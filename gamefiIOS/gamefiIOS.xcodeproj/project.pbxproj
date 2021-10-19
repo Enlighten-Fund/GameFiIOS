@@ -13,9 +13,20 @@
 		983AAE01271EA1C400D19C2E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 983AADFF271EA1C400D19C2E /* LaunchScreen.storyboard */; };
 		983AAE04271EA1C400D19C2E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE03271EA1C400D19C2E /* main.m */; };
 		983AAE10271EBB3000D19C2E /* GFNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE0F271EBB3000D19C2E /* GFNavigationBar.m */; };
+		983AAE13271EBDB600D19C2E /* GFNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE12271EBDB600D19C2E /* GFNavController.m */; };
+		983AAE28271EC39C00D19C2E /* NLCacheUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE17271EC39C00D19C2E /* NLCacheUnit.m */; };
+		983AAE29271EC39C00D19C2E /* NLCacheArgument.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE19271EC39C00D19C2E /* NLCacheArgument.m */; };
+		983AAE2A271EC39C00D19C2E /* NSString+NLAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE1B271EC39C00D19C2E /* NSString+NLAddition.m */; };
+		983AAE2B271EC39C00D19C2E /* NLResultUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE20271EC39C00D19C2E /* NLResultUnit.m */; };
+		983AAE2C271EC39C00D19C2E /* NLHttpSessionCacheUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE21271EC39C00D19C2E /* NLHttpSessionCacheUnit.m */; };
+		983AAE2D271EC39C00D19C2E /* NLMultipartFormArgument.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE24271EC39C00D19C2E /* NLMultipartFormArgument.m */; };
+		983AAE2E271EC39C00D19C2E /* NLHttpSessionUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE25271EC39C00D19C2E /* NLHttpSessionUnit.m */; };
+		BF641206763FAB28691E4DB7 /* libPods-gamefiIOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D02ED1E99B717E3630346099 /* libPods-gamefiIOS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2AC4DFDE2DE11A6D18811935 /* Pods-gamefiIOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gamefiIOS.debug.xcconfig"; path = "Target Support Files/Pods-gamefiIOS/Pods-gamefiIOS.debug.xcconfig"; sourceTree = "<group>"; };
+		4D8F5AAC799C28A09887D628 /* Pods-gamefiIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gamefiIOS.release.xcconfig"; path = "Target Support Files/Pods-gamefiIOS/Pods-gamefiIOS.release.xcconfig"; sourceTree = "<group>"; };
 		983AADEE271EA1C100D19C2E /* gamefiIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gamefiIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		983AADF1271EA1C100D19C2E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		983AADF2271EA1C100D19C2E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -27,6 +38,24 @@
 		983AAE03271EA1C400D19C2E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		983AAE0E271EBB3000D19C2E /* GFNavigationBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GFNavigationBar.h; sourceTree = "<group>"; };
 		983AAE0F271EBB3000D19C2E /* GFNavigationBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GFNavigationBar.m; sourceTree = "<group>"; };
+		983AAE11271EBDB600D19C2E /* GFNavController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GFNavController.h; sourceTree = "<group>"; };
+		983AAE12271EBDB600D19C2E /* GFNavController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GFNavController.m; sourceTree = "<group>"; };
+		983AAE16271EC39C00D19C2E /* NLCacheArgument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLCacheArgument.h; sourceTree = "<group>"; };
+		983AAE17271EC39C00D19C2E /* NLCacheUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLCacheUnit.m; sourceTree = "<group>"; };
+		983AAE18271EC39C00D19C2E /* NLCacheUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLCacheUnit.h; sourceTree = "<group>"; };
+		983AAE19271EC39C00D19C2E /* NLCacheArgument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLCacheArgument.m; sourceTree = "<group>"; };
+		983AAE1B271EC39C00D19C2E /* NSString+NLAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+NLAddition.m"; sourceTree = "<group>"; };
+		983AAE1C271EC39C00D19C2E /* NSString+NLAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+NLAddition.h"; sourceTree = "<group>"; };
+		983AAE1D271EC39C00D19C2E /* MWHTTPUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWHTTPUnit.h; sourceTree = "<group>"; };
+		983AAE1F271EC39C00D19C2E /* NLHttpSessionCacheUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHttpSessionCacheUnit.h; sourceTree = "<group>"; };
+		983AAE20271EC39C00D19C2E /* NLResultUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLResultUnit.m; sourceTree = "<group>"; };
+		983AAE21271EC39C00D19C2E /* NLHttpSessionCacheUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHttpSessionCacheUnit.m; sourceTree = "<group>"; };
+		983AAE22271EC39C00D19C2E /* NLResultUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLResultUnit.h; sourceTree = "<group>"; };
+		983AAE24271EC39C00D19C2E /* NLMultipartFormArgument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLMultipartFormArgument.m; sourceTree = "<group>"; };
+		983AAE25271EC39C00D19C2E /* NLHttpSessionUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHttpSessionUnit.m; sourceTree = "<group>"; };
+		983AAE26271EC39C00D19C2E /* NLHttpSessionUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHttpSessionUnit.h; sourceTree = "<group>"; };
+		983AAE27271EC39C00D19C2E /* NLMultipartFormArgument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLMultipartFormArgument.h; sourceTree = "<group>"; };
+		D02ED1E99B717E3630346099 /* libPods-gamefiIOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gamefiIOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,17 +63,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF641206763FAB28691E4DB7 /* libPods-gamefiIOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		364EEA819335784094571414 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2AC4DFDE2DE11A6D18811935 /* Pods-gamefiIOS.debug.xcconfig */,
+				4D8F5AAC799C28A09887D628 /* Pods-gamefiIOS.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		5A89EF7A3492A8173354E50A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D02ED1E99B717E3630346099 /* libPods-gamefiIOS.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		983AADE5271EA1C100D19C2E = {
 			isa = PBXGroup;
 			children = (
 				983AADF0271EA1C100D19C2E /* gamefiIOS */,
 				983AADEF271EA1C100D19C2E /* Products */,
+				364EEA819335784094571414 /* Pods */,
+				5A89EF7A3492A8173354E50A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -59,6 +108,7 @@
 		983AADF0271EA1C100D19C2E /* gamefiIOS */ = {
 			isa = PBXGroup;
 			children = (
+				983AAE2F271EC5AE00D19C2E /* HTTPUnit */,
 				983AAE0A271EBA9400D19C2E /* General */,
 				983AADF1271EA1C100D19C2E /* AppDelegate.h */,
 				983AADF2271EA1C100D19C2E /* AppDelegate.m */,
@@ -77,8 +127,72 @@
 			children = (
 				983AAE0E271EBB3000D19C2E /* GFNavigationBar.h */,
 				983AAE0F271EBB3000D19C2E /* GFNavigationBar.m */,
+				983AAE11271EBDB600D19C2E /* GFNavController.h */,
+				983AAE12271EBDB600D19C2E /* GFNavController.m */,
 			);
 			path = General;
+			sourceTree = "<group>";
+		};
+		983AAE14271EC39C00D19C2E /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				983AAE15271EC39C00D19C2E /* CacheUnit */,
+				983AAE1A271EC39C00D19C2E /* Extension */,
+				983AAE1D271EC39C00D19C2E /* MWHTTPUnit.h */,
+				983AAE1E271EC39C00D19C2E /* HTTPCacheUnit */,
+				983AAE23271EC39C00D19C2E /* HTTP */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		983AAE15271EC39C00D19C2E /* CacheUnit */ = {
+			isa = PBXGroup;
+			children = (
+				983AAE16271EC39C00D19C2E /* NLCacheArgument.h */,
+				983AAE17271EC39C00D19C2E /* NLCacheUnit.m */,
+				983AAE18271EC39C00D19C2E /* NLCacheUnit.h */,
+				983AAE19271EC39C00D19C2E /* NLCacheArgument.m */,
+			);
+			path = CacheUnit;
+			sourceTree = "<group>";
+		};
+		983AAE1A271EC39C00D19C2E /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				983AAE1B271EC39C00D19C2E /* NSString+NLAddition.m */,
+				983AAE1C271EC39C00D19C2E /* NSString+NLAddition.h */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		983AAE1E271EC39C00D19C2E /* HTTPCacheUnit */ = {
+			isa = PBXGroup;
+			children = (
+				983AAE1F271EC39C00D19C2E /* NLHttpSessionCacheUnit.h */,
+				983AAE20271EC39C00D19C2E /* NLResultUnit.m */,
+				983AAE21271EC39C00D19C2E /* NLHttpSessionCacheUnit.m */,
+				983AAE22271EC39C00D19C2E /* NLResultUnit.h */,
+			);
+			path = HTTPCacheUnit;
+			sourceTree = "<group>";
+		};
+		983AAE23271EC39C00D19C2E /* HTTP */ = {
+			isa = PBXGroup;
+			children = (
+				983AAE24271EC39C00D19C2E /* NLMultipartFormArgument.m */,
+				983AAE25271EC39C00D19C2E /* NLHttpSessionUnit.m */,
+				983AAE26271EC39C00D19C2E /* NLHttpSessionUnit.h */,
+				983AAE27271EC39C00D19C2E /* NLMultipartFormArgument.h */,
+			);
+			path = HTTP;
+			sourceTree = "<group>";
+		};
+		983AAE2F271EC5AE00D19C2E /* HTTPUnit */ = {
+			isa = PBXGroup;
+			children = (
+				983AAE14271EC39C00D19C2E /* Classes */,
+			);
+			path = HTTPUnit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -88,6 +202,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 983AAE07271EA1C400D19C2E /* Build configuration list for PBXNativeTarget "gamefiIOS" */;
 			buildPhases = (
+				DC00321EDFD534E5D36719C5 /* [CP] Check Pods Manifest.lock */,
 				983AADEA271EA1C100D19C2E /* Sources */,
 				983AADEB271EA1C100D19C2E /* Frameworks */,
 				983AADEC271EA1C100D19C2E /* Resources */,
@@ -144,15 +259,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		DC00321EDFD534E5D36719C5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-gamefiIOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		983AADEA271EA1C100D19C2E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				983AAE28271EC39C00D19C2E /* NLCacheUnit.m in Sources */,
+				983AAE2A271EC39C00D19C2E /* NSString+NLAddition.m in Sources */,
+				983AAE29271EC39C00D19C2E /* NLCacheArgument.m in Sources */,
 				983AADF9271EA1C100D19C2E /* ViewController.m in Sources */,
+				983AAE13271EBDB600D19C2E /* GFNavController.m in Sources */,
+				983AAE2B271EC39C00D19C2E /* NLResultUnit.m in Sources */,
 				983AADF3271EA1C100D19C2E /* AppDelegate.m in Sources */,
 				983AAE10271EBB3000D19C2E /* GFNavigationBar.m in Sources */,
+				983AAE2E271EC39C00D19C2E /* NLHttpSessionUnit.m in Sources */,
 				983AAE04271EA1C400D19C2E /* main.m in Sources */,
+				983AAE2C271EC39C00D19C2E /* NLHttpSessionCacheUnit.m in Sources */,
+				983AAE2D271EC39C00D19C2E /* NLMultipartFormArgument.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +432,7 @@
 		};
 		983AAE08271EA1C400D19C2E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2AC4DFDE2DE11A6D18811935 /* Pods-gamefiIOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -303,6 +452,7 @@
 		};
 		983AAE09271EA1C400D19C2E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4D8F5AAC799C28A09887D628 /* Pods-gamefiIOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

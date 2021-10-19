@@ -1,0 +1,7 @@
+target 'gamefiIOS' do
+    pod 'Masonry'
+    pod 'SDWebImage'
+    pod 'JSONModel'
+    pod 'UIViewController+HUD'
+    pod 'AFNetworking'
+end
