@@ -12,6 +12,7 @@
 		983AADFE271EA1C400D19C2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 983AADFD271EA1C400D19C2E /* Assets.xcassets */; };
 		983AAE01271EA1C400D19C2E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 983AADFF271EA1C400D19C2E /* LaunchScreen.storyboard */; };
 		983AAE04271EA1C400D19C2E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE03271EA1C400D19C2E /* main.m */; };
+		983AAE10271EBB3000D19C2E /* GFNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE0F271EBB3000D19C2E /* GFNavigationBar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,8 @@
 		983AAE00271EA1C400D19C2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		983AAE02271EA1C400D19C2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		983AAE03271EA1C400D19C2E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		983AAE0E271EBB3000D19C2E /* GFNavigationBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GFNavigationBar.h; sourceTree = "<group>"; };
+		983AAE0F271EBB3000D19C2E /* GFNavigationBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GFNavigationBar.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +59,7 @@
 		983AADF0271EA1C100D19C2E /* gamefiIOS */ = {
 			isa = PBXGroup;
 			children = (
+				983AAE0A271EBA9400D19C2E /* General */,
 				983AADF1271EA1C100D19C2E /* AppDelegate.h */,
 				983AADF2271EA1C100D19C2E /* AppDelegate.m */,
 				983AADF7271EA1C100D19C2E /* ViewController.h */,
@@ -66,6 +70,15 @@
 				983AAE03271EA1C400D19C2E /* main.m */,
 			);
 			path = gamefiIOS;
+			sourceTree = "<group>";
+		};
+		983AAE0A271EBA9400D19C2E /* General */ = {
+			isa = PBXGroup;
+			children = (
+				983AAE0E271EBB3000D19C2E /* GFNavigationBar.h */,
+				983AAE0F271EBB3000D19C2E /* GFNavigationBar.m */,
+			);
+			path = General;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,6 +151,7 @@
 			files = (
 				983AADF9271EA1C100D19C2E /* ViewController.m in Sources */,
 				983AADF3271EA1C100D19C2E /* AppDelegate.m in Sources */,
+				983AAE10271EBB3000D19C2E /* GFNavigationBar.m in Sources */,
 				983AAE04271EA1C400D19C2E /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
