@@ -5,4 +5,5 @@ target 'gamefiIOS' do
     pod 'UIViewController+HUD'
     pod 'AFNetworking'
     pod 'JSONKit-NoWarning'
+    pod 'JNKeychain'
 end

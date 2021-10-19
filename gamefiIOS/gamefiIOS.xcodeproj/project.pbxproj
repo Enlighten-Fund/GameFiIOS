@@ -24,6 +24,10 @@
 		983AAE36271ECC7300D19C2E /* NWResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE30271ECC7300D19C2E /* NWResult.m */; };
 		983AAE37271ECC7300D19C2E /* MWJSONResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE33271ECC7300D19C2E /* MWJSONResponseSerializer.m */; };
 		983AAE38271ECC7300D19C2E /* NWOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE35271ECC7300D19C2E /* NWOperationManager.m */; };
+		983AAE3E271ED2F800D19C2E /* MWDataUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE3C271ED2F800D19C2E /* MWDataUnit.m */; };
+		983AAE3F271ED2F800D19C2E /* DataReqHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE3D271ED2F800D19C2E /* DataReqHelper.m */; };
+		983AAE43271ED34800D19C2E /* NSString+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE42271ED34700D19C2E /* NSString+Category.m */; };
+		983AAE47271ED37300D19C2E /* MWKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE45271ED37300D19C2E /* MWKeychain.m */; };
 		BF641206763FAB28691E4DB7 /* libPods-gamefiIOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D02ED1E99B717E3630346099 /* libPods-gamefiIOS.a */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +69,16 @@
 		983AAE34271ECC7300D19C2E /* MWJSONResponseSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWJSONResponseSerializer.h; sourceTree = "<group>"; };
 		983AAE35271ECC7300D19C2E /* NWOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWOperationManager.m; sourceTree = "<group>"; };
 		983AAE39271ECCF500D19C2E /* MWENum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MWENum.h; sourceTree = "<group>"; };
+		983AAE3A271ED2F800D19C2E /* MWDataUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWDataUnit.h; sourceTree = "<group>"; };
+		983AAE3B271ED2F800D19C2E /* DataReqHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataReqHelper.h; sourceTree = "<group>"; };
+		983AAE3C271ED2F800D19C2E /* MWDataUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWDataUnit.m; sourceTree = "<group>"; };
+		983AAE3D271ED2F800D19C2E /* DataReqHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataReqHelper.m; sourceTree = "<group>"; };
+		983AAE41271ED34700D19C2E /* NSString+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Category.h"; sourceTree = "<group>"; };
+		983AAE42271ED34700D19C2E /* NSString+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Category.m"; sourceTree = "<group>"; };
+		983AAE45271ED37300D19C2E /* MWKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWKeychain.m; sourceTree = "<group>"; };
+		983AAE46271ED37300D19C2E /* MWKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWKeychain.h; sourceTree = "<group>"; };
+		983AAE48271ED3CB00D19C2E /* Singelton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Singelton.h; sourceTree = "<group>"; };
+		983AAE49271ED42E00D19C2E /* Config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
 		D02ED1E99B717E3630346099 /* libPods-gamefiIOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gamefiIOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -118,6 +132,10 @@
 		983AADF0271EA1C100D19C2E /* gamefiIOS */ = {
 			isa = PBXGroup;
 			children = (
+				983AAE49271ED42E00D19C2E /* Config.h */,
+				983AAE48271ED3CB00D19C2E /* Singelton.h */,
+				983AAE44271ED37300D19C2E /* Keychain */,
+				983AAE40271ED33600D19C2E /* Cagetory */,
 				983AAE39271ECCF500D19C2E /* MWENum.h */,
 				983AAE2F271EC5AE00D19C2E /* HTTPUnit */,
 				983AAE0A271EBA9400D19C2E /* General */,
@@ -207,9 +225,31 @@
 				983AAE35271ECC7300D19C2E /* NWOperationManager.m */,
 				983AAE31271ECC7300D19C2E /* NWResult.h */,
 				983AAE30271ECC7300D19C2E /* NWResult.m */,
+				983AAE3B271ED2F800D19C2E /* DataReqHelper.h */,
+				983AAE3D271ED2F800D19C2E /* DataReqHelper.m */,
+				983AAE3A271ED2F800D19C2E /* MWDataUnit.h */,
+				983AAE3C271ED2F800D19C2E /* MWDataUnit.m */,
 				983AAE14271EC39C00D19C2E /* Classes */,
 			);
 			path = HTTPUnit;
+			sourceTree = "<group>";
+		};
+		983AAE40271ED33600D19C2E /* Cagetory */ = {
+			isa = PBXGroup;
+			children = (
+				983AAE41271ED34700D19C2E /* NSString+Category.h */,
+				983AAE42271ED34700D19C2E /* NSString+Category.m */,
+			);
+			path = Cagetory;
+			sourceTree = "<group>";
+		};
+		983AAE44271ED37300D19C2E /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				983AAE45271ED37300D19C2E /* MWKeychain.m */,
+				983AAE46271ED37300D19C2E /* MWKeychain.h */,
+			);
+			path = Keychain;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -309,8 +349,10 @@
 				983AAE37271ECC7300D19C2E /* MWJSONResponseSerializer.m in Sources */,
 				983AAE28271EC39C00D19C2E /* NLCacheUnit.m in Sources */,
 				983AAE2A271EC39C00D19C2E /* NSString+NLAddition.m in Sources */,
+				983AAE47271ED37300D19C2E /* MWKeychain.m in Sources */,
 				983AAE36271ECC7300D19C2E /* NWResult.m in Sources */,
 				983AAE29271EC39C00D19C2E /* NLCacheArgument.m in Sources */,
+				983AAE3E271ED2F800D19C2E /* MWDataUnit.m in Sources */,
 				983AADF9271EA1C100D19C2E /* ViewController.m in Sources */,
 				983AAE13271EBDB600D19C2E /* GFNavController.m in Sources */,
 				983AAE2B271EC39C00D19C2E /* NLResultUnit.m in Sources */,
@@ -318,9 +360,11 @@
 				983AAE10271EBB3000D19C2E /* GFNavigationBar.m in Sources */,
 				983AAE2E271EC39C00D19C2E /* NLHttpSessionUnit.m in Sources */,
 				983AAE38271ECC7300D19C2E /* NWOperationManager.m in Sources */,
+				983AAE43271ED34800D19C2E /* NSString+Category.m in Sources */,
 				983AAE04271EA1C400D19C2E /* main.m in Sources */,
 				983AAE2C271EC39C00D19C2E /* NLHttpSessionCacheUnit.m in Sources */,
 				983AAE2D271EC39C00D19C2E /* NLMultipartFormArgument.m in Sources */,
+				983AAE3F271ED2F800D19C2E /* DataReqHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
