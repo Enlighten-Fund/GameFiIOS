@@ -21,6 +21,9 @@
 		983AAE2C271EC39C00D19C2E /* NLHttpSessionCacheUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE21271EC39C00D19C2E /* NLHttpSessionCacheUnit.m */; };
 		983AAE2D271EC39C00D19C2E /* NLMultipartFormArgument.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE24271EC39C00D19C2E /* NLMultipartFormArgument.m */; };
 		983AAE2E271EC39C00D19C2E /* NLHttpSessionUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE25271EC39C00D19C2E /* NLHttpSessionUnit.m */; };
+		983AAE36271ECC7300D19C2E /* NWResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE30271ECC7300D19C2E /* NWResult.m */; };
+		983AAE37271ECC7300D19C2E /* MWJSONResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE33271ECC7300D19C2E /* MWJSONResponseSerializer.m */; };
+		983AAE38271ECC7300D19C2E /* NWOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE35271ECC7300D19C2E /* NWOperationManager.m */; };
 		BF641206763FAB28691E4DB7 /* libPods-gamefiIOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D02ED1E99B717E3630346099 /* libPods-gamefiIOS.a */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +58,13 @@
 		983AAE25271EC39C00D19C2E /* NLHttpSessionUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLHttpSessionUnit.m; sourceTree = "<group>"; };
 		983AAE26271EC39C00D19C2E /* NLHttpSessionUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLHttpSessionUnit.h; sourceTree = "<group>"; };
 		983AAE27271EC39C00D19C2E /* NLMultipartFormArgument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLMultipartFormArgument.h; sourceTree = "<group>"; };
+		983AAE30271ECC7300D19C2E /* NWResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWResult.m; sourceTree = "<group>"; };
+		983AAE31271ECC7300D19C2E /* NWResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWResult.h; sourceTree = "<group>"; };
+		983AAE32271ECC7300D19C2E /* NWOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWOperationManager.h; sourceTree = "<group>"; };
+		983AAE33271ECC7300D19C2E /* MWJSONResponseSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWJSONResponseSerializer.m; sourceTree = "<group>"; };
+		983AAE34271ECC7300D19C2E /* MWJSONResponseSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWJSONResponseSerializer.h; sourceTree = "<group>"; };
+		983AAE35271ECC7300D19C2E /* NWOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWOperationManager.m; sourceTree = "<group>"; };
+		983AAE39271ECCF500D19C2E /* MWENum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MWENum.h; sourceTree = "<group>"; };
 		D02ED1E99B717E3630346099 /* libPods-gamefiIOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gamefiIOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -108,6 +118,7 @@
 		983AADF0271EA1C100D19C2E /* gamefiIOS */ = {
 			isa = PBXGroup;
 			children = (
+				983AAE39271ECCF500D19C2E /* MWENum.h */,
 				983AAE2F271EC5AE00D19C2E /* HTTPUnit */,
 				983AAE0A271EBA9400D19C2E /* General */,
 				983AADF1271EA1C100D19C2E /* AppDelegate.h */,
@@ -190,6 +201,12 @@
 		983AAE2F271EC5AE00D19C2E /* HTTPUnit */ = {
 			isa = PBXGroup;
 			children = (
+				983AAE34271ECC7300D19C2E /* MWJSONResponseSerializer.h */,
+				983AAE33271ECC7300D19C2E /* MWJSONResponseSerializer.m */,
+				983AAE32271ECC7300D19C2E /* NWOperationManager.h */,
+				983AAE35271ECC7300D19C2E /* NWOperationManager.m */,
+				983AAE31271ECC7300D19C2E /* NWResult.h */,
+				983AAE30271ECC7300D19C2E /* NWResult.m */,
 				983AAE14271EC39C00D19C2E /* Classes */,
 			);
 			path = HTTPUnit;
@@ -289,8 +306,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				983AAE37271ECC7300D19C2E /* MWJSONResponseSerializer.m in Sources */,
 				983AAE28271EC39C00D19C2E /* NLCacheUnit.m in Sources */,
 				983AAE2A271EC39C00D19C2E /* NSString+NLAddition.m in Sources */,
+				983AAE36271ECC7300D19C2E /* NWResult.m in Sources */,
 				983AAE29271EC39C00D19C2E /* NLCacheArgument.m in Sources */,
 				983AADF9271EA1C100D19C2E /* ViewController.m in Sources */,
 				983AAE13271EBDB600D19C2E /* GFNavController.m in Sources */,
@@ -298,6 +317,7 @@
 				983AADF3271EA1C100D19C2E /* AppDelegate.m in Sources */,
 				983AAE10271EBB3000D19C2E /* GFNavigationBar.m in Sources */,
 				983AAE2E271EC39C00D19C2E /* NLHttpSessionUnit.m in Sources */,
+				983AAE38271ECC7300D19C2E /* NWOperationManager.m in Sources */,
 				983AAE04271EA1C400D19C2E /* main.m in Sources */,
 				983AAE2C271EC39C00D19C2E /* NLHttpSessionCacheUnit.m in Sources */,
 				983AAE2D271EC39C00D19C2E /* NLMultipartFormArgument.m in Sources */,

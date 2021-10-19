@@ -14,6 +14,7 @@ PODS:
   - AFNetworking/Serialization (4.0.1)
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
+  - JSONKit-NoWarning (1.2)
   - JSONModel (1.8.0)
   - Masonry (1.1.0)
   - MBProgressHUD (0.9.2)
@@ -25,6 +26,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - JSONKit-NoWarning
   - JSONModel
   - Masonry
   - SDWebImage
@@ -33,6 +35,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - AFNetworking
+    - JSONKit-NoWarning
     - JSONModel
     - Masonry
     - MBProgressHUD
@@ -41,12 +44,13 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
+  JSONKit-NoWarning: 3d27e6f9e6846ecf741e8c64dcadd7d5aa7193cb
   JSONModel: 02ab723958366a3fd27da57ea2af2113658762e9
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   SDWebImage: 4dc3e42d9ec0c1028b960a33ac6b637bb432207b
   "UIViewController+HUD": 0e9e8b4d9f007a4c952acf97dae8669c62057b89
 
-PODFILE CHECKSUM: 62ec9f161a15b59f5d39a8907abfaba8b3c4565c
+PODFILE CHECKSUM: edc59a17dd871fc812140efef46baea538955a97
 
 COCOAPODS: 1.11.1
