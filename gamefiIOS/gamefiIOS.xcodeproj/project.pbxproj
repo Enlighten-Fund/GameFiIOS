@@ -12,8 +12,8 @@
 		983AADFE271EA1C400D19C2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 983AADFD271EA1C400D19C2E /* Assets.xcassets */; };
 		983AAE01271EA1C400D19C2E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 983AADFF271EA1C400D19C2E /* LaunchScreen.storyboard */; };
 		983AAE04271EA1C400D19C2E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE03271EA1C400D19C2E /* main.m */; };
-		983AAE10271EBB3000D19C2E /* GFNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE0F271EBB3000D19C2E /* GFNavigationBar.m */; };
-		983AAE13271EBDB600D19C2E /* GFNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE12271EBDB600D19C2E /* GFNavController.m */; };
+		983AAE10271EBB3000D19C2E /* MWNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE0F271EBB3000D19C2E /* MWNavigationBar.m */; };
+		983AAE13271EBDB600D19C2E /* MWNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE12271EBDB600D19C2E /* MWNavController.m */; };
 		983AAE28271EC39C00D19C2E /* NLCacheUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE17271EC39C00D19C2E /* NLCacheUnit.m */; };
 		983AAE29271EC39C00D19C2E /* NLCacheArgument.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE19271EC39C00D19C2E /* NLCacheArgument.m */; };
 		983AAE2A271EC39C00D19C2E /* NSString+NLAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE1B271EC39C00D19C2E /* NSString+NLAddition.m */; };
@@ -31,6 +31,8 @@
 		983AAE4C271FBBD400D19C2E /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE4B271FBBD400D19C2E /* TableViewCell.m */; };
 		983AAE4F271FBEC900D19C2E /* View.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE4E271FBEC900D19C2E /* View.m */; };
 		983AAE52271FC08D00D19C2E /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE51271FC08D00D19C2E /* CollectionViewCell.m */; };
+		983AAE55271FE09C00D19C2E /* BaseUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE54271FE09C00D19C2E /* BaseUIViewController.m */; };
+		983AAE58271FE15500D19C2E /* NWUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AAE56271FE15500D19C2E /* NWUtility.m */; };
 		BF641206763FAB28691E4DB7 /* libPods-gamefiIOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D02ED1E99B717E3630346099 /* libPods-gamefiIOS.a */; };
 /* End PBXBuildFile section */
 
@@ -46,10 +48,10 @@
 		983AAE00271EA1C400D19C2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		983AAE02271EA1C400D19C2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		983AAE03271EA1C400D19C2E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		983AAE0E271EBB3000D19C2E /* GFNavigationBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GFNavigationBar.h; sourceTree = "<group>"; };
-		983AAE0F271EBB3000D19C2E /* GFNavigationBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GFNavigationBar.m; sourceTree = "<group>"; };
-		983AAE11271EBDB600D19C2E /* GFNavController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GFNavController.h; sourceTree = "<group>"; };
-		983AAE12271EBDB600D19C2E /* GFNavController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GFNavController.m; sourceTree = "<group>"; };
+		983AAE0E271EBB3000D19C2E /* MWNavigationBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MWNavigationBar.h; sourceTree = "<group>"; };
+		983AAE0F271EBB3000D19C2E /* MWNavigationBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MWNavigationBar.m; sourceTree = "<group>"; };
+		983AAE11271EBDB600D19C2E /* MWNavController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MWNavController.h; sourceTree = "<group>"; };
+		983AAE12271EBDB600D19C2E /* MWNavController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MWNavController.m; sourceTree = "<group>"; };
 		983AAE16271EC39C00D19C2E /* NLCacheArgument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLCacheArgument.h; sourceTree = "<group>"; };
 		983AAE17271EC39C00D19C2E /* NLCacheUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLCacheUnit.m; sourceTree = "<group>"; };
 		983AAE18271EC39C00D19C2E /* NLCacheUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLCacheUnit.h; sourceTree = "<group>"; };
@@ -88,6 +90,11 @@
 		983AAE4E271FBEC900D19C2E /* View.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = View.m; sourceTree = "<group>"; };
 		983AAE50271FC08D00D19C2E /* CollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
 		983AAE51271FC08D00D19C2E /* CollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
+		983AAE53271FE09C00D19C2E /* BaseUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseUIViewController.h; sourceTree = "<group>"; };
+		983AAE54271FE09C00D19C2E /* BaseUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseUIViewController.m; sourceTree = "<group>"; };
+		983AAE56271FE15500D19C2E /* NWUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWUtility.m; sourceTree = "<group>"; };
+		983AAE57271FE15500D19C2E /* NWUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWUtility.h; sourceTree = "<group>"; };
+		983AAE59271FE1B700D19C2E /* Define.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
 		D02ED1E99B717E3630346099 /* libPods-gamefiIOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gamefiIOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -142,8 +149,11 @@
 			isa = PBXGroup;
 			children = (
 				983AAE49271ED42E00D19C2E /* Config.h */,
+				983AAE59271FE1B700D19C2E /* Define.h */,
 				983AAE48271ED3CB00D19C2E /* Singelton.h */,
 				983AAE39271ECCF500D19C2E /* MWENum.h */,
+				983AAE57271FE15500D19C2E /* NWUtility.h */,
+				983AAE56271FE15500D19C2E /* NWUtility.m */,
 				983AAE44271ED37300D19C2E /* Keychain */,
 				983AAE40271ED33600D19C2E /* Cagetory */,
 				983AAE2F271EC5AE00D19C2E /* HTTPUnit */,
@@ -163,16 +173,18 @@
 		983AAE0A271EBA9400D19C2E /* General */ = {
 			isa = PBXGroup;
 			children = (
-				983AAE0E271EBB3000D19C2E /* GFNavigationBar.h */,
-				983AAE0F271EBB3000D19C2E /* GFNavigationBar.m */,
-				983AAE11271EBDB600D19C2E /* GFNavController.h */,
-				983AAE12271EBDB600D19C2E /* GFNavController.m */,
+				983AAE0E271EBB3000D19C2E /* MWNavigationBar.h */,
+				983AAE0F271EBB3000D19C2E /* MWNavigationBar.m */,
+				983AAE11271EBDB600D19C2E /* MWNavController.h */,
+				983AAE12271EBDB600D19C2E /* MWNavController.m */,
 				983AAE4A271FBBD400D19C2E /* TableViewCell.h */,
 				983AAE4B271FBBD400D19C2E /* TableViewCell.m */,
 				983AAE50271FC08D00D19C2E /* CollectionViewCell.h */,
 				983AAE51271FC08D00D19C2E /* CollectionViewCell.m */,
 				983AAE4D271FBEC900D19C2E /* View.h */,
 				983AAE4E271FBEC900D19C2E /* View.m */,
+				983AAE53271FE09C00D19C2E /* BaseUIViewController.h */,
+				983AAE54271FE09C00D19C2E /* BaseUIViewController.m */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -369,10 +381,10 @@
 				983AAE29271EC39C00D19C2E /* NLCacheArgument.m in Sources */,
 				983AAE3E271ED2F800D19C2E /* MWDataUnit.m in Sources */,
 				983AADF9271EA1C100D19C2E /* ViewController.m in Sources */,
-				983AAE13271EBDB600D19C2E /* GFNavController.m in Sources */,
+				983AAE13271EBDB600D19C2E /* MWNavController.m in Sources */,
 				983AAE2B271EC39C00D19C2E /* NLResultUnit.m in Sources */,
 				983AADF3271EA1C100D19C2E /* AppDelegate.m in Sources */,
-				983AAE10271EBB3000D19C2E /* GFNavigationBar.m in Sources */,
+				983AAE10271EBB3000D19C2E /* MWNavigationBar.m in Sources */,
 				983AAE2E271EC39C00D19C2E /* NLHttpSessionUnit.m in Sources */,
 				983AAE4C271FBBD400D19C2E /* TableViewCell.m in Sources */,
 				983AAE4F271FBEC900D19C2E /* View.m in Sources */,
@@ -382,7 +394,9 @@
 				983AAE2C271EC39C00D19C2E /* NLHttpSessionCacheUnit.m in Sources */,
 				983AAE2D271EC39C00D19C2E /* NLMultipartFormArgument.m in Sources */,
 				983AAE52271FC08D00D19C2E /* CollectionViewCell.m in Sources */,
+				983AAE55271FE09C00D19C2E /* BaseUIViewController.m in Sources */,
 				983AAE3F271ED2F800D19C2E /* DataReqHelper.m in Sources */,
+				983AAE58271FE15500D19C2E /* NWUtility.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

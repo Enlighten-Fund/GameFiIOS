@@ -5,16 +5,16 @@
 //  Created by harden on 2021/10/19.
 //
 
-#import "GFNavController.h"
+#import "MWNavController.h"
 #define kGKDefaultVisibility YES
 #define IS_OS_OLDER_THAN_IOS_8 [[[UIDevice currentDevice] systemVersion] floatValue] <= 8.f
-@interface GFNavController ()
+@interface MWNavController ()
 @property (nonatomic,readonly) BOOL canPushOrPop;
 @property (nonatomic,readonly) id navLock;
 @property (nonatomic, assign) BOOL isMoving;
 @end
 
-@implementation GFNavController
+@implementation MWNavController
 
 - (void)viewDidLoad
 {

@@ -5,12 +5,12 @@
 //  Created by harden on 2021/10/19.
 //
 
-#import "GFNavigationBar.h"
-@interface GFNavigationBar ()
+#import "MWNavigationBar.h"
+@interface MWNavigationBar ()
 @property (nonatomic, strong) UIView *overlay;
 
 @end
-@implementation GFNavigationBar
+@implementation MWNavigationBar
 
 - (id)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {

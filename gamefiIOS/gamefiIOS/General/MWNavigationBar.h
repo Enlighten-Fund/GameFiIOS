@@ -6,7 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@interface GFNavigationBar : UINavigationBar
+@interface MWNavigationBar : UINavigationBar
 @property (nonatomic, strong) UIColor *bgColor;
 @property (nonatomic, assign, setter=setHiddenLine:) BOOL hiddenLine;
 @end
