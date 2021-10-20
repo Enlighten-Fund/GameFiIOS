@@ -246,8 +246,8 @@
 		983AAE44271ED37300D19C2E /* Keychain */ = {
 			isa = PBXGroup;
 			children = (
-				983AAE45271ED37300D19C2E /* MWKeychain.m */,
 				983AAE46271ED37300D19C2E /* MWKeychain.h */,
+				983AAE45271ED37300D19C2E /* MWKeychain.m */,
 			);
 			path = Keychain;
 			sourceTree = "<group>";
