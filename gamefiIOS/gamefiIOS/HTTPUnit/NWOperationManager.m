@@ -35,9 +35,9 @@ NSTimeInterval tenTimeoutInterval = 10;
     static NWOperationManager *_sharedClient = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NSString *host = @"www.baidu.com";
+        NSString *host = @"http://a2a7cb64ab5d94072bc625bdedd3f7ff-1574935958.ap-northeast-1.elb.amazonaws.com/v2/";
         _sharedClient = [[NWOperationManager alloc] initWithBaseURL:[NSURL URLWithString:host]];
-        AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+        AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
         [requestSerializer setValue:[NSString stringWithFormat:@"%@", [[NSLocale preferredLanguages] componentsJoinedByString:@", "]]
                  forHTTPHeaderField:@"Accept-Language"];
         [requestSerializer setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];

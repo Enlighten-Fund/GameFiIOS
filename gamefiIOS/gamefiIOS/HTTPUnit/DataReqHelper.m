@@ -159,6 +159,7 @@
         NWResult *result = (NWResult *)resultUnit;
         [self reponseURI:url operationCompleteBlock:requestCompleteBlock result:result];
 //        DDLogInfo(@"%@:\n:%@\n:%@",url,param,result.response);
+        NSLog(@"%@:\n:%@\n:%@",url,param,result.response);
     }];
     return sessionDataTask;
 }
