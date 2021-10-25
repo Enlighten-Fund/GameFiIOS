@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		980AE56D272669E1003B7092 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 980AE56C272669E1003B7092 /* DataManager.m */; };
 		983AADF3271EA1C100D19C2E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AADF2271EA1C100D19C2E /* AppDelegate.m */; };
 		983AADF9271EA1C100D19C2E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AADF8271EA1C100D19C2E /* ViewController.m */; };
 		983AADFE271EA1C400D19C2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 983AADFD271EA1C400D19C2E /* Assets.xcassets */; };
@@ -39,6 +40,8 @@
 /* Begin PBXFileReference section */
 		2AC4DFDE2DE11A6D18811935 /* Pods-gamefiIOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gamefiIOS.debug.xcconfig"; path = "Target Support Files/Pods-gamefiIOS/Pods-gamefiIOS.debug.xcconfig"; sourceTree = "<group>"; };
 		4D8F5AAC799C28A09887D628 /* Pods-gamefiIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gamefiIOS.release.xcconfig"; path = "Target Support Files/Pods-gamefiIOS/Pods-gamefiIOS.release.xcconfig"; sourceTree = "<group>"; };
+		980AE56B272669E1003B7092 /* DataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
+		980AE56C272669E1003B7092 /* DataManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		983AADEE271EA1C100D19C2E /* gamefiIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gamefiIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		983AADF1271EA1C100D19C2E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		983AADF2271EA1C100D19C2E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -127,6 +130,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		980AE56A2726695A003B7092 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				980AE56B272669E1003B7092 /* DataManager.h */,
+				980AE56C272669E1003B7092 /* DataManager.m */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 		983AADE5271EA1C100D19C2E = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +160,7 @@
 		983AADF0271EA1C100D19C2E /* gamefiIOS */ = {
 			isa = PBXGroup;
 			children = (
+				980AE56A2726695A003B7092 /* Manager */,
 				983AAE49271ED42E00D19C2E /* Config.h */,
 				983AAE59271FE1B700D19C2E /* Define.h */,
 				983AAE48271ED3CB00D19C2E /* Singelton.h */,
@@ -374,6 +387,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				983AAE37271ECC7300D19C2E /* MWJSONResponseSerializer.m in Sources */,
+				980AE56D272669E1003B7092 /* DataManager.m in Sources */,
 				983AAE28271EC39C00D19C2E /* NLCacheUnit.m in Sources */,
 				983AAE2A271EC39C00D19C2E /* NSString+NLAddition.m in Sources */,
 				983AAE47271ED37300D19C2E /* MWKeychain.m in Sources */,
