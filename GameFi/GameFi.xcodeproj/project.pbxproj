@@ -1,0 +1,440 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		15092795570575A8D11E51AF /* Pods_GameFi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCCE75DA83DE142077945AEF /* Pods_GameFi.framework */; };
+		7BCBC07F76E99519033E01A6 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = CBF9F66A81AD584A3895DB4F /* amplifyconfiguration.json */; };
+		7C326CFCDF747D3682D551F3 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = F1EDDF7C6BA0C87EAB5C8C12 /* awsconfiguration.json */; };
+		9811EA172726BB2700B0ACF0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9811EA162726BB2700B0ACF0 /* AppDelegate.swift */; };
+		9811EA192726BB2700B0ACF0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9811EA182726BB2700B0ACF0 /* SceneDelegate.swift */; };
+		9811EA1B2726BB2700B0ACF0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9811EA1A2726BB2700B0ACF0 /* ViewController.swift */; };
+		9811EA1E2726BB2700B0ACF0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9811EA1C2726BB2700B0ACF0 /* Main.storyboard */; };
+		9811EA202726BB2800B0ACF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9811EA1F2726BB2800B0ACF0 /* Assets.xcassets */; };
+		9811EA232726BB2800B0ACF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9811EA212726BB2800B0ACF0 /* LaunchScreen.storyboard */; };
+		988D86002726C57A00CE49D7 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 988D85FE2726C57A00CE49D7 /* amplifyconfiguration.json */; };
+		988D86012726C57A00CE49D7 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 988D85FF2726C57A00CE49D7 /* awsconfiguration.json */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2056B7442627D4EF41EBF823 /* Pods-GameFi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameFi.release.xcconfig"; path = "Target Support Files/Pods-GameFi/Pods-GameFi.release.xcconfig"; sourceTree = "<group>"; };
+		9811EA132726BB2700B0ACF0 /* GameFi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameFi.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9811EA162726BB2700B0ACF0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		9811EA182726BB2700B0ACF0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		9811EA1A2726BB2700B0ACF0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9811EA1D2726BB2700B0ACF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9811EA1F2726BB2800B0ACF0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9811EA222726BB2800B0ACF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9811EA242726BB2800B0ACF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		988D85FE2726C57A00CE49D7 /* amplifyconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = amplifyconfiguration.json; sourceTree = SOURCE_ROOT; };
+		988D85FF2726C57A00CE49D7 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = SOURCE_ROOT; };
+		C65868A573F5F7D6A4003290 /* Pods-GameFi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameFi.debug.xcconfig"; path = "Target Support Files/Pods-GameFi/Pods-GameFi.debug.xcconfig"; sourceTree = "<group>"; };
+		CBF9F66A81AD584A3895DB4F /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
+		F1EDDF7C6BA0C87EAB5C8C12 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
+		FCCE75DA83DE142077945AEF /* Pods_GameFi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GameFi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9811EA102726BB2700B0ACF0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15092795570575A8D11E51AF /* Pods_GameFi.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4199D9C3B4A28724DDAB9D9F /* AmplifyConfig */ = {
+			isa = PBXGroup;
+			children = (
+				F1EDDF7C6BA0C87EAB5C8C12 /* awsconfiguration.json */,
+				CBF9F66A81AD584A3895DB4F /* amplifyconfiguration.json */,
+			);
+			name = AmplifyConfig;
+			sourceTree = "<group>";
+		};
+		6C12D9104C0A0B3C9C47BF30 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FCCE75DA83DE142077945AEF /* Pods_GameFi.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9811EA0A2726BB2700B0ACF0 = {
+			isa = PBXGroup;
+			children = (
+				9811EA152726BB2700B0ACF0 /* GameFi */,
+				9811EA142726BB2700B0ACF0 /* Products */,
+				4199D9C3B4A28724DDAB9D9F /* AmplifyConfig */,
+				E53B31C82C867BF0D6041DEF /* Pods */,
+				6C12D9104C0A0B3C9C47BF30 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		9811EA142726BB2700B0ACF0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9811EA132726BB2700B0ACF0 /* GameFi.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9811EA152726BB2700B0ACF0 /* GameFi */ = {
+			isa = PBXGroup;
+			children = (
+				988D85FE2726C57A00CE49D7 /* amplifyconfiguration.json */,
+				988D85FF2726C57A00CE49D7 /* awsconfiguration.json */,
+				9811EA162726BB2700B0ACF0 /* AppDelegate.swift */,
+				9811EA182726BB2700B0ACF0 /* SceneDelegate.swift */,
+				9811EA1A2726BB2700B0ACF0 /* ViewController.swift */,
+				9811EA1C2726BB2700B0ACF0 /* Main.storyboard */,
+				9811EA1F2726BB2800B0ACF0 /* Assets.xcassets */,
+				9811EA212726BB2800B0ACF0 /* LaunchScreen.storyboard */,
+				9811EA242726BB2800B0ACF0 /* Info.plist */,
+			);
+			path = GameFi;
+			sourceTree = "<group>";
+		};
+		E53B31C82C867BF0D6041DEF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C65868A573F5F7D6A4003290 /* Pods-GameFi.debug.xcconfig */,
+				2056B7442627D4EF41EBF823 /* Pods-GameFi.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9811EA122726BB2700B0ACF0 /* GameFi */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9811EA272726BB2800B0ACF0 /* Build configuration list for PBXNativeTarget "GameFi" */;
+			buildPhases = (
+				A5FA6FAE9DA2300132C66383 /* [CP] Check Pods Manifest.lock */,
+				9811EA0F2726BB2700B0ACF0 /* Sources */,
+				9811EA102726BB2700B0ACF0 /* Frameworks */,
+				9811EA112726BB2700B0ACF0 /* Resources */,
+				6EA28F10FD272FFB876D2A74 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GameFi;
+			productName = GameFi;
+			productReference = 9811EA132726BB2700B0ACF0 /* GameFi.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9811EA0B2726BB2700B0ACF0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1250;
+				LastUpgradeCheck = 1250;
+				TargetAttributes = {
+					9811EA122726BB2700B0ACF0 = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
+				};
+			};
+			buildConfigurationList = 9811EA0E2726BB2700B0ACF0 /* Build configuration list for PBXProject "GameFi" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9811EA0A2726BB2700B0ACF0;
+			productRefGroup = 9811EA142726BB2700B0ACF0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9811EA122726BB2700B0ACF0 /* GameFi */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9811EA112726BB2700B0ACF0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9811EA232726BB2800B0ACF0 /* LaunchScreen.storyboard in Resources */,
+				988D86012726C57A00CE49D7 /* awsconfiguration.json in Resources */,
+				988D86002726C57A00CE49D7 /* amplifyconfiguration.json in Resources */,
+				9811EA202726BB2800B0ACF0 /* Assets.xcassets in Resources */,
+				9811EA1E2726BB2700B0ACF0 /* Main.storyboard in Resources */,
+				7C326CFCDF747D3682D551F3 /* awsconfiguration.json in Resources */,
+				7BCBC07F76E99519033E01A6 /* amplifyconfiguration.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6EA28F10FD272FFB876D2A74 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GameFi/Pods-GameFi-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GameFi/Pods-GameFi-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GameFi/Pods-GameFi-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A5FA6FAE9DA2300132C66383 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GameFi-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9811EA0F2726BB2700B0ACF0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9811EA1B2726BB2700B0ACF0 /* ViewController.swift in Sources */,
+				9811EA172726BB2700B0ACF0 /* AppDelegate.swift in Sources */,
+				9811EA192726BB2700B0ACF0 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		9811EA1C2726BB2700B0ACF0 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9811EA1D2726BB2700B0ACF0 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		9811EA212726BB2800B0ACF0 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9811EA222726BB2800B0ACF0 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9811EA252726BB2800B0ACF0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		9811EA262726BB2800B0ACF0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9811EA282726BB2800B0ACF0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C65868A573F5F7D6A4003290 /* Pods-GameFi.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5W82Z6DS32;
+				INFOPLIST_FILE = GameFi/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.enlighten.gamefi.GameFi;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9811EA292726BB2800B0ACF0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2056B7442627D4EF41EBF823 /* Pods-GameFi.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5W82Z6DS32;
+				INFOPLIST_FILE = GameFi/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.enlighten.gamefi.GameFi;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9811EA0E2726BB2700B0ACF0 /* Build configuration list for PBXProject "GameFi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9811EA252726BB2800B0ACF0 /* Debug */,
+				9811EA262726BB2800B0ACF0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9811EA272726BB2800B0ACF0 /* Build configuration list for PBXNativeTarget "GameFi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9811EA282726BB2800B0ACF0 /* Debug */,
+				9811EA292726BB2800B0ACF0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9811EA0B2726BB2700B0ACF0 /* Project object */;
+}

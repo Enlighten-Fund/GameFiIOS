@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-gamefi-dev-185640-authRole",
+      "UnauthRoleArn": "arn:aws:iam::269204510787:role/amplify-gamefi-dev-185640-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::269204510787:role/amplify-gamefi-dev-185640-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-gamefi-dev-185640-deployment",
+      "UnauthRoleName": "amplify-gamefi-dev-185640-unauthRole",
+      "StackName": "amplify-gamefi-dev-185640",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:269204510787:stack/amplify-gamefi-dev-185640/3f09f300-3582-11ec-886c-066001076477",
+      "AmplifyAppId": "d2c7bz2ktersox"
+    },
+    "categories": {
+      "auth": {
+        "gamefi96cf3769": {}
+      }
+    }
+  }
+}
