@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (5.4.4)
   - Amplify (1.15.3):
     - Amplify/Default (= 1.15.3)
   - Amplify/Default (1.15.3)
@@ -24,13 +25,21 @@ PODS:
   - AWSPluginsCore (1.15.3):
     - Amplify (= 1.15.3)
     - AWSCore (~> 2.26.1)
+  - HandyJSON (5.0.2)
+  - Kingfisher (6.3.1)
+  - SnapKit (5.0.1)
 
 DEPENDENCIES:
+  - Alamofire
   - Amplify
   - AmplifyPlugins/AWSCognitoAuthPlugin
+  - HandyJSON
+  - Kingfisher
+  - SnapKit
 
 SPEC REPOS:
   trunk:
+    - Alamofire
     - Amplify
     - AmplifyPlugins
     - AWSAuthCore
@@ -39,8 +48,12 @@ SPEC REPOS:
     - AWSCore
     - AWSMobileClient
     - AWSPluginsCore
+    - HandyJSON
+    - Kingfisher
+    - SnapKit
 
 SPEC CHECKSUMS:
+  Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
   Amplify: 0f1289c87ce5950d3c76d0e8e0ebbddbcda3cd30
   AmplifyPlugins: c2e983fcde04092101425cbebf1c1dddf9c04123
   AWSAuthCore: c785a33af10a45aab6456a5fa7150f759dad836f
@@ -49,7 +62,10 @@ SPEC CHECKSUMS:
   AWSCore: dd7f74ab3f354aad435f83afdbfac91bcb7d44c2
   AWSMobileClient: fc20c58eaad166b3d2a569ef9ce691d6fed0c5dd
   AWSPluginsCore: 7a1acaf5c6224bf6c2b678c24800c16563a76361
+  HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
+  Kingfisher: 016c8b653a35add51dd34a3aba36b580041acc74
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: f4a933b8904c3d0dd635b2bb83a13f324e146e1e
+PODFILE CHECKSUM: 8634b6302de8682707679b1a01f28c37216c0658
 
 COCOAPODS: 1.11.2

@@ -11,9 +11,7 @@
 		7BCBC07F76E99519033E01A6 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = CBF9F66A81AD584A3895DB4F /* amplifyconfiguration.json */; };
 		7C326CFCDF747D3682D551F3 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = F1EDDF7C6BA0C87EAB5C8C12 /* awsconfiguration.json */; };
 		9811EA172726BB2700B0ACF0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9811EA162726BB2700B0ACF0 /* AppDelegate.swift */; };
-		9811EA192726BB2700B0ACF0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9811EA182726BB2700B0ACF0 /* SceneDelegate.swift */; };
 		9811EA1B2726BB2700B0ACF0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9811EA1A2726BB2700B0ACF0 /* ViewController.swift */; };
-		9811EA1E2726BB2700B0ACF0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9811EA1C2726BB2700B0ACF0 /* Main.storyboard */; };
 		9811EA202726BB2800B0ACF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9811EA1F2726BB2800B0ACF0 /* Assets.xcassets */; };
 		9811EA232726BB2800B0ACF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9811EA212726BB2800B0ACF0 /* LaunchScreen.storyboard */; };
 		988D86002726C57A00CE49D7 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 988D85FE2726C57A00CE49D7 /* amplifyconfiguration.json */; };
@@ -24,9 +22,7 @@
 		2056B7442627D4EF41EBF823 /* Pods-GameFi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameFi.release.xcconfig"; path = "Target Support Files/Pods-GameFi/Pods-GameFi.release.xcconfig"; sourceTree = "<group>"; };
 		9811EA132726BB2700B0ACF0 /* GameFi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameFi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9811EA162726BB2700B0ACF0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9811EA182726BB2700B0ACF0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		9811EA1A2726BB2700B0ACF0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		9811EA1D2726BB2700B0ACF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9811EA1F2726BB2800B0ACF0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9811EA222726BB2800B0ACF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9811EA242726BB2800B0ACF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -92,9 +88,7 @@
 				988D85FE2726C57A00CE49D7 /* amplifyconfiguration.json */,
 				988D85FF2726C57A00CE49D7 /* awsconfiguration.json */,
 				9811EA162726BB2700B0ACF0 /* AppDelegate.swift */,
-				9811EA182726BB2700B0ACF0 /* SceneDelegate.swift */,
 				9811EA1A2726BB2700B0ACF0 /* ViewController.swift */,
-				9811EA1C2726BB2700B0ACF0 /* Main.storyboard */,
 				9811EA1F2726BB2800B0ACF0 /* Assets.xcassets */,
 				9811EA212726BB2800B0ACF0 /* LaunchScreen.storyboard */,
 				9811EA242726BB2800B0ACF0 /* Info.plist */,
@@ -174,7 +168,6 @@
 				988D86012726C57A00CE49D7 /* awsconfiguration.json in Resources */,
 				988D86002726C57A00CE49D7 /* amplifyconfiguration.json in Resources */,
 				9811EA202726BB2800B0ACF0 /* Assets.xcassets in Resources */,
-				9811EA1E2726BB2700B0ACF0 /* Main.storyboard in Resources */,
 				7C326CFCDF747D3682D551F3 /* awsconfiguration.json in Resources */,
 				7BCBC07F76E99519033E01A6 /* amplifyconfiguration.json in Resources */,
 			);
@@ -231,21 +224,12 @@
 			files = (
 				9811EA1B2726BB2700B0ACF0 /* ViewController.swift in Sources */,
 				9811EA172726BB2700B0ACF0 /* AppDelegate.swift in Sources */,
-				9811EA192726BB2700B0ACF0 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		9811EA1C2726BB2700B0ACF0 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9811EA1D2726BB2700B0ACF0 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		9811EA212726BB2800B0ACF0 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -382,6 +366,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5W82Z6DS32;
 				INFOPLIST_FILE = GameFi/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -389,7 +374,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.enlighten.gamefi.GameFi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -402,6 +387,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5W82Z6DS32;
 				INFOPLIST_FILE = GameFi/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -409,7 +395,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.enlighten.gamefi.GameFi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
