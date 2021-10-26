@@ -9,5 +9,5 @@ target 'GameFi' do
   pod 'HandyJSON'
   pod 'SnapKit'
   pod 'Kingfisher'
-
+  pod "ESTabBarController-swift"
 end
