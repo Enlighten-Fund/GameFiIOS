@@ -11,25 +11,23 @@
 		7BCBC07F76E99519033E01A6 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = CBF9F66A81AD584A3895DB4F /* amplifyconfiguration.json */; };
 		7C326CFCDF747D3682D551F3 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = F1EDDF7C6BA0C87EAB5C8C12 /* awsconfiguration.json */; };
 		980A7DC22728135B006AE4C4 /* GFNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980A7DC12728135B006AE4C4 /* GFNavController.swift */; };
+		980A7DC4272828FD006AE4C4 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980A7DC3272828FD006AE4C4 /* DataManager.swift */; };
 		9811EA172726BB2700B0ACF0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9811EA162726BB2700B0ACF0 /* AppDelegate.swift */; };
 		9811EA1B2726BB2700B0ACF0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9811EA1A2726BB2700B0ACF0 /* ViewController.swift */; };
 		9811EA202726BB2800B0ACF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9811EA1F2726BB2800B0ACF0 /* Assets.xcassets */; };
 		9811EA232726BB2800B0ACF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9811EA212726BB2800B0ACF0 /* LaunchScreen.storyboard */; };
-		988D86002726C57A00CE49D7 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 988D85FE2726C57A00CE49D7 /* amplifyconfiguration.json */; };
-		988D86012726C57A00CE49D7 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 988D85FF2726C57A00CE49D7 /* awsconfiguration.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2056B7442627D4EF41EBF823 /* Pods-GameFi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameFi.release.xcconfig"; path = "Target Support Files/Pods-GameFi/Pods-GameFi.release.xcconfig"; sourceTree = "<group>"; };
 		980A7DC12728135B006AE4C4 /* GFNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFNavController.swift; sourceTree = "<group>"; };
+		980A7DC3272828FD006AE4C4 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		9811EA132726BB2700B0ACF0 /* GameFi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameFi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9811EA162726BB2700B0ACF0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9811EA1A2726BB2700B0ACF0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9811EA1F2726BB2800B0ACF0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9811EA222726BB2800B0ACF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9811EA242726BB2800B0ACF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		988D85FE2726C57A00CE49D7 /* amplifyconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = amplifyconfiguration.json; sourceTree = SOURCE_ROOT; };
-		988D85FF2726C57A00CE49D7 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = SOURCE_ROOT; };
 		C65868A573F5F7D6A4003290 /* Pods-GameFi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameFi.debug.xcconfig"; path = "Target Support Files/Pods-GameFi/Pods-GameFi.debug.xcconfig"; sourceTree = "<group>"; };
 		CBF9F66A81AD584A3895DB4F /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
 		F1EDDF7C6BA0C87EAB5C8C12 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
@@ -69,9 +67,9 @@
 			isa = PBXGroup;
 			children = (
 				9811EA152726BB2700B0ACF0 /* GameFi */,
-				9811EA142726BB2700B0ACF0 /* Products */,
 				4199D9C3B4A28724DDAB9D9F /* AmplifyConfig */,
 				E53B31C82C867BF0D6041DEF /* Pods */,
+				9811EA142726BB2700B0ACF0 /* Products */,
 				6C12D9104C0A0B3C9C47BF30 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -87,14 +85,13 @@
 		9811EA152726BB2700B0ACF0 /* GameFi */ = {
 			isa = PBXGroup;
 			children = (
-				988D85FE2726C57A00CE49D7 /* amplifyconfiguration.json */,
-				988D85FF2726C57A00CE49D7 /* awsconfiguration.json */,
 				9811EA162726BB2700B0ACF0 /* AppDelegate.swift */,
 				9811EA1A2726BB2700B0ACF0 /* ViewController.swift */,
 				9811EA1F2726BB2800B0ACF0 /* Assets.xcassets */,
 				9811EA212726BB2800B0ACF0 /* LaunchScreen.storyboard */,
 				9811EA242726BB2800B0ACF0 /* Info.plist */,
 				980A7DC12728135B006AE4C4 /* GFNavController.swift */,
+				980A7DC3272828FD006AE4C4 /* DataManager.swift */,
 			);
 			path = GameFi;
 			sourceTree = "<group>";
@@ -168,8 +165,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9811EA232726BB2800B0ACF0 /* LaunchScreen.storyboard in Resources */,
-				988D86012726C57A00CE49D7 /* awsconfiguration.json in Resources */,
-				988D86002726C57A00CE49D7 /* amplifyconfiguration.json in Resources */,
 				9811EA202726BB2800B0ACF0 /* Assets.xcassets in Resources */,
 				7C326CFCDF747D3682D551F3 /* awsconfiguration.json in Resources */,
 				7BCBC07F76E99519033E01A6 /* amplifyconfiguration.json in Resources */,
@@ -226,6 +221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				980A7DC22728135B006AE4C4 /* GFNavController.swift in Sources */,
+				980A7DC4272828FD006AE4C4 /* DataManager.swift in Sources */,
 				9811EA1B2726BB2700B0ACF0 /* ViewController.swift in Sources */,
 				9811EA172726BB2700B0ACF0 /* AppDelegate.swift in Sources */,
 			);
