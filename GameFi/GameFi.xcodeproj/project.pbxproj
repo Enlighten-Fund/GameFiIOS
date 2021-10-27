@@ -12,6 +12,9 @@
 		7C326CFCDF747D3682D551F3 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = F1EDDF7C6BA0C87EAB5C8C12 /* awsconfiguration.json */; };
 		980A7DC22728135B006AE4C4 /* GFNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980A7DC12728135B006AE4C4 /* GFNavController.swift */; };
 		980A7DC4272828FD006AE4C4 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980A7DC3272828FD006AE4C4 /* DataManager.swift */; };
+		980A7DC6272900E6006AE4C4 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980A7DC5272900E6006AE4C4 /* UserManager.swift */; };
+		980A7DC8272902C7006AE4C4 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980A7DC7272902C7006AE4C4 /* APIConstants.swift */; };
+		980A7DCA27292034006AE4C4 /* GFResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980A7DC927292034006AE4C4 /* GFResult.swift */; };
 		9811EA172726BB2700B0ACF0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9811EA162726BB2700B0ACF0 /* AppDelegate.swift */; };
 		9811EA1B2726BB2700B0ACF0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9811EA1A2726BB2700B0ACF0 /* ViewController.swift */; };
 		9811EA202726BB2800B0ACF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9811EA1F2726BB2800B0ACF0 /* Assets.xcassets */; };
@@ -22,6 +25,9 @@
 		2056B7442627D4EF41EBF823 /* Pods-GameFi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameFi.release.xcconfig"; path = "Target Support Files/Pods-GameFi/Pods-GameFi.release.xcconfig"; sourceTree = "<group>"; };
 		980A7DC12728135B006AE4C4 /* GFNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFNavController.swift; sourceTree = "<group>"; };
 		980A7DC3272828FD006AE4C4 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		980A7DC5272900E6006AE4C4 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		980A7DC7272902C7006AE4C4 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
+		980A7DC927292034006AE4C4 /* GFResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFResult.swift; sourceTree = "<group>"; };
 		9811EA132726BB2700B0ACF0 /* GameFi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameFi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9811EA162726BB2700B0ACF0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9811EA1A2726BB2700B0ACF0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +98,9 @@
 				9811EA242726BB2800B0ACF0 /* Info.plist */,
 				980A7DC12728135B006AE4C4 /* GFNavController.swift */,
 				980A7DC3272828FD006AE4C4 /* DataManager.swift */,
+				980A7DC5272900E6006AE4C4 /* UserManager.swift */,
+				980A7DC7272902C7006AE4C4 /* APIConstants.swift */,
+				980A7DC927292034006AE4C4 /* GFResult.swift */,
 			);
 			path = GameFi;
 			sourceTree = "<group>";
@@ -222,7 +231,10 @@
 			files = (
 				980A7DC22728135B006AE4C4 /* GFNavController.swift in Sources */,
 				980A7DC4272828FD006AE4C4 /* DataManager.swift in Sources */,
+				980A7DC8272902C7006AE4C4 /* APIConstants.swift in Sources */,
+				980A7DCA27292034006AE4C4 /* GFResult.swift in Sources */,
 				9811EA1B2726BB2700B0ACF0 /* ViewController.swift in Sources */,
+				980A7DC6272900E6006AE4C4 /* UserManager.swift in Sources */,
 				9811EA172726BB2700B0ACF0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
