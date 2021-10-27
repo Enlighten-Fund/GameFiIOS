@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.green
-        DataManager.sharedInstance.POST(url: "example", param: ["" : ""]) { result,response in
+        DataManager.sharedInstance.POST(url: "example", param: ["abc" : "d"]) { result,response in
             
         }
     }

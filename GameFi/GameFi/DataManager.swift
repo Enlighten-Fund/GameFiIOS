@@ -2,16 +2,24 @@ import Foundation
 import Alamofire
 import HandyJSON
 
-typealias SuccessBlock = ([String:Any]) -> Void
-typealias FailureBlock = (AnyObject) -> Void
-typealias ProgressBlock = (Float) -> Void
 typealias CompleteBlock = (GFResult,Any) -> Void
  
 let BaseUrl = "http://a2a7cb64ab5d94072bc625bdedd3f7ff-1574935958.ap-northeast-1.elb.amazonaws.com/v2/"
+let jkver = "1.0"
+
 
 class DataManager: NSObject {
     static let sharedInstance = DataManager()
     private override init() {}
+    
+    func commonParameters() -> Dictionary<String, Any> {
+        var dic: [String:Any] =  [String:Any]()
+        dic["appver"] = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        dic["appbuild"] = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
+        dic["jkver"] = jkver
+        dic["os"] = "iOS" + UIDevice.current.systemVersion
+        return dic
+    }
     //MARK: - GET请求
 //    func GET(url:String,param:[String:Any]?,success: @escaping CompleteBlock) {
 //            if param != nil {
@@ -52,10 +60,15 @@ class DataManager: NSObject {
 //            }
 //        }
         //MARK: - POST请求  字典参数 ["id":"1","value":""]
-        func POST(url:String,param:[String:Any]?,completeBlock: @escaping CompleteBlock) {
+        func POST(url:String,param:[String:Any],completeBlock: @escaping CompleteBlock) {
+            var tempDic = commonParameters()
+            let tempDic2 = param
+            tempDic.merge(tempDic2) { _, _ in
+                
+            }
             let urlPath:URL = URL(string: BaseUrl + url)!
             let headers:HTTPHeaders = ["Content-Type":"application/json;charset=UTF-8"]
-            let request = AF.request(urlPath,method: .post,parameters: param,encoding: JSONEncoding.default, headers: headers)
+            let request = AF.request(urlPath,method: .post,parameters: tempDic,encoding: JSONEncoding.default, headers: headers)
             request.responseJSON { (response) in
                 print(response.result)
                 switch response.result {

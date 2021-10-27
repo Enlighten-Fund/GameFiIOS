@@ -93,14 +93,14 @@
 			children = (
 				9811EA162726BB2700B0ACF0 /* AppDelegate.swift */,
 				9811EA1A2726BB2700B0ACF0 /* ViewController.swift */,
-				9811EA1F2726BB2800B0ACF0 /* Assets.xcassets */,
-				9811EA212726BB2800B0ACF0 /* LaunchScreen.storyboard */,
-				9811EA242726BB2800B0ACF0 /* Info.plist */,
 				980A7DC12728135B006AE4C4 /* GFNavController.swift */,
 				980A7DC3272828FD006AE4C4 /* DataManager.swift */,
 				980A7DC5272900E6006AE4C4 /* UserManager.swift */,
 				980A7DC7272902C7006AE4C4 /* APIConstants.swift */,
 				980A7DC927292034006AE4C4 /* GFResult.swift */,
+				9811EA1F2726BB2800B0ACF0 /* Assets.xcassets */,
+				9811EA212726BB2800B0ACF0 /* LaunchScreen.storyboard */,
+				9811EA242726BB2800B0ACF0 /* Info.plist */,
 			);
 			path = GameFi;
 			sourceTree = "<group>";
