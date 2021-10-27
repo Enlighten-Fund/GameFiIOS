@@ -53,15 +53,6 @@ class DataManager: NSObject {
 //        }
         //MARK: - POST请求  字典参数 ["id":"1","value":""]
         func POST(url:String,param:[String:Any]?,completeBlock: @escaping CompleteBlock) {
-            if param != nil {
-                print("\n param:")
-                print(param! as [String:Any])
-            }
-            print("url===:" + url)
-            if url.count == 0 {
-                print("网络请求连接不正确")
-                return;
-            }
             let urlPath:URL = URL(string: BaseUrl + url)!
             let headers:HTTPHeaders = ["Content-Type":"application/json;charset=UTF-8"]
             let request = AF.request(urlPath,method: .post,parameters: param,encoding: JSONEncoding.default, headers: headers)
