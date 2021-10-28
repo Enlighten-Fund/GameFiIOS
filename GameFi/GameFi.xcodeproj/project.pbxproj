@@ -20,6 +20,7 @@
 		9811EA202726BB2800B0ACF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9811EA1F2726BB2800B0ACF0 /* Assets.xcassets */; };
 		9811EA232726BB2800B0ACF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9811EA212726BB2800B0ACF0 /* LaunchScreen.storyboard */; };
 		98823A3F27295B0100D9A7CD /* MarketPlaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98823A3E27295B0100D9A7CD /* MarketPlaceController.swift */; };
+		98823A412729674500D9A7CD /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98823A402729674500D9A7CD /* Define.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		9811EA222726BB2800B0ACF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9811EA242726BB2800B0ACF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		98823A3E27295B0100D9A7CD /* MarketPlaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketPlaceController.swift; sourceTree = "<group>"; };
+		98823A402729674500D9A7CD /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		C65868A573F5F7D6A4003290 /* Pods-GameFi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameFi.debug.xcconfig"; path = "Target Support Files/Pods-GameFi/Pods-GameFi.debug.xcconfig"; sourceTree = "<group>"; };
 		CBF9F66A81AD584A3895DB4F /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
 		F1EDDF7C6BA0C87EAB5C8C12 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				9811EA1F2726BB2800B0ACF0 /* Assets.xcassets */,
 				9811EA212726BB2800B0ACF0 /* LaunchScreen.storyboard */,
 				9811EA242726BB2800B0ACF0 /* Info.plist */,
+				98823A402729674500D9A7CD /* Define.swift */,
 			);
 			path = GameFi;
 			sourceTree = "<group>";
@@ -233,6 +236,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				980A7DC22728135B006AE4C4 /* GFNavController.swift in Sources */,
+				98823A412729674500D9A7CD /* Define.swift in Sources */,
 				980A7DC4272828FD006AE4C4 /* DataManager.swift in Sources */,
 				980A7DC8272902C7006AE4C4 /* APIConstants.swift in Sources */,
 				98823A3F27295B0100D9A7CD /* MarketPlaceController.swift in Sources */,

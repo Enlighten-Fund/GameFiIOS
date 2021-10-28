@@ -124,7 +124,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     lazy var tabbarVC: ESTabBarController? = {
         let tabBarController = ESTabBarController()
-        let v1 = ViewController()
+        let v1 = MarketPlaceController()
         let v2 = ViewController()
         let v3 = ViewController()
         let v4 = ViewController()
