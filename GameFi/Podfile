@@ -12,5 +12,5 @@ target 'GameFi' do
   pod "ESTabBarController-swift"
   pod 'MJRefresh'
   pod 'IQKeyboardManager'
-  pod 'CJLabel', '~> 1.0.3'
+  pod 'YBAttributeTextTapAction'
 end
