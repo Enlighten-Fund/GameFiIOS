@@ -11,4 +11,6 @@ target 'GameFi' do
   pod 'Kingfisher'
   pod "ESTabBarController-swift"
   pod 'MJRefresh'
+  pod 'IQKeyboardManager'
+  pod 'CJLabel', '~> 1.0.3'
 end

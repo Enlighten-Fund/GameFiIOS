@@ -13,15 +13,23 @@ import SnapKit
 
 class MarketPlaceController: UIViewController {
     override func viewDidLoad() {
+        super.viewDidLoad()
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: self.msgBtn!)
+        
         self.tableView?.backgroundColor = .red
         
-//        self.tableView?.mj_header = MJRefreshHeader.init(refreshingBlock: {
-//            
-//        })
+        self.tableView?.mj_header = MJRefreshHeader.init(refreshingBlock: {
+            self.tableView?.mj_header?.endRefreshing()
+        })
 //        self.tableView?.mj_header?.beginRefreshing {
-//            
+//
 //        }
         
+    }
+    
+    
+    @objc func msgBtnClick() {
+        print("个人消息")
     }
     
     lazy var tableView: UITableView? = {
@@ -39,6 +47,13 @@ class MarketPlaceController: UIViewController {
             make.right.equalToSuperview()
         }
         return tempTableView
+    }()
+    
+    lazy var msgBtn : UIButton? = {
+        let tempBtn = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: 20, height: 20))
+        tempBtn.setImage(UIImage.init(named: "message"), for: .normal)
+        tempBtn.addTarget(self, action: #selector(msgBtnClick), for: .touchUpInside)
+       return tempBtn
     }()
 }
 

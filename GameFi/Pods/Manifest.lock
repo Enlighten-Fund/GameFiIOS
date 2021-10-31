@@ -10,23 +10,24 @@ PODS:
     - AWSCore (~> 2.26.1)
     - AWSMobileClient (~> 2.26.1)
     - AWSPluginsCore (= 1.15.3)
-  - AWSAuthCore (2.26.2):
-    - AWSCore (= 2.26.2)
-  - AWSCognitoIdentityProvider (2.26.2):
-    - AWSCognitoIdentityProviderASF (= 2.26.2)
-    - AWSCore (= 2.26.2)
-  - AWSCognitoIdentityProviderASF (2.26.2)
-  - AWSCore (2.26.2)
-  - AWSMobileClient (2.26.2):
-    - AWSAuthCore (= 2.26.2)
-    - AWSCognitoIdentityProvider (= 2.26.2)
-    - AWSCognitoIdentityProviderASF (= 2.26.2)
-    - AWSCore (= 2.26.2)
+  - AWSAuthCore (2.26.3):
+    - AWSCore (= 2.26.3)
+  - AWSCognitoIdentityProvider (2.26.3):
+    - AWSCognitoIdentityProviderASF (= 2.26.3)
+    - AWSCore (= 2.26.3)
+  - AWSCognitoIdentityProviderASF (2.26.3)
+  - AWSCore (2.26.3)
+  - AWSMobileClient (2.26.3):
+    - AWSAuthCore (= 2.26.3)
+    - AWSCognitoIdentityProvider (= 2.26.3)
+    - AWSCognitoIdentityProviderASF (= 2.26.3)
+    - AWSCore (= 2.26.3)
   - AWSPluginsCore (1.15.3):
     - Amplify (= 1.15.3)
     - AWSCore (~> 2.26.1)
   - ESTabBarController-swift (2.8.0)
   - HandyJSON (5.0.2)
+  - IQKeyboardManager (6.5.6)
   - Kingfisher (6.3.1)
   - MJRefresh (3.7.2)
   - SnapKit (5.0.1)
@@ -37,6 +38,7 @@ DEPENDENCIES:
   - AmplifyPlugins/AWSCognitoAuthPlugin
   - ESTabBarController-swift
   - HandyJSON
+  - IQKeyboardManager
   - Kingfisher
   - MJRefresh
   - SnapKit
@@ -54,6 +56,7 @@ SPEC REPOS:
     - AWSPluginsCore
     - ESTabBarController-swift
     - HandyJSON
+    - IQKeyboardManager
     - Kingfisher
     - MJRefresh
     - SnapKit
@@ -62,18 +65,19 @@ SPEC CHECKSUMS:
   Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
   Amplify: 0f1289c87ce5950d3c76d0e8e0ebbddbcda3cd30
   AmplifyPlugins: c2e983fcde04092101425cbebf1c1dddf9c04123
-  AWSAuthCore: c785a33af10a45aab6456a5fa7150f759dad836f
-  AWSCognitoIdentityProvider: 0bea89a822d7dd76c7dc62212561a1074dee0031
-  AWSCognitoIdentityProviderASF: 425d7f40fb6a520f8437a5f8b991215239ec620b
-  AWSCore: dd7f74ab3f354aad435f83afdbfac91bcb7d44c2
-  AWSMobileClient: fc20c58eaad166b3d2a569ef9ce691d6fed0c5dd
+  AWSAuthCore: ce2089f8af1680aa433f6302b028ac786632cc5b
+  AWSCognitoIdentityProvider: a7e5caaade68cc93a92e3a888db30053dc167ee0
+  AWSCognitoIdentityProviderASF: ddcd5b1d919dccc15422b040ba4f99f5fbe85d9f
+  AWSCore: 7077ecff07ae3b184e65e2fa9855f6da048f9ae7
+  AWSMobileClient: 32f38bdb37ee29b2ac2c81739054f95bf3265f66
   AWSPluginsCore: 7a1acaf5c6224bf6c2b678c24800c16563a76361
   ESTabBarController-swift: 05593a6ad64700b03c0eb60ff625916370aa4136
   HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
+  IQKeyboardManager: 2a6e97afdafc7becf0cb17a9a8d795e3a980717f
   Kingfisher: 016c8b653a35add51dd34a3aba36b580041acc74
   MJRefresh: 30997d30b347c8e9508a4db11e3a690da0c9b85a
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: d8e0a0f265be045fd6616ef78e84dbc2287b7745
+PODFILE CHECKSUM: f41a513468f304b7507ca38a57cc8e1d88c71708
 
 COCOAPODS: 1.11.2

@@ -10,11 +10,14 @@ import Amplify
 import AmplifyPlugins
 import AWSPluginsCore
 import ESTabBarController_swift
+import IQKeyboardManager
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     self.window?.rootViewController = self.tabbarVC
+    IQKeyboardManager.shared().isEnabled = true
+    IQKeyboardManager.shared().isEnableAutoToolbar = true
 //        do {
             
             
@@ -127,27 +130,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let v1 = MarketPlaceController()
         let v2 = ViewController()
         let v3 = ViewController()
-        let v4 = ViewController()
-        let v5 = ViewController()
+        let v4 = RegisterController()
         
         v1.tabBarItem = ESTabBarItem.init(title: "Home", image: UIImage(named: "home"), selectedImage: UIImage(named: "home_1"))
         v2.tabBarItem = ESTabBarItem.init(title: "Find", image: UIImage(named: "find"), selectedImage: UIImage(named: "find_1"))
         v3.tabBarItem = ESTabBarItem.init(title: "Photo", image: UIImage(named: "photo"), selectedImage: UIImage(named: "photo_1"))
         v4.tabBarItem = ESTabBarItem.init(title: "Favor", image: UIImage(named: "favor"), selectedImage: UIImage(named: "favor_1"))
-        v5.tabBarItem = ESTabBarItem.init(title: "Me", image: UIImage(named: "me"), selectedImage: UIImage(named: "me_1"))
         
         let n1 = GFNavController.init(rootViewController: v1)
         let n2 = GFNavController.init(rootViewController: v2)
         let n3 = GFNavController.init(rootViewController: v3)
         let n4 = GFNavController.init(rootViewController: v4)
-        let n5 = GFNavController.init(rootViewController: v5)
         
         v1.title = "Home"
         v2.title = "Find"
         v3.title = "Photo"
         v4.title = "List"
-        v5.title = "Me"
-        tabBarController.viewControllers = [n1, n2, n3, n4, n5]
+        tabBarController.viewControllers = [n1, n2, n3, n4]
         return tabBarController
     }()
 }
