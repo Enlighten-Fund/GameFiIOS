@@ -236,10 +236,17 @@ class RegisterController: UIViewController {
         }
         
         var codeNotice = ""
-        if codeNotice.isBlank {
+        var temp4 = ""
+        if self.codeTextField!.text == nil {
+            temp4 = ""
+        }else{
+            temp4 = codeTextField!.text!
+        }
+        
+        if (temp4.isBlank) {
             codeNotice = "Please enter a valid code"
             self.codeModel.tip = codeNotice
-            self.codeModel.text = self.codeTextField!.text!
+            self.codeModel.text = codeTextField!.text!
             let indexPath: IndexPath = IndexPath.init(row: 3, section: 0)
             DispatchQueue.main.async {
                 self.tableView!.reloadRows(at: [indexPath], with: .none)
@@ -386,18 +393,23 @@ extension  RegisterController : UITableViewDelegate,UITableViewDataSource,UIText
                 self.tableView!.reloadRows(at: [indexPath], with: .none)
             }
         }else if textField.tag == 10004{
-//            var codeNotice = ""
-//            if codeNotice.isBlank {
-//                codeNotice = "Please enter a valid code"
-//            }else{
-//                codeNotice = ""
-//            }
-//            self.codeModel.tip = codeNotice
-//            self.codeModel.text = textField.text!
-//            let indexPath: IndexPath = IndexPath.init(row: 3, section: 0)
-//            DispatchQueue.main.async {
-//                self.tableView!.reloadRows(at: [indexPath], with: .none)
-//            }
+            var codeNotice = ""
+            var temp = ""
+            if textField.text == nil {
+                temp = ""
+            }else{
+                temp = textField.text!
+            }
+            
+            if (temp.isBlank) {
+                codeNotice = "Please enter a valid code"
+            }
+            self.codeModel.tip = codeNotice
+            self.codeModel.text = textField.text!
+            let indexPath: IndexPath = IndexPath.init(row: 3, section: 0)
+            DispatchQueue.main.async {
+                self.tableView!.reloadRows(at: [indexPath], with: .none)
+            }
         }
         
     }
