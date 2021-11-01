@@ -35,6 +35,8 @@ class LabelTextFildCell: TableViewCell {
     func update(model:LabelTFTipModel){
         if model.tip.isBlank {
             self.tipLabel.isHidden = true
+        }else{
+            self.tipLabel.isHidden = false
         }
         self.tipLabel.text = model.tip
         self.titleLabel?.text = model.title

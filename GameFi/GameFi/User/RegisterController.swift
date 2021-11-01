@@ -8,8 +8,16 @@
 import Foundation
 import UIKit
 import SnapKit
+import Alamofire
+import AmplifyPlugins
+import AWSPluginsCore
+import Amplify
 
 class RegisterController: UIViewController {
+    var emailTextField : UITextField?
+    var usernameTextField : UITextField?
+    var passwordTextField : UITextField?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView!.snp.makeConstraints { make in
@@ -20,9 +28,127 @@ class RegisterController: UIViewController {
         }
     }
     
-    @objc func loginBtnClick() {
+    @objc func loginBtnClick(btn:UIButton) {
         let loginVC = LoginController.init()
         self.navigationController?.pushViewController(loginVC, animated: true)
+    }
+    
+    @objc func codeBtnClick(btn:UIButton) {
+        //先本地校验
+        let textField : UITextField? = self.emailTextField
+        let temp = textField!.validateEmail()
+        var emailNotice = ""
+        if !temp {
+            emailNotice = "Please enter a valid email"
+             self.emailModel.tip = emailNotice
+             self.emailModel.text = textField!.text!
+             let indexPath: IndexPath = IndexPath.init(row: 0, section: 0)
+             DispatchQueue.main.async {
+                 self.tableView!.reloadRows(at: [indexPath], with: .none)
+             }
+             return
+         }
+        let temp2 = self.usernameTextField!.validateUsername()
+        var usernameNotice = ""
+        if !temp2 {
+            usernameNotice = "Please enter a valid username"
+            self.usernameModel.tip = usernameNotice
+            self.usernameModel.text = self.usernameTextField!.text!
+            let indexPath: IndexPath = IndexPath.init(row: 1, section: 0)
+            DispatchQueue.main.async {
+                self.tableView!.reloadRows(at: [indexPath], with: .none)
+            }
+            return
+        }
+        let temp3 = self.passwordTextField!.validatePassword()
+        var passwordNotice = ""
+        if !temp3 {
+            passwordNotice = "Please enter a valid password"
+            self.passwordModel.tip = passwordNotice
+            self.passwordModel.text = self.passwordTextField!.text!
+            let indexPath2: IndexPath = IndexPath.init(row: 2, section: 0)
+            DispatchQueue.main.async {
+                self.tableView!.reloadRows(at: [indexPath2], with: .none)
+            }
+            return
+        }
+        //本地验证通过
+        //按钮先不可用
+        DispatchQueue.main.async {
+            btn.isEnabled = false
+        }
+        let userAttributes = [AuthUserAttribute(.email, value: (self.emailTextField?.text)!)]
+        let options = AuthSignUpRequest.Options(userAttributes: userAttributes)
+        Amplify.Auth.signUp(username: (self.usernameTextField?.text)!, password: self.passwordTextField?.text, options: options) { result in
+            switch result {
+            case .success(let signUpResult):
+                if case let .confirmUser(deliveryDetails, _) = signUpResult.nextStep {
+                    print("Delivery details \(String(describing: deliveryDetails))")
+                    var countDownNum = 120
+                    Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+                        if countDownNum == 0 {
+                            DispatchQueue.main.async {
+                                btn.isEnabled = true
+                            }
+                              // 销毁计时器
+                            timer.invalidate()
+                        } else {
+                            countDownNum -= 1
+                            btn.setTitle(String(countDownNum), for: .normal)
+                        }
+                    }
+                } else {
+                    print("SignUp Complete")
+                    DispatchQueue.main.async {
+                        btn.isEnabled = true
+                    }
+                }
+            case .failure(let error):
+                print("An error occurred while registering a user \(error)")
+                DispatchQueue.main.async {
+                    btn.isEnabled = true
+                }
+            }
+        }
+    }
+    
+    func signUp(username: String, password: String, email: String) {
+        let userAttributes = [AuthUserAttribute(.email, value: email)]
+        let options = AuthSignUpRequest.Options(userAttributes: userAttributes)
+        Amplify.Auth.signUp(username: username, password: password, options: options) { result in
+            switch result {
+            case .success(let signUpResult):
+                if case let .confirmUser(deliveryDetails, _) = signUpResult.nextStep {
+                    print("Delivery details \(String(describing: deliveryDetails))")
+                } else {
+                    print("SignUp Complete")
+                }
+            case .failure(let error):
+                print("An error occurred while registering a user \(error)")
+            }
+        }
+    }
+    
+    func confirmSignUp(for username: String, with confirmationCode: String) {
+        Amplify.Auth.confirmSignUp(for: username, confirmationCode: confirmationCode) { result in
+            switch result {
+            case .success:
+                print("Confirm signUp succeeded")
+            case .failure(let error):
+                print("An error occurred while confirming sign up \(error)")
+            }
+        }
+    }
+    
+    func signIn(username: String, password: String) {
+        Amplify.Auth.signIn(username: username, password: password) { result in
+            switch result {
+            case .success:
+                print("Sign in succeeded")
+            case .failure(let error):
+                print("Sign in failed \(error)")
+            }
+        }
     }
     
     
@@ -71,40 +197,24 @@ extension  RegisterController : UITableViewDelegate,UITableViewDataSource,UIText
             var emailNotice = ""
             if !temp {
                emailNotice = "Please enter a valid email"
-            }else{
-                DataManager.sharedInstance.checkEmail(email: textField.text!) { result, reponse in
-                    if result.success!{
-                        emailNotice = ""
-                    }else{
-                        emailNotice = result.msg!
-                    }
-                }
             }
             self.emailModel.tip = emailNotice
             self.emailModel.text = textField.text!
             let indexPath: IndexPath = IndexPath.init(row: 0, section: 0)
             DispatchQueue.main.async {
-                self.tableView!.reloadRows(at: [indexPath], with: .fade)
+                self.tableView!.reloadRows(at: [indexPath], with: .none)
             }
         }else if textField.tag == 10002{
-            let temp = textField.validateEmail()
+            let temp = textField.validateUsername()
             var usernameNotice = ""
             if !temp {
                 usernameNotice = "Please enter a valid username"
-            }else{
-                DataManager.sharedInstance.checkEmail(email: textField.text!) { result, reponse in
-                    if result.success!{
-                        usernameNotice = ""
-                    }else{
-                        usernameNotice = result.msg!
-                    }
-                }
             }
             self.usernameModel.tip = usernameNotice
             self.usernameModel.text = textField.text!
             let indexPath: IndexPath = IndexPath.init(row: 1, section: 0)
             DispatchQueue.main.async {
-                self.tableView!.reloadRows(at: [indexPath], with: .fade)
+                self.tableView!.reloadRows(at: [indexPath], with: .none)
             }
         }else if textField.tag == 10003{
             let temp = textField.validatePassword()
@@ -118,7 +228,7 @@ extension  RegisterController : UITableViewDelegate,UITableViewDataSource,UIText
             self.passwordModel.text = textField.text!
             let indexPath: IndexPath = IndexPath.init(row: 2, section: 0)
             DispatchQueue.main.async {
-                self.tableView!.reloadRows(at: [indexPath], with: .fade)
+                self.tableView!.reloadRows(at: [indexPath], with: .none)
             }
         }
         
@@ -127,46 +237,50 @@ extension  RegisterController : UITableViewDelegate,UITableViewDataSource,UIText
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             
            return 4
-       }
+    }
         
-       func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
            return 60
-       }
+    }
         
-       func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell : UITableViewCell
-        switch indexPath.row {
-        case 0:
-            let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "0", for: indexPath) as! LabelTextFildCell
-            tempCell.textFild?.delegate = self
-            tempCell.textFild?.keyboardType = .emailAddress
-            tempCell.textFild?.tag = 10001
-            tempCell.update(model: self.emailModel)
-            cell = tempCell
-        case 1:
-            let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "1", for: indexPath) as! LabelTextFildCell
-            tempCell.textFild?.delegate = self
-            tempCell.textFild?.tag = 10002
-            tempCell.update(model: self.usernameModel)
-            cell = tempCell
-        case 2:
-            let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "2", for: indexPath) as! LabelTextFildCell
-            tempCell.textFild?.setupShowPasswordButton()
-            tempCell.textFild?.delegate = self
-            tempCell.textFild?.tag = 10003
-            tempCell.update(model: self.passwordModel)
-            cell = tempCell
-        case 3:
-            let tempCell : ConfirmCodeCell = tableView.dequeueReusableCell(withIdentifier: confirmCodeCellIdentifier, for: indexPath) as! ConfirmCodeCell
-            tempCell.titleLabel?.numberOfLines = 2
-            tempCell.update(model: self.codeModel)
-            cell = tempCell
-        default:
-            cell = tableView.dequeueReusableCell(withIdentifier: emptyTableViewCellIdentifier, for: indexPath)
-        }
-            cell.contentView.backgroundColor = .lightGray
-           return cell
-       }
+   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    var cell : UITableViewCell
+    switch indexPath.row {
+    case 0:
+        let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "0", for: indexPath) as! LabelTextFildCell
+        tempCell.textFild?.delegate = self
+        tempCell.textFild?.keyboardType = .emailAddress
+        tempCell.textFild?.tag = 10001
+        self.emailTextField = tempCell.textFild
+        tempCell.update(model: self.emailModel)
+        cell = tempCell
+    case 1:
+        let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "1", for: indexPath) as! LabelTextFildCell
+        tempCell.textFild?.delegate = self
+        tempCell.textFild?.tag = 10002
+        self.usernameTextField = tempCell.textFild
+        tempCell.update(model: self.usernameModel)
+        cell = tempCell
+    case 2:
+        let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "2", for: indexPath) as! LabelTextFildCell
+        tempCell.textFild?.setupShowPasswordButton()
+        tempCell.textFild?.delegate = self
+        tempCell.textFild?.tag = 10003
+        self.passwordTextField = tempCell.textFild
+        tempCell.update(model: self.passwordModel)
+        cell = tempCell
+    case 3:
+        let tempCell : ConfirmCodeCell = tableView.dequeueReusableCell(withIdentifier: confirmCodeCellIdentifier, for: indexPath) as! ConfirmCodeCell
+        tempCell.titleLabel?.numberOfLines = 2
+        tempCell.codeBtn.addTarget(self, action: #selector(codeBtnClick), for: .touchUpInside)
+        tempCell.update(model: self.codeModel)
+        cell = tempCell
+    default:
+        cell = tableView.dequeueReusableCell(withIdentifier: emptyTableViewCellIdentifier, for: indexPath)
+    }
+        cell.contentView.backgroundColor = .lightGray
+       return cell
+   }
         
        
 }

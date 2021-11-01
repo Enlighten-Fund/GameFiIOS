@@ -18,16 +18,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     self.window?.rootViewController = self.tabbarVC
     IQKeyboardManager.shared().isEnabled = true
     IQKeyboardManager.shared().isEnableAutoToolbar = true
-//        do {
-            
-            
-//            Amplify.Logging.logLevel = .verbose
-//                try Amplify.add(plugin: AWSCognitoAuthPlugin())
-//                try Amplify.configure()
-//                print("Amplify configured with auth plugin")
-//                signUp(username: "chenlu", password: "java,6720", email: "lu.chen@enlighten.finance")
-//                  confirmSignUp(for: "chenlu", with: "185847")
-//                signIn(username: "chenlu", password: "java,6720")
+        do {
+            Amplify.Logging.logLevel = .verbose
+                try Amplify.add(plugin: AWSCognitoAuthPlugin())
+                try Amplify.configure()
+                print("Amplify configured with auth plugin")
+//                signUp(username: "chenlu3", password: "java,6720", email: "lu.chen@enlighten3.finance")
+//                  confirmSignUp(for: "chenlu3", with: "165332")
+//                signIn(username: "chenlu3", password: "java,6720")
+//            signOutLocally()
 //            fetchAttributes()
 //            Amplify.Auth.fetchAuthSession { result in
 //                do {
@@ -56,14 +55,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                    print("Fetch auth session failed with error - \(error)")
 //                }
 //            }
-//
-//
-//
-//
-//
-//            } catch {
-//                print("Failed to initialize Amplify with \(error)")
-//            }
+
+
+
+
+
+            } catch {
+                print("Failed to initialize Amplify with \(error)")
+            }
 
             return true
     }
@@ -118,6 +117,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            }
 //        }
 //    }
+    func signOutLocally() {
+        Amplify.Auth.signOut() { result in
+            switch result {
+            case .success:
+                print("Successfully signed out")
+            case .failure(let error):
+                print("Sign out failed with error \(error)")
+            }
+        }
+    }
     lazy var window: UIWindow? = {
         let window = UIWindow.init(frame: UIScreen.main.bounds)
         window.makeKeyAndVisible()

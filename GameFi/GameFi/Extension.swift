@@ -57,7 +57,14 @@ extension UITextField{
 
 
     func validatePassword() -> Bool {
-        let temp = self.validate(value: "^[A-Z0-9a-z]{6,18}")
+        let temp = self.validate(value: "(?!^[0-9]+$)(?!^[A-z]+$)(?!^[^A-z0-9]+$)^.{6,16}$")
         return temp
     }
+    
+    func validateUsername() -> Bool {
+        let temp = self.validate(value: "^[A-Za-z0-9_-]{5,16}$")
+        return temp
+    }
+    
+    
 }
