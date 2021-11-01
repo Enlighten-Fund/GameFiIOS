@@ -26,8 +26,8 @@
             filePath = "GameFi/User/RegisterController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
             landmarkName = "loginBtnClick(btn:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -51,16 +51,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "37FE26F1-32C7-4837-930A-9B65AD20D366"
+            uuid = "C7F23242-3536-475A-BE7D-22CCDF66764D"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GameFi/User/View/LabelTextFildCell.swift"
+            filePath = "GameFi/User/RegisterController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "update(model:)"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
+            landmarkName = "fireTimer()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BA7EB0B8-253C-4C2C-82F9-1CFE0B88101B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GameFi/User/RegisterController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
+            landmarkName = "fireTimer()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
