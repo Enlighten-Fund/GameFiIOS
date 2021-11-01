@@ -330,7 +330,7 @@ class RegisterController: UIViewController {
         footView.scholarBtn.addTarget(self, action: #selector(scholarBtnClick), for: .touchUpInside)
         footView.scholarTitleBtn.addTarget(self, action: #selector(scholarBtnClick), for: .touchUpInside)
         footView.managerBtn.addTarget(self, action: #selector(managerBtnClick), for: .touchUpInside)
-        footView.managerBtn.addTarget(self, action: #selector(managerBtnClick), for: .touchUpInside)
+        footView.managerTitleBtn.addTarget(self, action: #selector(managerBtnClick), for: .touchUpInside)
         footView.privacyBtn.addTarget(self, action: #selector(privacyBtnClick), for: .touchUpInside)
         footView.registerBtn.addTarget(self, action: #selector(registerBtnClick), for: .touchUpInside)
         self.privacyLabel = footView.privacyLabel

@@ -139,7 +139,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let v1 = MarketPlaceController()
         let v2 = ViewController()
         let v3 = ViewController()
-        let v4 = RegisterController()
+        let v4 = LoginController()
         
         v1.tabBarItem = ESTabBarItem.init(title: "Home", image: UIImage(named: "home"), selectedImage: UIImage(named: "home_1"))
         v2.tabBarItem = ESTabBarItem.init(title: "Find", image: UIImage(named: "find"), selectedImage: UIImage(named: "find_1"))

@@ -12,7 +12,6 @@ target 'GameFi' do
   pod "ESTabBarController-swift"
   pod 'MJRefresh'
   pod 'IQKeyboardManager'
-  pod 'YBAttributeTextTapAction'
   pod 'MCToast'
   pod 'SCLAlertView'
 end

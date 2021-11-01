@@ -8,7 +8,8 @@
 import Foundation
 import UIKit
 import SnapKit
-class RegisterFootView: UIView {
+
+class LoginFootView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.scholarBtn.snp.makeConstraints { make in
@@ -36,22 +37,16 @@ class RegisterFootView: UIView {
             make.width.equalTo(100)
             make.height.equalTo(30)
         }
-        self.privacyBtn.snp.makeConstraints { make in
-            make.top.equalTo(self.scholarBtn.snp.bottom).offset(10)
-            make.left.equalToSuperview().offset(20)
-            make.width.equalTo(40)
-            make.height.equalTo(40)
-        }
-        self.privacyLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(self.privacyBtn)
-            make.left.equalTo(self.privacyBtn.snp.right).offset(10)
-            make.width.equalTo(IPhone_SCREEN_WIDTH - 40)
-            make.height.equalTo(40)
-        }
         self.registerBtn.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(self.privacyLabel.snp.bottom).offset(10)
+            make.top.equalTo(self.managerTitleBtn.snp.bottom).offset(20)
             make.width.equalTo(80)
+            make.height.equalTo(40)
+        }
+        self.registerLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(self.registerBtn.snp.bottom).offset(10)
+            make.width.equalTo(self.registerLabel.intrinsicContentSize.width + 1)
             make.height.equalTo(40)
         }
     }
@@ -59,6 +54,29 @@ class RegisterFootView: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+    
+    lazy var rememberBtn : UIButton = {
+        let tempBtn = UIButton.init(frame: CGRect.zero)
+        tempBtn.setImage(UIImage.init(named: "shop"), for: .normal)
+        tempBtn.setImage(UIImage.init(named: "shop_1"), for: .selected)
+        self.addSubview(tempBtn)
+        return tempBtn
+    }()
+    
+    lazy var rememberLabel : UILabel = {
+        let tempLabel = UILabel.init(frame: CGRect.zero)
+        tempLabel.text = "Remember me"
+        self.addSubview(tempLabel)
+        return tempLabel
+    }()
+    
+    
+    lazy var forgetPwdBtn : UIButton = {
+        let tempBtn = UIButton.init(frame: CGRect.zero)
+        tempBtn.setTitle("Forget", for: .normal)
+        self.addSubview(tempBtn)
+        return tempBtn
+    }()
     
     lazy var scholarBtn : UIButton = {
         let tempBtn = UIButton.init(frame: CGRect.zero)
@@ -94,31 +112,22 @@ class RegisterFootView: UIView {
         return tempBtn
     }()
     
-    lazy var privacyBtn : UIButton = {
-        let tempBtn = UIButton.init(frame: CGRect.zero)
-        tempBtn.setImage(UIImage.init(named: "tips"), for: .selected)
-        tempBtn.setImage(UIImage.init(named: "shop_1"), for: .normal)
-        tempBtn.setImage(UIImage.init(named: "shop_1"), for: .highlighted)
-        self.addSubview(tempBtn)
-        return tempBtn
-    }()
-    
-    lazy var privacyLabel : UILabel = {
-        let tempLabel = UILabel.init()
-        var mutableStr :NSMutableAttributedString = NSMutableAttributedString(string: "Accept the Privacy Policy and Terms of Service")
-        mutableStr.addAttribute(NSAttributedString.Key.foregroundColor, value:UIColor.blue, range:NSRange(location:10, length:15))
-        mutableStr.addAttribute(NSAttributedString.Key.foregroundColor, value:UIColor.blue, range:NSRange(location:30, length:16))
-        tempLabel.attributedText = mutableStr
-        tempLabel.font = UIFont.systemFont(ofSize: 12)
-        self.addSubview(tempLabel)
-        return tempLabel
-    }()
-    
     lazy var registerBtn : UIButton = {
         let tempBtn = UIButton.init(frame: CGRect.zero)
         tempBtn.setTitle("Sign Up", for: .normal)
         tempBtn.backgroundColor = .blue
         self.addSubview(tempBtn)
         return tempBtn
+    }()
+    
+    lazy var registerLabel : UILabel = {
+        let tempLabel = UILabel.init()
+        tempLabel.textAlignment = .center
+        var mutableStr :NSMutableAttributedString = NSMutableAttributedString(string: "Don't have an account? Sign up")
+        mutableStr.addAttribute(NSAttributedString.Key.foregroundColor, value:UIColor.blue, range:NSRange(location:23, length:7))
+        tempLabel.attributedText = mutableStr
+        tempLabel.font = UIFont.systemFont(ofSize: 12)
+        self.addSubview(tempLabel)
+        return tempLabel
     }()
 }
