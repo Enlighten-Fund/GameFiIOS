@@ -17,9 +17,6 @@ class RegisterController: UIViewController {
     var emailTextField : UITextField?
     var usernameTextField : UITextField?
     var passwordTextField : UITextField?
-    var codeBtn : UIButton?
-    var countDownNum = 120
-    var timer : Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,14 +79,25 @@ class RegisterController: UIViewController {
         }
         let userAttributes = [AuthUserAttribute(.email, value: (self.emailTextField?.text)!)]
         let options = AuthSignUpRequest.Options(userAttributes: userAttributes)
-        Amplify.Auth.signUp(username: (self.usernameTextField?.text)!, password: self.passwordTextField?.text, options: options) { [self] result in
+        Amplify.Auth.signUp(username: (self.usernameTextField?.text)!, password: self.passwordTextField!.text, options: options) {  result in
             switch result {
             case .success(let signUpResult):
                 if case let .confirmUser(deliveryDetails, _) = signUpResult.nextStep {
                     print("Delivery details \(String(describing: deliveryDetails))")
-                    DispatchQueue.main.async { [self] in
-                        self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
-                        self.timer?.fire()
+                    DispatchQueue.main.async {
+                        var countDownNum = 120
+                        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+                            if countDownNum == 0 {
+                                  // 销毁计时器
+                                timer.invalidate()
+                                btn.isEnabled = true
+                                print(">>> Timer has Stopped!")
+                            } else {
+                                print(">>> Countdown Number: \(countDownNum)")
+                                countDownNum -= 1
+                                btn.setTitle(String(countDownNum), for: .normal)
+                            }
+                        }
                     }
                     
                 } else {
@@ -103,22 +111,6 @@ class RegisterController: UIViewController {
                 DispatchQueue.main.async {
                     btn.isEnabled = true
                 }
-            }
-        }
-    }
-    
-    @objc func fireTimer() {
-        
-        if countDownNum == 0 {
-            DispatchQueue.main.async {
-                self.codeBtn!.isEnabled = true
-            }
-              // 销毁计时器
-            self.timer!.invalidate()
-        } else {
-            countDownNum = countDownNum - 1
-            DispatchQueue.main.async { [self] in
-                self.codeBtn!.setTitle(String(countDownNum), for: .normal)
             }
         }
     }
@@ -285,7 +277,6 @@ extension  RegisterController : UITableViewDelegate,UITableViewDataSource,UIText
         tempCell.titleLabel?.numberOfLines = 2
         tempCell.codeBtn.addTarget(self, action: #selector(codeBtnClick), for: .touchUpInside)
         tempCell.update(model: self.codeModel)
-        self.codeBtn = tempCell.codeBtn
         cell = tempCell
     default:
         cell = tableView.dequeueReusableCell(withIdentifier: emptyTableViewCellIdentifier, for: indexPath)
