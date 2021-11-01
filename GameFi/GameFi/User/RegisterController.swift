@@ -13,12 +13,15 @@ import AmplifyPlugins
 import AWSPluginsCore
 import Amplify
 import MCToast
+import SCLAlertView
 
 class RegisterController: UIViewController {
     var emailTextField : UITextField?
     var usernameTextField : UITextField?
     var passwordTextField : UITextField?
+    var codeTextField : UITextField?
     var footView : RegisterFootView?
+    var codeLabel : UILabel?
     var role : Int = 1 //1代表scholar 2 代表manager
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +42,7 @@ class RegisterController: UIViewController {
         self.emailTextField?.resignFirstResponder()
         self.usernameTextField?.resignFirstResponder()
         self.passwordTextField?.resignFirstResponder()
+        self.codeTextField?.resignFirstResponder()
         //先本地校验
         let textField : UITextField? = self.emailTextField
         let temp = textField!.validateEmail()
@@ -92,6 +96,11 @@ class RegisterController: UIViewController {
                 if case let .confirmUser(deliveryDetails, _) = signUpResult.nextStep {
                     print("Delivery details \(String(describing: deliveryDetails))")
                     DispatchQueue.main.async {
+                        self.codeModel.tip = "Enter the confirmation code we sent to " + (self.emailTextField?.text)!
+                        self.codeModel.text = self.codeTextField!.text!
+                        self.codeLabel?.text = self.codeModel.tip
+                        self.codeLabel?.isHidden = false
+                        
                         var countDownNum = 120
                         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
                             if countDownNum == 0 {
@@ -104,19 +113,23 @@ class RegisterController: UIViewController {
                                 print(">>> Countdown Number: \(countDownNum)")
                                 countDownNum -= 1
                                 btn.setTitle(String(countDownNum), for: .normal)
-                            }
+                               
+                        }
                         }
                     }
+
                     
                 } else {
                     print("SignUp Complete")
                     DispatchQueue.main.async {
+                        SCLAlertView.init().showError("系统提示：", subTitle: "SignUp Complete")
                         btn.isEnabled = true
                     }
                 }
             case .failure(let error):
                 print("An error occurred while registering a user \(error)")
                 DispatchQueue.main.async {
+                    SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")
                     btn.isEnabled = true
                 }
             }
@@ -173,9 +186,116 @@ class RegisterController: UIViewController {
         self.footView?.managerBtn.isSelected = true
         self.role = 2
     }
-    
-    @objc func registerBtnClick(btn:UIButton){
+    @objc func privacyBtnClick(btn:UIButton){
         btn.isSelected = !btn.isSelected
+        
+    }
+    
+    @objc func registerBtnClick(){
+        self.emailTextField?.resignFirstResponder()
+        self.usernameTextField?.resignFirstResponder()
+        self.passwordTextField?.resignFirstResponder()
+        self.codeTextField?.resignFirstResponder()
+        //先本地校验
+        let textField : UITextField? = self.emailTextField
+        let temp = textField!.validateEmail()
+        var emailNotice = ""
+        if !temp {
+            emailNotice = "Please enter a valid email"
+             self.emailModel.tip = emailNotice
+             self.emailModel.text = textField!.text!
+             let indexPath: IndexPath = IndexPath.init(row: 0, section: 0)
+             DispatchQueue.main.async {
+                 self.tableView!.reloadRows(at: [indexPath], with: .none)
+             }
+             return
+         }
+        let temp2 = self.usernameTextField!.validateUsername()
+        var usernameNotice = ""
+        if !temp2 {
+            usernameNotice = "Please enter a valid username"
+            self.usernameModel.tip = usernameNotice
+            self.usernameModel.text = self.usernameTextField!.text!
+            let indexPath: IndexPath = IndexPath.init(row: 1, section: 0)
+            DispatchQueue.main.async {
+                self.tableView!.reloadRows(at: [indexPath], with: .none)
+            }
+            return
+        }
+        let temp3 = self.passwordTextField!.validatePassword()
+        var passwordNotice = ""
+        if !temp3 {
+            passwordNotice = "Please enter a valid password"
+            self.passwordModel.tip = passwordNotice
+            self.passwordModel.text = self.passwordTextField!.text!
+            let indexPath2: IndexPath = IndexPath.init(row: 2, section: 0)
+            DispatchQueue.main.async {
+                self.tableView!.reloadRows(at: [indexPath2], with: .none)
+            }
+            return
+        }
+        
+        var codeNotice = ""
+        if codeNotice.isBlank {
+            codeNotice = "Please enter a valid code"
+            self.codeModel.tip = codeNotice
+            self.codeModel.text = self.codeTextField!.text!
+            let indexPath: IndexPath = IndexPath.init(row: 3, section: 0)
+            DispatchQueue.main.async {
+                self.tableView!.reloadRows(at: [indexPath], with: .none)
+            }
+            return
+        }
+        
+        //本地验证通过
+        self.mc_loading()
+        Amplify.Auth.confirmSignUp(for: (self.usernameTextField?.text)!, confirmationCode: (self.codeTextField?.text)!) { result in
+            switch result {
+            case .success:
+                print("Confirm signUp succeeded")
+                Amplify.Auth.signIn(username: self.usernameTextField?.text, password: self.passwordTextField?.text) { result in
+                    switch result {
+                    case .success:
+                        print("Sign in succeeded")
+                        Amplify.Auth.fetchAuthSession { result in
+                            self.mc_remove()
+                            do {
+                                let session = try result.get()
+
+                                // Get user sub or identity id
+                                if let identityProvider = session as? AuthCognitoIdentityProvider {
+                                    let usersub = try identityProvider.getUserSub().get()
+                                    let identityId = try identityProvider.getIdentityId().get()
+                                    print("User sub - \(usersub) and identity id \(identityId)")
+                                }
+
+                                // Get aws credentials
+                                if let awsCredentialsProvider = session as? AuthAWSCredentialsProvider {
+                                    let credentials = try awsCredentialsProvider.getAWSCredentials().get()
+                                    print("Access key - \(credentials.accessKey) ")
+                                }
+
+                                // Get cognito user pool token
+                                if let cognitoTokenProvider = session as? AuthCognitoTokensProvider {
+                                    let tokens = try cognitoTokenProvider.getCognitoTokens().get()
+                                    print("Id token - \(tokens.idToken) ")
+                                }
+
+                            } catch {
+                                self.mc_remove()
+                                print("Fetch auth session failed with error - \(error)")
+                            }
+                        }
+                    case .failure(let error):
+                        self.mc_remove()
+                        print("Sign in failed \(error)")
+                    }
+                }
+            case .failure(let error):
+                self.mc_remove()
+                print("An error occurred while confirming sign up \(error)")
+            }
+        }
         
     }
     
@@ -185,13 +305,14 @@ class RegisterController: UIViewController {
         let headerView = RegisterHeadView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 100))
         headerView.loginBtn.addTarget(self, action: #selector(loginBtnClick), for: .touchUpInside)
         tempTableView.tableHeaderView = headerView
-        let footView = RegisterFootView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 100))
-        footView.registerBtn.addTarget(self, action: #selector(registerBtnClick), for: .touchUpInside)
+        let footView = RegisterFootView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 150))
         self.footView = footView
         footView.scholarBtn.addTarget(self, action: #selector(scholarBtnClick), for: .touchUpInside)
         footView.scholarTitleBtn.addTarget(self, action: #selector(scholarBtnClick), for: .touchUpInside)
         footView.managerBtn.addTarget(self, action: #selector(managerBtnClick), for: .touchUpInside)
         footView.managerBtn.addTarget(self, action: #selector(managerBtnClick), for: .touchUpInside)
+        footView.privacyBtn.addTarget(self, action: #selector(privacyBtnClick), for: .touchUpInside)
+        footView.registerBtn.addTarget(self, action: #selector(registerBtnClick), for: .touchUpInside)
         tempTableView.tableFooterView = footView
         tempTableView.separatorStyle = .none
         tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "0")
@@ -264,6 +385,19 @@ extension  RegisterController : UITableViewDelegate,UITableViewDataSource,UIText
             DispatchQueue.main.async {
                 self.tableView!.reloadRows(at: [indexPath], with: .none)
             }
+        }else if textField.tag == 10004{
+//            var codeNotice = ""
+//            if codeNotice.isBlank {
+//                codeNotice = "Please enter a valid code"
+//            }else{
+//                codeNotice = ""
+//            }
+//            self.codeModel.tip = codeNotice
+//            self.codeModel.text = textField.text!
+//            let indexPath: IndexPath = IndexPath.init(row: 3, section: 0)
+//            DispatchQueue.main.async {
+//                self.tableView!.reloadRows(at: [indexPath], with: .none)
+//            }
         }
         
     }
@@ -305,6 +439,10 @@ extension  RegisterController : UITableViewDelegate,UITableViewDataSource,UIText
         cell = tempCell
     case 3:
         let tempCell : ConfirmCodeCell = tableView.dequeueReusableCell(withIdentifier: confirmCodeCellIdentifier, for: indexPath) as! ConfirmCodeCell
+        self.codeTextField = tempCell.textFild
+        self.codeTextField?.tag = 10004
+        self.codeLabel = tempCell.tipLabel
+        tempCell.textFild?.delegate = self
         tempCell.titleLabel?.numberOfLines = 2
         tempCell.codeBtn.addTarget(self, action: #selector(codeBtnClick), for: .touchUpInside)
         tempCell.update(model: self.codeModel)

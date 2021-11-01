@@ -33,6 +33,7 @@ PODS:
   - MCToast (0.1.0):
     - lottie-ios
   - MJRefresh (3.7.2)
+  - SCLAlertView (0.8)
   - SnapKit (5.0.1)
   - YBAttributeTextTapAction (3.0.3)
 
@@ -46,6 +47,7 @@ DEPENDENCIES:
   - Kingfisher
   - MCToast
   - MJRefresh
+  - SCLAlertView
   - SnapKit
   - YBAttributeTextTapAction
 
@@ -67,6 +69,7 @@ SPEC REPOS:
     - lottie-ios
     - MCToast
     - MJRefresh
+    - SCLAlertView
     - SnapKit
     - YBAttributeTextTapAction
 
@@ -87,9 +90,10 @@ SPEC CHECKSUMS:
   lottie-ios: c058aeafa76daa4cf64d773554bccc8385d0150e
   MCToast: accd8b0d4653bcd6b3b1a9770802c2358614e6a5
   MJRefresh: 30997d30b347c8e9508a4db11e3a690da0c9b85a
+  SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   YBAttributeTextTapAction: b7e61f0265b5673e7ce7bad7319e8eff9e209a2b
 
-PODFILE CHECKSUM: 46bd20159b96fc00d8722fa1afaf3aa12b3ed2cd
+PODFILE CHECKSUM: 9d9f2cc19c73c440a1c0a132fcb065e6fc4db609
 
 COCOAPODS: 1.11.2

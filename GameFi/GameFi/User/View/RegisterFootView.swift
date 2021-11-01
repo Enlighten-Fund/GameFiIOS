@@ -97,7 +97,9 @@ class RegisterFootView: UIView {
     
     lazy var privacyBtn : UIButton = {
         let tempBtn = UIButton.init(frame: CGRect.zero)
-        tempBtn.setImage(UIImage.init(named: "tips"), for: .normal)
+        tempBtn.setImage(UIImage.init(named: "tips"), for: .selected)
+        tempBtn.setImage(UIImage.init(named: "shop_1"), for: .normal)
+        tempBtn.setImage(UIImage.init(named: "shop_1"), for: .highlighted)
         self.addSubview(tempBtn)
         return tempBtn
     }()
