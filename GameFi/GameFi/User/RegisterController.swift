@@ -13,11 +13,13 @@ import AmplifyPlugins
 import AWSPluginsCore
 import Amplify
 import MCToast
+
 class RegisterController: UIViewController {
     var emailTextField : UITextField?
     var usernameTextField : UITextField?
     var passwordTextField : UITextField?
-    
+    var footView : RegisterFootView?
+    var role : Int = 1 //1代表scholar 2 代表manager
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView!.snp.makeConstraints { make in
@@ -160,6 +162,22 @@ class RegisterController: UIViewController {
         }
     }
     
+    @objc func scholarBtnClick() {
+        self.footView?.scholarBtn.isSelected = true
+        self.footView?.managerBtn.isSelected = false
+        self.role = 1
+    }
+    
+    @objc func managerBtnClick() {
+        self.footView?.scholarBtn.isSelected = false
+        self.footView?.managerBtn.isSelected = true
+        self.role = 2
+    }
+    
+    @objc func registerBtnClick(btn:UIButton){
+        btn.isSelected = !btn.isSelected
+        
+    }
     
     lazy var tableView: UITableView? = {
         let tempTableView = UITableView.init(frame: CGRect.zero, style: .plain)
@@ -167,7 +185,14 @@ class RegisterController: UIViewController {
         let headerView = RegisterHeadView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 100))
         headerView.loginBtn.addTarget(self, action: #selector(loginBtnClick), for: .touchUpInside)
         tempTableView.tableHeaderView = headerView
-        tempTableView.tableFooterView = RegisterFootView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 100))
+        let footView = RegisterFootView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 100))
+        footView.registerBtn.addTarget(self, action: #selector(registerBtnClick), for: .touchUpInside)
+        self.footView = footView
+        footView.scholarBtn.addTarget(self, action: #selector(scholarBtnClick), for: .touchUpInside)
+        footView.scholarTitleBtn.addTarget(self, action: #selector(scholarBtnClick), for: .touchUpInside)
+        footView.managerBtn.addTarget(self, action: #selector(managerBtnClick), for: .touchUpInside)
+        footView.managerBtn.addTarget(self, action: #selector(managerBtnClick), for: .touchUpInside)
+        tempTableView.tableFooterView = footView
         tempTableView.separatorStyle = .none
         tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "0")
         tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "1")
