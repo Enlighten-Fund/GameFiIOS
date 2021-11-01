@@ -104,7 +104,10 @@ class RegisterFootView: UIView {
     
     lazy var privacyLabel : UILabel = {
         let tempLabel = UILabel.init()
-        tempLabel.text = "Accept the Privacy Policy and Terms of Service"
+        var mutableStr :NSMutableAttributedString = NSMutableAttributedString(string: "Accept the Privacy Policy and Terms of Service")
+        mutableStr.addAttribute(NSAttributedString.Key.foregroundColor, value:UIColor.blue, range:NSRange(location:10, length:15))
+        mutableStr.addAttribute(NSAttributedString.Key.foregroundColor, value:UIColor.blue, range:NSRange(location:30, length:16))
+        tempLabel.attributedText = mutableStr
         tempLabel.font = UIFont.systemFont(ofSize: 12)
         self.addSubview(tempLabel)
         return tempLabel

@@ -9,10 +9,12 @@ import Foundation
 import HandyJSON
 class LabelTFTipModel : NSObject {
     var title : String
+    var text : String
     var tip : String
     
-    init(title:String,tip:String) {
+    init(title:String,text:String,tip:String) {
         self.title = title
+        self.text = text
         self.tip = tip
     }
 }

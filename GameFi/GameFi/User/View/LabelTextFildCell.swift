@@ -38,6 +38,7 @@ class LabelTextFildCell: TableViewCell {
         }
         self.tipLabel.text = model.tip
         self.titleLabel?.text = model.title
+        self.textFild?.text = model.text
     }
     
     lazy var titleLabel : UILabel? = {
@@ -55,6 +56,7 @@ class LabelTextFildCell: TableViewCell {
     
     lazy var tipLabel : UILabel = {
         let tempLabel = UILabel.init(frame: CGRect.zero)
+        tempLabel.textColor = .red
         self.contentView.addSubview(tempLabel)
         return tempLabel
     }()

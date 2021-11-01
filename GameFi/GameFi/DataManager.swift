@@ -85,51 +85,19 @@ class DataManager: NSObject {
                 }
             }
         }
-//        //MARK: - POST请求 数组参数（由于有数组参数的需求 ）[["id":"1","value":""],["id":"2","value":""]]
-//        class func POST2(url:String,param:Array<[String:String]>,success: @escaping SuccessBlock) {
-//            print("url===:" + url)
-//            let urlPath:URL = URL(string: BaseUrl + url)!
-//            print("\n param:")
-//            let data = try? JSONSerialization.data(withJSONObject: param, options: [])
-//            var urlRequest = URLRequest(url: urlPath)
-//            urlRequest.httpMethod = "POST"
-//            urlRequest.httpBody = data
-//            urlRequest.allHTTPHeaderFields = ["application/json":"Accept","application/json;charset=UTF-8":"Content-Type"]
-//
-//            let request = AF.request(urlRequest)
-//            request.responseJSON { (response) in
-//                DispatchQueue.global().async(execute: {
-//                    print(response.result)
-//                    switch response.result {
-//                    case let .success(result):
-//                        do {
-//                            let resultDict:[String:Any] = result as! [String:Any]
-//                            DispatchQueue.main.async(execute: {
-//                                /** 返回码 (Int 类型code 会报崩) */
-//                                let code = resultDict["resp_code"]
-//                                var resp_code = 0
-//                                if code is String {
-//                                    resp_code = Int(code as! String)!
-//                                } else if code is Int {
-//                                    resp_code = code as! Int
-//                                }
-//                                switch resp_code {
-//                                case 0:
-//                                    success(resultDict)
-//                                case 1: break
-//                                    // SVProgressHUD.showError(withStatus: (resultDict["resp_msg"] as! String))
-//                                default: break
-//                                    //SVProgressHUD.showError(withStatus: (resultDict["resp_msg"] as! String))
-//                                }
-//                            })
-//                        }
-//                    case let .failure(error):
-//                        print(error)
-//                    }
-//
-//                })
-//
-//            }
-//        }
+    
+    func checkEmail(email:String,completeBlock: @escaping CompleteBlock) {
+        let dic = ["email" : email]
+        self.POST(url: "user/check_exist", param: dic as [String : Any]) { result, reponse in
+            completeBlock(result,reponse)
+        }
+    }
+    
+    func checkUsername(username:String,completeBlock: @escaping CompleteBlock) {
+        let dic = ["username" : username]
+        self.POST(url: "user/check_exist", param: dic as [String : Any]) { result, reponse in
+            completeBlock(result,reponse)
+        }
+    }
  
 }

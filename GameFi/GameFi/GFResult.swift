@@ -16,7 +16,7 @@ enum HttpResponseCode : Int {
 class GFResult : NSObject{
     var code : HttpResponseCode?
     var msg : String?
-    var success : Bool?
+
     var data : Dictionary<String, Any>?
     
     
@@ -31,5 +31,14 @@ class GFResult : NSObject{
         self.code = HttpResponseCode(rawValue: terror.code)
         self.msg = error.localizedDescription
        
+    }
+    
+    var success : Bool?{
+        get{
+            if code == HttpResponseCode.HttpResponseCodeSuccess {
+                return true
+            }
+            return false
+        }
     }
 }

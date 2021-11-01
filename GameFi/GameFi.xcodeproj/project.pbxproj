@@ -28,6 +28,7 @@
 		984BDBA6272C1C3800F6144B /* ConfirmCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984BDBA5272C1C3800F6144B /* ConfirmCodeCell.swift */; };
 		984BDBA8272C1D2400F6144B /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984BDBA7272C1D2400F6144B /* TableViewCell.swift */; };
 		984BDBAA272C307B00F6144B /* RegisterFootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984BDBA9272C307B00F6144B /* RegisterFootView.swift */; };
+		984BDBAC272E494600F6144B /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984BDBAB272E494600F6144B /* LoginController.swift */; };
 		98823A3F27295B0100D9A7CD /* MarketPlaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98823A3E27295B0100D9A7CD /* MarketPlaceController.swift */; };
 		98823A412729674500D9A7CD /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98823A402729674500D9A7CD /* Define.swift */; };
 /* End PBXBuildFile section */
@@ -54,6 +55,7 @@
 		984BDBA5272C1C3800F6144B /* ConfirmCodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmCodeCell.swift; sourceTree = "<group>"; };
 		984BDBA7272C1D2400F6144B /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		984BDBA9272C307B00F6144B /* RegisterFootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterFootView.swift; sourceTree = "<group>"; };
+		984BDBAB272E494600F6144B /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		98823A3E27295B0100D9A7CD /* MarketPlaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketPlaceController.swift; sourceTree = "<group>"; };
 		98823A402729674500D9A7CD /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		C65868A573F5F7D6A4003290 /* Pods-GameFi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameFi.debug.xcconfig"; path = "Target Support Files/Pods-GameFi/Pods-GameFi.debug.xcconfig"; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				984BDBA0272BEEF000F6144B /* Model */,
 				984BDB9F272BEEDD00F6144B /* View */,
 				984BDB94272ACD0A00F6144B /* RegisterController.swift */,
+				984BDBAB272E494600F6144B /* LoginController.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				984BDBAC272E494600F6144B /* LoginController.swift in Sources */,
 				980A7DC22728135B006AE4C4 /* GFNavController.swift in Sources */,
 				98823A412729674500D9A7CD /* Define.swift in Sources */,
 				980A7DC4272828FD006AE4C4 /* DataManager.swift in Sources */,
