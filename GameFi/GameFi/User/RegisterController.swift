@@ -23,6 +23,9 @@ class RegisterController: UIViewController {
     var footView : RegisterFootView?
     var codeLabel : UILabel?
     var role : Int = 1 //1代表scholar 2 代表manager
+    var privacySelect = false
+    var privacyLabel : UILabel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView!.snp.makeConstraints { make in
@@ -188,7 +191,7 @@ class RegisterController: UIViewController {
     }
     @objc func privacyBtnClick(btn:UIButton){
         btn.isSelected = !btn.isSelected
-        
+        self.privacySelect = !self.privacySelect
     }
     
     @objc func registerBtnClick(){
@@ -254,6 +257,13 @@ class RegisterController: UIViewController {
             return
         }
         
+        if !self.privacySelect {
+            self.privacyLabel?.shake(direction: .horizontal, times: 2, interval: 0.1, offset: 5, completion: {
+                
+            })
+            return
+        }
+        
         //本地验证通过
         self.mc_loading()
         Amplify.Auth.confirmSignUp(for: (self.usernameTextField?.text)!, confirmationCode: (self.codeTextField?.text)!) { result in
@@ -291,15 +301,18 @@ class RegisterController: UIViewController {
                             } catch {
                                 self.mc_remove()
                                 print("Fetch auth session failed with error - \(error)")
+                                self.mc_text("\(error)")
                             }
                         }
                     case .failure(let error):
                         self.mc_remove()
                         print("Sign in failed \(error)")
+                        self.mc_text("\(error)")
                     }
                 }
             case .failure(let error):
                 self.mc_remove()
+                self.mc_text("\(error)")
                 print("An error occurred while confirming sign up \(error)")
             }
         }
@@ -320,6 +333,7 @@ class RegisterController: UIViewController {
         footView.managerBtn.addTarget(self, action: #selector(managerBtnClick), for: .touchUpInside)
         footView.privacyBtn.addTarget(self, action: #selector(privacyBtnClick), for: .touchUpInside)
         footView.registerBtn.addTarget(self, action: #selector(registerBtnClick), for: .touchUpInside)
+        self.privacyLabel = footView.privacyLabel
         tempTableView.tableFooterView = footView
         tempTableView.separatorStyle = .none
         tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "0")
