@@ -12,7 +12,7 @@ import Alamofire
 import AmplifyPlugins
 import AWSPluginsCore
 import Amplify
-
+import MCToast
 class RegisterController: UIViewController {
     var emailTextField : UITextField?
     var usernameTextField : UITextField?
@@ -34,6 +34,9 @@ class RegisterController: UIViewController {
     }
     
     @objc func codeBtnClick(btn:UIButton) {
+        self.emailTextField?.resignFirstResponder()
+        self.usernameTextField?.resignFirstResponder()
+        self.passwordTextField?.resignFirstResponder()
         //先本地校验
         let textField : UITextField? = self.emailTextField
         let temp = textField!.validateEmail()
@@ -79,7 +82,9 @@ class RegisterController: UIViewController {
         }
         let userAttributes = [AuthUserAttribute(.email, value: (self.emailTextField?.text)!)]
         let options = AuthSignUpRequest.Options(userAttributes: userAttributes)
+        mc_loading()
         Amplify.Auth.signUp(username: (self.usernameTextField?.text)!, password: self.passwordTextField!.text, options: options) {  result in
+            self.mc_remove()
             switch result {
             case .success(let signUpResult):
                 if case let .confirmUser(deliveryDetails, _) = signUpResult.nextStep {
@@ -91,6 +96,7 @@ class RegisterController: UIViewController {
                                   // 销毁计时器
                                 timer.invalidate()
                                 btn.isEnabled = true
+                                btn.setTitle("send", for: .normal)
                                 print(">>> Timer has Stopped!")
                             } else {
                                 print(">>> Countdown Number: \(countDownNum)")
