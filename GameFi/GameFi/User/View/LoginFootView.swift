@@ -37,16 +37,22 @@ class LoginFootView: UIView {
             make.width.equalTo(100)
             make.height.equalTo(30)
         }
-        self.registerBtn.snp.makeConstraints { make in
+        self.loginBtn.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(self.managerTitleBtn.snp.bottom).offset(20)
             make.width.equalTo(80)
             make.height.equalTo(40)
         }
         self.registerLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(self.registerBtn.snp.bottom).offset(10)
-            make.width.equalTo(self.registerLabel.intrinsicContentSize.width + 1)
+            make.centerX.equalToSuperview().offset(-30)
+            make.top.equalTo(self.loginBtn.snp.bottom).offset(10)
+            make.width.equalTo(self.registerLabel.intrinsicContentSize.width)
+            make.height.equalTo(40)
+        }
+        self.registerBtn.snp.makeConstraints { make in
+            make.left.equalTo(self.registerLabel.snp.right)
+            make.top.equalTo(self.loginBtn.snp.bottom).offset(10)
+            make.width.equalTo(60)
             make.height.equalTo(40)
         }
     }
@@ -112,7 +118,7 @@ class LoginFootView: UIView {
         return tempBtn
     }()
     
-    lazy var registerBtn : UIButton = {
+    lazy var loginBtn : UIButton = {
         let tempBtn = UIButton.init(frame: CGRect.zero)
         tempBtn.setTitle("Login in", for: .normal)
         tempBtn.backgroundColor = .blue
@@ -122,12 +128,19 @@ class LoginFootView: UIView {
     
     lazy var registerLabel : UILabel = {
         let tempLabel = UILabel.init()
-        tempLabel.textAlignment = .center
-        var mutableStr :NSMutableAttributedString = NSMutableAttributedString(string: "Don't have an account? Sign up")
-        mutableStr.addAttribute(NSAttributedString.Key.foregroundColor, value:UIColor.blue, range:NSRange(location:23, length:7))
-        tempLabel.attributedText = mutableStr
+        tempLabel.text = "Don't have an account? "
+        tempLabel.textAlignment = .right
         tempLabel.font = UIFont.systemFont(ofSize: 12)
         self.addSubview(tempLabel)
         return tempLabel
+    }()
+    
+    lazy var registerBtn : UIButton = {
+        let tempBtn = UIButton.init(frame: CGRect.zero)
+        tempBtn.setTitle("Sign up", for: .normal)
+        tempBtn.setTitleColor(.blue, for: .normal)
+        tempBtn.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        self.addSubview(tempBtn)
+        return tempBtn
     }()
 }

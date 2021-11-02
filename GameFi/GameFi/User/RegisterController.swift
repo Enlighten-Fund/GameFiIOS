@@ -336,6 +336,7 @@ class RegisterController: UIViewController {
         self.privacyLabel = footView.privacyLabel
         tempTableView.tableFooterView = footView
         tempTableView.separatorStyle = .none
+        tempTableView.keyboardDismissMode = .onDrag
         tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "0")
         tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "1")
         tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "2")

@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 import SnapKit
-
 class LoginController: UIViewController {
     var usernameTextField : UITextField?
     var passwordTextField : UITextField?
@@ -37,6 +36,13 @@ class LoginController: UIViewController {
         self.role = 2
     }
     
+    @objc func registerBtnClick() {
+        self.navigationController?.pushViewController(RegisterController.init(), animated: true)
+    }
+    @objc func loginBtnClick(){
+        
+    }
+    
     lazy var tableView: UITableView? = {
         let tempTableView = UITableView.init(frame: CGRect.zero, style: .plain)
         tempTableView.backgroundColor = .lightGray
@@ -48,13 +54,11 @@ class LoginController: UIViewController {
         footView.scholarTitleBtn.addTarget(self, action: #selector(scholarBtnClick), for: .touchUpInside)
         footView.managerBtn.addTarget(self, action: #selector(managerBtnClick), for: .touchUpInside)
         footView.managerTitleBtn.addTarget(self, action: #selector(managerBtnClick), for: .touchUpInside)
-        footView.registerLabel.yb_addAttributeTapAction(["Sign up"]) { (string, range, int) in
-            self.navigationController?.pushViewController(RegisterController.init(), animated: true)
-        }
-//        footView.privacyBtn.addTarget(self, action: #selector(privacyBtnClick), for: .touchUpInside)
-//        footView.registerBtn.addTarget(self, action: #selector(registerBtnClick), for: .touchUpInside)
+        footView.registerBtn.addTarget(self, action: #selector(registerBtnClick), for: .touchUpInside)
+        footView.loginBtn.addTarget(self, action: #selector(loginBtnClick), for: .touchUpInside)
         tempTableView.tableFooterView = footView
         tempTableView.separatorStyle = .none
+        tempTableView.keyboardDismissMode = .onDrag
         tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "0")
         tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "1")
         tempTableView.register(EmptyTableViewCell.classForCoder(), forCellReuseIdentifier: emptyTableViewCellIdentifier)
@@ -92,61 +96,31 @@ extension  LoginController : UITableViewDelegate,UITableViewDataSource,UITextFie
  
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField.tag == 10001{
-//            let temp = textField.validateEmail()
-//            var emailNotice = ""
-//            if !temp {
-//               emailNotice = "Please enter a valid email"
-//            }
-//            self.emailModel.tip = emailNotice
-//            self.emailModel.text = textField.text!
-//            let indexPath: IndexPath = IndexPath.init(row: 0, section: 0)
-//            DispatchQueue.main.async {
-//                self.tableView!.reloadRows(at: [indexPath], with: .none)
-//            }
+            let temp = textField.validateUsername()
+            var usernameNotice = ""
+            if !temp {
+                usernameNotice = "Please enter a valid username"
+            }
+            self.usernameModel.tip = usernameNotice
+            self.usernameModel.text = textField.text!
+            let indexPath: IndexPath = IndexPath.init(row: 0, section: 0)
+            DispatchQueue.main.async {
+                self.tableView!.reloadRows(at: [indexPath], with: .none)
+            }
         }else if textField.tag == 10002{
-//            let temp = textField.validateUsername()
-//            var usernameNotice = ""
-//            if !temp {
-//                usernameNotice = "Please enter a valid username"
-//            }
-//            self.usernameModel.tip = usernameNotice
-//            self.usernameModel.text = textField.text!
-//            let indexPath: IndexPath = IndexPath.init(row: 1, section: 0)
-//            DispatchQueue.main.async {
-//                self.tableView!.reloadRows(at: [indexPath], with: .none)
-//            }
-        }else if textField.tag == 10003{
-//            let temp = textField.validatePassword()
-//            var passwordNotice = ""
-//            if !temp {
-//                passwordNotice = "Please enter a valid password"
-//            }else{
-//                passwordNotice = ""
-//            }
-//            self.passwordModel.tip = passwordNotice
-//            self.passwordModel.text = textField.text!
-//            let indexPath: IndexPath = IndexPath.init(row: 2, section: 0)
-//            DispatchQueue.main.async {
-//                self.tableView!.reloadRows(at: [indexPath], with: .none)
-//            }
-        }else if textField.tag == 10004{
-//            var codeNotice = ""
-//            var temp = ""
-//            if textField.text == nil {
-//                temp = ""
-//            }else{
-//                temp = textField.text!
-//            }
-//            
-//            if (temp.isBlank) {
-//                codeNotice = "Please enter a valid code"
-//            }
-//            self.codeModel.tip = codeNotice
-//            self.codeModel.text = textField.text!
-//            let indexPath: IndexPath = IndexPath.init(row: 3, section: 0)
-//            DispatchQueue.main.async {
-//                self.tableView!.reloadRows(at: [indexPath], with: .none)
-//            }
+            let temp = textField.validatePassword()
+            var passwordNotice = ""
+            if !temp {
+                passwordNotice = "Please enter a valid password"
+            }else{
+                passwordNotice = ""
+            }
+            self.passwordModel.tip = passwordNotice
+            self.passwordModel.text = textField.text!
+            let indexPath: IndexPath = IndexPath.init(row: 1, section: 0)
+            DispatchQueue.main.async {
+                self.tableView!.reloadRows(at: [indexPath], with: .none)
+            }
         }
         
     }
@@ -169,6 +143,7 @@ extension  LoginController : UITableViewDelegate,UITableViewDataSource,UITextFie
         tempCell.textFild?.delegate = self
         tempCell.textFild?.tag = 10001
         self.usernameTextField = tempCell.textFild
+        tempCell.textFild?.placeholder = "Please enter 5 to 16 alphanumeric characters or underscores"
         tempCell.update(model: self.usernameModel)
         cell = tempCell
     case 1:
@@ -176,6 +151,7 @@ extension  LoginController : UITableViewDelegate,UITableViewDataSource,UITextFie
         tempCell.textFild?.setupShowPasswordButton()
         tempCell.textFild?.delegate = self
         tempCell.textFild?.tag = 10002
+        tempCell.textFild?.placeholder = "Please enter a 6-20 digit password with at least two of letters, numbers and symbols"
         self.passwordTextField = tempCell.textFild
         tempCell.update(model: self.passwordModel)
         cell = tempCell
