@@ -11,6 +11,7 @@ import SnapKit
 import Amplify
 import AmplifyPlugins
 import AWSPluginsCore
+import AWSMobileClient
 
 class LoginController: UIViewController {
     var usernameTextField : UITextField?
@@ -118,6 +119,27 @@ class LoginController: UIViewController {
                         if let cognitoTokenProvider = session as? AuthCognitoTokensProvider {
                             let tokens = try cognitoTokenProvider.getCognitoTokens().get()
                             print("Id token - \(tokens.accessToken) ")
+                            UserDefaults.init().setValue(tokens.accessToken, forKey: "token")
+                            AWSMobileClient.default().getUserAttributes { (attributes, error) in
+                                 if(error != nil){
+                                    print("ERROR: \(error)")
+                                 }else{
+                                    if let attributesDict = attributes{
+                                       print("gfrole:\(attributesDict["custom:gfrole"])")
+                                        UserDefaults.init().setValue(attributesDict["custom:gfrole"], forKey: "gfrole")
+                                    }
+                                 }
+                            }
+//                            Amplify.Auth.fetchUserAttributes() { result in
+//                                    switch result {
+//                                    case .success(let attributes):
+//                                        print("User attributes - \(attributes)")
+//                                        let attributesDict : Dictionary = attributes
+//                                        print("\(attributes["gfrole"])")
+//                                    case .failure(let error):
+//                                        print("Fetching user attributes failed with error \(error)")
+//                                    }
+//                                }
                         }
 
                     } catch {

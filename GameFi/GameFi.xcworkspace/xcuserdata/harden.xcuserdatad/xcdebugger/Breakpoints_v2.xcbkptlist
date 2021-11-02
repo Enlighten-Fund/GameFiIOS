@@ -40,8 +40,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "367"
             endingLineNumber = "367"
-            landmarkName = "tableView"
-            landmarkType = "24">
+            landmarkName = "updateAttribute(gfrole:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -56,8 +56,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "362"
             endingLineNumber = "362"
-            landmarkName = "tableView"
-            landmarkType = "24">
+            landmarkName = "updateAttribute(gfrole:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -72,8 +72,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "360"
             endingLineNumber = "360"
-            landmarkName = "tableView"
-            landmarkType = "24">
+            landmarkName = "updateAttribute(gfrole:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -19,34 +19,34 @@ class LoginFootView: UIView {
             make.height.equalTo(30)
         }
         
-        self.scholarBtn.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(40)
-            make.left.equalToSuperview().offset(20)
-            make.width.equalTo(30)
-            make.height.equalTo(30)
-        }
-        self.scholarTitleBtn.snp.makeConstraints { make in
-            make.centerY.equalTo(self.scholarBtn)
-            make.left.equalTo(self.scholarBtn.snp.right).offset(10)
-            make.width.equalTo(100)
-            make.height.equalTo(30)
-        }
-        
-        self.managerBtn.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(40)
-            make.right.equalTo(self.managerTitleBtn.snp.left).offset(-10)
-            make.width.equalTo(30)
-            make.height.equalTo(30)
-        }
-        self.managerTitleBtn.snp.makeConstraints { make in
-            make.centerY.equalTo(self.scholarBtn)
-            make.right.equalToSuperview().offset(-20)
-            make.width.equalTo(100)
-            make.height.equalTo(30)
-        }
+//        self.scholarBtn.snp.makeConstraints { make in
+//            make.top.equalToSuperview().offset(40)
+//            make.left.equalToSuperview().offset(20)
+//            make.width.equalTo(30)
+//            make.height.equalTo(30)
+//        }
+//        self.scholarTitleBtn.snp.makeConstraints { make in
+//            make.centerY.equalTo(self.scholarBtn)
+//            make.left.equalTo(self.scholarBtn.snp.right).offset(10)
+//            make.width.equalTo(100)
+//            make.height.equalTo(30)
+//        }
+//
+//        self.managerBtn.snp.makeConstraints { make in
+//            make.top.equalToSuperview().offset(40)
+//            make.right.equalTo(self.managerTitleBtn.snp.left).offset(-10)
+//            make.width.equalTo(30)
+//            make.height.equalTo(30)
+//        }
+//        self.managerTitleBtn.snp.makeConstraints { make in
+//            make.centerY.equalTo(self.scholarBtn)
+//            make.right.equalToSuperview().offset(-20)
+//            make.width.equalTo(100)
+//            make.height.equalTo(30)
+//        }
         self.loginBtn.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(self.managerTitleBtn.snp.bottom).offset(20)
+            make.top.equalTo(self.forgetPwdBtn.snp.bottom).offset(20)
             make.width.equalTo(80)
             make.height.equalTo(40)
         }
