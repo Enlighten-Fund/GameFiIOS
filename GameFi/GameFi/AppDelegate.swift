@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                signUp(username: "chenlu3", password: "java,6720", email: "lu.chen@enlighten3.finance")
 //                  confirmSignUp(for: "chenlu3", with: "165332")
 //                signIn(username: "chenlu3", password: "java,6720")
-//            signOutLocally()
+            signOutLocally()
 //            fetchAttributes()
 //            Amplify.Auth.fetchAuthSession { result in
 //                do {

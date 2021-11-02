@@ -299,27 +299,41 @@ class RegisterController: UIViewController {
                         switch result {
                         case .success:
                             print("Sign in succeeded")
-                            updateAttribute(gfrole: self.role)
-                            Amplify.Auth.fetchAuthSession { result in
-                                self.mc_remove()
-                                DispatchQueue.main.async {
-                                    self.navigationController?.popToRootViewController(animated: true)
-                                }
+                            UserDefaults.init().setValue(self.role, forKey: "gfrole")
+                            Amplify.Auth.update(userAttribute: AuthUserAttribute(.custom("gfrole"), value: String(self.role))) { result in
                                 do {
-                                    let session = try result.get()
-                                    // Get cognito user pool token
-                                    if let cognitoTokenProvider = session as? AuthCognitoTokensProvider {
-                                        let tokens = try cognitoTokenProvider.getCognitoTokens().get()
-                                        print("Id token - \(tokens.accessToken) ")
-                                        UserDefaults.init().setValue(tokens.accessToken, forKey: "token")
-                                    }
+                                    let updateResult = try result.get()
+                                    switch updateResult.nextStep {
+                                    case .confirmAttributeWithCode(let deliveryDetails, let info):
+                                        print("Confirm the attribute with details send to - \(deliveryDetails) \(info)")
+                                    case .done:
+                                        print("Update completed")
+                                        Amplify.Auth.fetchAuthSession { result in
+                                            self.mc_remove()
+                                            DispatchQueue.main.async {
+                                                self.navigationController?.popToRootViewController(animated: true)
+                                            }
+                                            do {
+                                                let session = try result.get()
+                                                // Get cognito user pool token
+                                                if let cognitoTokenProvider = session as? AuthCognitoTokensProvider {
+                                                    let tokens = try cognitoTokenProvider.getCognitoTokens().get()
+                                                    print("Id token - \(tokens.accessToken) ")
+                                                    UserDefaults.init().setValue(tokens.accessToken, forKey: "token")
+                                                }
 
+                                            } catch {
+                                                self.mc_remove()
+                                                print("Fetch auth session failed with error - \(error)")
+                                                self.mc_text("\(error)")
+                                            }
+                                        }
+                                    }
                                 } catch {
-                                    self.mc_remove()
-                                    print("Fetch auth session failed with error - \(error)")
-                                    self.mc_text("\(error)")
+                                    print("Update attribute failed with error \(error)")
                                 }
                             }
+                            
                         case .failure(let error):
                             self.mc_remove()
                             print("Sign in failed \(error)")
@@ -363,6 +377,7 @@ class RegisterController: UIViewController {
         tempTableView.tableHeaderView = headerView
         let footView = RegisterFootView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 150))
         self.footView = footView
+        footView.scholarBtn.isSelected = true
         footView.scholarBtn.addTarget(self, action: #selector(scholarBtnClick), for: .touchUpInside)
         footView.scholarTitleBtn.addTarget(self, action: #selector(scholarBtnClick), for: .touchUpInside)
         footView.managerBtn.addTarget(self, action: #selector(managerBtnClick), for: .touchUpInside)

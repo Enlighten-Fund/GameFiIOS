@@ -38,10 +38,10 @@
             filePath = "GameFi/User/RegisterController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "353"
-            endingLineNumber = "353"
-            landmarkName = "updateAttribute(gfrole:)"
-            landmarkType = "7">
+            startingLineNumber = "367"
+            endingLineNumber = "367"
+            landmarkName = "tableView"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -54,10 +54,10 @@
             filePath = "GameFi/User/RegisterController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "348"
-            endingLineNumber = "348"
-            landmarkName = "updateAttribute(gfrole:)"
-            landmarkType = "7">
+            startingLineNumber = "362"
+            endingLineNumber = "362"
+            landmarkName = "tableView"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -70,10 +70,10 @@
             filePath = "GameFi/User/RegisterController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "346"
-            endingLineNumber = "346"
-            landmarkName = "updateAttribute(gfrole:)"
-            landmarkType = "7">
+            startingLineNumber = "360"
+            endingLineNumber = "360"
+            landmarkName = "tableView"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
