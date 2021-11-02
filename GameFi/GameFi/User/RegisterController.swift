@@ -367,6 +367,22 @@ class RegisterController: UIViewController {
 
 extension  RegisterController : UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate{
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard textField.text != nil else {
+                return true
+            }
+            
+            //新输入的
+            if string.count == 0 {
+                return true
+            }
+            
+        if string.isBlank {
+            return false
+        }
+        return true
+    }
+ 
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField.tag == 10001{
             let temp = textField.validateEmail()

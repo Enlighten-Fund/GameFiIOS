@@ -74,6 +74,83 @@ class LoginController: UIViewController {
 }
 
 extension  LoginController : UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate{
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard textField.text != nil else {
+                return true
+            }
+            
+            //新输入的
+            if string.count == 0 {
+                return true
+            }
+            
+        if string.isBlank {
+            return false
+        }
+        return true
+    }
+ 
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField.tag == 10001{
+//            let temp = textField.validateEmail()
+//            var emailNotice = ""
+//            if !temp {
+//               emailNotice = "Please enter a valid email"
+//            }
+//            self.emailModel.tip = emailNotice
+//            self.emailModel.text = textField.text!
+//            let indexPath: IndexPath = IndexPath.init(row: 0, section: 0)
+//            DispatchQueue.main.async {
+//                self.tableView!.reloadRows(at: [indexPath], with: .none)
+//            }
+        }else if textField.tag == 10002{
+//            let temp = textField.validateUsername()
+//            var usernameNotice = ""
+//            if !temp {
+//                usernameNotice = "Please enter a valid username"
+//            }
+//            self.usernameModel.tip = usernameNotice
+//            self.usernameModel.text = textField.text!
+//            let indexPath: IndexPath = IndexPath.init(row: 1, section: 0)
+//            DispatchQueue.main.async {
+//                self.tableView!.reloadRows(at: [indexPath], with: .none)
+//            }
+        }else if textField.tag == 10003{
+//            let temp = textField.validatePassword()
+//            var passwordNotice = ""
+//            if !temp {
+//                passwordNotice = "Please enter a valid password"
+//            }else{
+//                passwordNotice = ""
+//            }
+//            self.passwordModel.tip = passwordNotice
+//            self.passwordModel.text = textField.text!
+//            let indexPath: IndexPath = IndexPath.init(row: 2, section: 0)
+//            DispatchQueue.main.async {
+//                self.tableView!.reloadRows(at: [indexPath], with: .none)
+//            }
+        }else if textField.tag == 10004{
+//            var codeNotice = ""
+//            var temp = ""
+//            if textField.text == nil {
+//                temp = ""
+//            }else{
+//                temp = textField.text!
+//            }
+//            
+//            if (temp.isBlank) {
+//                codeNotice = "Please enter a valid code"
+//            }
+//            self.codeModel.tip = codeNotice
+//            self.codeModel.text = textField.text!
+//            let indexPath: IndexPath = IndexPath.init(row: 3, section: 0)
+//            DispatchQueue.main.async {
+//                self.tableView!.reloadRows(at: [indexPath], with: .none)
+//            }
+        }
+        
+    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             

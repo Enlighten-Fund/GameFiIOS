@@ -114,7 +114,7 @@ class LoginFootView: UIView {
     
     lazy var registerBtn : UIButton = {
         let tempBtn = UIButton.init(frame: CGRect.zero)
-        tempBtn.setTitle("Sign Up", for: .normal)
+        tempBtn.setTitle("Login in", for: .normal)
         tempBtn.backgroundColor = .blue
         self.addSubview(tempBtn)
         return tempBtn
