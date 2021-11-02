@@ -15,7 +15,7 @@ import Amplify
 import MCToast
 import SCLAlertView
 
-class RegisterController: UIViewController {
+class ForgetPasswordController: UIViewController {
     var emailTextField : UITextField?
     var usernameTextField : UITextField?
     var passwordTextField : UITextField?
@@ -213,13 +213,6 @@ class RegisterController: UIViewController {
              }
              return
          }
-        self.emailModel.tip = emailNotice
-        self.emailModel.text = textField!.text!
-        let indexPath: IndexPath = IndexPath.init(row: 0, section: 0)
-        DispatchQueue.main.async {
-            self.tableView!.reloadRows(at: [indexPath], with: .none)
-        }
-        
         let temp2 = self.usernameTextField!.validateUsername()
         var usernameNotice = ""
         if !temp2 {
@@ -232,12 +225,6 @@ class RegisterController: UIViewController {
             }
             return
         }
-        self.usernameModel.tip = usernameNotice
-        self.usernameModel.text = self.usernameTextField!.text!
-        let indexPath1: IndexPath = IndexPath.init(row: 1, section: 0)
-        DispatchQueue.main.async {
-            self.tableView!.reloadRows(at: [indexPath1], with: .none)
-        }
         let temp3 = self.passwordTextField!.validatePassword()
         var passwordNotice = ""
         if !temp3 {
@@ -249,12 +236,6 @@ class RegisterController: UIViewController {
                 self.tableView!.reloadRows(at: [indexPath2], with: .none)
             }
             return
-        }
-        self.passwordModel.tip = passwordNotice
-        self.passwordModel.text = self.passwordTextField!.text!
-        let indexPath2: IndexPath = IndexPath.init(row: 2, section: 0)
-        DispatchQueue.main.async {
-            self.tableView!.reloadRows(at: [indexPath2], with: .none)
         }
         
         var codeNotice = ""
@@ -275,12 +256,7 @@ class RegisterController: UIViewController {
             }
             return
         }
-        self.codeModel.tip = codeNotice
-        self.codeModel.text = codeTextField!.text!
-        let indexPath3: IndexPath = IndexPath.init(row: 3, section: 0)
-        DispatchQueue.main.async {
-            self.tableView!.reloadRows(at: [indexPath3], with: .none)
-        }
+        
         if !self.privacySelect {
             self.privacyLabel?.shake(direction: .horizontal, times: 2, interval: 0.1, offset: 5, completion: {
                 
@@ -291,68 +267,56 @@ class RegisterController: UIViewController {
         //本地验证通过
         self.mc_loading()
         Amplify.Auth.confirmSignUp(for: (self.usernameTextField?.text)!, confirmationCode: (self.codeTextField?.text)!) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success:
-                    print("Confirm signUp succeeded")
-                    Amplify.Auth.signIn(username: self.usernameTextField?.text, password: self.passwordTextField?.text) { [self] result in
-                        switch result {
-                        case .success:
-                            print("Sign in succeeded")
-                            updateAttribute(gfrole: self.role)
-                            Amplify.Auth.fetchAuthSession { result in
-                                self.mc_remove()
-                                DispatchQueue.main.async {
-                                    self.navigationController?.popToRootViewController(animated: true)
-                                }
-                                do {
-                                    let session = try result.get()
-                                    // Get cognito user pool token
-                                    if let cognitoTokenProvider = session as? AuthCognitoTokensProvider {
-                                        let tokens = try cognitoTokenProvider.getCognitoTokens().get()
-                                        print("Id token - \(tokens.accessToken) ")
-                                        UserDefaults.init().setValue(tokens.accessToken, forKey: "token")
-                                    }
-
-                                } catch {
-                                    self.mc_remove()
-                                    print("Fetch auth session failed with error - \(error)")
-                                    self.mc_text("\(error)")
-                                }
-                            }
-                        case .failure(let error):
+            switch result {
+            case .success:
+                print("Confirm signUp succeeded")
+                Amplify.Auth.signIn(username: self.usernameTextField?.text, password: self.passwordTextField?.text) { result in
+                    switch result {
+                    case .success:
+                        print("Sign in succeeded")
+                        Amplify.Auth.fetchAuthSession { result in
                             self.mc_remove()
-                            print("Sign in failed \(error)")
-                            self.mc_text("\(error)")
-                        }
-                    }
-                case .failure(let error):
-                    self.mc_remove()
-                    self.mc_text("\(error)")
-                    print("An error occurred while confirming sign up \(error)")
-                }
-            }
-            
+                            do {
+                                let session = try result.get()
 
+                                // Get user sub or identity id
+                                if let identityProvider = session as? AuthCognitoIdentityProvider {
+                                    let usersub = try identityProvider.getUserSub().get()
+                                    let identityId = try identityProvider.getIdentityId().get()
+                                    print("User sub - \(usersub) and identity id \(identityId)")
+                                }
+
+                                // Get aws credentials
+                                if let awsCredentialsProvider = session as? AuthAWSCredentialsProvider {
+                                    let credentials = try awsCredentialsProvider.getAWSCredentials().get()
+                                    print("Access key - \(credentials.accessKey) ")
+                                }
+
+                                // Get cognito user pool token
+                                if let cognitoTokenProvider = session as? AuthCognitoTokensProvider {
+                                    let tokens = try cognitoTokenProvider.getCognitoTokens().get()
+                                    print("Id token - \(tokens.idToken) ")
+                                }
+
+                            } catch {
+                                self.mc_remove()
+                                print("Fetch auth session failed with error - \(error)")
+                                self.mc_text("\(error)")
+                            }
+                        }
+                    case .failure(let error):
+                        self.mc_remove()
+                        print("Sign in failed \(error)")
+                        self.mc_text("\(error)")
+                    }
+                }
+            case .failure(let error):
+                self.mc_remove()
+                self.mc_text("\(error)")
+                print("An error occurred while confirming sign up \(error)")
+            }
         }
         
-    }
-    //保存用户信息至aws和沙盒
-    func updateAttribute(gfrole:Int) {
-        UserDefaults.init().setValue(gfrole, forKey: "gfrole")
-        Amplify.Auth.update(userAttribute: AuthUserAttribute(.custom("gfrole"), value: String(gfrole))) { result in
-            do {
-                let updateResult = try result.get()
-                switch updateResult.nextStep {
-                case .confirmAttributeWithCode(let deliveryDetails, let info):
-                    print("Confirm the attribute with details send to - \(deliveryDetails) \(info)")
-                case .done:
-                    print("Update completed")
-                }
-            } catch {
-                print("Update attribute failed with error \(error)")
-            }
-        }
     }
     
     lazy var tableView: UITableView? = {
@@ -402,7 +366,7 @@ class RegisterController: UIViewController {
     }()
 }
 
-extension  RegisterController : UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate{
+extension  ForgetPasswordController : UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate{
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard textField.text != nil else {

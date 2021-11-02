@@ -8,6 +8,10 @@
 import Foundation
 import UIKit
 import SnapKit
+import Amplify
+import AmplifyPlugins
+import AWSPluginsCore
+
 class LoginController: UIViewController {
     var usernameTextField : UITextField?
     var passwordTextField : UITextField?
@@ -35,12 +39,99 @@ class LoginController: UIViewController {
         self.footView?.managerBtn.isSelected = true
         self.role = 2
     }
+    @objc func forgetPwdBtnClick() {
+        self.navigationController?.pushViewController(ForgetPasswordController.init(), animated: true)
+    }
+    
     
     @objc func registerBtnClick() {
         self.navigationController?.pushViewController(RegisterController.init(), animated: true)
     }
     @objc func loginBtnClick(){
+        var temp = false
+        if usernameTextField!.validateUsername() {
+            temp = true
+        }else if usernameTextField!.validateEmail(){
+            temp = true
+        }
+        var usernameNotice = ""
+        if !temp {
+            usernameNotice = "Please enter a valid username"
+            self.usernameModel.tip = usernameNotice
+            self.usernameModel.text = self.usernameTextField!.text!
+            let indexPath: IndexPath = IndexPath.init(row: 0, section: 0)
+            DispatchQueue.main.async {
+                self.tableView!.reloadRows(at: [indexPath], with: .none)
+            }
+            return
+        }
+        self.usernameModel.tip = usernameNotice
+        self.usernameModel.text = self.usernameTextField!.text!
+        let indexPath: IndexPath = IndexPath.init(row: 0, section: 0)
+        DispatchQueue.main.async {
+            self.tableView!.reloadRows(at: [indexPath], with: .none)
+        }
         
+        let temp1 = self.passwordTextField!.validatePassword()
+        var passwordNotice = ""
+        if !temp1 {
+            passwordNotice = "Please enter a valid password"
+            self.passwordModel.tip = passwordNotice
+            self.passwordModel.text = passwordTextField!.text!
+            let indexPath: IndexPath = IndexPath.init(row: 1, section: 0)
+            DispatchQueue.main.async {
+                self.tableView!.reloadRows(at: [indexPath], with: .none)
+            }
+            return
+        }
+        self.passwordModel.tip = passwordNotice
+        self.passwordModel.text = passwordTextField!.text!
+        let indexPath1: IndexPath = IndexPath.init(row: 1, section: 0)
+        DispatchQueue.main.async {
+            self.tableView!.reloadRows(at: [indexPath1], with: .none)
+        }
+        
+        self.mc_loading()
+        Amplify.Auth.signIn(username: self.usernameTextField?.text, password: self.passwordTextField?.text) { result in
+            switch result {
+            case .success:
+                print("Sign in succeeded")
+                Amplify.Auth.fetchAuthSession { result in
+                    self.mc_remove()
+                    do {
+                        let session = try result.get()
+
+//                        // Get user sub or identity id
+//                        if let identityProvider = session as? AuthCognitoIdentityProvider {
+//                            let usersub = try identityProvider.getUserSub().get()
+//                            let identityId = try identityProvider.getIdentityId().get()
+//                            print("User sub - \(usersub) and identity id \(identityId)")
+//                        }
+//
+//                        // Get aws credentials
+//                        if let awsCredentialsProvider = session as? AuthAWSCredentialsProvider {
+//                            let credentials = try awsCredentialsProvider.getAWSCredentials().get()
+//                            print("Access key - \(credentials.accessKey) ")
+//                        }
+
+                        // Get cognito user pool token
+                        if let cognitoTokenProvider = session as? AuthCognitoTokensProvider {
+                            let tokens = try cognitoTokenProvider.getCognitoTokens().get()
+                            print("Id token - \(tokens.accessToken) ")
+                        }
+
+                    } catch {
+                        self.mc_remove()
+                        print("Fetch auth session failed with error - \(error)")
+                        self.mc_failure(" \(error)")
+                    }
+                }
+            case .failure(let error):
+                self.mc_remove()
+                print("Sign in failed \(error)")
+                self.mc_failure(" \(error)")
+            }
+        }
     }
     
     lazy var tableView: UITableView? = {
@@ -48,7 +139,8 @@ class LoginController: UIViewController {
         tempTableView.backgroundColor = .lightGray
         let headerView = LoginHeadView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 100))
         tempTableView.tableHeaderView = headerView
-        let footView = LoginFootView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 150))
+        let footView = LoginFootView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 200))
+        footView.scholarBtn.isSelected = true
         self.footView = footView
         footView.scholarBtn.addTarget(self, action: #selector(scholarBtnClick), for: .touchUpInside)
         footView.scholarTitleBtn.addTarget(self, action: #selector(scholarBtnClick), for: .touchUpInside)
@@ -56,6 +148,7 @@ class LoginController: UIViewController {
         footView.managerTitleBtn.addTarget(self, action: #selector(managerBtnClick), for: .touchUpInside)
         footView.registerBtn.addTarget(self, action: #selector(registerBtnClick), for: .touchUpInside)
         footView.loginBtn.addTarget(self, action: #selector(loginBtnClick), for: .touchUpInside)
+        footView.forgetPwdBtn.addTarget(self, action: #selector(forgetPwdBtnClick), for: .touchUpInside)
         tempTableView.tableFooterView = footView
         tempTableView.separatorStyle = .none
         tempTableView.keyboardDismissMode = .onDrag
@@ -69,7 +162,7 @@ class LoginController: UIViewController {
     }()
     
     lazy var usernameModel : LabelTFTipModel = {
-        return LabelTFTipModel.init(title: "Username", text: "", tip: "")
+        return LabelTFTipModel.init(title: "Account", text: "", tip: "")
     }()
     
     lazy var passwordModel : LabelTFTipModel = {
@@ -82,7 +175,6 @@ extension  LoginController : UITableViewDelegate,UITableViewDataSource,UITextFie
         guard textField.text != nil else {
                 return true
             }
-            
             //新输入的
             if string.count == 0 {
                 return true
@@ -96,7 +188,12 @@ extension  LoginController : UITableViewDelegate,UITableViewDataSource,UITextFie
  
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField.tag == 10001{
-            let temp = textField.validateUsername()
+            var temp = false
+            if textField.validateUsername() {
+                temp = true
+            }else if textField.validateEmail(){
+                temp = true
+            }
             var usernameNotice = ""
             if !temp {
                 usernameNotice = "Please enter a valid username"

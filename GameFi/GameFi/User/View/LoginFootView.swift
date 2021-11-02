@@ -12,8 +12,15 @@ import SnapKit
 class LoginFootView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.forgetPwdBtn.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.right.equalToSuperview().offset(-20)
+            make.width.equalTo(150)
+            make.height.equalTo(30)
+        }
+        
         self.scholarBtn.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(10)
+            make.top.equalToSuperview().offset(40)
             make.left.equalToSuperview().offset(20)
             make.width.equalTo(30)
             make.height.equalTo(30)
@@ -26,7 +33,7 @@ class LoginFootView: UIView {
         }
         
         self.managerBtn.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(10)
+            make.top.equalToSuperview().offset(40)
             make.right.equalTo(self.managerTitleBtn.snp.left).offset(-10)
             make.width.equalTo(30)
             make.height.equalTo(30)
@@ -61,25 +68,12 @@ class LoginFootView: UIView {
         super.init(coder: coder)
     }
     
-    lazy var rememberBtn : UIButton = {
-        let tempBtn = UIButton.init(frame: CGRect.zero)
-        tempBtn.setImage(UIImage.init(named: "shop"), for: .normal)
-        tempBtn.setImage(UIImage.init(named: "shop_1"), for: .selected)
-        self.addSubview(tempBtn)
-        return tempBtn
-    }()
-    
-    lazy var rememberLabel : UILabel = {
-        let tempLabel = UILabel.init(frame: CGRect.zero)
-        tempLabel.text = "Remember me"
-        self.addSubview(tempLabel)
-        return tempLabel
-    }()
-    
-    
     lazy var forgetPwdBtn : UIButton = {
         let tempBtn = UIButton.init(frame: CGRect.zero)
-        tempBtn.setTitle("Forget", for: .normal)
+        tempBtn.setTitle("Forget Password?", for: .normal)
+        tempBtn.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        tempBtn.setTitleColor(.blue, for: .normal)
+        tempBtn.setTitleColor(.blue, for: .highlighted)
         self.addSubview(tempBtn)
         return tempBtn
     }()
