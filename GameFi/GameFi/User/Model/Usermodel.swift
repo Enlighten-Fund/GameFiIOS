@@ -7,7 +7,18 @@
 import Foundation
 import AWSMobileClient
 
-class Usermodel : NSObject {
+class Usermodel {
+    static let shared = Usermodel()
+       
+       // Make sure the class has only one instance
+       // Should not init outside
+       private init() {}
+       
+       // Optional
+       func reset() {
+           // Reset all properties to default value
+       }
+    
     var token : String?{
         get{
             var temp = ""
@@ -24,20 +35,22 @@ class Usermodel : NSObject {
         }
     }
     
+    var _gfrole : String?
     var gfrole : String?{
         get{
-            var temp = ""
-            AWSMobileClient.default().getUserAttributes {attributes, error in
-                if(error != nil){
-                        print("ERROR: \(error)")
-                }else{
-                        if let attributesDict = attributes{
-                           print(attributesDict["gfrole"])
-                           temp = attributesDict["gfrole"]!
-                        }
-                }
+            if _gfrole == nil{
+                _gfrole = UserDefaults.standard.string(forKey: "gfrole")
+                return _gfrole
             }
-            return temp
+            
+            if _gfrole == nil || _gfrole == "" {
+                _gfrole = "1"
+            }
+            return _gfrole
+        }
+        set{
+            _gfrole = newValue
+            UserDefaults.standard.setValue(newValue, forKey: "gfrole")
         }
     }
 }

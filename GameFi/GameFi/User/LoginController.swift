@@ -15,7 +15,6 @@ class LoginController: UIViewController {
     var usernameTextField : UITextField?
     var passwordTextField : UITextField?
     var footView : LoginFootView?
-    var role : Int = 1 //1代表scholar 2 代表manager
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,17 +26,7 @@ class LoginController: UIViewController {
         }
     }
     
-    @objc func scholarBtnClick() {
-        self.footView?.scholarBtn.isSelected = true
-        self.footView?.managerBtn.isSelected = false
-        self.role = 1
-    }
-    
-    @objc func managerBtnClick() {
-        self.footView?.scholarBtn.isSelected = false
-        self.footView?.managerBtn.isSelected = true
-        self.role = 2
-    }
+
     @objc func forgetPwdBtnClick() {
         self.navigationController?.pushViewController(ForgetPasswordController.init(), animated: true)
     }
@@ -105,6 +94,17 @@ class LoginController: UIViewController {
                         print("User is signed in.")
                         SCLAlertView.init().showError("系统提示：", subTitle: "登录成功")
                         self.navigationController?.popToRootViewController(animated: true)
+                        AWSMobileClient.default().getUserAttributes { [self]attributes, error in
+                            if(error != nil){
+                                print("ERROR: \(error)")
+                            }else{
+                                if let attributesDict = attributes{
+                                    if attributesDict["custom:gfrole"] != nil {
+                                        Usermodel.shared.gfrole = attributesDict["custom:gfrole"]!
+                                    }
+                                }
+                            }
+                        }
                     case .smsMFA:
                         print("SMS message sent to \(signInResult.codeDetails!.destination!)")
                         SCLAlertView.init().showError("系统提示：", subTitle: "\(signInResult.codeDetails!.destination!)")
@@ -125,10 +125,6 @@ class LoginController: UIViewController {
         let footView = LoginFootView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 200))
         footView.scholarBtn.isSelected = true
         self.footView = footView
-        footView.scholarBtn.addTarget(self, action: #selector(scholarBtnClick), for: .touchUpInside)
-        footView.scholarTitleBtn.addTarget(self, action: #selector(scholarBtnClick), for: .touchUpInside)
-        footView.managerBtn.addTarget(self, action: #selector(managerBtnClick), for: .touchUpInside)
-        footView.managerTitleBtn.addTarget(self, action: #selector(managerBtnClick), for: .touchUpInside)
         footView.registerBtn.addTarget(self, action: #selector(registerBtnClick), for: .touchUpInside)
         footView.loginBtn.addTarget(self, action: #selector(loginBtnClick), for: .touchUpInside)
         footView.forgetPwdBtn.addTarget(self, action: #selector(forgetPwdBtnClick), for: .touchUpInside)

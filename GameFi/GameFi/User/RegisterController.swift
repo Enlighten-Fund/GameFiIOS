@@ -8,10 +8,7 @@
 import Foundation
 import UIKit
 import SnapKit
-import Alamofire
-import AmplifyPlugins
-import AWSPluginsCore
-import Amplify
+import AWSMobileClient
 import MCToast
 import SCLAlertView
 
@@ -41,6 +38,23 @@ class RegisterController: UIViewController {
         self.navigationController?.pushViewController(loginVC, animated: true)
     }
     
+    @objc func scholarBtnClick() {
+        self.footView?.scholarBtn.isSelected = true
+        self.footView?.managerBtn.isSelected = false
+        self.role = 1
+    }
+    
+    @objc func managerBtnClick() {
+        self.footView?.scholarBtn.isSelected = false
+        self.footView?.managerBtn.isSelected = true
+        self.role = 2
+    }
+    @objc func privacyBtnClick(btn:UIButton){
+        btn.isSelected = !btn.isSelected
+        self.privacySelect = !self.privacySelect
+    }
+    
+    //发送验证码
     @objc func codeBtnClick(btn:UIButton) {
         self.emailTextField?.resignFirstResponder()
         self.usernameTextField?.resignFirstResponder()
@@ -89,15 +103,15 @@ class RegisterController: UIViewController {
         DispatchQueue.main.async {
             btn.isEnabled = false
         }
-        let userAttributes = [AuthUserAttribute(.email, value: (self.emailTextField?.text)!)]
-        let options = AuthSignUpRequest.Options(userAttributes: userAttributes)
         mc_loading()
-        Amplify.Auth.signUp(username: (self.usernameTextField?.text)!, password: self.passwordTextField!.text, options: options) {  result in
+        AWSMobileClient.default().signUp(username: (self.usernameTextField?.text)!, password: self.passwordTextField!.text!,userAttributes: ["email":self.emailTextField!.text!]) { signUpResult, error in
             self.mc_remove()
-            switch result {
-            case .success(let signUpResult):
-                if case let .confirmUser(deliveryDetails, _) = signUpResult.nextStep {
-                    print("Delivery details \(String(describing: deliveryDetails))")
+            if let signUpResult = signUpResult {
+                   switch(signUpResult.signUpConfirmationState) {
+                   case .confirmed:
+                       print("User is signed up and confirmed.")
+                   case .unconfirmed:
+                       print("User is not confirmed and needs verification via \(signUpResult.codeDeliveryDetails!.deliveryMedium) sent at \(signUpResult.codeDeliveryDetails!.destination!)")
                     DispatchQueue.main.async {
                         self.codeModel.tip = "Enter the confirmation code we sent to " + (self.emailTextField?.text)!
                         self.codeModel.text = self.codeTextField!.text!
@@ -117,82 +131,33 @@ class RegisterController: UIViewController {
                                 countDownNum -= 1
                                 btn.setTitle(String(countDownNum), for: .normal)
                                
-                        }
+                            }
                         }
                     }
+                   case .unknown:
+                       print("Unexpected case")
+                   }
+               } else if let error = error {
+                   if let error = error as? AWSMobileClientError {
+                       switch(error) {
+                       case .usernameExists(let message):
+                           print(message)
 
-                    
-                } else {
-                    print("SignUp Complete")
+                       default:
+                           break
+                       }
+                   }
+                   print("\(error.localizedDescription)")
                     DispatchQueue.main.async {
-                        SCLAlertView.init().showError("系统提示：", subTitle: "SignUp Complete")
+                        SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")
                         btn.isEnabled = true
                     }
-                }
-            case .failure(let error):
-                print("An error occurred while registering a user \(error)")
-                DispatchQueue.main.async {
-                    SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")
-                    btn.isEnabled = true
-                }
-            }
+               }
+            
         }
     }
     
-    func signUp(username: String, password: String, email: String) {
-        let userAttributes = [AuthUserAttribute(.email, value: email)]
-        let options = AuthSignUpRequest.Options(userAttributes: userAttributes)
-        Amplify.Auth.signUp(username: username, password: password, options: options) { result in
-            switch result {
-            case .success(let signUpResult):
-                if case let .confirmUser(deliveryDetails, _) = signUpResult.nextStep {
-                    print("Delivery details \(String(describing: deliveryDetails))")
-                } else {
-                    print("SignUp Complete")
-                }
-            case .failure(let error):
-                print("An error occurred while registering a user \(error)")
-            }
-        }
-    }
     
-    func confirmSignUp(for username: String, with confirmationCode: String) {
-        Amplify.Auth.confirmSignUp(for: username, confirmationCode: confirmationCode) { result in
-            switch result {
-            case .success:
-                print("Confirm signUp succeeded")
-            case .failure(let error):
-                print("An error occurred while confirming sign up \(error)")
-            }
-        }
-    }
-    
-    func signIn(username: String, password: String) {
-        Amplify.Auth.signIn(username: username, password: password) { result in
-            switch result {
-            case .success:
-                print("Sign in succeeded")
-            case .failure(let error):
-                print("Sign in failed \(error)")
-            }
-        }
-    }
-    
-    @objc func scholarBtnClick() {
-        self.footView?.scholarBtn.isSelected = true
-        self.footView?.managerBtn.isSelected = false
-        self.role = 1
-    }
-    
-    @objc func managerBtnClick() {
-        self.footView?.scholarBtn.isSelected = false
-        self.footView?.managerBtn.isSelected = true
-        self.role = 2
-    }
-    @objc func privacyBtnClick(btn:UIButton){
-        btn.isSelected = !btn.isSelected
-        self.privacySelect = !self.privacySelect
-    }
     
     @objc func registerBtnClick(){
         self.emailTextField?.resignFirstResponder()
@@ -290,83 +255,52 @@ class RegisterController: UIViewController {
         
         //本地验证通过
         self.mc_loading()
-        Amplify.Auth.confirmSignUp(for: (self.usernameTextField?.text)!, confirmationCode: (self.codeTextField?.text)!) { result in
+        AWSMobileClient.default().confirmSignUp(username: (self.usernameTextField?.text)!, confirmationCode: (self.codeTextField?.text)!) { signUpResult, error in
             DispatchQueue.main.async {
-                switch result {
-                case .success:
-                    print("Confirm signUp succeeded")
-                    Amplify.Auth.signIn(username: self.usernameTextField?.text, password: self.passwordTextField?.text) { [self] result in
-                        switch result {
-                        case .success:
-                            print("Sign in succeeded")
-                            UserDefaults.init().setValue(self.role, forKey: "gfrole")
-                            Amplify.Auth.update(userAttribute: AuthUserAttribute(.custom("gfrole"), value: String(self.role))) { result in
-                                do {
-                                    let updateResult = try result.get()
-                                    switch updateResult.nextStep {
-                                    case .confirmAttributeWithCode(let deliveryDetails, let info):
-                                        print("Confirm the attribute with details send to - \(deliveryDetails) \(info)")
-                                    case .done:
-                                        print("Update completed")
-                                        Amplify.Auth.fetchAuthSession { result in
-                                            self.mc_remove()
-                                            DispatchQueue.main.async {
-                                                self.navigationController?.popToRootViewController(animated: true)
-                                            }
-                                            do {
-                                                let session = try result.get()
-                                                // Get cognito user pool token
-                                                if let cognitoTokenProvider = session as? AuthCognitoTokensProvider {
-                                                    let tokens = try cognitoTokenProvider.getCognitoTokens().get()
-                                                    print("Id token - \(tokens.accessToken) ")
-                                                    UserDefaults.init().setValue(tokens.accessToken, forKey: "token")
-                                                }
-
-                                            } catch {
-                                                self.mc_remove()
-                                                print("Fetch auth session failed with error - \(error)")
-                                                self.mc_text("\(error)")
+                if let signUpResult = signUpResult {
+                        switch(signUpResult.signUpConfirmationState) {
+                        case .confirmed:
+                            print("User is signed up and confirmed.")
+                            AWSMobileClient.default().signIn(username: (self.usernameTextField?.text)!, password: (self.passwordTextField?.text)!) { (signInResult, error) in
+                                self.mc_remove()
+                                if let error = error  {
+                                    print("\(error.localizedDescription)")
+                                    DispatchQueue.main.async {SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")}
+                                    
+                                } else if let signInResult = signInResult {
+                                    switch (signInResult.signInState) {
+                                    case .signedIn:
+                                        print("User is signed in.")
+                                        Usermodel.shared.gfrole = String(self.role)
+                                        AWSMobileClient.default().updateUserAttributes(attributeMap: ["gfrole":String(self.role)]) { result, error in
+                                            if let error = error  {
+                                                print("\(error.localizedDescription)")
+                                                DispatchQueue.main.async {SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")}
                                             }
                                         }
+                                    case .smsMFA:
+                                        print("SMS message sent to \(signInResult.codeDetails!.destination!)")
+                                    default:
+                                        print("Sign In needs info which is not et supported.")
                                     }
-                                } catch {
-                                    print("Update attribute failed with error \(error)")
                                 }
                             }
-                            
-                        case .failure(let error):
+                        case .unconfirmed:
                             self.mc_remove()
-                            print("Sign in failed \(error)")
-                            self.mc_text("\(error)")
+                            print("User is not confirmed and needs verification via \(signUpResult.codeDeliveryDetails!.deliveryMedium) sent at \(signUpResult.codeDeliveryDetails!.destination!)")
+                        case .unknown:
+                            print("Unexpected case")
+                            self.mc_remove()
                         }
+                    } else if let error = error {
+                        self.mc_remove()
+                        print("\(error.localizedDescription)")
+                        DispatchQueue.main.async {SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")}
                     }
-                case .failure(let error):
-                    self.mc_remove()
-                    self.mc_text("\(error)")
-                    print("An error occurred while confirming sign up \(error)")
-                }
-            }
-            
 
+            }
         }
         
-    }
-    //保存用户信息至aws和沙盒
-    func updateAttribute(gfrole:Int) {
-        UserDefaults.init().setValue(gfrole, forKey: "gfrole")
-        Amplify.Auth.update(userAttribute: AuthUserAttribute(.custom("gfrole"), value: String(gfrole))) { result in
-            do {
-                let updateResult = try result.get()
-                switch updateResult.nextStep {
-                case .confirmAttributeWithCode(let deliveryDetails, let info):
-                    print("Confirm the attribute with details send to - \(deliveryDetails) \(info)")
-                case .done:
-                    print("Update completed")
-                }
-            } catch {
-                print("Update attribute failed with error \(error)")
-            }
-        }
     }
     
     lazy var tableView: UITableView? = {

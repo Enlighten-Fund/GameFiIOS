@@ -31,6 +31,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Amplify.Logging.logLevel = .verbose
             try Amplify.add(plugin: AWSCognitoAuthPlugin())
             try Amplify.configure()
+            AWSMobileClient.default().getUserAttributes { [self]attributes, error in
+                if(error != nil){
+                    print("ERROR: \(error)")
+                }else{
+                    if let attributesDict = attributes{
+                        if attributesDict["custom:gfrole"] != nil {
+                            Usermodel.shared.gfrole = attributesDict["custom:gfrole"]!
+                        }
+                    }
+                }
+            }
+            
             AWSMobileClient.default().addUserStateListener(self) { (userState, info) in
                 switch (userState) {
                 case .guest:

@@ -8,10 +8,6 @@
 import Foundation
 import UIKit
 import SnapKit
-import Alamofire
-import AmplifyPlugins
-import AWSPluginsCore
-import Amplify
 import MCToast
 import SCLAlertView
 import AWSMobileClient
