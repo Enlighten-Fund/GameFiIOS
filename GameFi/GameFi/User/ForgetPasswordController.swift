@@ -91,7 +91,6 @@ class ForgetPasswordController: UIViewController {
                                 btn.setTitle("send", for: .normal)
                                 print(">>> Timer has Stopped!")
                             } else {
-                                print(">>> Countdown Number: \(countDownNum)")
                                 countDownNum -= 1
                                 btn.setTitle(String(countDownNum), for: .normal)
                                

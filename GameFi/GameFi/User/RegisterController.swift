@@ -127,7 +127,6 @@ class RegisterController: UIViewController {
                                 btn.setTitle("send", for: .normal)
                                 print(">>> Timer has Stopped!")
                             } else {
-                                print(">>> Countdown Number: \(countDownNum)")
                                 countDownNum -= 1
                                 btn.setTitle(String(countDownNum), for: .normal)
                                
@@ -272,14 +271,12 @@ class RegisterController: UIViewController {
                                     case .signedIn:
                                         print("User is signed in.")
                                         Usermodel.shared.gfrole = String(self.role)
-                                        AWSMobileClient.default().updateUserAttributes(attributeMap: ["gfrole":String(self.role)]) { result, error in
+                                        AWSMobileClient.default().updateUserAttributes(attributeMap: ["custom:gfrole":String(self.role)]) { result, error in
                                             if let error = error  {
                                                 print("\(error.localizedDescription)")
                                                 DispatchQueue.main.async {SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")}
                                             }
                                         }
-                                    case .smsMFA:
-                                        print("SMS message sent to \(signInResult.codeDetails!.destination!)")
                                     default:
                                         print("Sign In needs info which is not et supported.")
                                     }
@@ -294,8 +291,17 @@ class RegisterController: UIViewController {
                         }
                     } else if let error = error {
                         self.mc_remove()
+                        if let error = error as? AWSMobileClientError {
+                            switch(error) {
+                            case .aliasExists(let message):
+                                DispatchQueue.main.async {SCLAlertView.init().showError("系统提示：", subTitle: "\(message),please change another email")}
+                            default:
+                                DispatchQueue.main.async {SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")}
+                                break
+                            }
+                        }
                         print("\(error.localizedDescription)")
-                        DispatchQueue.main.async {SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")}
+                        
                     }
 
             }
@@ -357,7 +363,6 @@ extension  RegisterController : UITableViewDelegate,UITableViewDataSource,UIText
         guard textField.text != nil else {
                 return true
             }
-            
             //新输入的
             if string.count == 0 {
                 return true

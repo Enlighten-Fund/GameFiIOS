@@ -52,6 +52,7 @@ class LabelTextFildCell: TableViewCell {
     lazy var textFild : UITextField? = {
         let tempTextField = UITextField.init(frame: CGRect.zero)
         tempTextField.borderStyle = .roundedRect
+        tempTextField.autocapitalizationType = .none
         self.contentView.addSubview(tempTextField)
         return tempTextField
     }()

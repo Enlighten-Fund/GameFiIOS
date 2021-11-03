@@ -36,6 +36,20 @@ class LoginController: UIViewController {
         self.navigationController?.pushViewController(RegisterController.init(), animated: true)
     }
     
+    func updateRole(){
+        AWSMobileClient.default().getUserAttributes { [self]attributes, error in
+            if(error != nil){
+                print("ERROR: \(error)")
+            }else{
+                if let attributesDict = attributes{
+                    if attributesDict["custom:gfrole"] != nil {
+                        Usermodel.shared.gfrole = attributesDict["custom:gfrole"]!
+                    }
+                }
+            }
+        }
+    }
+    
     //登录
     @objc func loginBtnClick(){
         var temp = false
@@ -92,18 +106,8 @@ class LoginController: UIViewController {
                     switch (signInResult.signInState) {
                     case .signedIn:
                         print("User is signed in.")
-                        SCLAlertView.init().showError("系统提示：", subTitle: "登录成功")
-                        self.navigationController?.popToRootViewController(animated: true)
-                        AWSMobileClient.default().getUserAttributes { [self]attributes, error in
-                            if(error != nil){
-                                print("ERROR: \(error)")
-                            }else{
-                                if let attributesDict = attributes{
-                                    if attributesDict["custom:gfrole"] != nil {
-                                        Usermodel.shared.gfrole = attributesDict["custom:gfrole"]!
-                                    }
-                                }
-                            }
+                        self.mc_success("login success", duration: 0.5) {
+                            self.navigationController?.popToRootViewController(animated: true)
                         }
                     case .smsMFA:
                         print("SMS message sent to \(signInResult.codeDetails!.destination!)")
