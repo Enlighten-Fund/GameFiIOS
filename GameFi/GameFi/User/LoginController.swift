@@ -28,7 +28,7 @@ class LoginController: UIViewController {
     
 
     @objc func forgetPwdBtnClick() {
-        self.navigationController?.pushViewController(ForgetPasswordController.init(), animated: true)
+        self.navigationController?.pushViewController(ForgetPwdController.init(), animated: true)
     }
     
     
