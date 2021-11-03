@@ -8,10 +8,8 @@
 import Foundation
 import UIKit
 import SnapKit
-import Amplify
-import AmplifyPlugins
-import AWSPluginsCore
 import AWSMobileClient
+import SCLAlertView
 
 class LoginController: UIViewController {
     var usernameTextField : UITextField?
@@ -48,6 +46,8 @@ class LoginController: UIViewController {
     @objc func registerBtnClick() {
         self.navigationController?.pushViewController(RegisterController.init(), animated: true)
     }
+    
+    //登录
     @objc func loginBtnClick(){
         var temp = false
         if usernameTextField!.validateUsername() {
@@ -93,74 +93,27 @@ class LoginController: UIViewController {
         }
         
         self.mc_loading()
-        Amplify.Auth.signIn(username: self.usernameTextField?.text, password: self.passwordTextField?.text) { result in
-            switch result {
-            case .success:
-                print("Sign in succeeded")
-                AWSMobileClient.default().getTokens { (tokens, error) in
-                    if let error = error {
-                        print("Error getting token \(error.localizedDescription)")
-                    } else if let tokens = tokens {
-                        print(tokens.accessToken!.tokenString!)
+        AWSMobileClient.default().signIn(username: (self.usernameTextField?.text)!, password: (self.passwordTextField?.text)!) { (signInResult, error) in
+            DispatchQueue.main.async {
+                self.mc_remove()
+                if let error = error  {
+                    print("\(error.localizedDescription)")
+                    SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")
+                } else if let signInResult = signInResult {
+                    switch (signInResult.signInState) {
+                    case .signedIn:
+                        print("User is signed in.")
+                        SCLAlertView.init().showError("系统提示：", subTitle: "登录成功")
+                        self.navigationController?.popToRootViewController(animated: true)
+                    case .smsMFA:
+                        print("SMS message sent to \(signInResult.codeDetails!.destination!)")
+                        SCLAlertView.init().showError("系统提示：", subTitle: "\(signInResult.codeDetails!.destination!)")
+                    default:
+                        print("Sign In needs info which is not et supported.")
                     }
                 }
-                
-//                Amplify.Auth.fetchAuthSession { result in
-//                    self.mc_remove()
-//                    do {
-//                        let session = try result.get()
-//
-////                        // Get user sub or identity id
-////                        if let identityProvider = session as? AuthCognitoIdentityProvider {
-////                            let usersub = try identityProvider.getUserSub().get()
-////                            let identityId = try identityProvider.getIdentityId().get()
-////                            print("User sub - \(usersub) and identity id \(identityId)")
-////                        }
-////
-////                        // Get aws credentials
-////                        if let awsCredentialsProvider = session as? AuthAWSCredentialsProvider {
-////                            let credentials = try awsCredentialsProvider.getAWSCredentials().get()
-////                            print("Access key - \(credentials.accessKey) ")
-////                        }
-//
-//                        // Get cognito user pool token
-//                        if let cognitoTokenProvider = session as? AuthCognitoTokensProvider {
-//                            let tokens = try cognitoTokenProvider.getCognitoTokens().get()
-//                            print("Id token - \(tokens.accessToken) ")
-//                            UserDefaults.init().setValue(tokens.accessToken, forKey: "token")
-//                            AWSMobileClient.default().getUserAttributes { (attributes, error) in
-//                                 if(error != nil){
-//                                    print("ERROR: \(error)")
-//                                 }else{
-//                                    if let attributesDict = attributes{
-//                                       print("gfrole:\(attributesDict["custom:gfrole"])")
-//                                        UserDefaults.init().setValue(attributesDict["custom:gfrole"], forKey: "gfrole")
-//                                    }
-//                                 }
-//                            }
-////                            Amplify.Auth.fetchUserAttributes() { result in
-////                                    switch result {
-////                                    case .success(let attributes):
-////                                        print("User attributes - \(attributes)")
-////                                        let attributesDict : Dictionary = attributes
-////                                        print("\(attributes["gfrole"])")
-////                                    case .failure(let error):
-////                                        print("Fetching user attributes failed with error \(error)")
-////                                    }
-////                                }
-//                        }
-//
-//                    } catch {
-//                        self.mc_remove()
-//                        print("Fetch auth session failed with error - \(error)")
-//                        self.mc_failure(" \(error)")
-//                    }
-//                }
-            case .failure(let error):
-                self.mc_remove()
-                print("Sign in failed \(error)")
-                self.mc_failure(" \(error)")
             }
+            
         }
     }
     
