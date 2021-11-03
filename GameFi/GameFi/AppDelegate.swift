@@ -11,6 +11,8 @@ import AmplifyPlugins
 import AWSPluginsCore
 import ESTabBarController_swift
 import IQKeyboardManager
+import AWSCognitoIdentityProvider
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -18,11 +20,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     self.window?.rootViewController = self.tabbarVC
     IQKeyboardManager.shared().isEnabled = true
     IQKeyboardManager.shared().isEnableAutoToolbar = true
+   
+    
         do {
-            Amplify.Logging.logLevel = .verbose
+                Amplify.Logging.logLevel = .verbose
                 try Amplify.add(plugin: AWSCognitoAuthPlugin())
                 try Amplify.configure()
-                print("Amplify configured with auth plugin")
+//            let configuration = AWSServiceConfiguration(region: .APNortheast1, credentialsProvider: nil)
+//            let poolConfiguration = AWSCognitoIdentityUserPoolConfiguration(clientId: "1hfgu631o7cbnsm8gfe3eo778b",
+//            clientSecret: "t0i5s5lf2evcnp7citepsoq676q9rrldlb4e6nj03frgadkee42", poolId: "ap-northeast-1_9Fa2QXxzo")
+//            AWSCognitoIdentityUserPool.register(with: configuration, userPoolConfiguration: poolConfiguration, forKey: "EnlightenGamefiUserPool")
+//                print("Amplify configured with auth plugin")
 //                signUp(username: "chenlu3", password: "java,6720", email: "lu.chen@enlighten3.finance")
 //                  confirmSignUp(for: "chenlu3", with: "165332")
 //                signIn(username: "chenlu3", password: "java,6720")

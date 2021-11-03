@@ -14,17 +14,13 @@ import AWSPluginsCore
 import Amplify
 import MCToast
 import SCLAlertView
+import AWSMobileClient
 
 class ForgetPasswordController: UIViewController {
     var emailTextField : UITextField?
-    var usernameTextField : UITextField?
     var passwordTextField : UITextField?
     var codeTextField : UITextField?
-    var footView : RegisterFootView?
     var codeLabel : UILabel?
-    var role : Int = 1 //1代表scholar 2 代表manager
-    var privacySelect = false
-    var privacyLabel : UILabel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +39,6 @@ class ForgetPasswordController: UIViewController {
     
     @objc func codeBtnClick(btn:UIButton) {
         self.emailTextField?.resignFirstResponder()
-        self.usernameTextField?.resignFirstResponder()
         self.passwordTextField?.resignFirstResponder()
         self.codeTextField?.resignFirstResponder()
         //先本地校验
@@ -60,18 +55,7 @@ class ForgetPasswordController: UIViewController {
              }
              return
          }
-        let temp2 = self.usernameTextField!.validateUsername()
-        var usernameNotice = ""
-        if !temp2 {
-            usernameNotice = "Please enter a valid username"
-            self.usernameModel.tip = usernameNotice
-            self.usernameModel.text = self.usernameTextField!.text!
-            let indexPath: IndexPath = IndexPath.init(row: 1, section: 0)
-            DispatchQueue.main.async {
-                self.tableView!.reloadRows(at: [indexPath], with: .none)
-            }
-            return
-        }
+        
         let temp3 = self.passwordTextField!.validatePassword()
         var passwordNotice = ""
         if !temp3 {
@@ -89,15 +73,13 @@ class ForgetPasswordController: UIViewController {
         DispatchQueue.main.async {
             btn.isEnabled = false
         }
-        let userAttributes = [AuthUserAttribute(.email, value: (self.emailTextField?.text)!)]
-        let options = AuthSignUpRequest.Options(userAttributes: userAttributes)
         mc_loading()
-        Amplify.Auth.signUp(username: (self.usernameTextField?.text)!, password: self.passwordTextField!.text, options: options) {  result in
+        AWSMobileClient.default().forgotPassword(username: (self.emailTextField?.text)!) { (forgotPasswordResult, error) in
             self.mc_remove()
-            switch result {
-            case .success(let signUpResult):
-                if case let .confirmUser(deliveryDetails, _) = signUpResult.nextStep {
-                    print("Delivery details \(String(describing: deliveryDetails))")
+            if let forgotPasswordResult = forgotPasswordResult {
+                switch(forgotPasswordResult.forgotPasswordState) {
+                case .confirmationCodeSent:
+                    print("Confirmation code sent via \(forgotPasswordResult.codeDeliveryDetails!.deliveryMedium) to: \(forgotPasswordResult.codeDeliveryDetails!.destination!)")
                     DispatchQueue.main.async {
                         self.codeModel.tip = "Enter the confirmation code we sent to " + (self.emailTextField?.text)!
                         self.codeModel.text = self.codeTextField!.text!
@@ -120,83 +102,20 @@ class ForgetPasswordController: UIViewController {
                         }
                         }
                     }
-
-                    
-                } else {
-                    print("SignUp Complete")
-                    DispatchQueue.main.async {
-                        SCLAlertView.init().showError("系统提示：", subTitle: "SignUp Complete")
-                        btn.isEnabled = true
-                    }
+                default:
+                    print("Error: Invalid case.")
                 }
-            case .failure(let error):
-                print("An error occurred while registering a user \(error)")
-                DispatchQueue.main.async {
-                    SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")
-                    btn.isEnabled = true
-                }
+            } else if let error = error {
+                print("Error occurred: \(error.localizedDescription)")
+                SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")
             }
         }
     }
     
-    func signUp(username: String, password: String, email: String) {
-        let userAttributes = [AuthUserAttribute(.email, value: email)]
-        let options = AuthSignUpRequest.Options(userAttributes: userAttributes)
-        Amplify.Auth.signUp(username: username, password: password, options: options) { result in
-            switch result {
-            case .success(let signUpResult):
-                if case let .confirmUser(deliveryDetails, _) = signUpResult.nextStep {
-                    print("Delivery details \(String(describing: deliveryDetails))")
-                } else {
-                    print("SignUp Complete")
-                }
-            case .failure(let error):
-                print("An error occurred while registering a user \(error)")
-            }
-        }
-    }
+   
     
-    func confirmSignUp(for username: String, with confirmationCode: String) {
-        Amplify.Auth.confirmSignUp(for: username, confirmationCode: confirmationCode) { result in
-            switch result {
-            case .success:
-                print("Confirm signUp succeeded")
-            case .failure(let error):
-                print("An error occurred while confirming sign up \(error)")
-            }
-        }
-    }
-    
-    func signIn(username: String, password: String) {
-        Amplify.Auth.signIn(username: username, password: password) { result in
-            switch result {
-            case .success:
-                print("Sign in succeeded")
-            case .failure(let error):
-                print("Sign in failed \(error)")
-            }
-        }
-    }
-    
-    @objc func scholarBtnClick() {
-        self.footView?.scholarBtn.isSelected = true
-        self.footView?.managerBtn.isSelected = false
-        self.role = 1
-    }
-    
-    @objc func managerBtnClick() {
-        self.footView?.scholarBtn.isSelected = false
-        self.footView?.managerBtn.isSelected = true
-        self.role = 2
-    }
-    @objc func privacyBtnClick(btn:UIButton){
-        btn.isSelected = !btn.isSelected
-        self.privacySelect = !self.privacySelect
-    }
-    
-    @objc func registerBtnClick(){
+    @objc func resetPwdBtnClick(btn:UIButton){
         self.emailTextField?.resignFirstResponder()
-        self.usernameTextField?.resignFirstResponder()
         self.passwordTextField?.resignFirstResponder()
         self.codeTextField?.resignFirstResponder()
         //先本地校验
@@ -213,29 +132,32 @@ class ForgetPasswordController: UIViewController {
              }
              return
          }
-        let temp2 = self.usernameTextField!.validateUsername()
-        var usernameNotice = ""
-        if !temp2 {
-            usernameNotice = "Please enter a valid username"
-            self.usernameModel.tip = usernameNotice
-            self.usernameModel.text = self.usernameTextField!.text!
-            let indexPath: IndexPath = IndexPath.init(row: 1, section: 0)
-            DispatchQueue.main.async {
-                self.tableView!.reloadRows(at: [indexPath], with: .none)
-            }
-            return
+        self.emailModel.tip = emailNotice
+        self.emailModel.text = textField!.text!
+        let indexPath: IndexPath = IndexPath.init(row: 0, section: 0)
+        DispatchQueue.main.async {
+            self.tableView!.reloadRows(at: [indexPath], with: .none)
         }
-        let temp3 = self.passwordTextField!.validatePassword()
+
+ 
+        let temp1 = self.passwordTextField!.validatePassword()
         var passwordNotice = ""
-        if !temp3 {
+        if !temp1 {
             passwordNotice = "Please enter a valid password"
             self.passwordModel.tip = passwordNotice
             self.passwordModel.text = self.passwordTextField!.text!
-            let indexPath2: IndexPath = IndexPath.init(row: 2, section: 0)
+            let indexPath2: IndexPath = IndexPath.init(row: 1, section: 0)
             DispatchQueue.main.async {
                 self.tableView!.reloadRows(at: [indexPath2], with: .none)
             }
             return
+        }
+        
+        self.passwordModel.tip = passwordNotice
+        self.passwordModel.text = self.passwordTextField!.text!
+        let indexPath2: IndexPath = IndexPath.init(row: 1, section: 0)
+        DispatchQueue.main.async {
+            self.tableView!.reloadRows(at: [indexPath2], with: .none)
         }
         
         var codeNotice = ""
@@ -250,73 +172,112 @@ class ForgetPasswordController: UIViewController {
             codeNotice = "Please enter a valid code"
             self.codeModel.tip = codeNotice
             self.codeModel.text = codeTextField!.text!
-            let indexPath: IndexPath = IndexPath.init(row: 3, section: 0)
+            let indexPath: IndexPath = IndexPath.init(row: 2, section: 0)
             DispatchQueue.main.async {
                 self.tableView!.reloadRows(at: [indexPath], with: .none)
             }
             return
         }
         
-        if !self.privacySelect {
-            self.privacyLabel?.shake(direction: .horizontal, times: 2, interval: 0.1, offset: 5, completion: {
-                
-            })
-            return
+        self.codeModel.tip = codeNotice
+        self.codeModel.text = codeTextField!.text!
+        let indexPath1: IndexPath = IndexPath.init(row: 2, section: 0)
+        DispatchQueue.main.async {
+            self.tableView!.reloadRows(at: [indexPath1], with: .none)
         }
         
         //本地验证通过
         self.mc_loading()
-        Amplify.Auth.confirmSignUp(for: (self.usernameTextField?.text)!, confirmationCode: (self.codeTextField?.text)!) { result in
-            switch result {
-            case .success:
-                print("Confirm signUp succeeded")
-                Amplify.Auth.signIn(username: self.usernameTextField?.text, password: self.passwordTextField?.text) { result in
-                    switch result {
-                    case .success:
-                        print("Sign in succeeded")
-                        Amplify.Auth.fetchAuthSession { result in
+        AWSMobileClient.default().confirmForgotPassword(username: (self.emailTextField?.text)!, newPassword: (self.passwordTextField?.text)!, confirmationCode: (self.codeTextField?.text)!) { (forgotPasswordResult, error) in
+            if let forgotPasswordResult = forgotPasswordResult {
+                switch(forgotPasswordResult.forgotPasswordState) {
+                case .done:
+                    print("Password changed successfully")
+                    AWSMobileClient.default().signIn(username: (self.emailTextField?.text)!, password: (self.passwordTextField?.text)!) { (signInResult, error) in
+                        DispatchQueue.main.async {
                             self.mc_remove()
-                            do {
-                                let session = try result.get()
-
-                                // Get user sub or identity id
-                                if let identityProvider = session as? AuthCognitoIdentityProvider {
-                                    let usersub = try identityProvider.getUserSub().get()
-                                    let identityId = try identityProvider.getIdentityId().get()
-                                    print("User sub - \(usersub) and identity id \(identityId)")
+                            if let error = error  {
+                                print("\(error.localizedDescription)")
+                                SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")
+                            } else if let signInResult = signInResult {
+                                switch (signInResult.signInState) {
+                                case .signedIn:
+                                    print("User is signed in.")
+                                    SCLAlertView.init().showError("系统提示：", subTitle: "修改密码并登录成功")
+                                    self.navigationController?.popToRootViewController(animated: true)
+                                case .smsMFA:
+                                    print("SMS message sent to \(signInResult.codeDetails!.destination!)")
+                                    SCLAlertView.init().showError("系统提示：", subTitle: "\(signInResult.codeDetails!.destination!)")
+                                default:
+                                    print("Sign In needs info which is not et supported.")
                                 }
-
-                                // Get aws credentials
-                                if let awsCredentialsProvider = session as? AuthAWSCredentialsProvider {
-                                    let credentials = try awsCredentialsProvider.getAWSCredentials().get()
-                                    print("Access key - \(credentials.accessKey) ")
-                                }
-
-                                // Get cognito user pool token
-                                if let cognitoTokenProvider = session as? AuthCognitoTokensProvider {
-                                    let tokens = try cognitoTokenProvider.getCognitoTokens().get()
-                                    print("Id token - \(tokens.idToken) ")
-                                }
-
-                            } catch {
-                                self.mc_remove()
-                                print("Fetch auth session failed with error - \(error)")
-                                self.mc_text("\(error)")
                             }
                         }
-                    case .failure(let error):
-                        self.mc_remove()
-                        print("Sign in failed \(error)")
-                        self.mc_text("\(error)")
+                        
                     }
+                default:
+                    self.mc_remove()
+                    print("Error: Could not change password.")
                 }
-            case .failure(let error):
+            } else if let error = error {
                 self.mc_remove()
-                self.mc_text("\(error)")
-                print("An error occurred while confirming sign up \(error)")
+                print("Error occurred: \(error.localizedDescription)")
+                SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")
             }
         }
         
+        
+        
+//        Amplify.Auth.confirmSignUp(for: (self.usernameTextField?.text)!, confirmationCode: (self.codeTextField?.text)!) { result in
+//            switch result {
+//            case .success:
+//                print("Confirm signUp succeeded")
+//                Amplify.Auth.signIn(username: self.usernameTextField?.text, password: self.passwordTextField?.text) { result in
+//                    switch result {
+//                    case .success:
+//                        print("Sign in succeeded")
+//                        Amplify.Auth.fetchAuthSession { result in
+//                            self.mc_remove()
+//                            do {
+//                                let session = try result.get()
+//
+//                                // Get user sub or identity id
+//                                if let identityProvider = session as? AuthCognitoIdentityProvider {
+//                                    let usersub = try identityProvider.getUserSub().get()
+//                                    let identityId = try identityProvider.getIdentityId().get()
+//                                    print("User sub - \(usersub) and identity id \(identityId)")
+//                                }
+//
+//                                // Get aws credentials
+//                                if let awsCredentialsProvider = session as? AuthAWSCredentialsProvider {
+//                                    let credentials = try awsCredentialsProvider.getAWSCredentials().get()
+//                                    print("Access key - \(credentials.accessKey) ")
+//                                }
+//
+//                                // Get cognito user pool token
+//                                if let cognitoTokenProvider = session as? AuthCognitoTokensProvider {
+//                                    let tokens = try cognitoTokenProvider.getCognitoTokens().get()
+//                                    print("Id token - \(tokens.idToken) ")
+//                                }
+//
+//                            } catch {
+//                                self.mc_remove()
+//                                print("Fetch auth session failed with error - \(error)")
+//                                self.mc_text("\(error)")
+//                            }
+//                        }
+//                    case .failure(let error):
+//                        self.mc_remove()
+//                        print("Sign in failed \(error)")
+//                        self.mc_text("\(error)")
+//                    }
+//                }
+//            case .failure(let error):
+//                self.mc_remove()
+//                self.mc_text("\(error)")
+//                print("An error occurred while confirming sign up \(error)")
+//            }
+//        }
     }
     
     lazy var tableView: UITableView? = {
@@ -325,21 +286,13 @@ class ForgetPasswordController: UIViewController {
         let headerView = RegisterHeadView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 100))
         headerView.loginBtn.addTarget(self, action: #selector(loginBtnClick), for: .touchUpInside)
         tempTableView.tableHeaderView = headerView
-        let footView = RegisterFootView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 150))
-        self.footView = footView
-        footView.scholarBtn.addTarget(self, action: #selector(scholarBtnClick), for: .touchUpInside)
-        footView.scholarTitleBtn.addTarget(self, action: #selector(scholarBtnClick), for: .touchUpInside)
-        footView.managerBtn.addTarget(self, action: #selector(managerBtnClick), for: .touchUpInside)
-        footView.managerTitleBtn.addTarget(self, action: #selector(managerBtnClick), for: .touchUpInside)
-        footView.privacyBtn.addTarget(self, action: #selector(privacyBtnClick), for: .touchUpInside)
-        footView.registerBtn.addTarget(self, action: #selector(registerBtnClick), for: .touchUpInside)
-        self.privacyLabel = footView.privacyLabel
-        tempTableView.tableFooterView = footView
+        let submitView = SubmitView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 50))
+        submitView.submitBtn.addTarget(self, action: #selector(resetPwdBtnClick), for: .touchUpInside)
+        tempTableView.tableFooterView = submitView
         tempTableView.separatorStyle = .none
         tempTableView.keyboardDismissMode = .onDrag
         tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "0")
         tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "1")
-        tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "2")
         tempTableView.register(EmptyTableViewCell.classForCoder(), forCellReuseIdentifier: emptyTableViewCellIdentifier)
         tempTableView.register(ConfirmCodeCell.classForCoder(), forCellReuseIdentifier: confirmCodeCellIdentifier)
         tempTableView.dataSource = self
@@ -353,12 +306,8 @@ class ForgetPasswordController: UIViewController {
         return LabelTFTipModel.init(title: "Email", text: "", tip: "")
     }()
     
-    lazy var usernameModel : LabelTFTipModel = {
-        return LabelTFTipModel.init(title: "Username", text: "", tip: "")
-    }()
-    
     lazy var passwordModel : LabelTFTipModel = {
-        return LabelTFTipModel.init(title: "Password", text: "", tip: "")
+        return LabelTFTipModel.init(title: "New Password", text: "", tip: "")
     }()
     
     lazy var codeModel : LabelTFTipModel = {
@@ -398,18 +347,6 @@ extension  ForgetPasswordController : UITableViewDelegate,UITableViewDataSource,
                 self.tableView!.reloadRows(at: [indexPath], with: .none)
             }
         }else if textField.tag == 10002{
-            let temp = textField.validateUsername()
-            var usernameNotice = ""
-            if !temp {
-                usernameNotice = "Please enter a valid username"
-            }
-            self.usernameModel.tip = usernameNotice
-            self.usernameModel.text = textField.text!
-            let indexPath: IndexPath = IndexPath.init(row: 1, section: 0)
-            DispatchQueue.main.async {
-                self.tableView!.reloadRows(at: [indexPath], with: .none)
-            }
-        }else if textField.tag == 10003{
             let temp = textField.validatePassword()
             var passwordNotice = ""
             if !temp {
@@ -419,11 +356,11 @@ extension  ForgetPasswordController : UITableViewDelegate,UITableViewDataSource,
             }
             self.passwordModel.tip = passwordNotice
             self.passwordModel.text = textField.text!
-            let indexPath: IndexPath = IndexPath.init(row: 2, section: 0)
+            let indexPath: IndexPath = IndexPath.init(row: 1, section: 0)
             DispatchQueue.main.async {
                 self.tableView!.reloadRows(at: [indexPath], with: .none)
             }
-        }else if textField.tag == 10004{
+        }else if textField.tag == 10003{
             var codeNotice = ""
             var temp = ""
             if textField.text == nil {
@@ -437,7 +374,7 @@ extension  ForgetPasswordController : UITableViewDelegate,UITableViewDataSource,
             }
             self.codeModel.tip = codeNotice
             self.codeModel.text = textField.text!
-            let indexPath: IndexPath = IndexPath.init(row: 3, section: 0)
+            let indexPath: IndexPath = IndexPath.init(row: 2, section: 0)
             DispatchQueue.main.async {
                 self.tableView!.reloadRows(at: [indexPath], with: .none)
             }
@@ -447,7 +384,7 @@ extension  ForgetPasswordController : UITableViewDelegate,UITableViewDataSource,
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             
-           return 4
+           return 3
     }
         
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -467,23 +404,16 @@ extension  ForgetPasswordController : UITableViewDelegate,UITableViewDataSource,
         cell = tempCell
     case 1:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "1", for: indexPath) as! LabelTextFildCell
-        tempCell.textFild?.delegate = self
-        tempCell.textFild?.tag = 10002
-        self.usernameTextField = tempCell.textFild
-        tempCell.update(model: self.usernameModel)
-        cell = tempCell
-    case 2:
-        let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "2", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.setupShowPasswordButton()
         tempCell.textFild?.delegate = self
-        tempCell.textFild?.tag = 10003
+        tempCell.textFild?.tag = 10002
         self.passwordTextField = tempCell.textFild
         tempCell.update(model: self.passwordModel)
         cell = tempCell
-    case 3:
+    case 2:
         let tempCell : ConfirmCodeCell = tableView.dequeueReusableCell(withIdentifier: confirmCodeCellIdentifier, for: indexPath) as! ConfirmCodeCell
         self.codeTextField = tempCell.textFild
-        self.codeTextField?.tag = 10004
+        self.codeTextField?.tag = 10003
         self.codeLabel = tempCell.tipLabel
         tempCell.textFild?.delegate = self
         tempCell.titleLabel?.numberOfLines = 2

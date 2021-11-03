@@ -13,7 +13,13 @@
     },
     "categories": {
       "auth": {
-        "gamefi96cf3769": {}
+        "gamefi96cf3769": {},
+        "gamefied0298b0": {
+          "userPoolId": "ap-northeast-1_9Fa2QXxzo",
+          "userPoolName": "EnlightenGamefiUserPool",
+          "webClientId": "3iiomvqvqmsscl5csuqkmoqis5",
+          "nativeClientId": "3iiomvqvqmsscl5csuqkmoqis5"
+        }
       }
     }
   }
