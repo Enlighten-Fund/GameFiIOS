@@ -97,57 +97,65 @@ class LoginController: UIViewController {
             switch result {
             case .success:
                 print("Sign in succeeded")
-                Amplify.Auth.fetchAuthSession { result in
-                    self.mc_remove()
-                    do {
-                        let session = try result.get()
-
-//                        // Get user sub or identity id
-//                        if let identityProvider = session as? AuthCognitoIdentityProvider {
-//                            let usersub = try identityProvider.getUserSub().get()
-//                            let identityId = try identityProvider.getIdentityId().get()
-//                            print("User sub - \(usersub) and identity id \(identityId)")
-//                        }
-//
-//                        // Get aws credentials
-//                        if let awsCredentialsProvider = session as? AuthAWSCredentialsProvider {
-//                            let credentials = try awsCredentialsProvider.getAWSCredentials().get()
-//                            print("Access key - \(credentials.accessKey) ")
-//                        }
-
-                        // Get cognito user pool token
-                        if let cognitoTokenProvider = session as? AuthCognitoTokensProvider {
-                            let tokens = try cognitoTokenProvider.getCognitoTokens().get()
-                            print("Id token - \(tokens.accessToken) ")
-                            UserDefaults.init().setValue(tokens.accessToken, forKey: "token")
-                            AWSMobileClient.default().getUserAttributes { (attributes, error) in
-                                 if(error != nil){
-                                    print("ERROR: \(error)")
-                                 }else{
-                                    if let attributesDict = attributes{
-                                       print("gfrole:\(attributesDict["custom:gfrole"])")
-                                        UserDefaults.init().setValue(attributesDict["custom:gfrole"], forKey: "gfrole")
-                                    }
-                                 }
-                            }
-//                            Amplify.Auth.fetchUserAttributes() { result in
-//                                    switch result {
-//                                    case .success(let attributes):
-//                                        print("User attributes - \(attributes)")
-//                                        let attributesDict : Dictionary = attributes
-//                                        print("\(attributes["gfrole"])")
-//                                    case .failure(let error):
-//                                        print("Fetching user attributes failed with error \(error)")
-//                                    }
-//                                }
-                        }
-
-                    } catch {
-                        self.mc_remove()
-                        print("Fetch auth session failed with error - \(error)")
-                        self.mc_failure(" \(error)")
+                AWSMobileClient.default().getTokens { (tokens, error) in
+                    if let error = error {
+                        print("Error getting token \(error.localizedDescription)")
+                    } else if let tokens = tokens {
+                        print(tokens.accessToken!.tokenString!)
                     }
                 }
+                
+//                Amplify.Auth.fetchAuthSession { result in
+//                    self.mc_remove()
+//                    do {
+//                        let session = try result.get()
+//
+////                        // Get user sub or identity id
+////                        if let identityProvider = session as? AuthCognitoIdentityProvider {
+////                            let usersub = try identityProvider.getUserSub().get()
+////                            let identityId = try identityProvider.getIdentityId().get()
+////                            print("User sub - \(usersub) and identity id \(identityId)")
+////                        }
+////
+////                        // Get aws credentials
+////                        if let awsCredentialsProvider = session as? AuthAWSCredentialsProvider {
+////                            let credentials = try awsCredentialsProvider.getAWSCredentials().get()
+////                            print("Access key - \(credentials.accessKey) ")
+////                        }
+//
+//                        // Get cognito user pool token
+//                        if let cognitoTokenProvider = session as? AuthCognitoTokensProvider {
+//                            let tokens = try cognitoTokenProvider.getCognitoTokens().get()
+//                            print("Id token - \(tokens.accessToken) ")
+//                            UserDefaults.init().setValue(tokens.accessToken, forKey: "token")
+//                            AWSMobileClient.default().getUserAttributes { (attributes, error) in
+//                                 if(error != nil){
+//                                    print("ERROR: \(error)")
+//                                 }else{
+//                                    if let attributesDict = attributes{
+//                                       print("gfrole:\(attributesDict["custom:gfrole"])")
+//                                        UserDefaults.init().setValue(attributesDict["custom:gfrole"], forKey: "gfrole")
+//                                    }
+//                                 }
+//                            }
+////                            Amplify.Auth.fetchUserAttributes() { result in
+////                                    switch result {
+////                                    case .success(let attributes):
+////                                        print("User attributes - \(attributes)")
+////                                        let attributesDict : Dictionary = attributes
+////                                        print("\(attributes["gfrole"])")
+////                                    case .failure(let error):
+////                                        print("Fetching user attributes failed with error \(error)")
+////                                    }
+////                                }
+//                        }
+//
+//                    } catch {
+//                        self.mc_remove()
+//                        print("Fetch auth session failed with error - \(error)")
+//                        self.mc_failure(" \(error)")
+//                    }
+//                }
             case .failure(let error):
                 self.mc_remove()
                 print("Sign in failed \(error)")

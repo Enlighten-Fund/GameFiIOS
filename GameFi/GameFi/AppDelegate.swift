@@ -12,129 +12,48 @@ import AWSPluginsCore
 import ESTabBarController_swift
 import IQKeyboardManager
 import AWSCognitoIdentityProvider
+import AWSMobileClient
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    self.window?.rootViewController = self.tabbarVC
-    IQKeyboardManager.shared().isEnabled = true
-    IQKeyboardManager.shared().isEnableAutoToolbar = true
-   
-    
-        do {
-                Amplify.Logging.logLevel = .verbose
-                try Amplify.add(plugin: AWSCognitoAuthPlugin())
-                try Amplify.configure()
-//            let configuration = AWSServiceConfiguration(region: .APNortheast1, credentialsProvider: nil)
-//            let poolConfiguration = AWSCognitoIdentityUserPoolConfiguration(clientId: "1hfgu631o7cbnsm8gfe3eo778b",
-//            clientSecret: "t0i5s5lf2evcnp7citepsoq676q9rrldlb4e6nj03frgadkee42", poolId: "ap-northeast-1_9Fa2QXxzo")
-//            AWSCognitoIdentityUserPool.register(with: configuration, userPoolConfiguration: poolConfiguration, forKey: "EnlightenGamefiUserPool")
-//                print("Amplify configured with auth plugin")
-//                signUp(username: "chenlu3", password: "java,6720", email: "lu.chen@enlighten3.finance")
-//                  confirmSignUp(for: "chenlu3", with: "165332")
-//                signIn(username: "chenlu3", password: "java,6720")
-            signOutLocally()
-//            fetchAttributes()
-//            Amplify.Auth.fetchAuthSession { result in
-//                do {
-//                    let session = try result.get()
-//
-//                    // Get user sub or identity id
-//                    if let identityProvider = session as? AuthCognitoIdentityProvider {
-//                        let usersub = try identityProvider.getUserSub().get()
-//                        let identityId = try identityProvider.getIdentityId().get()
-//                        print("User sub - \(usersub) and identity id \(identityId)")
-//                    }
-//
-//                    // Get aws credentials
-//                    if let awsCredentialsProvider = session as? AuthAWSCredentialsProvider {
-//                        let credentials = try awsCredentialsProvider.getAWSCredentials().get()
-//                        print("Access key - \(credentials.accessKey) ")
-//                    }
-//
-//                    // Get cognito user pool token
-//                    if let cognitoTokenProvider = session as? AuthCognitoTokensProvider {
-//                        let tokens = try cognitoTokenProvider.getCognitoTokens().get()
-//                        print("Id token - \(tokens.idToken) ")
-//                    }
-//
-//                } catch {
-//                    print("Fetch auth session failed with error - \(error)")
-//                }
-//            }
-
-
-
-
-
-            } catch {
-                print("Failed to initialize Amplify with \(error)")
-            }
-
+        self.window?.rootViewController = self.tabbarVC
+        IQKeyboardManager.shared().isEnabled = true
+        IQKeyboardManager.shared().isEnableAutoToolbar = true
+        configAWS()
             return true
     }
-
    
-
-    func signUp(username: String, password: String, email: String) {
-        let userAttributes = [AuthUserAttribute(.email, value: email)]
-        let options = AuthSignUpRequest.Options(userAttributes: userAttributes)
-        Amplify.Auth.signUp(username: username, password: password, options: options) { result in
-            switch result {
-            case .success(let signUpResult):
-                if case let .confirmUser(deliveryDetails, _) = signUpResult.nextStep {
-                    print("Delivery details \(String(describing: deliveryDetails))")
-                } else {
-                    print("SignUp Complete")
+    //Mark 配置AWS
+    func configAWS() {
+        do {
+            Amplify.Logging.logLevel = .verbose
+            try Amplify.add(plugin: AWSCognitoAuthPlugin())
+            try Amplify.configure()
+            AWSMobileClient.default().addUserStateListener(self) { (userState, info) in
+                switch (userState) {
+                case .guest:
+                    print("xxxxxxxLinsten--user is in guest mode.")
+                case .signedOut:
+                    print("xxxxxxxLinsten--user signed out")
+                case .signedIn:
+                    print("xxxxxxxLinsten--user is signed in.")
+                case .signedOutUserPoolsTokenInvalid:
+                    print("xxxxxxxLinsten--need to login again.")
+                case .signedOutFederatedTokensInvalid:
+                    print("xxxxxxxLinsten--user logged in via federation, but currently needs new tokens")
+                default:
+                    print("xxxxxxxLinsten--unsupported")
                 }
-            case .failure(let error):
-                print("An error occurred while registering a user \(error)")
             }
+        } catch {
+                print("Failed to initialize Amplify with \(error)")
         }
     }
     
-    func confirmSignUp(for username: String, with confirmationCode: String) {
-        Amplify.Auth.confirmSignUp(for: username, confirmationCode: confirmationCode) { result in
-            switch result {
-            case .success:
-                print("Confirm signUp succeeded")
-            case .failure(let error):
-                print("An error occurred while confirming sign up \(error)")
-            }
-        }
-    }
     
-    func signIn(username: String, password: String) {
-        Amplify.Auth.signIn(username: username, password: password) { result in
-            switch result {
-            case .success:
-                print("Sign in succeeded")
-            case .failure(let error):
-                print("Sign in failed \(error)")
-            }
-        }
-    }
-//    func fetchAttributes() {
-//        Amplify.Auth.fetchUserAttributes() { result in
-//            switch result {
-//            case .success(let attributes):
-//                print("User attributes - \(attributes)")
-//            case .failure(let error):
-//                print("Fetching user attributes failed with error \(error)")
-//            }
-//        }
-//    }
-    func signOutLocally() {
-        Amplify.Auth.signOut() { result in
-            switch result {
-            case .success:
-                print("Successfully signed out")
-            case .failure(let error):
-                print("Sign out failed with error \(error)")
-            }
-        }
-    }
+   //Mark getter
     lazy var window: UIWindow? = {
         let window = UIWindow.init(frame: UIScreen.main.bounds)
         window.makeKeyAndVisible()
@@ -144,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     lazy var tabbarVC: ESTabBarController? = {
         let tabBarController = ESTabBarController()
-        let v1 = MarketPlaceController()
+        let v1 = ViewController()
         let v2 = ViewController()
         let v3 = ViewController()
         let v4 = LoginController()

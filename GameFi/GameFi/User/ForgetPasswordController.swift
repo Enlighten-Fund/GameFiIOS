@@ -225,59 +225,6 @@ class ForgetPasswordController: UIViewController {
                 SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")
             }
         }
-        
-        
-        
-//        Amplify.Auth.confirmSignUp(for: (self.usernameTextField?.text)!, confirmationCode: (self.codeTextField?.text)!) { result in
-//            switch result {
-//            case .success:
-//                print("Confirm signUp succeeded")
-//                Amplify.Auth.signIn(username: self.usernameTextField?.text, password: self.passwordTextField?.text) { result in
-//                    switch result {
-//                    case .success:
-//                        print("Sign in succeeded")
-//                        Amplify.Auth.fetchAuthSession { result in
-//                            self.mc_remove()
-//                            do {
-//                                let session = try result.get()
-//
-//                                // Get user sub or identity id
-//                                if let identityProvider = session as? AuthCognitoIdentityProvider {
-//                                    let usersub = try identityProvider.getUserSub().get()
-//                                    let identityId = try identityProvider.getIdentityId().get()
-//                                    print("User sub - \(usersub) and identity id \(identityId)")
-//                                }
-//
-//                                // Get aws credentials
-//                                if let awsCredentialsProvider = session as? AuthAWSCredentialsProvider {
-//                                    let credentials = try awsCredentialsProvider.getAWSCredentials().get()
-//                                    print("Access key - \(credentials.accessKey) ")
-//                                }
-//
-//                                // Get cognito user pool token
-//                                if let cognitoTokenProvider = session as? AuthCognitoTokensProvider {
-//                                    let tokens = try cognitoTokenProvider.getCognitoTokens().get()
-//                                    print("Id token - \(tokens.idToken) ")
-//                                }
-//
-//                            } catch {
-//                                self.mc_remove()
-//                                print("Fetch auth session failed with error - \(error)")
-//                                self.mc_text("\(error)")
-//                            }
-//                        }
-//                    case .failure(let error):
-//                        self.mc_remove()
-//                        print("Sign in failed \(error)")
-//                        self.mc_text("\(error)")
-//                    }
-//                }
-//            case .failure(let error):
-//                self.mc_remove()
-//                self.mc_text("\(error)")
-//                print("An error occurred while confirming sign up \(error)")
-//            }
-//        }
     }
     
     lazy var tableView: UITableView? = {

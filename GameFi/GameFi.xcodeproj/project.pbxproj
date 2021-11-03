@@ -32,7 +32,7 @@
 		984BDBAC272E494600F6144B /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984BDBAB272E494600F6144B /* LoginController.swift */; };
 		986C586E27300B9A0021280A /* LoginHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C586D27300B9A0021280A /* LoginHeadView.swift */; };
 		986C587027300BEB0021280A /* LoginFootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C586F27300BEB0021280A /* LoginFootView.swift */; };
-		98823A3F27295B0100D9A7CD /* MarketPlaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98823A3E27295B0100D9A7CD /* MarketPlaceController.swift */; };
+		98823A3F27295B0100D9A7CD /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98823A3E27295B0100D9A7CD /* HomeController.swift */; };
 		98823A412729674500D9A7CD /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98823A402729674500D9A7CD /* Define.swift */; };
 		98E09B5A2731121B0020D97D /* ForgetPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E09B592731121B0020D97D /* ForgetPasswordController.swift */; };
 		98E09B5C273129140020D97D /* Usermodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E09B5B273129140020D97D /* Usermodel.swift */; };
@@ -64,7 +64,7 @@
 		984BDBAB272E494600F6144B /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		986C586D27300B9A0021280A /* LoginHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeadView.swift; sourceTree = "<group>"; };
 		986C586F27300BEB0021280A /* LoginFootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFootView.swift; sourceTree = "<group>"; };
-		98823A3E27295B0100D9A7CD /* MarketPlaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketPlaceController.swift; sourceTree = "<group>"; };
+		98823A3E27295B0100D9A7CD /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		98823A402729674500D9A7CD /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		98E09B592731121B0020D97D /* ForgetPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordController.swift; sourceTree = "<group>"; };
 		98E09B5B273129140020D97D /* Usermodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usermodel.swift; sourceTree = "<group>"; };
@@ -103,6 +103,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		980DB78A27327DF9006ED3BE /* General */ = {
+			isa = PBXGroup;
+			children = (
+				984BDBA7272C1D2400F6144B /* TableViewCell.swift */,
+			);
+			path = General;
+			sourceTree = "<group>";
+		};
 		9811EA0A2726BB2700B0ACF0 = {
 			isa = PBXGroup;
 			children = (
@@ -125,11 +133,11 @@
 		9811EA152726BB2700B0ACF0 /* GameFi */ = {
 			isa = PBXGroup;
 			children = (
-				984BDBA7272C1D2400F6144B /* TableViewCell.swift */,
+				980DB78A27327DF9006ED3BE /* General */,
 				984BDB9E272BED7C00F6144B /* User */,
 				98823A402729674500D9A7CD /* Define.swift */,
 				9811EA162726BB2700B0ACF0 /* AppDelegate.swift */,
-				98823A3E27295B0100D9A7CD /* MarketPlaceController.swift */,
+				98823A3E27295B0100D9A7CD /* HomeController.swift */,
 				9811EA1A2726BB2700B0ACF0 /* ViewController.swift */,
 				980A7DC12728135B006AE4C4 /* GFNavController.swift */,
 				980A7DC3272828FD006AE4C4 /* DataManager.swift */,
@@ -311,7 +319,7 @@
 				980A7DC8272902C7006AE4C4 /* APIConstants.swift in Sources */,
 				984BDB9D272BCDEF00F6144B /* EmptyTableViewCell.swift in Sources */,
 				98E09B5A2731121B0020D97D /* ForgetPasswordController.swift in Sources */,
-				98823A3F27295B0100D9A7CD /* MarketPlaceController.swift in Sources */,
+				98823A3F27295B0100D9A7CD /* HomeController.swift in Sources */,
 				984BDBA8272C1D2400F6144B /* TableViewCell.swift in Sources */,
 				980DB7892732615E006ED3BE /* SubmitView.swift in Sources */,
 				986C586E27300B9A0021280A /* LoginHeadView.swift in Sources */,

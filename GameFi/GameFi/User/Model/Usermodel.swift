@@ -5,24 +5,39 @@
 //  Created by harden on 2021/11/2.
 //
 import Foundation
-import HandyJSON
+import AWSMobileClient
+
 class Usermodel : NSObject {
-    var _token : String?
     var token : String?{
         get{
-            if _token == nil  {
-                _token = UserDefaults.init().string(forKey: "token")
+            var temp = ""
+            AWSMobileClient.default().getTokens { tokens, error in
+                if let error = error {
+                    print("Error getting token \(error.localizedDescription)")
+                    temp = ""
+                } else if let tokens = tokens {
+                    print(tokens.accessToken!.tokenString!)
+                    temp = tokens.accessToken!.tokenString!
+                }
             }
-            return _token
+            return temp
         }
     }
-    var _gfrole : String?
+    
     var gfrole : String?{
         get{
-            if _gfrole == nil  {
-                _gfrole = UserDefaults.init().string(forKey: "gfrole")
+            var temp = ""
+            AWSMobileClient.default().getUserAttributes {attributes, error in
+                if(error != nil){
+                        print("ERROR: \(error)")
+                }else{
+                        if let attributesDict = attributes{
+                           print(attributesDict["gfrole"])
+                           temp = attributesDict["gfrole"]!
+                        }
+                }
             }
-            return _gfrole
+            return temp
         }
     }
 }
