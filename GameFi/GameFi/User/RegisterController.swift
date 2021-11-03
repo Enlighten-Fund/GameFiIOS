@@ -17,8 +17,8 @@ class RegisterController: UIViewController {
     var usernameTextField : UITextField?
     var passwordTextField : UITextField?
     var codeTextField : UITextField?
+    var codeBtn : UIButton?
     var footView : RegisterFootView?
-    var codeLabel : UILabel?
     var role : Int = 1 //1代表scholar 2 代表manager
     var privacySelect = false
     var privacyLabel : UILabel?
@@ -31,6 +31,11 @@ class RegisterController: UIViewController {
             make.left.equalToSuperview()
             make.right.equalToSuperview()
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+//        self.timer.invalidate()
     }
     
     @objc func loginBtnClick(btn:UIButton) {
@@ -54,6 +59,11 @@ class RegisterController: UIViewController {
         self.privacySelect = !self.privacySelect
     }
     
+    func stopTimerAndUpdateCodeBtn() {
+        self.timer.invalidate()
+        self.codeBtn?.isEnabled = true
+        self.codeBtn?.setTitle("send", for: .normal)
+    }
     //发送验证码
     @objc func codeBtnClick(btn:UIButton) {
         self.emailTextField?.resignFirstResponder()
@@ -112,27 +122,7 @@ class RegisterController: UIViewController {
                        print("User is signed up and confirmed.")
                    case .unconfirmed:
                        print("User is not confirmed and needs verification via \(signUpResult.codeDeliveryDetails!.deliveryMedium) sent at \(signUpResult.codeDeliveryDetails!.destination!)")
-                    DispatchQueue.main.async {
-                        self.codeModel.tip = "Enter the confirmation code we sent to " + (self.emailTextField?.text)!
-                        self.codeModel.text = self.codeTextField!.text!
-                        self.codeLabel?.text = self.codeModel.tip
-                        self.codeLabel?.isHidden = false
-                        
-                        var countDownNum = 120
-                        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
-                            if countDownNum == 0 {
-                                  // 销毁计时器
-                                timer.invalidate()
-                                btn.isEnabled = true
-                                btn.setTitle("send", for: .normal)
-                                print(">>> Timer has Stopped!")
-                            } else {
-                                countDownNum -= 1
-                                btn.setTitle(String(countDownNum), for: .normal)
-                               
-                            }
-                        }
-                    }
+                    self.timer.fire()
                    case .unknown:
                        print("Unexpected case")
                    }
@@ -141,7 +131,18 @@ class RegisterController: UIViewController {
                        switch(error) {
                        case .usernameExists(let message):
                            print(message)
-
+                        DispatchQueue.main.async {
+                            AWSMobileClient.default().resendSignUpCode(username: self.usernameTextField!.text!, completionHandler: { (result, error) in
+                                if let signUpResult = result {
+                                    print("A verification code has been sent via \(signUpResult.codeDeliveryDetails!.deliveryMedium) at \(signUpResult.codeDeliveryDetails!.destination!)")
+                                    self.timer.fire()
+                                    
+                                } else if let error = error {
+                                    print("\(error.localizedDescription)")
+                                }
+                            })
+                            
+                        }
                        default:
                            break
                        }
@@ -221,7 +222,6 @@ class RegisterController: UIViewController {
             self.tableView!.reloadRows(at: [indexPath2], with: .none)
         }
         
-        var codeNotice = ""
         var temp4 = ""
         if self.codeTextField!.text == nil {
             temp4 = ""
@@ -230,16 +230,9 @@ class RegisterController: UIViewController {
         }
         
         if (temp4.isBlank) {
-            codeNotice = "Please enter a valid code"
-            self.codeModel.tip = codeNotice
-            self.codeModel.text = codeTextField!.text!
-            let indexPath: IndexPath = IndexPath.init(row: 3, section: 0)
-            DispatchQueue.main.async {
-                self.tableView!.reloadRows(at: [indexPath], with: .none)
-            }
+            DispatchQueue.main.async {SCLAlertView.init().showError("title", subTitle: "code is blank")}
             return
         }
-        self.codeModel.tip = codeNotice
         self.codeModel.text = codeTextField!.text!
         let indexPath3: IndexPath = IndexPath.init(row: 3, section: 0)
         DispatchQueue.main.async {
@@ -300,6 +293,10 @@ class RegisterController: UIViewController {
                                 break
                             }
                         }
+                        
+                        DispatchQueue.main.async { [self] in
+                            stopTimerAndUpdateCodeBtn()
+                        }
                         print("\(error.localizedDescription)")
                         
                     }
@@ -354,6 +351,32 @@ class RegisterController: UIViewController {
     
     lazy var codeModel : LabelTFTipModel = {
         LabelTFTipModel.init(title: "code", text: "", tip: "")
+    }()
+    
+    lazy var timer : Timer = {
+        var countDownNum = 120
+        let countdownTimer = Timer(timeInterval: 1.0, repeats: true) { timer in
+            DispatchQueue.main.async{
+                if countDownNum == 0 {
+                    // 销毁计时器
+                    timer.invalidate()
+                    self.codeBtn!.isEnabled = true
+                    self.codeBtn!.setTitle("send", for: .normal)
+                    
+                  print(">>> Timer has Stopped!")
+                } else {
+                    print(">>> Countdown Number: \(countDownNum)")
+                    countDownNum -= 1
+                    self.codeBtn!.setTitle(String(countDownNum), for: .normal)
+                }
+            }
+            
+        }
+        // 设置宽容度
+        countdownTimer.tolerance = 0.2
+        // 添加到当前 RunLoop，mode为默认。
+        RunLoop.current.add(countdownTimer, forMode: .default)
+        return countdownTimer
     }()
 }
 
@@ -413,24 +436,6 @@ extension  RegisterController : UITableViewDelegate,UITableViewDataSource,UIText
             DispatchQueue.main.async {
                 self.tableView!.reloadRows(at: [indexPath], with: .none)
             }
-        }else if textField.tag == 10004{
-            var codeNotice = ""
-            var temp = ""
-            if textField.text == nil {
-                temp = ""
-            }else{
-                temp = textField.text!
-            }
-            
-            if (temp.isBlank) {
-                codeNotice = "Please enter a valid code"
-            }
-            self.codeModel.tip = codeNotice
-            self.codeModel.text = textField.text!
-            let indexPath: IndexPath = IndexPath.init(row: 3, section: 0)
-            DispatchQueue.main.async {
-                self.tableView!.reloadRows(at: [indexPath], with: .none)
-            }
         }
         
     }
@@ -474,9 +479,9 @@ extension  RegisterController : UITableViewDelegate,UITableViewDataSource,UIText
         let tempCell : ConfirmCodeCell = tableView.dequeueReusableCell(withIdentifier: confirmCodeCellIdentifier, for: indexPath) as! ConfirmCodeCell
         self.codeTextField = tempCell.textFild
         self.codeTextField?.tag = 10004
-        self.codeLabel = tempCell.tipLabel
         tempCell.textFild?.delegate = self
-        tempCell.titleLabel?.numberOfLines = 2
+        tempCell.tipLabel.isHidden = true
+        self.codeBtn = tempCell.codeBtn
         tempCell.codeBtn.addTarget(self, action: #selector(codeBtnClick), for: .touchUpInside)
         tempCell.update(model: self.codeModel)
         cell = tempCell

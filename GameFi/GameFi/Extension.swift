@@ -43,7 +43,7 @@ extension UITextField{
 
 
     func validateEmail() -> Bool{
-      let temp = self.validate(value: "^([a-zA-Z0-9]+([._\\-])*[a-zA-Z0-9]*)+@([a-zA-Z0-9])+(.([a-zA-Z])+)+$")
+      let temp = self.validate(value: "[A-Z0-9a-z._%+-]+@[A-Za-z0-9,-]+\\.[A-Za-z]{2,20}")
       return temp
 
     }
