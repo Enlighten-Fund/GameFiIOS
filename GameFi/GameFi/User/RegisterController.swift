@@ -233,11 +233,7 @@ class RegisterController: UIViewController {
             DispatchQueue.main.async {SCLAlertView.init().showError("title", subTitle: "code is blank")}
             return
         }
-        self.codeModel.text = codeTextField!.text!
-        let indexPath3: IndexPath = IndexPath.init(row: 3, section: 0)
-        DispatchQueue.main.async {
-            self.tableView!.reloadRows(at: [indexPath3], with: .none)
-        }
+        
         if !self.privacySelect {
             self.privacyLabel?.shake(direction: .horizontal, times: 2, interval: 0.1, offset: 5, completion: {
                 
@@ -347,10 +343,6 @@ class RegisterController: UIViewController {
     
     lazy var passwordModel : LabelTFTipModel = {
         return LabelTFTipModel.init(title: "Password", text: "", tip: "")
-    }()
-    
-    lazy var codeModel : LabelTFTipModel = {
-        LabelTFTipModel.init(title: "code", text: "", tip: "")
     }()
     
     lazy var timer : Timer = {
@@ -483,7 +475,7 @@ extension  RegisterController : UITableViewDelegate,UITableViewDataSource,UIText
         tempCell.tipLabel.isHidden = true
         self.codeBtn = tempCell.codeBtn
         tempCell.codeBtn.addTarget(self, action: #selector(codeBtnClick), for: .touchUpInside)
-        tempCell.update(model: self.codeModel)
+        tempCell.titleLabel?.text = "code"
         cell = tempCell
     default:
         cell = tableView.dequeueReusableCell(withIdentifier: emptyTableViewCellIdentifier, for: indexPath)

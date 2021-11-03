@@ -12,12 +12,11 @@ import MCToast
 import SCLAlertView
 import AWSMobileClient
 
-class ForgetPasswordController: UIViewController {
+class ForgetPwdController: UIViewController {
     var emailTextField : UITextField?
     var passwordTextField : UITextField?
     var codeTextField : UITextField?
-    var codeLabel : UILabel?
-    
+    var codeBtn : UIButton?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView!.snp.makeConstraints { make in
@@ -31,6 +30,12 @@ class ForgetPasswordController: UIViewController {
     @objc func loginBtnClick(btn:UIButton) {
         let loginVC = LoginController.init()
         self.navigationController?.pushViewController(loginVC, animated: true)
+    }
+    
+    func stopTimerAndUpdateCodeBtn() {
+        self.timer.invalidate()
+        self.codeBtn?.isEnabled = true
+        self.codeBtn?.setTitle("send", for: .normal)
     }
     
     @objc func codeBtnClick(btn:UIButton) {
@@ -76,27 +81,7 @@ class ForgetPasswordController: UIViewController {
                 switch(forgotPasswordResult.forgotPasswordState) {
                 case .confirmationCodeSent:
                     print("Confirmation code sent via \(forgotPasswordResult.codeDeliveryDetails!.deliveryMedium) to: \(forgotPasswordResult.codeDeliveryDetails!.destination!)")
-                    DispatchQueue.main.async {
-                        self.codeModel.tip = "Enter the confirmation code we sent to " + (self.emailTextField?.text)!
-                        self.codeModel.text = self.codeTextField!.text!
-                        self.codeLabel?.text = self.codeModel.tip
-                        self.codeLabel?.isHidden = false
-                        
-                        var countDownNum = 120
-                        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
-                            if countDownNum == 0 {
-                                  // 销毁计时器
-                                timer.invalidate()
-                                btn.isEnabled = true
-                                btn.setTitle("send", for: .normal)
-                                print(">>> Timer has Stopped!")
-                            } else {
-                                countDownNum -= 1
-                                btn.setTitle(String(countDownNum), for: .normal)
-                               
-                        }
-                        }
-                    }
+                    self.timer.fire()
                 default:
                     print("Error: Invalid case.")
                 }
@@ -155,7 +140,6 @@ class ForgetPasswordController: UIViewController {
             self.tableView!.reloadRows(at: [indexPath2], with: .none)
         }
         
-        var codeNotice = ""
         var temp4 = ""
         if self.codeTextField!.text == nil {
             temp4 = ""
@@ -164,21 +148,8 @@ class ForgetPasswordController: UIViewController {
         }
         
         if (temp4.isBlank) {
-            codeNotice = "Please enter a valid code"
-            self.codeModel.tip = codeNotice
-            self.codeModel.text = codeTextField!.text!
-            let indexPath: IndexPath = IndexPath.init(row: 2, section: 0)
-            DispatchQueue.main.async {
-                self.tableView!.reloadRows(at: [indexPath], with: .none)
-            }
+            DispatchQueue.main.async {SCLAlertView.init().showError("title", subTitle: "code is blank")}
             return
-        }
-        
-        self.codeModel.tip = codeNotice
-        self.codeModel.text = codeTextField!.text!
-        let indexPath1: IndexPath = IndexPath.init(row: 2, section: 0)
-        DispatchQueue.main.async {
-            self.tableView!.reloadRows(at: [indexPath1], with: .none)
         }
         
         //本地验证通过
@@ -216,8 +187,12 @@ class ForgetPasswordController: UIViewController {
                 }
             } else if let error = error {
                 self.mc_remove()
-                print("Error occurred: \(error.localizedDescription)")
-                SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")
+                DispatchQueue.main.async {
+                    print("Error occurred: \(error.localizedDescription)")
+                    SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")
+                    self.stopTimerAndUpdateCodeBtn()
+                }
+                
             }
         }
     }
@@ -252,12 +227,34 @@ class ForgetPasswordController: UIViewController {
         return LabelTFTipModel.init(title: "New Password", text: "", tip: "")
     }()
     
-    lazy var codeModel : LabelTFTipModel = {
-        LabelTFTipModel.init(title: "code", text: "", tip: "")
+    lazy var timer : Timer = {
+        var countDownNum = 120
+        let countdownTimer = Timer(timeInterval: 1.0, repeats: true) { timer in
+            DispatchQueue.main.async{
+                if countDownNum == 0 {
+                    // 销毁计时器
+                    timer.invalidate()
+                    self.codeBtn!.isEnabled = true
+                    self.codeBtn!.setTitle("send", for: .normal)
+                    
+                  print(">>> Timer has Stopped!")
+                } else {
+                    print(">>> Countdown Number: \(countDownNum)")
+                    countDownNum -= 1
+                    self.codeBtn!.setTitle(String(countDownNum), for: .normal)
+                }
+            }
+            
+        }
+        // 设置宽容度
+        countdownTimer.tolerance = 0.2
+        // 添加到当前 RunLoop，mode为默认。
+        RunLoop.current.add(countdownTimer, forMode: .default)
+        return countdownTimer
     }()
 }
 
-extension  ForgetPasswordController : UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate{
+extension  ForgetPwdController : UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate{
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard textField.text != nil else {
@@ -302,24 +299,6 @@ extension  ForgetPasswordController : UITableViewDelegate,UITableViewDataSource,
             DispatchQueue.main.async {
                 self.tableView!.reloadRows(at: [indexPath], with: .none)
             }
-        }else if textField.tag == 10003{
-            var codeNotice = ""
-            var temp = ""
-            if textField.text == nil {
-                temp = ""
-            }else{
-                temp = textField.text!
-            }
-            
-            if (temp.isBlank) {
-                codeNotice = "Please enter a valid code"
-            }
-            self.codeModel.tip = codeNotice
-            self.codeModel.text = textField.text!
-            let indexPath: IndexPath = IndexPath.init(row: 2, section: 0)
-            DispatchQueue.main.async {
-                self.tableView!.reloadRows(at: [indexPath], with: .none)
-            }
         }
         
     }
@@ -356,11 +335,9 @@ extension  ForgetPasswordController : UITableViewDelegate,UITableViewDataSource,
         let tempCell : ConfirmCodeCell = tableView.dequeueReusableCell(withIdentifier: confirmCodeCellIdentifier, for: indexPath) as! ConfirmCodeCell
         self.codeTextField = tempCell.textFild
         self.codeTextField?.tag = 10003
-        self.codeLabel = tempCell.tipLabel
         tempCell.textFild?.delegate = self
-        tempCell.titleLabel?.numberOfLines = 2
         tempCell.codeBtn.addTarget(self, action: #selector(codeBtnClick), for: .touchUpInside)
-        tempCell.update(model: self.codeModel)
+        tempCell.tipLabel.isHidden = true
         cell = tempCell
     default:
         cell = tableView.dequeueReusableCell(withIdentifier: emptyTableViewCellIdentifier, for: indexPath)

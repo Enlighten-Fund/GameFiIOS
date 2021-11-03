@@ -34,7 +34,7 @@
 		986C587027300BEB0021280A /* LoginFootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C586F27300BEB0021280A /* LoginFootView.swift */; };
 		98823A3F27295B0100D9A7CD /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98823A3E27295B0100D9A7CD /* HomeController.swift */; };
 		98823A412729674500D9A7CD /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98823A402729674500D9A7CD /* Define.swift */; };
-		98E09B5A2731121B0020D97D /* ForgetPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E09B592731121B0020D97D /* ForgetPasswordController.swift */; };
+		98E09B5A2731121B0020D97D /* ForgetPwdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E09B592731121B0020D97D /* ForgetPwdController.swift */; };
 		98E09B5C273129140020D97D /* Usermodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E09B5B273129140020D97D /* Usermodel.swift */; };
 /* End PBXBuildFile section */
 
@@ -66,7 +66,7 @@
 		986C586F27300BEB0021280A /* LoginFootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFootView.swift; sourceTree = "<group>"; };
 		98823A3E27295B0100D9A7CD /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		98823A402729674500D9A7CD /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
-		98E09B592731121B0020D97D /* ForgetPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordController.swift; sourceTree = "<group>"; };
+		98E09B592731121B0020D97D /* ForgetPwdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPwdController.swift; sourceTree = "<group>"; };
 		98E09B5B273129140020D97D /* Usermodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usermodel.swift; sourceTree = "<group>"; };
 		C65868A573F5F7D6A4003290 /* Pods-GameFi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameFi.debug.xcconfig"; path = "Target Support Files/Pods-GameFi/Pods-GameFi.debug.xcconfig"; sourceTree = "<group>"; };
 		CBF9F66A81AD584A3895DB4F /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
@@ -159,7 +159,7 @@
 				984BDB9F272BEEDD00F6144B /* View */,
 				984BDB94272ACD0A00F6144B /* RegisterController.swift */,
 				984BDBAB272E494600F6144B /* LoginController.swift */,
-				98E09B592731121B0020D97D /* ForgetPasswordController.swift */,
+				98E09B592731121B0020D97D /* ForgetPwdController.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -318,7 +318,7 @@
 				980A7DC4272828FD006AE4C4 /* DataManager.swift in Sources */,
 				980A7DC8272902C7006AE4C4 /* APIConstants.swift in Sources */,
 				984BDB9D272BCDEF00F6144B /* EmptyTableViewCell.swift in Sources */,
-				98E09B5A2731121B0020D97D /* ForgetPasswordController.swift in Sources */,
+				98E09B5A2731121B0020D97D /* ForgetPwdController.swift in Sources */,
 				98823A3F27295B0100D9A7CD /* HomeController.swift in Sources */,
 				984BDBA8272C1D2400F6144B /* TableViewCell.swift in Sources */,
 				980DB7892732615E006ED3BE /* SubmitView.swift in Sources */,
