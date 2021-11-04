@@ -16,6 +16,8 @@
 		980A7DC8272902C7006AE4C4 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980A7DC7272902C7006AE4C4 /* APIConstants.swift */; };
 		980A7DCA27292034006AE4C4 /* GFResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980A7DC927292034006AE4C4 /* GFResult.swift */; };
 		980DB7892732615E006ED3BE /* SubmitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB7882732615E006ED3BE /* SubmitView.swift */; };
+		980DB78C27337D6F006ED3BE /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB78B27337D6F006ED3BE /* CollectionViewCell.swift */; };
+		980DB79027337F7C006ED3BE /* HomeCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB78F27337F7C006ED3BE /* HomeCollectionCell.swift */; };
 		9811EA172726BB2700B0ACF0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9811EA162726BB2700B0ACF0 /* AppDelegate.swift */; };
 		9811EA1B2726BB2700B0ACF0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9811EA1A2726BB2700B0ACF0 /* ViewController.swift */; };
 		9811EA202726BB2800B0ACF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9811EA1F2726BB2800B0ACF0 /* Assets.xcassets */; };
@@ -46,6 +48,8 @@
 		980A7DC7272902C7006AE4C4 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		980A7DC927292034006AE4C4 /* GFResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFResult.swift; sourceTree = "<group>"; };
 		980DB7882732615E006ED3BE /* SubmitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitView.swift; sourceTree = "<group>"; };
+		980DB78B27337D6F006ED3BE /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		980DB78F27337F7C006ED3BE /* HomeCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionCell.swift; sourceTree = "<group>"; };
 		9811EA132726BB2700B0ACF0 /* GameFi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameFi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9811EA162726BB2700B0ACF0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9811EA1A2726BB2700B0ACF0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -107,8 +111,26 @@
 			isa = PBXGroup;
 			children = (
 				984BDBA7272C1D2400F6144B /* TableViewCell.swift */,
+				980DB78B27337D6F006ED3BE /* CollectionViewCell.swift */,
 			);
 			path = General;
+			sourceTree = "<group>";
+		};
+		980DB78D27337E96006ED3BE /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				980DB78E27337F40006ED3BE /* View */,
+				98823A3E27295B0100D9A7CD /* HomeController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		980DB78E27337F40006ED3BE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				980DB78F27337F7C006ED3BE /* HomeCollectionCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		9811EA0A2726BB2700B0ACF0 = {
@@ -134,10 +156,10 @@
 			isa = PBXGroup;
 			children = (
 				980DB78A27327DF9006ED3BE /* General */,
+				980DB78D27337E96006ED3BE /* Home */,
 				984BDB9E272BED7C00F6144B /* User */,
 				98823A402729674500D9A7CD /* Define.swift */,
 				9811EA162726BB2700B0ACF0 /* AppDelegate.swift */,
-				98823A3E27295B0100D9A7CD /* HomeController.swift */,
 				9811EA1A2726BB2700B0ACF0 /* ViewController.swift */,
 				980A7DC12728135B006AE4C4 /* GFNavController.swift */,
 				980A7DC3272828FD006AE4C4 /* DataManager.swift */,
@@ -317,8 +339,10 @@
 				98823A412729674500D9A7CD /* Define.swift in Sources */,
 				980A7DC4272828FD006AE4C4 /* DataManager.swift in Sources */,
 				980A7DC8272902C7006AE4C4 /* APIConstants.swift in Sources */,
+				980DB78C27337D6F006ED3BE /* CollectionViewCell.swift in Sources */,
 				984BDB9D272BCDEF00F6144B /* EmptyTableViewCell.swift in Sources */,
 				98E09B5A2731121B0020D97D /* ForgetPwdController.swift in Sources */,
+				980DB79027337F7C006ED3BE /* HomeCollectionCell.swift in Sources */,
 				98823A3F27295B0100D9A7CD /* HomeController.swift in Sources */,
 				984BDBA8272C1D2400F6144B /* TableViewCell.swift in Sources */,
 				980DB7892732615E006ED3BE /* SubmitView.swift in Sources */,

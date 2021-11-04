@@ -94,7 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
     lazy var tabbarVC: ESTabBarController? = {
         let tabBarController = ESTabBarController()
         tabBarController.delegate = self
-        let v1 = ViewController()
+        let v1 = HomeController()
         let v2 = ViewController()
         let v3 = ViewController()
         let v4 = LoginController()

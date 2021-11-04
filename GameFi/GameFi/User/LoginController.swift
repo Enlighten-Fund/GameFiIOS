@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import AWSMobileClient
 import SCLAlertView
-
+import MJRefresh
 class LoginController: ViewController {
     var usernameTextField : UITextField?
     var passwordTextField : UITextField?
@@ -24,6 +24,8 @@ class LoginController: ViewController {
             make.left.equalToSuperview()
             make.right.equalToSuperview()
         }
+        
+     
     }
     
     @objc func forgetPwdBtnClick() {
