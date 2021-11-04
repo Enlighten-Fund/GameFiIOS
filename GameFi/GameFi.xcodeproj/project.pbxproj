@@ -18,6 +18,17 @@
 		980DB7892732615E006ED3BE /* SubmitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB7882732615E006ED3BE /* SubmitView.swift */; };
 		980DB78C27337D6F006ED3BE /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB78B27337D6F006ED3BE /* CollectionViewCell.swift */; };
 		980DB79027337F7C006ED3BE /* HomeCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB78F27337F7C006ED3BE /* HomeCollectionCell.swift */; };
+		980DB7962733D391006ED3BE /* TYPageTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB7912733D391006ED3BE /* TYPageTitleView.swift */; };
+		980DB7972733D391006ED3BE /* TYPageStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB7922733D391006ED3BE /* TYPageStyle.swift */; };
+		980DB7982733D391006ED3BE /* TYPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB7932733D391006ED3BE /* TYPageView.swift */; };
+		980DB7992733D391006ED3BE /* TYPageViewConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB7942733D391006ED3BE /* TYPageViewConst.swift */; };
+		980DB79A2733D391006ED3BE /* UIView+FastKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB7952733D391006ED3BE /* UIView+FastKit.swift */; };
+		980DB79C2733D3F6006ED3BE /* ScholarshipsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB79B2733D3F6006ED3BE /* ScholarshipsController.swift */; };
+		980DB79E2733D486006ED3BE /* ScholarsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB79D2733D486006ED3BE /* ScholarsController.swift */; };
+		980DB7A12733E05C006ED3BE /* ScholarshipModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB7A02733E05C006ED3BE /* ScholarshipModel.swift */; };
+		980DB7A32733E6EC006ED3BE /* ScholarshipListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB7A22733E6EC006ED3BE /* ScholarshipListModel.swift */; };
+		980DB7A52733F158006ED3BE /* JsonUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB7A42733F158006ED3BE /* JsonUtil.swift */; };
+		980DB7A72733F19E006ED3BE /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB7A62733F19E006ED3BE /* BaseModel.swift */; };
 		9811EA172726BB2700B0ACF0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9811EA162726BB2700B0ACF0 /* AppDelegate.swift */; };
 		9811EA1B2726BB2700B0ACF0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9811EA1A2726BB2700B0ACF0 /* ViewController.swift */; };
 		9811EA202726BB2800B0ACF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9811EA1F2726BB2800B0ACF0 /* Assets.xcassets */; };
@@ -50,6 +61,17 @@
 		980DB7882732615E006ED3BE /* SubmitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitView.swift; sourceTree = "<group>"; };
 		980DB78B27337D6F006ED3BE /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		980DB78F27337F7C006ED3BE /* HomeCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionCell.swift; sourceTree = "<group>"; };
+		980DB7912733D391006ED3BE /* TYPageTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TYPageTitleView.swift; sourceTree = "<group>"; };
+		980DB7922733D391006ED3BE /* TYPageStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TYPageStyle.swift; sourceTree = "<group>"; };
+		980DB7932733D391006ED3BE /* TYPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TYPageView.swift; sourceTree = "<group>"; };
+		980DB7942733D391006ED3BE /* TYPageViewConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TYPageViewConst.swift; sourceTree = "<group>"; };
+		980DB7952733D391006ED3BE /* UIView+FastKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+FastKit.swift"; sourceTree = "<group>"; };
+		980DB79B2733D3F6006ED3BE /* ScholarshipsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarshipsController.swift; sourceTree = "<group>"; };
+		980DB79D2733D486006ED3BE /* ScholarsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarsController.swift; sourceTree = "<group>"; };
+		980DB7A02733E05C006ED3BE /* ScholarshipModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarshipModel.swift; sourceTree = "<group>"; };
+		980DB7A22733E6EC006ED3BE /* ScholarshipListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarshipListModel.swift; sourceTree = "<group>"; };
+		980DB7A42733F158006ED3BE /* JsonUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonUtil.swift; sourceTree = "<group>"; };
+		980DB7A62733F19E006ED3BE /* BaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
 		9811EA132726BB2700B0ACF0 /* GameFi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameFi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9811EA162726BB2700B0ACF0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9811EA1A2726BB2700B0ACF0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -119,8 +141,16 @@
 		980DB78D27337E96006ED3BE /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				980DB79F2733E02B006ED3BE /* Model */,
+				980DB7922733D391006ED3BE /* TYPageStyle.swift */,
+				980DB7912733D391006ED3BE /* TYPageTitleView.swift */,
+				980DB7932733D391006ED3BE /* TYPageView.swift */,
+				980DB7942733D391006ED3BE /* TYPageViewConst.swift */,
+				980DB7952733D391006ED3BE /* UIView+FastKit.swift */,
 				980DB78E27337F40006ED3BE /* View */,
 				98823A3E27295B0100D9A7CD /* HomeController.swift */,
+				980DB79B2733D3F6006ED3BE /* ScholarshipsController.swift */,
+				980DB79D2733D486006ED3BE /* ScholarsController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -131,6 +161,15 @@
 				980DB78F27337F7C006ED3BE /* HomeCollectionCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		980DB79F2733E02B006ED3BE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				980DB7A02733E05C006ED3BE /* ScholarshipModel.swift */,
+				980DB7A22733E6EC006ED3BE /* ScholarshipListModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		9811EA0A2726BB2700B0ACF0 = {
@@ -170,6 +209,8 @@
 				9811EA1F2726BB2800B0ACF0 /* Assets.xcassets */,
 				9811EA212726BB2800B0ACF0 /* LaunchScreen.storyboard */,
 				9811EA242726BB2800B0ACF0 /* Info.plist */,
+				980DB7A42733F158006ED3BE /* JsonUtil.swift */,
+				980DB7A62733F19E006ED3BE /* BaseModel.swift */,
 			);
 			path = GameFi;
 			sourceTree = "<group>";
@@ -334,27 +375,38 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				980DB7A12733E05C006ED3BE /* ScholarshipModel.swift in Sources */,
 				984BDBAC272E494600F6144B /* LoginController.swift in Sources */,
 				980A7DC22728135B006AE4C4 /* GFNavController.swift in Sources */,
 				98823A412729674500D9A7CD /* Define.swift in Sources */,
+				980DB7A32733E6EC006ED3BE /* ScholarshipListModel.swift in Sources */,
 				980A7DC4272828FD006AE4C4 /* DataManager.swift in Sources */,
 				980A7DC8272902C7006AE4C4 /* APIConstants.swift in Sources */,
 				980DB78C27337D6F006ED3BE /* CollectionViewCell.swift in Sources */,
 				984BDB9D272BCDEF00F6144B /* EmptyTableViewCell.swift in Sources */,
+				980DB7972733D391006ED3BE /* TYPageStyle.swift in Sources */,
+				980DB7992733D391006ED3BE /* TYPageViewConst.swift in Sources */,
 				98E09B5A2731121B0020D97D /* ForgetPwdController.swift in Sources */,
 				980DB79027337F7C006ED3BE /* HomeCollectionCell.swift in Sources */,
 				98823A3F27295B0100D9A7CD /* HomeController.swift in Sources */,
 				984BDBA8272C1D2400F6144B /* TableViewCell.swift in Sources */,
 				980DB7892732615E006ED3BE /* SubmitView.swift in Sources */,
+				980DB79C2733D3F6006ED3BE /* ScholarshipsController.swift in Sources */,
 				986C586E27300B9A0021280A /* LoginHeadView.swift in Sources */,
 				984BDBAA272C307B00F6144B /* RegisterFootView.swift in Sources */,
 				984BDBA4272C0E9300F6144B /* Extension.swift in Sources */,
 				984BDB95272ACD0A00F6144B /* RegisterController.swift in Sources */,
 				980A7DCA27292034006AE4C4 /* GFResult.swift in Sources */,
 				9811EA1B2726BB2700B0ACF0 /* ViewController.swift in Sources */,
+				980DB79A2733D391006ED3BE /* UIView+FastKit.swift in Sources */,
+				980DB7A72733F19E006ED3BE /* BaseModel.swift in Sources */,
 				984BDBA6272C1C3800F6144B /* ConfirmCodeCell.swift in Sources */,
+				980DB7A52733F158006ED3BE /* JsonUtil.swift in Sources */,
 				984BDBA2272BEF1D00F6144B /* LabelTFTipModel.swift in Sources */,
 				986C587027300BEB0021280A /* LoginFootView.swift in Sources */,
+				980DB7982733D391006ED3BE /* TYPageView.swift in Sources */,
+				980DB7962733D391006ED3BE /* TYPageTitleView.swift in Sources */,
+				980DB79E2733D486006ED3BE /* ScholarsController.swift in Sources */,
 				980A7DC6272900E6006AE4C4 /* UserManager.swift in Sources */,
 				9811EA172726BB2700B0ACF0 /* AppDelegate.swift in Sources */,
 				98E09B5C273129140020D97D /* Usermodel.swift in Sources */,

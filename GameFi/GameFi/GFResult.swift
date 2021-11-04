@@ -8,34 +8,34 @@
 import Foundation
 
 enum HttpResponseCode : Int {
-    case HttpResponseCodeSuccess = 200
+    case HttpResponseCodeSuccess = 1
     case HttpResponseCodeUnkonwError               = 90000
     case HttpResponseCodeErrorFailedConnect        = -1009
 }
 
 class GFResult : NSObject{
-    var code : HttpResponseCode?
+    var code : Int?
     var msg : String?
 
     var data : Dictionary<String, Any>?
     
     
     init(reponse: Dictionary<String, Any>?){
-        self.code = reponse?["code"] as? HttpResponseCode
+        self.code = reponse?["code"] as? Int
         self.msg = reponse?["msg"] as? String
         self.data = reponse
     }
     
     init(error:Error){
         let terror = error as NSError
-        self.code = HttpResponseCode(rawValue: terror.code)
+        self.code = terror.code
         self.msg = error.localizedDescription
        
     }
     
     var success : Bool?{
         get{
-            if code == HttpResponseCode.HttpResponseCodeSuccess {
+            if code == 1 {
                 return true
             }
             return false

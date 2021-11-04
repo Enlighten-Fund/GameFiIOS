@@ -112,7 +112,12 @@ class DataManager: NSObject {
         }
         let dic = ["page_index" : pageIndex,"page_size" : 20]
         self.POST(url: "scholarship/list_by_\(roleStr)", param: dic) { result, reponse in
-            completeBlock(result,reponse)
+            if result.success!{
+                let scholarshipListModel : ScholarshipListModel = JsonUtil.jsonToModel(reponse as! String, ScholarshipListModel.self) as! ScholarshipListModel
+                completeBlock(result,scholarshipListModel)
+            }else{
+                completeBlock(result,reponse)
+            }
         }
     }
  
