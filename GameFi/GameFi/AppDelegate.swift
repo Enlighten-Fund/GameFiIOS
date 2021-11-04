@@ -15,7 +15,7 @@ import AWSCognitoIdentityProvider
 import AWSMobileClient
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate{
 
    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         self.window?.rootViewController = self.tabbarVC
@@ -25,6 +25,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
     }
    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if tabBarController.selectedIndex == 2 {
+            let navVC = GFNavController.init(rootViewController: LoginController.init())
+            navVC.modalPresentationStyle = .fullScreen
+            tabBarController.present(navVC, animated: true) {
+                
+            }
+        }
+    }
+    
+    
     //Mark 配置AWS
     func configAWS() {
         do {
@@ -51,9 +62,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     print("xxxxxxxLinsten--user signed out")
                 case .signedIn:
                     print("xxxxxxxLinsten--user is signed in.")
+                    self.tabbarVC?.selectedIndex  = 0
                 case .signedOutUserPoolsTokenInvalid:
                     print("xxxxxxxLinsten--need to login again.")
+                    self.tabbarVC?.present(LoginController.init(), animated: true, completion: {
+                        
+                    })
                 case .signedOutFederatedTokensInvalid:
+                    self.tabbarVC?.present(LoginController.init(), animated: true, completion: {
+                        
+                    })
                     print("xxxxxxxLinsten--user logged in via federation, but currently needs new tokens")
                 default:
                     print("xxxxxxxLinsten--unsupported")
@@ -75,6 +93,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     lazy var tabbarVC: ESTabBarController? = {
         let tabBarController = ESTabBarController()
+        tabBarController.delegate = self
         let v1 = ViewController()
         let v2 = ViewController()
         let v3 = ViewController()

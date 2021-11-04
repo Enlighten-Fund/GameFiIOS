@@ -12,7 +12,7 @@ import AWSMobileClient
 import MCToast
 import SCLAlertView
 
-class RegisterController: UIViewController {
+class RegisterController: ViewController {
     var emailTextField : UITextField?
     var usernameTextField : UITextField?
     var passwordTextField : UITextField?
@@ -27,7 +27,7 @@ class RegisterController: UIViewController {
         super.viewDidLoad()
         self.tableView!.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(IPhone_NavHeight)
-            make.bottom.equalToSuperview().offset(-IPhone_TabbarHeight)
+            make.bottom.equalToSuperview().offset(0)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
         }
@@ -35,7 +35,7 @@ class RegisterController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-//        self.timer.invalidate()
+        self.timer.invalidate()
     }
     
     @objc func loginBtnClick(btn:UIButton) {
@@ -59,11 +59,21 @@ class RegisterController: UIViewController {
         self.privacySelect = !self.privacySelect
     }
     
-    func stopTimerAndUpdateCodeBtn() {
-        self.timer.invalidate()
-        self.codeBtn?.isEnabled = true
-        self.codeBtn?.setTitle("send", for: .normal)
+    func fireTimerAndShowAlert(title:String) {
+        DispatchQueue.main.async {
+            self.timer.fire()
+            SCLAlertView.init().showInfo("系统提示", subTitle: title)
+        }
     }
+    
+    func stopTimerAndUpdateCodeBtn() {
+        DispatchQueue.main.async {
+            self.timer.invalidate()
+            self.codeBtn?.isEnabled = true
+            self.codeBtn?.setTitle("send", for: .normal)
+        }
+    }
+    
     //发送验证码
     @objc func codeBtnClick(btn:UIButton) {
         self.emailTextField?.resignFirstResponder()
@@ -122,7 +132,8 @@ class RegisterController: UIViewController {
                        print("User is signed up and confirmed.")
                    case .unconfirmed:
                        print("User is not confirmed and needs verification via \(signUpResult.codeDeliveryDetails!.deliveryMedium) sent at \(signUpResult.codeDeliveryDetails!.destination!)")
-                    self.timer.fire()
+                    self.fireTimerAndShowAlert(title: "A verification code has been sent via \(signUpResult.codeDeliveryDetails!.deliveryMedium) at \(signUpResult.codeDeliveryDetails!.destination!)")
+                    
                    case .unknown:
                        print("Unexpected case")
                    }
@@ -135,7 +146,7 @@ class RegisterController: UIViewController {
                             AWSMobileClient.default().resendSignUpCode(username: self.usernameTextField!.text!, completionHandler: { (result, error) in
                                 if let signUpResult = result {
                                     print("A verification code has been sent via \(signUpResult.codeDeliveryDetails!.deliveryMedium) at \(signUpResult.codeDeliveryDetails!.destination!)")
-                                    self.timer.fire()
+                                    self.fireTimerAndShowAlert(title: "A verification code has been sent via \(signUpResult.codeDeliveryDetails!.deliveryMedium) at \(signUpResult.codeDeliveryDetails!.destination!)")
                                     
                                 } else if let error = error {
                                     print("\(error.localizedDescription)")
@@ -147,11 +158,6 @@ class RegisterController: UIViewController {
                            break
                        }
                    }
-                   print("\(error.localizedDescription)")
-                    DispatchQueue.main.async {
-                        SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")
-                        btn.isEnabled = true
-                    }
                }
             
         }
@@ -259,6 +265,12 @@ class RegisterController: UIViewController {
                                     switch (signInResult.signInState) {
                                     case .signedIn:
                                         print("User is signed in.")
+                                        self.mc_success("注册成功", duration: 0.2) {
+                                            self.dismiss(animated: true) {
+                                                
+                                            }
+                                        }
+                                        
                                         Usermodel.shared.gfrole = String(self.role)
                                         AWSMobileClient.default().updateUserAttributes(attributeMap: ["custom:gfrole":String(self.role)]) { result, error in
                                             if let error = error  {
@@ -357,16 +369,13 @@ class RegisterController: UIViewController {
                     
                   print(">>> Timer has Stopped!")
                 } else {
-                    print(">>> Countdown Number: \(countDownNum)")
                     countDownNum -= 1
                     self.codeBtn!.setTitle(String(countDownNum), for: .normal)
                 }
             }
             
         }
-        // 设置宽容度
-        countdownTimer.tolerance = 0.2
-        // 添加到当前 RunLoop，mode为默认。
+        self.timer = countdownTimer
         RunLoop.current.add(countdownTimer, forMode: .default)
         return countdownTimer
     }()

@@ -11,7 +11,7 @@ import SnapKit
 import AWSMobileClient
 import SCLAlertView
 
-class LoginController: UIViewController {
+class LoginController: ViewController {
     var usernameTextField : UITextField?
     var passwordTextField : UITextField?
     var footView : LoginFootView?
@@ -20,13 +20,12 @@ class LoginController: UIViewController {
         super.viewDidLoad()
         self.tableView!.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(IPhone_NavHeight)
-            make.bottom.equalToSuperview().offset(-IPhone_TabbarHeight)
+            make.bottom.equalToSuperview().offset(0)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
         }
     }
     
-
     @objc func forgetPwdBtnClick() {
         self.navigationController?.pushViewController(ForgetPwdController.init(), animated: true)
     }
@@ -107,7 +106,9 @@ class LoginController: UIViewController {
                     case .signedIn:
                         print("User is signed in.")
                         self.mc_success("login success", duration: 0.5) {
-                            self.navigationController?.popToRootViewController(animated: true)
+                            self.dismiss(animated: true) {
+                                
+                            }
                         }
                     case .smsMFA:
                         print("SMS message sent to \(signInResult.codeDetails!.destination!)")

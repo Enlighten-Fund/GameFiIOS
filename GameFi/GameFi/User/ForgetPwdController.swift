@@ -12,7 +12,7 @@ import MCToast
 import SCLAlertView
 import AWSMobileClient
 
-class ForgetPwdController: UIViewController {
+class ForgetPwdController: ViewController {
     var emailTextField : UITextField?
     var passwordTextField : UITextField?
     var codeTextField : UITextField?
@@ -21,7 +21,7 @@ class ForgetPwdController: UIViewController {
         super.viewDidLoad()
         self.tableView!.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(IPhone_NavHeight)
-            make.bottom.equalToSuperview().offset(-IPhone_TabbarHeight)
+            make.bottom.equalToSuperview().offset(0)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
         }
