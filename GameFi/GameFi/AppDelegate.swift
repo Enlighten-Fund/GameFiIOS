@@ -60,6 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
                     print("xxxxxxxLinsten--user is in guest mode.")
                 case .signedOut:
                     print("xxxxxxxLinsten--user signed out")
+                    Usermodel.shared.gfrole = nil
                 case .signedIn:
                     print("xxxxxxxLinsten--user is signed in.")
                     self.tabbarVC?.selectedIndex  = 0

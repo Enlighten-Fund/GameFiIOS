@@ -22,7 +22,9 @@ class HomeController: UIViewController {
         }
         
         self.collectionView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
-            
+            DataManager.sharedInstance.fetchScholarShip(pageIndex: 1) { result, reponse in
+                
+            }
         })
         self.collectionView.mj_footer = MJRefreshBackNormalFooter.init(refreshingBlock: {
             

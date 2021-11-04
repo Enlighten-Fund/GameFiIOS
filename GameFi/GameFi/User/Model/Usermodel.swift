@@ -43,9 +43,6 @@ class Usermodel {
                 return _gfrole
             }
             
-            if _gfrole == nil || _gfrole == "" {
-                _gfrole = "1"
-            }
             return _gfrole
         }
         set{

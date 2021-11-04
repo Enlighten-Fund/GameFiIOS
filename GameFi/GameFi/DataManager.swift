@@ -70,7 +70,7 @@ class DataManager: NSObject {
             let headers:HTTPHeaders = ["Content-Type":"application/json;charset=UTF-8"]
             let request = AF.request(urlPath,method: .post,parameters: tempDic,encoding: JSONEncoding.default, headers: headers)
             request.responseJSON { (response) in
-                print(response.result)
+                print("请求\(url)\n入参:\(tempDic)\n返回:\(response.result)")
                 switch response.result {
                 case let .success(result):
                     do {
@@ -96,6 +96,22 @@ class DataManager: NSObject {
     func checkUsername(username:String,completeBlock: @escaping CompleteBlock) {
         let dic = ["username" : username]
         self.POST(url: "user/check_exist", param: dic as [String : Any]) { result, reponse in
+            completeBlock(result,reponse)
+        }
+    }
+    
+    func fetchScholarShip(pageIndex:Int, completeBlock: @escaping CompleteBlock) {
+        var roleStr = ""
+        let role : String? = Usermodel.shared.gfrole
+        if role == nil {
+            roleStr = "marketplace"
+        }else if role == "1"{
+            roleStr = "scholar"
+        }else if role == "2"{
+            roleStr = "manager"
+        }
+        let dic = ["page_index" : pageIndex,"page_size" : 20]
+        self.POST(url: "scholarship/list_by_\(roleStr)", param: dic) { result, reponse in
             completeBlock(result,reponse)
         }
     }
