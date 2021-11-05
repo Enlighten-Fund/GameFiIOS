@@ -11,7 +11,6 @@ import SnapKit
 import AWSMobileClient
 import MCToast
 import SCLAlertView
-import YYText
 
 class RegisterController: ViewController {
     var emailTextField : UITextField?

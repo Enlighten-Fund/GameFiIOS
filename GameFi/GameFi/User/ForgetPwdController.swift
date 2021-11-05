@@ -205,7 +205,7 @@ class ForgetPwdController: ViewController {
         headerView.loginBtn.addTarget(self, action: #selector(loginBtnClick), for: .touchUpInside)
         headerView.welcomeLabel?.text = "Forget password?"
         tempTableView.tableHeaderView = headerView
-        let submitView = SubmitView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 50))
+        let submitView = SubmitView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 80))
         submitView.submitBtn.addTarget(self, action: #selector(resetPwdBtnClick), for: .touchUpInside)
         tempTableView.tableFooterView = submitView
         tempTableView.separatorStyle = .none
@@ -323,6 +323,7 @@ extension  ForgetPwdController : UITableViewDelegate,UITableViewDataSource,UITex
         tempCell.textFild?.keyboardType = .emailAddress
         tempCell.textFild?.tag = 10001
         self.emailTextField = tempCell.textFild
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "Enter email", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         tempCell.update(model: self.emailModel)
         cell = tempCell
     case 1:
@@ -331,6 +332,7 @@ extension  ForgetPwdController : UITableViewDelegate,UITableViewDataSource,UITex
         tempCell.textFild?.delegate = self
         tempCell.textFild?.tag = 10002
         self.passwordTextField = tempCell.textFild
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "Enter password", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         tempCell.update(model: self.passwordModel)
         cell = tempCell
     case 2:
@@ -340,6 +342,7 @@ extension  ForgetPwdController : UITableViewDelegate,UITableViewDataSource,UITex
         tempCell.textFild?.delegate = self
         tempCell.codeBtn.addTarget(self, action: #selector(codeBtnClick), for: .touchUpInside)
         tempCell.tipLabel.isHidden = true
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "Enter code", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         cell = tempCell
     default:
         cell = tableView.dequeueReusableCell(withIdentifier: emptyTableViewCellIdentifier, for: indexPath)

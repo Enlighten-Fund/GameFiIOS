@@ -14,9 +14,9 @@ class SubmitView: UIView {
         super.init(frame: frame)
         self.submitBtn.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview()
-            make.width.equalTo(150)
-            make.height.equalTo(30)
+            make.top.equalToSuperview().offset(20)
+            make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
+            make.height.equalTo(40)
         }
     }
     
@@ -27,10 +27,10 @@ class SubmitView: UIView {
     lazy var submitBtn : UIButton = {
         let tempBtn = UIButton.init(frame: CGRect.zero)
         tempBtn.setTitle("OK", for: .normal)
-        tempBtn.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-        tempBtn.backgroundColor = .blue
-        tempBtn.setTitleColor(.white, for: .normal)
-        tempBtn.setTitleColor(.white, for: .highlighted)
+        tempBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
+        tempBtn.layer.cornerRadius = 5
+        tempBtn.layer.masksToBounds = true
+        tempBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         self.addSubview(tempBtn)
         return tempBtn
     }()
