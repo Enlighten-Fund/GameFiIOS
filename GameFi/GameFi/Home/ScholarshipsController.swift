@@ -145,6 +145,7 @@ extension  ScholarshipsController : UICollectionViewDelegate,UICollectionViewDat
                 }else{
                     let error : Error = reponse as! Error
                     SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")
+                    
                 }
             }
         }

@@ -94,26 +94,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
     
     lazy var tabbarVC: ESTabBarController? = {
         let tabBarController = ESTabBarController()
+        tabBarController.tabBar.barTintColor = UIColor(red: 0.13, green: 0.14, blue: 0.2, alpha: 1)
         tabBarController.delegate = self
         let v1 = HomeController()
         let v2 = ViewController()
         let v3 = ViewController()
         let v4 = LoginController()
         
-        v1.tabBarItem = ESTabBarItem.init(title: "Home", image: UIImage(named: "home"), selectedImage: UIImage(named: "home_1"))
-        v2.tabBarItem = ESTabBarItem.init(title: "Find", image: UIImage(named: "find"), selectedImage: UIImage(named: "find_1"))
-        v3.tabBarItem = ESTabBarItem.init(title: "Photo", image: UIImage(named: "photo"), selectedImage: UIImage(named: "photo_1"))
-        v4.tabBarItem = ESTabBarItem.init(title: "Favor", image: UIImage(named: "favor"), selectedImage: UIImage(named: "favor_1"))
+        v1.tabBarItem = ESTabBarItem.init(title: "Explore", image: UIImage(named: "explore"), selectedImage: UIImage(named: "explore_select"))
+        v2.tabBarItem = ESTabBarItem.init(title: "Accounts", image: UIImage(named: "accounts"), selectedImage: UIImage(named: "accounts_select"))
+        v3.tabBarItem = ESTabBarItem.init(title: "Tracker", image: UIImage(named: "tracker"), selectedImage: UIImage(named: "tracker_select"))
+        v4.tabBarItem = ESTabBarItem.init(title: "Profile", image: UIImage(named: "profile"), selectedImage: UIImage(named: "profile_select"))
         
         let n1 = GFNavController.init(rootViewController: v1)
         let n2 = GFNavController.init(rootViewController: v2)
         let n3 = GFNavController.init(rootViewController: v3)
         let n4 = GFNavController.init(rootViewController: v4)
         
-        v1.title = "Home"
-        v2.title = "Find"
-        v3.title = "Photo"
-        v4.title = "List"
+        v1.title = "Explore"
+        v2.title = "Accounts"
+        v3.title = "Tracker"
+        v4.title = "Profile"
         tabBarController.viewControllers = [n1, n2, n3, n4]
         return tabBarController
     }()

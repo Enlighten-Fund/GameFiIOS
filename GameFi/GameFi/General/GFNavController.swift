@@ -9,13 +9,10 @@ class GFNavController: UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let appearance = UIBarButtonItem.appearance()
-//        appearance.setBackButtonTitlePositionAdjustment(UIOffset.init(horizontal: 0.0, vertical: -60), for: .default)
-//        self.navigationBar.isTranslucent = true
-//        self.navigationBar.barTintColor = UIColor.init(red: 250/255.0, green: 250/255.0, blue: 250/255.0, alpha: 0.8)
-//        self.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.init(red: 38/255.0, green: 38/255.0, blue: 38/255.0, alpha: 1.0), NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16.0)]
-//        self.navigationBar.tintColor = UIColor.init(red: 38/255.0, green: 38/255.0, blue: 38/255.0, alpha: 1.0)
-//        self.navigationItem.title = "Example"
+        self.navigationBar.isTranslucent = true
+        self.navigationBar.barTintColor = UIColor(red: 0.13, green: 0.14, blue: 0.2, alpha: 1)
+        self.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor(red: 1, green: 1, blue: 1, alpha: 1), NSAttributedString.Key.font: UIFont(name: "PingFang SC Semibold", size: 15) as Any]
+      self.navigationBar.tintColor = UIColor(red: 0.13, green: 0.14, blue: 0.2, alpha: 1)
     }
     
 }
