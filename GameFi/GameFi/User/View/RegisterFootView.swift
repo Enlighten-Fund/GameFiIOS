@@ -30,16 +30,37 @@ class RegisterFootView: UIView {
             make.width.equalTo(30)
             make.height.equalTo(30)
         }
-        self.privacyLabel.snp.makeConstraints { make in
+        self.privacyLabel1.snp.makeConstraints { make in
             make.centerY.equalTo(self.privacyBtn)
             make.left.equalTo(self.privacyBtn.snp.right).offset(10)
-            make.width.equalTo(IPhone_SCREEN_WIDTH - 40)
+            make.width.equalTo(self.privacyLabel1.intrinsicContentSize.width + 1)
+            make.height.equalTo(40)
+        }
+        
+        self.privacyLabel2.snp.makeConstraints { make in
+            make.centerY.equalTo(self.privacyBtn)
+            make.left.equalTo(self.privacyLabel1.snp.right)
+            make.width.equalTo(self.privacyLabel2.intrinsicContentSize.width + 1)
+            make.height.equalTo(40)
+        }
+        
+        self.privacyLabel3.snp.makeConstraints { make in
+            make.centerY.equalTo(self.privacyBtn)
+            make.left.equalTo(self.privacyLabel2.snp.right)
+            make.width.equalTo(self.privacyLabel3.intrinsicContentSize.width + 1)
+            make.height.equalTo(40)
+        }
+        
+        self.privacyLabel4.snp.makeConstraints { make in
+            make.centerY.equalTo(self.privacyBtn)
+            make.left.equalTo(self.privacyLabel3.snp.right)
+            make.width.equalTo(self.privacyLabel4.intrinsicContentSize.width + 1)
             make.height.equalTo(40)
         }
         self.registerBtn.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(self.privacyLabel.snp.bottom).offset(10)
-            make.width.equalTo(80)
+            make.top.equalTo(self.privacyLabel1.snp.bottom).offset(20)
+            make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
             make.height.equalTo(40)
         }
     }
@@ -90,13 +111,38 @@ class RegisterFootView: UIView {
         return tempBtn
     }()
     
-    lazy var privacyLabel : UILabel = {
+    lazy var privacyLabel1 : UILabel = {
         let tempLabel = UILabel.init()
-        var mutableStr :NSMutableAttributedString = NSMutableAttributedString(string: "Accept the Privacy Policy and Terms of Service")
-        mutableStr.addAttribute(NSAttributedString.Key.foregroundColor, value:UIColor.blue, range:NSRange(location:10, length:15))
-        mutableStr.addAttribute(NSAttributedString.Key.foregroundColor, value:UIColor.blue, range:NSRange(location:30, length:16))
-        tempLabel.attributedText = mutableStr
-        tempLabel.font = UIFont.systemFont(ofSize: 12)
+        tempLabel.font = UIFont.systemFont(ofSize: 14)
+        tempLabel.textColor = .white
+        tempLabel.text = "Accept the "
+        self.addSubview(tempLabel)
+        return tempLabel
+    }()
+    
+    lazy var privacyLabel2 : UILabel = {
+        let tempLabel = UILabel.init()
+        tempLabel.font = UIFont.systemFont(ofSize: 14)
+        tempLabel.textColor = UIColor(red: 0.36, green: 0.56, blue: 1,alpha:1)
+        tempLabel.text = "Privacy Policy"
+        self.addSubview(tempLabel)
+        return tempLabel
+    }()
+    
+    lazy var privacyLabel3 : UILabel = {
+        let tempLabel = UILabel.init()
+        tempLabel.font = UIFont.systemFont(ofSize: 14)
+        tempLabel.textColor = .white
+        tempLabel.text = " and "
+        self.addSubview(tempLabel)
+        return tempLabel
+    }()
+    
+    lazy var privacyLabel4 : UILabel = {
+        let tempLabel = UILabel.init()
+        tempLabel.font = UIFont.systemFont(ofSize: 14)
+        tempLabel.textColor = UIColor(red: 0.36, green: 0.56, blue: 1,alpha:1)
+        tempLabel.text = "Terms of Service"
         self.addSubview(tempLabel)
         return tempLabel
     }()
@@ -104,7 +150,10 @@ class RegisterFootView: UIView {
     lazy var registerBtn : UIButton = {
         let tempBtn = UIButton.init(frame: CGRect.zero)
         tempBtn.setTitle("Sign Up", for: .normal)
-        tempBtn.backgroundColor = .blue
+        tempBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
+        tempBtn.layer.cornerRadius = 5
+        tempBtn.layer.masksToBounds = true
+        tempBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         self.addSubview(tempBtn)
         return tempBtn
     }()

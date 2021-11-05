@@ -19,7 +19,7 @@ class ForgetPwdController: ViewController {
     var codeBtn : UIButton?
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem
+        self.title = "forget password"
         self.tableView!.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(0)
             make.bottom.equalToSuperview().offset(0)
@@ -200,9 +200,10 @@ class ForgetPwdController: ViewController {
     
     lazy var tableView: UITableView? = {
         let tempTableView = UITableView.init(frame: CGRect.zero, style: .plain)
-        tempTableView.backgroundColor = .lightGray
+        tempTableView.backgroundColor = self.view.backgroundColor
         let headerView = RegisterHeadView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 100))
         headerView.loginBtn.addTarget(self, action: #selector(loginBtnClick), for: .touchUpInside)
+        headerView.welcomeLabel?.text = "Forget password?"
         tempTableView.tableHeaderView = headerView
         let submitView = SubmitView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 50))
         submitView.submitBtn.addTarget(self, action: #selector(resetPwdBtnClick), for: .touchUpInside)
@@ -343,7 +344,7 @@ extension  ForgetPwdController : UITableViewDelegate,UITableViewDataSource,UITex
     default:
         cell = tableView.dequeueReusableCell(withIdentifier: emptyTableViewCellIdentifier, for: indexPath)
     }
-        cell.contentView.backgroundColor = .lightGray
+    cell.contentView.backgroundColor = self.view.backgroundColor
        return cell
    }
         

@@ -11,6 +11,7 @@ import SnapKit
 import AWSMobileClient
 import MCToast
 import SCLAlertView
+import YYText
 
 class RegisterController: ViewController {
     var emailTextField : UITextField?
@@ -21,7 +22,7 @@ class RegisterController: ViewController {
     var footView : RegisterFootView?
     var role : Int = 1 //1代表scholar 2 代表manager
     var privacySelect = false
-    var privacyLabel : UILabel?
+    var privacyBtn : UIButton?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -246,7 +247,7 @@ class RegisterController: ViewController {
         }
         
         if !self.privacySelect {
-            self.privacyLabel?.shake(direction: .horizontal, times: 2, interval: 0.1, offset: 5, completion: {
+            self.privacyBtn?.shake(direction: .horizontal, times: 2, interval: 0.1, offset: 5, completion: {
                 
             })
             return
@@ -319,6 +320,14 @@ class RegisterController: ViewController {
         
     }
     
+    @objc func privacy() {
+        
+    }
+    
+    @objc func service() {
+        
+    }
+    
     lazy var tableView: UITableView? = {
         let tempTableView = UITableView.init(frame: CGRect.zero, style: .plain)
         tempTableView.backgroundColor = UIColor(red: 0.15, green: 0.16, blue: 0.24, alpha: 1)
@@ -327,13 +336,17 @@ class RegisterController: ViewController {
         tempTableView.tableHeaderView = headerView
         let footView = RegisterFootView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 150))
         self.footView = footView
-        self.footView?.scholarTitleBtn.isSelected = true
         footView.scholarTitleBtn.isSelected = true
         footView.scholarTitleBtn.addTarget(self, action: #selector(scholarBtnClick), for: .touchUpInside)
         footView.managerTitleBtn.addTarget(self, action: #selector(managerBtnClick), for: .touchUpInside)
         footView.privacyBtn.addTarget(self, action: #selector(privacyBtnClick), for: .touchUpInside)
         footView.registerBtn.addTarget(self, action: #selector(registerBtnClick), for: .touchUpInside)
-        self.privacyLabel = footView.privacyLabel
+        footView.privacyLabel2.isUserInteractionEnabled = true
+        let tap1 = UITapGestureRecognizer.init(target: self, action:  #selector(privacy))
+        footView.privacyLabel2.addGestureRecognizer(tap1)
+        footView.privacyLabel4.isUserInteractionEnabled = true
+        let tap2 = UITapGestureRecognizer.init(target: self, action: #selector(service))
+        footView.privacyLabel4.addGestureRecognizer(tap2)
         tempTableView.tableFooterView = footView
         tempTableView.separatorStyle = .none
         tempTableView.keyboardDismissMode = .onDrag

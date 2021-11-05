@@ -145,6 +145,7 @@ class LoginController: ViewController {
         tempTableView.register(EmptyTableViewCell.classForCoder(), forCellReuseIdentifier: emptyTableViewCellIdentifier)
         tempTableView.dataSource = self
         tempTableView.delegate = self
+        tempTableView.backgroundColor = self.view.backgroundColor
         view.addSubview(tempTableView)
         return tempTableView
     }()
@@ -243,7 +244,7 @@ extension  LoginController : UITableViewDelegate,UITableViewDataSource,UITextFie
     default:
         cell = tableView.dequeueReusableCell(withIdentifier: emptyTableViewCellIdentifier, for: indexPath)
     }
-        cell.contentView.backgroundColor = .lightGray
+    cell.contentView.backgroundColor = self.view.backgroundColor
        return cell
    }
 }
