@@ -16,6 +16,11 @@ class ViewController: UIViewController {
         self.view.backgroundColor = UIColor(red: 0.15, green: 0.16, blue: 0.24, alpha: 1)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: self.msgBtn!)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: self.leftBtn!)
+        if (self.navigationController?.viewControllers.count)! > 1 {
+            self.leftBtn?.isHidden = false
+        }else{
+            self.leftBtn?.isHidden = true
+        }
     }
 
         @objc func msgBtnClick() {
@@ -45,8 +50,8 @@ class ViewController: UIViewController {
            return tempBtn
         }()
     lazy var leftBtn : UIButton? = {
-        let tempBtn = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: 20, height: 20))
-        tempBtn.setImage(UIImage.init(named: "home"), for: .normal)
+        let tempBtn = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: 40, height: 40))
+        tempBtn.setImage(UIImage.init(named: "arrow_left"), for: .normal)
         tempBtn.addTarget(self, action: #selector(leftBtnClick), for: .touchUpInside)
        return tempBtn
     }()

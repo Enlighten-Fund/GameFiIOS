@@ -97,8 +97,8 @@ class LYDropListTItleView: UIView {
         icon.snp.makeConstraints { (make) in
             make.left.equalTo(label.snp.right).offset(2*suitParm)
             make.centerY.equalTo(label)
-            make.width.equalTo(12)
-            make.height.equalTo(12)
+            make.width.equalTo(15)
+            make.height.equalTo(9)
             
         }
         

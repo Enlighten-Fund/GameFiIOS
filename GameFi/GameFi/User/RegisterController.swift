@@ -25,8 +25,9 @@ class RegisterController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Register"
         self.tableView!.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(IPhone_NavHeight)
+            make.top.equalToSuperview().offset(0)
             make.bottom.equalToSuperview().offset(0)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
