@@ -76,7 +76,10 @@ class DataManager: NSObject {
                     do {
                         let resultDict:[String:Any] = result as! [String:Any]
                         let result = GFResult.init(reponse: resultDict)
-                        completeBlock(result,resultDict["data"] as Any)
+                        if result.success! {
+                            completeBlock(result,resultDict["data"] as Any)
+                        }
+                        
                     }
                 case let .failure(error):
                     print(error)

@@ -14,17 +14,53 @@ import SCLAlertView
 class ScholarshipsController: UIViewController {
     var pageIndex = 1
     var dataSource : Array<Any>? = Array.init()
+    let sortArray:[String] = ["Latest","Highest credit","Modt everyday","SLP Most Axie","counts"]
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor(red: 0.15, green: 0.16, blue: 0.24, alpha: 1)
         self.collectionView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(0)
+            make.top.equalTo(self.dropListView.snp.bottom)
             make.bottom.equalToSuperview().offset(0)
             make.left.equalToSuperview()
+            make.right.equalToSuperview()
+        }
+        self.sortLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(12)
+            make.height.equalTo(20)
+            make.left.equalToSuperview().offset(20)
+            make.width.equalTo(60)
+        }
+        self.dropListView.snp.makeConstraints { make in
+            make.centerY.equalTo(self.sortLabel)
+            make.height.equalTo(44)
+            make.width.equalTo(SCREEN_WIDTH)
             make.right.equalToSuperview()
         }
         self.collectionView.mj_header?.beginRefreshing()
     }
 
+    lazy var sortLabel:UILabel = {
+        let label = UILabel()
+        let attrString = NSMutableAttributedString(string: "Sort by")
+        label.frame = CGRect(x: 20, y: 151.5, width: 49.5, height: 21)
+        label.numberOfLines = 0
+        let attr: [NSAttributedString.Key : Any] = [.font: UIFont(name: "Avenir Medium", size: 15) as Any,.foregroundColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1)]
+        attrString.addAttributes(attr, range: NSRange(location: 0, length: attrString.length))
+        label.attributedText = attrString
+        self.view.addSubview(label)
+        return label
+    }()
+    
+    lazy var dropListView:LYDropListView = {
+        //传入一个二维数组即可
+        let drop = LYDropListView.init(frame: CGRect.init(x: 0, y: kNaviHeight, width: screenWidth, height: 40), tableArr: [sortArray], selectClosure: { (tag, row) in
+            //tag - 100是第几个标题菜单，row是菜单第几行
+              print(tag-100,row)
+        })
+        drop.backgroundColor = UIColor(red: 0.15, green: 0.16, blue: 0.24, alpha: 1)
+        self.view.addSubview(drop)
+        return drop
+    }()
     
         lazy var collectionView: UICollectionView = {
                 let layout = UICollectionViewFlowLayout()

@@ -15,7 +15,7 @@ class HomeController: UIViewController {
         super.viewDidLoad()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: self.msgBtn!)
         self.pageView?.snp.makeConstraints({ make in
-            make.top.equalToSuperview().offset(IPhone_NavHeight)
+            make.top.equalToSuperview().offset(0)
             make.left.equalToSuperview()
             make.bottom.equalToSuperview().offset(-IPhone_TabbarHeight)
             make.right.equalToSuperview()
