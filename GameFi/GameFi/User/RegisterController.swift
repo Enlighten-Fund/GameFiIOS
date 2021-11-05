@@ -45,15 +45,19 @@ class RegisterController: ViewController {
     }
     
     @objc func scholarBtnClick() {
-        self.footView?.scholarBtn.isSelected = true
-        self.footView?.managerBtn.isSelected = false
+        self.footView?.scholarTitleBtn.isSelected = true
+        self.footView?.managerTitleBtn.isSelected = false
         self.role = 1
+        self.footView?.scholarTitleBtn.layer.borderColor = UIColor.init(hexString: "#5D8FFF").cgColor
+        self.footView?.managerTitleBtn.layer.borderColor = UIColor.white.cgColor
     }
     
     @objc func managerBtnClick() {
-        self.footView?.scholarBtn.isSelected = false
-        self.footView?.managerBtn.isSelected = true
+        self.footView?.scholarTitleBtn.isSelected = false
+        self.footView?.managerTitleBtn.isSelected = true
         self.role = 2
+        self.footView?.managerTitleBtn.layer.borderColor = UIColor.init(hexString: "#5D8FFF").cgColor
+        self.footView?.scholarTitleBtn.layer.borderColor = UIColor.white.cgColor
     }
     @objc func privacyBtnClick(btn:UIButton){
         btn.isSelected = !btn.isSelected
@@ -323,10 +327,9 @@ class RegisterController: ViewController {
         tempTableView.tableHeaderView = headerView
         let footView = RegisterFootView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 150))
         self.footView = footView
-        footView.scholarBtn.isSelected = true
-        footView.scholarBtn.addTarget(self, action: #selector(scholarBtnClick), for: .touchUpInside)
+        self.footView?.scholarTitleBtn.isSelected = true
+        footView.scholarTitleBtn.isSelected = true
         footView.scholarTitleBtn.addTarget(self, action: #selector(scholarBtnClick), for: .touchUpInside)
-        footView.managerBtn.addTarget(self, action: #selector(managerBtnClick), for: .touchUpInside)
         footView.managerTitleBtn.addTarget(self, action: #selector(managerBtnClick), for: .touchUpInside)
         footView.privacyBtn.addTarget(self, action: #selector(privacyBtnClick), for: .touchUpInside)
         footView.registerBtn.addTarget(self, action: #selector(registerBtnClick), for: .touchUpInside)
@@ -459,6 +462,7 @@ extension  RegisterController : UITableViewDelegate,UITableViewDataSource,UIText
         tempCell.textFild?.delegate = self
         tempCell.textFild?.keyboardType = .emailAddress
         tempCell.textFild?.tag = 10001
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "Enter email", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.emailTextField = tempCell.textFild
         tempCell.update(model: self.emailModel)
         cell = tempCell
@@ -466,6 +470,7 @@ extension  RegisterController : UITableViewDelegate,UITableViewDataSource,UIText
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "1", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.delegate = self
         tempCell.textFild?.tag = 10002
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "Enter username", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.usernameTextField = tempCell.textFild
         tempCell.update(model: self.usernameModel)
         cell = tempCell
@@ -474,6 +479,7 @@ extension  RegisterController : UITableViewDelegate,UITableViewDataSource,UIText
         tempCell.textFild?.setupShowPasswordButton()
         tempCell.textFild?.delegate = self
         tempCell.textFild?.tag = 10003
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "Enter password", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.passwordTextField = tempCell.textFild
         tempCell.update(model: self.passwordModel)
         cell = tempCell
@@ -483,6 +489,7 @@ extension  RegisterController : UITableViewDelegate,UITableViewDataSource,UIText
         self.codeTextField?.tag = 10004
         tempCell.textFild?.delegate = self
         tempCell.tipLabel.isHidden = true
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "Enter code", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.codeBtn = tempCell.codeBtn
         tempCell.codeBtn.addTarget(self, action: #selector(codeBtnClick), for: .touchUpInside)
         tempCell.titleLabel?.text = "code"
