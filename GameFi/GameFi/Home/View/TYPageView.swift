@@ -22,7 +22,7 @@ class TYPageView: UIView {
     //pageTitleView
     private lazy var pageTitleView: TYPageTitleView = {
         let pageTitleView = TYPageTitleView(frame: CGRect(x: 0, y: 0, width: self.bounds.width, height: self.style.labelHeight), titles: self.titles, style: self.style)
-        pageTitleView.backgroundColor = .white
+        pageTitleView.backgroundColor = UIColor(red: 0.15, green: 0.16, blue: 0.24, alpha: 1)
         pageTitleView.delegate = self
         return pageTitleView
     }()

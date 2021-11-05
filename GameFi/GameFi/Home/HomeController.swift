@@ -39,8 +39,6 @@ class HomeController: UIViewController {
                                 titles: ["Scholarships","Scholars"],
                                 childControllers: [ScholarshipsController(),ScholarsController()],
                                 parentController: self)
-        pageView.backgroundColor = UIColor.cyan
-        
         view.addSubview(pageView)
         return pageView
     }()

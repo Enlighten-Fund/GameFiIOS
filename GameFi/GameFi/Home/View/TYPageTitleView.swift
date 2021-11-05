@@ -31,7 +31,7 @@ class TYPageTitleView: UIView {
     lazy var lineView:UIView = {
         let line = UIView()
         line.backgroundColor = self.style.bottomLineColor
-        line.frame.size.height = 2
+        line.frame.size.height = 5
         line.frame.origin.y = self.bounds.size.height - line.frame.size.height
         return line
     }()
