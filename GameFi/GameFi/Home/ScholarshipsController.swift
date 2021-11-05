@@ -10,6 +10,7 @@ import MJRefresh
 import SnapKit
 import Foundation
 import SCLAlertView
+
 class ScholarshipsController: UIViewController {
     var pageIndex = 1
     var dataSource : Array<Any>? = Array.init()
