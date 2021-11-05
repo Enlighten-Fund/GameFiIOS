@@ -317,8 +317,8 @@ class RegisterController: ViewController {
     
     lazy var tableView: UITableView? = {
         let tempTableView = UITableView.init(frame: CGRect.zero, style: .plain)
-        tempTableView.backgroundColor = .lightGray
-        let headerView = RegisterHeadView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 100))
+        tempTableView.backgroundColor = UIColor(red: 0.15, green: 0.16, blue: 0.24, alpha: 1)
+        let headerView = RegisterHeadView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 90))
         headerView.loginBtn.addTarget(self, action: #selector(loginBtnClick), for: .touchUpInside)
         tempTableView.tableHeaderView = headerView
         let footView = RegisterFootView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 150))
@@ -490,7 +490,7 @@ extension  RegisterController : UITableViewDelegate,UITableViewDataSource,UIText
     default:
         cell = tableView.dequeueReusableCell(withIdentifier: emptyTableViewCellIdentifier, for: indexPath)
     }
-        cell.contentView.backgroundColor = .lightGray
+    cell.contentView.backgroundColor = self.view.backgroundColor
        return cell
    }
         
