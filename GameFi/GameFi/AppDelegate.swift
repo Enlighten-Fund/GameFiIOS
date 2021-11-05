@@ -16,7 +16,7 @@ import AWSMobileClient
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate{
-
+    var homeVC : HomeController? = nil
    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         self.window?.rootViewController = self.tabbarVC
         IQKeyboardManager.shared().isEnabled = true
@@ -100,7 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         let v2 = ViewController()
         let v3 = ViewController()
         let v4 = LoginController()
-        
+        self.homeVC = v1
         v1.tabBarItem = ESTabBarItem.init(title: "Explore", image: UIImage(named: "explore"), selectedImage: UIImage(named: "explore_select"))
         v2.tabBarItem = ESTabBarItem.init(title: "Accounts", image: UIImage(named: "accounts"), selectedImage: UIImage(named: "accounts_select"))
         v3.tabBarItem = ESTabBarItem.init(title: "Tracker", image: UIImage(named: "tracker"), selectedImage: UIImage(named: "tracker_select"))

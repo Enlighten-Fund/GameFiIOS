@@ -106,7 +106,7 @@ extension  ScholarshipsController : UICollectionViewDelegate,UICollectionViewDat
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: homeCollectionCellIdentifier, for: indexPath) as! HomeCollectionCell
-        cell.backgroundColor = .orange
+        cell.makeConstraints()
         return cell
     }
 
@@ -120,12 +120,10 @@ extension  ScholarshipsController : UICollectionViewDelegate,UICollectionViewDat
 //        return headView
 //    }
 
-    // #MARK: --UICollectionViewDelegate的代理方法
-    /**
-    Description:当点击某个Item之后的回应
-    */
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        print("(\(indexPath.section),\(indexPath.row))")
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let appdelegate : AppDelegate = UIApplication.shared.delegate! as! AppDelegate
+        let scholarshipDetailVC = ScholarshipsDetailController.init(scholarshipId: 123)
+        appdelegate.homeVC?.navigationController!.pushViewController(scholarshipDetailVC, animated: true)
     }
 
     //#MARK: --UICollectionViewDelegateFlowLayout的代理方法

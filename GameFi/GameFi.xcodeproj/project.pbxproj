@@ -30,6 +30,10 @@
 		980DB7AE2734F677006ED3BE /* LYDropListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB7AB2734F677006ED3BE /* LYDropListView.swift */; };
 		980DB7AF2734F677006ED3BE /* LYCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB7AC2734F677006ED3BE /* LYCommon.swift */; };
 		980DB7B02734F677006ED3BE /* LYDropListTItleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB7AD2734F677006ED3BE /* LYDropListTItleView.swift */; };
+		980DB7C527355876006ED3BE /* ScholarshipsDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB7C427355876006ED3BE /* ScholarshipsDetailController.swift */; };
+		980DB7C727356393006ED3BE /* ScholarshipDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB7C627356393006ED3BE /* ScholarshipDetailHeaderView.swift */; };
+		980DB7C927356C85006ED3BE /* LabelAndLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB7C827356C85006ED3BE /* LabelAndLabelView.swift */; };
+		980DB7CB273571E0006ED3BE /* ScholarshipDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB7CA273571E0006ED3BE /* ScholarshipDetailModel.swift */; };
 		9811EA172726BB2700B0ACF0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9811EA162726BB2700B0ACF0 /* AppDelegate.swift */; };
 		9811EA1B2726BB2700B0ACF0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9811EA1A2726BB2700B0ACF0 /* ViewController.swift */; };
 		9811EA202726BB2800B0ACF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9811EA1F2726BB2800B0ACF0 /* Assets.xcassets */; };
@@ -74,6 +78,10 @@
 		980DB7AB2734F677006ED3BE /* LYDropListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LYDropListView.swift; sourceTree = "<group>"; };
 		980DB7AC2734F677006ED3BE /* LYCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LYCommon.swift; sourceTree = "<group>"; };
 		980DB7AD2734F677006ED3BE /* LYDropListTItleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LYDropListTItleView.swift; sourceTree = "<group>"; };
+		980DB7C427355876006ED3BE /* ScholarshipsDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarshipsDetailController.swift; sourceTree = "<group>"; };
+		980DB7C627356393006ED3BE /* ScholarshipDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarshipDetailHeaderView.swift; sourceTree = "<group>"; };
+		980DB7C827356C85006ED3BE /* LabelAndLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelAndLabelView.swift; sourceTree = "<group>"; };
+		980DB7CA273571E0006ED3BE /* ScholarshipDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarshipDetailModel.swift; sourceTree = "<group>"; };
 		9811EA132726BB2700B0ACF0 /* GameFi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameFi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9811EA162726BB2700B0ACF0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9811EA1A2726BB2700B0ACF0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -155,6 +163,7 @@
 				980DB78E27337F40006ED3BE /* View */,
 				98823A3E27295B0100D9A7CD /* HomeController.swift */,
 				980DB79B2733D3F6006ED3BE /* ScholarshipsController.swift */,
+				980DB7C427355876006ED3BE /* ScholarshipsDetailController.swift */,
 				980DB79D2733D486006ED3BE /* ScholarsController.swift */,
 			);
 			path = Home;
@@ -169,6 +178,8 @@
 				980DB7942733D391006ED3BE /* TYPageViewConst.swift */,
 				980DB7952733D391006ED3BE /* UIView+FastKit.swift */,
 				980DB78F27337F7C006ED3BE /* HomeCollectionCell.swift */,
+				980DB7C827356C85006ED3BE /* LabelAndLabelView.swift */,
+				980DB7C627356393006ED3BE /* ScholarshipDetailHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -178,6 +189,7 @@
 			children = (
 				980DB7A02733E05C006ED3BE /* ScholarshipModel.swift */,
 				980DB7A22733E6EC006ED3BE /* ScholarshipListModel.swift */,
+				980DB7CA273571E0006ED3BE /* ScholarshipDetailModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -397,15 +409,18 @@
 				980DB7972733D391006ED3BE /* TYPageStyle.swift in Sources */,
 				980DB7B02734F677006ED3BE /* LYDropListTItleView.swift in Sources */,
 				980DB7992733D391006ED3BE /* TYPageViewConst.swift in Sources */,
+				980DB7C527355876006ED3BE /* ScholarshipsDetailController.swift in Sources */,
 				98E09B5A2731121B0020D97D /* ForgetPwdController.swift in Sources */,
 				980DB79027337F7C006ED3BE /* HomeCollectionCell.swift in Sources */,
 				98823A3F27295B0100D9A7CD /* HomeController.swift in Sources */,
 				980DB7AF2734F677006ED3BE /* LYCommon.swift in Sources */,
 				984BDBA8272C1D2400F6144B /* TableViewCell.swift in Sources */,
+				980DB7C727356393006ED3BE /* ScholarshipDetailHeaderView.swift in Sources */,
 				980DB7892732615E006ED3BE /* SubmitView.swift in Sources */,
 				980DB79C2733D3F6006ED3BE /* ScholarshipsController.swift in Sources */,
 				986C586E27300B9A0021280A /* LoginHeadView.swift in Sources */,
 				984BDBAA272C307B00F6144B /* RegisterFootView.swift in Sources */,
+				980DB7C927356C85006ED3BE /* LabelAndLabelView.swift in Sources */,
 				984BDBA4272C0E9300F6144B /* Extension.swift in Sources */,
 				984BDB95272ACD0A00F6144B /* RegisterController.swift in Sources */,
 				980DB7AE2734F677006ED3BE /* LYDropListView.swift in Sources */,
@@ -420,6 +435,7 @@
 				980DB7982733D391006ED3BE /* TYPageView.swift in Sources */,
 				980DB7962733D391006ED3BE /* TYPageTitleView.swift in Sources */,
 				980DB79E2733D486006ED3BE /* ScholarsController.swift in Sources */,
+				980DB7CB273571E0006ED3BE /* ScholarshipDetailModel.swift in Sources */,
 				9811EA172726BB2700B0ACF0 /* AppDelegate.swift in Sources */,
 				98E09B5C273129140020D97D /* Usermodel.swift in Sources */,
 				984BDB99272BA23600F6144B /* RegisterHeadView.swift in Sources */,
