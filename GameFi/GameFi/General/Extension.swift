@@ -21,7 +21,7 @@ extension UITextField {
         eyesButton.addTarget(self, action: #selector(eyesButton(btn:)), for: .touchUpInside)
         eyesButton.frame = CGRect(x: 0, y: 0, width: 21, height: 18)
         eyesButton.setImage(UIImage(named: "eye"), for: .normal)
-        eyesButton.setImage(UIImage(named: "arrow_left"), for: .selected)
+        eyesButton.setImage(UIImage(named: "eye_look"), for: .selected)
         rightView = eyesButton
         rightViewMode = .always
     }

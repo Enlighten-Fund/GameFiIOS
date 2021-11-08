@@ -25,7 +25,7 @@ class RegisterController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Register"
+        self.title = "Sign up"
         self.tableView!.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(0)
             make.bottom.equalToSuperview().offset(0)
@@ -354,7 +354,7 @@ extension  RegisterController : UITableViewDelegate,UITableViewDataSource,UIText
         tempCell.textFild?.delegate = self
         tempCell.textFild?.keyboardType = .emailAddress
         tempCell.textFild?.tag = 10001
-        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "Enter email", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter email", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.emailTextField = tempCell.textFild
 
         cell = tempCell
@@ -362,7 +362,7 @@ extension  RegisterController : UITableViewDelegate,UITableViewDataSource,UIText
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "1", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.delegate = self
         tempCell.textFild?.tag = 10002
-        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "Enter username", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter username", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.usernameTextField = tempCell.textFild
 
         cell = tempCell
@@ -371,7 +371,7 @@ extension  RegisterController : UITableViewDelegate,UITableViewDataSource,UIText
         tempCell.textFild?.setupShowPasswordButton()
         tempCell.textFild?.delegate = self
         tempCell.textFild?.tag = 10003
-        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "Enter password", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter password", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.passwordTextField = tempCell.textFild
     
         cell = tempCell
@@ -380,7 +380,7 @@ extension  RegisterController : UITableViewDelegate,UITableViewDataSource,UIText
         self.codeTextField = tempCell.textFild
         self.codeTextField?.tag = 10004
         tempCell.textFild?.delegate = self
-        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "Enter code", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter code", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.codeBtn = tempCell.codeBtn
         tempCell.codeBtn.addTarget(self, action: #selector(codeBtnClick), for: .touchUpInside)
         cell = tempCell

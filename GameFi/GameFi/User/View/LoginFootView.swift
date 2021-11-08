@@ -14,40 +14,14 @@ class LoginFootView: UIView {
         super.init(frame: frame)
         self.forgetPwdBtn.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.right.equalToSuperview().offset(-20)
+            make.left.equalToSuperview().offset(5)
             make.width.equalTo(150)
             make.height.equalTo(30)
         }
-        
-//        self.scholarBtn.snp.makeConstraints { make in
-//            make.top.equalToSuperview().offset(40)
-//            make.left.equalToSuperview().offset(20)
-//            make.width.equalTo(30)
-//            make.height.equalTo(30)
-//        }
-//        self.scholarTitleBtn.snp.makeConstraints { make in
-//            make.centerY.equalTo(self.scholarBtn)
-//            make.left.equalTo(self.scholarBtn.snp.right).offset(10)
-//            make.width.equalTo(100)
-//            make.height.equalTo(30)
-//        }
-//
-//        self.managerBtn.snp.makeConstraints { make in
-//            make.top.equalToSuperview().offset(40)
-//            make.right.equalTo(self.managerTitleBtn.snp.left).offset(-10)
-//            make.width.equalTo(30)
-//            make.height.equalTo(30)
-//        }
-//        self.managerTitleBtn.snp.makeConstraints { make in
-//            make.centerY.equalTo(self.scholarBtn)
-//            make.right.equalToSuperview().offset(-20)
-//            make.width.equalTo(100)
-//            make.height.equalTo(30)
-//        }
         self.loginBtn.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(self.forgetPwdBtn.snp.bottom).offset(20)
-            make.width.equalTo(80)
+            make.top.equalTo(self.forgetPwdBtn.snp.bottom).offset(10)
+            make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
             make.height.equalTo(40)
         }
         self.registerLabel.snp.makeConstraints { make in
@@ -71,43 +45,9 @@ class LoginFootView: UIView {
     lazy var forgetPwdBtn : UIButton = {
         let tempBtn = UIButton.init(frame: CGRect.zero)
         tempBtn.setTitle("Forget Password?", for: .normal)
-        tempBtn.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-        tempBtn.setTitleColor(.blue, for: .normal)
-        tempBtn.setTitleColor(.blue, for: .highlighted)
-        self.addSubview(tempBtn)
-        return tempBtn
-    }()
-    
-    lazy var scholarBtn : UIButton = {
-        let tempBtn = UIButton.init(frame: CGRect.zero)
-        tempBtn.setImage(UIImage.init(named: "shop"), for: .normal)
-        tempBtn.setImage(UIImage.init(named: "shop_1"), for: .selected)
-        self.addSubview(tempBtn)
-        return tempBtn
-    }()
-    
-    lazy var scholarTitleBtn : UIButton = {
-        let tempBtn = UIButton.init(frame: CGRect.zero)
-        tempBtn.setTitle("I'm a scholar", for: .normal)
-        tempBtn.setTitle("I'm a scholar", for: .selected)
-        tempBtn.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-        self.addSubview(tempBtn)
-        return tempBtn
-    }()
-    
-    lazy var managerBtn : UIButton = {
-        let tempBtn = UIButton.init(frame: CGRect.zero)
-        tempBtn.setImage(UIImage.init(named: "shop"), for: .normal)
-        tempBtn.setImage(UIImage.init(named: "shop_1"), for: .selected)
-        self.addSubview(tempBtn)
-        return tempBtn
-    }()
-    
-    lazy var managerTitleBtn : UIButton = {
-        let tempBtn = UIButton.init(frame: CGRect.zero)
-        tempBtn.setTitle("I'm a manager", for: .normal)
-        tempBtn.setTitle("I'm a manager", for: .selected)
-        tempBtn.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        tempBtn.titleLabel?.font = UIFont(name: "PingFang SC Regular", size: 15)
+        tempBtn.setTitleColor(UIColor(red: 0.36, green: 0.56, blue: 1, alpha: 1), for: .normal)
+        tempBtn.setTitleColor(UIColor(red: 0.36, green: 0.56, blue: 1, alpha: 1), for: .highlighted)
         self.addSubview(tempBtn)
         return tempBtn
     }()
@@ -115,7 +55,10 @@ class LoginFootView: UIView {
     lazy var loginBtn : UIButton = {
         let tempBtn = UIButton.init(frame: CGRect.zero)
         tempBtn.setTitle("Login in", for: .normal)
-        tempBtn.backgroundColor = .blue
+        tempBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
+        tempBtn.layer.cornerRadius = 5
+        tempBtn.layer.masksToBounds = true
+        tempBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         self.addSubview(tempBtn)
         return tempBtn
     }()
@@ -124,7 +67,8 @@ class LoginFootView: UIView {
         let tempLabel = UILabel.init()
         tempLabel.text = "Don't have an account? "
         tempLabel.textAlignment = .right
-        tempLabel.font = UIFont.systemFont(ofSize: 12)
+        tempLabel.font = UIFont.systemFont(ofSize: 14)
+        tempLabel.textColor = .white
         self.addSubview(tempLabel)
         return tempLabel
     }()
@@ -132,8 +76,9 @@ class LoginFootView: UIView {
     lazy var registerBtn : UIButton = {
         let tempBtn = UIButton.init(frame: CGRect.zero)
         tempBtn.setTitle("Sign up", for: .normal)
-        tempBtn.setTitleColor(.blue, for: .normal)
-        tempBtn.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        tempBtn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        tempBtn.setTitleColor(UIColor(red: 0.36, green: 0.56, blue: 1,alpha:1), for: .normal)
+        tempBtn.setTitleColor(UIColor(red: 0.36, green: 0.56, blue: 1,alpha:1), for: .highlighted)
         self.addSubview(tempBtn)
         return tempBtn
     }()

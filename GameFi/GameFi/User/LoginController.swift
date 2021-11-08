@@ -18,12 +18,12 @@ class LoginController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Login"
+        self.title = "Sign in"
         self.leftBtn?.isHidden = false
         self.tableView!.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(0)
             make.bottom.equalToSuperview().offset(0)
-            make.left.equalToSuperview()
+            make.left.equalToSuperview().offset(0)
             make.right.equalToSuperview()
         }
         
@@ -97,7 +97,6 @@ class LoginController: ViewController {
         let headerView = LoginHeadView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 60))
         tempTableView.tableHeaderView = headerView
         let footView = LoginFootView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 200))
-        footView.scholarBtn.isSelected = true
         self.footView = footView
         footView.registerBtn.addTarget(self, action: #selector(registerBtnClick), for: .touchUpInside)
         footView.loginBtn.addTarget(self, action: #selector(loginBtnClick), for: .touchUpInside)
@@ -166,14 +165,14 @@ extension  LoginController : UITableViewDelegate,UITableViewDataSource,UITextFie
         tempCell.textFild?.delegate = self
         tempCell.textFild?.tag = 10001
         self.usernameTextField = tempCell.textFild
-        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "Enter email", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter email", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         cell = tempCell
     case 1:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "1", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.setupShowPasswordButton()
         tempCell.textFild?.delegate = self
         tempCell.textFild?.tag = 10002
-        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "Enter password", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter password", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.passwordTextField = tempCell.textFild
         cell = tempCell
     default:
