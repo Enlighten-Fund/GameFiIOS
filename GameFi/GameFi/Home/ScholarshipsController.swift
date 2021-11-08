@@ -36,6 +36,12 @@ class ScholarshipsController: UIViewController {
             make.width.equalTo(SCREEN_WIDTH)
             make.right.equalToSuperview()
         }
+        self.addScholarshipBtn.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-15)
+            make.height.equalTo(50)
+            make.width.equalTo(50)
+            make.bottom.equalToSuperview().offset(-20)
+        }
         self.collectionView.mj_header?.beginRefreshing()
     }
 
@@ -68,31 +74,45 @@ class ScholarshipsController: UIViewController {
         return drop
     }()
     
-        lazy var collectionView: UICollectionView = {
-            let layout = UICollectionViewFlowLayout()
-            //水平间隔
-            layout.minimumInteritemSpacing = 10
-            //垂直行间距
-            layout.minimumLineSpacing = 10
-            layout.scrollDirection = UICollectionView.ScrollDirection.vertical  //滚动方向
-            layout.itemSize = CGSize(width: (IPhone_SCREEN_WIDTH - 40)/2, height: 215)
-            // 设置CollectionView
-            let ourCollectionView : UICollectionView = UICollectionView(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: IPhone_SCREEN_HEIGHT), collectionViewLayout: layout)
-            ourCollectionView.delegate = self
-            ourCollectionView.dataSource = self
-            ourCollectionView.register(HomeCollectionCell.classForCoder(), forCellWithReuseIdentifier: homeCollectionCellIdentifier)
-            ourCollectionView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
-                self.refreshHttpRequest()
-            })
-            ourCollectionView.mj_footer = MJRefreshBackNormalFooter.init(refreshingBlock: {
-                self.loadMoreHttpRequest()
-            })
-            ourCollectionView.mj_header?.isAutomaticallyChangeAlpha = true
-            ourCollectionView.backgroundColor = self.view.backgroundColor
-            
-            self.view.addSubview(ourCollectionView)
-            return ourCollectionView
-        }()
+    lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        //水平间隔
+        layout.minimumInteritemSpacing = 10
+        //垂直行间距
+        layout.minimumLineSpacing = 10
+        layout.scrollDirection = UICollectionView.ScrollDirection.vertical  //滚动方向
+        layout.itemSize = CGSize(width: (IPhone_SCREEN_WIDTH - 40)/2, height: 215)
+        // 设置CollectionView
+        let ourCollectionView : UICollectionView = UICollectionView(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: IPhone_SCREEN_HEIGHT), collectionViewLayout: layout)
+        ourCollectionView.delegate = self
+        ourCollectionView.dataSource = self
+        ourCollectionView.register(HomeCollectionCell.classForCoder(), forCellWithReuseIdentifier: homeCollectionCellIdentifier)
+        ourCollectionView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
+            self.refreshHttpRequest()
+        })
+        ourCollectionView.mj_footer = MJRefreshBackNormalFooter.init(refreshingBlock: {
+            self.loadMoreHttpRequest()
+        })
+        ourCollectionView.mj_header?.isAutomaticallyChangeAlpha = true
+        ourCollectionView.backgroundColor = self.view.backgroundColor
+        
+        self.view.addSubview(ourCollectionView)
+        return ourCollectionView
+    }()
+    
+    lazy var addScholarshipBtn: UIButton = {
+        let tempBtn = UIButton.init()
+        tempBtn.backgroundColor = UIColor(red: 0.27, green: 0.3, blue: 0.45, alpha: 1)
+        tempBtn.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).cgColor
+        tempBtn.layer.shadowOffset = CGSize(width: 0, height: 1)
+        tempBtn.layer.shadowOpacity = 1
+        tempBtn.layer.shadowRadius = 5
+        tempBtn.layer.cornerRadius = 25
+        tempBtn.setImage(UIImage.init(named: "add"), for: .normal)
+        tempBtn.setImage(UIImage.init(named: "add"), for: .highlighted)
+        self.view.addSubview(tempBtn)
+        return tempBtn
+    }()
 }
 
 extension  ScholarshipsController : UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
