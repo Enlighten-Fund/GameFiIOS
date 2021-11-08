@@ -15,7 +15,7 @@
 		980A7DCA27292034006AE4C4 /* GFResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980A7DC927292034006AE4C4 /* GFResult.swift */; };
 		980DB7892732615E006ED3BE /* SubmitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB7882732615E006ED3BE /* SubmitView.swift */; };
 		980DB78C27337D6F006ED3BE /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB78B27337D6F006ED3BE /* CollectionViewCell.swift */; };
-		980DB79027337F7C006ED3BE /* HomeCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB78F27337F7C006ED3BE /* HomeCollectionCell.swift */; };
+		980DB79027337F7C006ED3BE /* ScholarDetailsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB78F27337F7C006ED3BE /* ScholarDetailsCollectionCell.swift */; };
 		980DB7962733D391006ED3BE /* TYPageTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB7912733D391006ED3BE /* TYPageTitleView.swift */; };
 		980DB7972733D391006ED3BE /* TYPageStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB7922733D391006ED3BE /* TYPageStyle.swift */; };
 		980DB7982733D391006ED3BE /* TYPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB7932733D391006ED3BE /* TYPageView.swift */; };
@@ -63,7 +63,7 @@
 		980A7DC927292034006AE4C4 /* GFResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFResult.swift; sourceTree = "<group>"; };
 		980DB7882732615E006ED3BE /* SubmitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitView.swift; sourceTree = "<group>"; };
 		980DB78B27337D6F006ED3BE /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
-		980DB78F27337F7C006ED3BE /* HomeCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionCell.swift; sourceTree = "<group>"; };
+		980DB78F27337F7C006ED3BE /* ScholarDetailsCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarDetailsCollectionCell.swift; sourceTree = "<group>"; };
 		980DB7912733D391006ED3BE /* TYPageTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TYPageTitleView.swift; sourceTree = "<group>"; };
 		980DB7922733D391006ED3BE /* TYPageStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TYPageStyle.swift; sourceTree = "<group>"; };
 		980DB7932733D391006ED3BE /* TYPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TYPageView.swift; sourceTree = "<group>"; };
@@ -177,7 +177,7 @@
 				980DB7932733D391006ED3BE /* TYPageView.swift */,
 				980DB7942733D391006ED3BE /* TYPageViewConst.swift */,
 				980DB7952733D391006ED3BE /* UIView+FastKit.swift */,
-				980DB78F27337F7C006ED3BE /* HomeCollectionCell.swift */,
+				980DB78F27337F7C006ED3BE /* ScholarDetailsCollectionCell.swift */,
 				980DB7C827356C85006ED3BE /* LabelAndLabelView.swift */,
 				980DB7C627356393006ED3BE /* ScholarshipDetailHeaderView.swift */,
 			);
@@ -411,7 +411,7 @@
 				980DB7992733D391006ED3BE /* TYPageViewConst.swift in Sources */,
 				980DB7C527355876006ED3BE /* ScholarshipsDetailController.swift in Sources */,
 				98E09B5A2731121B0020D97D /* ForgetPwdController.swift in Sources */,
-				980DB79027337F7C006ED3BE /* HomeCollectionCell.swift in Sources */,
+				980DB79027337F7C006ED3BE /* ScholarDetailsCollectionCell.swift in Sources */,
 				98823A3F27295B0100D9A7CD /* HomeController.swift in Sources */,
 				980DB7AF2734F677006ED3BE /* LYCommon.swift in Sources */,
 				984BDBA8272C1D2400F6144B /* TableViewCell.swift in Sources */,

@@ -86,7 +86,7 @@ class ScholarshipsController: UIViewController {
         let ourCollectionView : UICollectionView = UICollectionView(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: IPhone_SCREEN_HEIGHT), collectionViewLayout: layout)
         ourCollectionView.delegate = self
         ourCollectionView.dataSource = self
-        ourCollectionView.register(HomeCollectionCell.classForCoder(), forCellWithReuseIdentifier: homeCollectionCellIdentifier)
+        ourCollectionView.register(ScholarshipsCell.classForCoder(), forCellWithReuseIdentifier: scholarshipsCelldentifier)
         ourCollectionView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
             self.refreshHttpRequest()
         })
@@ -136,7 +136,7 @@ extension  ScholarshipsController : UICollectionViewDelegate,UICollectionViewDat
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: homeCollectionCellIdentifier, for: indexPath) as! HomeCollectionCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: scholarshipsCelldentifier, for: indexPath) as! ScholarshipsCell
         cell.makeConstraints()
         cell.update(scholarshipModel: ScholarshipModel.init())
         return cell

@@ -6,7 +6,7 @@
 //
 
 import UIKit
-let homeCollectionCellIdentifier:String = "HomeCollectionCell"
+let scholarshipsCelldentifier:String = "ScholarshipsCollectionCell"
 
 class HomeLabelAndLabelView: UIView{
     override init(frame: CGRect) {
@@ -51,7 +51,7 @@ class HomeLabelAndLabelView: UIView{
     }()
 }
 
-class HomeCollectionCell: UICollectionViewCell {
+class ScholarshipsCell: UICollectionViewCell {
     
     func makeConstraints(){
         self.contentView.layer.cornerRadius = 5
