@@ -82,7 +82,7 @@ class RegisterController: ViewController {
         DispatchQueue.main.async {
             self.timer.invalidate()
             self.codeBtn?.isEnabled = true
-            self.codeBtn?.setTitle("send", for: .normal)
+            self.codeBtn?.setTitle("Send code", for: .normal)
         }
     }
     
@@ -346,7 +346,7 @@ class RegisterController: ViewController {
                     // 销毁计时器
                     timer.invalidate()
                     self.codeBtn!.isEnabled = true
-                    self.codeBtn!.setTitle("send", for: .normal)
+                    self.codeBtn!.setTitle("Send code", for: .normal)
                     
                   print(">>> Timer has Stopped!")
                 } else {

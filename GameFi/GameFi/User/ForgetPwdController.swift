@@ -26,6 +26,13 @@ class ForgetPwdController: ViewController {
             make.left.equalToSuperview()
             make.right.equalToSuperview()
         }
+        self.noticeLabel!.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(0)
+            make.height.equalTo(45)
+            make.left.equalToSuperview().offset(0)
+            make.right.equalToSuperview()
+        }
+        self.noticeLabel?.isHidden = true
     }
     
     @objc func loginBtnClick(btn:UIButton) {
@@ -36,20 +43,64 @@ class ForgetPwdController: ViewController {
     func stopTimerAndUpdateCodeBtn() {
         self.timer.invalidate()
         self.codeBtn?.isEnabled = true
-        self.codeBtn?.setTitle("send", for: .normal)
+        self.codeBtn?.setTitle("Send code", for: .normal)
+    }
+    
+    func showNoticeLabel(notice:String){
+        DispatchQueue.main.async {
+            self.noticeLabel?.text = notice
+            self.noticeLabel?.isHidden = false
+        }
+    }
+    
+    func hideNoticeLabel(){
+        DispatchQueue.main.async {
+            self.noticeLabel?.isHidden = true
+            self.noticeLabel?.text = ""
+        }
+    }
+    
+    func valifyEmail() -> Bool {
+        if self.emailTextField!.validateEmail(){
+            self.hideNoticeLabel()
+            return false
+        }else {
+            self.showNoticeLabel(notice: "Your email format is incorrect")
+            return false
+        }
+    }
+    
+    func valifyPassword() -> Bool {
+        if self.passwordTextField!.validatePassword() {
+            self.hideNoticeLabel()
+            return true
+        }else{
+            self.showNoticeLabel(notice: "Your password format is incorrect")
+            return false
+        }
+    }
+    
+    func valifyCode() -> Bool {
+        if self.codeTextField!.text == nil || ((self.codeTextField?.text?.isBlank) != nil){
+            self.showNoticeLabel(notice: "Your code format is incorrect")
+            return false
+        }else{
+            self.hideNoticeLabel()
+            return true
+        }
     }
     
     @objc func codeBtnClick(btn:UIButton) {
         self.emailTextField?.resignFirstResponder()
         self.passwordTextField?.resignFirstResponder()
         self.codeTextField?.resignFirstResponder()
-        //先本地校验
-        let textField : UITextField? = self.emailTextField
-        let temp = textField!.validateEmail()
-        
-        
-        let temp3 = self.passwordTextField!.validatePassword()
-        
+        ///先本地校验
+        if !self.valifyEmail() {
+            return
+        }
+        if !self.valifyPassword() {
+            return
+        }
         //本地验证通过
         //按钮先不可用
         DispatchQueue.main.async {
@@ -80,23 +131,14 @@ class ForgetPwdController: ViewController {
         self.passwordTextField?.resignFirstResponder()
         self.codeTextField?.resignFirstResponder()
         //先本地校验
-        let textField : UITextField? = self.emailTextField
-        let temp = textField!.validateEmail()
-        
-
- 
-        let temp1 = self.passwordTextField!.validatePassword()
-        
-        
-        var temp4 = ""
-        if self.codeTextField!.text == nil {
-            temp4 = ""
-        }else{
-            temp4 = codeTextField!.text!
+        //先本地校验
+        if !self.valifyEmail() {
+            return
         }
-        
-        if (temp4.isBlank) {
-            DispatchQueue.main.async {SCLAlertView.init().showError("title", subTitle: "code is blank")}
+        if !self.valifyPassword() {
+            return
+        }
+        if !self.valifyCode() {
             return
         }
         
@@ -148,7 +190,7 @@ class ForgetPwdController: ViewController {
     lazy var tableView: UITableView? = {
         let tempTableView = UITableView.init(frame: CGRect.zero, style: .plain)
         tempTableView.backgroundColor = self.view.backgroundColor
-        let headerView = RegisterHeadView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 100))
+        let headerView = RegisterHeadView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 80))
         headerView.loginBtn.addTarget(self, action: #selector(loginBtnClick), for: .touchUpInside)
         headerView.welcomeLabel?.text = "Forget password?"
         tempTableView.tableHeaderView = headerView
@@ -175,7 +217,7 @@ class ForgetPwdController: ViewController {
                     // 销毁计时器
                     timer.invalidate()
                     self.codeBtn!.isEnabled = true
-                    self.codeBtn!.setTitle("send", for: .normal)
+                    self.codeBtn!.setTitle("Send code", for: .normal)
                     
                   print(">>> Timer has Stopped!")
                 } else {
@@ -191,6 +233,16 @@ class ForgetPwdController: ViewController {
         // 添加到当前 RunLoop，mode为默认。
         RunLoop.current.add(countdownTimer, forMode: .default)
         return countdownTimer
+    }()
+    lazy var noticeLabel: UILabel? = {
+        let tempLabel = UILabel.init(frame: CGRect.zero)
+        tempLabel.backgroundColor = UIColor(red: 0.96, green: 0.3, blue: 0.3, alpha: 1)
+        tempLabel.font = UIFont(name: "Avenir Next Medium", size: 15)
+        tempLabel.textColor = .white
+        tempLabel.textAlignment = .center
+        tempLabel.numberOfLines = 0
+        view.addSubview(tempLabel)
+        return tempLabel
     }()
 }
 
@@ -213,12 +265,12 @@ extension  ForgetPwdController : UITableViewDelegate,UITableViewDataSource,UITex
     }
  
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField.tag == 10001{
-            let temp = textField.validateEmail()
-            
-        }else if textField.tag == 10002{
-            let temp = textField.validatePassword()
-            
+        if textField == self.passwordTextField{
+            self.valifyPassword()
+        }else if textField == self.emailTextField{
+            self.valifyEmail()
+        }else if textField == self.codeTextField{
+            self.valifyCode()
         }
         
     }
@@ -239,7 +291,6 @@ extension  ForgetPwdController : UITableViewDelegate,UITableViewDataSource,UITex
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "0", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.delegate = self
         tempCell.textFild?.keyboardType = .emailAddress
-        tempCell.textFild?.tag = 10001
         self.emailTextField = tempCell.textFild
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter email", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         cell = tempCell
@@ -247,14 +298,12 @@ extension  ForgetPwdController : UITableViewDelegate,UITableViewDataSource,UITex
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "1", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.setupShowPasswordButton()
         tempCell.textFild?.delegate = self
-        tempCell.textFild?.tag = 10002
         self.passwordTextField = tempCell.textFild
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter password", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         cell = tempCell
     case 2:
         let tempCell : ConfirmCodeCell = tableView.dequeueReusableCell(withIdentifier: confirmCodeCellIdentifier, for: indexPath) as! ConfirmCodeCell
         self.codeTextField = tempCell.textFild
-        self.codeTextField?.tag = 10003
         tempCell.textFild?.delegate = self
         tempCell.codeBtn.addTarget(self, action: #selector(codeBtnClick), for: .touchUpInside)
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter code", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
