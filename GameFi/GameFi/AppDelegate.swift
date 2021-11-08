@@ -102,7 +102,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         let v1 = HomeController()
         let v2 = ViewController()
         let v3 = ViewController()
-        let v4 = LoginController()
+        let v4 = ProfileGuestController()
         self.homeVC = v1
         v1.tabBarItem = ESTabBarItem.init(title: "Explore", image: UIImage(named: "explore"), selectedImage: UIImage(named: "explore_select"))
         v2.tabBarItem = ESTabBarItem.init(title: "Accounts", image: UIImage(named: "accounts"), selectedImage: UIImage(named: "accounts_select"))

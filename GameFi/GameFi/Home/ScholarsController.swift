@@ -160,8 +160,8 @@ extension  ScholarsController : UICollectionViewDelegate,UICollectionViewDataSou
                     }
                     self.collectionView.reloadData()
                 }else{
-                    let error : Error = reponse as! Error
-                    SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")
+//                    let error : Error = reponse as! Error
+//                    SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")
                     
                 }
             }
