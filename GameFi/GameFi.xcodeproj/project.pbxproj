@@ -52,6 +52,9 @@
 		986C586E27300B9A0021280A /* LoginHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C586D27300B9A0021280A /* LoginHeadView.swift */; };
 		986C587027300BEB0021280A /* LoginFootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C586F27300BEB0021280A /* LoginFootView.swift */; };
 		987694272738ED150075CA0F /* ScholarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987694262738ED150075CA0F /* ScholarModel.swift */; };
+		987694292738F1440075CA0F /* ScholarDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987694282738F1440075CA0F /* ScholarDetailController.swift */; };
+		9876942B2738F22C0075CA0F /* ScholarDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9876942A2738F22C0075CA0F /* ScholarDetailModel.swift */; };
+		9876942D2738F2950075CA0F /* ScholarDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9876942C2738F2950075CA0F /* ScholarDetailHeaderView.swift */; };
 		98823A3F27295B0100D9A7CD /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98823A3E27295B0100D9A7CD /* HomeController.swift */; };
 		98823A412729674500D9A7CD /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98823A402729674500D9A7CD /* Define.swift */; };
 		98E09B5A2731121B0020D97D /* ForgetPwdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E09B592731121B0020D97D /* ForgetPwdController.swift */; };
@@ -104,6 +107,9 @@
 		986C586D27300B9A0021280A /* LoginHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeadView.swift; sourceTree = "<group>"; };
 		986C586F27300BEB0021280A /* LoginFootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFootView.swift; sourceTree = "<group>"; };
 		987694262738ED150075CA0F /* ScholarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarModel.swift; sourceTree = "<group>"; };
+		987694282738F1440075CA0F /* ScholarDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarDetailController.swift; sourceTree = "<group>"; };
+		9876942A2738F22C0075CA0F /* ScholarDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarDetailModel.swift; sourceTree = "<group>"; };
+		9876942C2738F2950075CA0F /* ScholarDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarDetailHeaderView.swift; sourceTree = "<group>"; };
 		98823A3E27295B0100D9A7CD /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		98823A402729674500D9A7CD /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		98E09B592731121B0020D97D /* ForgetPwdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPwdController.swift; sourceTree = "<group>"; };
@@ -169,6 +175,7 @@
 				980DB79B2733D3F6006ED3BE /* ScholarshipsController.swift */,
 				980DB7C427355876006ED3BE /* ScholarshipsDetailController.swift */,
 				980DB79D2733D486006ED3BE /* ScholarsController.swift */,
+				987694282738F1440075CA0F /* ScholarDetailController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -185,6 +192,7 @@
 				980DB7CC2738E9F6006ED3BE /* ScholarsCell.swift */,
 				980DB7C827356C85006ED3BE /* LabelAndLabelView.swift */,
 				980DB7C627356393006ED3BE /* ScholarshipDetailHeaderView.swift */,
+				9876942C2738F2950075CA0F /* ScholarDetailHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -196,6 +204,7 @@
 				980DB7A22733E6EC006ED3BE /* ScholarshipListModel.swift */,
 				980DB7CA273571E0006ED3BE /* ScholarshipDetailModel.swift */,
 				987694262738ED150075CA0F /* ScholarModel.swift */,
+				9876942A2738F22C0075CA0F /* ScholarDetailModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -404,7 +413,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9876942D2738F2950075CA0F /* ScholarDetailHeaderView.swift in Sources */,
 				980DB7A12733E05C006ED3BE /* ScholarshipModel.swift in Sources */,
+				9876942B2738F22C0075CA0F /* ScholarDetailModel.swift in Sources */,
 				984BDBAC272E494600F6144B /* LoginController.swift in Sources */,
 				980A7DC22728135B006AE4C4 /* GFNavController.swift in Sources */,
 				98823A412729674500D9A7CD /* Define.swift in Sources */,
@@ -436,6 +447,7 @@
 				980DB79A2733D391006ED3BE /* UIView+FastKit.swift in Sources */,
 				980DB7A72733F19E006ED3BE /* BaseModel.swift in Sources */,
 				984BDBA6272C1C3800F6144B /* ConfirmCodeCell.swift in Sources */,
+				987694292738F1440075CA0F /* ScholarDetailController.swift in Sources */,
 				980DB7A52733F158006ED3BE /* JsonUtil.swift in Sources */,
 				984BDBA2272BEF1D00F6144B /* LabelTFTipModel.swift in Sources */,
 				986C587027300BEB0021280A /* LoginFootView.swift in Sources */,

@@ -36,12 +36,6 @@ class ScholarsController: UIViewController {
             make.width.equalTo(SCREEN_WIDTH)
             make.right.equalToSuperview()
         }
-        self.addScholarshipBtn.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-15)
-            make.height.equalTo(50)
-            make.width.equalTo(50)
-            make.bottom.equalToSuperview().offset(-20)
-        }
         self.collectionView.mj_header?.beginRefreshing()
     }
 
@@ -99,20 +93,6 @@ class ScholarsController: UIViewController {
         self.view.addSubview(ourCollectionView)
         return ourCollectionView
     }()
-    
-    lazy var addScholarshipBtn: UIButton = {
-        let tempBtn = UIButton.init()
-        tempBtn.backgroundColor = UIColor(red: 0.27, green: 0.3, blue: 0.45, alpha: 1)
-        tempBtn.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).cgColor
-        tempBtn.layer.shadowOffset = CGSize(width: 0, height: 1)
-        tempBtn.layer.shadowOpacity = 1
-        tempBtn.layer.shadowRadius = 5
-        tempBtn.layer.cornerRadius = 25
-        tempBtn.setImage(UIImage.init(named: "add"), for: .normal)
-        tempBtn.setImage(UIImage.init(named: "add"), for: .highlighted)
-        self.view.addSubview(tempBtn)
-        return tempBtn
-    }()
 }
 
 extension  ScholarsController : UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
@@ -144,8 +124,8 @@ extension  ScholarsController : UICollectionViewDelegate,UICollectionViewDataSou
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let appdelegate : AppDelegate = UIApplication.shared.delegate! as! AppDelegate
-        let scholarshipDetailVC = ScholarshipsDetailController.init(scholarshipId: 123)
-        appdelegate.homeVC?.navigationController!.pushViewController(scholarshipDetailVC, animated: true)
+        let scholarDetailController = ScholarDetailController.init(scholarId: 123)
+        appdelegate.homeVC?.navigationController!.pushViewController(scholarDetailController, animated: true)
     }
 
     //#MARK: --请求
