@@ -15,7 +15,7 @@
 		980A7DCA27292034006AE4C4 /* GFResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980A7DC927292034006AE4C4 /* GFResult.swift */; };
 		980DB7892732615E006ED3BE /* SubmitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB7882732615E006ED3BE /* SubmitView.swift */; };
 		980DB78C27337D6F006ED3BE /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB78B27337D6F006ED3BE /* CollectionViewCell.swift */; };
-		980DB79027337F7C006ED3BE /* ScholarDetailsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB78F27337F7C006ED3BE /* ScholarDetailsCollectionCell.swift */; };
+		980DB79027337F7C006ED3BE /* ScholarShipsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB78F27337F7C006ED3BE /* ScholarShipsCell.swift */; };
 		980DB7962733D391006ED3BE /* TYPageTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB7912733D391006ED3BE /* TYPageTitleView.swift */; };
 		980DB7972733D391006ED3BE /* TYPageStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB7922733D391006ED3BE /* TYPageStyle.swift */; };
 		980DB7982733D391006ED3BE /* TYPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB7932733D391006ED3BE /* TYPageView.swift */; };
@@ -34,6 +34,7 @@
 		980DB7C727356393006ED3BE /* ScholarshipDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB7C627356393006ED3BE /* ScholarshipDetailHeaderView.swift */; };
 		980DB7C927356C85006ED3BE /* LabelAndLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB7C827356C85006ED3BE /* LabelAndLabelView.swift */; };
 		980DB7CB273571E0006ED3BE /* ScholarshipDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB7CA273571E0006ED3BE /* ScholarshipDetailModel.swift */; };
+		980DB7CD2738E9F6006ED3BE /* ScholarsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980DB7CC2738E9F6006ED3BE /* ScholarsCell.swift */; };
 		9811EA172726BB2700B0ACF0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9811EA162726BB2700B0ACF0 /* AppDelegate.swift */; };
 		9811EA1B2726BB2700B0ACF0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9811EA1A2726BB2700B0ACF0 /* ViewController.swift */; };
 		9811EA202726BB2800B0ACF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9811EA1F2726BB2800B0ACF0 /* Assets.xcassets */; };
@@ -50,6 +51,7 @@
 		984BDBAC272E494600F6144B /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984BDBAB272E494600F6144B /* LoginController.swift */; };
 		986C586E27300B9A0021280A /* LoginHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C586D27300B9A0021280A /* LoginHeadView.swift */; };
 		986C587027300BEB0021280A /* LoginFootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C586F27300BEB0021280A /* LoginFootView.swift */; };
+		987694272738ED150075CA0F /* ScholarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987694262738ED150075CA0F /* ScholarModel.swift */; };
 		98823A3F27295B0100D9A7CD /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98823A3E27295B0100D9A7CD /* HomeController.swift */; };
 		98823A412729674500D9A7CD /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98823A402729674500D9A7CD /* Define.swift */; };
 		98E09B5A2731121B0020D97D /* ForgetPwdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E09B592731121B0020D97D /* ForgetPwdController.swift */; };
@@ -63,7 +65,7 @@
 		980A7DC927292034006AE4C4 /* GFResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFResult.swift; sourceTree = "<group>"; };
 		980DB7882732615E006ED3BE /* SubmitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitView.swift; sourceTree = "<group>"; };
 		980DB78B27337D6F006ED3BE /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
-		980DB78F27337F7C006ED3BE /* ScholarDetailsCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarDetailsCollectionCell.swift; sourceTree = "<group>"; };
+		980DB78F27337F7C006ED3BE /* ScholarShipsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarShipsCell.swift; sourceTree = "<group>"; };
 		980DB7912733D391006ED3BE /* TYPageTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TYPageTitleView.swift; sourceTree = "<group>"; };
 		980DB7922733D391006ED3BE /* TYPageStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TYPageStyle.swift; sourceTree = "<group>"; };
 		980DB7932733D391006ED3BE /* TYPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TYPageView.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 		980DB7C627356393006ED3BE /* ScholarshipDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarshipDetailHeaderView.swift; sourceTree = "<group>"; };
 		980DB7C827356C85006ED3BE /* LabelAndLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelAndLabelView.swift; sourceTree = "<group>"; };
 		980DB7CA273571E0006ED3BE /* ScholarshipDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarshipDetailModel.swift; sourceTree = "<group>"; };
+		980DB7CC2738E9F6006ED3BE /* ScholarsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarsCell.swift; sourceTree = "<group>"; };
 		9811EA132726BB2700B0ACF0 /* GameFi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameFi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9811EA162726BB2700B0ACF0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9811EA1A2726BB2700B0ACF0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -100,6 +103,7 @@
 		984BDBAB272E494600F6144B /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		986C586D27300B9A0021280A /* LoginHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeadView.swift; sourceTree = "<group>"; };
 		986C586F27300BEB0021280A /* LoginFootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFootView.swift; sourceTree = "<group>"; };
+		987694262738ED150075CA0F /* ScholarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarModel.swift; sourceTree = "<group>"; };
 		98823A3E27295B0100D9A7CD /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		98823A402729674500D9A7CD /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		98E09B592731121B0020D97D /* ForgetPwdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPwdController.swift; sourceTree = "<group>"; };
@@ -177,7 +181,8 @@
 				980DB7932733D391006ED3BE /* TYPageView.swift */,
 				980DB7942733D391006ED3BE /* TYPageViewConst.swift */,
 				980DB7952733D391006ED3BE /* UIView+FastKit.swift */,
-				980DB78F27337F7C006ED3BE /* ScholarDetailsCollectionCell.swift */,
+				980DB78F27337F7C006ED3BE /* ScholarShipsCell.swift */,
+				980DB7CC2738E9F6006ED3BE /* ScholarsCell.swift */,
 				980DB7C827356C85006ED3BE /* LabelAndLabelView.swift */,
 				980DB7C627356393006ED3BE /* ScholarshipDetailHeaderView.swift */,
 			);
@@ -190,6 +195,7 @@
 				980DB7A02733E05C006ED3BE /* ScholarshipModel.swift */,
 				980DB7A22733E6EC006ED3BE /* ScholarshipListModel.swift */,
 				980DB7CA273571E0006ED3BE /* ScholarshipDetailModel.swift */,
+				987694262738ED150075CA0F /* ScholarModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -404,6 +410,7 @@
 				98823A412729674500D9A7CD /* Define.swift in Sources */,
 				980DB7A32733E6EC006ED3BE /* ScholarshipListModel.swift in Sources */,
 				980A7DC4272828FD006AE4C4 /* DataManager.swift in Sources */,
+				980DB7CD2738E9F6006ED3BE /* ScholarsCell.swift in Sources */,
 				980DB78C27337D6F006ED3BE /* CollectionViewCell.swift in Sources */,
 				984BDB9D272BCDEF00F6144B /* EmptyTableViewCell.swift in Sources */,
 				980DB7972733D391006ED3BE /* TYPageStyle.swift in Sources */,
@@ -411,7 +418,7 @@
 				980DB7992733D391006ED3BE /* TYPageViewConst.swift in Sources */,
 				980DB7C527355876006ED3BE /* ScholarshipsDetailController.swift in Sources */,
 				98E09B5A2731121B0020D97D /* ForgetPwdController.swift in Sources */,
-				980DB79027337F7C006ED3BE /* ScholarDetailsCollectionCell.swift in Sources */,
+				980DB79027337F7C006ED3BE /* ScholarShipsCell.swift in Sources */,
 				98823A3F27295B0100D9A7CD /* HomeController.swift in Sources */,
 				980DB7AF2734F677006ED3BE /* LYCommon.swift in Sources */,
 				984BDBA8272C1D2400F6144B /* TableViewCell.swift in Sources */,
@@ -435,6 +442,7 @@
 				980DB7982733D391006ED3BE /* TYPageView.swift in Sources */,
 				980DB7962733D391006ED3BE /* TYPageTitleView.swift in Sources */,
 				980DB79E2733D486006ED3BE /* ScholarsController.swift in Sources */,
+				987694272738ED150075CA0F /* ScholarModel.swift in Sources */,
 				980DB7CB273571E0006ED3BE /* ScholarshipDetailModel.swift in Sources */,
 				9811EA172726BB2700B0ACF0 /* AppDelegate.swift in Sources */,
 				98E09B5C273129140020D97D /* Usermodel.swift in Sources */,

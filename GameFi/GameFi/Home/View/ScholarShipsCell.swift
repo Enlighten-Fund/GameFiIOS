@@ -14,7 +14,7 @@ class HomeLabelAndLabelView: UIView{
         self.leftLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.left.equalToSuperview().offset(12)
-            make.width.equalTo(40)
+            make.width.equalTo(65)
             make.height.equalTo(20)
         }
         self.rightLabel.snp.makeConstraints { make in

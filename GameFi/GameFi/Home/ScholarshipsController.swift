@@ -142,42 +142,13 @@ extension  ScholarshipsController : UICollectionViewDelegate,UICollectionViewDat
         return cell
     }
 
-//    /**
-//     - returns: 返回headview或者footview
-//     */
-//    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-//        let headView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "headView", forIndexPath: indexPath)
-//        headView.backgroundColor = UIColor.whiteColor()
-//
-//        return headView
-//    }
-
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let appdelegate : AppDelegate = UIApplication.shared.delegate! as! AppDelegate
         let scholarshipDetailVC = ScholarshipsDetailController.init(scholarshipId: 123)
         appdelegate.homeVC?.navigationController!.pushViewController(scholarshipDetailVC, animated: true)
     }
 
-    //#MARK: --UICollectionViewDelegateFlowLayout的代理方法
-    /**
-     - returns: header的大小
-     */
-//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-//        return CGSize(width: width, height: 17)
-//    }
-    /**
-     Description:可以定制不同的item
-
-     - returns: item的大小
-//     */
-//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-//        if  indexPath.row % 2 == 1{
-//            return CGSize(width: width/2, height: height/3)
-//        }
-//        else{
-//            return CGSize(width: width/2, height: height/2)
-//        }
-//    }
+    //#MARK: --请求
     func refreshHttpRequest() {
         pageIndex = 1
         self.requestListData()
