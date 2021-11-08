@@ -55,6 +55,7 @@
 		987694292738F1440075CA0F /* ScholarDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987694282738F1440075CA0F /* ScholarDetailController.swift */; };
 		9876942B2738F22C0075CA0F /* ScholarDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9876942A2738F22C0075CA0F /* ScholarDetailModel.swift */; };
 		9876942D2738F2950075CA0F /* ScholarDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9876942C2738F2950075CA0F /* ScholarDetailHeaderView.swift */; };
+		9876942F2738FD500075CA0F /* ScholarDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9876942E2738FD500075CA0F /* ScholarDetailCell.swift */; };
 		98823A3F27295B0100D9A7CD /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98823A3E27295B0100D9A7CD /* HomeController.swift */; };
 		98823A412729674500D9A7CD /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98823A402729674500D9A7CD /* Define.swift */; };
 		98E09B5A2731121B0020D97D /* ForgetPwdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E09B592731121B0020D97D /* ForgetPwdController.swift */; };
@@ -110,6 +111,7 @@
 		987694282738F1440075CA0F /* ScholarDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarDetailController.swift; sourceTree = "<group>"; };
 		9876942A2738F22C0075CA0F /* ScholarDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarDetailModel.swift; sourceTree = "<group>"; };
 		9876942C2738F2950075CA0F /* ScholarDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarDetailHeaderView.swift; sourceTree = "<group>"; };
+		9876942E2738FD500075CA0F /* ScholarDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarDetailCell.swift; sourceTree = "<group>"; };
 		98823A3E27295B0100D9A7CD /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		98823A402729674500D9A7CD /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		98E09B592731121B0020D97D /* ForgetPwdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPwdController.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				980DB7C827356C85006ED3BE /* LabelAndLabelView.swift */,
 				980DB7C627356393006ED3BE /* ScholarshipDetailHeaderView.swift */,
 				9876942C2738F2950075CA0F /* ScholarDetailHeaderView.swift */,
+				9876942E2738FD500075CA0F /* ScholarDetailCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -414,6 +417,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9876942D2738F2950075CA0F /* ScholarDetailHeaderView.swift in Sources */,
+				9876942F2738FD500075CA0F /* ScholarDetailCell.swift in Sources */,
 				980DB7A12733E05C006ED3BE /* ScholarshipModel.swift in Sources */,
 				9876942B2738F22C0075CA0F /* ScholarDetailModel.swift in Sources */,
 				984BDBAC272E494600F6144B /* LoginController.swift in Sources */,

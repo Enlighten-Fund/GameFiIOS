@@ -1,9 +1,3 @@
-//
-//  ScholarshipsDetailController.swift
-//  GameFi
-//
-//  Created by harden on 2021/11/5.
-//
 
 //
 //  File.swift
@@ -19,7 +13,7 @@ import SCLAlertView
 import MJRefresh
 
 class ScholarDetailController: ViewController {
-    var scholarDetailModel : ScholarshipDetailModel?
+    var scholarDetailModel : ScholarDetailModel?
     var scholarId : Int?
     init(scholarId : Int) {
         super.init(nibName: nil, bundle: nil)
@@ -48,10 +42,19 @@ class ScholarDetailController: ViewController {
             DispatchQueue.main.async { [self] in
                 self.tableView!.mj_header?.endRefreshing()
                 if result.success!{
-                    let tempModel : ScholarshipDetailModel = reponse as! ScholarshipDetailModel
+//                    let tempModel : ScholarDetailModel = reponse as! ScholarDetailModel
+                    //测试
+                    let tempModel : ScholarDetailModel = ScholarDetailModel.init()
+                    tempModel.selfintroduction = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sed turpis sed velit pulvinar suscipit. In placerat, lectus eu luctus cursus, nisl magna molestie tellus, sed congue mauris leo non felis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras sit amet risus at est interdum aliquet. ectus eu luctus cursus, nisl magna molestie tellus, sed congue mauris leo non felis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras sit amet risus at est interdum aliquet. "
+                    tempModel.gamepalybefore = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sed turpis sed velit pulvinar suscipit. In placerat, lectus eu luctus cursus, nisl magna molestie tellus, sed congue mauris leo non felis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras sit amet risus at est interdum aliquet. ectus eu luctus cursus, nisl magna molestie tellus, sed congue mauris leo non felis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras sit amet risus at est interdum aliquet. "
                     self.scholarDetailModel = tempModel
                     self.tableView!.reloadData()
                 }else{
+                    let tempModel : ScholarDetailModel = ScholarDetailModel.init()
+                    tempModel.selfintroduction = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sed turpis sed velit pulvinar suscipit. In placerat, lectus eu luctus cursus, nisl magna molestie tellus, sed congue mauris leo non felis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras sit amet risus at est interdum aliquet. ectus eu luctus cursus, nisl magna molestie tellus, sed congue mauris leo non felis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras sit amet risus at est interdum aliquet. "
+                    tempModel.gamepalybefore = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sed turpis sed velit pulvinar suscipit. In placerat, lectus eu luctus cursus, nisl magna molestie tellus, sed congue mauris leo non felis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras sit amet risus at est interdum aliquet. ectus eu luctus cursus, nisl magna molestie tellus, sed congue mauris leo non felis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras sit amet risus at est interdum aliquet. "
+                    self.scholarDetailModel = tempModel
+                    self.tableView!.reloadData()
                     SCLAlertView.init().showError("系统提示：", subTitle: result.msg!)
                     
                 }
@@ -68,6 +71,7 @@ class ScholarDetailController: ViewController {
         tempTableView.tableHeaderView = headerView
         tempTableView.separatorStyle = .none
         tempTableView.register(EmptyTableViewCell.classForCoder(), forCellReuseIdentifier: emptyTableViewCellIdentifier)
+        tempTableView.register(ScholarDetailCell.classForCoder(), forCellReuseIdentifier: scholarDetailCellIdentifier)
         tempTableView.dataSource = self
         tempTableView.delegate = self
         tempTableView.backgroundColor = self.view.backgroundColor
@@ -84,22 +88,45 @@ class ScholarDetailController: ViewController {
 extension  ScholarDetailController : UITableViewDelegate,UITableViewDataSource{
    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            
+        if self.scholarDetailModel == nil {
+            return 0
+        }
            return 2
     }
         
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 {
+            let font:UIFont! = UIFont(name: "Avenir Next Regular", size: 15)
+            let attributes = [NSAttributedString.Key.font:font]
+            let option = NSStringDrawingOptions.usesLineFragmentOrigin
+            let size = (self.scholarDetailModel?.gamepalybefore!.boundingRect(with: CGSize.init(width: IPhone_SCREEN_WIDTH - 30, height: 10000),options: option,attributes: attributes as [NSAttributedString.Key : Any],context: nil))!
+            return size.height + 50 + 2
+        }else if indexPath.row == 1{
+            let font:UIFont! = UIFont(name: "Avenir Next Regular", size: 15)
+            let attributes = [NSAttributedString.Key.font:font]
+            let option = NSStringDrawingOptions.usesLineFragmentOrigin
+            let size = (self.scholarDetailModel?.selfintroduction!.boundingRect(with: CGSize.init(width: IPhone_SCREEN_WIDTH - 30, height: 10000),options: option,attributes: attributes as [NSAttributedString.Key : Any],context: nil))!
+            return size.height + 50 + 2
+        }
         return 0.01
     }
         
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     var cell : UITableViewCell
     switch indexPath.row {
+    case 0:
+        cell = tableView.dequeueReusableCell(withIdentifier: scholarDetailCellIdentifier, for: indexPath)
+        let tempcell :ScholarDetailCell  = cell as! ScholarDetailCell
+        tempcell.update(title: "Games played before", content: (self.scholarDetailModel?.gamepalybefore)!)
+    case 1:
+        cell = tableView.dequeueReusableCell(withIdentifier: scholarDetailCellIdentifier, for: indexPath) as! ScholarDetailCell
+        let tempcell :ScholarDetailCell  = cell as! ScholarDetailCell
+        tempcell.update(title: "Self introduction", content: (self.scholarDetailModel?.selfintroduction)!)
     default:
         cell = tableView.dequeueReusableCell(withIdentifier: emptyTableViewCellIdentifier, for: indexPath)
     }
     cell.contentView.backgroundColor = self.view.backgroundColor
-       return cell
+    return cell
    }
 }
 
