@@ -28,8 +28,8 @@ class HomeController: UIViewController {
     }
     
     lazy var msgBtn : UIButton? = {
-        let tempBtn = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: 20, height: 20))
-        tempBtn.setImage(UIImage.init(named: "message"), for: .normal)
+        let tempBtn = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: 30, height: 30))
+        tempBtn.setImage(UIImage.init(named: "msg"), for: .normal)
         tempBtn.addTarget(self, action: #selector(msgBtnClick), for: .touchUpInside)
        return tempBtn
     }()
