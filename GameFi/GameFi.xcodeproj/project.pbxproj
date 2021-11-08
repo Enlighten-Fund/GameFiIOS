@@ -259,8 +259,8 @@
 			children = (
 				984BDBA0272BEEF000F6144B /* Model */,
 				984BDB9F272BEEDD00F6144B /* View */,
-				984BDB94272ACD0A00F6144B /* RegisterController.swift */,
 				984BDBAB272E494600F6144B /* LoginController.swift */,
+				984BDB94272ACD0A00F6144B /* RegisterController.swift */,
 				98E09B592731121B0020D97D /* ForgetPwdController.swift */,
 			);
 			path = User;

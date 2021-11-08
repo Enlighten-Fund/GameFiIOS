@@ -26,8 +26,53 @@ class LoginController: ViewController {
             make.left.equalToSuperview().offset(0)
             make.right.equalToSuperview()
         }
-        
-     
+        self.noticeLabel!.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(0)
+            make.height.equalTo(45)
+            make.left.equalToSuperview().offset(0)
+            make.right.equalToSuperview()
+        }
+        self.noticeLabel?.isHidden = true
+    }
+    
+    
+    func showNoticeLabel(notice:String){
+        DispatchQueue.main.async {
+            self.noticeLabel?.text = notice
+            self.noticeLabel?.isHidden = false
+        }
+    }
+    
+    func hideNoticeLabel(){
+        DispatchQueue.main.async {
+            self.noticeLabel?.isHidden = true
+            self.noticeLabel?.text = ""
+        }
+    }
+    
+    func valifyAccount() -> Bool {
+        var temp = false
+        if self.usernameTextField!.validateUsername() {
+            temp = true
+        }else if self.usernameTextField!.validateEmail(){
+            temp = true
+        }
+        if !temp {
+            self.showNoticeLabel(notice: "Your email or username format is incorrect")
+            return false
+        }
+        self.hideNoticeLabel()
+        return true
+    }
+    
+    func valifyPassword() -> Bool {
+        if self.passwordTextField!.validatePassword() {
+            self.hideNoticeLabel()
+            return true
+        }else{
+            self.showNoticeLabel(notice: "Your password format is incorrect")
+            return false
+        }
     }
     
     @objc func forgetPwdBtnClick() {
@@ -55,14 +100,12 @@ class LoginController: ViewController {
     
     //登录
     @objc func loginBtnClick(){
-        var temp = false
-        if usernameTextField!.validateUsername() {
-            temp = true
-        }else if usernameTextField!.validateEmail(){
-            temp = true
+        if !self.valifyAccount() {
+            return
         }
-        //
-        
+        if !self.valifyPassword() {
+            return
+        }
         self.mc_loading()
         AWSMobileClient.default().signIn(username: (self.usernameTextField?.text)!, password: (self.passwordTextField?.text)!) { (signInResult, error) in
             DispatchQueue.main.async {
@@ -113,6 +156,17 @@ class LoginController: ViewController {
         view.addSubview(tempTableView)
         return tempTableView
     }()
+    
+    lazy var noticeLabel: UILabel? = {
+        let tempLabel = UILabel.init(frame: CGRect.zero)
+        tempLabel.backgroundColor = UIColor(red: 0.96, green: 0.3, blue: 0.3, alpha: 1)
+        tempLabel.font = UIFont(name: "Avenir Next Medium", size: 15)
+        tempLabel.textColor = .white
+        tempLabel.textAlignment = .center
+        tempLabel.numberOfLines = 0
+        view.addSubview(tempLabel)
+        return tempLabel
+    }()
 }
 
 extension  LoginController : UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate{
@@ -132,17 +186,10 @@ extension  LoginController : UITableViewDelegate,UITableViewDataSource,UITextFie
     }
  
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField.tag == 10001{
-            var temp = false
-            if textField.validateUsername() {
-                temp = true
-            }else if textField.validateEmail(){
-                temp = true
-            }
-            //
-        }else if textField.tag == 10002{
-            let temp = textField.validatePassword()
-            //
+        if textField == self.usernameTextField{
+            self.valifyAccount()
+        }else if textField == self.passwordTextField{
+            self.valifyPassword()
         }
         
     }
@@ -163,7 +210,6 @@ extension  LoginController : UITableViewDelegate,UITableViewDataSource,UITextFie
     case 0:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "0", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.delegate = self
-        tempCell.textFild?.tag = 10001
         self.usernameTextField = tempCell.textFild
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter email", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         cell = tempCell
@@ -171,7 +217,6 @@ extension  LoginController : UITableViewDelegate,UITableViewDataSource,UITextFie
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "1", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.setupShowPasswordButton()
         tempCell.textFild?.delegate = self
-        tempCell.textFild?.tag = 10002
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter password", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.passwordTextField = tempCell.textFild
         cell = tempCell
