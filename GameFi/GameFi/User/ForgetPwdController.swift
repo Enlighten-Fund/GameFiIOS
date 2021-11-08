@@ -46,30 +46,10 @@ class ForgetPwdController: ViewController {
         //先本地校验
         let textField : UITextField? = self.emailTextField
         let temp = textField!.validateEmail()
-        var emailNotice = ""
-        if !temp {
-            emailNotice = "Please enter a valid email"
-             self.emailModel.tip = emailNotice
-             self.emailModel.text = textField!.text!
-             let indexPath: IndexPath = IndexPath.init(row: 0, section: 0)
-             DispatchQueue.main.async {
-                 self.tableView!.reloadRows(at: [indexPath], with: .none)
-             }
-             return
-         }
+        
         
         let temp3 = self.passwordTextField!.validatePassword()
-        var passwordNotice = ""
-        if !temp3 {
-            passwordNotice = "Please enter a valid password"
-            self.passwordModel.tip = passwordNotice
-            self.passwordModel.text = self.passwordTextField!.text!
-            let indexPath2: IndexPath = IndexPath.init(row: 2, section: 0)
-            DispatchQueue.main.async {
-                self.tableView!.reloadRows(at: [indexPath2], with: .none)
-            }
-            return
-        }
+        
         //本地验证通过
         //按钮先不可用
         DispatchQueue.main.async {
@@ -102,44 +82,11 @@ class ForgetPwdController: ViewController {
         //先本地校验
         let textField : UITextField? = self.emailTextField
         let temp = textField!.validateEmail()
-        var emailNotice = ""
-        if !temp {
-            emailNotice = "Please enter a valid email"
-             self.emailModel.tip = emailNotice
-             self.emailModel.text = textField!.text!
-             let indexPath: IndexPath = IndexPath.init(row: 0, section: 0)
-             DispatchQueue.main.async {
-                 self.tableView!.reloadRows(at: [indexPath], with: .none)
-             }
-             return
-         }
-        self.emailModel.tip = emailNotice
-        self.emailModel.text = textField!.text!
-        let indexPath: IndexPath = IndexPath.init(row: 0, section: 0)
-        DispatchQueue.main.async {
-            self.tableView!.reloadRows(at: [indexPath], with: .none)
-        }
+        
 
  
         let temp1 = self.passwordTextField!.validatePassword()
-        var passwordNotice = ""
-        if !temp1 {
-            passwordNotice = "Please enter a valid password"
-            self.passwordModel.tip = passwordNotice
-            self.passwordModel.text = self.passwordTextField!.text!
-            let indexPath2: IndexPath = IndexPath.init(row: 1, section: 0)
-            DispatchQueue.main.async {
-                self.tableView!.reloadRows(at: [indexPath2], with: .none)
-            }
-            return
-        }
         
-        self.passwordModel.tip = passwordNotice
-        self.passwordModel.text = self.passwordTextField!.text!
-        let indexPath2: IndexPath = IndexPath.init(row: 1, section: 0)
-        DispatchQueue.main.async {
-            self.tableView!.reloadRows(at: [indexPath2], with: .none)
-        }
         
         var temp4 = ""
         if self.codeTextField!.text == nil {
@@ -220,15 +167,6 @@ class ForgetPwdController: ViewController {
         return tempTableView
     }()
     
-    lazy var emailModel : LabelTFTipModel = {
-        
-        return LabelTFTipModel.init(title: "Email", text: "", tip: "")
-    }()
-    
-    lazy var passwordModel : LabelTFTipModel = {
-        return LabelTFTipModel.init(title: "New Password", text: "", tip: "")
-    }()
-    
     lazy var timer : Timer = {
         var countDownNum = 120
         let countdownTimer = Timer(timeInterval: 1.0, repeats: true) { timer in
@@ -277,30 +215,10 @@ extension  ForgetPwdController : UITableViewDelegate,UITableViewDataSource,UITex
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField.tag == 10001{
             let temp = textField.validateEmail()
-            var emailNotice = ""
-            if !temp {
-               emailNotice = "Please enter a valid email"
-            }
-            self.emailModel.tip = emailNotice
-            self.emailModel.text = textField.text!
-            let indexPath: IndexPath = IndexPath.init(row: 0, section: 0)
-            DispatchQueue.main.async {
-                self.tableView!.reloadRows(at: [indexPath], with: .none)
-            }
+            
         }else if textField.tag == 10002{
             let temp = textField.validatePassword()
-            var passwordNotice = ""
-            if !temp {
-                passwordNotice = "Please enter a valid password"
-            }else{
-                passwordNotice = ""
-            }
-            self.passwordModel.tip = passwordNotice
-            self.passwordModel.text = textField.text!
-            let indexPath: IndexPath = IndexPath.init(row: 1, section: 0)
-            DispatchQueue.main.async {
-                self.tableView!.reloadRows(at: [indexPath], with: .none)
-            }
+            
         }
         
     }
@@ -324,7 +242,6 @@ extension  ForgetPwdController : UITableViewDelegate,UITableViewDataSource,UITex
         tempCell.textFild?.tag = 10001
         self.emailTextField = tempCell.textFild
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "Enter email", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
-        tempCell.update(model: self.emailModel)
         cell = tempCell
     case 1:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "1", for: indexPath) as! LabelTextFildCell
@@ -333,7 +250,6 @@ extension  ForgetPwdController : UITableViewDelegate,UITableViewDataSource,UITex
         tempCell.textFild?.tag = 10002
         self.passwordTextField = tempCell.textFild
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "Enter password", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
-        tempCell.update(model: self.passwordModel)
         cell = tempCell
     case 2:
         let tempCell : ConfirmCodeCell = tableView.dequeueReusableCell(withIdentifier: confirmCodeCellIdentifier, for: indexPath) as! ConfirmCodeCell
@@ -341,7 +257,6 @@ extension  ForgetPwdController : UITableViewDelegate,UITableViewDataSource,UITex
         self.codeTextField?.tag = 10003
         tempCell.textFild?.delegate = self
         tempCell.codeBtn.addTarget(self, action: #selector(codeBtnClick), for: .touchUpInside)
-        tempCell.tipLabel.isHidden = true
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "Enter code", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         cell = tempCell
     default:

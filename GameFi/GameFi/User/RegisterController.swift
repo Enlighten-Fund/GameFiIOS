@@ -88,41 +88,11 @@ class RegisterController: ViewController {
         //先本地校验
         let textField : UITextField? = self.emailTextField
         let temp = textField!.validateEmail()
-        var emailNotice = ""
-        if !temp {
-            emailNotice = "Please enter a valid email"
-             self.emailModel.tip = emailNotice
-             self.emailModel.text = textField!.text!
-             let indexPath: IndexPath = IndexPath.init(row: 0, section: 0)
-             DispatchQueue.main.async {
-                 self.tableView!.reloadRows(at: [indexPath], with: .none)
-             }
-             return
-         }
+        
         let temp2 = self.usernameTextField!.validateUsername()
-        var usernameNotice = ""
-        if !temp2 {
-            usernameNotice = "Please enter a valid username"
-            self.usernameModel.tip = usernameNotice
-            self.usernameModel.text = self.usernameTextField!.text!
-            let indexPath: IndexPath = IndexPath.init(row: 1, section: 0)
-            DispatchQueue.main.async {
-                self.tableView!.reloadRows(at: [indexPath], with: .none)
-            }
-            return
-        }
+        
         let temp3 = self.passwordTextField!.validatePassword()
-        var passwordNotice = ""
-        if !temp3 {
-            passwordNotice = "Please enter a valid password"
-            self.passwordModel.tip = passwordNotice
-            self.passwordModel.text = self.passwordTextField!.text!
-            let indexPath2: IndexPath = IndexPath.init(row: 2, section: 0)
-            DispatchQueue.main.async {
-                self.tableView!.reloadRows(at: [indexPath2], with: .none)
-            }
-            return
-        }
+        
         //本地验证通过
         //按钮先不可用
         DispatchQueue.main.async {
@@ -178,60 +148,12 @@ class RegisterController: ViewController {
         //先本地校验
         let textField : UITextField? = self.emailTextField
         let temp = textField!.validateEmail()
-        var emailNotice = ""
-        if !temp {
-            emailNotice = "Please enter a valid email"
-             self.emailModel.tip = emailNotice
-             self.emailModel.text = textField!.text!
-             let indexPath: IndexPath = IndexPath.init(row: 0, section: 0)
-             DispatchQueue.main.async {
-                 self.tableView!.reloadRows(at: [indexPath], with: .none)
-             }
-             return
-         }
-        self.emailModel.tip = emailNotice
-        self.emailModel.text = textField!.text!
-        let indexPath: IndexPath = IndexPath.init(row: 0, section: 0)
-        DispatchQueue.main.async {
-            self.tableView!.reloadRows(at: [indexPath], with: .none)
-        }
+        
         
         let temp2 = self.usernameTextField!.validateUsername()
-        var usernameNotice = ""
-        if !temp2 {
-            usernameNotice = "Please enter a valid username"
-            self.usernameModel.tip = usernameNotice
-            self.usernameModel.text = self.usernameTextField!.text!
-            let indexPath: IndexPath = IndexPath.init(row: 1, section: 0)
-            DispatchQueue.main.async {
-                self.tableView!.reloadRows(at: [indexPath], with: .none)
-            }
-            return
-        }
-        self.usernameModel.tip = usernameNotice
-        self.usernameModel.text = self.usernameTextField!.text!
-        let indexPath1: IndexPath = IndexPath.init(row: 1, section: 0)
-        DispatchQueue.main.async {
-            self.tableView!.reloadRows(at: [indexPath1], with: .none)
-        }
+        
         let temp3 = self.passwordTextField!.validatePassword()
-        var passwordNotice = ""
-        if !temp3 {
-            passwordNotice = "Please enter a valid password"
-            self.passwordModel.tip = passwordNotice
-            self.passwordModel.text = self.passwordTextField!.text!
-            let indexPath2: IndexPath = IndexPath.init(row: 2, section: 0)
-            DispatchQueue.main.async {
-                self.tableView!.reloadRows(at: [indexPath2], with: .none)
-            }
-            return
-        }
-        self.passwordModel.tip = passwordNotice
-        self.passwordModel.text = self.passwordTextField!.text!
-        let indexPath2: IndexPath = IndexPath.init(row: 2, section: 0)
-        DispatchQueue.main.async {
-            self.tableView!.reloadRows(at: [indexPath2], with: .none)
-        }
+        
         
         var temp4 = ""
         if self.codeTextField!.text == nil {
@@ -360,19 +282,6 @@ class RegisterController: ViewController {
         return tempTableView
     }()
     
-    lazy var emailModel : LabelTFTipModel = {
-        
-        return LabelTFTipModel.init(title: "Email", text: "", tip: "")
-    }()
-    
-    lazy var usernameModel : LabelTFTipModel = {
-        return LabelTFTipModel.init(title: "Username", text: "", tip: "")
-    }()
-    
-    lazy var passwordModel : LabelTFTipModel = {
-        return LabelTFTipModel.init(title: "Password", text: "", tip: "")
-    }()
-    
     lazy var timer : Timer = {
         var countDownNum = 120
         let countdownTimer = Timer(timeInterval: 1.0, repeats: true) { timer in
@@ -417,42 +326,13 @@ extension  RegisterController : UITableViewDelegate,UITableViewDataSource,UIText
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField.tag == 10001{
             let temp = textField.validateEmail()
-            var emailNotice = ""
-            if !temp {
-               emailNotice = "Please enter a valid email"
-            }
-            self.emailModel.tip = emailNotice
-            self.emailModel.text = textField.text!
-            let indexPath: IndexPath = IndexPath.init(row: 0, section: 0)
-            DispatchQueue.main.async {
-                self.tableView!.reloadRows(at: [indexPath], with: .none)
-            }
+            
         }else if textField.tag == 10002{
             let temp = textField.validateUsername()
-            var usernameNotice = ""
-            if !temp {
-                usernameNotice = "Please enter a valid username"
-            }
-            self.usernameModel.tip = usernameNotice
-            self.usernameModel.text = textField.text!
-            let indexPath: IndexPath = IndexPath.init(row: 1, section: 0)
-            DispatchQueue.main.async {
-                self.tableView!.reloadRows(at: [indexPath], with: .none)
-            }
+            
         }else if textField.tag == 10003{
             let temp = textField.validatePassword()
-            var passwordNotice = ""
-            if !temp {
-                passwordNotice = "Please enter a valid password"
-            }else{
-                passwordNotice = ""
-            }
-            self.passwordModel.tip = passwordNotice
-            self.passwordModel.text = textField.text!
-            let indexPath: IndexPath = IndexPath.init(row: 2, section: 0)
-            DispatchQueue.main.async {
-                self.tableView!.reloadRows(at: [indexPath], with: .none)
-            }
+           
         }
         
     }
@@ -476,7 +356,7 @@ extension  RegisterController : UITableViewDelegate,UITableViewDataSource,UIText
         tempCell.textFild?.tag = 10001
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "Enter email", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.emailTextField = tempCell.textFild
-        tempCell.update(model: self.emailModel)
+
         cell = tempCell
     case 1:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "1", for: indexPath) as! LabelTextFildCell
@@ -484,7 +364,7 @@ extension  RegisterController : UITableViewDelegate,UITableViewDataSource,UIText
         tempCell.textFild?.tag = 10002
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "Enter username", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.usernameTextField = tempCell.textFild
-        tempCell.update(model: self.usernameModel)
+
         cell = tempCell
     case 2:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "2", for: indexPath) as! LabelTextFildCell
@@ -493,18 +373,16 @@ extension  RegisterController : UITableViewDelegate,UITableViewDataSource,UIText
         tempCell.textFild?.tag = 10003
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "Enter password", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.passwordTextField = tempCell.textFild
-        tempCell.update(model: self.passwordModel)
+    
         cell = tempCell
     case 3:
         let tempCell : ConfirmCodeCell = tableView.dequeueReusableCell(withIdentifier: confirmCodeCellIdentifier, for: indexPath) as! ConfirmCodeCell
         self.codeTextField = tempCell.textFild
         self.codeTextField?.tag = 10004
         tempCell.textFild?.delegate = self
-        tempCell.tipLabel.isHidden = true
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "Enter code", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.codeBtn = tempCell.codeBtn
         tempCell.codeBtn.addTarget(self, action: #selector(codeBtnClick), for: .touchUpInside)
-        tempCell.titleLabel?.text = "code"
         cell = tempCell
     default:
         cell = tableView.dequeueReusableCell(withIdentifier: emptyTableViewCellIdentifier, for: indexPath)

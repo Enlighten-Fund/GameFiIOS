@@ -43,7 +43,6 @@
 		984BDB99272BA23600F6144B /* RegisterHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984BDB98272BA23600F6144B /* RegisterHeadView.swift */; };
 		984BDB9B272BC6C200F6144B /* LabelTextFildCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984BDB9A272BC6C200F6144B /* LabelTextFildCell.swift */; };
 		984BDB9D272BCDEF00F6144B /* EmptyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984BDB9C272BCDEF00F6144B /* EmptyTableViewCell.swift */; };
-		984BDBA2272BEF1D00F6144B /* LabelTFTipModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984BDBA1272BEF1D00F6144B /* LabelTFTipModel.swift */; };
 		984BDBA4272C0E9300F6144B /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984BDBA3272C0E9300F6144B /* Extension.swift */; };
 		984BDBA6272C1C3800F6144B /* ConfirmCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984BDBA5272C1C3800F6144B /* ConfirmCodeCell.swift */; };
 		984BDBA8272C1D2400F6144B /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984BDBA7272C1D2400F6144B /* TableViewCell.swift */; };
@@ -99,7 +98,6 @@
 		984BDB98272BA23600F6144B /* RegisterHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterHeadView.swift; sourceTree = "<group>"; };
 		984BDB9A272BC6C200F6144B /* LabelTextFildCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTextFildCell.swift; sourceTree = "<group>"; };
 		984BDB9C272BCDEF00F6144B /* EmptyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTableViewCell.swift; sourceTree = "<group>"; };
-		984BDBA1272BEF1D00F6144B /* LabelTFTipModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTFTipModel.swift; sourceTree = "<group>"; };
 		984BDBA3272C0E9300F6144B /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		984BDBA5272C1C3800F6144B /* ConfirmCodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmCodeCell.swift; sourceTree = "<group>"; };
 		984BDBA7272C1D2400F6144B /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
@@ -286,7 +284,6 @@
 		984BDBA0272BEEF000F6144B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				984BDBA1272BEF1D00F6144B /* LabelTFTipModel.swift */,
 				98E09B5B273129140020D97D /* Usermodel.swift */,
 			);
 			path = Model;
@@ -453,7 +450,6 @@
 				984BDBA6272C1C3800F6144B /* ConfirmCodeCell.swift in Sources */,
 				987694292738F1440075CA0F /* ScholarDetailController.swift in Sources */,
 				980DB7A52733F158006ED3BE /* JsonUtil.swift in Sources */,
-				984BDBA2272BEF1D00F6144B /* LabelTFTipModel.swift in Sources */,
 				986C587027300BEB0021280A /* LoginFootView.swift in Sources */,
 				980DB7982733D391006ED3BE /* TYPageView.swift in Sources */,
 				980DB7962733D391006ED3BE /* TYPageTitleView.swift in Sources */,

@@ -61,42 +61,7 @@ class LoginController: ViewController {
         }else if usernameTextField!.validateEmail(){
             temp = true
         }
-        var usernameNotice = ""
-        if !temp {
-            usernameNotice = "Please enter a valid username"
-            self.usernameModel.tip = usernameNotice
-            self.usernameModel.text = self.usernameTextField!.text!
-            let indexPath: IndexPath = IndexPath.init(row: 0, section: 0)
-            DispatchQueue.main.async {
-                self.tableView!.reloadRows(at: [indexPath], with: .none)
-            }
-            return
-        }
-        self.usernameModel.tip = usernameNotice
-        self.usernameModel.text = self.usernameTextField!.text!
-        let indexPath: IndexPath = IndexPath.init(row: 0, section: 0)
-        DispatchQueue.main.async {
-            self.tableView!.reloadRows(at: [indexPath], with: .none)
-        }
-        
-        let temp1 = self.passwordTextField!.validatePassword()
-        var passwordNotice = ""
-        if !temp1 {
-            passwordNotice = "Please enter a valid password"
-            self.passwordModel.tip = passwordNotice
-            self.passwordModel.text = passwordTextField!.text!
-            let indexPath: IndexPath = IndexPath.init(row: 1, section: 0)
-            DispatchQueue.main.async {
-                self.tableView!.reloadRows(at: [indexPath], with: .none)
-            }
-            return
-        }
-        self.passwordModel.tip = passwordNotice
-        self.passwordModel.text = passwordTextField!.text!
-        let indexPath1: IndexPath = IndexPath.init(row: 1, section: 0)
-        DispatchQueue.main.async {
-            self.tableView!.reloadRows(at: [indexPath1], with: .none)
-        }
+        //
         
         self.mc_loading()
         AWSMobileClient.default().signIn(username: (self.usernameTextField?.text)!, password: (self.passwordTextField?.text)!) { (signInResult, error) in
@@ -129,7 +94,7 @@ class LoginController: ViewController {
     lazy var tableView: UITableView? = {
         let tempTableView = UITableView.init(frame: CGRect.zero, style: .plain)
         tempTableView.backgroundColor = .lightGray
-        let headerView = LoginHeadView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 100))
+        let headerView = LoginHeadView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 60))
         tempTableView.tableHeaderView = headerView
         let footView = LoginFootView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 200))
         footView.scholarBtn.isSelected = true
@@ -148,14 +113,6 @@ class LoginController: ViewController {
         tempTableView.backgroundColor = self.view.backgroundColor
         view.addSubview(tempTableView)
         return tempTableView
-    }()
-    
-    lazy var usernameModel : LabelTFTipModel = {
-        return LabelTFTipModel.init(title: "Account", text: "", tip: "")
-    }()
-    
-    lazy var passwordModel : LabelTFTipModel = {
-        return LabelTFTipModel.init(title: "Password", text: "", tip: "")
     }()
 }
 
@@ -183,30 +140,10 @@ extension  LoginController : UITableViewDelegate,UITableViewDataSource,UITextFie
             }else if textField.validateEmail(){
                 temp = true
             }
-            var usernameNotice = ""
-            if !temp {
-                usernameNotice = "Please enter a valid username"
-            }
-            self.usernameModel.tip = usernameNotice
-            self.usernameModel.text = textField.text!
-            let indexPath: IndexPath = IndexPath.init(row: 0, section: 0)
-            DispatchQueue.main.async {
-                self.tableView!.reloadRows(at: [indexPath], with: .none)
-            }
+            //
         }else if textField.tag == 10002{
             let temp = textField.validatePassword()
-            var passwordNotice = ""
-            if !temp {
-                passwordNotice = "Please enter a valid password"
-            }else{
-                passwordNotice = ""
-            }
-            self.passwordModel.tip = passwordNotice
-            self.passwordModel.text = textField.text!
-            let indexPath: IndexPath = IndexPath.init(row: 1, section: 0)
-            DispatchQueue.main.async {
-                self.tableView!.reloadRows(at: [indexPath], with: .none)
-            }
+            //
         }
         
     }
@@ -218,7 +155,7 @@ extension  LoginController : UITableViewDelegate,UITableViewDataSource,UITextFie
     }
         
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-           return 80
+           return 60
     }
         
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -229,17 +166,15 @@ extension  LoginController : UITableViewDelegate,UITableViewDataSource,UITextFie
         tempCell.textFild?.delegate = self
         tempCell.textFild?.tag = 10001
         self.usernameTextField = tempCell.textFild
-        tempCell.textFild?.placeholder = "Please enter 5 to 16 alphanumeric characters or underscores"
-        tempCell.update(model: self.usernameModel)
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "Enter email", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         cell = tempCell
     case 1:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "1", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.setupShowPasswordButton()
         tempCell.textFild?.delegate = self
         tempCell.textFild?.tag = 10002
-        tempCell.textFild?.placeholder = "Please enter a 6-20 digit password with at least two of letters, numbers and symbols"
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "Enter password", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.passwordTextField = tempCell.textFild
-        tempCell.update(model: self.passwordModel)
         cell = tempCell
     default:
         cell = tableView.dequeueReusableCell(withIdentifier: emptyTableViewCellIdentifier, for: indexPath)

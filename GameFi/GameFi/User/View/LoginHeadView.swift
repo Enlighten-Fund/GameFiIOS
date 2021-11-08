@@ -13,9 +13,9 @@ class LoginHeadView: UIView {
         super.init(frame: frame)
         self.welcomeLabel!.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
-            make.height.equalTo(30)
-            make.left.equalToSuperview().offset(20)
-            make.width.equalTo(IPhone_SCREEN_WIDTH - 20)
+            make.height.equalTo(20)
+            make.left.equalToSuperview().offset(15)
+            make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
         }
     }
     
@@ -25,7 +25,9 @@ class LoginHeadView: UIView {
     
     lazy var welcomeLabel : UILabel? = {
         let tempLabel = UILabel.init(frame: CGRect.zero)
+        tempLabel.font = UIFont(name: "Avenir Next Bold", size: 17)
         tempLabel.text = "Welcome!"
+        tempLabel.textColor = .white
         self.addSubview(tempLabel)
         return tempLabel
     }()
