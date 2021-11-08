@@ -14,14 +14,14 @@ class LabelAndLabelView: UIView{
         super.init(frame: frame)
         self.leftLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.left.equalToSuperview().offset(15)
+            make.left.equalToSuperview()
             make.width.equalTo(IPhone_SCREEN_WIDTH / 2.0 - 15)
             make.height.equalTo(35)
         }
         self.rightLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.left.equalTo(self.leftLabel.snp.right).offset(0)
-            make.width.equalTo(IPhone_SCREEN_WIDTH / 2.0 - 15)
+            make.right.equalToSuperview()
             make.height.equalTo(35)
         }
     }

@@ -118,6 +118,7 @@ extension  ScholarshipsController : UICollectionViewDelegate,UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: homeCollectionCellIdentifier, for: indexPath) as! HomeCollectionCell
         cell.makeConstraints()
+        cell.update(scholarshipModel: ScholarshipModel.init())
         return cell
     }
 

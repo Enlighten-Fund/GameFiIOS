@@ -63,7 +63,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
                     Usermodel.shared.gfrole = nil
                 case .signedIn:
                     print("xxxxxxxLinsten--user is signed in.")
-                    self.tabbarVC?.selectedIndex  = 0
+                    DispatchQueue.main.async {
+                        self.tabbarVC?.selectedIndex  = 0
+                    }
+                    
                 case .signedOutUserPoolsTokenInvalid:
                     print("xxxxxxxLinsten--need to login again.")
                     self.tabbarVC?.present(LoginController.init(), animated: true, completion: {

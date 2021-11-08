@@ -31,32 +31,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "560C2908-43E9-46CD-8EA8-15CD780FAFD6"
+            uuid = "2062149F-D1EB-4055-BB30-6BBC040C1D16"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameFi/User/RegisterController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "323"
-            endingLineNumber = "323"
-            landmarkName = "privacy()"
+            startingLineNumber = "256"
+            endingLineNumber = "256"
+            landmarkName = "registerBtnClick()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "870C24FB-7FA6-488C-A3E3-3EBDB9D5A183"
+            uuid = "78486E1A-3F5F-444F-9538-43200D173665"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameFi/User/RegisterController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "327"
-            endingLineNumber = "327"
-            landmarkName = "service()"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
+            landmarkName = "registerBtnClick()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
