@@ -134,8 +134,8 @@ class LYDropListView: UIView,UITableViewDelegate,UITableViewDataSource{
         for i in 0..<totalArry.count{
         
             let tableView = UITableView.init(frame: CGRect.init(x: 0, y: 40, width: screenWidth, height: 0), style: .plain)
-            
-            
+            tableView.separatorStyle = .singleLine
+            tableView.separatorColor = UIColor(red: 0.27, green: 0.3, blue: 0.41, alpha: 1)
             tableView.delegate = self
             tableView.dataSource = self
             tableView.tag = 100+i
@@ -203,7 +203,10 @@ extension LYDropListView{
         let cell = tableView.dequeueReusableCell(withIdentifier: cellid, for: indexPath) as UITableViewCell
         cell.textLabel?.font = UIFont.systemFont(ofSize: 14)
         cell.textLabel?.text = tableArray[tableView.tag - 100][indexPath.row]
-//        cell.textLabel?.textAlignment = .center
+        cell.contentView.backgroundColor = UIColor(red: 0.19, green: 0.21, blue: 0.29, alpha: 1)
+        cell.textLabel?.textColor = .white
+        cell.textLabel?.textAlignment = .center
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
         return cell
     }
 }
