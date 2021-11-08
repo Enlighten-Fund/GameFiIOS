@@ -10,13 +10,12 @@ import UIKit
 import SnapKit
 import SCLAlertView
 import MJRefresh
-import AWSMobileClient
 
-class ProfileGuestController: ViewController {
+class ProfileController: ViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Profile"
+        self.title = "Profile xxx"
         self.headerView!.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(0)
             make.height.equalTo(170)
@@ -33,20 +32,6 @@ class ProfileGuestController: ViewController {
     }
     
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        AWSMobileClient.default().getTokens { [self] tokens, error in
-            if let error = error {
-                print("Error getting token \(error.localizedDescription)")
-            } else if let tokens = tokens {
-                print(tokens.accessToken!.tokenString!)
-                DispatchQueue.main.async {
-                    self.navigationController?.pushViewController(ProfileController.init(), animated: false)
-                }
-            }
-        }
-    }
-    
     
     
     @objc func signBtnClick() {
@@ -56,7 +41,6 @@ class ProfileGuestController: ViewController {
             
         })
     }
-    
     
     lazy var headerView: ProfileGuestHeaderView? = {
         let tempView = ProfileGuestHeaderView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH - 30, height: 170))
@@ -82,7 +66,7 @@ class ProfileGuestController: ViewController {
     
 }
 
-extension  ProfileGuestController : UITableViewDelegate,UITableViewDataSource{
+extension  ProfileController : UITableViewDelegate,UITableViewDataSource{
    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
            return 4

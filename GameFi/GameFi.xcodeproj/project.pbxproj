@@ -57,6 +57,7 @@
 		9876942F2738FD500075CA0F /* ScholarDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9876942E2738FD500075CA0F /* ScholarDetailCell.swift */; };
 		9876943227393CEC0075CA0F /* ProfileGuestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9876943127393CEC0075CA0F /* ProfileGuestController.swift */; };
 		98769435273941890075CA0F /* ProfileGuestHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98769434273941890075CA0F /* ProfileGuestHeaderView.swift */; };
+		987694372739625A0075CA0F /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987694362739625A0075CA0F /* ProfileController.swift */; };
 		98823A3F27295B0100D9A7CD /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98823A3E27295B0100D9A7CD /* HomeController.swift */; };
 		98823A412729674500D9A7CD /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98823A402729674500D9A7CD /* Define.swift */; };
 		98E09B5A2731121B0020D97D /* ForgetPwdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E09B592731121B0020D97D /* ForgetPwdController.swift */; };
@@ -114,6 +115,7 @@
 		9876942E2738FD500075CA0F /* ScholarDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarDetailCell.swift; sourceTree = "<group>"; };
 		9876943127393CEC0075CA0F /* ProfileGuestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileGuestController.swift; sourceTree = "<group>"; };
 		98769434273941890075CA0F /* ProfileGuestHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileGuestHeaderView.swift; sourceTree = "<group>"; };
+		987694362739625A0075CA0F /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		98823A3E27295B0100D9A7CD /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		98823A402729674500D9A7CD /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		98E09B592731121B0020D97D /* ForgetPwdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPwdController.swift; sourceTree = "<group>"; };
@@ -299,6 +301,7 @@
 			children = (
 				987694332739416A0075CA0F /* View */,
 				9876943127393CEC0075CA0F /* ProfileGuestController.swift */,
+				987694362739625A0075CA0F /* ProfileController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -460,6 +463,7 @@
 				980DB7892732615E006ED3BE /* SubmitView.swift in Sources */,
 				9876943227393CEC0075CA0F /* ProfileGuestController.swift in Sources */,
 				980DB79C2733D3F6006ED3BE /* ScholarshipsController.swift in Sources */,
+				987694372739625A0075CA0F /* ProfileController.swift in Sources */,
 				986C586E27300B9A0021280A /* LoginHeadView.swift in Sources */,
 				984BDBAA272C307B00F6144B /* RegisterFootView.swift in Sources */,
 				980DB7C927356C85006ED3BE /* LabelAndLabelView.swift in Sources */,

@@ -19,22 +19,6 @@ class Usermodel {
            // Reset all properties to default value
        }
     
-    var token : String?{
-        get{
-            var temp = ""
-            AWSMobileClient.default().getTokens { tokens, error in
-                if let error = error {
-                    print("Error getting token \(error.localizedDescription)")
-                    temp = ""
-                } else if let tokens = tokens {
-                    print(tokens.accessToken!.tokenString!)
-                    temp = tokens.accessToken!.tokenString!
-                }
-            }
-            return temp
-        }
-    }
-    
     var _gfrole : String?
     var gfrole : String?{
         get{

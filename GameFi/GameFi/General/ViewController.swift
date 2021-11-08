@@ -9,6 +9,7 @@ import UIKit
 import AWSMobileClient
 import SCLAlertView
 
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -43,12 +44,12 @@ class ViewController: UIViewController {
         }
     }
     
-        lazy var msgBtn : UIButton? = {
-            let tempBtn = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: 20, height: 20))
-            tempBtn.setImage(UIImage.init(named: "message"), for: .normal)
-            tempBtn.addTarget(self, action: #selector(msgBtnClick), for: .touchUpInside)
-           return tempBtn
-        }()
+    lazy var msgBtn : UIButton? = {
+        let tempBtn = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: 20, height: 20))
+        tempBtn.setImage(UIImage.init(named: "msg"), for: .normal)
+        tempBtn.addTarget(self, action: #selector(msgBtnClick), for: .touchUpInside)
+       return tempBtn
+    }()
     lazy var leftBtn : UIButton? = {
         let tempBtn = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: 40, height: 40))
         tempBtn.setImage(UIImage.init(named: "arrow_left"), for: .normal)
