@@ -19,10 +19,10 @@ class ScholarshipsController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(red: 0.15, green: 0.16, blue: 0.24, alpha: 1)
         self.collectionView.snp.makeConstraints { make in
-            make.top.equalTo(self.dropListView.snp.bottom)
+            make.top.equalTo(self.dropListView.snp.bottom).offset(15)
             make.bottom.equalToSuperview().offset(0)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
+            make.left.equalToSuperview().offset(15)
+            make.right.equalToSuperview().offset(-15)
         }
         self.sortLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(12)
@@ -58,19 +58,28 @@ class ScholarshipsController: UIViewController {
               print(tag-100,row)
         })
         drop.backgroundColor = UIColor(red: 0.15, green: 0.16, blue: 0.24, alpha: 1)
+        let tline = UIView.init(frame: CGRect.init(x: 0, y: 0, width: screenWidth, height: 0.5))
+        tline.backgroundColor = UIColor(red: 0.27, green: 0.3, blue: 0.41, alpha: 1)
+        drop.addSubview(tline)
+        let bline = UIView.init(frame: CGRect.init(x: 0, y: 43.5, width: screenWidth, height: 0.5))
+        bline.backgroundColor = UIColor(red: 0.27, green: 0.3, blue: 0.41, alpha: 1)
+        drop.addSubview(bline)
         self.view.addSubview(drop)
         return drop
     }()
     
         lazy var collectionView: UICollectionView = {
-                let layout = UICollectionViewFlowLayout()
+            let layout = UICollectionViewFlowLayout()
+            //水平间隔
+            layout.minimumInteritemSpacing = 10
+            //垂直行间距
+            layout.minimumLineSpacing = 10
             layout.scrollDirection = UICollectionView.ScrollDirection.vertical  //滚动方向
-            layout.itemSize = CGSize(width: (IPhone_SCREEN_WIDTH - 30)/2, height: 80)
+            layout.itemSize = CGSize(width: (IPhone_SCREEN_WIDTH - 40)/2, height: 215)
             // 设置CollectionView
             let ourCollectionView : UICollectionView = UICollectionView(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: IPhone_SCREEN_HEIGHT), collectionViewLayout: layout)
             ourCollectionView.delegate = self
             ourCollectionView.dataSource = self
-            ourCollectionView.backgroundColor = UIColor.white
             ourCollectionView.register(HomeCollectionCell.classForCoder(), forCellWithReuseIdentifier: homeCollectionCellIdentifier)
             ourCollectionView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
                 self.refreshHttpRequest()
@@ -79,6 +88,8 @@ class ScholarshipsController: UIViewController {
                 self.loadMoreHttpRequest()
             })
             ourCollectionView.mj_header?.isAutomaticallyChangeAlpha = true
+            ourCollectionView.backgroundColor = self.view.backgroundColor
+            
             self.view.addSubview(ourCollectionView)
             return ourCollectionView
         }()
