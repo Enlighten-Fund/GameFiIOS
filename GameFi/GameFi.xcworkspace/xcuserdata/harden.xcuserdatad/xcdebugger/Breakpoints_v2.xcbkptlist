@@ -38,8 +38,8 @@
             filePath = "GameFi/User/RegisterController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178"
+            startingLineNumber = "220"
+            endingLineNumber = "220"
             landmarkName = "registerBtnClick()"
             landmarkType = "7">
          </BreakpointContent>

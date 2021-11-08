@@ -32,6 +32,13 @@ class RegisterController: ViewController {
             make.left.equalToSuperview()
             make.right.equalToSuperview()
         }
+        self.noticeLabel!.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(0)
+            make.height.equalTo(45)
+            make.left.equalToSuperview().offset(0)
+            make.right.equalToSuperview()
+        }
+        self.noticeLabel?.isHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -79,6 +86,46 @@ class RegisterController: ViewController {
         }
     }
     
+    func valifyEmail() -> Bool {
+        if self.emailTextField!.validateEmail(){
+            self.hideNoticeLabel()
+            return false
+        }else {
+            self.showNoticeLabel(notice: "Your email format is incorrect")
+            return false
+        }
+    }
+    
+    func valifyUsername() -> Bool {
+        if self.usernameTextField!.validateUsername(){
+            self.hideNoticeLabel()
+            return false
+        }else {
+            self.showNoticeLabel(notice: "Your username format is incorrect")
+            return false
+        }
+    }
+    
+    func valifyPassword() -> Bool {
+        if self.passwordTextField!.validatePassword() {
+            self.hideNoticeLabel()
+            return true
+        }else{
+            self.showNoticeLabel(notice: "Your password format is incorrect")
+            return false
+        }
+    }
+    
+    func valifyCode() -> Bool {
+        if self.codeTextField!.text == nil || ((self.codeTextField?.text?.isBlank) != nil){
+            self.showNoticeLabel(notice: "Your code format is incorrect")
+            return false
+        }else{
+            self.hideNoticeLabel()
+            return true
+        }
+    }
+    
     //发送验证码
     @objc func codeBtnClick(btn:UIButton) {
         self.emailTextField?.resignFirstResponder()
@@ -86,12 +133,15 @@ class RegisterController: ViewController {
         self.passwordTextField?.resignFirstResponder()
         self.codeTextField?.resignFirstResponder()
         //先本地校验
-        let textField : UITextField? = self.emailTextField
-        let temp = textField!.validateEmail()
-        
-        let temp2 = self.usernameTextField!.validateUsername()
-        
-        let temp3 = self.passwordTextField!.validatePassword()
+        if !self.valifyEmail() {
+            return
+        }
+        if !self.valifyUsername() {
+            return
+        }
+        if !self.valifyPassword() {
+            return
+        }
         
         //本地验证通过
         //按钮先不可用
@@ -146,24 +196,16 @@ class RegisterController: ViewController {
         self.passwordTextField?.resignFirstResponder()
         self.codeTextField?.resignFirstResponder()
         //先本地校验
-        let textField : UITextField? = self.emailTextField
-        let temp = textField!.validateEmail()
-        
-        
-        let temp2 = self.usernameTextField!.validateUsername()
-        
-        let temp3 = self.passwordTextField!.validatePassword()
-        
-        
-        var temp4 = ""
-        if self.codeTextField!.text == nil {
-            temp4 = ""
-        }else{
-            temp4 = codeTextField!.text!
+        if !self.valifyEmail() {
+            return
         }
-        
-        if (temp4.isBlank) {
-            DispatchQueue.main.async {SCLAlertView.init().showError("title", subTitle: "code is blank")}
+        if !self.valifyUsername() {
+            return
+        }
+        if !self.valifyPassword() {
+            return
+        }
+        if !self.valifyCode() {
             return
         }
         
@@ -249,6 +291,20 @@ class RegisterController: ViewController {
         
     }
     
+    func showNoticeLabel(notice:String){
+        DispatchQueue.main.async {
+            self.noticeLabel?.text = notice
+            self.noticeLabel?.isHidden = false
+        }
+    }
+    
+    func hideNoticeLabel(){
+        DispatchQueue.main.async {
+            self.noticeLabel?.isHidden = true
+            self.noticeLabel?.text = ""
+        }
+    }
+    
     lazy var tableView: UITableView? = {
         let tempTableView = UITableView.init(frame: CGRect.zero, style: .plain)
         tempTableView.backgroundColor = UIColor(red: 0.15, green: 0.16, blue: 0.24, alpha: 1)
@@ -304,6 +360,16 @@ class RegisterController: ViewController {
         RunLoop.current.add(countdownTimer, forMode: .default)
         return countdownTimer
     }()
+    lazy var noticeLabel: UILabel? = {
+        let tempLabel = UILabel.init(frame: CGRect.zero)
+        tempLabel.backgroundColor = UIColor(red: 0.96, green: 0.3, blue: 0.3, alpha: 1)
+        tempLabel.font = UIFont(name: "Avenir Next Medium", size: 15)
+        tempLabel.textColor = .white
+        tempLabel.textAlignment = .center
+        tempLabel.numberOfLines = 0
+        view.addSubview(tempLabel)
+        return tempLabel
+    }()
 }
 
 extension  RegisterController : UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate{
@@ -324,15 +390,14 @@ extension  RegisterController : UITableViewDelegate,UITableViewDataSource,UIText
     }
  
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField.tag == 10001{
-            let temp = textField.validateEmail()
-            
-        }else if textField.tag == 10002{
-            let temp = textField.validateUsername()
-            
-        }else if textField.tag == 10003{
-            let temp = textField.validatePassword()
-           
+        if textField == self.usernameTextField{
+            self.valifyUsername()
+        }else if textField == self.passwordTextField{
+            self.valifyPassword()
+        }else if textField == self.emailTextField{
+            self.valifyEmail()
+        }else if textField == self.codeTextField{
+            self.valifyCode()
         }
         
     }
@@ -353,7 +418,6 @@ extension  RegisterController : UITableViewDelegate,UITableViewDataSource,UIText
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "0", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.delegate = self
         tempCell.textFild?.keyboardType = .emailAddress
-        tempCell.textFild?.tag = 10001
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter email", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.emailTextField = tempCell.textFild
 
@@ -361,7 +425,6 @@ extension  RegisterController : UITableViewDelegate,UITableViewDataSource,UIText
     case 1:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "1", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.delegate = self
-        tempCell.textFild?.tag = 10002
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter username", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.usernameTextField = tempCell.textFild
 
@@ -370,7 +433,6 @@ extension  RegisterController : UITableViewDelegate,UITableViewDataSource,UIText
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "2", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.setupShowPasswordButton()
         tempCell.textFild?.delegate = self
-        tempCell.textFild?.tag = 10003
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter password", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.passwordTextField = tempCell.textFild
     
@@ -378,7 +440,6 @@ extension  RegisterController : UITableViewDelegate,UITableViewDataSource,UIText
     case 3:
         let tempCell : ConfirmCodeCell = tableView.dequeueReusableCell(withIdentifier: confirmCodeCellIdentifier, for: indexPath) as! ConfirmCodeCell
         self.codeTextField = tempCell.textFild
-        self.codeTextField?.tag = 10004
         tempCell.textFild?.delegate = self
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter code", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.codeBtn = tempCell.codeBtn
