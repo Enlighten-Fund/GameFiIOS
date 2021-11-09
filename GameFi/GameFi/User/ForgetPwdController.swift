@@ -297,6 +297,7 @@ extension  ForgetPwdController : UITableViewDelegate,UITableViewDataSource,UITex
     case 1:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "1", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.setupShowPasswordButton()
+        tempCell.textFild?.isSecureTextEntry = true
         tempCell.textFild?.delegate = self
         self.passwordTextField = tempCell.textFild
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter password", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])

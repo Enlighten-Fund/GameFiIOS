@@ -37,10 +37,10 @@ class ProfileHeaderView: UIView {
             make.height.equalTo(20)
         }
         self.cetifiedBtn.snp.makeConstraints { make in
-            make.top.equalTo(self.emailLabel.snp.bottom)
-            make.right.equalTo(self.iconImgView.snp.right).offset(10)
-            make.width.equalTo(120)
-            make.height.equalTo(20)
+            make.bottom.equalToSuperview().offset(-15)
+            make.right.equalToSuperview().offset(-15)
+            make.width.equalTo(115)
+            make.height.equalTo(35)
         }
     }
     

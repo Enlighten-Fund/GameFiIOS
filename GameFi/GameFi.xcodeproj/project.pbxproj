@@ -61,6 +61,7 @@
 		98823A3F27295B0100D9A7CD /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98823A3E27295B0100D9A7CD /* HomeController.swift */; };
 		98823A412729674500D9A7CD /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98823A402729674500D9A7CD /* Define.swift */; };
 		98D99407273A107D006AA8DC /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D99406273A107D006AA8DC /* ProfileHeaderView.swift */; };
+		98D99409273A3A45006AA8DC /* SweetAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D99408273A3A45006AA8DC /* SweetAlert.swift */; };
 		98E09B5A2731121B0020D97D /* ForgetPwdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E09B592731121B0020D97D /* ForgetPwdController.swift */; };
 		98E09B5C273129140020D97D /* Usermodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E09B5B273129140020D97D /* Usermodel.swift */; };
 /* End PBXBuildFile section */
@@ -120,6 +121,7 @@
 		98823A3E27295B0100D9A7CD /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		98823A402729674500D9A7CD /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		98D99406273A107D006AA8DC /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		98D99408273A3A45006AA8DC /* SweetAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SweetAlert.swift; sourceTree = "<group>"; };
 		98E09B592731121B0020D97D /* ForgetPwdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPwdController.swift; sourceTree = "<group>"; };
 		98E09B5B273129140020D97D /* Usermodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usermodel.swift; sourceTree = "<group>"; };
 		C65868A573F5F7D6A4003290 /* Pods-GameFi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameFi.debug.xcconfig"; path = "Target Support Files/Pods-GameFi/Pods-GameFi.debug.xcconfig"; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 		9811EA152726BB2700B0ACF0 /* GameFi */ = {
 			isa = PBXGroup;
 			children = (
+				98D99408273A3A45006AA8DC /* SweetAlert.swift */,
 				9876943027393CCB0075CA0F /* Profile */,
 				980DB78A27327DF9006ED3BE /* General */,
 				984BDB9E272BED7C00F6144B /* User */,
@@ -444,6 +447,7 @@
 				9876942D2738F2950075CA0F /* ScholarDetailHeaderView.swift in Sources */,
 				9876942F2738FD500075CA0F /* ScholarDetailCell.swift in Sources */,
 				980DB7A12733E05C006ED3BE /* ScholarshipModel.swift in Sources */,
+				98D99409273A3A45006AA8DC /* SweetAlert.swift in Sources */,
 				9876942B2738F22C0075CA0F /* ScholarDetailModel.swift in Sources */,
 				98D99407273A107D006AA8DC /* ProfileHeaderView.swift in Sources */,
 				984BDBAC272E494600F6144B /* LoginController.swift in Sources */,
