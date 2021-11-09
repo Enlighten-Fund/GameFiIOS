@@ -39,7 +39,6 @@ class ProfileGuestController: ViewController {
             if let error = error {
                 print("Error getting token \(error.localizedDescription)")
             } else if let tokens = tokens {
-                print(tokens.accessToken!.tokenString!)
                 DispatchQueue.main.async {
                     self.navigationController?.pushViewController(ProfileController.init(), animated: false)
                 }

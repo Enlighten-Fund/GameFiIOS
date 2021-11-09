@@ -26,13 +26,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
     }
    
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        if tabBarController.selectedIndex == 2 {
-            let navVC = GFNavController.init(rootViewController: LoginController.init())
-            navVC.modalPresentationStyle = .fullScreen
-            tabBarController.present(navVC, animated: true) {
-                
-            }
-        }
+//        if tabBarController.selectedIndex == 2 {
+        //            let navVC = GFNavController.init(rootViewController: LoginController.init())
+        //            navVC.modalPresentationStyle = .fullScreen
+        //            tabBarController.present(navVC, animated: true) {
+        //
+        //            }
+//        }
     }
     
     

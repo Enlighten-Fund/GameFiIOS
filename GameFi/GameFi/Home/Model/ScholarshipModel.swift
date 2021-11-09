@@ -10,13 +10,13 @@ import HandyJSON
 
 class ScholarshipModel: BaseModel {
     var scholarship_id : Int?
-    var manager_user_id : Int?
-    var scholar_user_id : Int?
-    var account_ronin_address : String?
-    var account_passcode : String?
-    var account_qrcode : String?
-    var status : String?
-    var start_timestamp : String?
-    var end_timestamp : String?
+    var estimate_daily_slp : Int?
+    var scholar_percentage : Float?
+    var offer_period : Int?
+    var manager_user_name : String?
+    var credit_score : Int?
+    var mmr : Int?
+    var axie_count : Int?
+    var security_deposit : Int?
     required init() {}
 }

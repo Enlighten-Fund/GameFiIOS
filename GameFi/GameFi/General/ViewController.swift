@@ -25,12 +25,7 @@ class ViewController: UIViewController {
     }
 
         @objc func msgBtnClick() {
-            AWSMobileClient.default().signOut { error in
-                if let error = error  {
-                    print("\(error.localizedDescription)")
-                    SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")
-                }
-            }
+           
         }
     
     

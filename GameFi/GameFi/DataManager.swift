@@ -86,33 +86,10 @@ class DataManager: NSObject {
                 }
             }
         }
-    
-    func checkEmail(email:String,completeBlock: @escaping CompleteBlock) {
-        let dic = ["email" : email]
-        self.POST(url: "user/check_exist", param: dic as [String : Any]) { result, reponse in
-            completeBlock(result,reponse)
-        }
-    }
-    
-    func checkUsername(username:String,completeBlock: @escaping CompleteBlock) {
-        let dic = ["username" : username]
-        self.POST(url: "user/check_exist", param: dic as [String : Any]) { result, reponse in
-            completeBlock(result,reponse)
-        }
-    }
-    
-    func fetchScholarShip(pageIndex:Int, completeBlock: @escaping CompleteBlock) {
-        var roleStr = ""
-        let role : String? = Usermodel.shared.gfrole
-        if role == nil {
-            roleStr = "marketplace"
-        }else if role == "1"{
-            roleStr = "scholar"
-        }else if role == "2"{
-            roleStr = "manager"
-        }
-        let dic = ["page_index" : pageIndex,"page_size" : 20]
-        self.POST(url: "scholarship/list_by_\(roleStr)", param: dic) { result, reponse in
+    //无需鉴权
+    func fetchMarketPlaceScholarShip(filter:String, pageIndex:Int, completeBlock: @escaping CompleteBlock) {
+        let dic = ["page_index" : pageIndex,"page_size" : 20,"order_by_key" : filter] as [String : Any]
+        self.POST(url: "scholarship/list_by_marketplace", param: dic) { result, reponse in
             if result.success!{
                 let scholarshipListModel : ScholarshipListModel = JsonUtil.jsonToModel(reponse as! String, ScholarshipListModel.self) as! ScholarshipListModel
                 completeBlock(result,scholarshipListModel)
@@ -125,6 +102,18 @@ class DataManager: NSObject {
     func fetchScholarShipDetail(scholarshipId:Int, completeBlock: @escaping CompleteBlock) {
         let dic = ["id" : scholarshipId]
         self.POST(url: "scholarship/get_by_id", param: dic) { result, reponse in
+            if result.success!{
+                let scholarshipDetailModel : ScholarshipDetailModel = JsonUtil.jsonToModel(reponse as! String, ScholarshipListModel.self) as! ScholarshipDetailModel
+                completeBlock(result,scholarshipDetailModel)
+            }else{
+                completeBlock(result,reponse)
+            }
+        }
+    }
+    
+    func fetchScholar(filter:String, pageIndex:Int, completeBlock: @escaping CompleteBlock) {
+        let dic = ["page_index" : pageIndex,"page_size" : 20,"order_by_key" : filter] as [String : Any]
+        self.POST(url: "user/list_scholar", param: dic) { result, reponse in
             if result.success!{
                 let scholarshipDetailModel : ScholarshipDetailModel = JsonUtil.jsonToModel(reponse as! String, ScholarshipListModel.self) as! ScholarshipDetailModel
                 completeBlock(result,scholarshipDetailModel)

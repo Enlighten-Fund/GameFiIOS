@@ -15,6 +15,7 @@ class ScholarsController: UIViewController {
     var pageIndex = 1
     var dataSource : Array<Any>? = Array.init()
     let sortArray:[String] = ["Latest","Highest credit","Modt everyday","SLP Most Axie","counts"]
+    var filter : String? = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(red: 0.15, green: 0.16, blue: 0.24, alpha: 1)
@@ -54,8 +55,8 @@ class ScholarsController: UIViewController {
     lazy var dropListView:LYDropListView = {
         //传入一个二维数组即可
         let drop = LYDropListView.init(frame: CGRect.init(x: 0, y: kNaviHeight, width: screenWidth, height: 40), tableArr: [sortArray], selectClosure: { (tag, row) in
-            //tag - 100是第几个标题菜单，row是菜单第几行
-              print(tag-100,row)
+            self.filter = self.sortArray[row]
+            self.collectionView.mj_header?.beginRefreshing()
         })
         drop.backgroundColor = UIColor(red: 0.15, green: 0.16, blue: 0.24, alpha: 1)
         let tline = UIView.init(frame: CGRect.init(x: 0, y: 0, width: screenWidth, height: 0.5))
@@ -139,7 +140,7 @@ extension  ScholarsController : UICollectionViewDelegate,UICollectionViewDataSou
     }
     
     func requestListData() {
-        DataManager.sharedInstance.fetchScholarShip(pageIndex: pageIndex) { result, reponse in
+        DataManager.sharedInstance.fetchMarketPlaceScholarShip(filter: "", pageIndex: pageIndex) { result, reponse in
             DispatchQueue.main.async { [self] in
                 self.collectionView.mj_footer?.endRefreshing()
                 self.collectionView.mj_header?.endRefreshing()
