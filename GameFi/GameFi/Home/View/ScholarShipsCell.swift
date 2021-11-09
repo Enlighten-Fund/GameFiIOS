@@ -110,11 +110,11 @@ class ScholarshipsCell: UICollectionViewCell {
     func update(scholarshipModel:ScholarshipModel) {
         self.axieImgView.image = UIImage.init(named: "explore_select")
         self.accountLabel.text = scholarshipModel.manager_user_name
-        self.creditLabel.text = "Credit: \(String(scholarshipModel.credit_score!))"
-        self.slpLabel.text = "\(String(describing: scholarshipModel.estimate_daily_slp))/day (\(String(scholarshipModel.scholar_percentage!))%)"
-        self.offerLabelView.update(leftTitle: "Offer", rithtTitle: "\(String(describing: scholarshipModel.offer_period)) Days")
-        self.mmrLabelView.update(leftTitle: "MMR", rithtTitle: String(scholarshipModel.mmr!))
-        self.axiesLabelView.update(leftTitle: "Axies", rithtTitle: String(scholarshipModel.axie_count!))
+        self.creditLabel.text = "Credit: \(scholarshipModel.credit_score!)"
+        self.slpLabel.text = "\(scholarshipModel.estimate_daily_slp)/day (\(scholarshipModel.scholar_percentage!)%)"
+        self.offerLabelView.update(leftTitle: "Offer", rithtTitle: "\(scholarshipModel.offer_period) Days")
+        self.mmrLabelView.update(leftTitle: "MMR", rithtTitle: scholarshipModel.mmr!)
+        self.axiesLabelView.update(leftTitle: "Axies", rithtTitle: scholarshipModel.axie_count!)
     }
     
     lazy var axieImgView : UIImageView = {

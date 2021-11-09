@@ -19,9 +19,10 @@ import SCLAlertView
 import MJRefresh
 
 class ScholarshipsDetailController: ViewController {
+    var headerview : ScholarshipDetailHeaderView?
     var scholarshipsDetailModel : ScholarshipDetailModel?
-    var scholarshipId : Int?
-    init(scholarshipId : Int) {
+    var scholarshipId : String?
+    init(scholarshipId : String) {
         super.init(nibName: nil, bundle: nil)
         self.scholarshipId = scholarshipId
     }
@@ -36,8 +37,8 @@ class ScholarshipsDetailController: ViewController {
         self.tableView!.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(0)
             make.bottom.equalToSuperview().offset(0)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
+            make.left.equalToSuperview().offset(15)
+            make.right.equalToSuperview().offset(-15)
         }
         self.tableView?.mj_header?.beginRefreshing()
      
@@ -50,11 +51,8 @@ class ScholarshipsDetailController: ViewController {
                 if result.success!{
                     let tempModel : ScholarshipDetailModel = reponse as! ScholarshipDetailModel
                     self.scholarshipsDetailModel = tempModel
+                    self.headerview?.update(scholarshipDetailModel: scholarshipsDetailModel!)
                     self.tableView!.reloadData()
-                }else{
-//                    let error : Error = reponse as! Error
-//                    SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")
-                    
                 }
             }
         }
@@ -64,9 +62,9 @@ class ScholarshipsDetailController: ViewController {
     lazy var tableView: UITableView? = {
         let tempTableView = UITableView.init(frame: CGRect.zero, style: .plain)
         tempTableView.backgroundColor = self.view.backgroundColor
-        let headerView = ScholarshipDetailHeaderView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 300))
-        headerView.update(scholarshipDetailModel: ScholarshipDetailModel.init())
-        tempTableView.tableHeaderView = headerView
+        let theaderView = ScholarshipDetailHeaderView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 300))
+        self.headerview = theaderView
+        tempTableView.tableHeaderView = theaderView
 //        let footView = LoginFootView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 200))
 //        footView.scholarBtn.isSelected = true
         tempTableView.separatorStyle = .none

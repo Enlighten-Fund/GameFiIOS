@@ -14,8 +14,8 @@ import MJRefresh
 
 class ScholarDetailController: ViewController {
     var scholarDetailModel : ScholarDetailModel?
-    var scholarId : Int?
-    init(scholarId : Int) {
+    var scholarId : String?
+    init(scholarId : String) {
         super.init(nibName: nil, bundle: nil)
         self.scholarId = scholarId
     }

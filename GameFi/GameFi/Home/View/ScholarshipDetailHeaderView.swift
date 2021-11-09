@@ -16,62 +16,62 @@ class ScholarshipDetailHeaderView: UIView {
         self.managerNameLabelView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(0)
             make.left.equalToSuperview()
-            make.width.equalTo(IPhone_SCREEN_WIDTH)
+            make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
             make.height.equalTo(35)
         }
         self.expectedLabelView.snp.makeConstraints { make in
             make.top.equalTo(self.managerNameLabelView.snp.bottom).offset(0)
             make.left.equalToSuperview()
-            make.width.equalTo(IPhone_SCREEN_WIDTH)
+            make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
             make.height.equalTo(35)
         }
         self.contractLabelView.snp.makeConstraints { make in
             make.top.equalTo(self.expectedLabelView.snp.bottom).offset(0)
             make.left.equalToSuperview()
-            make.width.equalTo(IPhone_SCREEN_WIDTH)
+            make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
             make.height.equalTo(35)
         }
         self.creditLabelView.snp.makeConstraints { make in
             make.top.equalTo(self.contractLabelView.snp.bottom).offset(0)
             make.left.equalToSuperview()
-            make.width.equalTo(IPhone_SCREEN_WIDTH)
+            make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
             make.height.equalTo(35)
         }
         self.axieCountLabelView.snp.makeConstraints { make in
             make.top.equalTo(self.creditLabelView.snp.bottom).offset(0)
             make.left.equalToSuperview()
-            make.width.equalTo(IPhone_SCREEN_WIDTH)
+            make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
             make.height.equalTo(35)
         }
         self.rentedLabelView.snp.makeConstraints { make in
             make.top.equalTo(self.axieCountLabelView.snp.bottom).offset(0)
             make.left.equalToSuperview()
-            make.width.equalTo(IPhone_SCREEN_WIDTH)
+            make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
             make.height.equalTo(35)
         }
         self.scholarLabelView.snp.makeConstraints { make in
             make.top.equalTo(self.rentedLabelView.snp.bottom).offset(0)
             make.left.equalToSuperview()
-            make.width.equalTo(IPhone_SCREEN_WIDTH)
+            make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
             make.height.equalTo(35)
         }
         self.securityLabelView.snp.makeConstraints { make in
             make.top.equalTo(self.scholarLabelView.snp.bottom).offset(0)
             make.left.equalToSuperview()
-            make.width.equalTo(IPhone_SCREEN_WIDTH)
+            make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
             make.height.equalTo(35)
         }
     }
     
     func update(scholarshipDetailModel:ScholarshipDetailModel) {
-        self.managerNameLabelView.update(leftTitle: "Manager name", rithtTitle: "")
-        self.expectedLabelView.update(leftTitle: "Expected SLP per day", rithtTitle: "")
-        self.contractLabelView.update(leftTitle: "Contract period", rithtTitle: "")
-        self.creditLabelView.update(leftTitle: "Credit score", rithtTitle: "")
-        self.axieCountLabelView.update(leftTitle: "Axie counts", rithtTitle: "")
+        self.managerNameLabelView.update(leftTitle: "Manager name", rithtTitle: scholarshipDetailModel.manager_user_name!)
+        self.expectedLabelView.update(leftTitle: "Expected SLP per day", rithtTitle: scholarshipDetailModel.myestimate_daily_slp!)
+        self.contractLabelView.update(leftTitle: "Contract period", rithtTitle: scholarshipDetailModel.manager_user_name!)
+        self.creditLabelView.update(leftTitle: "Credit score", rithtTitle: scholarshipDetailModel.credit_score!)
+        self.axieCountLabelView.update(leftTitle: "Axie counts", rithtTitle: scholarshipDetailModel.axie_count!)
         self.rentedLabelView.update(leftTitle: "Rented times", rithtTitle: "")
-        self.scholarLabelView.update(leftTitle: "Scholar’s percentage", rithtTitle: "")
-        self.securityLabelView.update(leftTitle: "Security deposit", rithtTitle: "")
+        self.scholarLabelView.update(leftTitle: "Scholar’s percentage", rithtTitle: "\(scholarshipDetailModel.scholar_percentage!)%")
+        self.securityLabelView.update(leftTitle: "Security deposit", rithtTitle: "\(scholarshipDetailModel.myestimate_daily_slp!)SLP")
     }
     
     required init?(coder: NSCoder) {

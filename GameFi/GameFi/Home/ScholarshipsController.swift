@@ -146,7 +146,8 @@ extension  ScholarshipsController : UICollectionViewDelegate,UICollectionViewDat
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let appdelegate : AppDelegate = UIApplication.shared.delegate! as! AppDelegate
-        let scholarshipDetailVC = ScholarshipsDetailController.init(scholarshipId: 123)
+        let scholarshipModel : ScholarshipModel = self.dataSource![indexPath.row] as! ScholarshipModel
+        let scholarshipDetailVC = ScholarshipsDetailController.init(scholarshipId: scholarshipModel.scholarship_id!)
         appdelegate.homeVC?.navigationController!.pushViewController(scholarshipDetailVC, animated: true)
     }
 

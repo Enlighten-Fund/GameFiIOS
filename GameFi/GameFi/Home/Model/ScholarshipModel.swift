@@ -9,14 +9,22 @@ import Foundation
 import HandyJSON
 
 class ScholarshipModel: BaseModel {
-    var scholarship_id : Int?
-    var estimate_daily_slp : Int?
-    var scholar_percentage : Float?
-    var offer_period : Int?
+    var scholarship_id : String?
+    var estimate_daily_slp : String?
+    var myestimate_daily_slp : String?{
+        get{
+            if estimate_daily_slp == nil {
+                return ""
+            }
+            return estimate_daily_slp
+        }
+    }
+    var scholar_percentage : String?
+    var offer_period : String?
     var manager_user_name : String?
-    var credit_score : Int?
-    var mmr : Int?
-    var axie_count : Int?
-    var security_deposit : Int?
+    var credit_score : String?
+    var mmr : String?
+    var axie_count : String?
+    var security_deposit : String?
     required init() {}
 }

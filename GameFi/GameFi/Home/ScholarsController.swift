@@ -125,7 +125,7 @@ extension  ScholarsController : UICollectionViewDelegate,UICollectionViewDataSou
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let appdelegate : AppDelegate = UIApplication.shared.delegate! as! AppDelegate
-        let scholarDetailController = ScholarDetailController.init(scholarId: 123)
+        let scholarDetailController = ScholarDetailController.init(scholarId: "123")
         appdelegate.homeVC?.navigationController!.pushViewController(scholarDetailController, animated: true)
     }
 
