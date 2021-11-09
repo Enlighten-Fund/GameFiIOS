@@ -134,6 +134,8 @@ extension  ProfileController : UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row
         {
+        case 0:
+            self.navigationController?.pushViewController(EditProfileController.init(), animated: true)
         case 5:
             self.navigationController?.pushViewController(ResetPwdController.init(), animated: true)
         case 6:

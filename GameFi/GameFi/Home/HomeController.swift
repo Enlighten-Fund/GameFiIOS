@@ -24,7 +24,7 @@ class HomeController: UIViewController {
     
     
     @objc func msgBtnClick() {
-        print("个人消息")
+        self.navigationController?.pushViewController(NotificationController.init(), animated: true)
     }
     
     lazy var msgBtn : UIButton? = {
