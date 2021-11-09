@@ -1,8 +1,8 @@
 //
-//  File.swift
+//  ResetPwdController.swift
 //  GameFi
 //
-//  Created by harden on 2021/10/28.
+//  Created by harden on 2021/11/9.
 //
 
 import Foundation
@@ -12,14 +12,14 @@ import MCToast
 import SCLAlertView
 import AWSMobileClient
 
-class ForgetPwdController: ViewController {
+class ResetPwdController: ViewController {
     var emailTextField : UITextField?
     var passwordTextField : UITextField?
     var codeTextField : UITextField?
     var codeBtn : UIButton?
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Forget password"
+        self.title = "Reset password"
         self.tableView!.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(0)
             make.bottom.equalToSuperview().offset(0)
@@ -89,7 +89,6 @@ class ForgetPwdController: ViewController {
             return true
         }
     }
-    
     func fireTimerAndShowAlert(title:String) {
         DispatchQueue.main.async {
             self.timer.fire()
@@ -113,7 +112,10 @@ class ForgetPwdController: ViewController {
         DispatchQueue.main.async {
             btn.isEnabled = false
         }
+        
+        
         mc_loading()
+        
         AWSMobileClient.default().forgotPassword(username: (self.emailTextField?.text)!) { (forgotPasswordResult, error) in
             self.mc_remove()
             if let forgotPasswordResult = forgotPasswordResult {
@@ -134,6 +136,16 @@ class ForgetPwdController: ViewController {
    
     
     @objc func resetPwdBtnClick(btn:UIButton){
+//        AWSMobileClient.default().changePassword(currentPassword: "Java6720", proposedPassword: "Java6728") { error in
+//            if let error = error  {
+//                print("\(error.localizedDescription)")
+//                DispatchQueue.main.async {
+//                    SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")
+//                }
+//
+//            }
+//        }
+        
         self.emailTextField?.resignFirstResponder()
         self.passwordTextField?.resignFirstResponder()
         self.codeTextField?.resignFirstResponder()
@@ -148,49 +160,46 @@ class ForgetPwdController: ViewController {
         if !self.valifyCode() {
             return
         }
-        
+
         //本地验证通过
         self.mc_loading()
         AWSMobileClient.default().confirmForgotPassword(username: (self.emailTextField?.text)!, newPassword: (self.passwordTextField?.text)!, confirmationCode: (self.codeTextField?.text)!) { (forgotPasswordResult, error) in
-            DispatchQueue.main.async {
-                if let forgotPasswordResult = forgotPasswordResult {
-                    switch(forgotPasswordResult.forgotPasswordState) {
-                    case .done:
-                        print("Password changed successfully")
-                        AWSMobileClient.default().signIn(username: (self.emailTextField?.text)!, password: (self.passwordTextField?.text)!) { (signInResult, error) in
-                            DispatchQueue.main.async {
-                                self.mc_remove()
-                                if let error = error  {
-                                    print("\(error.localizedDescription)")
-                                    SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")
-                                } else if let signInResult = signInResult {
-                                    switch (signInResult.signInState) {
-                                    case .signedIn:
-                                        print("User is signed in.")
-                                        SCLAlertView.init().showError("系统提示：", subTitle: "修改密码并登录成功")
-                                        self.navigationController?.popToRootViewController(animated: true)
-                                    case .smsMFA:
-                                        print("SMS message sent to \(signInResult.codeDetails!.destination!)")
-                                        SCLAlertView.init().showError("系统提示：", subTitle: "\(signInResult.codeDetails!.destination!)")
-                                    default:
-                                        print("Sign In needs info which is not et supported.")
-                                    }
+            if let forgotPasswordResult = forgotPasswordResult {
+                switch(forgotPasswordResult.forgotPasswordState) {
+                case .done:
+                    print("Password changed successfully")
+                    AWSMobileClient.default().signIn(username: (self.emailTextField?.text)!, password: (self.passwordTextField?.text)!) { (signInResult, error) in
+                        DispatchQueue.main.async {
+                            self.mc_remove()
+                            if let error = error  {
+                                print("\(error.localizedDescription)")
+                                SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")
+                            } else if let signInResult = signInResult {
+                                switch (signInResult.signInState) {
+                                case .signedIn:
+                                    print("User is signed in.")
+                                    SCLAlertView.init().showError("系统提示：", subTitle: "修改密码并登录成功")
+                                    self.navigationController?.popToRootViewController(animated: true)
+                                case .smsMFA:
+                                    print("SMS message sent to \(signInResult.codeDetails!.destination!)")
+                                    SCLAlertView.init().showError("系统提示：", subTitle: "\(signInResult.codeDetails!.destination!)")
+                                default:
+                                    print("Sign In needs info which is not et supported.")
                                 }
                             }
-                            
                         }
-                    default:
-                        self.mc_remove()
-                        print("Error: Could not change password.")
+
                     }
-                } else if let error = error {
+                default:
                     self.mc_remove()
-                    DispatchQueue.main.async {
-                        print("Error occurred: \(error.localizedDescription)")
-                        SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")
-                        self.stopTimerAndUpdateCodeBtn()
-                    }
-                    
+                    print("Error: Could not change password.")
+                }
+            } else if let error = error {
+                self.mc_remove()
+                DispatchQueue.main.async {
+                    print("Error occurred: \(error.localizedDescription)")
+                    SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")
+                    self.stopTimerAndUpdateCodeBtn()
                 }
 
             }
@@ -228,10 +237,7 @@ class ForgetPwdController: ViewController {
                     timer.invalidate()
                     self.codeBtn!.isEnabled = true
                     self.codeBtn!.setTitle("Send code", for: .normal)
-                    
-                  print(">>> Timer has Stopped!")
                 } else {
-                    print(">>> Countdown Number: \(countDownNum)")
                     countDownNum -= 1
                     self.codeBtn!.setTitle(String(countDownNum), for: .normal)
                 }
@@ -256,7 +262,7 @@ class ForgetPwdController: ViewController {
     }()
 }
 
-extension  ForgetPwdController : UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate{
+extension  ResetPwdController : UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate{
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard textField.text != nil else {

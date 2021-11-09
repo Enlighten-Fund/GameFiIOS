@@ -66,12 +66,12 @@ class ScholarshipDetailHeaderView: UIView {
     func update(scholarshipDetailModel:ScholarshipDetailModel) {
         self.managerNameLabelView.update(leftTitle: "Manager name", rithtTitle: scholarshipDetailModel.manager_user_name!)
         self.expectedLabelView.update(leftTitle: "Expected SLP per day", rithtTitle: scholarshipDetailModel.myestimate_daily_slp!)
-        self.contractLabelView.update(leftTitle: "Contract period", rithtTitle: scholarshipDetailModel.manager_user_name!)
+        self.contractLabelView.update(leftTitle: "Contract period", rithtTitle: scholarshipDetailModel.offer_period!)
         self.creditLabelView.update(leftTitle: "Credit score", rithtTitle: scholarshipDetailModel.credit_score!)
         self.axieCountLabelView.update(leftTitle: "Axie counts", rithtTitle: scholarshipDetailModel.axie_count!)
         self.rentedLabelView.update(leftTitle: "Rented times", rithtTitle: "")
         self.scholarLabelView.update(leftTitle: "Scholar’s percentage", rithtTitle: "\(scholarshipDetailModel.scholar_percentage!)%")
-        self.securityLabelView.update(leftTitle: "Security deposit", rithtTitle: "\(scholarshipDetailModel.myestimate_daily_slp!)SLP")
+        self.securityLabelView.update(leftTitle: "Security deposit", rithtTitle: "\(scholarshipDetailModel.security_deposit!)SLP")
     }
     
     required init?(coder: NSCoder) {

@@ -122,9 +122,6 @@ class LoginController: ViewController {
                                 
                             }
                         }
-                    case .smsMFA:
-                        print("SMS message sent to \(signInResult.codeDetails!.destination!)")
-                        SCLAlertView.init().showError("系统提示：", subTitle: "\(signInResult.codeDetails!.destination!)")
                     default:
                         print("Sign In needs info which is not et supported.")
                     }

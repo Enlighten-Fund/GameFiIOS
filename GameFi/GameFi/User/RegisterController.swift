@@ -117,7 +117,7 @@ class RegisterController: ViewController {
     }
     
     func valifyCode() -> Bool {
-        if self.codeTextField!.text == nil || ((self.codeTextField?.text?.isBlank) != nil){
+        if self.codeTextField!.text == nil || self.codeTextField!.text!.isBlank{
             self.showNoticeLabel(notice: "Your code format is incorrect")
             return false
         }else{

@@ -134,6 +134,8 @@ extension  ProfileController : UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row
         {
+        case 5:
+            self.navigationController?.pushViewController(ResetPwdController.init(), animated: true)
         case 6:
             SweetAlert().showAlert("notice:", subTitle: "Are you sure you want to log out？", style: .warning, buttonTitle:"Cancel", buttonColor:UIColorFromRGB(0xD0D0D0) , otherButtonTitle:  "OK", otherButtonColor: UIColorFromRGB(0xDD6B55)) { (isOtherButton) -> Void in
                 if isOtherButton == true {
@@ -141,10 +143,16 @@ extension  ProfileController : UITableViewDelegate,UITableViewDataSource{
                     
                 }else{
                     AWSMobileClient.default().signOut { error in
-                        if let error = error  {
-                            print("\(error.localizedDescription)")
-                            SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")
+                        DispatchQueue.main.async {
+                            if let error = error  {
+                                print("\(error.localizedDescription)")
+                                SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")
+                            }else{
+                                self.navigationController?.popViewController(animated: true)
+                               
+                            }
                         }
+                        
                     }
                 }
             }

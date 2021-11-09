@@ -63,6 +63,7 @@
 		98D99407273A107D006AA8DC /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D99406273A107D006AA8DC /* ProfileHeaderView.swift */; };
 		98D99409273A3A45006AA8DC /* SweetAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D99408273A3A45006AA8DC /* SweetAlert.swift */; };
 		98D9940B273A46D2006AA8DC /* ScholarListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D9940A273A46D2006AA8DC /* ScholarListModel.swift */; };
+		98D9940D273A5C67006AA8DC /* ResetPwdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D9940C273A5C67006AA8DC /* ResetPwdController.swift */; };
 		98E09B5A2731121B0020D97D /* ForgetPwdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E09B592731121B0020D97D /* ForgetPwdController.swift */; };
 		98E09B5C273129140020D97D /* Usermodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E09B5B273129140020D97D /* Usermodel.swift */; };
 /* End PBXBuildFile section */
@@ -124,6 +125,7 @@
 		98D99406273A107D006AA8DC /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		98D99408273A3A45006AA8DC /* SweetAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SweetAlert.swift; sourceTree = "<group>"; };
 		98D9940A273A46D2006AA8DC /* ScholarListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarListModel.swift; sourceTree = "<group>"; };
+		98D9940C273A5C67006AA8DC /* ResetPwdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwdController.swift; sourceTree = "<group>"; };
 		98E09B592731121B0020D97D /* ForgetPwdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPwdController.swift; sourceTree = "<group>"; };
 		98E09B5B273129140020D97D /* Usermodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usermodel.swift; sourceTree = "<group>"; };
 		C65868A573F5F7D6A4003290 /* Pods-GameFi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameFi.debug.xcconfig"; path = "Target Support Files/Pods-GameFi/Pods-GameFi.debug.xcconfig"; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 				984BDBAB272E494600F6144B /* LoginController.swift */,
 				984BDB94272ACD0A00F6144B /* RegisterController.swift */,
 				98E09B592731121B0020D97D /* ForgetPwdController.swift */,
+				98D9940C273A5C67006AA8DC /* ResetPwdController.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -500,6 +503,7 @@
 				98E09B5C273129140020D97D /* Usermodel.swift in Sources */,
 				984BDB99272BA23600F6144B /* RegisterHeadView.swift in Sources */,
 				984BDB9B272BC6C200F6144B /* LabelTextFildCell.swift in Sources */,
+				98D9940D273A5C67006AA8DC /* ResetPwdController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
