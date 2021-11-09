@@ -115,8 +115,20 @@ class DataManager: NSObject {
         let dic = ["page_index" : pageIndex,"page_size" : 20,"order_by_key" : filter] as [String : Any]
         self.POST(url: "user/list_scholar", param: dic) { result, reponse in
             if result.success!{
-                let scholarshipDetailModel : ScholarshipDetailModel = JsonUtil.jsonToModel(reponse as! String, ScholarshipListModel.self) as! ScholarshipDetailModel
-                completeBlock(result,scholarshipDetailModel)
+                let scholarListModel : ScholarListModel = JsonUtil.jsonToModel(reponse as! String, ScholarListModel.self) as! ScholarListModel
+                completeBlock(result,scholarListModel)
+            }else{
+                completeBlock(result,reponse)
+            }
+        }
+    }
+    
+    func fetchUserDetail(userid:String, completeBlock: @escaping CompleteBlock) {
+        let dic = ["id" : Int(userid)]
+        self.POST(url: "user/get_by_id", param: dic as [String : Any]) { result, reponse in
+            if result.success!{
+                let scholarDetailModel : ScholarDetailModel = JsonUtil.jsonToModel(reponse as! String, ScholarDetailModel.self) as! ScholarDetailModel
+                completeBlock(result,scholarDetailModel)
             }else{
                 completeBlock(result,reponse)
             }

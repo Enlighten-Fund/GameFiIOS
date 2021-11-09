@@ -8,7 +8,7 @@
 import Foundation
 import HandyJSON
 
-class ScholarDetailModel: BaseModel {
+class ScholarDetailModel: ScholarModel {
     var scholarship_id : Int?
     var manager_user_id : Int?
     var scholar_user_id : Int?

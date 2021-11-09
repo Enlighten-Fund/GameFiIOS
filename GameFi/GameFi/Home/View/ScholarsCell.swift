@@ -61,13 +61,13 @@ class ScholarsCell: UICollectionViewCell {
 
     func update(scholarModel:ScholarModel) {
         self.axieImgView.image = UIImage.init(named: "explore_select")
-        self.accountLabel.text = "Mr_isthestrangee"
-        self.creditLabel.text = "Credit: 150"
-        self.mmrLabelView.update(leftTitle: "MMR(avg)", rithtTitle: "2500")
+        self.accountLabel.text = scholarModel.username
+        self.creditLabel.text = "Credit: \(scholarModel.credit_score!)"
+//        self.mmrLabelView.update(leftTitle: "MMR(avg)", rithtTitle: scholarModel.m)
         self.mmrLabelView.rightLabel.textColor = UIColor(red: 1, green: 0.72, blue: 0.07, alpha: 1)
-        self.winRateLabelView.update(leftTitle: "Win rate", rithtTitle: "60%")
-        self.expLabelView.update(leftTitle: "Exp.", rithtTitle: ">6 months")
-        self.availabelLabelView.update(leftTitle: "Available", rithtTitle: "6 hrs/day")
+//        self.winRateLabelView.update(leftTitle: "Win rate", rithtTitle: "60%")
+//        self.expLabelView.update(leftTitle: "Exp.", rithtTitle: ">6 months")
+//        self.availabelLabelView.update(leftTitle: "Available", rithtTitle: "6 hrs/day")
     }
     
     lazy var axieImgView : UIImageView = {

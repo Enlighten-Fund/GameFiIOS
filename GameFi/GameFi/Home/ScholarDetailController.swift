@@ -38,7 +38,7 @@ class ScholarDetailController: ViewController {
     }
     
     func requestData() {
-        DataManager.sharedInstance.fetchScholarShipDetail(scholarshipId: self.scholarId!) { result, reponse in
+        DataManager.sharedInstance.fetchUserDetail(userid:self.scholarId!) { result, reponse in
             DispatchQueue.main.async { [self] in
                 self.tableView!.mj_header?.endRefreshing()
                 if result.success!{

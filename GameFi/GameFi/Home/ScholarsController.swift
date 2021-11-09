@@ -119,13 +119,15 @@ extension  ScholarsController : UICollectionViewDelegate,UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: scholarsCelldentifier, for: indexPath) as! ScholarsCell
         cell.makeConstraints()
-        cell.update(scholarModel: ScholarModel.init())
+        let scholarModel = self.dataSource![indexPath.row]
+        cell.update(scholarModel: scholarModel as! ScholarModel)
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let scholarModel : ScholarModel = self.dataSource![indexPath.row] as! ScholarModel
         let appdelegate : AppDelegate = UIApplication.shared.delegate! as! AppDelegate
-        let scholarDetailController = ScholarDetailController.init(scholarId: "123")
+        let scholarDetailController = ScholarDetailController.init(scholarId: scholarModel.user_id!)
         appdelegate.homeVC?.navigationController!.pushViewController(scholarDetailController, animated: true)
     }
 
@@ -140,30 +142,26 @@ extension  ScholarsController : UICollectionViewDelegate,UICollectionViewDataSou
     }
     
     func requestListData() {
-        DataManager.sharedInstance.fetchMarketPlaceScholarShip(filter: "", pageIndex: pageIndex) { result, reponse in
+        DataManager.sharedInstance.fetchScholar(filter: self.filter!, pageIndex: pageIndex) { result, reponse in
             DispatchQueue.main.async { [self] in
                 self.collectionView.mj_footer?.endRefreshing()
                 self.collectionView.mj_header?.endRefreshing()
                 if result.success!{
-                    let scholarshipListModel : ScholarshipListModel = reponse as! ScholarshipListModel
+                    let scholarListModel : ScholarListModel = reponse as! ScholarListModel
                     if self.pageIndex == 1{
-                        self.dataSource = scholarshipListModel.data
+                        self.dataSource = scholarListModel.data
                     }else{
-                        if scholarshipListModel.data != nil {
-                            self.dataSource?.append(contentsOf: scholarshipListModel.data!)
+                        if scholarListModel.data != nil {
+                            self.dataSource?.append(contentsOf: scholarListModel.data!)
                         }
             
                     }
-                    if scholarshipListModel.next_page! > pageIndex {
-                        pageIndex = scholarshipListModel.next_page!
+                    if scholarListModel.next_page! > pageIndex {
+                        pageIndex = scholarListModel.next_page!
                     }else{
                         self.collectionView.mj_footer?.endRefreshingWithNoMoreData()
                     }
                     self.collectionView.reloadData()
-                }else{
-//                    let error : Error = reponse as! Error
-//                    SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")
-                    
                 }
             }
         }
