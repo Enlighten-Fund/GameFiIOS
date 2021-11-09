@@ -89,7 +89,7 @@ class RegisterController: ViewController {
     func valifyEmail() -> Bool {
         if self.emailTextField!.validateEmail(){
             self.hideNoticeLabel()
-            return false
+            return true
         }else {
             self.showNoticeLabel(notice: "Your email format is incorrect")
             return false
@@ -99,7 +99,7 @@ class RegisterController: ViewController {
     func valifyUsername() -> Bool {
         if self.usernameTextField!.validateUsername(){
             self.hideNoticeLabel()
-            return false
+            return true
         }else {
             self.showNoticeLabel(notice: "Your username format is incorrect")
             return false

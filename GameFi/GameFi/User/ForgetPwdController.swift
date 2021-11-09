@@ -63,7 +63,7 @@ class ForgetPwdController: ViewController {
     func valifyEmail() -> Bool {
         if self.emailTextField!.validateEmail(){
             self.hideNoticeLabel()
-            return false
+            return true
         }else {
             self.showNoticeLabel(notice: "Your email format is incorrect")
             return false
