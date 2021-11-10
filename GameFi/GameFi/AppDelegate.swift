@@ -101,7 +101,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         tabBarController.delegate = self
         let v1 = HomeController()
         let v2 = ViewController()
-        let v3 = ViewController()
+        let v3 = TrackController()
         let v4 = ProfileGuestController()
         self.homeVC = v1
         v1.tabBarItem = ESTabBarItem.init(title: "Explore", image: UIImage(named: "explore"), selectedImage: UIImage(named: "explore_select"))

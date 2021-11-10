@@ -26,7 +26,7 @@ class ScholarDetailController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Scholarship Detail"
+        self.title = "Scholar Detail"
         self.tableView!.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(0)
             make.bottom.equalToSuperview().offset(0)
@@ -55,7 +55,7 @@ class ScholarDetailController: ViewController {
                     tempModel.gamepalybefore = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sed turpis sed velit pulvinar suscipit. In placerat, lectus eu luctus cursus, nisl magna molestie tellus, sed congue mauris leo non felis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras sit amet risus at est interdum aliquet. ectus eu luctus cursus, nisl magna molestie tellus, sed congue mauris leo non felis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras sit amet risus at est interdum aliquet. "
                     self.scholarDetailModel = tempModel
                     self.tableView!.reloadData()
-                    SCLAlertView.init().showError("系统提示：", subTitle: result.msg!)
+                   
                     
                 }
             }

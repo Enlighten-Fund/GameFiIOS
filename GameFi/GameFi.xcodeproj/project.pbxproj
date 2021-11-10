@@ -67,6 +67,9 @@
 		98D99411273A7F31006AA8DC /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D99410273A7F31006AA8DC /* EditProfileController.swift */; };
 		98D99414273A8CFE006AA8DC /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D99413273A8CFE006AA8DC /* NotificationController.swift */; };
 		98D99417273A8DDC006AA8DC /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D99416273A8DDB006AA8DC /* NotificationCell.swift */; };
+		98D9941A273A9A17006AA8DC /* TrackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D99419273A9A17006AA8DC /* TrackController.swift */; };
+		98D9941D273B6D68006AA8DC /* TrackHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D9941C273B6D68006AA8DC /* TrackHeadView.swift */; };
+		98D9941F273B9E22006AA8DC /* TrackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D9941E273B9E22006AA8DC /* TrackCell.swift */; };
 		98E09B5A2731121B0020D97D /* ForgetPwdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E09B592731121B0020D97D /* ForgetPwdController.swift */; };
 		98E09B5C273129140020D97D /* Usermodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E09B5B273129140020D97D /* Usermodel.swift */; };
 /* End PBXBuildFile section */
@@ -132,6 +135,9 @@
 		98D99410273A7F31006AA8DC /* EditProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileController.swift; sourceTree = "<group>"; };
 		98D99413273A8CFE006AA8DC /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		98D99416273A8DDB006AA8DC /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
+		98D99419273A9A17006AA8DC /* TrackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackController.swift; sourceTree = "<group>"; };
+		98D9941C273B6D68006AA8DC /* TrackHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackHeadView.swift; sourceTree = "<group>"; };
+		98D9941E273B9E22006AA8DC /* TrackCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCell.swift; sourceTree = "<group>"; };
 		98E09B592731121B0020D97D /* ForgetPwdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPwdController.swift; sourceTree = "<group>"; };
 		98E09B5B273129140020D97D /* Usermodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usermodel.swift; sourceTree = "<group>"; };
 		C65868A573F5F7D6A4003290 /* Pods-GameFi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameFi.debug.xcconfig"; path = "Target Support Files/Pods-GameFi/Pods-GameFi.debug.xcconfig"; sourceTree = "<group>"; };
@@ -263,6 +269,7 @@
 		9811EA152726BB2700B0ACF0 /* GameFi */ = {
 			isa = PBXGroup;
 			children = (
+				98D99418273A9A03006AA8DC /* Track */,
 				98D99412273A8CDC006AA8DC /* Notification */,
 				98D99408273A3A45006AA8DC /* SweetAlert.swift */,
 				9876943027393CCB0075CA0F /* Profile */,
@@ -347,6 +354,24 @@
 			isa = PBXGroup;
 			children = (
 				98D99416273A8DDB006AA8DC /* NotificationCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		98D99418273A9A03006AA8DC /* Track */ = {
+			isa = PBXGroup;
+			children = (
+				98D9941B273B6D40006AA8DC /* View */,
+				98D99419273A9A17006AA8DC /* TrackController.swift */,
+			);
+			path = Track;
+			sourceTree = "<group>";
+		};
+		98D9941B273B6D40006AA8DC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				98D9941C273B6D68006AA8DC /* TrackHeadView.swift */,
+				98D9941E273B9E22006AA8DC /* TrackCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -486,6 +511,7 @@
 				980A7DC22728135B006AE4C4 /* GFNavController.swift in Sources */,
 				98823A412729674500D9A7CD /* Define.swift in Sources */,
 				980DB7A32733E6EC006ED3BE /* ScholarshipListModel.swift in Sources */,
+				98D9941D273B6D68006AA8DC /* TrackHeadView.swift in Sources */,
 				98D99414273A8CFE006AA8DC /* NotificationController.swift in Sources */,
 				980A7DC4272828FD006AE4C4 /* DataManager.swift in Sources */,
 				980DB7CD2738E9F6006ED3BE /* ScholarsCell.swift in Sources */,
@@ -509,11 +535,13 @@
 				98D9940B273A46D2006AA8DC /* ScholarListModel.swift in Sources */,
 				986C586E27300B9A0021280A /* LoginHeadView.swift in Sources */,
 				984BDBAA272C307B00F6144B /* RegisterFootView.swift in Sources */,
+				98D9941F273B9E22006AA8DC /* TrackCell.swift in Sources */,
 				980DB7C927356C85006ED3BE /* LabelAndLabelView.swift in Sources */,
 				984BDBA4272C0E9300F6144B /* Extension.swift in Sources */,
 				984BDB95272ACD0A00F6144B /* RegisterController.swift in Sources */,
 				980DB7AE2734F677006ED3BE /* LYDropListView.swift in Sources */,
 				980A7DCA27292034006AE4C4 /* GFResult.swift in Sources */,
+				98D9941A273A9A17006AA8DC /* TrackController.swift in Sources */,
 				9811EA1B2726BB2700B0ACF0 /* ViewController.swift in Sources */,
 				98769435273941890075CA0F /* ProfileGuestHeaderView.swift in Sources */,
 				980DB79A2733D391006ED3BE /* UIView+FastKit.swift in Sources */,
