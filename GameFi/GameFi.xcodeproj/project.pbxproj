@@ -53,6 +53,8 @@
 		98581722273CEBD600D8CFCA /* NoOfferScholarshipController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98581721273CEBD600D8CFCA /* NoOfferScholarshipController.swift */; };
 		98581724273CF45900D8CFCA /* NoOfferScholarshipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98581723273CF45900D8CFCA /* NoOfferScholarshipCell.swift */; };
 		98581726273CF70900D8CFCA /* NoOfferHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98581725273CF70900D8CFCA /* NoOfferHeaderView.swift */; };
+		98581728273D0A3700D8CFCA /* AddTrackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98581727273D0A3700D8CFCA /* AddTrackController.swift */; };
+		9858172A273D0F2C00D8CFCA /* LabelAndLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98581729273D0F2C00D8CFCA /* LabelAndLabelCell.swift */; };
 		986C586E27300B9A0021280A /* LoginHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C586D27300B9A0021280A /* LoginHeadView.swift */; };
 		986C587027300BEB0021280A /* LoginFootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C586F27300BEB0021280A /* LoginFootView.swift */; };
 		987694272738ED150075CA0F /* ScholarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987694262738ED150075CA0F /* ScholarModel.swift */; };
@@ -129,6 +131,8 @@
 		98581721273CEBD600D8CFCA /* NoOfferScholarshipController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoOfferScholarshipController.swift; sourceTree = "<group>"; };
 		98581723273CF45900D8CFCA /* NoOfferScholarshipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoOfferScholarshipCell.swift; sourceTree = "<group>"; };
 		98581725273CF70900D8CFCA /* NoOfferHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoOfferHeaderView.swift; sourceTree = "<group>"; };
+		98581727273D0A3700D8CFCA /* AddTrackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTrackController.swift; sourceTree = "<group>"; };
+		98581729273D0F2C00D8CFCA /* LabelAndLabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelAndLabelCell.swift; sourceTree = "<group>"; };
 		986C586D27300B9A0021280A /* LoginHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeadView.swift; sourceTree = "<group>"; };
 		986C586F27300BEB0021280A /* LoginFootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFootView.swift; sourceTree = "<group>"; };
 		987694262738ED150075CA0F /* ScholarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarModel.swift; sourceTree = "<group>"; };
@@ -380,6 +384,7 @@
 			children = (
 				98D9941B273B6D40006AA8DC /* View */,
 				98D99419273A9A17006AA8DC /* TrackController.swift */,
+				98581727273D0A3700D8CFCA /* AddTrackController.swift */,
 			);
 			path = Track;
 			sourceTree = "<group>";
@@ -389,6 +394,7 @@
 			children = (
 				98D9941C273B6D68006AA8DC /* TrackHeadView.swift */,
 				98D9941E273B9E22006AA8DC /* TrackCell.swift */,
+				98581729273D0F2C00D8CFCA /* LabelAndLabelCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -569,6 +575,7 @@
 				984BDB9D272BCDEF00F6144B /* EmptyTableViewCell.swift in Sources */,
 				980DB7972733D391006ED3BE /* TYPageStyle.swift in Sources */,
 				980DB7B02734F677006ED3BE /* LYDropListTItleView.swift in Sources */,
+				9858172A273D0F2C00D8CFCA /* LabelAndLabelCell.swift in Sources */,
 				980DB7992733D391006ED3BE /* TYPageViewConst.swift in Sources */,
 				980DB7C527355876006ED3BE /* ScholarshipsDetailController.swift in Sources */,
 				98D99428273BACDA006AA8DC /* AccountScholarshipCell.swift in Sources */,
@@ -604,6 +611,7 @@
 				987694292738F1440075CA0F /* ScholarDetailController.swift in Sources */,
 				980DB7A52733F158006ED3BE /* JsonUtil.swift in Sources */,
 				986C587027300BEB0021280A /* LoginFootView.swift in Sources */,
+				98581728273D0A3700D8CFCA /* AddTrackController.swift in Sources */,
 				98D99425273BAB19006AA8DC /* AccountScholarshipsController.swift in Sources */,
 				980DB7982733D391006ED3BE /* TYPageView.swift in Sources */,
 				980DB7962733D391006ED3BE /* TYPageTitleView.swift in Sources */,

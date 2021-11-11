@@ -22,7 +22,7 @@ class TrackController: ViewController {
             make.left.equalToSuperview().offset(15)
             make.right.equalToSuperview().offset(-15)
         }
-        self.addScholarshipBtn.snp.makeConstraints { make in
+        self.addTrackBtn.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-15)
             make.height.equalTo(50)
             make.width.equalTo(50)
@@ -46,6 +46,9 @@ class TrackController: ViewController {
 //        }
     }
     
+    @objc func showAddTrack(){
+        self.navigationController?.pushViewController(AddTrackController.init(), animated: true)
+    }
     
     lazy var tableView: UITableView? = {
         let headerview = TrackHeadView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 335))
@@ -66,7 +69,7 @@ class TrackController: ViewController {
         return tempTableView
     }()
     
-    lazy var addScholarshipBtn: UIButton = {
+    lazy var addTrackBtn: UIButton = {
         let tempBtn = UIButton.init()
         tempBtn.backgroundColor = UIColor(red: 0.27, green: 0.3, blue: 0.45, alpha: 1)
         tempBtn.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).cgColor
@@ -76,6 +79,7 @@ class TrackController: ViewController {
         tempBtn.layer.cornerRadius = 25
         tempBtn.setImage(UIImage.init(named: "add"), for: .normal)
         tempBtn.setImage(UIImage.init(named: "add"), for: .highlighted)
+        tempBtn.addTarget(self, action: #selector(showAddTrack), for: .touchUpInside)
         self.view.addSubview(tempBtn)
         return tempBtn
     }()
