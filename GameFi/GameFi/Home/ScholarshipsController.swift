@@ -46,6 +46,11 @@ class ScholarshipsController: UIViewController {
         self.collectionView.mj_header?.beginRefreshing()
     }
 
+    @objc func showAddScholarshipVC() {
+        let appdelegate : AppDelegate = UIApplication.shared.delegate! as! AppDelegate
+        appdelegate.homeVC?.navigationController!.pushViewController(AddScholarshipController.init(), animated: true)
+    }
+    
     lazy var sortLabel:UILabel = {
         let label = UILabel()
         let attrString = NSMutableAttributedString(string: "Sort by")
@@ -111,6 +116,7 @@ class ScholarshipsController: UIViewController {
         tempBtn.layer.cornerRadius = 25
         tempBtn.setImage(UIImage.init(named: "add"), for: .normal)
         tempBtn.setImage(UIImage.init(named: "add"), for: .highlighted)
+        tempBtn.addTarget(self, action: #selector(showAddScholarshipVC), for: .touchUpInside)
         self.view.addSubview(tempBtn)
         return tempBtn
     }()

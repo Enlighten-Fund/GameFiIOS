@@ -21,7 +21,7 @@ class LabelAndLabelCell: TableViewCell {
         self.rightLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.left.equalTo(self.leftLabel.snp.right).offset(0)
-            make.right.equalToSuperview().offset(-15)
+            make.right.equalToSuperview().offset(-25)
             make.height.equalTo(50)
         }
     }
