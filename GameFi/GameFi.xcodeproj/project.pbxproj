@@ -70,6 +70,9 @@
 		98D9941A273A9A17006AA8DC /* TrackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D99419273A9A17006AA8DC /* TrackController.swift */; };
 		98D9941D273B6D68006AA8DC /* TrackHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D9941C273B6D68006AA8DC /* TrackHeadView.swift */; };
 		98D9941F273B9E22006AA8DC /* TrackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D9941E273B9E22006AA8DC /* TrackCell.swift */; };
+		98D99423273BA9F0006AA8DC /* AccountsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D99422273BA9F0006AA8DC /* AccountsController.swift */; };
+		98D99425273BAB19006AA8DC /* AccountScholarshipsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D99424273BAB19006AA8DC /* AccountScholarshipsController.swift */; };
+		98D99428273BACDA006AA8DC /* AccountScholarshipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D99427273BACDA006AA8DC /* AccountScholarshipCell.swift */; };
 		98E09B5A2731121B0020D97D /* ForgetPwdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E09B592731121B0020D97D /* ForgetPwdController.swift */; };
 		98E09B5C273129140020D97D /* Usermodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E09B5B273129140020D97D /* Usermodel.swift */; };
 /* End PBXBuildFile section */
@@ -138,6 +141,9 @@
 		98D99419273A9A17006AA8DC /* TrackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackController.swift; sourceTree = "<group>"; };
 		98D9941C273B6D68006AA8DC /* TrackHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackHeadView.swift; sourceTree = "<group>"; };
 		98D9941E273B9E22006AA8DC /* TrackCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCell.swift; sourceTree = "<group>"; };
+		98D99422273BA9F0006AA8DC /* AccountsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsController.swift; sourceTree = "<group>"; };
+		98D99424273BAB19006AA8DC /* AccountScholarshipsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountScholarshipsController.swift; sourceTree = "<group>"; };
+		98D99427273BACDA006AA8DC /* AccountScholarshipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountScholarshipCell.swift; sourceTree = "<group>"; };
 		98E09B592731121B0020D97D /* ForgetPwdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPwdController.swift; sourceTree = "<group>"; };
 		98E09B5B273129140020D97D /* Usermodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usermodel.swift; sourceTree = "<group>"; };
 		C65868A573F5F7D6A4003290 /* Pods-GameFi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameFi.debug.xcconfig"; path = "Target Support Files/Pods-GameFi/Pods-GameFi.debug.xcconfig"; sourceTree = "<group>"; };
@@ -269,9 +275,10 @@
 		9811EA152726BB2700B0ACF0 /* GameFi */ = {
 			isa = PBXGroup;
 			children = (
+				98D99421273BA97A006AA8DC /* Accounts */,
+				98D99420273BA96D006AA8DC /* Util */,
 				98D99418273A9A03006AA8DC /* Track */,
 				98D99412273A8CDC006AA8DC /* Notification */,
-				98D99408273A3A45006AA8DC /* SweetAlert.swift */,
 				9876943027393CCB0075CA0F /* Profile */,
 				980DB78A27327DF9006ED3BE /* General */,
 				984BDB9E272BED7C00F6144B /* User */,
@@ -372,6 +379,32 @@
 			children = (
 				98D9941C273B6D68006AA8DC /* TrackHeadView.swift */,
 				98D9941E273B9E22006AA8DC /* TrackCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		98D99420273BA96D006AA8DC /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				98D99408273A3A45006AA8DC /* SweetAlert.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		98D99421273BA97A006AA8DC /* Accounts */ = {
+			isa = PBXGroup;
+			children = (
+				98D99426273BACA1006AA8DC /* View */,
+				98D99422273BA9F0006AA8DC /* AccountsController.swift */,
+				98D99424273BAB19006AA8DC /* AccountScholarshipsController.swift */,
+			);
+			path = Accounts;
+			sourceTree = "<group>";
+		};
+		98D99426273BACA1006AA8DC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				98D99427273BACDA006AA8DC /* AccountScholarshipCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -521,6 +554,7 @@
 				980DB7B02734F677006ED3BE /* LYDropListTItleView.swift in Sources */,
 				980DB7992733D391006ED3BE /* TYPageViewConst.swift in Sources */,
 				980DB7C527355876006ED3BE /* ScholarshipsDetailController.swift in Sources */,
+				98D99428273BACDA006AA8DC /* AccountScholarshipCell.swift in Sources */,
 				98E09B5A2731121B0020D97D /* ForgetPwdController.swift in Sources */,
 				980DB79027337F7C006ED3BE /* ScholarShipsCell.swift in Sources */,
 				98823A3F27295B0100D9A7CD /* HomeController.swift in Sources */,
@@ -550,10 +584,12 @@
 				987694292738F1440075CA0F /* ScholarDetailController.swift in Sources */,
 				980DB7A52733F158006ED3BE /* JsonUtil.swift in Sources */,
 				986C587027300BEB0021280A /* LoginFootView.swift in Sources */,
+				98D99425273BAB19006AA8DC /* AccountScholarshipsController.swift in Sources */,
 				980DB7982733D391006ED3BE /* TYPageView.swift in Sources */,
 				980DB7962733D391006ED3BE /* TYPageTitleView.swift in Sources */,
 				980DB79E2733D486006ED3BE /* ScholarsController.swift in Sources */,
 				987694272738ED150075CA0F /* ScholarModel.swift in Sources */,
+				98D99423273BA9F0006AA8DC /* AccountsController.swift in Sources */,
 				980DB7CB273571E0006ED3BE /* ScholarshipDetailModel.swift in Sources */,
 				9811EA172726BB2700B0ACF0 /* AppDelegate.swift in Sources */,
 				98E09B5C273129140020D97D /* Usermodel.swift in Sources */,

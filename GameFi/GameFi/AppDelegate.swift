@@ -100,7 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         tabBarController.tabBar.barTintColor = UIColor(red: 0.13, green: 0.14, blue: 0.2, alpha: 1)
         tabBarController.delegate = self
         let v1 = HomeController()
-        let v2 = ViewController()
+        let v2 = AccountsController()
         let v3 = TrackController()
         let v4 = ProfileGuestController()
         self.homeVC = v1
