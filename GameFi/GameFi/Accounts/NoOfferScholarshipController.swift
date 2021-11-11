@@ -35,10 +35,12 @@ class NoOfferScholarshipController: UIViewController {
         layout.minimumLineSpacing = 10
         layout.scrollDirection = UICollectionView.ScrollDirection.vertical  //滚动方向
         layout.itemSize = CGSize(width: IPhone_SCREEN_WIDTH - 30, height: 430)
+        layout.headerReferenceSize = CGSize(width: IPhone_SCREEN_WIDTH - 30, height: 175)
         // 设置CollectionView
         let ourCollectionView : UICollectionView = UICollectionView(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: IPhone_SCREEN_HEIGHT), collectionViewLayout: layout)
         ourCollectionView.delegate = self
         ourCollectionView.dataSource = self
+        ourCollectionView.register(NoOfferHeaderView.self, forSupplementaryViewOfKind:UICollectionView.elementKindSectionHeader, withReuseIdentifier: noOfferHeaderViewheaderIdentifier)
         ourCollectionView.register(NoOfferScholarshipCell.classForCoder(), forCellWithReuseIdentifier: noOfferScholarshipCellIdentifier)
         ourCollectionView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
             self.refreshHttpRequest()
@@ -75,6 +77,19 @@ extension  NoOfferScholarshipController : UICollectionViewDelegate,UICollectionV
         return 5
     }
 
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        var reusableview:UICollectionReusableView!
+        if kind ==  UICollectionView.elementKindSectionHeader{
+            reusableview = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: noOfferHeaderViewheaderIdentifier, for: indexPath) as! NoOfferHeaderView
+            let temp : NoOfferHeaderView = reusableview as! NoOfferHeaderView
+            temp.makeConstraints()
+        }
+        return reusableview
+    }
+    
+    
+  
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: noOfferScholarshipCellIdentifier, for: indexPath) as! NoOfferScholarshipCell
         cell.makeConstraints()
