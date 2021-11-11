@@ -62,16 +62,17 @@ class EditProfileController: ViewController {
     lazy var tableView: UITableView? = {
         let tempTableView = UITableView.init(frame: CGRect.zero, style: .plain)
         tempTableView.backgroundColor = UIColor(red: 0.15, green: 0.16, blue: 0.24, alpha: 1)
-        let headerView = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH - 30, height: 40))
-        headerView.textColor = .white
-        headerView.font = UIFont(name: "Avenir Heavy", size: 16)
-        tempTableView.tableHeaderView = headerView
-        
         tempTableView.separatorStyle = .none
         tempTableView.keyboardDismissMode = .onDrag
         tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "0")
         tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "1")
         tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "2")
+        tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "3")
+        tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "4")
+        tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "5")
+        tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "6")
+        tempTableView.register(TextViewCell.classForCoder(), forCellReuseIdentifier: textViewCellIdentifier + "7")
+        tempTableView.register(TextViewCell.classForCoder(), forCellReuseIdentifier: textViewCellIdentifier + "8")
         tempTableView.register(EmptyTableViewCell.classForCoder(), forCellReuseIdentifier: emptyTableViewCellIdentifier)
         tempTableView.dataSource = self
         tempTableView.delegate = self
@@ -91,7 +92,7 @@ class EditProfileController: ViewController {
     }()
 }
 
-extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate{
+extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UITextViewDelegate{
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 //        guard textField.text != nil else {
@@ -115,10 +116,13 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             
-           return 9
+           return 10
     }
         
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 7 || indexPath.row == 8 {
+            return 150
+        }
            return 60
     }
         
@@ -128,34 +132,62 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
     case 0:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "0", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.delegate = self
-        tempCell.textFild?.keyboardType = .emailAddress
-        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter email", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  First name", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.emailTextField = tempCell.textFild
 
         cell = tempCell
     case 1:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "1", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.delegate = self
-        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter username", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Last name", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.usernameTextField = tempCell.textFild
 
         cell = tempCell
     case 2:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "2", for: indexPath) as! LabelTextFildCell
-        tempCell.textFild?.setupShowPasswordButton()
-        tempCell.textFild?.isSecureTextEntry = true
         tempCell.textFild?.delegate = self
-        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter password", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Nationality", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.passwordTextField = tempCell.textFild
     
         cell = tempCell
     case 3:
-        let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "2", for: indexPath) as! LabelTextFildCell
-        tempCell.textFild?.setupShowPasswordButton()
-        tempCell.textFild?.isSecureTextEntry = true
+        let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "3", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.delegate = self
-        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter password", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter age 0-100", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.passwordTextField = tempCell.textFild
+    
+        cell = tempCell
+    case 4:
+        let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "4", for: indexPath) as! LabelTextFildCell
+        tempCell.textFild?.delegate = self
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter available time (0-24 hours)", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
+        self.passwordTextField = tempCell.textFild
+    
+        cell = tempCell
+    case 5:
+        let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "5", for: indexPath) as! LabelTextFildCell
+        tempCell.textFild?.delegate = self
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter highest MMR", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
+        self.passwordTextField = tempCell.textFild
+    
+        cell = tempCell
+    case 6:
+        let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "6", for: indexPath) as! LabelTextFildCell
+        tempCell.textFild?.delegate = self
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  How long have you played this game", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
+        self.passwordTextField = tempCell.textFild
+    
+        cell = tempCell
+    case 7:
+        let tempCell : TextViewCell = tableView.dequeueReusableCell(withIdentifier: textViewCellIdentifier + "7", for: indexPath) as! TextViewCell
+        tempCell.textView?.delegate = self
+       
+    
+        cell = tempCell
+    case 8:
+        let tempCell : TextViewCell = tableView.dequeueReusableCell(withIdentifier: textViewCellIdentifier + "8", for: indexPath) as! TextViewCell
+        tempCell.textView?.delegate = self
+       
     
         cell = tempCell
     default:

@@ -58,6 +58,7 @@
 		9858172C273D1BCC00D8CFCA /* AddScholarshipController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858172B273D1BCC00D8CFCA /* AddScholarshipController.swift */; };
 		9858172E273D205600D8CFCA /* PostScholarshipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858172D273D205600D8CFCA /* PostScholarshipCell.swift */; };
 		98581730273D2DBF00D8CFCA /* PostScholarFootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858172F273D2DBF00D8CFCA /* PostScholarFootView.swift */; };
+		98581732273D3DB800D8CFCA /* TextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98581731273D3DB800D8CFCA /* TextViewCell.swift */; };
 		986C586E27300B9A0021280A /* LoginHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C586D27300B9A0021280A /* LoginHeadView.swift */; };
 		986C587027300BEB0021280A /* LoginFootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C586F27300BEB0021280A /* LoginFootView.swift */; };
 		987694272738ED150075CA0F /* ScholarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987694262738ED150075CA0F /* ScholarModel.swift */; };
@@ -139,6 +140,7 @@
 		9858172B273D1BCC00D8CFCA /* AddScholarshipController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScholarshipController.swift; sourceTree = "<group>"; };
 		9858172D273D205600D8CFCA /* PostScholarshipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostScholarshipCell.swift; sourceTree = "<group>"; };
 		9858172F273D2DBF00D8CFCA /* PostScholarFootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostScholarFootView.swift; sourceTree = "<group>"; };
+		98581731273D3DB800D8CFCA /* TextViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewCell.swift; sourceTree = "<group>"; };
 		986C586D27300B9A0021280A /* LoginHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeadView.swift; sourceTree = "<group>"; };
 		986C586F27300BEB0021280A /* LoginFootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFootView.swift; sourceTree = "<group>"; };
 		987694262738ED150075CA0F /* ScholarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarModel.swift; sourceTree = "<group>"; };
@@ -367,6 +369,7 @@
 			children = (
 				98769434273941890075CA0F /* ProfileGuestHeaderView.swift */,
 				98D99406273A107D006AA8DC /* ProfileHeaderView.swift */,
+				98581731273D3DB800D8CFCA /* TextViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -602,6 +605,7 @@
 				987694372739625A0075CA0F /* ProfileController.swift in Sources */,
 				98581730273D2DBF00D8CFCA /* PostScholarFootView.swift in Sources */,
 				98D9940B273A46D2006AA8DC /* ScholarListModel.swift in Sources */,
+				98581732273D3DB800D8CFCA /* TextViewCell.swift in Sources */,
 				986C586E27300B9A0021280A /* LoginHeadView.swift in Sources */,
 				984BDBAA272C307B00F6144B /* RegisterFootView.swift in Sources */,
 				98D9941F273B9E22006AA8DC /* TrackCell.swift in Sources */,

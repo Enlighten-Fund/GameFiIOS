@@ -12,6 +12,12 @@ class LabelAndLabelCell: TableViewCell {
     
     override func makeConstraints(){
         super.makeConstraints()
+        self.bgView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(10)
+            make.left.equalToSuperview().offset(15)
+            make.right.equalToSuperview().offset(-15)
+            make.bottom.equalToSuperview().offset(0)
+        }
         self.leftLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.left.equalToSuperview().offset(15)
@@ -26,11 +32,19 @@ class LabelAndLabelCell: TableViewCell {
         }
     }
     
+    lazy var bgView : UIView = {
+        let tempView = UIView.init(frame: CGRect.zero)
+        tempView.backgroundColor = UIColor(red: 0.19, green: 0.21, blue: 0.29, alpha: 1)
+        tempView.layer.cornerRadius = 5
+        tempView.layer.masksToBounds = true
+        self.contentView.addSubview(tempView)
+        return tempView
+    }()
+    
     lazy var leftLabel : UILabel = {
         let tempLabel = UILabel.init(frame: CGRect.zero)
         tempLabel.textColor = .white
         tempLabel.font = UIFont(name: "Avenir Next Regular", size: 15)
-        tempLabel.backgroundColor = UIColor(red: 0.19, green: 0.21, blue: 0.29, alpha: 1)
         self.contentView.addSubview(tempLabel)
         return tempLabel
     }()
@@ -38,7 +52,6 @@ class LabelAndLabelCell: TableViewCell {
         let tempLabel = UILabel.init(frame: CGRect.zero)
         tempLabel.textColor = .white
         tempLabel.textAlignment = .right
-        tempLabel.backgroundColor = UIColor(red: 0.19, green: 0.21, blue: 0.29, alpha: 1)
         tempLabel.font = UIFont(name: "Avenir Next Regular", size: 15)
         self.contentView.addSubview(tempLabel)
         return tempLabel

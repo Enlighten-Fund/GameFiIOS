@@ -15,4 +15,22 @@ class GFNavController: UINavigationController {
       self.navigationBar.tintColor = UIColor(red: 0.13, green: 0.14, blue: 0.2, alpha: 1)
     }
     
+    
+    
+    
+    override func pushViewController(_ viewController: UIViewController, animated: Bool){
+        if viewController.isKind(of: ProfileController.self)
+            ||  viewController.isKind(of: HomeController.self)
+            ||  viewController.isKind(of: TrackController.self)
+            ||  viewController.isKind(of: ProfileGuestController.self)
+            ||  viewController.isKind(of: AccountsController.self){
+            viewController.hidesBottomBarWhenPushed = false
+            super.pushViewController(viewController, animated: false)
+            return
+        }
+        viewController.hidesBottomBarWhenPushed = true
+        super.pushViewController(viewController, animated: true)
+
+    }
+
 }
