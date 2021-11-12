@@ -20,8 +20,14 @@ class ScholarModel: BaseModel {
     var username : String?
     var email : String?
     var credit_score : String?
-    var scholar_profile : ProfileModel?
+    var mmr : String?
+    var available_time : String?
+    var scholar_since : String?
     
+    
+    //缺失
+    var scholar_portrait:String?
+    var winrate : String?
     required init() {}
 }
 

@@ -88,7 +88,7 @@ class ScholarshipsCell: UICollectionViewCell {
         self.creditLabel.snp.makeConstraints { make in
             make.top.equalTo(self.accountLabel.snp.bottom)
             make.centerX.equalToSuperview()
-            make.height.equalTo(25)
+            make.height.equalTo(20)
             make.width.equalToSuperview()
         }
         self.slpImgView.snp.makeConstraints { make in

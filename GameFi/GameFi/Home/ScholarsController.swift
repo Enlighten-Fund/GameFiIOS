@@ -19,6 +19,7 @@ class ScholarsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(red: 0.15, green: 0.16, blue: 0.24, alpha: 1)
+        self.filter = sortArray[0]
         self.collectionView.snp.makeConstraints { make in
             make.top.equalTo(self.dropListView.snp.bottom).offset(15)
             make.bottom.equalToSuperview().offset(0)

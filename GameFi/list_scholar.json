@@ -1,0 +1,5 @@
+{
+  "code": 1,
+  "data": "{\"count\": 2, \"next_page\": 2, \"data\": [{\"user_id\": \"101\", \"winrate\":70,\"avatar\": \"https://enlighten-gamefi-oss-private.s3.amazonaws.com/user-avatar/101?AWSAccessKeyId=AKIAT5LOW3BBT45KW3SH&Signature=XOTKS%2Fotk5LvMQmTs9H5c5Jymic%3D&Expires=1636702171\", \"username\": \"scholar1\", \"credit_score\": 100, \"scholar_since\": \"2021-11-10 06:11:07\", \"mmr\": \"n/a\", \"available_time\": \"n/a\"}, {\"user_id\": \"102\",\"winrate\":70, \"avatar\": \"https://enlighten-gamefi-oss-private.s3.amazonaws.com/user-avatar/102?AWSAccessKeyId=AKIAT5LOW3BBT45KW3SH&Signature=NnCvr2R3jGviK53glYHYZXq9Ec4%3D&Expires=1636702171\", \"username\": \"scholar2\", \"credit_score\": 85, \"scholar_since\": \"2021-11-10 06:11:07\", \"mmr\": \"n/a\", \"available_time\": \"n/a\"}]}",
+  "msg": "success"
+}

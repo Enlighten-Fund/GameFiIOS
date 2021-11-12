@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Kingfisher
+
 let scholarsCelldentifier:String = "ScholarsCell"
 
 class ScholarsCell: UICollectionViewCell {
@@ -14,14 +16,14 @@ class ScholarsCell: UICollectionViewCell {
         self.contentView.layer.cornerRadius = 5
         self.contentView.layer.masksToBounds = true
         self.contentView.backgroundColor = UIColor.init(hexString: "0x30354B")
-        self.axieImgView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
-            make.left.equalToSuperview().offset(18)
-            make.height.equalTo(44)
-            make.right.equalToSuperview().offset(-18)
+        self.accountImgView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(10)
+            make.height.equalTo(50)
+            make.width.equalTo(50)
         }
         self.accountLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.axieImgView.snp.bottom)
+            make.top.equalTo(self.accountImgView.snp.bottom)
             make.centerX.equalToSuperview()
             make.height.equalTo(25)
             make.width.equalToSuperview()
@@ -60,17 +62,34 @@ class ScholarsCell: UICollectionViewCell {
     }
 
     func update(scholarModel:ScholarModel) {
-        self.axieImgView.image = UIImage.init(named: "explore_select")
-        self.accountLabel.text = scholarModel.username
-        self.creditLabel.text = "Credit: \(scholarModel.credit_score!)"
-//        self.mmrLabelView.update(leftTitle: "MMR(avg)", rithtTitle: scholarModel.m)
-        self.mmrLabelView.rightLabel.textColor = UIColor(red: 1, green: 0.72, blue: 0.07, alpha: 1)
-//        self.winRateLabelView.update(leftTitle: "Win rate", rithtTitle: "60%")
-//        self.expLabelView.update(leftTitle: "Exp.", rithtTitle: ">6 months")
-//        self.availabelLabelView.update(leftTitle: "Available", rithtTitle: "6 hrs/day")
+        self.accountImgView.image = UIImage.init(named: "portrait")
+        if scholarModel.scholar_portrait != nil {
+            self.accountImgView.kf.setImage(with: URL.init(string: scholarModel.scholar_portrait!))
+        }
+        if scholarModel.username != nil {
+            self.accountLabel.text = scholarModel.username
+        }
+        if scholarModel.credit_score != nil {
+            self.creditLabel.text = "Credit: \(scholarModel.credit_score!)"
+        }
+        if scholarModel.mmr != nil {
+            self.mmrLabelView.update(leftTitle: "MMR(avg)", rithtTitle: scholarModel.mmr!)
+            self.mmrLabelView.rightLabel.textColor = UIColor(red: 1, green: 0.72, blue: 0.07, alpha: 1)
+        }
+        if scholarModel.winrate != nil {
+            self.winRateLabelView.update(leftTitle: "Win rate", rithtTitle: scholarModel.winrate!)
+        }
+      
+        if scholarModel.scholar_since != nil {
+            self.expLabelView.update(leftTitle: "Exp.", rithtTitle: scholarModel.scholar_since!)
+        }
+        if scholarModel.available_time != nil {
+            self.availabelLabelView.update(leftTitle: "Available", rithtTitle: scholarModel.available_time!)
+        }
+
     }
     
-    lazy var axieImgView : UIImageView = {
+    lazy var accountImgView : UIImageView = {
         let tempImgView = UIImageView.init()
         self.contentView.addSubview(tempImgView)
         return tempImgView
