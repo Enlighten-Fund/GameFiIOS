@@ -9,12 +9,7 @@ import AWSMobileClient
 
 class Usermodel {
     static let shared = Usermodel()
-       
-       // Make sure the class has only one instance
-       // Should not init outside
        private init() {}
-       
-       // Optional
        func reset() {
            // Reset all properties to default value
        }
@@ -32,6 +27,22 @@ class Usermodel {
         set{
             _gfrole = newValue
             UserDefaults.standard.setValue(newValue, forKey: "gfrole")
+        }
+    }
+    
+    var _token : String?
+    var token : String?{
+        get{
+            if _token == nil{
+                _token = UserDefaults.standard.string(forKey: "token")
+                return _token
+            }
+            
+            return _token
+        }
+        set{
+            _token = newValue
+            UserDefaults.standard.setValue(newValue, forKey: "token")
         }
     }
 }

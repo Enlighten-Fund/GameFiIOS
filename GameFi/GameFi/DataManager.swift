@@ -18,6 +18,7 @@ class DataManager: NSObject {
         dic["appbuild"] = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
         dic["jkver"] = jkver
         dic["os"] = "iOS" + UIDevice.current.systemVersion
+        dic["role"] = UserManager.sharedInstance.currentRole()
         return dic
     }
     //MARK: - GET请求

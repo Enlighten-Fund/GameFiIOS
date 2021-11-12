@@ -166,7 +166,8 @@ class ForgetPwdController: ViewController {
                                 } else if let signInResult = signInResult {
                                     switch (signInResult.signInState) {
                                     case .signedIn:
-                                        print("User is signed in.")
+                                        UserManager.sharedInstance.updateToken()
+                                        UserManager.sharedInstance.fetchAndUpdateRole()
                                         SCLAlertView.init().showError("系统提示：", subTitle: "修改密码并登录成功")
                                         self.navigationController?.popToRootViewController(animated: true)
                                     case .smsMFA:

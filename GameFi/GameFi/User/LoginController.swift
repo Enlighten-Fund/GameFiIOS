@@ -11,15 +11,19 @@ import SnapKit
 import AWSMobileClient
 import SCLAlertView
 import MJRefresh
+
+//定义
+typealias LoginSuccessBlock = ()->Void
 class LoginController: ViewController {
     var usernameTextField : UITextField?
     var passwordTextField : UITextField?
     var footView : LoginFootView?
-    
+    var loginSuccessBlock:LoginSuccessBlock?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Sign in"
         self.leftBtn?.isHidden = false
+        self.msgBtn?.isHidden = true
         self.tableView!.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(0)
             make.bottom.equalToSuperview().offset(0)
@@ -84,20 +88,6 @@ class LoginController: ViewController {
         self.navigationController?.pushViewController(RegisterController.init(), animated: true)
     }
     
-    func updateRole(){
-        AWSMobileClient.default().getUserAttributes { [self]attributes, error in
-            if(error != nil){
-                print("ERROR: \(error)")
-            }else{
-                if let attributesDict = attributes{
-                    if attributesDict["custom:gfrole"] != nil {
-                        Usermodel.shared.gfrole = attributesDict["custom:gfrole"]!
-                    }
-                }
-            }
-        }
-    }
-    
     //登录
     @objc func loginBtnClick(){
         if !self.valifyAccount() {
@@ -117,9 +107,16 @@ class LoginController: ViewController {
                     switch (signInResult.signInState) {
                     case .signedIn:
                         print("User is signed in.")
+                        
                         self.mc_success("login success", duration: 0.5) {
                             self.dismiss(animated: true) {
-                                
+                                UserManager.sharedInstance.updateToken()
+                                UserManager.sharedInstance.fetchRoleBlock = {
+                                    if self.loginSuccessBlock != nil{
+                                        self.loginSuccessBlock!()
+                                    }
+                                }
+                                UserManager.sharedInstance.fetchAndUpdateRole()
                             }
                         }
                     default:

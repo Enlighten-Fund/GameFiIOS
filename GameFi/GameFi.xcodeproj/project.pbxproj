@@ -61,6 +61,7 @@
 		98581732273D3DB800D8CFCA /* TextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98581731273D3DB800D8CFCA /* TextViewCell.swift */; };
 		98581735273E334100D8CFCA /* list_by_marketplace.json in Resources */ = {isa = PBXBuildFile; fileRef = 98581734273E334100D8CFCA /* list_by_marketplace.json */; };
 		98581737273E41A800D8CFCA /* list_scholar.json in Resources */ = {isa = PBXBuildFile; fileRef = 98581736273E41A800D8CFCA /* list_scholar.json */; };
+		98581739273E921800D8CFCA /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98581738273E921800D8CFCA /* UserManager.swift */; };
 		986C586E27300B9A0021280A /* LoginHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C586D27300B9A0021280A /* LoginHeadView.swift */; };
 		986C587027300BEB0021280A /* LoginFootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C586F27300BEB0021280A /* LoginFootView.swift */; };
 		987694272738ED150075CA0F /* ScholarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987694262738ED150075CA0F /* ScholarModel.swift */; };
@@ -145,6 +146,7 @@
 		98581731273D3DB800D8CFCA /* TextViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewCell.swift; sourceTree = "<group>"; };
 		98581734273E334100D8CFCA /* list_by_marketplace.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = list_by_marketplace.json; sourceTree = "<group>"; };
 		98581736273E41A800D8CFCA /* list_scholar.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = list_scholar.json; sourceTree = "<group>"; };
+		98581738273E921800D8CFCA /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		986C586D27300B9A0021280A /* LoginHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeadView.swift; sourceTree = "<group>"; };
 		986C586F27300BEB0021280A /* LoginFootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFootView.swift; sourceTree = "<group>"; };
 		987694262738ED150075CA0F /* ScholarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarModel.swift; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 				980DB78D27337E96006ED3BE /* Home */,
 				9811EA162726BB2700B0ACF0 /* AppDelegate.swift */,
 				980A7DC3272828FD006AE4C4 /* DataManager.swift */,
+				98581738273E921800D8CFCA /* UserManager.swift */,
 				9811EA1F2726BB2800B0ACF0 /* Assets.xcassets */,
 				9811EA212726BB2800B0ACF0 /* LaunchScreen.storyboard */,
 				9811EA242726BB2800B0ACF0 /* Info.plist */,
@@ -592,6 +595,7 @@
 				980A7DC4272828FD006AE4C4 /* DataManager.swift in Sources */,
 				980DB7CD2738E9F6006ED3BE /* ScholarsCell.swift in Sources */,
 				980DB78C27337D6F006ED3BE /* CollectionViewCell.swift in Sources */,
+				98581739273E921800D8CFCA /* UserManager.swift in Sources */,
 				984BDB9D272BCDEF00F6144B /* EmptyTableViewCell.swift in Sources */,
 				980DB7972733D391006ED3BE /* TYPageStyle.swift in Sources */,
 				980DB7B02734F677006ED3BE /* LYDropListTItleView.swift in Sources */,

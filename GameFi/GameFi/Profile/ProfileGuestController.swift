@@ -35,14 +35,8 @@ class ProfileGuestController: ViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        AWSMobileClient.default().getTokens { [self] tokens, error in
-            if let error = error {
-                print("Error getting token \(error.localizedDescription)")
-            } else if let tokens = tokens {
-                DispatchQueue.main.async {
-                    self.navigationController?.pushViewController(ProfileController.init(), animated: false)
-                }
-            }
+        if UserManager.sharedInstance.isLogin() {
+            self.navigationController?.pushViewController(ProfileController.init(), animated: false)
         }
     }
     

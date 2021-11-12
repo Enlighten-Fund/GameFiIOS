@@ -89,13 +89,13 @@ extension  ScholarDetailController : UITableViewDelegate,UITableViewDataSource{
             let attributes = [NSAttributedString.Key.font:font]
             let option = NSStringDrawingOptions.usesLineFragmentOrigin
             let size = (self.scholarDetailModel?.game_history!.boundingRect(with: CGSize.init(width: IPhone_SCREEN_WIDTH - 30, height: 10000),options: option,attributes: attributes as [NSAttributedString.Key : Any],context: nil))!
-            return size.height + 50 + 2
+            return size.height + 50 + 10
         }else if indexPath.row == 1{
             let font:UIFont! = UIFont(name: "Avenir Next Regular", size: 15)
             let attributes = [NSAttributedString.Key.font:font]
             let option = NSStringDrawingOptions.usesLineFragmentOrigin
             let size = (self.scholarDetailModel?.self_intro!.boundingRect(with: CGSize.init(width: IPhone_SCREEN_WIDTH - 30, height: 10000),options: option,attributes: attributes as [NSAttributedString.Key : Any],context: nil))!
-            return size.height + 50 + 2
+            return size.height + 50 + 10
         }
         return 0.01
     }

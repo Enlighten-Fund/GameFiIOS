@@ -234,17 +234,11 @@ class RegisterController: ViewController {
                                     switch (signInResult.signInState) {
                                     case .signedIn:
                                         print("User is signed in.")
+                                       
                                         self.mc_success("注册成功", duration: 0.2) {
                                             self.dismiss(animated: true) {
-                                                
-                                            }
-                                        }
-                                        
-                                        Usermodel.shared.gfrole = String(self.role)
-                                        AWSMobileClient.default().updateUserAttributes(attributeMap: ["custom:gfrole":String(self.role)]) { result, error in
-                                            if let error = error  {
-                                                print("\(error.localizedDescription)")
-                                                DispatchQueue.main.async {SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")}
+                                                UserManager.sharedInstance.updateToken()
+                                                UserManager.sharedInstance.updateRole(role: String(self.role))
                                             }
                                         }
                                     default:

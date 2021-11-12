@@ -10,6 +10,7 @@ import MJRefresh
 import SnapKit
 import Foundation
 import SCLAlertView
+import AWSMobileClient
 
 class ScholarshipsController: UIViewController {
     var pageIndex = 1
@@ -47,9 +48,49 @@ class ScholarshipsController: UIViewController {
         self.collectionView.mj_header?.beginRefreshing()
     }
 
-    @objc func showAddScholarshipVC() {
-        let appdelegate : AppDelegate = UIApplication.shared.delegate! as! AppDelegate
-        appdelegate.homeVC?.navigationController!.pushViewController(AddScholarshipController.init(), animated: true)
+    func showAddScholarshipVC() {
+        DispatchQueue.main.async {
+            let appdelegate : AppDelegate = UIApplication.shared.delegate! as! AppDelegate
+            appdelegate.homeVC?.navigationController!.pushViewController(AddScholarshipController.init(), animated: true)
+        }
+    }
+    
+    func changeRoleToManager() {
+        DispatchQueue.main.async {
+            SweetAlert().showAlert("notice:", subTitle: "Are you sure want to change role to manager", style: .warning, buttonTitle:"Cancel", buttonColor:UIColorFromRGB(0xD0D0D0) , otherButtonTitle:  "YES", otherButtonColor: UIColorFromRGB(0xDD6B55)) { (isOtherButton) -> Void in
+                if isOtherButton == true {
+                }else{
+                    UserManager.sharedInstance.updateRole(role: "2")
+                    self.showAddScholarshipVC()
+                }
+            }
+        }
+        
+    }
+    
+    @objc func addScholarshipBtnClick() {
+        if UserManager.sharedInstance.isLogin() {
+            if UserManager.sharedInstance.currentRole() == 1 {
+                self.changeRoleToManager()
+            }else if UserManager.sharedInstance.currentRole() == 2{
+                self.showAddScholarshipVC()
+            }
+        }else{
+            let loginVC = LoginController.init()
+            loginVC.loginSuccessBlock = {()  in
+                if UserManager.sharedInstance.currentRole() == 1 {
+                    self.changeRoleToManager()
+                }else if UserManager.sharedInstance.currentRole() == 2{
+                    self.showAddScholarshipVC()
+                }
+            }
+            let navVC = GFNavController.init(rootViewController: loginVC)
+            navVC.modalPresentationStyle = .fullScreen
+            let appdelegate : AppDelegate = UIApplication.shared.delegate! as! AppDelegate
+            appdelegate.homeVC?.navigationController!.present(navVC, animated: true, completion: {
+                
+            })
+        }
     }
     
     lazy var sortLabel:UILabel = {
@@ -117,7 +158,7 @@ class ScholarshipsController: UIViewController {
         tempBtn.layer.cornerRadius = 25
         tempBtn.setImage(UIImage.init(named: "add"), for: .normal)
         tempBtn.setImage(UIImage.init(named: "add"), for: .highlighted)
-        tempBtn.addTarget(self, action: #selector(showAddScholarshipVC), for: .touchUpInside)
+        tempBtn.addTarget(self, action: #selector(addScholarshipBtnClick), for: .touchUpInside)
         self.view.addSubview(tempBtn)
         return tempBtn
     }()

@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         IQKeyboardManager.shared().isEnabled = true
         IQKeyboardManager.shared().isEnableAutoToolbar = true
         configAWS()
-            return true
+        return true
     }
    
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
@@ -42,17 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
             Amplify.Logging.logLevel = .verbose
             try Amplify.add(plugin: AWSCognitoAuthPlugin())
             try Amplify.configure()
-            AWSMobileClient.default().getUserAttributes { [self]attributes, error in
-                if(error != nil){
-                    print("ERROR: \(error)")
-                }else{
-                    if let attributesDict = attributes{
-                        if attributesDict["custom:gfrole"] != nil {
-                            Usermodel.shared.gfrole = attributesDict["custom:gfrole"]!
-                        }
-                    }
-                }
-            }
+            UserManager.sharedInstance.fetchAndUpdateRole()
             
             AWSMobileClient.default().addUserStateListener(self) { (userState, info) in
                 switch (userState) {
@@ -61,11 +51,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
                 case .signedOut:
                     print("xxxxxxxLinsten--user signed out")
                     Usermodel.shared.gfrole = nil
-                case .signedIn:
+                    Usermodel.shared.token = nil
+                   case .signedIn:
                     print("xxxxxxxLinsten--user is signed in.")
-                    DispatchQueue.main.async {
-                        self.tabbarVC?.selectedIndex  = 0
-                    }
                     
                 case .signedOutUserPoolsTokenInvalid:
                     print("xxxxxxxLinsten--need to login again.")
