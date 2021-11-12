@@ -148,7 +148,7 @@ class DataManager: NSObject {
     }
     
     func fetchUserDetail(userid:String, completeBlock: @escaping CompleteBlock) {
-        let dic = ["id" : Int(userid)]
+        let dic = ["id" : userid]
         self.POST(url: "user/get_by_id", param: dic as [String : Any]) { result, reponse in
             if result.success!{
                 let scholarDetailModel : ScholarDetailModel = JsonUtil.jsonToModel(reponse as! String, ScholarDetailModel.self) as! ScholarDetailModel

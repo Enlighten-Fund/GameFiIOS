@@ -23,49 +23,65 @@ class ScholarDetailHeaderView: UIView {
         self.managerNameLabelView.snp.makeConstraints { make in
             make.top.equalTo(iconImgView.snp.bottom)
             make.left.equalToSuperview()
-            make.width.equalTo(IPhone_SCREEN_WIDTH)
+            make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
             make.height.equalTo(35)
         }
         self.nationalityLabelView.snp.makeConstraints { make in
             make.top.equalTo(self.managerNameLabelView.snp.bottom).offset(0)
             make.left.equalToSuperview()
-            make.width.equalTo(IPhone_SCREEN_WIDTH)
+            make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
             make.height.equalTo(35)
         }
         self.contractAgeLabelView.snp.makeConstraints { make in
             make.top.equalTo(self.nationalityLabelView.snp.bottom).offset(0)
             make.left.equalToSuperview()
-            make.width.equalTo(IPhone_SCREEN_WIDTH)
+            make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
             make.height.equalTo(35)
         }
         self.availableLabelView.snp.makeConstraints { make in
             make.top.equalTo(self.contractAgeLabelView.snp.bottom).offset(0)
             make.left.equalToSuperview()
-            make.width.equalTo(IPhone_SCREEN_WIDTH)
+            make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
             make.height.equalTo(35)
         }
         self.highestLabelView.snp.makeConstraints { make in
             make.top.equalTo(self.availableLabelView.snp.bottom).offset(0)
             make.left.equalToSuperview()
-            make.width.equalTo(IPhone_SCREEN_WIDTH)
+            make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
             make.height.equalTo(35)
         }
         self.experienceLabelView.snp.makeConstraints { make in
             make.top.equalTo(self.highestLabelView.snp.bottom).offset(0)
             make.left.equalToSuperview()
-            make.width.equalTo(IPhone_SCREEN_WIDTH)
+            make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
             make.height.equalTo(35)
         }
     }
     
     func update(scholarDetailModel:ScholarDetailModel) {
-        self.iconImgView.image = UIImage.init(named: "")
-        self.managerNameLabelView.update(leftTitle: "Manager name", rithtTitle: "")
-        self.nationalityLabelView.update(leftTitle: "Nationality", rithtTitle: "")
-        self.contractAgeLabelView.update(leftTitle: "Contract age", rithtTitle: "")
-        self.availableLabelView.update(leftTitle: "Available time", rithtTitle: "")
-        self.highestLabelView.update(leftTitle: "Highest MMR", rithtTitle: "")
-        self.experienceLabelView.update(leftTitle: "Experience", rithtTitle: "")
+        
+        self.iconImgView.image = UIImage.init(named: "portrait")
+        if scholarDetailModel.scholar_portrait != nil {
+            self.iconImgView.kf.setImage(with: URL.init(string: scholarDetailModel.scholar_portrait!))
+        }
+        if scholarDetailModel.username != nil {
+            self.managerNameLabelView.update(leftTitle: "Manager name", rithtTitle: scholarDetailModel.username!)
+        }
+        if scholarDetailModel.nation != nil {
+            self.nationalityLabelView.update(leftTitle: "Nationality", rithtTitle: scholarDetailModel.nation!)
+        }
+        if scholarDetailModel.age != nil {
+            self.contractAgeLabelView.update(leftTitle: "Contract age", rithtTitle: scholarDetailModel.age!)
+        }
+        if scholarDetailModel.available_time != nil {
+            self.availableLabelView.update(leftTitle: "Available time", rithtTitle: scholarDetailModel.available_time!)
+        }
+        if scholarDetailModel.mmr != nil {
+            self.highestLabelView.update(leftTitle: "Highest MMR", rithtTitle: scholarDetailModel.mmr!)
+        }
+        if scholarDetailModel.scholar_since != nil {
+            self.experienceLabelView.update(leftTitle: "Experience", rithtTitle: scholarDetailModel.scholar_since!)
+        }
     }
     
     required init?(coder: NSCoder) {

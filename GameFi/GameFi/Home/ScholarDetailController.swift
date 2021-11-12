@@ -14,6 +14,7 @@ import MJRefresh
 
 class ScholarDetailController: ViewController {
     var scholarDetailModel : ScholarDetailModel?
+    var headerView : ScholarDetailHeaderView?
     var scholarId : String?
     init(scholarId : String) {
         super.init(nibName: nil, bundle: nil)
@@ -42,21 +43,9 @@ class ScholarDetailController: ViewController {
             DispatchQueue.main.async { [self] in
                 self.tableView!.mj_header?.endRefreshing()
                 if result.success!{
-//                    let tempModel : ScholarDetailModel = reponse as! ScholarDetailModel
-                    //测试
-                    let tempModel : ScholarDetailModel = ScholarDetailModel.init()
-                    tempModel.selfintroduction = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sed turpis sed velit pulvinar suscipit. In placerat, lectus eu luctus cursus, nisl magna molestie tellus, sed congue mauris leo non felis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras sit amet risus at est interdum aliquet. ectus eu luctus cursus, nisl magna molestie tellus, sed congue mauris leo non felis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras sit amet risus at est interdum aliquet. "
-                    tempModel.gamepalybefore = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sed turpis sed velit pulvinar suscipit. In placerat, lectus eu luctus cursus, nisl magna molestie tellus, sed congue mauris leo non felis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras sit amet risus at est interdum aliquet. ectus eu luctus cursus, nisl magna molestie tellus, sed congue mauris leo non felis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras sit amet risus at est interdum aliquet. "
-                    self.scholarDetailModel = tempModel
+                    self.scholarDetailModel = (reponse as! ScholarDetailModel)
+                    self.headerView?.update(scholarDetailModel: self.scholarDetailModel!)
                     self.tableView!.reloadData()
-                }else{
-                    let tempModel : ScholarDetailModel = ScholarDetailModel.init()
-                    tempModel.selfintroduction = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sed turpis sed velit pulvinar suscipit. In placerat, lectus eu luctus cursus, nisl magna molestie tellus, sed congue mauris leo non felis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras sit amet risus at est interdum aliquet. ectus eu luctus cursus, nisl magna molestie tellus, sed congue mauris leo non felis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras sit amet risus at est interdum aliquet. "
-                    tempModel.gamepalybefore = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sed turpis sed velit pulvinar suscipit. In placerat, lectus eu luctus cursus, nisl magna molestie tellus, sed congue mauris leo non felis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras sit amet risus at est interdum aliquet. ectus eu luctus cursus, nisl magna molestie tellus, sed congue mauris leo non felis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras sit amet risus at est interdum aliquet. "
-                    self.scholarDetailModel = tempModel
-                    self.tableView!.reloadData()
-                   
-                    
                 }
             }
         }
@@ -67,7 +56,7 @@ class ScholarDetailController: ViewController {
         let tempTableView = UITableView.init(frame: CGRect.zero, style: .plain)
         tempTableView.backgroundColor = self.view.backgroundColor
         let headerView = ScholarDetailHeaderView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 300))
-        headerView.update(scholarDetailModel: ScholarDetailModel.init())
+        self.headerView = headerView
         tempTableView.tableHeaderView = headerView
         tempTableView.separatorStyle = .none
         tempTableView.register(EmptyTableViewCell.classForCoder(), forCellReuseIdentifier: emptyTableViewCellIdentifier)
@@ -99,13 +88,13 @@ extension  ScholarDetailController : UITableViewDelegate,UITableViewDataSource{
             let font:UIFont! = UIFont(name: "Avenir Next Regular", size: 15)
             let attributes = [NSAttributedString.Key.font:font]
             let option = NSStringDrawingOptions.usesLineFragmentOrigin
-            let size = (self.scholarDetailModel?.gamepalybefore!.boundingRect(with: CGSize.init(width: IPhone_SCREEN_WIDTH - 30, height: 10000),options: option,attributes: attributes as [NSAttributedString.Key : Any],context: nil))!
+            let size = (self.scholarDetailModel?.game_history!.boundingRect(with: CGSize.init(width: IPhone_SCREEN_WIDTH - 30, height: 10000),options: option,attributes: attributes as [NSAttributedString.Key : Any],context: nil))!
             return size.height + 50 + 2
         }else if indexPath.row == 1{
             let font:UIFont! = UIFont(name: "Avenir Next Regular", size: 15)
             let attributes = [NSAttributedString.Key.font:font]
             let option = NSStringDrawingOptions.usesLineFragmentOrigin
-            let size = (self.scholarDetailModel?.selfintroduction!.boundingRect(with: CGSize.init(width: IPhone_SCREEN_WIDTH - 30, height: 10000),options: option,attributes: attributes as [NSAttributedString.Key : Any],context: nil))!
+            let size = (self.scholarDetailModel?.self_intro!.boundingRect(with: CGSize.init(width: IPhone_SCREEN_WIDTH - 30, height: 10000),options: option,attributes: attributes as [NSAttributedString.Key : Any],context: nil))!
             return size.height + 50 + 2
         }
         return 0.01
@@ -117,11 +106,11 @@ extension  ScholarDetailController : UITableViewDelegate,UITableViewDataSource{
     case 0:
         cell = tableView.dequeueReusableCell(withIdentifier: scholarDetailCellIdentifier, for: indexPath)
         let tempcell :ScholarDetailCell  = cell as! ScholarDetailCell
-        tempcell.update(title: "Games played before", content: (self.scholarDetailModel?.gamepalybefore)!)
+        tempcell.update(title: "Games played before", content: (self.scholarDetailModel?.game_history)!)
     case 1:
         cell = tableView.dequeueReusableCell(withIdentifier: scholarDetailCellIdentifier, for: indexPath) as! ScholarDetailCell
         let tempcell :ScholarDetailCell  = cell as! ScholarDetailCell
-        tempcell.update(title: "Self introduction", content: (self.scholarDetailModel?.selfintroduction)!)
+        tempcell.update(title: "Self introduction", content: (self.scholarDetailModel?.self_intro)!)
     default:
         cell = tableView.dequeueReusableCell(withIdentifier: emptyTableViewCellIdentifier, for: indexPath)
     }

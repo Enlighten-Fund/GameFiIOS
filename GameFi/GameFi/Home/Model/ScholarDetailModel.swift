@@ -9,14 +9,10 @@ import Foundation
 import HandyJSON
 
 class ScholarDetailModel: ScholarModel {
-    var scholarship_id : Int?
-    var manager_user_id : Int?
-    var scholar_user_id : Int?
-    var account_ronin_address : String?
-    var gamepalybefore : String?
-    var selfintroduction : String?
-    var status : String?
-    var start_timestamp : String?
-    var end_timestamp : String?
+    var nation : String?
+    var age : String?
+    var game_history : String?
+    var self_intro : String?
+    
     required init() {}
 }

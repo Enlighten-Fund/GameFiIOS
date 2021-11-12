@@ -19,8 +19,10 @@ class ViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: self.leftBtn!)
         if (self.navigationController?.viewControllers.count)! > 1 {
             self.leftBtn?.isHidden = false
+            self.msgBtn?.isHidden = true
         }else{
             self.leftBtn?.isHidden = true
+            self.msgBtn?.isHidden = false
         }
     }
 
