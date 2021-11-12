@@ -21,7 +21,7 @@ class ScholarshipsController: UIViewController {
         self.view.backgroundColor = UIColor(red: 0.15, green: 0.16, blue: 0.24, alpha: 1)
         self.collectionView.snp.makeConstraints { make in
             make.top.equalTo(self.dropListView.snp.bottom).offset(15)
-            make.bottom.equalToSuperview().offset(0)
+            make.bottom.equalToSuperview().offset(-10)
             make.left.equalToSuperview().offset(15)
             make.right.equalToSuperview().offset(-15)
         }
@@ -123,18 +123,11 @@ class ScholarshipsController: UIViewController {
 }
 
 extension  ScholarshipsController : UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
-    // #MARK: --UICollectionViewDataSource的代理方法
-    /**
-    - 该方法是可选方法，默认为1
-    - returns: CollectionView中section的个数
-    */
+   
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
 
-    /**
-     - returns: Section中Item的个数
-     */
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if self.dataSource == nil {
             return 0

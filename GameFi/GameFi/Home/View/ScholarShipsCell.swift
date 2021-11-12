@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Kingfisher
+
 let scholarshipsCelldentifier:String = "ScholarshipsCollectionCell"
 
 class HomeLabelAndLabelView: UIView{
@@ -57,14 +59,28 @@ class ScholarshipsCell: UICollectionViewCell {
         self.contentView.layer.cornerRadius = 5
         self.contentView.layer.masksToBounds = true
         self.contentView.backgroundColor = UIColor.init(hexString: "0x30354B")
-        self.axieImgView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
-            make.left.equalToSuperview().offset(18)
-            make.height.equalTo(44)
-            make.right.equalToSuperview().offset(-18)
+        self.axieImgView1.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.height.equalTo(80)
+            make.width.equalTo(100)
+        }
+        
+        self.axieImgView2.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.right.equalTo(self.axieImgView1.snp.left).offset(60)
+            make.height.equalTo(80)
+            make.width.equalTo(100)
+        }
+        
+        self.axieImgView3.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.left.equalTo(self.axieImgView1.snp.right).offset(-60)
+            make.height.equalTo(80)
+            make.width.equalTo(100)
         }
         self.accountLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.axieImgView.snp.bottom)
+            make.top.equalTo(self.axieImgView1.snp.bottom).offset(-20)
             make.centerX.equalToSuperview()
             make.height.equalTo(25)
             make.width.equalToSuperview()
@@ -105,19 +121,61 @@ class ScholarshipsCell: UICollectionViewCell {
             make.height.equalTo(25)
             make.left.equalToSuperview()
         }
+        self.contentView.bringSubviewToFront(self.axieImgView2)
+        self.contentView.bringSubviewToFront(self.axieImgView1)
+        self.contentView.bringSubviewToFront(self.axieImgView3)
     }
 
     func update(scholarshipModel:ScholarshipModel) {
-        self.axieImgView.image = UIImage.init(named: "explore_select")
-        self.accountLabel.text = scholarshipModel.manager_user_name
-        self.creditLabel.text = "Credit: \(scholarshipModel.credit_score!)"
-        self.slpLabel.text = "\(scholarshipModel.estimate_daily_slp)/day (\(scholarshipModel.scholar_percentage!)%)"
-        self.offerLabelView.update(leftTitle: "Offer", rithtTitle: "\(scholarshipModel.offer_period) Days")
-        self.mmrLabelView.update(leftTitle: "MMR", rithtTitle: scholarshipModel.mmr!)
-        self.axiesLabelView.update(leftTitle: "Axies", rithtTitle: scholarshipModel.axie_count!)
+        if scholarshipModel.axie_brief == nil || scholarshipModel.axie_brief!.count < 3{
+            
+        }else{
+            let axiePic1 : String = scholarshipModel.axie_brief![0]
+            self.axieImgView1.kf.setImage(with: URL.init(string: "https://storage.googleapis.com/assets.axieinfinity.com/axies/\(axiePic1)/axie/axie-full-transparent.png"))
+            let axiePic2 : String = scholarshipModel.axie_brief![1]
+            self.axieImgView2.kf.setImage(with:  URL.init(string: "https://storage.googleapis.com/assets.axieinfinity.com/axies/\(axiePic2)/axie/axie-full-transparent.png"))
+            let axiePic3 : String = scholarshipModel.axie_brief![2]
+            self.axieImgView3.kf.setImage(with: URL.init(string: "https://storage.googleapis.com/assets.axieinfinity.com/axies/\(axiePic3)/axie/axie-full-transparent.png"))
+        }
+        
+        if scholarshipModel.manager_user_name == nil {
+            self.accountLabel.text = ""
+        }else{
+            self.accountLabel.text = scholarshipModel.manager_user_name!
+        }
+        
+        if scholarshipModel.credit_score == nil {
+            self.creditLabel.text = "Credit:"
+        }else{
+            self.creditLabel.text = "Credit: \(scholarshipModel.credit_score!)"
+        }
+        
+        if scholarshipModel.estimate_daily_slp != nil && scholarshipModel.scholar_percentage != nil {
+            self.slpLabel.text = "\(scholarshipModel.estimate_daily_slp!)/day (\(scholarshipModel.scholar_percentage!)%)"
+        }
+        if scholarshipModel.offer_period != nil {
+            self.offerLabelView.update(leftTitle: "Offer", rithtTitle: "\(scholarshipModel.offer_period!) Days")
+        }
+        if scholarshipModel.mmr != nil {
+            self.mmrLabelView.update(leftTitle: "MMR", rithtTitle: scholarshipModel.mmr!)
+        }
+        if scholarshipModel.axie_count != nil  {
+            self.axiesLabelView.update(leftTitle: "Axies", rithtTitle: scholarshipModel.axie_count!)
+        }
+        
     }
     
-    lazy var axieImgView : UIImageView = {
+    lazy var axieImgView1 : UIImageView = {
+        let tempImgView = UIImageView.init()
+        self.contentView.addSubview(tempImgView)
+        return tempImgView
+    }()
+    lazy var axieImgView2 : UIImageView = {
+        let tempImgView = UIImageView.init()
+        self.contentView.addSubview(tempImgView)
+        return tempImgView
+    }()
+    lazy var axieImgView3 : UIImageView = {
         let tempImgView = UIImageView.init()
         self.contentView.addSubview(tempImgView)
         return tempImgView

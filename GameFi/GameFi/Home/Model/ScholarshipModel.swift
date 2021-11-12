@@ -9,6 +9,8 @@ import Foundation
 import HandyJSON
 
 class ScholarshipModel: BaseModel {
+    var axie_brief : Array<String>?//图片列表
+    
     var scholarship_id : String?
     var estimate_daily_slp : String?
     var myestimate_daily_slp : String?{

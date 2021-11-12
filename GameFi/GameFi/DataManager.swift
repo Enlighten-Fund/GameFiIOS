@@ -90,12 +90,24 @@ class DataManager: NSObject {
     func fetchMarketPlaceScholarShip(filter:String, pageIndex:Int, completeBlock: @escaping CompleteBlock) {
         let dic = ["page_index" : pageIndex,"page_size" : 20,"order_by_key" : filter] as [String : Any]
         self.POST(url: "scholarship/list_by_marketplace", param: dic) { result, reponse in
-            if result.success!{
-                let scholarshipListModel : ScholarshipListModel = JsonUtil.jsonToModel(reponse as! String, ScholarshipListModel.self) as! ScholarshipListModel
-                completeBlock(result,scholarshipListModel)
-            }else{
-                completeBlock(result,reponse)
-            }
+            let path = Bundle.main.path(forResource: "list_by_marketplace", ofType: "json")
+            let url = URL(fileURLWithPath: path!)
+                do {
+                        let data = try Data(contentsOf: url)
+                        let jsonData:Any = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
+                    let jsonDic : Dictionary = jsonData as! Dictionary<String, Any>
+                    let scholarshipListModel : ScholarshipListModel = JsonUtil.jsonToModel(jsonDic["data"] as! String, ScholarshipListModel.self) as! ScholarshipListModel
+                        completeBlock(result,scholarshipListModel)
+                } catch let error as Error? {
+                        print("读取本地数据出现错误!",error)
+                }
+            
+//            if result.success!{
+//                let scholarshipListModel : ScholarshipListModel = JsonUtil.jsonToModel(reponse as! String, ScholarshipListModel.self) as! ScholarshipListModel
+//                completeBlock(result,scholarshipListModel)
+//            }else{
+//                completeBlock(result,reponse)
+//            }
         }
     }
     

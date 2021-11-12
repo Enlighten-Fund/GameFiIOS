@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import HandyJSON
 
 enum HttpResponseCode : Int {
     case HttpResponseCodeSuccess = 1

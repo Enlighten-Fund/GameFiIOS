@@ -9,10 +9,19 @@
 import Foundation
 import UIKit
 
-extension String {
-  var isBlank: Bool {
-    return allSatisfy({ $0.isWhitespace })
-  }
+extension String{
+    
+    /// check string cellection is whiteSpace
+    var isBlank : Bool{
+        return allSatisfy({$0.isWhitespace})
+    }
+}
+
+
+extension Optional where Wrapped == String{
+    var isBlank : Bool{
+        return self?.isBlank ?? true
+    }
 }
 
 extension UITextField {

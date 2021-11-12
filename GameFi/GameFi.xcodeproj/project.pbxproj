@@ -59,6 +59,7 @@
 		9858172E273D205600D8CFCA /* PostScholarshipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858172D273D205600D8CFCA /* PostScholarshipCell.swift */; };
 		98581730273D2DBF00D8CFCA /* PostScholarFootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858172F273D2DBF00D8CFCA /* PostScholarFootView.swift */; };
 		98581732273D3DB800D8CFCA /* TextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98581731273D3DB800D8CFCA /* TextViewCell.swift */; };
+		98581735273E334100D8CFCA /* list_by_marketplace.json in Resources */ = {isa = PBXBuildFile; fileRef = 98581734273E334100D8CFCA /* list_by_marketplace.json */; };
 		986C586E27300B9A0021280A /* LoginHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C586D27300B9A0021280A /* LoginHeadView.swift */; };
 		986C587027300BEB0021280A /* LoginFootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C586F27300BEB0021280A /* LoginFootView.swift */; };
 		987694272738ED150075CA0F /* ScholarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987694262738ED150075CA0F /* ScholarModel.swift */; };
@@ -141,6 +142,7 @@
 		9858172D273D205600D8CFCA /* PostScholarshipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostScholarshipCell.swift; sourceTree = "<group>"; };
 		9858172F273D2DBF00D8CFCA /* PostScholarFootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostScholarFootView.swift; sourceTree = "<group>"; };
 		98581731273D3DB800D8CFCA /* TextViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewCell.swift; sourceTree = "<group>"; };
+		98581734273E334100D8CFCA /* list_by_marketplace.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = list_by_marketplace.json; sourceTree = "<group>"; };
 		986C586D27300B9A0021280A /* LoginHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeadView.swift; sourceTree = "<group>"; };
 		986C586F27300BEB0021280A /* LoginFootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFootView.swift; sourceTree = "<group>"; };
 		987694262738ED150075CA0F /* ScholarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarModel.swift; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 		9811EA0A2726BB2700B0ACF0 = {
 			isa = PBXGroup;
 			children = (
+				98581734273E334100D8CFCA /* list_by_marketplace.json */,
 				9811EA152726BB2700B0ACF0 /* GameFi */,
 				4199D9C3B4A28724DDAB9D9F /* AmplifyConfig */,
 				E53B31C82C867BF0D6041DEF /* Pods */,
@@ -514,6 +517,7 @@
 				9811EA202726BB2800B0ACF0 /* Assets.xcassets in Resources */,
 				7C326CFCDF747D3682D551F3 /* awsconfiguration.json in Resources */,
 				7BCBC07F76E99519033E01A6 /* amplifyconfiguration.json in Resources */,
+				98581735273E334100D8CFCA /* list_by_marketplace.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
