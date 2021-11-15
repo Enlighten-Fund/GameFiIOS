@@ -1,5 +1,5 @@
 {
   "code": 1,
-  "data": "{\"id\": 1621249, \"axie_class\": \"test_class\", \"stats_hp\": 23, \"stats_speed\": 34, \"stats_skill\": 56, \"stats_morale\": 78, \"ability_back\": \"beast-tail-01\", \"ability_mouth\": \"beast-tail-02\", \"ability_horn\": \"beast-tail-03\", \"ability_tail\": \"beast-tail-04\"}",
+  "data": "{\"id\": 1621249, \"axie_class\": \"test_class\", \"stats_hp\": 23, \"stats_speed\": 34, \"stats_skill\": 56, \"stats_morale\": 78, \"ability_back\": \"aquatic-back-02\", \"ability_mouth\": \"beast-mouth-02\", \"ability_horn\": \"bird-horn-02\", \"ability_tail\": \"aquatic-tail-08\"}",
   "msg": "success"
 }

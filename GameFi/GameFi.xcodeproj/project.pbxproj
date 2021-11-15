@@ -65,6 +65,9 @@
 		9858173B27422D3D00D8CFCA /* ScholarshipDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858173A27422D3D00D8CFCA /* ScholarshipDetailCell.swift */; };
 		9858173D27424F3700D8CFCA /* AxieinfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858173C27424F3700D8CFCA /* AxieinfoModel.swift */; };
 		985817412742565B00D8CFCA /* axieinfo.json in Resources */ = {isa = PBXBuildFile; fileRef = 985817402742565B00D8CFCA /* axieinfo.json */; };
+		985817432742784B00D8CFCA /* axieability.json in Resources */ = {isa = PBXBuildFile; fileRef = 985817422742784B00D8CFCA /* axieability.json */; };
+		985817452742788E00D8CFCA /* AbilityUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985817442742788E00D8CFCA /* AbilityUtil.swift */; };
+		985817472742793F00D8CFCA /* AxieAbilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985817462742793F00D8CFCA /* AxieAbilityModel.swift */; };
 		986C586E27300B9A0021280A /* LoginHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C586D27300B9A0021280A /* LoginHeadView.swift */; };
 		986C587027300BEB0021280A /* LoginFootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C586F27300BEB0021280A /* LoginFootView.swift */; };
 		987694272738ED150075CA0F /* ScholarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987694262738ED150075CA0F /* ScholarModel.swift */; };
@@ -153,6 +156,9 @@
 		9858173A27422D3D00D8CFCA /* ScholarshipDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarshipDetailCell.swift; sourceTree = "<group>"; };
 		9858173C27424F3700D8CFCA /* AxieinfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxieinfoModel.swift; sourceTree = "<group>"; };
 		985817402742565B00D8CFCA /* axieinfo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = axieinfo.json; sourceTree = "<group>"; };
+		985817422742784B00D8CFCA /* axieability.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = axieability.json; sourceTree = "<group>"; };
+		985817442742788E00D8CFCA /* AbilityUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityUtil.swift; sourceTree = "<group>"; };
+		985817462742793F00D8CFCA /* AxieAbilityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxieAbilityModel.swift; sourceTree = "<group>"; };
 		986C586D27300B9A0021280A /* LoginHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeadView.swift; sourceTree = "<group>"; };
 		986C586F27300BEB0021280A /* LoginFootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFootView.swift; sourceTree = "<group>"; };
 		987694262738ED150075CA0F /* ScholarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarModel.swift; sourceTree = "<group>"; };
@@ -278,6 +284,7 @@
 				9876942A2738F22C0075CA0F /* ScholarDetailModel.swift */,
 				98D9940A273A46D2006AA8DC /* ScholarListModel.swift */,
 				9858173C27424F3700D8CFCA /* AxieinfoModel.swift */,
+				985817462742793F00D8CFCA /* AxieAbilityModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -295,6 +302,7 @@
 		9811EA0A2726BB2700B0ACF0 = {
 			isa = PBXGroup;
 			children = (
+				985817422742784B00D8CFCA /* axieability.json */,
 				985817402742565B00D8CFCA /* axieinfo.json */,
 				98581734273E334100D8CFCA /* list_by_marketplace.json */,
 				98581736273E41A800D8CFCA /* list_scholar.json */,
@@ -433,6 +441,7 @@
 			isa = PBXGroup;
 			children = (
 				98D99408273A3A45006AA8DC /* SweetAlert.swift */,
+				985817442742788E00D8CFCA /* AbilityUtil.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -533,6 +542,7 @@
 				98581737273E41A800D8CFCA /* list_scholar.json in Resources */,
 				985817412742565B00D8CFCA /* axieinfo.json in Resources */,
 				7C326CFCDF747D3682D551F3 /* awsconfiguration.json in Resources */,
+				985817432742784B00D8CFCA /* axieability.json in Resources */,
 				7BCBC07F76E99519033E01A6 /* amplifyconfiguration.json in Resources */,
 				98581735273E334100D8CFCA /* list_by_marketplace.json in Resources */,
 			);
@@ -603,6 +613,7 @@
 				98D9941D273B6D68006AA8DC /* TrackHeadView.swift in Sources */,
 				98D99414273A8CFE006AA8DC /* NotificationController.swift in Sources */,
 				980A7DC4272828FD006AE4C4 /* DataManager.swift in Sources */,
+				985817452742788E00D8CFCA /* AbilityUtil.swift in Sources */,
 				980DB7CD2738E9F6006ED3BE /* ScholarsCell.swift in Sources */,
 				980DB78C27337D6F006ED3BE /* CollectionViewCell.swift in Sources */,
 				98581739273E921800D8CFCA /* UserManager.swift in Sources */,
@@ -659,6 +670,7 @@
 				987694272738ED150075CA0F /* ScholarModel.swift in Sources */,
 				98D99423273BA9F0006AA8DC /* AccountsController.swift in Sources */,
 				980DB7CB273571E0006ED3BE /* ScholarshipDetailModel.swift in Sources */,
+				985817472742793F00D8CFCA /* AxieAbilityModel.swift in Sources */,
 				9811EA172726BB2700B0ACF0 /* AppDelegate.swift in Sources */,
 				98E09B5C273129140020D97D /* Usermodel.swift in Sources */,
 				984BDB99272BA23600F6144B /* RegisterHeadView.swift in Sources */,

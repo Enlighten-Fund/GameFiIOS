@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         IQKeyboardManager.shared().isEnabled = true
         IQKeyboardManager.shared().isEnableAutoToolbar = true
         configAWS()
+        AbilityUtil.sharedInstance.config()
         return true
     }
    
