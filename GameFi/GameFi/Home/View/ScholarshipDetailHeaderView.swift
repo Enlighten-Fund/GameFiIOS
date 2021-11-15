@@ -43,14 +43,8 @@ class ScholarshipDetailHeaderView: UIView {
             make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
             make.height.equalTo(35)
         }
-        self.rentedLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.axieCountLabelView.snp.bottom).offset(0)
-            make.left.equalToSuperview()
-            make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
-            make.height.equalTo(35)
-        }
         self.scholarLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.rentedLabelView.snp.bottom).offset(0)
+            make.top.equalTo(self.axieCountLabelView.snp.bottom).offset(0)
             make.left.equalToSuperview()
             make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
             make.height.equalTo(35)
@@ -81,10 +75,6 @@ class ScholarshipDetailHeaderView: UIView {
         
         if scholarshipDetailModel.axie_count != nil {
             self.axieCountLabelView.update(leftTitle: "Axie counts", rithtTitle: scholarshipDetailModel.axie_count!)
-        }
-        
-        if scholarshipDetailModel.rentedtimes != nil  {
-            self.rentedLabelView.update(leftTitle: "Rented times", rithtTitle: scholarshipDetailModel.rentedtimes!)
         }
         
         if scholarshipDetailModel.scholar_percentage != nil  {
