@@ -12,7 +12,10 @@ import SCLAlertView
 import MJRefresh
 
 class TrackController: ViewController {
-    
+    var dataSource : Array<Any>? = Array.init()
+    var trackModel : TrackSumModel?
+    var trackHeadView : TrackHeadView?
+    var pageIndex = 1
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Tracker"
@@ -28,22 +31,61 @@ class TrackController: ViewController {
             make.width.equalTo(50)
             make.bottom.equalToSuperview().offset(-20 - IPhone_TabbarHeight)
         }
-//        self.tableView?.mj_header?.beginRefreshing()
+        self.tableView?.mj_header?.beginRefreshing()
      
     }
     
+    //#MARK: --请求
+    func refreshHttpRequest() {
+        pageIndex = 1
+        self.requestData()
+    }
+    
+    func loadMoreHttpRequest() {
+        DataManager.sharedInstance.fetchTrackerList(pageIndex: self.pageIndex) { result, reponse in
+            DispatchQueue.main.async { [self] in
+                self.tableView!.mj_header?.endRefreshing()
+                if result.success!{
+                    
+                }
+            }
+        }
+    }
+    
     func requestData() {
-//        DataManager.sharedInstance.fetchScholarShipDetail(scholarshipId: self.scholarshipId!) { result, reponse in
-//            DispatchQueue.main.async { [self] in
-//                self.tableView!.mj_header?.endRefreshing()
-//                if result.success!{
-//                    let tempModel : ScholarshipDetailModel = reponse as! ScholarshipDetailModel
-//                    self.scholarshipsDetailModel = tempModel
-//                    self.headerview?.update(scholarshipDetailModel: scholarshipsDetailModel!)
-//                    self.tableView!.reloadData()
-//                }
-//            }
-//        }
+        DataManager.sharedInstance.fetchTrackerSummary { result, reponse in
+            DispatchQueue.main.async { [self] in
+                self.tableView!.mj_header?.endRefreshing()
+                if result.success!{
+                    let tempModel : TrackSumModel = reponse as! TrackSumModel
+                    self.trackModel = tempModel
+                    self.trackHeadView!.update(trackSumModel: tempModel)
+                }
+            }
+        }
+        DataManager.sharedInstance.fetchTrackerList(pageIndex: self.pageIndex) { result, reponse in
+            DispatchQueue.main.async { [self] in
+                self.tableView!.mj_footer?.endRefreshing()
+                self.tableView!.mj_header?.endRefreshing()
+                if result.success!{
+                    let trackListModel : TrackListModel = reponse as! TrackListModel
+                    if self.pageIndex == 1{
+                        self.dataSource = trackListModel.data
+                    }else{
+                        if trackListModel.data != nil {
+                            self.dataSource?.append(contentsOf: trackListModel.data!)
+                        }
+            
+                    }
+                    if trackListModel.next_page! > pageIndex {
+                        pageIndex = trackListModel.next_page!
+                    }else{
+                        self.tableView!.mj_footer?.endRefreshingWithNoMoreData()
+                    }
+                    self.tableView!.reloadData()
+                }
+            }
+        }
     }
     
     @objc func showAddTrack(){
@@ -52,6 +94,7 @@ class TrackController: ViewController {
     
     lazy var tableView: UITableView? = {
         let headerview = TrackHeadView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 335))
+        self.trackHeadView = headerview
         let tempTableView = UITableView.init(frame: CGRect.zero, style: .plain)
         tempTableView.tableHeaderView = headerview
         tempTableView.backgroundColor = self.view.backgroundColor
@@ -65,6 +108,9 @@ class TrackController: ViewController {
             self.requestData()
         })
         tempTableView.mj_header?.isAutomaticallyChangeAlpha = true
+        tempTableView.mj_footer = MJRefreshAutoNormalFooter.init(refreshingBlock: {
+            self.loadMoreHttpRequest()
+        })
         view.addSubview(tempTableView)
         return tempTableView
     }()
@@ -88,8 +134,10 @@ class TrackController: ViewController {
 extension  TrackController : UITableViewDelegate,UITableViewDataSource{
    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            
-           return 2
+        if self.dataSource == nil {
+            return 0
+        }
+        return self.dataSource!.count
     }
         
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -112,6 +160,8 @@ extension  TrackController : UITableViewDelegate,UITableViewDataSource{
     var cell : UITableViewCell
     let tempCell : TrackCell = tableView.dequeueReusableCell(withIdentifier: trackCellIdentifier, for: indexPath) as! TrackCell
     cell = tempCell
+    let trackModel = self.dataSource![indexPath.row]
+    tempCell.update(trackModel: trackModel as! TrackModel)
     cell.contentView.backgroundColor = self.view.backgroundColor
        return cell
    }

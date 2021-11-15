@@ -126,6 +126,18 @@ class TrackHeadView: UIView {
         super.init(coder: coder)
     }
     
+    func update(trackSumModel:TrackSumModel) {
+        if trackSumModel.track_slp_total != nil {
+            self.unclaimedContentView.totalLabel.text = trackSumModel.track_slp_total
+        }
+        if trackSumModel.track_slp_scholar != nil {
+            self.scholarContentView.totalLabel.text = trackSumModel.track_slp_scholar
+        }
+        if trackSumModel.track_slp_checkpoint != nil {
+            self.averageContentView.totalLabel.text = trackSumModel.track_slp_checkpoint
+        }
+    }
+    
     lazy var unclaimedContentView  : TrackContentView = {
         let temp = TrackContentView.init(frame: CGRect.zero)
         temp.iconImgView.image = UIImage.init(named: "unclaimed")

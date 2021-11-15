@@ -182,5 +182,29 @@ class DataManager: NSObject {
             }
         }
     }
- 
+    //获取Tracker总数据
+    func fetchTrackerSummary(completeBlock: @escaping CompleteBlock) {
+        let dic = ["user_id" : "123"]
+        self.POST(url: "game_accounts/get_summary_by_user", param: dic as [String : Any]) { result, reponse in
+            if result.success!{
+                let trackSumModel : TrackSumModel = JsonUtil.jsonToModel(reponse as! String, TrackSumModel.self) as! TrackSumModel
+                completeBlock(result,trackSumModel)
+            }else{
+                completeBlock(result,reponse)
+            }
+        }
+    }
+    
+    //获取Tracker 列表
+    func fetchTrackerList(pageIndex:Int,completeBlock: @escaping CompleteBlock) {
+        let dic = ["page_index" : pageIndex,"page_size" : 20,"user_id" : "123"] as [String : Any]
+        self.POST(url: "game_accounts/list_all_by_user", param: dic as [String : Any]) { result, reponse in
+            if result.success!{
+                let trackListModel = JsonUtil.jsonToModel(reponse as! String, TrackListModel.self)
+                completeBlock(result,trackListModel)
+            }else{
+                completeBlock(result,reponse)
+            }
+        }
+    }
 }

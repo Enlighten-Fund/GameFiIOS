@@ -95,6 +95,9 @@ class TrackCell: TableViewCell {
         }
     }
     
+    func update(trackModel:TrackModel)  {
+        
+    }
     
     lazy var bgView : UIView = {
         let temp = UIView.init(frame: CGRect.zero)

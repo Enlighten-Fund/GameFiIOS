@@ -68,6 +68,11 @@
 		985817432742784B00D8CFCA /* axieability.json in Resources */ = {isa = PBXBuildFile; fileRef = 985817422742784B00D8CFCA /* axieability.json */; };
 		985817452742788E00D8CFCA /* AbilityUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985817442742788E00D8CFCA /* AbilityUtil.swift */; };
 		985817472742793F00D8CFCA /* AxieAbilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985817462742793F00D8CFCA /* AxieAbilityModel.swift */; };
+		985817492742955900D8CFCA /* tracksum.json in Resources */ = {isa = PBXBuildFile; fileRef = 985817482742955900D8CFCA /* tracksum.json */; };
+		9858174B274295A500D8CFCA /* TrackSumModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858174A274295A500D8CFCA /* TrackSumModel.swift */; };
+		9858174E27429C1A00D8CFCA /* TrackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858174D27429C1A00D8CFCA /* TrackModel.swift */; };
+		9858175027429E6300D8CFCA /* TrackListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858174F27429E6300D8CFCA /* TrackListModel.swift */; };
+		985817522742A13100D8CFCA /* tracklist.json in Resources */ = {isa = PBXBuildFile; fileRef = 985817512742A13100D8CFCA /* tracklist.json */; };
 		986C586E27300B9A0021280A /* LoginHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C586D27300B9A0021280A /* LoginHeadView.swift */; };
 		986C587027300BEB0021280A /* LoginFootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C586F27300BEB0021280A /* LoginFootView.swift */; };
 		987694272738ED150075CA0F /* ScholarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987694262738ED150075CA0F /* ScholarModel.swift */; };
@@ -159,6 +164,11 @@
 		985817422742784B00D8CFCA /* axieability.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = axieability.json; sourceTree = "<group>"; };
 		985817442742788E00D8CFCA /* AbilityUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityUtil.swift; sourceTree = "<group>"; };
 		985817462742793F00D8CFCA /* AxieAbilityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxieAbilityModel.swift; sourceTree = "<group>"; };
+		985817482742955900D8CFCA /* tracksum.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tracksum.json; sourceTree = "<group>"; };
+		9858174A274295A500D8CFCA /* TrackSumModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackSumModel.swift; sourceTree = "<group>"; };
+		9858174D27429C1A00D8CFCA /* TrackModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackModel.swift; sourceTree = "<group>"; };
+		9858174F27429E6300D8CFCA /* TrackListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListModel.swift; sourceTree = "<group>"; };
+		985817512742A13100D8CFCA /* tracklist.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = tracklist.json; sourceTree = "<group>"; };
 		986C586D27300B9A0021280A /* LoginHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeadView.swift; sourceTree = "<group>"; };
 		986C586F27300BEB0021280A /* LoginFootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFootView.swift; sourceTree = "<group>"; };
 		987694262738ED150075CA0F /* ScholarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarModel.swift; sourceTree = "<group>"; };
@@ -302,10 +312,12 @@
 		9811EA0A2726BB2700B0ACF0 = {
 			isa = PBXGroup;
 			children = (
+				985817512742A13100D8CFCA /* tracklist.json */,
 				985817422742784B00D8CFCA /* axieability.json */,
 				985817402742565B00D8CFCA /* axieinfo.json */,
 				98581734273E334100D8CFCA /* list_by_marketplace.json */,
 				98581736273E41A800D8CFCA /* list_scholar.json */,
+				985817482742955900D8CFCA /* tracksum.json */,
 				9811EA152726BB2700B0ACF0 /* GameFi */,
 				4199D9C3B4A28724DDAB9D9F /* AmplifyConfig */,
 				E53B31C82C867BF0D6041DEF /* Pods */,
@@ -379,6 +391,16 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		9858174C274295AC00D8CFCA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9858174A274295A500D8CFCA /* TrackSumModel.swift */,
+				9858174D27429C1A00D8CFCA /* TrackModel.swift */,
+				9858174F27429E6300D8CFCA /* TrackListModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		9876943027393CCB0075CA0F /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -420,6 +442,7 @@
 		98D99418273A9A03006AA8DC /* Track */ = {
 			isa = PBXGroup;
 			children = (
+				9858174C274295AC00D8CFCA /* Model */,
 				98D9941B273B6D40006AA8DC /* View */,
 				98D99419273A9A17006AA8DC /* TrackController.swift */,
 				98581727273D0A3700D8CFCA /* AddTrackController.swift */,
@@ -539,8 +562,10 @@
 			files = (
 				9811EA232726BB2800B0ACF0 /* LaunchScreen.storyboard in Resources */,
 				9811EA202726BB2800B0ACF0 /* Assets.xcassets in Resources */,
+				985817492742955900D8CFCA /* tracksum.json in Resources */,
 				98581737273E41A800D8CFCA /* list_scholar.json in Resources */,
 				985817412742565B00D8CFCA /* axieinfo.json in Resources */,
+				985817522742A13100D8CFCA /* tracklist.json in Resources */,
 				7C326CFCDF747D3682D551F3 /* awsconfiguration.json in Resources */,
 				985817432742784B00D8CFCA /* axieability.json in Resources */,
 				7BCBC07F76E99519033E01A6 /* amplifyconfiguration.json in Resources */,
@@ -654,6 +679,7 @@
 				98769435273941890075CA0F /* ProfileGuestHeaderView.swift in Sources */,
 				98581726273CF70900D8CFCA /* NoOfferHeaderView.swift in Sources */,
 				980DB79A2733D391006ED3BE /* UIView+FastKit.swift in Sources */,
+				9858174B274295A500D8CFCA /* TrackSumModel.swift in Sources */,
 				980DB7A72733F19E006ED3BE /* BaseModel.swift in Sources */,
 				984BDBA6272C1C3800F6144B /* ConfirmCodeCell.swift in Sources */,
 				987694292738F1440075CA0F /* ScholarDetailController.swift in Sources */,
@@ -663,7 +689,9 @@
 				98581728273D0A3700D8CFCA /* AddTrackController.swift in Sources */,
 				98D99425273BAB19006AA8DC /* AccountScholarshipsController.swift in Sources */,
 				980DB7982733D391006ED3BE /* TYPageView.swift in Sources */,
+				9858174E27429C1A00D8CFCA /* TrackModel.swift in Sources */,
 				9858172C273D1BCC00D8CFCA /* AddScholarshipController.swift in Sources */,
+				9858175027429E6300D8CFCA /* TrackListModel.swift in Sources */,
 				9858173B27422D3D00D8CFCA /* ScholarshipDetailCell.swift in Sources */,
 				980DB7962733D391006ED3BE /* TYPageTitleView.swift in Sources */,
 				980DB79E2733D486006ED3BE /* ScholarsController.swift in Sources */,
