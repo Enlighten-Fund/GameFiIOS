@@ -114,7 +114,7 @@ class DataManager: NSObject {
     
     func fetchScholarShipDetail(scholarshipId:String, completeBlock: @escaping CompleteBlock) {
         let dic = ["id" : Int(scholarshipId)]
-        self.POST(url: "scholarship/get_by_id", param: dic) { result, reponse in
+        self.POST(url: "scholarship/get_by_id", param: dic as [String : Any]) { result, reponse in
             if result.success!{
                 let scholarshipDetailModel : ScholarshipDetailModel = JsonUtil.jsonToModel(reponse as! String, ScholarshipDetailModel.self) as! ScholarshipDetailModel
                 completeBlock(result,scholarshipDetailModel)

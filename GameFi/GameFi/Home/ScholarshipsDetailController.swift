@@ -86,7 +86,7 @@ extension  ScholarshipsDetailController : UITableViewDelegate,UITableViewDataSou
    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             
-           return 0
+           return 10
     }
         
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

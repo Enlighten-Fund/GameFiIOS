@@ -64,14 +64,36 @@ class ScholarshipDetailHeaderView: UIView {
     }
     
     func update(scholarshipDetailModel:ScholarshipDetailModel) {
-        self.managerNameLabelView.update(leftTitle: "Manager name", rithtTitle: scholarshipDetailModel.manager_user_name!)
-        self.expectedLabelView.update(leftTitle: "Expected SLP per day", rithtTitle: scholarshipDetailModel.myestimate_daily_slp!)
-        self.contractLabelView.update(leftTitle: "Contract period", rithtTitle: scholarshipDetailModel.offer_period!)
-        self.creditLabelView.update(leftTitle: "Credit score", rithtTitle: scholarshipDetailModel.credit_score!)
-        self.axieCountLabelView.update(leftTitle: "Axie counts", rithtTitle: scholarshipDetailModel.axie_count!)
-        self.rentedLabelView.update(leftTitle: "Rented times", rithtTitle: "")
-        self.scholarLabelView.update(leftTitle: "Scholar’s percentage", rithtTitle: "\(scholarshipDetailModel.scholar_percentage!)%")
-        self.securityLabelView.update(leftTitle: "Security deposit", rithtTitle: "\(scholarshipDetailModel.security_deposit!)SLP")
+        if scholarshipDetailModel.manager_user_name != nil {
+            self.managerNameLabelView.update(leftTitle: "Manager name", rithtTitle: scholarshipDetailModel.manager_user_name!)
+        }
+        if scholarshipDetailModel.myestimate_daily_slp != nil {
+            self.expectedLabelView.update(leftTitle: "Expected SLP per day", rithtTitle: scholarshipDetailModel.myestimate_daily_slp!)
+        }
+       
+        if scholarshipDetailModel.offer_period != nil {
+            self.contractLabelView.update(leftTitle: "Contract period", rithtTitle: scholarshipDetailModel.offer_period!)
+        }
+        
+        if scholarshipDetailModel.credit_score != nil {
+            self.creditLabelView.update(leftTitle: "Credit score", rithtTitle: scholarshipDetailModel.credit_score!)
+        }
+        
+        if scholarshipDetailModel.axie_count != nil {
+            self.axieCountLabelView.update(leftTitle: "Axie counts", rithtTitle: scholarshipDetailModel.axie_count!)
+        }
+        
+        if scholarshipDetailModel.rentedtimes != nil  {
+            self.rentedLabelView.update(leftTitle: "Rented times", rithtTitle: scholarshipDetailModel.rentedtimes!)
+        }
+        
+        if scholarshipDetailModel.scholar_percentage != nil  {
+            self.scholarLabelView.update(leftTitle: "Scholar’s percentage", rithtTitle: "\(scholarshipDetailModel.scholar_percentage!)%")
+        }
+        if scholarshipDetailModel.security_deposit != nil  {
+            self.securityLabelView.update(leftTitle: "Security deposit", rithtTitle: "\(scholarshipDetailModel.security_deposit!) SLP")
+        }
+        
     }
     
     required init?(coder: NSCoder) {

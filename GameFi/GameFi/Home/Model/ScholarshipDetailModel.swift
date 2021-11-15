@@ -9,7 +9,7 @@ import Foundation
 import HandyJSON
 
 class ScholarshipDetailModel: ScholarshipModel {
-    
+    var rentedtimes : String?
     required init() {}
 }
 
