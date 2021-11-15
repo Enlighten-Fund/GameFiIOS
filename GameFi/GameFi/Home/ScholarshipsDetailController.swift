@@ -24,6 +24,8 @@ class ScholarshipsDetailController: ViewController {
     var scholarshipId : String?
     var axieIds : [String]?
     var dataSource : Array<Any>? = Array.init()
+    
+    
     init(scholarshipId : String,axieIds:[String]) {
         super.init(nibName: nil, bundle: nil)
         self.scholarshipId = scholarshipId
@@ -39,9 +41,15 @@ class ScholarshipsDetailController: ViewController {
         self.title = "Scholarship Detail"
         self.tableView!.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(0)
-            make.bottom.equalToSuperview().offset(0)
+            make.bottom.equalTo(self.applyView!.snp.top)
             make.left.equalToSuperview().offset(15)
             make.right.equalToSuperview().offset(-15)
+        }
+        self.applyView!.snp.makeConstraints { make in
+            make.height.equalTo(57)
+            make.bottom.equalToSuperview().offset(-IPhone_TabbarSafeBottomMargin)
+            make.left.equalToSuperview().offset(0)
+            make.right.equalToSuperview().offset(0)
         }
         self.tableView?.mj_header?.beginRefreshing()
      
@@ -78,6 +86,9 @@ class ScholarshipsDetailController: ViewController {
         
     }
     
+    @objc func submitBtnClick() {
+        
+    }
     
     lazy var tableView: UITableView? = {
         let tempTableView = UITableView.init(frame: CGRect.zero, style: .plain)
@@ -85,8 +96,6 @@ class ScholarshipsDetailController: ViewController {
         let theaderView = ScholarshipDetailHeaderView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 300))
         self.headerview = theaderView
         tempTableView.tableHeaderView = theaderView
-//        let footView = LoginFootView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 200))
-//        footView.scholarBtn.isSelected = true
         tempTableView.separatorStyle = .none
         tempTableView.register(EmptyTableViewCell.classForCoder(), forCellReuseIdentifier: emptyTableViewCellIdentifier)
         tempTableView.register(ScholarshipDetailCell.classForCoder(), forCellReuseIdentifier: scholarshipDetailCellIdentifier)
@@ -101,7 +110,13 @@ class ScholarshipsDetailController: ViewController {
         view.addSubview(tempTableView)
         return tempTableView
     }()
-    
+    lazy var applyView: SubmitView? = {
+        let tempView = SubmitView.init(frame: CGRect.zero)
+        tempView.submitBtn.setTitle("Apply", for: .normal)
+        tempView.submitBtn.addTarget(self, action: #selector(submitBtnClick), for: .touchUpInside)
+        view.addSubview(tempView)
+        return tempView
+    }()
 }
 
 extension  ScholarshipsDetailController : UITableViewDelegate,UITableViewDataSource{

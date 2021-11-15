@@ -14,9 +14,9 @@ class SubmitView: UIView {
         super.init(frame: frame)
         self.submitBtn.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(20)
+            make.top.equalToSuperview()
             make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
-            make.height.equalTo(40)
+            make.height.equalToSuperview()
         }
     }
     
