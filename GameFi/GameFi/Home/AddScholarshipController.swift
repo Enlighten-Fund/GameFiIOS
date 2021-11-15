@@ -48,13 +48,102 @@ class AddScholarshipController: ViewController {
     func hideNoticeLabel(){
         DispatchQueue.main.async {
             self.noticeLabel?.isHidden = true
+            self.noticeLabel?.numberOfLines = 0
             self.noticeLabel?.text = ""
         }
     }
     
     
     @objc func addScholarship(){
+        if !self.valifyAccount() {
+            return
+        }
+        if !self.valifyRonin() {
+            return
+        }
+        if !self.valifyEmail() {
+            return
+        }
+        if !self.valifyPassword() {
+            return
+        }
+        if !self.valifyPercentage() {
+            return
+        }
+//        var params = ["account_login" : self.accountNameTextField?.text,
+//                      "account_passcode" : self.passwordTextField?.text,
+//                      "account_ronin_address":self.roninTextField?.text,
+//                      "scholar_percentage":self.managerPercentTextField?.text,
+//                      "offer_period":
+//                     ]
         
+    }
+    
+    func valifyAccount() -> Bool {
+        var temp = false
+        if self.accountNameTextField!.validateUsername() {
+            temp = true
+        }else if self.accountNameTextField!.validateEmail(){
+            temp = true
+        }
+        if !temp {
+            self.showNoticeLabel(notice: "Account name should be filled in")
+            return false
+        }
+        self.hideNoticeLabel()
+        return true
+    }
+    
+    func valifyRonin() -> Bool {
+        var temp = false
+        if self.roninTextField!.validateRonin() {
+            temp = true
+        }
+        if !temp {
+            self.showNoticeLabel(notice: "The format is ronin:xxxxxxx")
+            return false
+        }
+        self.hideNoticeLabel()
+        return true
+    }
+    
+    func valifyEmail() -> Bool {
+        var temp = false
+        if self.emailTextField!.validateEmail() {
+            temp = true
+        }
+        if !temp {
+            self.showNoticeLabel(notice: "The email format is ")
+            return false
+        }
+        self.hideNoticeLabel()
+        return true
+    }
+    
+    func valifyPassword() -> Bool {
+        var temp = false
+        if self.passwordTextField!.validatePassword() {
+            temp = true
+        }
+        if !temp {
+            self.showNoticeLabel(notice: "The password format is ")
+            return false
+        }
+        self.hideNoticeLabel()
+        return true
+    }
+    
+    func valifyPercentage() -> Bool {
+        var temp = false
+        if self.managerPercentTextField!.validatePassword() {
+            temp = true
+        }
+        if !temp {
+            self.showNoticeLabel(notice: "The percentage format is ")
+            return false
+        }
+        self.hideNoticeLabel()
+        return true
     }
     
     lazy var tableView: UITableView? = {
@@ -108,11 +197,15 @@ extension  AddScholarshipController : UITableViewDelegate,UITableViewDataSource,
     }
  
     func textFieldDidEndEditing(_ textField: UITextField) {
-//        if textField == self.usernameTextField{
-////            self.valifyAccount()
-//        }else if textField == self.passwordTextField{
-////            self.valifyPassword()
-//        }
+        if textField == self.accountNameTextField{
+            self.valifyAccount()
+        }else if textField == self.roninTextField{
+            self.valifyRonin()
+        }else if textField == self.emailTextField{
+            self.valifyEmail()
+        }else if textField == self.passwordTextField{
+            self.valifyPassword()
+        }
         
     }
     
@@ -141,25 +234,25 @@ extension  AddScholarshipController : UITableViewDelegate,UITableViewDataSource,
     case 1:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "1", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.delegate = self
-        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter password", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Ronin address: 550fc6aee0126b5d31d347…", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.roninTextField = tempCell.textFild
         cell = tempCell
     case 2:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "2", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.delegate = self
-        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter password", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Email address", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.emailTextField = tempCell.textFild
         cell = tempCell
     case 3:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "3", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.delegate = self
-        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter password", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Email password", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.passwordTextField = tempCell.textFild
         cell = tempCell
     case 4:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "4", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.delegate = self
-        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter password", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Manager percentage", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.managerPercentTextField = tempCell.textFild
         cell = tempCell
     case 5:

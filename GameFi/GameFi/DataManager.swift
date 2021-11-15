@@ -4,7 +4,7 @@ import HandyJSON
 
 typealias CompleteBlock = (GFResult,Any) -> Void
  
-let BaseUrl = "http://a2a7cb64ab5d94072bc625bdedd3f7ff-1574935958.ap-northeast-1.elb.amazonaws.com/v2/"
+let BaseUrl = "http://a2a7cb64ab5d94072bc625bdedd3f7ff-1103167960.ap-northeast-1.elb.amazonaws.com/v2/"
 let jkver = "1.0"
 
 
