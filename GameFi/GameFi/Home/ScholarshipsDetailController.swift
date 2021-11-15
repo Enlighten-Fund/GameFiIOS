@@ -22,9 +22,12 @@ class ScholarshipsDetailController: ViewController {
     var headerview : ScholarshipDetailHeaderView?
     var scholarshipsDetailModel : ScholarshipDetailModel?
     var scholarshipId : String?
-    init(scholarshipId : String) {
+    var axieIds : [String]?
+    var dataSource : Array<Any>? = Array.init()
+    init(scholarshipId : String,axieIds:[String]) {
         super.init(nibName: nil, bundle: nil)
         self.scholarshipId = scholarshipId
+        self.axieIds = axieIds
     }
     
     required init?(coder: NSCoder) {
@@ -45,6 +48,8 @@ class ScholarshipsDetailController: ViewController {
     }
     
     func requestData() {
+        self.dataSource = Array.init()
+        //基本信息 表头
         DataManager.sharedInstance.fetchScholarShipDetail(scholarshipId: self.scholarshipId!) { result, reponse in
             DispatchQueue.main.async { [self] in
                 self.tableView!.mj_header?.endRefreshing()
@@ -52,10 +57,25 @@ class ScholarshipsDetailController: ViewController {
                     let tempModel : ScholarshipDetailModel = reponse as! ScholarshipDetailModel
                     self.scholarshipsDetailModel = tempModel
                     self.headerview?.update(scholarshipDetailModel: scholarshipsDetailModel!)
-                    self.tableView!.reloadData()
                 }
             }
         }
+        if self.axieIds != nil && self.axieIds!.count > 0 {
+            for axieId in self.axieIds! {
+                DataManager.sharedInstance.fetchAxieDetail(axieId: axieId) { result, reponse in
+                    let tempModel : AxieinfoModel = reponse as! AxieinfoModel
+                    self.dataSource?.append(tempModel)
+                    if self.dataSource?.count == self.axieIds?.count {
+                        DispatchQueue.main.async { [self] in
+                            self.tableView!.mj_header?.endRefreshing()
+                            self.tableView?.reloadData()
+                        }
+                    }
+                }
+            }
+            
+        }
+        
     }
     
     
@@ -69,6 +89,8 @@ class ScholarshipsDetailController: ViewController {
 //        footView.scholarBtn.isSelected = true
         tempTableView.separatorStyle = .none
         tempTableView.register(EmptyTableViewCell.classForCoder(), forCellReuseIdentifier: emptyTableViewCellIdentifier)
+        tempTableView.register(ScholarshipDetailCell.classForCoder(), forCellReuseIdentifier: scholarshipDetailCellIdentifier)
+        
         tempTableView.dataSource = self
         tempTableView.delegate = self
         tempTableView.backgroundColor = self.view.backgroundColor
@@ -85,38 +107,28 @@ class ScholarshipsDetailController: ViewController {
 extension  ScholarshipsDetailController : UITableViewDelegate,UITableViewDataSource{
    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            
-           return 10
+        if self.axieIds == nil || self.axieIds!.count == 0 {
+            return 0
+        }
+           return self.axieIds!.count
     }
         
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 0.01
+        return 920.0
     }
         
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    var cell : UITableViewCell
-    switch indexPath.row {
-//    case 0:
-//        let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "0", for: indexPath) as! LabelTextFildCell
-//        tempCell.textFild?.delegate = self
-//        tempCell.textFild?.tag = 10001
-//        self.usernameTextField = tempCell.textFild
-//        tempCell.textFild?.placeholder = "Please enter 5 to 16 alphanumeric characters or underscores"
-//        tempCell.update(model: self.usernameModel)
-//        cell = tempCell
-//    case 1:
-//        let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "1", for: indexPath) as! LabelTextFildCell
-//        tempCell.textFild?.setupShowPasswordButton()
-//        tempCell.textFild?.delegate = self
-//        tempCell.textFild?.tag = 10002
-//        tempCell.textFild?.placeholder = "Please enter a 6-20 digit password with at least two of letters, numbers and symbols"
-//        self.passwordTextField = tempCell.textFild
-//        tempCell.update(model: self.passwordModel)
-//        cell = tempCell
-    default:
-        cell = tableView.dequeueReusableCell(withIdentifier: emptyTableViewCellIdentifier, for: indexPath)
-    }
-    cell.contentView.backgroundColor = self.view.backgroundColor
+        var cell : UITableViewCell
+        if indexPath.row < self.dataSource!.count {
+            cell = tableView.dequeueReusableCell(withIdentifier: scholarshipDetailCellIdentifier, for: indexPath)
+            let tempcell :ScholarshipDetailCell  = cell as! ScholarshipDetailCell
+            let axieInfoModel = self.dataSource![indexPath.row]
+            tempcell.update(axieinfoModel: axieInfoModel as! AxieinfoModel)
+        }else{
+            cell = tableView.dequeueReusableCell(withIdentifier: emptyTableViewCellIdentifier, for: indexPath)
+        }
+    
+       cell.contentView.backgroundColor = self.view.backgroundColor
        return cell
    }
 }

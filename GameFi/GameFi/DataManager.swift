@@ -124,6 +124,29 @@ class DataManager: NSObject {
         }
     }
     
+    func fetchAxieDetail(axieId:String, completeBlock: @escaping CompleteBlock) {
+        let dic = ["id" : Int(axieId)]
+        self.POST(url: "axie/get_by_id", param: dic as [String : Any]) { result, reponse in
+            let path = Bundle.main.path(forResource: "axieinfo", ofType: "json")
+            let url = URL(fileURLWithPath: path!)
+                do {
+                        let data = try Data(contentsOf: url)
+                        let jsonData:Any = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
+                    let jsonDic : Dictionary = jsonData as! Dictionary<String, Any>
+                    let axieinfoModel : AxieinfoModel = JsonUtil.jsonToModel(jsonDic["data"] as! String, AxieinfoModel.self) as! AxieinfoModel
+                        completeBlock(result,axieinfoModel)
+                } catch let error as Error? {
+                        print("读取本地数据出现错误!",error)
+                }
+//            if result.success!{
+//                let axieinfoModel : AxieinfoModel = JsonUtil.jsonToModel(reponse as! String, AxieinfoModel.self) as! AxieinfoModel
+//                completeBlock(result,axieinfoModel)
+//            }else{
+//                completeBlock(result,reponse)
+//            }
+        }
+    }
+    
     func fetchScholar(filter:String, pageIndex:Int, completeBlock: @escaping CompleteBlock) {
         let dic = ["page_index" : pageIndex,"page_size" : 20,"order_by_key" : filter] as [String : Any]
         self.POST(url: "user/list_scholar", param: dic) { result, reponse in
