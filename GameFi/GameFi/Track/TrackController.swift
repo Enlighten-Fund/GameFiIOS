@@ -93,7 +93,7 @@ class TrackController: ViewController {
     }
     
     lazy var tableView: UITableView? = {
-        let headerview = TrackHeadView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 335))
+        let headerview = TrackHeadView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 235))
         self.trackHeadView = headerview
         let tempTableView = UITableView.init(frame: CGRect.zero, style: .plain)
         tempTableView.tableHeaderView = headerview

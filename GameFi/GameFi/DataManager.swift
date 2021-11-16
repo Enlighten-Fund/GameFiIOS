@@ -186,12 +186,24 @@ class DataManager: NSObject {
     func fetchTrackerSummary(completeBlock: @escaping CompleteBlock) {
         let dic = ["user_id" : "123"]
         self.POST(url: "game_accounts/get_summary_by_user", param: dic as [String : Any]) { result, reponse in
-            if result.success!{
-                let trackSumModel : TrackSumModel = JsonUtil.jsonToModel(reponse as! String, TrackSumModel.self) as! TrackSumModel
-                completeBlock(result,trackSumModel)
-            }else{
-                completeBlock(result,reponse)
+            let path = Bundle.main.path(forResource: "tracksum", ofType: "json")
+            let url = URL(fileURLWithPath: path!)
+            do {
+                    let data = try Data(contentsOf: url)
+                    let jsonData:Any = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
+                let jsonDic : Dictionary = jsonData as! Dictionary<String, Any>
+                let trackSumModel : TrackSumModel = JsonUtil.jsonToModel(jsonDic["data"] as! String, TrackSumModel.self) as! TrackSumModel
+                    completeBlock(result,trackSumModel)
+            } catch let error as Error? {
+                    print("读取本地数据出现错误!",error)
             }
+            
+//            if result.success!{
+//                let trackSumModel : TrackSumModel = JsonUtil.jsonToModel(reponse as! String, TrackSumModel.self) as! TrackSumModel
+//                completeBlock(result,trackSumModel)
+//            }else{
+//                completeBlock(result,reponse)
+//            }
         }
     }
     

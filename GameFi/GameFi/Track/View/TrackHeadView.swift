@@ -67,6 +67,7 @@ class TrackContentView: UIView {
     }()
     lazy var usdLabel : UILabel = {
         let tempLabel = UILabel.init(frame: CGRect.zero)
+        tempLabel.isHidden = true
         tempLabel.textColor = UIColor(red: 0.58, green: 0.62, blue: 0.78, alpha: 1)
         tempLabel.font =  UIFont(name: "Avenir Next Medium", size: 12)
         self.addSubview(tempLabel)
@@ -83,42 +84,42 @@ class TrackContentView: UIView {
 class TrackHeadView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.unclaimedContentView.snp.makeConstraints { make in
+        self.totalContentView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(15)
             make.left.equalToSuperview()
             make.width.equalTo(IPhone_SCREEN_WIDTH / 2.0 - 15 - 5)
             make.height.equalTo(100)
         }
-        self.roninContentView.snp.makeConstraints { make in
+        self.unclaimedContentView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(15)
             make.right.equalToSuperview()
+            make.width.equalTo(IPhone_SCREEN_WIDTH / 2.0 - 15 - 5)
+            make.height.equalTo(100)
+        }
+        self.managerContentView.snp.makeConstraints { make in
+            make.top.equalTo(self.totalContentView.snp.bottom).offset(10)
+            make.left.equalToSuperview()
             make.width.equalTo(IPhone_SCREEN_WIDTH / 2.0 - 15 - 5)
             make.height.equalTo(100)
         }
         self.scholarContentView.snp.makeConstraints { make in
             make.top.equalTo(self.unclaimedContentView.snp.bottom).offset(10)
-            make.left.equalToSuperview()
-            make.width.equalTo(IPhone_SCREEN_WIDTH / 2.0 - 15 - 5)
-            make.height.equalTo(100)
-        }
-        self.managerContentView.snp.makeConstraints { make in
-            make.top.equalTo(self.roninContentView.snp.bottom).offset(10)
             make.right.equalToSuperview()
             make.width.equalTo(IPhone_SCREEN_WIDTH / 2.0 - 15 - 5)
             make.height.equalTo(100)
         }
-        self.averageContentView.snp.makeConstraints { make in
-            make.top.equalTo(self.scholarContentView.snp.bottom).offset(10)
-            make.left.equalToSuperview()
-            make.width.equalTo(IPhone_SCREEN_WIDTH / 2.0 - 15 - 5)
-            make.height.equalTo(100)
-        }
-        self.totalContentView.snp.makeConstraints { make in
-            make.top.equalTo(self.managerContentView.snp.bottom).offset(10)
-            make.right.equalToSuperview()
-            make.width.equalTo(IPhone_SCREEN_WIDTH / 2.0 - 15 - 5)
-            make.height.equalTo(100)
-        }
+//        self.averageContentView.snp.makeConstraints { make in
+//            make.top.equalTo(self.scholarContentView.snp.bottom).offset(10)
+//            make.left.equalToSuperview()
+//            make.width.equalTo(IPhone_SCREEN_WIDTH / 2.0 - 15 - 5)
+//            make.height.equalTo(100)
+//        }
+//        self.totalContentView.snp.makeConstraints { make in
+//            make.top.equalTo(self.managerContentView.snp.bottom).offset(10)
+//            make.right.equalToSuperview()
+//            make.width.equalTo(IPhone_SCREEN_WIDTH / 2.0 - 15 - 5)
+//            make.height.equalTo(100)
+//        }
     }
     
     
@@ -127,14 +128,28 @@ class TrackHeadView: UIView {
     }
     
     func update(trackSumModel:TrackSumModel) {
-        if trackSumModel.track_slp_total != nil {
-            self.unclaimedContentView.totalLabel.text = trackSumModel.track_slp_total
+        if trackSumModel.track_slp_total != nil && trackSumModel.scholar_slp_total != nil && trackSumModel.manager_slp_total != nil{
+            let total = Float(trackSumModel.track_slp_total!)! + Float(trackSumModel.scholar_slp_total!)! + Float(trackSumModel.manager_slp_total!)!
+            self.totalContentView.totalLabel.text = String(lroundf(total))
         }
-        if trackSumModel.track_slp_scholar != nil {
-            self.scholarContentView.totalLabel.text = trackSumModel.track_slp_scholar
+        if trackSumModel.track_slp_total != nil
+            && trackSumModel.track_slp_balance != nil
+            && trackSumModel.scholar_slp_total != nil
+            && trackSumModel.scholar_slp_balance != nil
+            && trackSumModel.manager_slp_total != nil
+            && trackSumModel.manager_slp_balance != nil{
+            let track = Float(trackSumModel.track_slp_total!)! - Float(trackSumModel.track_slp_balance!)!
+            let scholar = Float(trackSumModel.scholar_slp_total!)! - Float(trackSumModel.scholar_slp_balance!)!
+            let manager = Float(trackSumModel.manager_slp_total!)! - Float(trackSumModel.manager_slp_balance!)!
+            self.unclaimedContentView.totalLabel.text = String(lroundf(track + scholar + manager))
         }
-        if trackSumModel.track_slp_checkpoint != nil {
-            self.averageContentView.totalLabel.text = trackSumModel.track_slp_checkpoint
+        if trackSumModel.track_slp_manager != nil && trackSumModel.scholar_slp_manager != nil && trackSumModel.manager_slp_manager != nil{
+            let total = Float(trackSumModel.track_slp_manager!)! + Float(trackSumModel.scholar_slp_manager!)! + Float(trackSumModel.manager_slp_manager!)!
+            self.managerContentView.totalLabel.text =  String(lroundf(total))
+        }
+        if trackSumModel.track_slp_scholar != nil && trackSumModel.scholar_slp_scholar != nil && trackSumModel.manager_slp_scholar != nil{
+            let total = Float(trackSumModel.track_slp_scholar!)! + Float(trackSumModel.scholar_slp_scholar!)! + Float(trackSumModel.manager_slp_scholar!)!
+            self.scholarContentView.totalLabel.text =  String(lroundf(total))
         }
     }
     
