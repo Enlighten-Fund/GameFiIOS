@@ -54,49 +54,66 @@ class LabelAndLabelInterView: UIView{
 }
 
 class TrackCell: TableViewCell {
-    
+
     override func makeConstraints() {
         super.makeConstraints()
         self.bgView.snp.makeConstraints { make in
             make.left.equalToSuperview()
             make.right.equalToSuperview()
             make.top.equalToSuperview()
-            make.height.equalTo(140)
+            make.height.equalTo(165)
         }
-        self.accountLabelInterView.snp.makeConstraints { make in
+        self.accountLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(15)
             make.right.equalToSuperview().offset(-15)
-            make.top.equalToSuperview().offset(15)
-            make.height.equalTo(20)
+            make.top.equalToSuperview()
+            make.height.equalTo(30)
         }
-        self.todayInterView.snp.makeConstraints { make in
+        self.moreBtn.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-15)
+            make.centerY.equalTo(self.accountLabel)
+            make.height.equalTo(25)
+            make.width.equalTo(20)
+        }
+        self.totalInterView.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(15)
             make.right.equalToSuperview().offset(-15)
-            make.top.equalTo(self.accountLabelInterView.snp.bottom)
-            make.height.equalTo(20)
+            make.top.equalTo(self.accountLabel.snp.bottom)
+            make.height.equalTo(25)
         }
-        self.averageLabelInterView.snp.makeConstraints { make in
+        self.unclaimedLabelInterView.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(15)
             make.right.equalToSuperview().offset(-15)
-            make.top.equalTo(self.todayInterView.snp.bottom)
-            make.height.equalTo(20)
+            make.top.equalTo(self.totalInterView.snp.bottom)
+            make.height.equalTo(25)
+        }
+        self.managerInterView.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(15)
+            make.right.equalToSuperview().offset(-15)
+            make.top.equalTo(self.unclaimedLabelInterView.snp.bottom)
+            make.height.equalTo(25)
+        }
+        self.scholarLabelInterView.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(15)
+            make.right.equalToSuperview().offset(-15)
+            make.top.equalTo(self.managerInterView.snp.bottom)
+            make.height.equalTo(25)
         }
         self.mmrLabelInterView.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(15)
             make.right.equalToSuperview().offset(-15)
-            make.top.equalTo(self.averageLabelInterView.snp.bottom)
-            make.height.equalTo(20)
-        }
-        self.managerLabelInterView.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(15)
-            make.right.equalToSuperview().offset(-15)
-            make.top.equalTo(self.mmrLabelInterView.snp.bottom)
-            make.height.equalTo(20)
+            make.top.equalTo(self.scholarLabelInterView.snp.bottom)
+            make.height.equalTo(25)
         }
     }
     
     func update(trackModel:TrackModel)  {
-        
+        self.accountLabel.text = trackModel.name
+        self.totalInterView.rightLabel.text = trackModel.slp_total
+        self.unclaimedLabelInterView.rightLabel.text = String(lroundf(Float(trackModel.slp_total!)! - Float(trackModel.slp_balance!)!))
+        self.managerInterView.rightLabel.text = trackModel.slp_manager
+        self.scholarLabelInterView.rightLabel.text = trackModel.slp_scholar
+        self.mmrLabelInterView.rightLabel.text = trackModel.mmr
     }
     
     lazy var bgView : UIView = {
@@ -108,28 +125,47 @@ class TrackCell: TableViewCell {
         return temp
     }()
     
-    lazy var accountLabelInterView : LabelAndLabelInterView = {
-        let temp = LabelAndLabelInterView.init(frame: CGRect.zero)
+    lazy var accountLabel : UILabel = {
+        let temp = UILabel.init(frame: CGRect.zero)
+        temp.font = UIFont(name: "Avenir Next Medium", size: 15)
+        temp.textColor = .white
         self.contentView.addSubview(temp)
         return temp
     }()
-    lazy var todayInterView : LabelAndLabelInterView = {
-        let temp = LabelAndLabelInterView.init(frame: CGRect.zero)
+    lazy var moreBtn : UIButton = {
+        let temp = UIButton.init(frame: CGRect.zero)
+        temp.setImage(UIImage.init(named: "more"), for: .normal)
         self.contentView.addSubview(temp)
         return temp
     }()
-    lazy var averageLabelInterView : LabelAndLabelInterView = {
+    lazy var totalInterView : LabelAndLabelInterView = {
         let temp = LabelAndLabelInterView.init(frame: CGRect.zero)
+        temp.leftLabel.text = "Total"
+        self.contentView.addSubview(temp)
+        return temp
+    }()
+    
+    lazy var unclaimedLabelInterView : LabelAndLabelInterView = {
+        let temp = LabelAndLabelInterView.init(frame: CGRect.zero)
+        temp.leftLabel.text = "Unclaimed"
+        self.contentView.addSubview(temp)
+        return temp
+    }()
+    lazy var managerInterView : LabelAndLabelInterView = {
+        let temp = LabelAndLabelInterView.init(frame: CGRect.zero)
+        temp.leftLabel.text = "Manager"
+        self.contentView.addSubview(temp)
+        return temp
+    }()
+    lazy var scholarLabelInterView : LabelAndLabelInterView = {
+        let temp = LabelAndLabelInterView.init(frame: CGRect.zero)
+        temp.leftLabel.text = "Scholar"
         self.contentView.addSubview(temp)
         return temp
     }()
     lazy var mmrLabelInterView : LabelAndLabelInterView = {
         let temp = LabelAndLabelInterView.init(frame: CGRect.zero)
-        self.contentView.addSubview(temp)
-        return temp
-    }()
-    lazy var managerLabelInterView : LabelAndLabelInterView = {
-        let temp = LabelAndLabelInterView.init(frame: CGRect.zero)
+        temp.leftLabel.text = "MMR"
         self.contentView.addSubview(temp)
         return temp
     }()

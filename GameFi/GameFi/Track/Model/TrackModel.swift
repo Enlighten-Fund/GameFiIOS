@@ -14,6 +14,8 @@ class TrackModel: BaseModel {
     var type : String?
     var scholar_percentage : String?
     var slp_total : String?
+    var slp_manager : String?
+    var slp_scholar : String?
     var slp_balance : String?
     var slp_checkpoint : String?
     var mmr : String?

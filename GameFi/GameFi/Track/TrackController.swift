@@ -45,8 +45,23 @@ class TrackController: ViewController {
         DataManager.sharedInstance.fetchTrackerList(pageIndex: self.pageIndex) { result, reponse in
             DispatchQueue.main.async { [self] in
                 self.tableView!.mj_header?.endRefreshing()
+                self.tableView!.mj_footer?.endRefreshing()
                 if result.success!{
-                    
+                    let trackListModel : TrackListModel = reponse as! TrackListModel
+                    if self.pageIndex == 1{
+                        self.dataSource = trackListModel.data
+                    }else{
+                        if trackListModel.data != nil {
+                            self.dataSource?.append(contentsOf: trackListModel.data!)
+                        }
+            
+                    }
+                    if trackListModel.next_page! > pageIndex {
+                        pageIndex = trackListModel.next_page!
+                    }else{
+                        self.tableView!.mj_footer?.endRefreshingWithNoMoreData()
+                    }
+                    self.tableView!.reloadData()
                 }
             }
         }
@@ -141,7 +156,7 @@ extension  TrackController : UITableViewDelegate,UITableViewDataSource{
     }
         
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 155
+        return 175
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

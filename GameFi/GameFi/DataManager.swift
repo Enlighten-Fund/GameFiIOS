@@ -211,12 +211,23 @@ class DataManager: NSObject {
     func fetchTrackerList(pageIndex:Int,completeBlock: @escaping CompleteBlock) {
         let dic = ["page_index" : pageIndex,"page_size" : 20,"user_id" : "123"] as [String : Any]
         self.POST(url: "game_accounts/list_all_by_user", param: dic as [String : Any]) { result, reponse in
-            if result.success!{
-                let trackListModel = JsonUtil.jsonToModel(reponse as! String, TrackListModel.self)
-                completeBlock(result,trackListModel)
-            }else{
-                completeBlock(result,reponse)
+            let path = Bundle.main.path(forResource: "tracklist", ofType: "json")
+            let url = URL(fileURLWithPath: path!)
+            do {
+                    let data = try Data(contentsOf: url)
+                    let jsonData:Any = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
+                let jsonDic : Dictionary = jsonData as! Dictionary<String, Any>
+                let trackListModel : TrackListModel = JsonUtil.jsonToModel(jsonDic["data"] as! String, TrackListModel.self) as! TrackListModel
+                    completeBlock(result,trackListModel)
+            } catch let error as Error? {
+                    print("读取本地数据出现错误!",error)
             }
+//            if result.success!{
+//                let trackListModel = JsonUtil.jsonToModel(reponse as! String, TrackListModel.self)
+//                completeBlock(result,trackListModel)
+//            }else{
+//                completeBlock(result,reponse)
+//            }
         }
     }
 }
