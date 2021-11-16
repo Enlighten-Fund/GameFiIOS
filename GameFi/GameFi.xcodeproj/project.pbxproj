@@ -74,6 +74,7 @@
 		9858175027429E6300D8CFCA /* TrackListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858174F27429E6300D8CFCA /* TrackListModel.swift */; };
 		985817522742A13100D8CFCA /* tracklist.json in Resources */ = {isa = PBXBuildFile; fileRef = 985817512742A13100D8CFCA /* tracklist.json */; };
 		985817542743990100D8CFCA /* GFAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985817532743990100D8CFCA /* GFAlert.swift */; };
+		985817562743EE5C00D8CFCA /* EditTrackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985817552743EE5C00D8CFCA /* EditTrackController.swift */; };
 		986C586E27300B9A0021280A /* LoginHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C586D27300B9A0021280A /* LoginHeadView.swift */; };
 		986C587027300BEB0021280A /* LoginFootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C586F27300BEB0021280A /* LoginFootView.swift */; };
 		987694272738ED150075CA0F /* ScholarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987694262738ED150075CA0F /* ScholarModel.swift */; };
@@ -171,6 +172,7 @@
 		9858174F27429E6300D8CFCA /* TrackListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListModel.swift; sourceTree = "<group>"; };
 		985817512742A13100D8CFCA /* tracklist.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = tracklist.json; sourceTree = "<group>"; };
 		985817532743990100D8CFCA /* GFAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFAlert.swift; sourceTree = "<group>"; };
+		985817552743EE5C00D8CFCA /* EditTrackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTrackController.swift; sourceTree = "<group>"; };
 		986C586D27300B9A0021280A /* LoginHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeadView.swift; sourceTree = "<group>"; };
 		986C586F27300BEB0021280A /* LoginFootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFootView.swift; sourceTree = "<group>"; };
 		987694262738ED150075CA0F /* ScholarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarModel.swift; sourceTree = "<group>"; };
@@ -448,6 +450,7 @@
 				98D9941B273B6D40006AA8DC /* View */,
 				98D99419273A9A17006AA8DC /* TrackController.swift */,
 				98581727273D0A3700D8CFCA /* AddTrackController.swift */,
+				985817552743EE5C00D8CFCA /* EditTrackController.swift */,
 			);
 			path = Track;
 			sourceTree = "<group>";
@@ -652,6 +655,7 @@
 				980DB7992733D391006ED3BE /* TYPageViewConst.swift in Sources */,
 				980DB7C527355876006ED3BE /* ScholarshipsDetailController.swift in Sources */,
 				98D99428273BACDA006AA8DC /* AccountScholarshipCell.swift in Sources */,
+				985817562743EE5C00D8CFCA /* EditTrackController.swift in Sources */,
 				98E09B5A2731121B0020D97D /* ForgetPwdController.swift in Sources */,
 				980DB79027337F7C006ED3BE /* ScholarShipsCell.swift in Sources */,
 				98823A3F27295B0100D9A7CD /* HomeController.swift in Sources */,

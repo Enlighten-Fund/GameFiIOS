@@ -106,16 +106,35 @@ class TrackController: ViewController {
     @objc func showAddTrack(){
         self.navigationController?.pushViewController(AddTrackController.init(), animated: true)
     }
-    @objc func showOpertate(){
+    @objc func showOpertate(btn:UIButton){
         GFAlert.showAlert(titleStr: nil, msgStr: nil, style: .actionSheet, currentVC: self, cancelBtn: "Cancel", cancelHandler: { (cancelAction) in
             
         }, otherBtns: ["Edit","Delete"]) { (idx) in
-            if idx == 0{
-                
-            }else if idx == 1{
-                
+            DispatchQueue.main.async { [self] in
+                if idx == 0{
+                    let row = btn.tag - 88888
+                    let trackModel = dataSource![row]
+                    self.navigationController?.pushViewController(EditTrackController.init(trackModel: trackModel as! TrackModel), animated: true)
+                }else if idx == 1{
+                    GFAlert.showAlert(titleStr: "notice:", msgStr: "You will lost the tracking of this account", currentVC: self, cancelHandler: { cancelAction in
+                        
+                    }, otherBtns: ["OK"]) { idx in
+                        let row = btn.tag - 88888
+                        let trackModel : TrackModel = dataSource![row] as! TrackModel
+                        self.mc_loading()
+                        DataManager.sharedInstance.deleteTracker(ronin_address: trackModel.ronin_address!) { result, reponse in
+                            if result.success!{
+                                DispatchQueue.main.async { [self] in
+                                    self.mc_text("delete success")
+                                    self.tableView?.mj_header?.beginRefreshing {
+                                        
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
-            
         }
     }
     
@@ -191,6 +210,7 @@ extension  TrackController : UITableViewDelegate,UITableViewDataSource{
     let trackModel = self.dataSource![indexPath.row]
     tempCell.update(trackModel: trackModel as! TrackModel)
     tempCell.moreBtn.addTarget(self, action: #selector(showOpertate), for: .touchUpInside)
+    tempCell.moreBtn.tag = 88888 + indexPath.row
     cell.contentView.backgroundColor = self.view.backgroundColor
        return cell
    }

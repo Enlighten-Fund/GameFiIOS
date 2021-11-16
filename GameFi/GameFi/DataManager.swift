@@ -247,4 +247,17 @@ class DataManager: NSObject {
             }
         }
     }
+    
+    //Delete Tracker
+    func deleteTracker(ronin_address:String,completeBlock: @escaping CompleteBlock) {
+        let dic = ["ronin_address" : ronin_address,
+                   "user_id": "123"] as [String : Any]
+        self.POST(url: "game_accounts/delete_tracker", param: dic as [String : Any]) { result, reponse in
+            if result.success!{
+                completeBlock(result,reponse)
+            }else{
+                completeBlock(result,reponse)
+            }
+        }
+    }
 }
