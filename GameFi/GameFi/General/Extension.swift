@@ -73,12 +73,6 @@ extension UITextField{
         let temp = self.validate(value: "^[A-Za-z0-9_-]{5,16}$")
         return temp
     }
-    
-    func validateRonin() -> Bool {
-        let temp = self.validate(value: "^[A-Za-z0-9_-]{5,16}$")
-        return temp
-    }
-    
 }
 /// 抖动方向
 ///

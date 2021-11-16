@@ -96,9 +96,9 @@ class AddScholarshipController: ViewController {
     
     func valifyRonin() -> Bool {
         var temp = false
-        if self.roninTextField!.validateRonin() {
-            temp = true
-        }
+//        if self.roninTextField!.validateRonin() {
+//            temp = true
+//        }
         if !temp {
             self.showNoticeLabel(notice: "The format is ronin:xxxxxxx")
             return false

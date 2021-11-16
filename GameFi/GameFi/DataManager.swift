@@ -230,4 +230,21 @@ class DataManager: NSObject {
 //            }
         }
     }
+    
+    //Create Tracker
+    func createTracker(accountName:String,ronin_address:String,manager_percentage:Float,completeBlock: @escaping CompleteBlock) {
+        let dic = ["name" : accountName,
+                   "ronin_address" : ronin_address,
+                   "manager_percentage" : manager_percentage,
+                   "scholar_percentage": 100 - manager_percentage,
+                   "user_id": "123"] as [String : Any]
+        self.POST(url: "game_accounts/create_tracker", param: dic as [String : Any]) { result, reponse in
+            if result.success!{
+                let trackListModel = JsonUtil.jsonToModel(reponse as! String, TrackListModel.self)
+                completeBlock(result,trackListModel)
+            }else{
+                completeBlock(result,reponse)
+            }
+        }
+    }
 }

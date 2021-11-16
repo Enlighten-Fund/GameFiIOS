@@ -15,12 +15,12 @@ class AddTrackController: ViewController {
     var accountNameTextField : UITextField?
     var roninTextField : UITextField?
     var managerPercentTextField : UITextField?
-    
+    var scholarpercentageLabel : UILabel?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Track account"
         self.tableView!.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(0)
+            make.top.equalToSuperview().offset(50)
             make.bottom.equalToSuperview().offset(0)
             make.left.equalToSuperview().offset(0)
             make.right.equalToSuperview()
@@ -50,8 +50,66 @@ class AddTrackController: ViewController {
     }
     
     
+    func valifyAccount() -> Bool{
+        if self.accountNameTextField!.text == nil || self.accountNameTextField!.text!.isBlank {
+            self.showNoticeLabel(notice: "Account name should be filled in")
+            return false
+        }else{
+            self.hideNoticeLabel()
+            return true
+        }
+    }
+    
+    func valifyRonin() -> Bool{
+        if self.roninTextField!.text == nil || self.roninTextField!.text!.isBlank {
+            self.showNoticeLabel(notice: "Ronin address should be filled in")
+            return false
+        }else if !self.roninTextField!.text!.starts(with: "0x") && !self.roninTextField!.text!.starts(with: "ronin:"){
+            self.showNoticeLabel(notice: "Ronin address format is 0x...... or ronin:......")
+            return false
+        }else if self.roninTextField!.text!.count != 42 &&  self.roninTextField!.text!.count != 46{
+            self.showNoticeLabel(notice: "Ronin address format is 0x...... or ronin:......")
+            return false
+        }else{
+            self.hideNoticeLabel()
+            return true
+        }
+    }
+    
+    func valifyPercent() -> Bool{
+        if self.managerPercentTextField!.text == nil || self.managerPercentTextField!.text!.isBlank {
+            self.showNoticeLabel(notice: "Manager percentage should be filled in")
+            return false
+        }else{
+            let percent : Float = Float(self.managerPercentTextField!.text!)!
+            if percent < 0.00 || percent > 100.00 {
+                self.showNoticeLabel(notice: "Manager percentage format is 0.00-100.00,Two significant decimals are supported")
+                return false
+            }else{
+                return true
+            }
+        }
+    }
+    
     @objc func addTrack(){
-        
+        if !self.valifyAccount() {
+            return
+        }
+        if !self.valifyRonin() {
+            return
+        }
+        if !self.valifyPercent() {
+            return
+        }
+        self.mc_loading()
+        DataManager.sharedInstance.createTracker(accountName: accountNameTextField!.text!, ronin_address: roninTextField!.text!, manager_percentage: Float(roninTextField!.text!)!) { result, reponse in
+            DispatchQueue.main.async { [self] in
+                self.mc_remove()
+                if result.success!{
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
+        }
     }
     
     lazy var tableView: UITableView? = {
@@ -86,6 +144,14 @@ class AddTrackController: ViewController {
 }
 
 extension  AddTrackController : UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate{
+    func isValid(checkStr:String, regex:String) ->Bool{
+
+          let predicte = NSPredicate(format:"SELF MATCHES %@", regex)
+
+          return predicte.evaluate(with: checkStr)
+
+    }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard textField.text != nil else {
                 return true
@@ -98,15 +164,40 @@ extension  AddTrackController : UITableViewDelegate,UITableViewDataSource,UIText
         if string.isBlank {
             return false
         }
+        
+        if self.managerPercentTextField == textField {
+            //第一个参数，被替换字符串的range
+
+            //第二个参数，即将键入或者粘贴的string
+
+            //返回的是改变过后的新str，即textfield的新的文本内容
+
+            let checkStr = (textField.text as NSString?)?.replacingCharacters(in: range, with: string)
+
+            //正则表达式（只支持两位小数）
+
+            let regex = "^\\-?([1-9]\\d*|0)(\\.\\d{0,2})?$"
+
+             //判断新的文本内容是否符合要求
+
+           return self.isValid(checkStr: checkStr!, regex: regex)
+        }
+        
+
         return true
     }
  
     func textFieldDidEndEditing(_ textField: UITextField) {
-//        if textField == self.usernameTextField{
-////            self.valifyAccount()
-//        }else if textField == self.passwordTextField{
-////            self.valifyPassword()
-//        }
+        if textField == self.accountNameTextField{
+            self.valifyAccount()
+        }else if textField == self.roninTextField{
+            self.valifyRonin()
+        }else if textField == self.managerPercentTextField{
+            if self.valifyPercent(){
+                let str = String(format: "%.2f", 100 - Float(textField.text!)!)
+                self.scholarpercentageLabel!.text = "\(str)%    "
+            }
+        }
         
     }
     
@@ -132,19 +223,21 @@ extension  AddTrackController : UITableViewDelegate,UITableViewDataSource,UIText
     case 1:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "1", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.delegate = self
-        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter password", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Ronin address", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.roninTextField = tempCell.textFild
         cell = tempCell
     case 2:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "2", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.delegate = self
-        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter password", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Manager percentage", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.managerPercentTextField = tempCell.textFild
+        tempCell.textFild?.keyboardType = .numberPad
         cell = tempCell
     case 3:
         let tempCell : LabelAndLabelCell = tableView.dequeueReusableCell(withIdentifier: labelAndLabelCellIdentifier + "3", for: indexPath) as! LabelAndLabelCell
         tempCell.leftLabel.text = "  Scholar percentage"
         tempCell.rightLabel.text = "0%    "
+        self.scholarpercentageLabel = tempCell.rightLabel
         cell = tempCell
     default:
         cell = tableView.dequeueReusableCell(withIdentifier: emptyTableViewCellIdentifier, for: indexPath)

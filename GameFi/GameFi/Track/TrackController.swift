@@ -106,6 +106,19 @@ class TrackController: ViewController {
     @objc func showAddTrack(){
         self.navigationController?.pushViewController(AddTrackController.init(), animated: true)
     }
+    @objc func showOpertate(){
+        GFAlert.showAlert(titleStr: nil, msgStr: nil, style: .actionSheet, currentVC: self, cancelBtn: "Cancel", cancelHandler: { (cancelAction) in
+            
+        }, otherBtns: ["Edit","Delete"]) { (idx) in
+            if idx == 0{
+                
+            }else if idx == 1{
+                
+            }
+            
+        }
+    }
+    
     
     lazy var tableView: UITableView? = {
         let headerview = TrackHeadView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 235))
@@ -177,6 +190,7 @@ extension  TrackController : UITableViewDelegate,UITableViewDataSource{
     cell = tempCell
     let trackModel = self.dataSource![indexPath.row]
     tempCell.update(trackModel: trackModel as! TrackModel)
+    tempCell.moreBtn.addTarget(self, action: #selector(showOpertate), for: .touchUpInside)
     cell.contentView.backgroundColor = self.view.backgroundColor
        return cell
    }
