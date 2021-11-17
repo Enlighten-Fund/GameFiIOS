@@ -260,4 +260,28 @@ class DataManager: NSObject {
             }
         }
     }
+    
+    //manager latest application
+    func fetechManagerLatestApplication(pageIndex:Int,completeBlock: @escaping CompleteBlock) {
+        let dic = ["page_index" : pageIndex,"page_size" : 20,"user_id": "123"] as [String : Any]
+        self.POST(url: "application/list_by_manager", param: dic as [String : Any]) { result, reponse in
+            let path = Bundle.main.path(forResource: "managerApplicationList", ofType: "json")
+            let url = URL(fileURLWithPath: path!)
+            do {
+                    let data = try Data(contentsOf: url)
+                    let jsonData:Any = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
+                let jsonDic : Dictionary = jsonData as! Dictionary<String, Any>
+                let managerApplicationListModel : ManagerApplicationListModel = JsonUtil.jsonToModel(jsonDic["data"] as! String, ManagerApplicationListModel.self) as! ManagerApplicationListModel
+                    completeBlock(result,managerApplicationListModel)
+            } catch let error as Error? {
+                    print("读取本地数据出现错误!",error)
+            }
+//            if result.success!{
+//                let managerApplicationListModel = JsonUtil.jsonToModel(reponse as! String, ManagerApplicationListModel.self)
+//                completeBlock(result,managerApplicationListModel)
+//            }else{
+//                completeBlock(result,reponse)
+//            }
+        }
+    }
 }

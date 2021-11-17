@@ -18,49 +18,43 @@ class LatestScholarshipCell: UICollectionViewCell {
         self.scholarLabelView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.right.equalToSuperview().offset(-15)
-            make.height.equalTo(25)
+            make.height.equalTo(30)
             make.left.equalToSuperview().offset(15)
         }
         self.creditScoreLabelView.snp.makeConstraints { make in
             make.top.equalTo(self.scholarLabelView.snp.bottom)
             make.right.equalToSuperview().offset(-15)
-            make.height.equalTo(25)
+            make.height.equalTo(30)
             make.left.equalToSuperview().offset(15)
         }
         self.highmmrLabelView.snp.makeConstraints { make in
             make.top.equalTo(self.creditScoreLabelView.snp.bottom)
             make.right.equalToSuperview().offset(-15)
-            make.height.equalTo(25)
-            make.left.equalToSuperview().offset(15)
-        }
-        self.pvpLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.highmmrLabelView.snp.bottom)
-            make.right.equalToSuperview().offset(-15)
-            make.height.equalTo(25)
-            make.left.equalToSuperview().offset(15)
-        }
-        self.returnPerDayLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.pvpLabelView.snp.bottom)
-            make.right.equalToSuperview().offset(-15)
-            make.height.equalTo(25)
-            make.left.equalToSuperview().offset(15)
-        }
-        self.countryLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.returnPerDayLabelView.snp.bottom)
-            make.right.equalToSuperview().offset(-15)
-            make.height.equalTo(25)
+            make.height.equalTo(30)
             make.left.equalToSuperview().offset(15)
         }
         self.availabelLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.countryLabelView.snp.bottom)
+            make.top.equalTo(self.highmmrLabelView.snp.bottom)
             make.right.equalToSuperview().offset(-15)
-            make.height.equalTo(25)
+            make.height.equalTo(30)
+            make.left.equalToSuperview().offset(15)
+        }
+        self.experienceLabelView.snp.makeConstraints { make in
+            make.top.equalTo(self.availabelLabelView.snp.bottom)
+            make.right.equalToSuperview().offset(-15)
+            make.height.equalTo(30)
+            make.left.equalToSuperview().offset(15)
+        }
+        self.countryLabelView.snp.makeConstraints { make in
+            make.top.equalTo(self.experienceLabelView.snp.bottom)
+            make.right.equalToSuperview().offset(-15)
+            make.height.equalTo(30)
             make.left.equalToSuperview().offset(15)
         }
         self.accountAppliedLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.availabelLabelView.snp.bottom)
+            make.top.equalTo(self.countryLabelView.snp.bottom)
             make.right.equalToSuperview().offset(-15)
-            make.height.equalTo(25)
+            make.height.equalTo(30)
             make.left.equalToSuperview().offset(15)
         }
         self.refuseBtn.snp.makeConstraints { make in
@@ -77,47 +71,77 @@ class LatestScholarshipCell: UICollectionViewCell {
         }
     }
 
-    func update(scholarshipModel:ScholarshipModel) {
+    func update(managerApplicationModel:ManagerApplicationModel) {
+        if managerApplicationModel.username != nil {
+            self.scholarLabelView.rightLabel.text = managerApplicationModel.username
+        }
+        if managerApplicationModel.credit_score != nil {
+            self.creditScoreLabelView.rightLabel.text = managerApplicationModel.credit_score
+        }
+        if managerApplicationModel.mmr != nil {
+            self.highmmrLabelView.rightLabel.text = managerApplicationModel.mmr
+        }
+        if managerApplicationModel.available_time != nil {
+            self.availabelLabelView.rightLabel.text = managerApplicationModel.available_time
+        }
+        if managerApplicationModel.scholar_since != nil {
+            self.experienceLabelView.rightLabel.text = managerApplicationModel.scholar_since
+        }
+        if managerApplicationModel.nation != nil {
+            self.countryLabelView.rightLabel.text = managerApplicationModel.nation
+        }
+        if managerApplicationModel.accountApplied != nil {
+            self.accountAppliedLabelView.rightLabel.text = managerApplicationModel.accountApplied
+        }
         
     }
     
     lazy var scholarLabelView : LabelAndLabelInterView = {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
+        tempLabelView.leftLabel.text = "Scholar"
         self.contentView.addSubview(tempLabelView)
         return tempLabelView
     }()
     lazy var creditScoreLabelView : LabelAndLabelInterView = {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
+        tempLabelView.leftLabel.text = "Credit score"
         self.contentView.addSubview(tempLabelView)
         return tempLabelView
     }()
     lazy var highmmrLabelView : LabelAndLabelInterView = {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
-        self.contentView.addSubview(tempLabelView)
-        return tempLabelView
-    }()
-    lazy var pvpLabelView : LabelAndLabelInterView = {
-        let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
-        self.contentView.addSubview(tempLabelView)
-        return tempLabelView
-    }()
-    lazy var returnPerDayLabelView : LabelAndLabelInterView = {
-        let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
-        self.contentView.addSubview(tempLabelView)
-        return tempLabelView
-    }()
-    lazy var countryLabelView : LabelAndLabelInterView = {
-        let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
+        tempLabelView.leftLabel.text = "Highest MMR"
         self.contentView.addSubview(tempLabelView)
         return tempLabelView
     }()
     lazy var availabelLabelView : LabelAndLabelInterView = {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
+        tempLabelView.leftLabel.text = "Available time"
         self.contentView.addSubview(tempLabelView)
         return tempLabelView
     }()
+//    lazy var pvpLabelView : LabelAndLabelInterView = {
+//        let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
+//        tempLabelView.leftLabel.text = "Highest MMR"
+//        self.contentView.addSubview(tempLabelView)
+//        return tempLabelView
+//    }()
+    lazy var experienceLabelView : LabelAndLabelInterView = {
+        let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
+        tempLabelView.leftLabel.text = "Experience in Axie"
+        self.contentView.addSubview(tempLabelView)
+        return tempLabelView
+    }()
+    lazy var countryLabelView : LabelAndLabelInterView = {
+        let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
+        tempLabelView.leftLabel.text = "Location"
+        self.contentView.addSubview(tempLabelView)
+        return tempLabelView
+    }()
+   
     lazy var accountAppliedLabelView : LabelAndLabelInterView = {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
+        tempLabelView.leftLabel.text = "Account applied"
         self.contentView.addSubview(tempLabelView)
         return tempLabelView
     }()
@@ -140,7 +164,7 @@ class LatestScholarshipCell: UICollectionViewCell {
         tempBtn.layer.cornerRadius = 3
         tempBtn.layer.masksToBounds = true
         tempBtn.setTitleColor(.white, for: .normal)
-        tempBtn.setTitle("Apply", for: .normal)
+        tempBtn.setTitle("Offer", for: .normal)
         tempBtn.titleLabel?.font = UIFont(name: "Avenir Next Medium", size: 14)
         tempBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
         self.contentView.addSubview(tempBtn)
