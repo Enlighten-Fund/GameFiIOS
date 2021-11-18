@@ -23,7 +23,8 @@ class GFNavController: UINavigationController {
             ||  viewController.isKind(of: HomeController.self)
             ||  viewController.isKind(of: TrackController.self)
             ||  viewController.isKind(of: ProfileGuestController.self)
-            ||  viewController.isKind(of: AccountsController.self){
+            ||  viewController.isKind(of: ManagerAccountsController.self)
+            ||  viewController.isKind(of: ScholarAccountsController.self){
             viewController.hidesBottomBarWhenPushed = false
             super.pushViewController(viewController, animated: false)
             return

@@ -23,17 +23,68 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         IQKeyboardManager.shared().isEnableAutoToolbar = true
         configAWS()
         AbilityUtil.sharedInstance.config()
+    
+    /// 自定义通知
+    NotificationCenter.default.addObserver(self, selector: #selector(changeRole), name: NSNotification.Name(rawValue: CHANGEROLE_NOFI), object: nil)
         return true
     }
-   
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-//        if tabBarController.selectedIndex == 2 {
-        //            let navVC = GFNavController.init(rootViewController: LoginController.init())
-        //            navVC.modalPresentationStyle = .fullScreen
-        //            tabBarController.present(navVC, animated: true) {
-        //
-        //            }
-//        }
+    
+    /// 接受到通知后的方法回调
+    @objc private func changeRole(noti: Notification) {
+        let currentRole = UserManager.sharedInstance.currentRole()
+        if currentRole == 1 {
+            let tabBarController = ESTabBarController()
+            tabBarController.tabBar.barTintColor = UIColor(red: 0.13, green: 0.14, blue: 0.2, alpha: 1)
+            tabBarController.delegate = self
+            let v1 = HomeController()
+            let v2 = ScholarAccountsController()
+            let v3 = TrackController()
+            let v4 = ProfileGuestController()
+            self.homeVC = v1
+            v1.tabBarItem = ESTabBarItem.init(title: "Explore", image: UIImage(named: "explore"), selectedImage: UIImage(named: "explore_select"))
+            v2.tabBarItem = ESTabBarItem.init(title: "Accounts", image: UIImage(named: "accounts"), selectedImage: UIImage(named: "accounts_select"))
+            v3.tabBarItem = ESTabBarItem.init(title: "Tracker", image: UIImage(named: "tracker"), selectedImage: UIImage(named: "tracker_select"))
+            v4.tabBarItem = ESTabBarItem.init(title: "Profile", image: UIImage(named: "profile"), selectedImage: UIImage(named: "profile_select"))
+            
+            let n1 = GFNavController.init(rootViewController: v1)
+            let n2 = GFNavController.init(rootViewController: v2)
+            let n3 = GFNavController.init(rootViewController: v3)
+            let n4 = GFNavController.init(rootViewController: v4)
+            
+            v1.title = "Explore"
+            v2.title = "Accounts"
+            v3.title = "Tracker"
+            v4.title = "Profile"
+            tabBarController.viewControllers = [n1, n2, n3, n4]
+            self.tabbarVC = tabBarController
+            self.window?.rootViewController = self.tabbarVC
+        }else if currentRole == 2{
+            let tabBarController = ESTabBarController()
+            tabBarController.tabBar.barTintColor = UIColor(red: 0.13, green: 0.14, blue: 0.2, alpha: 1)
+            tabBarController.delegate = self
+            let v1 = HomeController()
+            let v2 = ManagerAccountsController()
+            let v3 = TrackController()
+            let v4 = ProfileGuestController()
+            self.homeVC = v1
+            v1.tabBarItem = ESTabBarItem.init(title: "Explore", image: UIImage(named: "explore"), selectedImage: UIImage(named: "explore_select"))
+            v2.tabBarItem = ESTabBarItem.init(title: "Accounts", image: UIImage(named: "accounts"), selectedImage: UIImage(named: "accounts_select"))
+            v3.tabBarItem = ESTabBarItem.init(title: "Tracker", image: UIImage(named: "tracker"), selectedImage: UIImage(named: "tracker_select"))
+            v4.tabBarItem = ESTabBarItem.init(title: "Profile", image: UIImage(named: "profile"), selectedImage: UIImage(named: "profile_select"))
+            
+            let n1 = GFNavController.init(rootViewController: v1)
+            let n2 = GFNavController.init(rootViewController: v2)
+            let n3 = GFNavController.init(rootViewController: v3)
+            let n4 = GFNavController.init(rootViewController: v4)
+            
+            v1.title = "Explore"
+            v2.title = "Accounts"
+            v3.title = "Tracker"
+            v4.title = "Profile"
+            tabBarController.viewControllers = [n1, n2, n3, n4]
+            self.tabbarVC = tabBarController
+            self.window?.rootViewController = self.tabbarVC
+        }
     }
     
     
@@ -89,22 +140,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         tabBarController.tabBar.barTintColor = UIColor(red: 0.13, green: 0.14, blue: 0.2, alpha: 1)
         tabBarController.delegate = self
         let v1 = HomeController()
-        let v2 = AccountsController()
+        var v2 : UIViewController?
+        let currentRole = UserManager.sharedInstance.currentRole()
+        if currentRole == 1 {
+            v2 = ScholarAccountsController()
+            
+        }else if currentRole == 2{
+            v2 = ManagerAccountsController()
+        }
         let v3 = TrackController()
         let v4 = ProfileGuestController()
         self.homeVC = v1
         v1.tabBarItem = ESTabBarItem.init(title: "Explore", image: UIImage(named: "explore"), selectedImage: UIImage(named: "explore_select"))
-        v2.tabBarItem = ESTabBarItem.init(title: "Accounts", image: UIImage(named: "accounts"), selectedImage: UIImage(named: "accounts_select"))
+        v2!.tabBarItem = ESTabBarItem.init(title: "Accounts", image: UIImage(named: "accounts"), selectedImage: UIImage(named: "accounts_select"))
         v3.tabBarItem = ESTabBarItem.init(title: "Tracker", image: UIImage(named: "tracker"), selectedImage: UIImage(named: "tracker_select"))
         v4.tabBarItem = ESTabBarItem.init(title: "Profile", image: UIImage(named: "profile"), selectedImage: UIImage(named: "profile_select"))
         
         let n1 = GFNavController.init(rootViewController: v1)
-        let n2 = GFNavController.init(rootViewController: v2)
+        let n2 = GFNavController.init(rootViewController: v2!)
         let n3 = GFNavController.init(rootViewController: v3)
         let n4 = GFNavController.init(rootViewController: v4)
         
         v1.title = "Explore"
-        v2.title = "Accounts"
+        v2!.title = "Accounts"
         v3.title = "Tracker"
         v4.title = "Profile"
         tabBarController.viewControllers = [n1, n2, n3, n4]
