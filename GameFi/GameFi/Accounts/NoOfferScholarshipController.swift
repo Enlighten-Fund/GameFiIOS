@@ -27,6 +27,7 @@ class NoOfferScholarshipController: UIViewController {
         self.collectionView.mj_header?.beginRefreshing()
     }
     
+    
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         //水平间隔

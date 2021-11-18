@@ -40,6 +40,10 @@ class LatestScholarshipController: UIViewController {
         self.collectionView.mj_header?.beginRefreshing()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         //水平间隔

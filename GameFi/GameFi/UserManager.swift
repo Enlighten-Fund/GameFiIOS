@@ -31,11 +31,10 @@ class UserManager: NSObject {
         if role.isEmpty {
             return
         }
+        Usermodel.shared.gfrole = role
         AWSMobileClient.default().updateUserAttributes(attributeMap: ["custom:gfrole":role]) { result, error in
             if let error = error  {
                 print("\(error.localizedDescription)")
-            }else{
-                Usermodel.shared.gfrole = role
             }
         }
     }

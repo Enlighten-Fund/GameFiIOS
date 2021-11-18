@@ -21,3 +21,6 @@ let IPhone_TabbarHeight = (iPhoneX ? (49+34) : 49)
 let IPhone_TabbarSafeBottomMargin = (iPhoneX ? 34 : 0)
 // 适配iPhone X 导航栏高度
 let IPhone_NavHeight = (iPhoneX ? 88 : 64)
+
+
+let CHANGEROLE_NOFI = "CHANGEROLE"

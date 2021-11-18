@@ -1,8 +1,8 @@
 //
-//  AccountsController.swift
+//  AccountController2.swift
 //  GameFi
 //
-//  Created by harden on 2021/11/10.
+//  Created by harden on 2021/11/18.
 //
 
 import Foundation
@@ -10,7 +10,7 @@ import UIKit
 import MJRefresh
 import SnapKit
 
-class AccountsController: UIViewController {
+class AccountsController2: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         /// 自定义通知
@@ -80,23 +80,12 @@ class AccountsController: UIViewController {
     }()
     
     lazy var pageView : TYPageView? = {
-        let currentRole = UserManager.sharedInstance.currentRole()
-        if currentRole == 1 {
-            let pageView = TYPageView(frame: view.bounds,
-                                    titles: ["Renting","Applying"],
-                                    childControllers: [ScholarRentScholarshipController(),ScholarApplingScholarshipController()],
-                                    parentController: self)
-            view.addSubview(pageView)
-            self.pageView = pageView
-            
-        }else if currentRole == 2{
-            let pageView = TYPageView(frame: view.bounds,
-                                    titles: ["Application","Offering","Not offerd"],
-                                    childControllers: [LatestScholarshipController(),OfferingScholarshipsController(),NoOfferScholarshipController()],
-                                    parentController: self)
-            view.addSubview(pageView)
-            self.pageView = pageView
-        }
+        let pageView = TYPageView(frame: view.bounds,
+                                titles: ["Renting","Applying"],
+                                childControllers: [ScholarRentScholarshipController(),ScholarApplingScholarshipController()],
+                                parentController: self)
+        view.addSubview(pageView)
+        self.pageView = pageView
         return pageView
     }()
 }

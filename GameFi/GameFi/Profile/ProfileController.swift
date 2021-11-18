@@ -34,7 +34,22 @@ class ProfileController: ViewController {
     }
     
     @objc override func leftBtnClick() {
+        var notiMsg = ""
+        var torole = ""
+        if UserManager.sharedInstance.currentRole() == 1 {//
+            notiMsg = "Your current identity is scholar. Are you sure you want to switch to manager?"
+            torole = "2"
+        }else if UserManager.sharedInstance.currentRole() == 2{
+            notiMsg = "Your current identity is manager. Are you sure you want to switch to scholar?"
+            torole = "1"
+        }
         //change role
+        GFAlert.showAlert(titleStr: "Notice:", msgStr: notiMsg, currentVC: self, cancelHandler: { aletAction in
+            
+        }, otherBtns: ["YES"]) { idex in
+            UserManager.sharedInstance.updateRole(role: torole)
+            NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: CHANGEROLE_NOFI), object: nil)
+        }
     }
     
     @objc func signBtnClick() {

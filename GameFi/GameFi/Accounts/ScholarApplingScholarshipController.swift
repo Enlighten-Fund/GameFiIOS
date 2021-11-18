@@ -1,8 +1,8 @@
 //
-//  AccountScholarshipsController.swift
+//  ScholarApplingScholarshipController.swift
 //  GameFi
 //
-//  Created by harden on 2021/11/10.
+//  Created by harden on 2021/11/18.
 //
 
 import UIKit
@@ -11,7 +11,7 @@ import SnapKit
 import Foundation
 import SCLAlertView
 
-class OfferingScholarshipsController: UIViewController {
+class ScholarApplingScholarshipController: UIViewController {
     var pageIndex = 1
     var dataSource : Array<Any>? = Array.init()
     override func viewDidLoad() {
@@ -28,7 +28,6 @@ class OfferingScholarshipsController: UIViewController {
     }
     
     
-    
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         //水平间隔
@@ -36,12 +35,14 @@ class OfferingScholarshipsController: UIViewController {
         //垂直行间距
         layout.minimumLineSpacing = 10
         layout.scrollDirection = UICollectionView.ScrollDirection.vertical  //滚动方向
-        layout.itemSize = CGSize(width: IPhone_SCREEN_WIDTH - 30, height: 440)
+        layout.itemSize = CGSize(width: IPhone_SCREEN_WIDTH - 30, height: 400)
+        layout.headerReferenceSize = CGSize(width: IPhone_SCREEN_WIDTH - 30, height: 175)
         // 设置CollectionView
         let ourCollectionView : UICollectionView = UICollectionView(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: IPhone_SCREEN_HEIGHT), collectionViewLayout: layout)
         ourCollectionView.delegate = self
         ourCollectionView.dataSource = self
-        ourCollectionView.register(ManagerScholarshipCell.classForCoder(), forCellWithReuseIdentifier: managerScholarshipCellIdentifier)
+        ourCollectionView.register(NoOfferHeaderView.self, forSupplementaryViewOfKind:UICollectionView.elementKindSectionHeader, withReuseIdentifier: noOfferHeaderViewheaderIdentifier)
+        ourCollectionView.register(NoOfferScholarshipCell.classForCoder(), forCellWithReuseIdentifier: noOfferScholarshipCellIdentifier)
         ourCollectionView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
             self.refreshHttpRequest()
         })
@@ -56,7 +57,7 @@ class OfferingScholarshipsController: UIViewController {
     }()
 }
 
-extension  OfferingScholarshipsController : UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+extension  ScholarApplingScholarshipController : UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     // #MARK: --UICollectionViewDataSource的代理方法
     /**
     - 该方法是可选方法，默认为1
@@ -76,11 +77,24 @@ extension  OfferingScholarshipsController : UICollectionViewDelegate,UICollectio
         return self.dataSource!.count
     }
 
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        var reusableview:UICollectionReusableView!
+        if kind ==  UICollectionView.elementKindSectionHeader{
+            reusableview = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: noOfferHeaderViewheaderIdentifier, for: indexPath) as! NoOfferHeaderView
+            let temp : NoOfferHeaderView = reusableview as! NoOfferHeaderView
+            temp.makeConstraints()
+        }
+        return reusableview
+    }
+    
+    
+  
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: managerScholarshipCellIdentifier, for: indexPath) as! ManagerScholarshipCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: noOfferScholarshipCellIdentifier, for: indexPath) as! NoOfferScholarshipCell
         cell.makeConstraints()
-        let managerscholarshipModel = self.dataSource![indexPath.row]
-        cell.update(managerScholarshipModel: managerscholarshipModel as! ManagerScholarshipModel)
+        let managerScholarshipModel = self.dataSource![indexPath.row]
+        cell.update(managerScholarshipModel: managerScholarshipModel as! ManagerScholarshipModel)
         return cell
     }
 
@@ -125,3 +139,4 @@ extension  OfferingScholarshipsController : UICollectionViewDelegate,UICollectio
         }
     }
 }
+
