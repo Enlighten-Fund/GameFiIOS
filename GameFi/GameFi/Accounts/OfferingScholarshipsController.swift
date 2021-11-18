@@ -11,7 +11,7 @@ import SnapKit
 import Foundation
 import SCLAlertView
 
-class AccountScholarshipsController: UIViewController {
+class OfferingScholarshipsController: UIViewController {
     var pageIndex = 1
     var dataSource : Array<Any>? = Array.init()
     override func viewDidLoad() {
@@ -24,7 +24,7 @@ class AccountScholarshipsController: UIViewController {
             make.right.equalToSuperview().offset(-15)
         }
         
-//        self.collectionView.mj_header?.beginRefreshing()
+        self.collectionView.mj_header?.beginRefreshing()
     }
     
     lazy var collectionView: UICollectionView = {
@@ -34,12 +34,12 @@ class AccountScholarshipsController: UIViewController {
         //垂直行间距
         layout.minimumLineSpacing = 10
         layout.scrollDirection = UICollectionView.ScrollDirection.vertical  //滚动方向
-        layout.itemSize = CGSize(width: IPhone_SCREEN_WIDTH - 30, height: 430)
+        layout.itemSize = CGSize(width: IPhone_SCREEN_WIDTH - 30, height: 440)
         // 设置CollectionView
         let ourCollectionView : UICollectionView = UICollectionView(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: IPhone_SCREEN_HEIGHT), collectionViewLayout: layout)
         ourCollectionView.delegate = self
         ourCollectionView.dataSource = self
-        ourCollectionView.register(AccountScholarshipsCell.classForCoder(), forCellWithReuseIdentifier: accountScholarshipsCellIdentifier)
+        ourCollectionView.register(ManagerScholarshipCell.classForCoder(), forCellWithReuseIdentifier: managerScholarshipCellIdentifier)
         ourCollectionView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
             self.refreshHttpRequest()
         })
@@ -54,7 +54,7 @@ class AccountScholarshipsController: UIViewController {
     }()
 }
 
-extension  AccountScholarshipsController : UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+extension  OfferingScholarshipsController : UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     // #MARK: --UICollectionViewDataSource的代理方法
     /**
     - 该方法是可选方法，默认为1
@@ -68,18 +68,17 @@ extension  AccountScholarshipsController : UICollectionViewDelegate,UICollection
      - returns: Section中Item的个数
      */
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        if self.dataSource == nil {
-//            return 0
-//        }
-//        return self.dataSource!.count
-        return 5
+        if self.dataSource == nil {
+            return 0
+        }
+        return self.dataSource!.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: accountScholarshipsCellIdentifier, for: indexPath) as! AccountScholarshipsCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: managerScholarshipCellIdentifier, for: indexPath) as! ManagerScholarshipCell
         cell.makeConstraints()
-//        let scholarshipModel = self.dataSource![indexPath.row]
-//        cell.update(scholarshipModel: scholarshipModel as! ScholarshipModel)
+        let managerscholarshipModel = self.dataSource![indexPath.row]
+        cell.update(managerScholarshipModel: managerscholarshipModel as! ManagerScholarshipModel)
         return cell
     }
 
@@ -101,28 +100,26 @@ extension  AccountScholarshipsController : UICollectionViewDelegate,UICollection
     }
     
     func requestListData() {
-//        DataManager.sharedInstance.fetchMarketPlaceScholarShip(filter:self.filter!, pageIndex: pageIndex) { result, reponse in
-//            DispatchQueue.main.async { [self] in
-//                self.collectionView.mj_footer?.endRefreshing()
-//                self.collectionView.mj_header?.endRefreshing()
-//                if result.success!{
-//                    let scholarshipListModel : ScholarshipListModel = reponse as! ScholarshipListModel
-//                    if self.pageIndex == 1{
-//                        self.dataSource = scholarshipListModel.data
-//                    }else{
-//                        if scholarshipListModel.data != nil {
-//                            self.dataSource?.append(contentsOf: scholarshipListModel.data!)
-//                        }
-//
-//                    }
-//                    if scholarshipListModel.next_page! > pageIndex {
-//                        pageIndex = scholarshipListModel.next_page!
-//                    }else{
-//                        self.collectionView.mj_footer?.endRefreshingWithNoMoreData()
-//                    }
-//                    self.collectionView.reloadData()
-//                }
-//            }
-//        }
+        DataManager.sharedInstance.fetchManagerOfferingScholarShip(pageIndex: pageIndex) { result, reponse in
+                DispatchQueue.main.async { [self] in
+                    self.collectionView.mj_footer?.endRefreshing()
+                    self.collectionView.mj_header?.endRefreshing()
+                    let managerScholarshipListModel : ManagerScholarshipListModel = reponse as! ManagerScholarshipListModel
+                    if self.pageIndex == 1{
+                        self.dataSource = managerScholarshipListModel.data
+                    }else{
+                        if managerScholarshipListModel.data != nil {
+                            self.dataSource?.append(contentsOf: managerScholarshipListModel.data!)
+                        }
+
+                    }
+                    if managerScholarshipListModel.next_page! > pageIndex {
+                        pageIndex = managerScholarshipListModel.next_page!
+                    }else{
+                        self.collectionView.mj_footer?.endRefreshingWithNoMoreData()
+                    }
+                    self.collectionView.reloadData()
+                }
+        }
     }
 }

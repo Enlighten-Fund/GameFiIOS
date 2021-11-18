@@ -78,6 +78,9 @@
 		985817592744F48E00D8CFCA /* ManagerApplicationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985817582744F48E00D8CFCA /* ManagerApplicationModel.swift */; };
 		9858175B2744F50600D8CFCA /* ManagerApplicationListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858175A2744F50600D8CFCA /* ManagerApplicationListModel.swift */; };
 		9858175D2744F60F00D8CFCA /* managerApplicationList.json in Resources */ = {isa = PBXBuildFile; fileRef = 9858175C2744F60F00D8CFCA /* managerApplicationList.json */; };
+		9858175F2745005900D8CFCA /* managerscholarshiplist.json in Resources */ = {isa = PBXBuildFile; fileRef = 9858175E2745005900D8CFCA /* managerscholarshiplist.json */; };
+		985817632746233900D8CFCA /* ManagerScholarshipModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985817622746233900D8CFCA /* ManagerScholarshipModel.swift */; };
+		985817652746256600D8CFCA /* ManagerScholarshipListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985817642746256600D8CFCA /* ManagerScholarshipListModel.swift */; };
 		986C586E27300B9A0021280A /* LoginHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C586D27300B9A0021280A /* LoginHeadView.swift */; };
 		986C587027300BEB0021280A /* LoginFootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C586F27300BEB0021280A /* LoginFootView.swift */; };
 		987694272738ED150075CA0F /* ScholarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987694262738ED150075CA0F /* ScholarModel.swift */; };
@@ -101,8 +104,8 @@
 		98D9941D273B6D68006AA8DC /* TrackHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D9941C273B6D68006AA8DC /* TrackHeadView.swift */; };
 		98D9941F273B9E22006AA8DC /* TrackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D9941E273B9E22006AA8DC /* TrackCell.swift */; };
 		98D99423273BA9F0006AA8DC /* AccountsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D99422273BA9F0006AA8DC /* AccountsController.swift */; };
-		98D99425273BAB19006AA8DC /* AccountScholarshipsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D99424273BAB19006AA8DC /* AccountScholarshipsController.swift */; };
-		98D99428273BACDA006AA8DC /* AccountScholarshipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D99427273BACDA006AA8DC /* AccountScholarshipCell.swift */; };
+		98D99425273BAB19006AA8DC /* OfferingScholarshipsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D99424273BAB19006AA8DC /* OfferingScholarshipsController.swift */; };
+		98D99428273BACDA006AA8DC /* ManagerScholarshipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D99427273BACDA006AA8DC /* ManagerScholarshipCell.swift */; };
 		98E09B5A2731121B0020D97D /* ForgetPwdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E09B592731121B0020D97D /* ForgetPwdController.swift */; };
 		98E09B5C273129140020D97D /* Usermodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E09B5B273129140020D97D /* Usermodel.swift */; };
 /* End PBXBuildFile section */
@@ -179,6 +182,9 @@
 		985817582744F48E00D8CFCA /* ManagerApplicationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerApplicationModel.swift; sourceTree = "<group>"; };
 		9858175A2744F50600D8CFCA /* ManagerApplicationListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerApplicationListModel.swift; sourceTree = "<group>"; };
 		9858175C2744F60F00D8CFCA /* managerApplicationList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = managerApplicationList.json; sourceTree = "<group>"; };
+		9858175E2745005900D8CFCA /* managerscholarshiplist.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = managerscholarshiplist.json; sourceTree = "<group>"; };
+		985817622746233900D8CFCA /* ManagerScholarshipModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerScholarshipModel.swift; sourceTree = "<group>"; };
+		985817642746256600D8CFCA /* ManagerScholarshipListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerScholarshipListModel.swift; sourceTree = "<group>"; };
 		986C586D27300B9A0021280A /* LoginHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeadView.swift; sourceTree = "<group>"; };
 		986C586F27300BEB0021280A /* LoginFootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFootView.swift; sourceTree = "<group>"; };
 		987694262738ED150075CA0F /* ScholarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarModel.swift; sourceTree = "<group>"; };
@@ -202,8 +208,8 @@
 		98D9941C273B6D68006AA8DC /* TrackHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackHeadView.swift; sourceTree = "<group>"; };
 		98D9941E273B9E22006AA8DC /* TrackCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCell.swift; sourceTree = "<group>"; };
 		98D99422273BA9F0006AA8DC /* AccountsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsController.swift; sourceTree = "<group>"; };
-		98D99424273BAB19006AA8DC /* AccountScholarshipsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountScholarshipsController.swift; sourceTree = "<group>"; };
-		98D99427273BACDA006AA8DC /* AccountScholarshipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountScholarshipCell.swift; sourceTree = "<group>"; };
+		98D99424273BAB19006AA8DC /* OfferingScholarshipsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferingScholarshipsController.swift; sourceTree = "<group>"; };
+		98D99427273BACDA006AA8DC /* ManagerScholarshipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerScholarshipCell.swift; sourceTree = "<group>"; };
 		98E09B592731121B0020D97D /* ForgetPwdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPwdController.swift; sourceTree = "<group>"; };
 		98E09B5B273129140020D97D /* Usermodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usermodel.swift; sourceTree = "<group>"; };
 		C65868A573F5F7D6A4003290 /* Pods-GameFi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameFi.debug.xcconfig"; path = "Target Support Files/Pods-GameFi/Pods-GameFi.debug.xcconfig"; sourceTree = "<group>"; };
@@ -322,6 +328,7 @@
 		9811EA0A2726BB2700B0ACF0 = {
 			isa = PBXGroup;
 			children = (
+				9858175E2745005900D8CFCA /* managerscholarshiplist.json */,
 				9858175C2744F60F00D8CFCA /* managerApplicationList.json */,
 				985817512742A13100D8CFCA /* tracklist.json */,
 				985817422742784B00D8CFCA /* axieability.json */,
@@ -417,6 +424,8 @@
 			children = (
 				985817582744F48E00D8CFCA /* ManagerApplicationModel.swift */,
 				9858175A2744F50600D8CFCA /* ManagerApplicationListModel.swift */,
+				985817622746233900D8CFCA /* ManagerScholarshipModel.swift */,
+				985817642746256600D8CFCA /* ManagerScholarshipListModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -497,8 +506,8 @@
 				985817572744F24700D8CFCA /* Model */,
 				98D99426273BACA1006AA8DC /* View */,
 				98D99422273BA9F0006AA8DC /* AccountsController.swift */,
-				98D99424273BAB19006AA8DC /* AccountScholarshipsController.swift */,
 				9858171D273CE4CE00D8CFCA /* LatestScholarshipController.swift */,
+				98D99424273BAB19006AA8DC /* OfferingScholarshipsController.swift */,
 				98581721273CEBD600D8CFCA /* NoOfferScholarshipController.swift */,
 			);
 			path = Accounts;
@@ -507,7 +516,7 @@
 		98D99426273BACA1006AA8DC /* View */ = {
 			isa = PBXGroup;
 			children = (
-				98D99427273BACDA006AA8DC /* AccountScholarshipCell.swift */,
+				98D99427273BACDA006AA8DC /* ManagerScholarshipCell.swift */,
 				9858171F273CE6AE00D8CFCA /* LatestScholarshipCell.swift */,
 				98581723273CF45900D8CFCA /* NoOfferScholarshipCell.swift */,
 				98581725273CF70900D8CFCA /* NoOfferHeaderView.swift */,
@@ -591,6 +600,7 @@
 				9858175D2744F60F00D8CFCA /* managerApplicationList.json in Resources */,
 				985817522742A13100D8CFCA /* tracklist.json in Resources */,
 				7C326CFCDF747D3682D551F3 /* awsconfiguration.json in Resources */,
+				9858175F2745005900D8CFCA /* managerscholarshiplist.json in Resources */,
 				985817432742784B00D8CFCA /* axieability.json in Resources */,
 				7BCBC07F76E99519033E01A6 /* amplifyconfiguration.json in Resources */,
 				98581735273E334100D8CFCA /* list_by_marketplace.json in Resources */,
@@ -658,6 +668,7 @@
 				98D99417273A8DDC006AA8DC /* NotificationCell.swift in Sources */,
 				980A7DC22728135B006AE4C4 /* GFNavController.swift in Sources */,
 				98823A412729674500D9A7CD /* Define.swift in Sources */,
+				985817652746256600D8CFCA /* ManagerScholarshipListModel.swift in Sources */,
 				980DB7A32733E6EC006ED3BE /* ScholarshipListModel.swift in Sources */,
 				98D9941D273B6D68006AA8DC /* TrackHeadView.swift in Sources */,
 				98D99414273A8CFE006AA8DC /* NotificationController.swift in Sources */,
@@ -672,7 +683,7 @@
 				9858172A273D0F2C00D8CFCA /* LabelAndLabelCell.swift in Sources */,
 				980DB7992733D391006ED3BE /* TYPageViewConst.swift in Sources */,
 				980DB7C527355876006ED3BE /* ScholarshipsDetailController.swift in Sources */,
-				98D99428273BACDA006AA8DC /* AccountScholarshipCell.swift in Sources */,
+				98D99428273BACDA006AA8DC /* ManagerScholarshipCell.swift in Sources */,
 				985817562743EE5C00D8CFCA /* EditTrackController.swift in Sources */,
 				98E09B5A2731121B0020D97D /* ForgetPwdController.swift in Sources */,
 				980DB79027337F7C006ED3BE /* ScholarShipsCell.swift in Sources */,
@@ -712,8 +723,9 @@
 				980DB7A52733F158006ED3BE /* JsonUtil.swift in Sources */,
 				986C587027300BEB0021280A /* LoginFootView.swift in Sources */,
 				9858173D27424F3700D8CFCA /* AxieinfoModel.swift in Sources */,
+				985817632746233900D8CFCA /* ManagerScholarshipModel.swift in Sources */,
 				98581728273D0A3700D8CFCA /* AddTrackController.swift in Sources */,
-				98D99425273BAB19006AA8DC /* AccountScholarshipsController.swift in Sources */,
+				98D99425273BAB19006AA8DC /* OfferingScholarshipsController.swift in Sources */,
 				980DB7982733D391006ED3BE /* TYPageView.swift in Sources */,
 				9858174E27429C1A00D8CFCA /* TrackModel.swift in Sources */,
 				9858172C273D1BCC00D8CFCA /* AddScholarshipController.swift in Sources */,
