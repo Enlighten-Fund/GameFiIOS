@@ -24,7 +24,7 @@ class NoOfferScholarshipController: UIViewController {
             make.right.equalToSuperview().offset(-15)
         }
         
-//        self.collectionView.mj_header?.beginRefreshing()
+        self.collectionView.mj_header?.beginRefreshing()
     }
     
     lazy var collectionView: UICollectionView = {
@@ -34,7 +34,7 @@ class NoOfferScholarshipController: UIViewController {
         //垂直行间距
         layout.minimumLineSpacing = 10
         layout.scrollDirection = UICollectionView.ScrollDirection.vertical  //滚动方向
-        layout.itemSize = CGSize(width: IPhone_SCREEN_WIDTH - 30, height: 430)
+        layout.itemSize = CGSize(width: IPhone_SCREEN_WIDTH - 30, height: 400)
         layout.headerReferenceSize = CGSize(width: IPhone_SCREEN_WIDTH - 30, height: 175)
         // 设置CollectionView
         let ourCollectionView : UICollectionView = UICollectionView(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: IPhone_SCREEN_HEIGHT), collectionViewLayout: layout)
@@ -70,11 +70,10 @@ extension  NoOfferScholarshipController : UICollectionViewDelegate,UICollectionV
      - returns: Section中Item的个数
      */
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        if self.dataSource == nil {
-//            return 0
-//        }
-//        return self.dataSource!.count
-        return 5
+        if self.dataSource == nil {
+            return 0
+        }
+        return self.dataSource!.count
     }
 
     
@@ -93,8 +92,8 @@ extension  NoOfferScholarshipController : UICollectionViewDelegate,UICollectionV
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: noOfferScholarshipCellIdentifier, for: indexPath) as! NoOfferScholarshipCell
         cell.makeConstraints()
-//        let scholarshipModel = self.dataSource![indexPath.row]
-//        cell.update(scholarshipModel: scholarshipModel as! ScholarshipModel)
+        let managerScholarshipModel = self.dataSource![indexPath.row]
+        cell.update(managerScholarshipModel: managerScholarshipModel as! ManagerScholarshipModel)
         return cell
     }
 
@@ -116,28 +115,26 @@ extension  NoOfferScholarshipController : UICollectionViewDelegate,UICollectionV
     }
     
     func requestListData() {
-//        DataManager.sharedInstance.fetchMarketPlaceScholarShip(filter:self.filter!, pageIndex: pageIndex) { result, reponse in
-//            DispatchQueue.main.async { [self] in
-//                self.collectionView.mj_footer?.endRefreshing()
-//                self.collectionView.mj_header?.endRefreshing()
-//                if result.success!{
-//                    let scholarshipListModel : ScholarshipListModel = reponse as! ScholarshipListModel
-//                    if self.pageIndex == 1{
-//                        self.dataSource = scholarshipListModel.data
-//                    }else{
-//                        if scholarshipListModel.data != nil {
-//                            self.dataSource?.append(contentsOf: scholarshipListModel.data!)
-//                        }
-//
-//                    }
-//                    if scholarshipListModel.next_page! > pageIndex {
-//                        pageIndex = scholarshipListModel.next_page!
-//                    }else{
-//                        self.collectionView.mj_footer?.endRefreshingWithNoMoreData()
-//                    }
-//                    self.collectionView.reloadData()
-//                }
-//            }
-//        }
+        DataManager.sharedInstance.fetchManagerOfferingScholarShip(pageIndex: pageIndex) { result, reponse in
+                DispatchQueue.main.async { [self] in
+                    self.collectionView.mj_footer?.endRefreshing()
+                    self.collectionView.mj_header?.endRefreshing()
+                    let managerScholarshipListModel : ManagerScholarshipListModel = reponse as! ManagerScholarshipListModel
+                    if self.pageIndex == 1{
+                        self.dataSource = managerScholarshipListModel.data
+                    }else{
+                        if managerScholarshipListModel.data != nil {
+                            self.dataSource?.append(contentsOf: managerScholarshipListModel.data!)
+                        }
+
+                    }
+                    if managerScholarshipListModel.next_page! > pageIndex {
+                        pageIndex = managerScholarshipListModel.next_page!
+                    }else{
+                        self.collectionView.mj_footer?.endRefreshingWithNoMoreData()
+                    }
+                    self.collectionView.reloadData()
+                }
+        }
     }
 }

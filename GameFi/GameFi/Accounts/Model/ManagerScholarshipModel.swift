@@ -32,5 +32,6 @@ class ManagerScholarshipModel: BaseModel {
     
     //缺失
     var scholar_portrait : String?
+    var mmr : String?
     required init() {}
 }
