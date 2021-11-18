@@ -151,7 +151,7 @@ class LatestScholarshipCell: UICollectionViewCell {
         tempBtn.layer.cornerRadius = 3
         tempBtn.layer.masksToBounds = true
         tempBtn.setTitleColor(.white, for: .normal)
-        tempBtn.setTitle("Refuse", for: .normal)
+        tempBtn.setTitle("Reject", for: .normal)
         tempBtn.titleLabel?.font = UIFont(name: "Avenir Next Medium", size: 14)
         tempBtn.layer.borderWidth = 0.5
         tempBtn.layer.borderColor = UIColor.white.cgColor

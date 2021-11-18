@@ -37,7 +37,7 @@ class AccountsController: UIViewController {
     lazy var pageView : TYPageView? = {
         
         let pageView = TYPageView(frame: view.bounds,
-                                titles: ["Latest application","Offering","Not offerd"],
+                                titles: ["Application","Offering","Not offerd"],
                                 childControllers: [LatestScholarshipController(),OfferingScholarshipsController(),NoOfferScholarshipController()],
                                 parentController: self)
         view.addSubview(pageView)
