@@ -29,7 +29,8 @@ class ManagerScholarshipModel: BaseModel {
     var account_axie_count : String?
     var account_axie_brief : Array<String>?
     var account_security_deposit : String?
-    
+    var manager_user_name : String?
+    var manager_credit_score : String?
     //缺失
     var scholar_portrait : String?
     var mmr : String?
