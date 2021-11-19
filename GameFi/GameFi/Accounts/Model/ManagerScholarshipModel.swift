@@ -27,7 +27,15 @@ class ManagerScholarshipModel: BaseModel {
     var account_lifecycle_slp_start : String?
     var account_lifecycle_slp_latest : String?
     var account_axie_count : String?
-    var account_axie_brief : Array<String>?
+    var account_axie_brief : String?
+    var myAxieArry : Array<String>?{
+        get{
+            if account_axie_brief == nil {
+                return []
+            }
+            return account_axie_brief?.components(separatedBy: ",")
+        }
+    }
     var account_security_deposit : String?
     var manager_user_name : String?
     var manager_credit_score : String?

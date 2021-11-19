@@ -125,7 +125,7 @@ class DataManager: NSObject {
     }
     
     func fetchAxieDetail(axieId:String, completeBlock: @escaping CompleteBlock) {
-        let dic = ["id" : Int(axieId)]
+        let dic = ["id" : Float(axieId)]
         self.POST(url: "axie/get_by_id", param: dic as [String : Any]) { result, reponse in
 //            let path = Bundle.main.path(forResource: "axieinfo", ofType: "json")
 //            let url = URL(fileURLWithPath: path!)
@@ -445,6 +445,18 @@ class DataManager: NSObject {
     func fetchUserinfo(completeBlock: @escaping CompleteBlock) {
         let dic = ["id" : "201" as Any] as [String : Any]
         self.POST(url: "user/get_by_id", param: dic ) { result, reponse in
+            if result.success!{
+                let userInfoModel : UserInfoModel = JsonUtil.jsonToModel(reponse as! String, UserInfoModel.self) as! UserInfoModel
+                completeBlock(result,userInfoModel)
+            }else{
+                completeBlock(result,reponse)
+            }
+        }
+    }
+    
+    func fetchUserDetailinfo(completeBlock: @escaping CompleteBlock) {
+        let dic = ["id" : "201" as Any] as [String : Any]
+        self.POST(url: "user/get_all_by_id", param: dic ) { result, reponse in
             if result.success!{
                 let userInfoModel : UserInfoModel = JsonUtil.jsonToModel(reponse as! String, UserInfoModel.self) as! UserInfoModel
                 completeBlock(result,userInfoModel)

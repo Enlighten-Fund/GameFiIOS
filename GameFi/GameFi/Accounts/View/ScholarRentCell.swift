@@ -155,14 +155,14 @@ class ScholarRentCell: UICollectionViewCell {
     }
     
     func update(managerScholarshipModel:ManagerScholarshipModel) {
-        if managerScholarshipModel.account_axie_brief == nil || managerScholarshipModel.account_axie_brief!.count < 3{
+        if managerScholarshipModel.myAxieArry == nil || managerScholarshipModel.myAxieArry!.count < 3{
             
         }else{
-            let axiePic1 : String = managerScholarshipModel.account_axie_brief![0]
+            let axiePic1 : String = managerScholarshipModel.myAxieArry![0]
             self.axieImgView1.kf.setImage(with: URL.init(string: "https://storage.googleapis.com/assets.axieinfinity.com/axies/\(axiePic1)/axie/axie-full-transparent.png"))
-            let axiePic2 : String = managerScholarshipModel.account_axie_brief![1]
+            let axiePic2 : String = managerScholarshipModel.myAxieArry![1]
             self.axieImgView2.kf.setImage(with:  URL.init(string: "https://storage.googleapis.com/assets.axieinfinity.com/axies/\(axiePic2)/axie/axie-full-transparent.png"))
-            let axiePic3 : String = managerScholarshipModel.account_axie_brief![2]
+            let axiePic3 : String = managerScholarshipModel.myAxieArry![2]
             self.axieImgView3.kf.setImage(with: URL.init(string: "https://storage.googleapis.com/assets.axieinfinity.com/axies/\(axiePic3)/axie/axie-full-transparent.png"))
         }
         if managerScholarshipModel.manager_user_name != nil {
