@@ -68,7 +68,6 @@ class PostScholarshipCell: TableViewCell {
         tempLabel.textAlignment = .right
         tempLabel.backgroundColor = UIColor(red: 0.19, green: 0.21, blue: 0.29, alpha: 1)
         tempLabel.font = UIFont(name: "Avenir Next Regular", size: 15)
-        tempLabel.text = "80%"
         self.contentView.addSubview(tempLabel)
         return tempLabel
     }()
@@ -87,7 +86,7 @@ class PostScholarshipCell: TableViewCell {
         tempLabel.textAlignment = .right
         tempLabel.backgroundColor = UIColor(red: 0.19, green: 0.21, blue: 0.29, alpha: 1)
         tempLabel.font = UIFont(name: "Avenir Next Regular", size: 15)
-        tempLabel.text = "10%"
+        tempLabel.text = "5%"
         self.contentView.addSubview(tempLabel)
         return tempLabel
     }()

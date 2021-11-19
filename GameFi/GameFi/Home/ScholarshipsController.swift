@@ -57,12 +57,11 @@ class ScholarshipsController: UIViewController {
     
     func changeRoleToManager() {
         DispatchQueue.main.async {
-            SweetAlert().showAlert("notice:", subTitle: "Are you sure want to change role to manager", style: .warning, buttonTitle:"Cancel", buttonColor:UIColorFromRGB(0xD0D0D0) , otherButtonTitle:  "YES", otherButtonColor: UIColorFromRGB(0xDD6B55)) { (isOtherButton) -> Void in
-                if isOtherButton == true {
-                }else{
-                    UserManager.sharedInstance.updateRole(role: "2")
-                    self.showAddScholarshipVC()
-                }
+            GFAlert.showAlert(titleStr: "Notice:", msgStr: "Please switch your role to a manager", currentVC: self, cancelHandler: { aletAction in
+                
+            }, otherBtns: ["YES"]) { idex in
+                UserManager.sharedInstance.updateRole(role: "2")
+                NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: CHANGEROLE_NOFI), object: nil)
             }
         }
         

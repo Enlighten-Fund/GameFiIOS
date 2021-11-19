@@ -17,13 +17,14 @@ class AddScholarshipController: ViewController {
     var emailTextField : UITextField?
     var passwordTextField : UITextField?
     var managerPercentTextField : UITextField?
-    
+    var offerDaysTextField : UITextField?
+    var scholarpercentageLabel : UILabel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Post my scholarship"
         self.tableView!.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(0)
+            make.top.equalToSuperview().offset(50)
             make.bottom.equalToSuperview().offset(0)
             make.left.equalToSuperview().offset(0)
             make.right.equalToSuperview()
@@ -79,71 +80,128 @@ class AddScholarshipController: ViewController {
         
     }
     
+    func updateTextField(textField:UITextField,focus:Bool)  {
+        if focus {
+            textField.layer.borderColor = UIColor.init(hexString: "0xB85050").cgColor
+        }else{
+            textField.layer.borderColor = UIColor(red: 0.27, green: 0.3, blue: 0.41, alpha: 1).cgColor
+        }
+    }
+    
     func valifyAccount() -> Bool {
-        var temp = false
-        if self.accountNameTextField!.validateUsername() {
-            temp = true
-        }else if self.accountNameTextField!.validateEmail(){
-            temp = true
-        }
-        if !temp {
+        if self.accountNameTextField!.text == nil || self.accountNameTextField!.text!.isBlank {
             self.showNoticeLabel(notice: "Account name should be filled in")
+            self.updateTextField(textField: self.accountNameTextField!, focus: true)
             return false
+        }else{
+            self.hideNoticeLabel()
+            self.updateTextField(textField: self.accountNameTextField!, focus: false)
+            return true
         }
-        self.hideNoticeLabel()
-        return true
     }
     
     func valifyRonin() -> Bool {
-        var temp = false
-//        if self.roninTextField!.validateRonin() {
-//            temp = true
-//        }
-        if !temp {
-            self.showNoticeLabel(notice: "The format is ronin:xxxxxxx")
+        if self.roninTextField!.text == nil || self.roninTextField!.text!.isBlank {
+            self.showNoticeLabel(notice: "Ronin address should be filled in")
+            self.updateTextField(textField: self.roninTextField!, focus: true)
             return false
+        }else if !self.roninTextField!.text!.starts(with: "0x") && !self.roninTextField!.text!.starts(with: "ronin:"){
+            self.showNoticeLabel(notice: "Ronin address format is 0x...... or ronin:......")
+            self.updateTextField(textField: self.roninTextField!, focus: true)
+            return false
+        }else if self.roninTextField!.text!.count != 42 &&  self.roninTextField!.text!.count != 46{
+            self.showNoticeLabel(notice: "Ronin address format is 0x...... or ronin:......")
+            self.updateTextField(textField: self.roninTextField!, focus: true)
+            return false
+        }else{
+            self.hideNoticeLabel()
+            self.updateTextField(textField: self.roninTextField!, focus: false)
+            return true
         }
-        self.hideNoticeLabel()
-        return true
     }
     
     func valifyEmail() -> Bool {
+        if self.emailTextField!.text == nil || self.emailTextField!.text!.isBlank {
+            self.showNoticeLabel(notice: "Email should be filled in ")
+            self.updateTextField(textField: self.emailTextField!, focus: true)
+            return false
+        }
         var temp = false
         if self.emailTextField!.validateEmail() {
             temp = true
         }
         if !temp {
-            self.showNoticeLabel(notice: "The email format is ")
+            self.showNoticeLabel(notice: "Please enter a valid email")
+            self.updateTextField(textField: self.emailTextField!, focus: true)
             return false
         }
         self.hideNoticeLabel()
+        self.updateTextField(textField: self.emailTextField!, focus: false)
         return true
     }
     
     func valifyPassword() -> Bool {
+        if self.passwordTextField!.text == nil || self.passwordTextField!.text!.isBlank {
+            self.showNoticeLabel(notice: "Password should be filled in ")
+            self.updateTextField(textField: self.passwordTextField!, focus: true)
+            return false
+        }
         var temp = false
         if self.passwordTextField!.validatePassword() {
             temp = true
         }
         if !temp {
-            self.showNoticeLabel(notice: "The password format is ")
+            self.showNoticeLabel(notice: "The password shall be at least 6 digits in length and shall contain at least two of letters, numbers and symbols")
+            self.updateTextField(textField: self.passwordTextField!, focus: true)
             return false
         }
         self.hideNoticeLabel()
+        self.updateTextField(textField: self.passwordTextField!, focus: false)
+        return true
+    }
+    
+    func valifyOfferDays() -> Bool {
+        if self.offerDaysTextField!.text == nil || self.offerDaysTextField!.text!.isBlank {
+            self.showNoticeLabel(notice: "Period days should be filled in ")
+            self.updateTextField(textField: self.offerDaysTextField!, focus: true)
+            return false
+        }
+        var temp = false
+        if self.offerDaysTextField!.validateNumber() {
+            temp = true
+        }
+        if !temp {
+            self.showNoticeLabel(notice: "Period days must be an integer")
+            self.updateTextField(textField: self.offerDaysTextField!, focus: true)
+            return false
+        }
+        if Int(self.offerDaysTextField!.text!)! <= 2 {
+            self.showNoticeLabel(notice: "Period days must be more than 2")
+            self.updateTextField(textField: self.offerDaysTextField!, focus: true)
+            return false
+        }
+        self.hideNoticeLabel()
+        self.updateTextField(textField: self.offerDaysTextField!, focus: false)
         return true
     }
     
     func valifyPercentage() -> Bool {
-        var temp = false
-        if self.managerPercentTextField!.validatePassword() {
-            temp = true
-        }
-        if !temp {
-            self.showNoticeLabel(notice: "The percentage format is ")
+        if self.managerPercentTextField!.text == nil || self.managerPercentTextField!.text!.isBlank {
+            self.showNoticeLabel(notice: "Manager percentage should be filled in")
+            self.updateTextField(textField: self.managerPercentTextField!, focus: true)
             return false
+        }else{
+            let percent : Float = Float(self.managerPercentTextField!.text!)!
+            if percent < 0.00 || percent > 100.00 {
+                self.showNoticeLabel(notice: "Percentage must be a number from 0 to 95")
+                self.updateTextField(textField: self.managerPercentTextField!, focus: true)
+                return false
+            }else{
+                self.hideNoticeLabel()
+                self.updateTextField(textField: self.managerPercentTextField!, focus: false)
+                return true
+            }
         }
-        self.hideNoticeLabel()
-        return true
     }
     
     lazy var tableView: UITableView? = {
@@ -159,7 +217,8 @@ class AddScholarshipController: ViewController {
         tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "2")
         tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "3")
         tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "4")
-        tempTableView.register(PostScholarshipCell.classForCoder(), forCellReuseIdentifier: postScholarshipCellIdentifier + "5")
+        tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "5")
+        tempTableView.register(PostScholarshipCell.classForCoder(), forCellReuseIdentifier: postScholarshipCellIdentifier + "6")
         tempTableView.register(EmptyTableViewCell.classForCoder(), forCellReuseIdentifier: emptyTableViewCellIdentifier)
         tempTableView.dataSource = self
         tempTableView.delegate = self
@@ -203,8 +262,15 @@ extension  AddScholarshipController : UITableViewDelegate,UITableViewDataSource,
             self.valifyRonin()
         }else if textField == self.emailTextField{
             self.valifyEmail()
+        }else if textField == self.managerPercentTextField{
+            if self.valifyPercentage(){
+                let str = String(format: "%.2f", 95 - Float(textField.text!)!)
+                self.scholarpercentageLabel!.text = "\(str)%    "
+            }
         }else if textField == self.passwordTextField{
             self.valifyPassword()
+        }else if textField == self.offerDaysTextField{
+            self.valifyOfferDays()
         }
         
     }
@@ -212,11 +278,11 @@ extension  AddScholarshipController : UITableViewDelegate,UITableViewDataSource,
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             
-           return 6
+           return 7
     }
         
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 5 {
+        if indexPath.row == 6 {
             return 100
         }
            return 60
@@ -240,23 +306,31 @@ extension  AddScholarshipController : UITableViewDelegate,UITableViewDataSource,
     case 2:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "2", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.delegate = self
-        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Email address", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Axie account email", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.emailTextField = tempCell.textFild
         cell = tempCell
     case 3:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "3", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.delegate = self
-        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Email password", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Axie account password", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.passwordTextField = tempCell.textFild
         cell = tempCell
     case 4:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "4", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.delegate = self
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Offer contract days", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
+        self.offerDaysTextField = tempCell.textFild
+        self.offerDaysTextField?.keyboardType = .numberPad
+        cell = tempCell
+    case 5:
+        let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "5", for: indexPath) as! LabelTextFildCell
+        tempCell.textFild?.delegate = self
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Manager percentage", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.managerPercentTextField = tempCell.textFild
         cell = tempCell
-    case 5:
-        let tempCell : PostScholarshipCell = tableView.dequeueReusableCell(withIdentifier: postScholarshipCellIdentifier + "5", for: indexPath) as! PostScholarshipCell
+    case 6:
+        let tempCell : PostScholarshipCell = tableView.dequeueReusableCell(withIdentifier: postScholarshipCellIdentifier + "6", for: indexPath) as! PostScholarshipCell
+        self.scholarpercentageLabel = tempCell.rightLabel
         cell = tempCell
     default:
         cell = tableView.dequeueReusableCell(withIdentifier: emptyTableViewCellIdentifier, for: indexPath)

@@ -73,6 +73,12 @@ extension UITextField{
         let temp = self.validate(value: "^[A-Za-z0-9_-]{5,16}$")
         return temp
     }
+    func validateNumber() -> Bool {
+        let temp = self.validate(value: "^[0-9]+$")
+        return temp
+    }
+    
+    
 }
 /// 抖动方向
 ///
