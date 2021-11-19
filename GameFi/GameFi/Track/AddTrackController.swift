@@ -49,13 +49,23 @@ class AddTrackController: ViewController {
         }
     }
     
+    func updateTextField(textField:UITextField,focus:Bool)  {
+        if focus {
+            textField.layer.borderColor = UIColor.init(hexString: "0xB85050").cgColor
+        }else{
+            textField.layer.borderColor = UIColor(red: 0.27, green: 0.3, blue: 0.41, alpha: 1).cgColor
+        }
+    }
+    
     
     func valifyAccount() -> Bool{
         if self.accountNameTextField!.text == nil || self.accountNameTextField!.text!.isBlank {
             self.showNoticeLabel(notice: "Account name should be filled in")
+            self.updateTextField(textField: self.accountNameTextField!, focus: true)
             return false
         }else{
             self.hideNoticeLabel()
+            self.updateTextField(textField: self.accountNameTextField!, focus: false)
             return true
         }
     }
@@ -63,15 +73,19 @@ class AddTrackController: ViewController {
     func valifyRonin() -> Bool{
         if self.roninTextField!.text == nil || self.roninTextField!.text!.isBlank {
             self.showNoticeLabel(notice: "Ronin address should be filled in")
+            self.updateTextField(textField: self.roninTextField!, focus: true)
             return false
         }else if !self.roninTextField!.text!.starts(with: "0x") && !self.roninTextField!.text!.starts(with: "ronin:"){
             self.showNoticeLabel(notice: "Ronin address format is 0x...... or ronin:......")
+            self.updateTextField(textField: self.roninTextField!, focus: true)
             return false
         }else if self.roninTextField!.text!.count != 42 &&  self.roninTextField!.text!.count != 46{
             self.showNoticeLabel(notice: "Ronin address format is 0x...... or ronin:......")
+            self.updateTextField(textField: self.roninTextField!, focus: true)
             return false
         }else{
             self.hideNoticeLabel()
+            self.updateTextField(textField: self.roninTextField!, focus: false)
             return true
         }
     }
@@ -79,11 +93,13 @@ class AddTrackController: ViewController {
     func valifyPercent() -> Bool{
         if self.managerPercentTextField!.text == nil || self.managerPercentTextField!.text!.isBlank {
             self.showNoticeLabel(notice: "Manager percentage should be filled in")
+            self.updateTextField(textField: self.managerPercentTextField!, focus: true)
             return false
         }else{
             let percent : Float = Float(self.managerPercentTextField!.text!)!
             if percent < 0.00 || percent > 100.00 {
-                self.showNoticeLabel(notice: "Manager percentage format is 0.00-100.00,Two significant decimals are supported")
+                self.showNoticeLabel(notice: "Manager Percentage must be a number from 0 to 100")
+                self.updateTextField(textField: self.managerPercentTextField!, focus: false)
                 return false
             }else{
                 return true

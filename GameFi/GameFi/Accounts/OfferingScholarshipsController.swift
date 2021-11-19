@@ -106,21 +106,28 @@ extension  OfferingScholarshipsController : UICollectionViewDelegate,UICollectio
                 DispatchQueue.main.async { [self] in
                     self.collectionView.mj_footer?.endRefreshing()
                     self.collectionView.mj_header?.endRefreshing()
-                    let managerScholarshipListModel : ManagerScholarshipListModel = reponse as! ManagerScholarshipListModel
-                    if self.pageIndex == 1{
-                        self.dataSource = managerScholarshipListModel.data
-                    }else{
-                        if managerScholarshipListModel.data != nil {
-                            self.dataSource?.append(contentsOf: managerScholarshipListModel.data!)
-                        }
+                    if result.success!{
+                        let managerScholarshipListModel : ManagerScholarshipListModel = reponse as! ManagerScholarshipListModel
+                        if self.pageIndex == 1{
+                            self.dataSource = managerScholarshipListModel.data
+                        }else{
+                            if managerScholarshipListModel.data != nil {
+                                self.dataSource?.append(contentsOf: managerScholarshipListModel.data!)
+                            }
 
-                    }
-                    if managerScholarshipListModel.next_page! > pageIndex {
-                        pageIndex = managerScholarshipListModel.next_page!
+                        }
+                        if managerScholarshipListModel.next_page! > pageIndex {
+                            pageIndex = managerScholarshipListModel.next_page!
+                        }else{
+                            self.collectionView.mj_footer?.endRefreshingWithNoMoreData()
+                        }
+                        self.collectionView.reloadData()
                     }else{
-                        self.collectionView.mj_footer?.endRefreshingWithNoMoreData()
+                        if  result.msg != nil && !result.msg!.isBlank {
+                            self.mc_success(result.msg!)
+                        }
                     }
-                    self.collectionView.reloadData()
+                    
                 }
         }
     }

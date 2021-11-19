@@ -68,15 +68,34 @@ class AddScholarshipController: ViewController {
         if !self.valifyPassword() {
             return
         }
+        if !self.valifyOfferDays() {
+            return
+        }
         if !self.valifyPercentage() {
             return
         }
-//        var params = ["account_login" : self.accountNameTextField?.text,
-//                      "account_passcode" : self.passwordTextField?.text,
-//                      "account_ronin_address":self.roninTextField?.text,
-//                      "scholar_percentage":self.managerPercentTextField?.text,
-//                      "offer_period":
-//                     ]
+        let params = ["scholarship_name" : self.accountNameTextField?.text as Any,
+                      "account_login" : self.emailTextField?.text as Any,
+                      "account_passcode" : self.passwordTextField?.text as Any,
+                      "account_ronin_address":self.roninTextField?.text as Any,
+                      "manager_percentage":Float(self.managerPercentTextField!.text!)!,
+                      "offer_period": Int(self.offerDaysTextField!.text!) as Any,
+                      "scholar_percentage":95 - Float(self.managerPercentTextField!.text!)!,
+        ] as [String : Any]
+        self.mc_loading()
+        DataManager.sharedInstance.createScholarShip(dic: params) { result, reponse in
+            DispatchQueue.main.async { [self] in
+                self.mc_remove()
+                if result.success!{
+                    self.mc_success("Finished！Waiting the review")
+                    self.navigationController?.popViewController(animated: true)
+                }else{
+                    if  result.msg != nil && !result.msg!.isBlank {
+                        self.mc_success(result.msg!)
+                    }
+                }
+            }
+        }
         
     }
     
@@ -192,8 +211,8 @@ class AddScholarshipController: ViewController {
             return false
         }else{
             let percent : Float = Float(self.managerPercentTextField!.text!)!
-            if percent < 0.00 || percent > 100.00 {
-                self.showNoticeLabel(notice: "Percentage must be a number from 0 to 95")
+            if percent < 0.00 || percent > 95.00 {
+                self.showNoticeLabel(notice: "Manager Percentage must be a number from 0 to 95")
                 self.updateTextField(textField: self.managerPercentTextField!, focus: true)
                 return false
             }else{
