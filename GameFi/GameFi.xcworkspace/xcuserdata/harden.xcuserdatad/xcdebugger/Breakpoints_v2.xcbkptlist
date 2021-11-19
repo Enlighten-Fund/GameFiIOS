@@ -19,54 +19,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "37FF90CD-76EA-44BE-B2CC-CC8F30AF592A"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GameFi/Accounts/NoOfferScholarshipController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "37FF90CD-76EA-44BE-B2CC-CC8F30AF592A - 1ff5d4347414835f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "GameFi.NoOfferScholarshipController.viewDidLoad() -&gt; ()"
-                  moduleName = "GameFi"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/harden/Desktop/GameFiIOS/GameFi/GameFi/Accounts/NoOfferScholarshipController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "20"
-                  endingLineNumber = "20"
-                  offsetFromSymbolStart = "439">
-               </Location>
-               <Location
-                  uuid = "37FF90CD-76EA-44BE-B2CC-CC8F30AF592A - b07c2ecf022c29dd"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (SnapKit.ConstraintMaker) -&gt; () in GameFi.NoOfferScholarshipController.viewDidLoad() -&gt; ()"
-                  moduleName = "GameFi"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/harden/Desktop/GameFiIOS/GameFi/GameFi/Accounts/NoOfferScholarshipController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "21"
-                  endingLineNumber = "21"
-                  offsetFromSymbolStart = "25">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "F48E3C05-0FA3-4C98-AA32-47AEFEA05984"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"

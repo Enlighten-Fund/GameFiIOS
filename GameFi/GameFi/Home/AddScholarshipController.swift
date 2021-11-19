@@ -96,7 +96,6 @@ class AddScholarshipController: ViewController {
                 }
             }
         }
-        
     }
     
     func updateTextField(textField:UITextField,focus:Bool)  {

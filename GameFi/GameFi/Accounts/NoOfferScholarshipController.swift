@@ -116,10 +116,11 @@ extension  NoOfferScholarshipController : UICollectionViewDelegate,UICollectionV
     }
     
     func requestListData() {
-        DataManager.sharedInstance.fetchManagerOfferingScholarShip(pageIndex: pageIndex) { result, reponse in
-                DispatchQueue.main.async { [self] in
-                    self.collectionView.mj_footer?.endRefreshing()
-                    self.collectionView.mj_header?.endRefreshing()
+        DataManager.sharedInstance.fetchManagerNoOfferScholarShip(pageIndex: pageIndex) { result, reponse in
+            DispatchQueue.main.async { [self] in
+                self.collectionView.mj_footer?.endRefreshing()
+                self.collectionView.mj_header?.endRefreshing()
+                if result.success!{
                     let managerScholarshipListModel : ManagerScholarshipListModel = reponse as! ManagerScholarshipListModel
                     if self.pageIndex == 1{
                         self.dataSource = managerScholarshipListModel.data
@@ -135,7 +136,13 @@ extension  NoOfferScholarshipController : UICollectionViewDelegate,UICollectionV
                         self.collectionView.mj_footer?.endRefreshingWithNoMoreData()
                     }
                     self.collectionView.reloadData()
+                }else{
+                    if  result.msg != nil && !result.msg!.isBlank {
+                        self.mc_success(result.msg!)
+                    }
                 }
+                
+            }
         }
     }
 }

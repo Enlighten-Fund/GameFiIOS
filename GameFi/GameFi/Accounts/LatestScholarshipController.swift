@@ -151,47 +151,28 @@ extension  LatestScholarshipController : UICollectionViewDelegate,UICollectionVi
                 self.collectionView.mj_footer?.endRefreshing()
                 self.collectionView.mj_header?.endRefreshing()
                 if result.success!{
-                    let managerApplicationListModel : ManagerApplicationListModel = reponse as! ManagerApplicationListModel
+                    let managerScholarshipListModel : ManagerScholarshipListModel = reponse as! ManagerScholarshipListModel
                     if self.pageIndex == 1{
-                        self.dataSource = managerApplicationListModel.data
+                        self.dataSource = managerScholarshipListModel.data
                     }else{
-                        if managerApplicationListModel.data != nil {
-                            self.dataSource?.append(contentsOf: managerApplicationListModel.data!)
+                        if managerScholarshipListModel.data != nil {
+                            self.dataSource?.append(contentsOf: managerScholarshipListModel.data!)
                         }
 
                     }
-                    if managerApplicationListModel.next_page! > pageIndex {
-                        pageIndex = managerApplicationListModel.next_page!
+                    if managerScholarshipListModel.next_page! > pageIndex {
+                        pageIndex = managerScholarshipListModel.next_page!
                     }else{
                         self.collectionView.mj_footer?.endRefreshingWithNoMoreData()
                     }
                     self.collectionView.reloadData()
+                }else{
+                    if  result.msg != nil && !result.msg!.isBlank {
+                        self.mc_success(result.msg!)
+                    }
                 }
             }
         }
-//        DataManager.sharedInstance.fetchMarketPlaceScholarShip(filter:self.filter!, pageIndex: pageIndex) { result, reponse in
-//            DispatchQueue.main.async { [self] in
-//                self.collectionView.mj_footer?.endRefreshing()
-//                self.collectionView.mj_header?.endRefreshing()
-//                if result.success!{
-//                    let scholarshipListModel : ScholarshipListModel = reponse as! ScholarshipListModel
-//                    if self.pageIndex == 1{
-//                        self.dataSource = scholarshipListModel.data
-//                    }else{
-//                        if scholarshipListModel.data != nil {
-//                            self.dataSource?.append(contentsOf: scholarshipListModel.data!)
-//                        }
-//
-//                    }
-//                    if scholarshipListModel.next_page! > pageIndex {
-//                        pageIndex = scholarshipListModel.next_page!
-//                    }else{
-//                        self.collectionView.mj_footer?.endRefreshingWithNoMoreData()
-//                    }
-//                    self.collectionView.reloadData()
-//                }
-//            }
-//        }
     }
 }
 
