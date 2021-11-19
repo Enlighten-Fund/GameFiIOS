@@ -441,4 +441,16 @@ class DataManager: NSObject {
         }
     }
     
+    //
+    func fetchUserinfo(completeBlock: @escaping CompleteBlock) {
+        let dic = ["id" : "201" as Any] as [String : Any]
+        self.POST(url: "user/get_by_id", param: dic ) { result, reponse in
+            if result.success!{
+                let userInfoModel : UserInfoModel = JsonUtil.jsonToModel(reponse as! String, UserInfoModel.self) as! UserInfoModel
+                completeBlock(result,userInfoModel)
+            }else{
+                completeBlock(result,reponse)
+            }
+        }
+    }
 }

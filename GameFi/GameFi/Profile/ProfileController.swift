@@ -13,14 +13,13 @@ import MJRefresh
 import AWSMobileClient
 
 class ProfileController: ViewController {
-
+    var userInfoModel : UserInfoModel?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Profile"
-        self.leftBtn!.setImage(UIImage.init(named: "profile_role"), for: .normal)
         self.headerView!.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(0)
-            make.height.equalTo(170)
+            make.height.equalTo(100)
             make.left.equalToSuperview().offset(0)
             make.right.equalToSuperview().offset(0)
         }
@@ -31,6 +30,36 @@ class ProfileController: ViewController {
             make.right.equalToSuperview().offset(-15)
         }
      
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateLeftBtn()
+        self.requestData()
+    }
+    
+    func updateLeftBtn(){
+        if UserManager.sharedInstance.currentRole() == 1 {
+            self.leftBtn!.setImage(UIImage.init(named: "profile_scholar"), for: .normal)
+        }else{
+            self.leftBtn!.setImage(UIImage.init(named: "profile_manager"), for: .normal)
+        }
+    }
+    
+    
+    func requestData() {
+        self.mc_loading()
+        DataManager.sharedInstance.fetchUserinfo { result, reponse in
+            DispatchQueue.main.async { [self] in
+                self.mc_remove()
+                if result.success!{
+                    let userInfoModel : UserInfoModel = reponse as! UserInfoModel
+                    self.userInfoModel = userInfoModel
+                    self.headerView?.update(userInfoModel: userInfoModel)
+                    
+                }
+            }
+        }
     }
     
     @objc override func leftBtnClick() {
@@ -61,7 +90,7 @@ class ProfileController: ViewController {
     }
     
     lazy var headerView: ProfileHeaderView? = {
-        let tempView = ProfileHeaderView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH - 30, height: 170))
+        let tempView = ProfileHeaderView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH - 30, height: 100))
         tempView.backgroundColor = self.view.backgroundColor
 //        tempView.signBtn.addTarget(self, action: #selector(signBtnClick), for: .touchUpInside)
         view.addSubview(tempView)

@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SnapKit
+import Kingfisher
 
 class ProfileHeaderView: UIView {
     override init(frame: CGRect) {
@@ -33,11 +34,11 @@ class ProfileHeaderView: UIView {
         self.creditLabel.snp.makeConstraints { make in
             make.top.equalTo(self.emailLabel.snp.bottom)
             make.left.equalTo(self.iconImgView.snp.right).offset(10)
-            make.width.equalTo(120)
+            make.width.equalTo(200)
             make.height.equalTo(20)
         }
         self.cetifiedBtn.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-15)
+            make.bottom.equalTo(self.creditLabel.snp.bottom)
             make.right.equalToSuperview().offset(-15)
             make.width.equalTo(115)
             make.height.equalTo(35)
@@ -47,6 +48,23 @@ class ProfileHeaderView: UIView {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    func update(userInfoModel : UserInfoModel) {
+        self.iconImgView.image = UIImage.init(named: "portrait")
+        if userInfoModel.avatar != nil {
+            self.iconImgView.kf.setImage(with:  URL.init(string: userInfoModel.avatar!))
+        }
+        if userInfoModel.username != nil {
+            self.usernameLabel.text = userInfoModel.username
+        }
+        if userInfoModel.email != nil {
+            self.emailLabel.text = userInfoModel.email
+        }
+        if userInfoModel.credit_score != nil {
+            self.creditLabel.text = "Credit Score: \(userInfoModel.credit_score!)"
+        }
+        
     }
     
     lazy var iconImgView : UIImageView = {
