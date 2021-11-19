@@ -171,7 +171,7 @@ class NoOfferScholarshipCell: UICollectionViewCell {
                 self.btn.isHidden = true
                 self.leftBtn.isHidden = false
                 self.rightBtn.isHidden = false
-            } else if managerScholarshipModel.status == "PENDING_PAYMENT" {
+            } else if managerScholarshipModel.status == "LISTING" {
                 self.btn.isHidden = false
                 self.leftBtn.isHidden = true
                 self.rightBtn.isHidden = true

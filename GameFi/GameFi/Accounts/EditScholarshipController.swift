@@ -1,8 +1,8 @@
 //
-//  AddTrackController.swift
+//  EditScholarshipController.swift
 //  GameFi
 //
-//  Created by harden on 2021/11/11.
+//  Created by harden on 2021/11/19.
 //
 
 import Foundation
@@ -11,7 +11,7 @@ import SnapKit
 import AWSMobileClient
 import SCLAlertView
 import MJRefresh
-class AddScholarshipController: ViewController {
+class EditScholarshipController: ViewController {
     var accountNameTextField : UITextField?
     var roninTextField : UITextField?
     var emailTextField : UITextField?
@@ -19,10 +19,11 @@ class AddScholarshipController: ViewController {
     var managerPercentTextField : UITextField?
     var offerDaysTextField : UITextField?
     var scholarpercentageLabel : UILabel?
-    var status : String?
-    init(status : String) {
+    var managerScholarshipModel : ManagerScholarshipModel?
+    
+    init(managerScholarshipModel:ManagerScholarshipModel) {
         super.init(nibName: nil, bundle: nil)
-        self.status = status
+        self.managerScholarshipModel = managerScholarshipModel
     }
     
     required init?(coder: NSCoder) {
@@ -64,7 +65,7 @@ class AddScholarshipController: ViewController {
     }
     
     
-    @objc func addScholarship(){
+    @objc func editScholarship(){
         if !self.valifyAccount() {
             return
         }
@@ -90,10 +91,10 @@ class AddScholarshipController: ViewController {
                       "manager_percentage":Float(self.managerPercentTextField!.text!)!,
                       "offer_period": Int(self.offerDaysTextField!.text!) as Any,
                       "scholar_percentage":95 - Float(self.managerPercentTextField!.text!)!,
-                      "status": self.status as Any,
+                      "id":Int(self.managerScholarshipModel!.scholarship_id!) as Any
         ] as [String : Any]
         self.mc_loading()
-        DataManager.sharedInstance.createScholarShip(dic: params) { result, reponse in
+        DataManager.sharedInstance.editScholarShip(dic: params) { result, reponse in
             DispatchQueue.main.async { [self] in
                 self.mc_remove()
                 if result.success!{
@@ -236,12 +237,7 @@ class AddScholarshipController: ViewController {
         let tempTableView = UITableView.init(frame: CGRect.zero, style: .plain)
         let footView = PostScholarFootView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 60))
         footView.cancelBtn.addTarget(self, action: #selector(leftBtnClick), for: .touchUpInside)
-        footView.postBtn.addTarget(self, action: #selector(addScholarship), for: .touchUpInside)
-        if self.status == "DRAFT"{
-            footView.postBtn.setTitle("Save", for: .normal)
-        }else {
-            footView.postBtn.setTitle("Post", for: .normal)
-        }
+        footView.postBtn.addTarget(self, action: #selector(editScholarship), for: .touchUpInside)
         tempTableView.tableFooterView = footView
         tempTableView.separatorStyle = .none
         tempTableView.keyboardDismissMode = .onDrag
@@ -272,7 +268,7 @@ class AddScholarshipController: ViewController {
     }()
 }
 
-extension  AddScholarshipController : UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate{
+extension  EditScholarshipController : UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate{
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard textField.text != nil else {
                 return true
@@ -329,24 +325,28 @@ extension  AddScholarshipController : UITableViewDelegate,UITableViewDataSource,
         tempCell.textFild?.delegate = self
         self.accountNameTextField = tempCell.textFild
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Account name", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
+        self.accountNameTextField?.text = self.managerScholarshipModel?.scholarship_name
         cell = tempCell
     case 1:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "1", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.delegate = self
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Ronin address: 550fc6aee0126b5d31d347…", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.roninTextField = tempCell.textFild
+        self.roninTextField?.text = self.managerScholarshipModel?.account_ronin_address
         cell = tempCell
     case 2:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "2", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.delegate = self
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Axie account email", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.emailTextField = tempCell.textFild
+        self.emailTextField?.text = self.managerScholarshipModel?.account_login
         cell = tempCell
     case 3:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "3", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.delegate = self
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Axie account password", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.passwordTextField = tempCell.textFild
+        self.passwordTextField?.text = self.managerScholarshipModel?.account_passcode
         cell = tempCell
     case 4:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "4", for: indexPath) as! LabelTextFildCell
@@ -354,16 +354,19 @@ extension  AddScholarshipController : UITableViewDelegate,UITableViewDataSource,
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Offer contract days", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.offerDaysTextField = tempCell.textFild
         self.offerDaysTextField?.keyboardType = .numberPad
+        self.offerDaysTextField?.text = self.managerScholarshipModel?.offer_period
         cell = tempCell
     case 5:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "5", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.delegate = self
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Manager percentage", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.managerPercentTextField = tempCell.textFild
+        self.managerPercentTextField?.text = self.managerScholarshipModel?.manager_percentage
         cell = tempCell
     case 6:
         let tempCell : PostScholarshipCell = tableView.dequeueReusableCell(withIdentifier: postScholarshipCellIdentifier + "6", for: indexPath) as! PostScholarshipCell
         self.scholarpercentageLabel = tempCell.rightLabel
+        self.scholarpercentageLabel?.text = managerScholarshipModel?.scholar_percentage
         cell = tempCell
     default:
         cell = tableView.dequeueReusableCell(withIdentifier: emptyTableViewCellIdentifier, for: indexPath)
@@ -372,3 +375,4 @@ extension  AddScholarshipController : UITableViewDelegate,UITableViewDataSource,
        return cell
    }
 }
+

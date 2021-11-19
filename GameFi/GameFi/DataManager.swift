@@ -397,4 +397,31 @@ class DataManager: NSObject {
             }
         }
     }
+    
+    //edit scholarship
+    func editScholarShip(dic:[String: Any], completeBlock: @escaping CompleteBlock) {
+        let dicParam = NSMutableDictionary.init()
+        dicParam.addEntries(from: dic)
+        dicParam["user_id"] = "201"
+        self.POST(url: "scholarship/update_info_by_id", param: dicParam as! [String : Any]) { result, reponse in
+            if result.success!{
+                completeBlock(result,reponse)
+            }else{
+                completeBlock(result,reponse)
+            }
+        }
+    }
+    
+    //update scholarship status
+    func updateScholarshipStatus(scholarshipid:String, status: String , completeBlock: @escaping CompleteBlock) {
+        let dic = ["id" : Int(scholarshipid) as Any,"status" : status,"user_id":"201"] as [String : Any]
+        self.POST(url: "scholarship/update_status_by_id", param: dic ) { result, reponse in
+            if result.success!{
+                completeBlock(result,reponse)
+            }else{
+                completeBlock(result,reponse)
+            }
+        }
+    }
+    
 }

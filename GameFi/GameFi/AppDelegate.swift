@@ -17,6 +17,8 @@ import AWSMobileClient
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate{
     var homeVC : HomeController? = nil
+    var managerAccontVC : ManagerAccountsController? = nil
+    var scholarAccontVC : ScholarAccountsController? = nil
    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         self.window?.rootViewController = self.tabbarVC
         IQKeyboardManager.shared().isEnabled = true

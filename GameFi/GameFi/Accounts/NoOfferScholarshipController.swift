@@ -28,10 +28,62 @@ class NoOfferScholarshipController: UIViewController {
     }
     
     @objc func showAddScholarshipVC() {
-        self.navigationController?.pushViewController(AddScholarshipController.init(), animated: true)
+        let addScholarshipVC = AddScholarshipController.init(status: "DRAFT")
+        let appdelegate : AppDelegate = UIApplication.shared.delegate! as! AppDelegate
+        let vc : GFNavController = appdelegate.tabbarVC?.viewControllers![1] as! GFNavController
+        vc.pushViewController(addScholarshipVC, animated: true)
     }
     
+    @objc func showEditScholarshipVC(btn:UIButton) {
+        if btn.tag - 10000 < self.dataSource!.count {
+            let managerScholarshipModel = self.dataSource![btn.tag - 10000]
+            let editScholarshipVC = EditScholarshipController.init(managerScholarshipModel: managerScholarshipModel as! ManagerScholarshipModel)
+            let appdelegate : AppDelegate = UIApplication.shared.delegate! as! AppDelegate
+            let vc : GFNavController = appdelegate.tabbarVC?.viewControllers![1] as! GFNavController
+            vc.pushViewController(editScholarshipVC, animated: true)
+        }
+        
+    }
     
+    @objc func postScholarship(btn:UIButton) {
+        if btn.tag - 20000 < self.dataSource!.count {
+            let managerScholarshipModel : ManagerScholarshipModel = self.dataSource![btn.tag - 20000] as! ManagerScholarshipModel
+            self.mc_loading()
+            DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: managerScholarshipModel.scholarship_id!, status: "LISTING") { result, reponse in
+                DispatchQueue.main.async { [self] in
+                    self.mc_remove()
+                    if result.success!{
+                        self.mc_success("Finished！Waiting the review")
+                        self.collectionView.mj_header?.beginRefreshing()
+                    }else{
+                        if  result.msg != nil && !result.msg!.isBlank {
+                            self.mc_success(result.msg!)
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+    
+    @objc func recallScholarship(btn:UIButton) {
+        if btn.tag - 30000 < self.dataSource!.count {
+            let managerScholarshipModel : ManagerScholarshipModel = self.dataSource![btn.tag - 30000] as! ManagerScholarshipModel
+            self.mc_loading()
+            DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: managerScholarshipModel.scholarship_id!, status: "DRAFT") { result, reponse in
+                DispatchQueue.main.async { [self] in
+                    self.mc_remove()
+                    if result.success!{
+                        self.collectionView.mj_header?.beginRefreshing()
+                    }else{
+                        if  result.msg != nil && !result.msg!.isBlank {
+                            self.mc_success(result.msg!)
+                        }
+                    }
+                }
+            }
+        }
+    }
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         //水平间隔
@@ -100,6 +152,12 @@ extension  NoOfferScholarshipController : UICollectionViewDelegate,UICollectionV
         cell.makeConstraints()
         let managerScholarshipModel = self.dataSource![indexPath.row]
         cell.update(managerScholarshipModel: managerScholarshipModel as! ManagerScholarshipModel)
+        cell.leftBtn.addTarget(self, action: #selector(showEditScholarshipVC), for: .touchUpInside)
+        cell.leftBtn.tag = 10000 + indexPath.row
+        cell.rightBtn.addTarget(self, action: #selector(postScholarship), for: .touchUpInside)
+        cell.rightBtn.tag = 20000 + indexPath.row
+        cell.btn.addTarget(self, action: #selector(recallScholarship), for: .touchUpInside)
+        cell.btn.tag = 30000 + indexPath.row
         return cell
     }
 

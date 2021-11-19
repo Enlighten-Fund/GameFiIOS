@@ -51,7 +51,8 @@ class ScholarshipsController: UIViewController {
     func showAddScholarshipVC() {
         DispatchQueue.main.async {
             let appdelegate : AppDelegate = UIApplication.shared.delegate! as! AppDelegate
-            appdelegate.homeVC?.navigationController!.pushViewController(AddScholarshipController.init(), animated: true)
+            let addScholarVC = AddScholarshipController.init(status: "LISTING")
+            appdelegate.homeVC?.navigationController!.pushViewController(addScholarVC, animated: true)
         }
     }
     

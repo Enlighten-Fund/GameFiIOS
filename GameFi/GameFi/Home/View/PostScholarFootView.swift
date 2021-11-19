@@ -48,8 +48,8 @@ class PostScholarFootView: UIView{
     
     lazy var postBtn : UIButton = {
         let tempBtn = UIButton.init(frame: CGRect.zero)
-        tempBtn.setTitle("Post", for: .normal)
-        tempBtn.setTitle("Post", for: .selected)
+        tempBtn.setTitle("Save", for: .normal)
+        tempBtn.setTitle("Save", for: .selected)
         tempBtn.setTitleColor(.white, for: .normal)
         tempBtn.setTitleColor(.white, for: .selected)
         tempBtn.layer.cornerRadius = 5
