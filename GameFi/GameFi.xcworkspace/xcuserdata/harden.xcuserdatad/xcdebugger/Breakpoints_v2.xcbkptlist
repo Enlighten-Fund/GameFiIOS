@@ -19,38 +19,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F48E3C05-0FA3-4C98-AA32-47AEFEA05984"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GameFi/Accounts/ScholarRentScholarshipController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "10260201-6D4B-4FBD-A849-8B7AF34285CA"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GameFi/Accounts/ScholarApplingScholarshipController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "32AD4D3B-D0C6-44FA-A4A8-D5ED070771D1"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -83,65 +51,97 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A8AA0622-F21C-40FD-8E8E-C6D69A4CBE31"
+            uuid = "6EB50785-FC57-4091-90D8-34D0B0175023"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GameFi/Accounts/ScholarAccountsController.swift"
+            filePath = "GameFi/DataManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "pageView"
-            landmarkType = "24">
+            startingLineNumber = "242"
+            endingLineNumber = "242"
+            landmarkName = "createTracker(accountName:ronin_address:manager_percentage:completeBlock:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "839E4375-D1D3-4D46-AA3F-C5F6D7C25183"
+            uuid = "CDE60E5C-7A86-43E5-8C60-48D10ABA537F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GameFi/Accounts/ScholarAccountsController.swift"
+            filePath = "GameFi/DataManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "17"
-            endingLineNumber = "17"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
+            landmarkName = "createTracker(accountName:ronin_address:manager_percentage:completeBlock:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "839E4375-D1D3-4D46-AA3F-C5F6D7C25183 - 42e3665eebe51aa0"
+                  uuid = "CDE60E5C-7A86-43E5-8C60-48D10ABA537F - d9988bacc6266e48"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "GameFi.ScholarAccountsController.viewDidLoad() -&gt; ()"
+                  symbolName = "GameFi.DataManager.createTracker(accountName: Swift.String, ronin_address: Swift.String, manager_percentage: Swift.Float, completeBlock: (GameFi.GFResult, Any) -&gt; ()) -&gt; ()"
                   moduleName = "GameFi"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/harden/Desktop/GameFiIOS/GameFi/GameFi/Accounts/ScholarAccountsController.swift"
+                  urlString = "file:///Users/harden/Desktop/GameFiIOS/GameFi/GameFi/DataManager.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "17"
-                  endingLineNumber = "17"
-                  offsetFromSymbolStart = "444">
+                  startingLineNumber = "241"
+                  endingLineNumber = "241"
+                  offsetFromSymbolStart = "844">
                </Location>
                <Location
-                  uuid = "839E4375-D1D3-4D46-AA3F-C5F6D7C25183 - 39c0f0e2decd1ec"
+                  uuid = "CDE60E5C-7A86-43E5-8C60-48D10ABA537F - 9e561b1c1ae4d9c4"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (SnapKit.ConstraintMaker) -&gt; () in GameFi.ScholarAccountsController.viewDidLoad() -&gt; ()"
+                  symbolName = "closure #1 (GameFi.GFResult, Any) -&gt; () in GameFi.DataManager.createTracker(accountName: Swift.String, ronin_address: Swift.String, manager_percentage: Swift.Float, completeBlock: (GameFi.GFResult, Any) -&gt; ()) -&gt; ()"
                   moduleName = "GameFi"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/harden/Desktop/GameFiIOS/GameFi/GameFi/Accounts/ScholarAccountsController.swift"
+                  urlString = "file:///Users/harden/Desktop/GameFiIOS/GameFi/GameFi/DataManager.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "18"
-                  endingLineNumber = "18"
-                  offsetFromSymbolStart = "44">
+                  startingLineNumber = "242"
+                  endingLineNumber = "242"
+                  offsetFromSymbolStart = "213">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F0446074-9FE4-4323-A0F1-DDFB6B51AB6D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GameFi/DataManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "POST(url:param:completeBlock:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "33C68396-EA1A-4CF4-88AB-BDF1FCACB83F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GameFi/DataManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "POST(url:param:completeBlock:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

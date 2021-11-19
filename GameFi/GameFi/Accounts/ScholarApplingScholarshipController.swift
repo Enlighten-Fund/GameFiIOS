@@ -101,7 +101,7 @@ extension  ScholarApplingScholarshipController : UICollectionViewDelegate,UIColl
     }
     
     func requestListData() {
-        DataManager.sharedInstance.fetchManagerOfferingScholarShip(pageIndex: pageIndex) { result, reponse in
+        DataManager.sharedInstance.fetchScholarApplyingScholarShip(pageIndex: pageIndex) { result, reponse in
                 DispatchQueue.main.async { [self] in
                     self.collectionView.mj_footer?.endRefreshing()
                     self.collectionView.mj_header?.endRefreshing()

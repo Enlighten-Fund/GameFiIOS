@@ -127,47 +127,47 @@ class DataManager: NSObject {
     func fetchAxieDetail(axieId:String, completeBlock: @escaping CompleteBlock) {
         let dic = ["id" : Int(axieId)]
         self.POST(url: "axie/get_by_id", param: dic as [String : Any]) { result, reponse in
-            let path = Bundle.main.path(forResource: "axieinfo", ofType: "json")
-            let url = URL(fileURLWithPath: path!)
-                do {
-                        let data = try Data(contentsOf: url)
-                        let jsonData:Any = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
-                    let jsonDic : Dictionary = jsonData as! Dictionary<String, Any>
-                    let axieinfoModel : AxieinfoModel = JsonUtil.jsonToModel(jsonDic["data"] as! String, AxieinfoModel.self) as! AxieinfoModel
-                        completeBlock(result,axieinfoModel)
-                } catch let error as Error? {
-                        print("读取本地数据出现错误!",error)
-                }
-//            if result.success!{
-//                let axieinfoModel : AxieinfoModel = JsonUtil.jsonToModel(reponse as! String, AxieinfoModel.self) as! AxieinfoModel
-//                completeBlock(result,axieinfoModel)
-//            }else{
-//                completeBlock(result,reponse)
-//            }
+//            let path = Bundle.main.path(forResource: "axieinfo", ofType: "json")
+//            let url = URL(fileURLWithPath: path!)
+//                do {
+//                        let data = try Data(contentsOf: url)
+//                        let jsonData:Any = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
+//                    let jsonDic : Dictionary = jsonData as! Dictionary<String, Any>
+//                    let axieinfoModel : AxieinfoModel = JsonUtil.jsonToModel(jsonDic["data"] as! String, AxieinfoModel.self) as! AxieinfoModel
+//                        completeBlock(result,axieinfoModel)
+//                } catch let error as Error? {
+//                        print("读取本地数据出现错误!",error)
+//                }
+            if result.success!{
+                let axieinfoModel : AxieinfoModel = JsonUtil.jsonToModel(reponse as! String, AxieinfoModel.self) as! AxieinfoModel
+                completeBlock(result,axieinfoModel)
+            }else{
+                completeBlock(result,reponse)
+            }
         }
     }
     
     func fetchScholar(filter:String, pageIndex:Int, completeBlock: @escaping CompleteBlock) {
         let dic = ["page_index" : pageIndex,"page_size" : 20,"order_by_key" : filter] as [String : Any]
         self.POST(url: "user/list_scholar", param: dic) { result, reponse in
-            let path = Bundle.main.path(forResource: "list_scholar", ofType: "json")
-            let url = URL(fileURLWithPath: path!)
-            do {
-                    let data = try Data(contentsOf: url)
-                    let jsonData:Any = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
-                let jsonDic : Dictionary = jsonData as! Dictionary<String, Any>
-                let scholarListModel : ScholarListModel = JsonUtil.jsonToModel(jsonDic["data"] as! String, ScholarListModel.self) as! ScholarListModel
-                    completeBlock(result,scholarListModel)
-            } catch let error as Error? {
-                    print("读取本地数据出现错误!",error)
-            }
-            
-//            if result.success!{
-//                let scholarListModel : ScholarListModel = JsonUtil.jsonToModel(reponse as! String, ScholarListModel.self) as! ScholarListModel
-//                completeBlock(result,scholarListModel)
-//            }else{
-//                completeBlock(result,reponse)
+//            let path = Bundle.main.path(forResource: "list_scholar", ofType: "json")
+//            let url = URL(fileURLWithPath: path!)
+//            do {
+//                    let data = try Data(contentsOf: url)
+//                    let jsonData:Any = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
+//                let jsonDic : Dictionary = jsonData as! Dictionary<String, Any>
+//                let scholarListModel : ScholarListModel = JsonUtil.jsonToModel(jsonDic["data"] as! String, ScholarListModel.self) as! ScholarListModel
+//                    completeBlock(result,scholarListModel)
+//            } catch let error as Error? {
+//                    print("读取本地数据出现错误!",error)
 //            }
+            
+            if result.success!{
+                let scholarListModel : ScholarListModel = JsonUtil.jsonToModel(reponse as! String, ScholarListModel.self) as! ScholarListModel
+                completeBlock(result,scholarListModel)
+            }else{
+                completeBlock(result,reponse)
+            }
         }
     }
     
@@ -186,24 +186,24 @@ class DataManager: NSObject {
     func fetchTrackerSummary(completeBlock: @escaping CompleteBlock) {
         let dic = ["user_id" : "201"]
         self.POST(url: "game_accounts/get_summary_by_user", param: dic as [String : Any]) { result, reponse in
-            let path = Bundle.main.path(forResource: "tracksum", ofType: "json")
-            let url = URL(fileURLWithPath: path!)
-            do {
-                    let data = try Data(contentsOf: url)
-                    let jsonData:Any = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
-                let jsonDic : Dictionary = jsonData as! Dictionary<String, Any>
-                let trackSumModel : TrackSumModel = JsonUtil.jsonToModel(jsonDic["data"] as! String, TrackSumModel.self) as! TrackSumModel
-                    completeBlock(result,trackSumModel)
-            } catch let error as Error? {
-                    print("读取本地数据出现错误!",error)
-            }
-            
-//            if result.success!{
-//                let trackSumModel : TrackSumModel = JsonUtil.jsonToModel(reponse as! String, TrackSumModel.self) as! TrackSumModel
-//                completeBlock(result,trackSumModel)
-//            }else{
-//                completeBlock(result,reponse)
+//            let path = Bundle.main.path(forResource: "tracksum", ofType: "json")
+//            let url = URL(fileURLWithPath: path!)
+//            do {
+//                    let data = try Data(contentsOf: url)
+//                    let jsonData:Any = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
+//                let jsonDic : Dictionary = jsonData as! Dictionary<String, Any>
+//                let trackSumModel : TrackSumModel = JsonUtil.jsonToModel(jsonDic["data"] as! String, TrackSumModel.self) as! TrackSumModel
+//                    completeBlock(result,trackSumModel)
+//            } catch let error as Error? {
+//                    print("读取本地数据出现错误!",error)
 //            }
+            
+            if result.success!{
+                let trackSumModel : TrackSumModel = JsonUtil.jsonToModel(reponse as! String, TrackSumModel.self) as! TrackSumModel
+                completeBlock(result,trackSumModel)
+            }else{
+                completeBlock(result,reponse)
+            }
         }
     }
     
@@ -211,23 +211,23 @@ class DataManager: NSObject {
     func fetchTrackerList(pageIndex:Int,completeBlock: @escaping CompleteBlock) {
         let dic = ["page_index" : pageIndex,"page_size" : 20,"user_id" : "201"] as [String : Any]
         self.POST(url: "game_accounts/list_all_by_user", param: dic as [String : Any]) { result, reponse in
-            let path = Bundle.main.path(forResource: "tracklist", ofType: "json")
-            let url = URL(fileURLWithPath: path!)
-            do {
-                    let data = try Data(contentsOf: url)
-                    let jsonData:Any = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
-                let jsonDic : Dictionary = jsonData as! Dictionary<String, Any>
-                let trackListModel : TrackListModel = JsonUtil.jsonToModel(jsonDic["data"] as! String, TrackListModel.self) as! TrackListModel
-                    completeBlock(result,trackListModel)
-            } catch let error as Error? {
-                    print("读取本地数据出现错误!",error)
-            }
-//            if result.success!{
-//                let trackListModel = JsonUtil.jsonToModel(reponse as! String, TrackListModel.self)
-//                completeBlock(result,trackListModel)
-//            }else{
-//                completeBlock(result,reponse)
+//            let path = Bundle.main.path(forResource: "tracklist", ofType: "json")
+//            let url = URL(fileURLWithPath: path!)
+//            do {
+//                    let data = try Data(contentsOf: url)
+//                    let jsonData:Any = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
+//                let jsonDic : Dictionary = jsonData as! Dictionary<String, Any>
+//                let trackListModel : TrackListModel = JsonUtil.jsonToModel(jsonDic["data"] as! String, TrackListModel.self) as! TrackListModel
+//                    completeBlock(result,trackListModel)
+//            } catch let error as Error? {
+//                    print("读取本地数据出现错误!",error)
 //            }
+            if result.success!{
+                let trackListModel = JsonUtil.jsonToModel(reponse as! String, TrackListModel.self)
+                completeBlock(result,trackListModel)
+            }else{
+                completeBlock(result,reponse)
+            }
         }
     }
     
@@ -235,10 +235,27 @@ class DataManager: NSObject {
     func createTracker(accountName:String,ronin_address:String,manager_percentage:Float,completeBlock: @escaping CompleteBlock) {
         let dic = ["name" : accountName,
                    "ronin_address" : ronin_address,
-                   "manager_percentage" : manager_percentage,
-                   "scholar_percentage": 100 - manager_percentage,
+                   "manager_percentage" : Float(manager_percentage),
+                   "scholar_percentage": Float(100 - manager_percentage),
                    "user_id": "201"] as [String : Any]
-        self.POST(url: "game_accounts/create_tracker", param: dic as [String : Any]) { result, reponse in
+        self.POST(url: "game_accounts/update_tracker", param: dic as [String : Any]) { result, reponse in
+            if result.success!{
+                let trackListModel = JsonUtil.jsonToModel(reponse as! String, TrackListModel.self)
+                completeBlock(result,trackListModel)
+            }else{
+                completeBlock(result,reponse)
+            }
+        }
+    }
+    
+    //Edit Tracker
+    func editTracker(accountName:String,ronin_address:String,manager_percentage:Float,completeBlock: @escaping CompleteBlock) {
+        let dic = ["name" : accountName,
+                   "ronin_address" : ronin_address,
+                   "manager_percentage" : Float(manager_percentage),
+                   "scholar_percentage": Float(100 - manager_percentage),
+                   "user_id": "201"] as [String : Any]
+        self.POST(url: "game_accounts/update_tracker", param: dic as [String : Any]) { result, reponse in
             if result.success!{
                 let trackListModel = JsonUtil.jsonToModel(reponse as! String, TrackListModel.self)
                 completeBlock(result,trackListModel)
@@ -265,23 +282,23 @@ class DataManager: NSObject {
     func fetechManagerLatestApplication(pageIndex:Int,completeBlock: @escaping CompleteBlock) {
         let dic = ["page_index" : pageIndex,"page_size" : 20,"user_id": "201"] as [String : Any]
         self.POST(url: "application/list_by_manager", param: dic as [String : Any]) { result, reponse in
-            let path = Bundle.main.path(forResource: "managerApplicationList", ofType: "json")
-            let url = URL(fileURLWithPath: path!)
-            do {
-                    let data = try Data(contentsOf: url)
-                    let jsonData:Any = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
-                let jsonDic : Dictionary = jsonData as! Dictionary<String, Any>
-                let managerApplicationListModel : ManagerApplicationListModel = JsonUtil.jsonToModel(jsonDic["data"] as! String, ManagerApplicationListModel.self) as! ManagerApplicationListModel
-                    completeBlock(result,managerApplicationListModel)
-            } catch let error as Error? {
-                    print("读取本地数据出现错误!",error)
-            }
-//            if result.success!{
-//                let managerApplicationListModel = JsonUtil.jsonToModel(reponse as! String, ManagerApplicationListModel.self)
-//                completeBlock(result,managerApplicationListModel)
-//            }else{
-//                completeBlock(result,reponse)
+//            let path = Bundle.main.path(forResource: "managerApplicationList", ofType: "json")
+//            let url = URL(fileURLWithPath: path!)
+//            do {
+//                    let data = try Data(contentsOf: url)
+//                    let jsonData:Any = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
+//                let jsonDic : Dictionary = jsonData as! Dictionary<String, Any>
+//                let managerApplicationListModel : ManagerApplicationListModel = JsonUtil.jsonToModel(jsonDic["data"] as! String, ManagerApplicationListModel.self) as! ManagerApplicationListModel
+//                    completeBlock(result,managerApplicationListModel)
+//            } catch let error as Error? {
+//                    print("读取本地数据出现错误!",error)
 //            }
+            if result.success!{
+                let managerApplicationListModel = JsonUtil.jsonToModel(reponse as! String, ManagerApplicationListModel.self)
+                completeBlock(result,managerApplicationListModel)
+            }else{
+                completeBlock(result,reponse)
+            }
         }
     }
     
@@ -337,7 +354,7 @@ class DataManager: NSObject {
     
     //scholar renting
     func fetchScholarRentScholarShip(pageIndex:Int, completeBlock: @escaping CompleteBlock) {
-        let dic = ["page_index" : pageIndex,"page_size" : 20] as [String : Any]
+        let dic = ["page_index" : pageIndex,"page_size" : 20,"user_id" : "201"] as [String : Any]
         self.POST(url: "scholarship/list_by_scholar", param: dic) { result, reponse in
 //            let path = Bundle.main.path(forResource: "managerscholarshiplist", ofType: "json")
 //            let url = URL(fileURLWithPath: path!)
@@ -362,7 +379,7 @@ class DataManager: NSObject {
     
     //scholar apping
     func fetchScholarApplyingScholarShip(pageIndex:Int, completeBlock: @escaping CompleteBlock) {
-        let dic = ["page_index" : pageIndex,"page_size" : 20] as [String : Any]
+        let dic = ["page_index" : pageIndex,"page_size" : 20,"user_id" : "201"] as [String : Any]
         self.POST(url: "application/list_by_scholar", param: dic) { result, reponse in
 //            let path = Bundle.main.path(forResource: "managerscholarshiplist", ofType: "json")
 //            let url = URL(fileURLWithPath: path!)

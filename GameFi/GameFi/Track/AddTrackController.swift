@@ -118,7 +118,7 @@ class AddTrackController: ViewController {
             return
         }
         self.mc_loading()
-        DataManager.sharedInstance.createTracker(accountName: accountNameTextField!.text!, ronin_address: roninTextField!.text!, manager_percentage: Float(roninTextField!.text!)!) { result, reponse in
+        DataManager.sharedInstance.createTracker(accountName: accountNameTextField!.text!, ronin_address: roninTextField!.text!, manager_percentage: Float(managerPercentTextField!.text!)!) { result, reponse in
             DispatchQueue.main.async { [self] in
                 self.mc_remove()
                 if result.success!{
