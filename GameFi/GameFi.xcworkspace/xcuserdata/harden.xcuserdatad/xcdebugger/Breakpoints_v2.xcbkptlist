@@ -115,32 +115,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F0446074-9FE4-4323-A0F1-DDFB6B51AB6D"
+            uuid = "34AC7BCF-BBE6-474A-A7CB-3AB71FEBEDFB"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GameFi/DataManager.swift"
+            filePath = "GameFi/Profile/View/ProfileHeaderView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
-            landmarkName = "POST(url:param:completeBlock:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "33C68396-EA1A-4CF4-88AB-BDF1FCACB83F"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GameFi/DataManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
-            landmarkName = "POST(url:param:completeBlock:)"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "update(userInfoModel:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

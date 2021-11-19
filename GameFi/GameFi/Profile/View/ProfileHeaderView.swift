@@ -15,7 +15,7 @@ class ProfileHeaderView: UIView {
         super.init(frame: frame)
         self.iconImgView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
-            make.left.equalToSuperview()
+            make.left.equalToSuperview().offset(15)
             make.width.equalTo(65)
             make.height.equalTo(65)
         }
@@ -51,9 +51,12 @@ class ProfileHeaderView: UIView {
     }
     
     func update(userInfoModel : UserInfoModel) {
-        self.iconImgView.image = UIImage.init(named: "portrait")
+//        self.iconImgView.image = UIImage.init(named: "portrait")
         if userInfoModel.avatar != nil {
-            self.iconImgView.kf.setImage(with:  URL.init(string: userInfoModel.avatar!))
+//            self.iconImgView.kf.setImage(with:  URL.init(string: userInfoModel.avatar!))
+            self.iconImgView.kf.setImage(with: URL.init(string: userInfoModel.avatar!), placeholder:  UIImage.init(named: "portrait"), options: nil) {result, error in
+                
+            }
         }
         if userInfoModel.username != nil {
             self.usernameLabel.text = userInfoModel.username
