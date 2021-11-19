@@ -27,6 +27,10 @@ class NoOfferScholarshipController: UIViewController {
         self.collectionView.mj_header?.beginRefreshing()
     }
     
+    @objc func showAddScholarshipVC() {
+        self.navigationController?.pushViewController(AddScholarshipController.init(), animated: true)
+    }
+    
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -83,6 +87,7 @@ extension  NoOfferScholarshipController : UICollectionViewDelegate,UICollectionV
         if kind ==  UICollectionView.elementKindSectionHeader{
             reusableview = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: noOfferHeaderViewheaderIdentifier, for: indexPath) as! NoOfferHeaderView
             let temp : NoOfferHeaderView = reusableview as! NoOfferHeaderView
+            temp.btn.addTarget(self, action: #selector(showAddScholarshipVC), for: .touchUpInside)
             temp.makeConstraints()
         }
         return reusableview

@@ -151,17 +151,17 @@ extension  LatestScholarshipController : UICollectionViewDelegate,UICollectionVi
                 self.collectionView.mj_footer?.endRefreshing()
                 self.collectionView.mj_header?.endRefreshing()
                 if result.success!{
-                    let managerScholarshipListModel : ManagerScholarshipListModel = reponse as! ManagerScholarshipListModel
+                    let managerApplicationListModel : ManagerApplicationListModel = reponse as! ManagerApplicationListModel
                     if self.pageIndex == 1{
-                        self.dataSource = managerScholarshipListModel.data
+                        self.dataSource = managerApplicationListModel.data
                     }else{
-                        if managerScholarshipListModel.data != nil {
-                            self.dataSource?.append(contentsOf: managerScholarshipListModel.data!)
+                        if managerApplicationListModel.data != nil {
+                            self.dataSource?.append(contentsOf: managerApplicationListModel.data!)
                         }
 
                     }
-                    if managerScholarshipListModel.next_page! > pageIndex {
-                        pageIndex = managerScholarshipListModel.next_page!
+                    if managerApplicationListModel.next_page! > pageIndex {
+                        pageIndex = managerApplicationListModel.next_page!
                     }else{
                         self.collectionView.mj_footer?.endRefreshingWithNoMoreData()
                     }
