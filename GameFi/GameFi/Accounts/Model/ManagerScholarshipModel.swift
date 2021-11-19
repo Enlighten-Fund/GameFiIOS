@@ -33,6 +33,6 @@ class ManagerScholarshipModel: BaseModel {
     var manager_credit_score : String?
     //缺失
     var scholar_portrait : String?
-    var mmr : String?
+    var account_mmr : String?
     required init() {}
 }

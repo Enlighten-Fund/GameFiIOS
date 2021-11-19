@@ -113,8 +113,8 @@ class ScholarApplyCell: UICollectionViewCell {
         if managerScholarshipModel.offer_period != nil {
             self.offerdaysLabelView.rightLabel.text = "\(managerScholarshipModel.offer_period!) days"
         }
-        if managerScholarshipModel.mmr != nil {
-            self.offerdaysLabelView.rightLabel.text = managerScholarshipModel.mmr!
+        if managerScholarshipModel.account_mmr != nil {
+            self.offerdaysLabelView.rightLabel.text = managerScholarshipModel.account_mmr!
         }
         if managerScholarshipModel.account_axie_count != nil{
             self.axieCountLabelView.rightLabel.text = "\(managerScholarshipModel.account_axie_count!)"

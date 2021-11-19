@@ -148,8 +148,8 @@ class NoOfferScholarshipCell: UICollectionViewCell {
         if managerScholarshipModel.manager_percentage != nil {
             self.managerPercentLabelView.rightLabel.text = managerScholarshipModel.manager_percentage
         }
-        if managerScholarshipModel.mmr != nil {
-            self.mmrLabelView.rightLabel.text = managerScholarshipModel.mmr
+        if managerScholarshipModel.account_mmr != nil {
+            self.mmrLabelView.rightLabel.text = managerScholarshipModel.account_mmr
         }
         if managerScholarshipModel.offer_period != nil {
             self.OfferContractLabelView.rightLabel.text = managerScholarshipModel.offer_period
