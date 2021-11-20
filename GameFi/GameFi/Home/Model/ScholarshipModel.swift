@@ -15,7 +15,7 @@ class ScholarshipModel: BaseModel {
             if axie_brief == nil {
                 return []
             }
-            return axie_brief?.components(separatedBy: ", ")
+            return axie_brief?.components(separatedBy: ",")
         }
     }
     var scholarship_id : String?
