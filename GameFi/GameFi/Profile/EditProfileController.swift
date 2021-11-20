@@ -13,19 +13,16 @@ import MCToast
 import SCLAlertView
 
 class EditProfileController: ViewController {
-    var emailTextField : UITextField?
-    var usernameTextField : UITextField?
-    var passwordTextField : UITextField?
-    var codeTextField : UITextField?
-    var codeBtn : UIButton?
-    var footView : RegisterFootView?
-    var role : Int = 1 //1代表scholar 2 代表manager
-    var privacySelect = false
-    var privacyBtn : UIButton?
+    var firstnameTextField : UITextField?
+    var lastnameTextField : UITextField?
+    var idNoTextField : UITextField?
+    var mmrField : UITextField?
+    var gamesPlayedTextView : UITextView?
+    var introduceTextView : UITextView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Sign up"
+        self.title = "Edit Profile"
         self.tableView!.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(0)
             make.bottom.equalToSuperview().offset(0)
@@ -60,7 +57,7 @@ class EditProfileController: ViewController {
     }
     
     lazy var tableView: UITableView? = {
-        let tempTableView = UITableView.init(frame: CGRect.zero, style: .plain)
+        let tempTableView = UITableView.init(frame: CGRect.zero, style: .grouped)
         tempTableView.backgroundColor = UIColor(red: 0.15, green: 0.16, blue: 0.24, alpha: 1)
         tempTableView.separatorStyle = .none
         tempTableView.keyboardDismissMode = .onDrag
@@ -68,11 +65,13 @@ class EditProfileController: ViewController {
         tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "1")
         tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "2")
         tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "3")
-        tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "4")
-        tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "5")
-        tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "6")
-        tempTableView.register(TextViewCell.classForCoder(), forCellReuseIdentifier: textViewCellIdentifier + "7")
-        tempTableView.register(TextViewCell.classForCoder(), forCellReuseIdentifier: textViewCellIdentifier + "8")
+        tempTableView.register(TextViewCell.classForCoder(), forCellReuseIdentifier: textViewCellIdentifier + "0")
+        tempTableView.register(TextViewCell.classForCoder(), forCellReuseIdentifier: textViewCellIdentifier + "1")
+        tempTableView.register(PickerViewCell.classForCoder(), forCellReuseIdentifier: pickerViewCellIdentifier + "0")
+        tempTableView.register(PickerViewCell.classForCoder(), forCellReuseIdentifier: pickerViewCellIdentifier + "1")
+        tempTableView.register(PickerViewCell.classForCoder(), forCellReuseIdentifier: pickerViewCellIdentifier + "2")
+        tempTableView.register(PickerViewCell.classForCoder(), forCellReuseIdentifier: pickerViewCellIdentifier + "3")
+        tempTableView.register(IDPhotoCell.classForCoder(), forCellReuseIdentifier: IDPhotoCellIdentifier)
         tempTableView.register(EmptyTableViewCell.classForCoder(), forCellReuseIdentifier: emptyTableViewCellIdentifier)
         tempTableView.dataSource = self
         tempTableView.delegate = self
@@ -114,84 +113,115 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
         
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            
-           return 10
+        if section == 0 {
+            return 6
+        }else if section == 1{
+            return 5
+        }
+        return 0
     }
         
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 7 || indexPath.row == 8 {
+        if indexPath.section == 1 && indexPath.row == 3 {
             return 150
+        }
+        if indexPath.section == 1 && indexPath.row == 4 {
+            return 150
+        }
+        if indexPath.section == 0 && indexPath.row == 5 {
+            return 140
         }
            return 60
     }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 60
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH - 30, height: 60))
+        label.font = UIFont(name: "Avenir Heavy", size: 16)
+        label.textColor = .white
+        if section == 0 {
+            label.text = "Personal info"
+        }else{
+            label.text = "More info"
+        }
+        return label
+    }
         
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    var cell : UITableViewCell
-    switch indexPath.row {
-    case 0:
-        let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "0", for: indexPath) as! LabelTextFildCell
-        tempCell.textFild?.delegate = self
-        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  First name", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
-        self.emailTextField = tempCell.textFild
+    var cell : UITableViewCell!
+    if indexPath.section == 0 {
+        switch indexPath.row {
+        case 0:
+            let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "0", for: indexPath) as! LabelTextFildCell
+            tempCell.textFild?.delegate = self
+            tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  First name", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
+            self.firstnameTextField = tempCell.textFild
+            cell = tempCell
+        case 1:
+            let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "1", for: indexPath) as! LabelTextFildCell
+            tempCell.textFild?.delegate = self
+            tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Last name", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
+            self.lastnameTextField = tempCell.textFild
 
-        cell = tempCell
-    case 1:
-        let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "1", for: indexPath) as! LabelTextFildCell
-        tempCell.textFild?.delegate = self
-        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Last name", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
-        self.usernameTextField = tempCell.textFild
-
-        cell = tempCell
-    case 2:
-        let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "2", for: indexPath) as! LabelTextFildCell
-        tempCell.textFild?.delegate = self
-        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Nationality", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
-        self.passwordTextField = tempCell.textFild
-    
-        cell = tempCell
-    case 3:
-        let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "3", for: indexPath) as! LabelTextFildCell
-        tempCell.textFild?.delegate = self
-        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter age 0-100", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
-        self.passwordTextField = tempCell.textFild
-    
-        cell = tempCell
-    case 4:
-        let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "4", for: indexPath) as! LabelTextFildCell
-        tempCell.textFild?.delegate = self
-        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter available time (0-24 hours)", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
-        self.passwordTextField = tempCell.textFild
-    
-        cell = tempCell
-    case 5:
-        let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "5", for: indexPath) as! LabelTextFildCell
-        tempCell.textFild?.delegate = self
-        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter highest MMR", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
-        self.passwordTextField = tempCell.textFild
-    
-        cell = tempCell
-    case 6:
-        let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "6", for: indexPath) as! LabelTextFildCell
-        tempCell.textFild?.delegate = self
-        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  How long have you played this game", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
-        self.passwordTextField = tempCell.textFild
-    
-        cell = tempCell
-    case 7:
-        let tempCell : TextViewCell = tableView.dequeueReusableCell(withIdentifier: textViewCellIdentifier + "7", for: indexPath) as! TextViewCell
-        tempCell.textView?.delegate = self
-       
-    
-        cell = tempCell
-    case 8:
-        let tempCell : TextViewCell = tableView.dequeueReusableCell(withIdentifier: textViewCellIdentifier + "8", for: indexPath) as! TextViewCell
-        tempCell.textView?.delegate = self
-       
-    
-        cell = tempCell
-    default:
-        cell = tableView.dequeueReusableCell(withIdentifier: emptyTableViewCellIdentifier, for: indexPath)
+            cell = tempCell
+        case 2:
+            let tempCell : PickerViewCell = tableView.dequeueReusableCell(withIdentifier: pickerViewCellIdentifier + "0", for: indexPath) as! PickerViewCell
+            tempCell.titleLabel?.text = "Country/State/City"
+            cell = tempCell
+        case 3:
+            let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "2", for: indexPath) as! LabelTextFildCell
+            tempCell.textFild?.delegate = self
+            tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  ID number", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
+            self.idNoTextField = tempCell.textFild
+            cell = tempCell
+        case 4:
+            let tempCell : PickerViewCell = tableView.dequeueReusableCell(withIdentifier: pickerViewCellIdentifier + "1", for: indexPath) as! PickerViewCell
+            tempCell.titleLabel?.text = "Date of birth (MM/DD/YYY)"
+            cell = tempCell
+        case 5:
+            let tempCell : IDPhotoCell = tableView.dequeueReusableCell(withIdentifier: IDPhotoCellIdentifier, for: indexPath) as! IDPhotoCell
+            cell = tempCell
+        default:
+            cell = tableView.dequeueReusableCell(withIdentifier: emptyTableViewCellIdentifier, for: indexPath)
+        }
+    }else if indexPath.section == 1{
+        switch indexPath.row {
+        case 0:
+            let tempCell : PickerViewCell = tableView.dequeueReusableCell(withIdentifier: pickerViewCellIdentifier + "2", for: indexPath) as! PickerViewCell
+            tempCell.titleLabel?.text = "Available time / day (hours)"
+            cell = tempCell
+        case 1:
+            let tempCell : PickerViewCell = tableView.dequeueReusableCell(withIdentifier: pickerViewCellIdentifier + "3", for: indexPath) as! PickerViewCell
+            tempCell.titleLabel?.text = "Your experience in Axie Infinity"
+            cell = tempCell
+        case 2:
+            let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "3", for: indexPath) as! LabelTextFildCell
+            tempCell.textFild?.delegate = self
+            tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Highest MMR", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
+            self.mmrField = tempCell.textFild
+        
+            cell = tempCell
+        case 3:
+            let tempCell : TextViewCell = tableView.dequeueReusableCell(withIdentifier: textViewCellIdentifier + "0", for: indexPath) as! TextViewCell
+            tempCell.textView?.delegate = self
+            self.gamesPlayedTextView = tempCell.textView
+            cell = tempCell
+        case 4:
+            let tempCell : TextViewCell = tableView.dequeueReusableCell(withIdentifier: textViewCellIdentifier + "1", for: indexPath) as! TextViewCell
+            tempCell.textView?.delegate = self
+            self.introduceTextView = tempCell.textView
+            cell = tempCell
+        default:
+            cell = tableView.dequeueReusableCell(withIdentifier: emptyTableViewCellIdentifier, for: indexPath)
+        }
     }
     cell.contentView.backgroundColor = self.view.backgroundColor
        return cell
