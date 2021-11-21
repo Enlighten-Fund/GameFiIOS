@@ -19,6 +19,12 @@ class EditProfileController: ViewController {
     var mmrField : UITextField?
     var gamesPlayedTextView : UITextView?
     var introduceTextView : UITextView?
+    var countryArray = [[ String :  AnyObject ]]()
+    var countryIndex = 0
+    var stateIndex = 0
+    var cityIndex = 0
+    var countryLabel : UILabel?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +42,18 @@ class EditProfileController: ViewController {
             make.right.equalToSuperview()
         }
         self.noticeLabel?.isHidden = true
+        
+        //初始化数据
+        let  path =  Bundle.main.path(forResource: "countries-heirarchy" , ofType: "json" )
+        let url = URL(fileURLWithPath: path!)
+            do {
+                    let data = try Data(contentsOf: url)
+                    let jsonData:Any = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
+                let jsonArray : [[ String :  AnyObject ]] = jsonData as! [[ String :  AnyObject ]]
+                self.countryArray = jsonArray
+            } catch let error as Error? {
+                    print("读取本地数据出现错误!",error)
+            }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -54,6 +72,50 @@ class EditProfileController: ViewController {
             self.noticeLabel?.isHidden = true
             self.noticeLabel?.text = ""
         }
+    }
+    
+    func showCountryPickerView() {
+        self.countryPickerView!.snp.remakeConstraints { make in
+            make.bottom.equalToSuperview().offset(IPhone_TabbarSafeBottomMargin)
+            make.height.equalTo(400)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+        }
+    }
+    
+    @objc func hideCountryPickerView() {
+        self.countryPickerView!.snp.remakeConstraints { make in
+            make.bottom.equalToSuperview().offset(IPhone_TabbarSafeBottomMargin)
+            make.height.equalTo(0)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+        }
+    }
+    
+    @objc func selectCountry() {
+        //获取选中的
+        var country = ""
+        var state = ""
+        var city = ""
+        let  countryDic : Dictionary =  self.countryArray[countryIndex]
+        country = countryDic["countryName"] as! String
+        if countryDic[ "states" ] != nil {
+            let statesArray : Array<[ String :  AnyObject ]> = countryDic[ "states" ] as! Array<[ String :  AnyObject ]>
+            let  stateDic : [String : AnyObject] = statesArray[stateIndex]
+            state = (stateDic[ "stateName" ] as? String)!
+            let cityArry : Array<[ String :  AnyObject ]>  = stateDic["cities"] as! Array<[String : AnyObject]>
+            let  cityDic : [String : AnyObject] = cityArry[cityIndex]
+            city = (cityDic[ "cityName" ] as? String)!
+        }else{
+            if countryDic[ "cities" ] != nil {
+                let citiesArray : Array<[ String :  AnyObject ]> = countryDic[ "cities" ] as! Array<[ String :  AnyObject ]>
+                let  cityDic : [String : AnyObject] = citiesArray[stateIndex]
+                city = (cityDic[ "cityName" ] as? String)!
+            }
+            
+        }
+        self.countryLabel?.text = "\(country)-\(state)-\(city)"
+        self.hideCountryPickerView()
     }
     
     lazy var tableView: UITableView? = {
@@ -89,6 +151,108 @@ class EditProfileController: ViewController {
         view.addSubview(tempLabel)
         return tempLabel
     }()
+    lazy var countryPickerView: GFPickerView? = {
+        let tempPickerView = GFPickerView.init(frame: CGRect.zero)
+        tempPickerView.cancelBtn?.addTarget(self, action: #selector(hideCountryPickerView), for: .touchUpInside)
+        tempPickerView.okBtn?.addTarget(self, action: #selector(selectCountry), for: .touchUpInside)
+        tempPickerView.pickerView?.dataSource = self
+        tempPickerView.pickerView?.delegate = self
+        tempPickerView.backgroundColor = .white
+        view.addSubview(tempPickerView)
+        return tempPickerView
+    }()
+    
+}
+
+extension  EditProfileController :UIPickerViewDataSource,UIPickerViewDelegate{
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return  3
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        var title = ""
+        if  component == 0 {
+            let  countryDic =  self.countryArray[row]
+            title = (countryDic[ "countryName" ] as? String)!
+        } else  if  component == 1 {
+            let  countryDic =  self.countryArray[countryIndex]
+            if countryDic[ "states" ] != nil {
+                let statesArray : Array<[ String :  AnyObject ]> = countryDic[ "states" ] as! Array<[ String :  AnyObject ]>
+                let  stateDic : [String : AnyObject] = statesArray[row]
+                title = (stateDic[ "stateName" ] as? String)!
+            }else{
+                let citiesArray : Array<[ String :  AnyObject ]> = countryDic[ "cities" ] as! Array<[ String :  AnyObject ]>
+                let  cityDic : [String : AnyObject] = citiesArray[row]
+                title = (cityDic[ "cityName" ] as? String)!
+            }
+            
+        } else  {
+            let  country =  self.countryArray[countryIndex]
+            let statesArray : Array<[ String :  AnyObject ]> = country[ "states" ] as! Array<[ String :  AnyObject ]>
+            let  stateDic : [String : AnyObject] = statesArray[self.stateIndex]
+            let cityArry : Array<[ String :  AnyObject ]>  = stateDic["cities"] as! Array<[String : AnyObject]>
+            let  cityDic : [String : AnyObject] = cityArry[row]
+            title =  (cityDic[ "cityName" ] as? String)!
+        }
+        
+           let showLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 34))
+           showLabel.textAlignment = .center
+           showLabel.adjustsFontSizeToFitWidth = true
+           //重新加载label的文字内容
+           showLabel.text = title
+           return showLabel
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if  component == 0 {
+            return  self .countryArray.count
+        }  else  if  component == 1 {
+            let  countryDic =  self .countryArray[self.countryIndex]
+            if countryDic["states"]?.count == nil ||  countryDic["states"]?.count == 0{
+                if  countryDic[ "cities" ] != nil && countryDic[ "cities" ]!.count > 0{
+                    return  countryDic[ "cities" ]!.count
+                }
+                return 0
+               
+            }else{
+                return countryDic[ "states" ]!.count
+            }
+            
+        }  else  {
+            let  countryDic =  self.countryArray[countryIndex]
+            if countryDic[ "states" ] == nil {
+                return 0
+            }else{
+                let statesArray : Array<[ String :  AnyObject ]> = countryDic[ "states" ] as! Array<[ String :  AnyObject ]>
+                let  stateDic : [String : AnyObject] = statesArray[self.stateIndex]
+                return  stateDic[ "cities" ]!.count
+            }
+            
+        }
+    }
+        
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        switch component {
+        case 0:
+            countryIndex = row;
+            stateIndex = 0;
+            cityIndex = 0;
+            pickerView.reloadComponent(1);
+            pickerView.reloadComponent(2);
+            pickerView.selectRow(0, inComponent: 1, animated:  false )
+            pickerView.selectRow(0, inComponent: 2, animated:  false )
+        case 1:
+            stateIndex = row
+            cityIndex = 0
+            pickerView.reloadComponent(2)
+            pickerView.selectRow(0, inComponent: 2, animated:  false )
+        case  2:
+            cityIndex = row
+        default :
+            break ;
+        }
+    }
+      
 }
 
 extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UITextViewDelegate{
@@ -175,6 +339,7 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
         case 2:
             let tempCell : PickerViewCell = tableView.dequeueReusableCell(withIdentifier: pickerViewCellIdentifier + "0", for: indexPath) as! PickerViewCell
             tempCell.titleLabel?.text = "Country/State/City"
+            self.countryLabel = tempCell.titleLabel
             cell = tempCell
         case 3:
             let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "2", for: indexPath) as! LabelTextFildCell
@@ -227,6 +392,17 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
        return cell
    }
         
-       
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 && indexPath.row == 2 {
+            //country
+            self.showCountryPickerView()
+        }else if indexPath.section == 0 && indexPath.row == 4{
+            //birthday
+        }else if indexPath.section == 1 && indexPath.row == 0{
+            //available time
+        }else if indexPath.section == 1 && indexPath.row == 1{
+            //experience
+        }
+    }
 }
 
