@@ -31,6 +31,8 @@ class EditProfileController: ViewController {
     var playAxieArray = ["< 1","1-3","3-6",">6"]
     var availableIndex = 0
     var playAxieIndex = 0
+    var idPhotoCell : IDPhotoCell?
+    var idImgView : UIImageView?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Edit Profile"
@@ -200,6 +202,47 @@ class EditProfileController: ViewController {
         self.hideCountryPickerView()
     }
     
+    @objc func showPictureSheet() {
+        GFAlert.showAlert(titleStr: nil, msgStr: nil, style: .actionSheet, currentVC: self, cancelBtn: "Cancel", cancelHandler: { (cancelAction) in
+            
+        }, otherBtns: ["Capture","Photo"]) { (idx) in
+            DispatchQueue.main.async { [self] in
+                if idx == 0{
+                    imagePicker.takePhoto(presentFrom: self, completion: { [unowned self] (image, status) in
+                        DispatchQueue.main.async { [self] in
+                            if status == .success {
+                                self.idImgView?.image = image
+                            }else{
+                                if status == .denied{
+                                    HImagePickerUtils.showTips(at: self,type: .takePhoto)
+                                }else{
+                                    print(status.description())
+                                }
+                                
+                            }
+                        }
+                    })
+                }else if idx == 1{
+                    imagePicker.choosePhoto(presentFrom: self, completion: { [unowned self] (image, status) in
+                        DispatchQueue.main.async { [self] in
+                            if status == .success {
+                                self.idImgView?.image = image
+                            }else{
+                                if status == .denied{
+                                    HImagePickerUtils.showTips(at: self,type: .choosePhoto)
+                                }else{
+                                    print(status.description())
+                                }
+                                
+                            }
+                        }
+                        
+                    })
+                }
+            }
+        }
+    }
+    
     lazy var tableView: UITableView? = {
         let tempTableView = UITableView.init(frame: CGRect.zero, style: .grouped)
         tempTableView.backgroundColor = UIColor(red: 0.15, green: 0.16, blue: 0.24, alpha: 1)
@@ -276,6 +319,7 @@ class EditProfileController: ViewController {
         view.addSubview(tempPickerView)
         return tempPickerView
     }()
+    lazy var imagePicker = HImagePickerUtils()
 }
 
 extension  EditProfileController :UIPickerViewDataSource,UIPickerViewDelegate{
@@ -443,7 +487,7 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
             return 150
         }
         if indexPath.section == 0 && indexPath.row == 5 {
-            return 140
+            return IPhone_SCREEN_WIDTH - 60
         }
            return 60
     }
@@ -503,6 +547,11 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
             cell = tempCell
         case 5:
             let tempCell : IDPhotoCell = tableView.dequeueReusableCell(withIdentifier: IDPhotoCellIdentifier, for: indexPath) as! IDPhotoCell
+            self.idPhotoCell = tempCell
+            tempCell.btn.addTarget(self, action: #selector(showPictureSheet), for: .touchUpInside)
+            self.idImgView = tempCell.bgImgView
+            tempCell.contentView.layer.borderWidth = 1
+            tempCell.contentView.layer.borderColor = UIColor.white.cgColor
             cell = tempCell
         default:
             cell = tableView.dequeueReusableCell(withIdentifier: emptyTableViewCellIdentifier, for: indexPath)
