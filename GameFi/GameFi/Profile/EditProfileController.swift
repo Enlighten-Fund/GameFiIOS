@@ -327,7 +327,7 @@ extension  EditProfileController :UIPickerViewDataSource,UIPickerViewDelegate{
            let showLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 34))
            showLabel.textAlignment = .center
            showLabel.adjustsFontSizeToFitWidth = true
-           //重新加载label的文字内容
+           showLabel.textColor = .black
            showLabel.text = title
            return showLabel
     }

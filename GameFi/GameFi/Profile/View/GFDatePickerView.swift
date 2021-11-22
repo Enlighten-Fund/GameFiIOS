@@ -54,7 +54,8 @@ class GFDatePickerView: UIView {
     lazy var pickerView: UIDatePicker? = {
         let tempPickerView = UIDatePicker.init(frame: CGRect.zero)
         tempPickerView.datePickerMode = .date
-        tempPickerView.maximumDate = Date.init()
+        tempPickerView.minimumDate = Date(timeInterval:-10*24*60*60*365,since:Date())
+        tempPickerView.maximumDate = Date()
         if #available(iOS 13.4, *) {
             tempPickerView.preferredDatePickerStyle = .wheels
         }

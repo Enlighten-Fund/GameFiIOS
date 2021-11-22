@@ -30,7 +30,7 @@ class GFPickerView: UIView {
             make.top.equalTo(self.okBtn!.snp.bottom)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.height.equalTo(340)
         }
     }
     

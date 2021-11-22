@@ -92,7 +92,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "241"
                   endingLineNumber = "241"
-                  offsetFromSymbolStart = "777">
+                  offsetFromSymbolStart = "680">
                </Location>
                <Location
                   uuid = "CDE60E5C-7A86-43E5-8C60-48D10ABA537F - 9e561b1c1ae4d9c4"
@@ -107,7 +107,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "242"
                   endingLineNumber = "242"
-                  offsetFromSymbolStart = "213">
+                  offsetFromSymbolStart = "92">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -144,7 +144,7 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "BF5A64F2-3A8C-4F80-B007-7849B113FBB6 - 8e072e6846914542"
+                  uuid = "BF5A64F2-3A8C-4F80-B007-7849B113FBB6 - 8e072e68469145a1"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -154,12 +154,12 @@
                   urlString = "file:///Users/harden/Desktop/GameFiIOS/GameFi/GameFi/Profile/EditProfileController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "118"
-                  endingLineNumber = "118"
-                  offsetFromSymbolStart = "52">
+                  startingLineNumber = "119"
+                  endingLineNumber = "119"
+                  offsetFromSymbolStart = "48">
                </Location>
                <Location
-                  uuid = "BF5A64F2-3A8C-4F80-B007-7849B113FBB6 - 4961dda40dd7585e"
+                  uuid = "BF5A64F2-3A8C-4F80-B007-7849B113FBB6 - 4961dda40dd7587f"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -169,9 +169,9 @@
                   urlString = "file:///Users/harden/Desktop/GameFiIOS/GameFi/GameFi/Profile/EditProfileController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "119"
-                  endingLineNumber = "119"
-                  offsetFromSymbolStart = "25">
+                  startingLineNumber = "120"
+                  endingLineNumber = "120"
+                  offsetFromSymbolStart = "24">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -206,6 +206,22 @@
             endingLineNumber = "295"
             landmarkName = "pickerView(_:viewForRow:forComponent:reusing:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A283C924-5634-4216-BE39-80CFDE2CE070"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GameFi/Profile/View/GFDatePickerView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "pickerView"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
