@@ -207,11 +207,8 @@ class EditProfileController: ViewController {
     }
     
     func uploadIdPhoto(image:UIImage) {
-        self.mc_loading()
- 
-
-        
-        DataManager.sharedInstance.uploadImage(url: self.uploadUrl!, image: image, params: [:], imageName: "") { result,reponse in
+        self.mc_loading()        
+        DataManager.sharedInstance.uploadImage(url: self.uploadUrl!, image: image) { result,reponse in
             DispatchQueue.main.async { [self] in
                 self.mc_remove()
                 if result.success!{
