@@ -24,7 +24,7 @@ class EditProfileController: ViewController {
     var stateIndex = 0
     var cityIndex = 0
     var countryLabel : UILabel?
-    
+    var birthDayLabel : UILabel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,6 +90,36 @@ class EditProfileController: ViewController {
             make.left.equalToSuperview()
             make.right.equalToSuperview()
         }
+    }
+    
+    func showBirthDayPickerView() {
+        self.birthdayDatePickerView!.snp.remakeConstraints { make in
+            make.bottom.equalToSuperview().offset(IPhone_TabbarSafeBottomMargin)
+            make.height.equalTo(400)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+        }
+    }
+    
+    @objc func hideBirthdayPickerView() {
+        self.birthdayDatePickerView!.snp.remakeConstraints { make in
+            make.bottom.equalToSuperview().offset(IPhone_TabbarSafeBottomMargin)
+            make.height.equalTo(0)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+        }
+    }
+    
+    func stringFromDate(date:NSDate) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.string(from: date as Date)
+    }
+    
+    @objc func selectBirthDay() {
+        let birthDay = self.birthdayDatePickerView?.pickerView?.date
+        self.birthDayLabel?.text = self.stringFromDate(date: birthDay! as NSDate)
+        self.hideBirthdayPickerView()
     }
     
     @objc func selectCountry() {
@@ -162,6 +192,14 @@ class EditProfileController: ViewController {
         return tempPickerView
     }()
     
+    lazy var birthdayDatePickerView: GFDatePickerView? = {
+        let birthdayDatePickerView = GFDatePickerView.init(frame: CGRect.zero)
+        birthdayDatePickerView.cancelBtn?.addTarget(self, action: #selector(hideBirthdayPickerView), for: .touchUpInside)
+        birthdayDatePickerView.okBtn?.addTarget(self, action: #selector(selectBirthDay), for: .touchUpInside)
+        birthdayDatePickerView.backgroundColor = .white
+        view.addSubview(birthdayDatePickerView)
+        return birthdayDatePickerView
+    }()
 }
 
 extension  EditProfileController :UIPickerViewDataSource,UIPickerViewDelegate{
@@ -350,6 +388,7 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
         case 4:
             let tempCell : PickerViewCell = tableView.dequeueReusableCell(withIdentifier: pickerViewCellIdentifier + "1", for: indexPath) as! PickerViewCell
             tempCell.titleLabel?.text = "Date of birth (MM/DD/YYY)"
+            self.birthDayLabel = tempCell.titleLabel
             cell = tempCell
         case 5:
             let tempCell : IDPhotoCell = tableView.dequeueReusableCell(withIdentifier: IDPhotoCellIdentifier, for: indexPath) as! IDPhotoCell
@@ -398,6 +437,7 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
             self.showCountryPickerView()
         }else if indexPath.section == 0 && indexPath.row == 4{
             //birthday
+            self.showBirthDayPickerView()
         }else if indexPath.section == 1 && indexPath.row == 0{
             //available time
         }else if indexPath.section == 1 && indexPath.row == 1{

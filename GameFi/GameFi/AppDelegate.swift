@@ -111,11 +111,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
                     
                 case .signedOutUserPoolsTokenInvalid:
                     print("xxxxxxxLinsten--need to login again.")
-                    self.tabbarVC?.present(LoginController.init(), animated: true, completion: {
-                        
-                    })
+                    DispatchQueue.main.async { [self] in
+                        let navVC = GFNavController.init(rootViewController: LoginController.init())
+                        navVC.modalPresentationStyle = .fullScreen
+                        self.tabbarVC?.present(navVC, animated: true, completion: {
+                            
+                        })
+                    }
+                   
                 case .signedOutFederatedTokensInvalid:
-                    self.tabbarVC?.present(LoginController.init(), animated: true, completion: {
+                    let navVC = GFNavController.init(rootViewController: LoginController.init())
+                    navVC.modalPresentationStyle = .fullScreen
+                    self.tabbarVC?.present(navVC, animated: true, completion: {
                         
                     })
                     print("xxxxxxxLinsten--user logged in via federation, but currently needs new tokens")
@@ -147,7 +154,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         if currentRole == 1 {
             v2 = ScholarAccountsController()
             
-        }else if currentRole == 2{
+        }else{
             v2 = ManagerAccountsController()
         }
         let v3 = TrackController()

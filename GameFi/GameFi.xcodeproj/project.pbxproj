@@ -92,6 +92,7 @@
 		985817782749349700D8CFCA /* IDPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985817772749349700D8CFCA /* IDPhotoCell.swift */; };
 		9858177A274A6ED400D8CFCA /* countries-heirarchy.json in Resources */ = {isa = PBXBuildFile; fileRef = 98581779274A6ED400D8CFCA /* countries-heirarchy.json */; };
 		9858177C274A8CF200D8CFCA /* GFPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858177B274A8CF200D8CFCA /* GFPickerView.swift */; };
+		9858177E274B283500D8CFCA /* GFDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858177D274B283500D8CFCA /* GFDatePickerView.swift */; };
 		986C586E27300B9A0021280A /* LoginHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C586D27300B9A0021280A /* LoginHeadView.swift */; };
 		986C587027300BEB0021280A /* LoginFootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C586F27300BEB0021280A /* LoginFootView.swift */; };
 		987694272738ED150075CA0F /* ScholarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987694262738ED150075CA0F /* ScholarModel.swift */; };
@@ -207,6 +208,7 @@
 		985817772749349700D8CFCA /* IDPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDPhotoCell.swift; sourceTree = "<group>"; };
 		98581779274A6ED400D8CFCA /* countries-heirarchy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "countries-heirarchy.json"; sourceTree = "<group>"; };
 		9858177B274A8CF200D8CFCA /* GFPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFPickerView.swift; sourceTree = "<group>"; };
+		9858177D274B283500D8CFCA /* GFDatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFDatePickerView.swift; sourceTree = "<group>"; };
 		986C586D27300B9A0021280A /* LoginHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeadView.swift; sourceTree = "<group>"; };
 		986C586F27300BEB0021280A /* LoginFootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFootView.swift; sourceTree = "<group>"; };
 		987694262738ED150075CA0F /* ScholarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarModel.swift; sourceTree = "<group>"; };
@@ -482,6 +484,7 @@
 				985817752749300500D8CFCA /* PickerViewCell.swift */,
 				985817772749349700D8CFCA /* IDPhotoCell.swift */,
 				9858177B274A8CF200D8CFCA /* GFPickerView.swift */,
+				9858177D274B283500D8CFCA /* GFDatePickerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -722,6 +725,7 @@
 				980DB78C27337D6F006ED3BE /* CollectionViewCell.swift in Sources */,
 				98581739273E921800D8CFCA /* UserManager.swift in Sources */,
 				9858176B2746907B00D8CFCA /* ScholarAccountsController.swift in Sources */,
+				9858177E274B283500D8CFCA /* GFDatePickerView.swift in Sources */,
 				984BDB9D272BCDEF00F6144B /* EmptyTableViewCell.swift in Sources */,
 				9858177C274A8CF200D8CFCA /* GFPickerView.swift in Sources */,
 				980DB7972733D391006ED3BE /* TYPageStyle.swift in Sources */,
