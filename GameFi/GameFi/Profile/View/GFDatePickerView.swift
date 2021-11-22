@@ -30,7 +30,7 @@ class GFDatePickerView: UIView {
             make.top.equalTo(self.okBtn!.snp.bottom)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.height.equalTo(340)
         }
     }
     
@@ -54,7 +54,6 @@ class GFDatePickerView: UIView {
     lazy var pickerView: UIDatePicker? = {
         let tempPickerView = UIDatePicker.init(frame: CGRect.zero)
         tempPickerView.datePickerMode = .date
-        tempPickerView.minimumDate = Date(timeInterval:-10*24*60*60*365,since:Date())
         tempPickerView.maximumDate = Date()
         if #available(iOS 13.4, *) {
             tempPickerView.preferredDatePickerStyle = .wheels

@@ -249,7 +249,7 @@ class EditProfileController: ViewController {
         let birthdayDatePickerView = GFDatePickerView.init(frame: CGRect.zero)
         birthdayDatePickerView.cancelBtn?.addTarget(self, action: #selector(hideBirthdayPickerView), for: .touchUpInside)
         birthdayDatePickerView.okBtn?.addTarget(self, action: #selector(selectBirthDay), for: .touchUpInside)
-        birthdayDatePickerView.backgroundColor = .white
+        birthdayDatePickerView.backgroundColor = UIColor.init(hexString: "0x30354B")
         view.addSubview(birthdayDatePickerView)
         return birthdayDatePickerView
     }()
