@@ -1,6 +1,7 @@
 import Foundation
 import Alamofire
 import HandyJSON
+import Amplify
 
 typealias CompleteBlock = (GFResult,Any) -> Void
  
@@ -443,7 +444,7 @@ class DataManager: NSObject {
     
     //
     func fetchUserinfo(completeBlock: @escaping CompleteBlock) {
-        let dic = ["id" : "201" as Any] as [String : Any]
+        let dic = ["user_id" : "201" as Any] as [String : Any]
         self.POST(url: "user/get_by_id", param: dic ) { result, reponse in
             if result.success!{
                 let userInfoModel : UserInfoModel = JsonUtil.jsonToModel(reponse as! String, UserInfoModel.self) as! UserInfoModel
@@ -455,7 +456,7 @@ class DataManager: NSObject {
     }
     
     func fetchUserDetailinfo(completeBlock: @escaping CompleteBlock) {
-        let dic = ["id" : "201" as Any] as [String : Any]
+        let dic = ["user_id" : "201" as Any] as [String : Any]
         self.POST(url: "user/get_all_by_id", param: dic ) { result, reponse in
             if result.success!{
                 let userInfoModel : UserInfoModel = JsonUtil.jsonToModel(reponse as! String, UserInfoModel.self) as! UserInfoModel
@@ -465,4 +466,91 @@ class DataManager: NSObject {
             }
         }
     }
+    
+    func fetchUpdateUrl(resource : String,completeBlock: @escaping CompleteBlock) {
+        let dic = ["user_id" : "201" as Any,"resource" : resource] as [String : Any]
+        self.POST(url: "user/get_presigned_url_for_put", param: dic ) { result, reponse in
+            if result.success!{
+                if let data = (reponse as AnyObject).data(using: String.Encoding.utf8.rawValue) {
+                    do {
+                      let dic = try JSONSerialization.jsonObject(with: data, options: [JSONSerialization.ReadingOptions.init(rawValue: 0)]) as? [String:AnyObject]
+                        completeBlock(result,dic as Any)
+                    } catch let error as NSError {
+                      print(error)
+                    }
+                  }
+               
+            }else{
+                completeBlock(result,reponse)
+            }
+        }
+    }
+    
+    /// 图片上传
+///
+/// - Parameters:
+///   - url: 地址
+///   - image: 图片
+///   - params: 参数
+///   - imageName: 图片名字
+///   - progressClosure: 进度回调
+///   - successClosure: 成功回调
+func uploadImage(url: String,image: UIImage,params: [String:String],imageName:String,completeBlock: @escaping CompleteBlock){
+//    let dealUrl = url.replacingOccurrences(of: "https", with: "http")
+    
+    //压缩图片 可自定义
+    let imageData : Data  = UIImage.resetImgSize(sourceImage: image, maxImageLenght: IPhone_SCREEN_HEIGHT, maxSizeKB: 1024)
+//    let urlString = dealUrl
+//    let httpHeaders = HTTPHeaders(["Content-Type": "image/png; charset=utf-8"])
+    let config = URLSessionConfiguration.default
+    let session = URLSession(configuration: config)
+
+    // Set the URLRequest to POST and to the specified URL
+    var urlRequest = URLRequest(url: URL(string: url)!)
+    urlRequest.httpMethod = "PUT"
+
+    // Set Content-Type Header to multipart/form-data, this is equivalent to submitting form data with file upload in a web browser
+    // And the boundary is also set here
+    urlRequest.setValue("image/png", forHTTPHeaderField: "Content-Type")
+
+    var data = Data()
+
+    // Add the reqtype field and its value to the raw http request data
+//    data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
+//    data.append("Content-Disposition: form-data; name=\"\(fieldName)\"\r\n\r\n".data(using: .utf8)!)
+//    data.append("\(fieldValue)".data(using: .utf8)!)
+
+    // Add the userhash field and its value to the raw http reqyest data
+//    data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
+//    data.append("Content-Disposition: form-data; name=\"\(fieldName2)\"\r\n\r\n".data(using: .utf8)!)
+//    data.append("\(fieldValue2)".data(using: .utf8)!)
+
+    // Add the image data to the raw http request data
+//    data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
+//    data.append("Content-Disposition: form-data; name=\"fileToUpload\"; filename=\"chenlu\"\r\n".data(using: .utf8)!)
+//    data.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
+    data.append(imageData)
+
+    // End the raw http request data, note that there is 2 extra dash ("-") at the end, this is to indicate the end of the data
+    // According to the HTTP 1.1 specification https://tools.ietf.org/html/rfc7230
+//    data.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
+
+    // Send a POST request to the URL, with the data we created earlier
+    session.uploadTask(with: urlRequest, from: data, completionHandler: { responseData, response, error in
+        
+        if(error != nil){
+            print("\(error!.localizedDescription)")
+        }
+        
+        guard let responseData = responseData else {
+            print("no response data")
+            return
+        }
+        
+        if let responseString = String(data: responseData, encoding: .utf8) {
+            print("uploaded to: \(responseString)")
+        }
+    }).resume()
+
+}
 }

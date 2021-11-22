@@ -11,6 +11,7 @@ import SnapKit
 import AWSMobileClient
 import MCToast
 import SCLAlertView
+import Amplify
 
 class EditProfileController: ViewController {
     var firstnameTextField : UITextField?
@@ -33,6 +34,8 @@ class EditProfileController: ViewController {
     var playAxieIndex = 0
     var idPhotoCell : IDPhotoCell?
     var idImgView : UIImageView?
+    var uploadUrl : String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Edit Profile"
@@ -61,6 +64,7 @@ class EditProfileController: ViewController {
             } catch let error as Error? {
                     print("读取本地数据出现错误!",error)
             }
+        self.fetchUploadIdPhotoUrl()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -202,6 +206,23 @@ class EditProfileController: ViewController {
         self.hideCountryPickerView()
     }
     
+    func uploadIdPhoto(image:UIImage) {
+        self.mc_loading()
+ 
+
+        
+        DataManager.sharedInstance.uploadImage(url: self.uploadUrl!, image: image, params: [:], imageName: "") { result,reponse in
+            DispatchQueue.main.async { [self] in
+                self.mc_remove()
+                if result.success!{
+                    self.mc_text("uploadsuccess")
+                    self.idImgView?.image = image
+                }
+            }
+        }
+
+    }
+    
     @objc func showPictureSheet() {
         GFAlert.showAlert(titleStr: nil, msgStr: nil, style: .actionSheet, currentVC: self, cancelBtn: "Cancel", cancelHandler: { (cancelAction) in
             
@@ -211,7 +232,7 @@ class EditProfileController: ViewController {
                     imagePicker.takePhoto(presentFrom: self, completion: { [unowned self] (image, status) in
                         DispatchQueue.main.async { [self] in
                             if status == .success {
-                                self.idImgView?.image = image
+                                self.uploadIdPhoto(image: image!)
                             }else{
                                 if status == .denied{
                                     HImagePickerUtils.showTips(at: self,type: .takePhoto)
@@ -226,7 +247,7 @@ class EditProfileController: ViewController {
                     imagePicker.choosePhoto(presentFrom: self, completion: { [unowned self] (image, status) in
                         DispatchQueue.main.async { [self] in
                             if status == .success {
-                                self.idImgView?.image = image
+                                self.uploadIdPhoto(image: image!)
                             }else{
                                 if status == .denied{
                                     HImagePickerUtils.showTips(at: self,type: .choosePhoto)
@@ -239,6 +260,15 @@ class EditProfileController: ViewController {
                         
                     })
                 }
+            }
+        }
+    }
+    
+    func fetchUploadIdPhotoUrl() {
+        DataManager.sharedInstance.fetchUpdateUrl(resource: "user-id-photo") { result, reponse in
+            if result.success!{
+                let dic : Dictionary = reponse as! Dictionary<String, AnyObject>
+                self.uploadUrl = dic["url"] as? String
             }
         }
     }
