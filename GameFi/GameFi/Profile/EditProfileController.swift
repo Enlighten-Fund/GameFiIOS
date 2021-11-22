@@ -25,7 +25,12 @@ class EditProfileController: ViewController {
     var cityIndex = 0
     var countryLabel : UILabel?
     var birthDayLabel : UILabel?
-    
+    var availableLabel : UILabel?
+    var playAxieLabel : UILabel?
+    var availabelArray = ["1-3","3-5","5-7","7-9","9-11"]
+    var playAxieArray = ["< 1","1-3","3-6",">6"]
+    var availableIndex = 0
+    var playAxieIndex = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Edit Profile"
@@ -109,6 +114,53 @@ class EditProfileController: ViewController {
             make.right.equalToSuperview()
         }
     }
+
+    func showAvailablePickerView() {
+        self.availablePickerView!.snp.remakeConstraints { make in
+            make.bottom.equalToSuperview().offset(IPhone_TabbarSafeBottomMargin)
+            make.height.equalTo(400)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+        }
+    }
+    
+    @objc func hideAvailablePickerView() {
+        self.availablePickerView!.snp.remakeConstraints { make in
+            make.bottom.equalToSuperview().offset(IPhone_TabbarSafeBottomMargin)
+            make.height.equalTo(0)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+        }
+    }
+    
+    @objc func selectAvailable() {
+        self.availableLabel?.text = self.availabelArray[availableIndex]
+        self.hideAvailablePickerView()
+    }
+    @objc func selectPlayAxie() {
+        self.playAxieLabel?.text = self.playAxieArray[playAxieIndex]
+        self.hidePlayAxiePickerView()
+    }
+    
+    
+    func showPlayAxiePickerView() {
+        self.playAxiePickerView!.snp.remakeConstraints { make in
+            make.bottom.equalToSuperview().offset(IPhone_TabbarSafeBottomMargin)
+            make.height.equalTo(400)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+        }
+    }
+    
+    @objc func hidePlayAxiePickerView() {
+        self.playAxiePickerView!.snp.remakeConstraints { make in
+            make.bottom.equalToSuperview().offset(IPhone_TabbarSafeBottomMargin)
+            make.height.equalTo(0)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+        }
+    }
+    
     
     func stringFromDate(date:NSDate) -> String {
         let dateFormatter = DateFormatter()
@@ -183,6 +235,7 @@ class EditProfileController: ViewController {
     }()
     lazy var countryPickerView: GFPickerView? = {
         let tempPickerView = GFPickerView.init(frame: CGRect.zero)
+        tempPickerView.pickerView?.tag = 30001
         tempPickerView.cancelBtn?.addTarget(self, action: #selector(hideCountryPickerView), for: .touchUpInside)
         tempPickerView.okBtn?.addTarget(self, action: #selector(selectCountry), for: .touchUpInside)
         tempPickerView.pickerView?.dataSource = self
@@ -200,38 +253,76 @@ class EditProfileController: ViewController {
         view.addSubview(birthdayDatePickerView)
         return birthdayDatePickerView
     }()
+    
+    lazy var availablePickerView: GFPickerView? = {
+        let tempPickerView = GFPickerView.init(frame: CGRect.zero)
+        tempPickerView.pickerView?.tag = 30002
+        tempPickerView.cancelBtn?.addTarget(self, action: #selector(hideAvailablePickerView), for: .touchUpInside)
+        tempPickerView.okBtn?.addTarget(self, action: #selector(selectAvailable), for: .touchUpInside)
+        tempPickerView.pickerView?.dataSource = self
+        tempPickerView.pickerView?.delegate = self
+        tempPickerView.backgroundColor = .white
+        view.addSubview(tempPickerView)
+        return tempPickerView
+    }()
+    lazy var playAxiePickerView: GFPickerView? = {
+        let tempPickerView = GFPickerView.init(frame: CGRect.zero)
+        tempPickerView.pickerView?.tag = 30003
+        tempPickerView.cancelBtn?.addTarget(self, action: #selector(hidePlayAxiePickerView), for: .touchUpInside)
+        tempPickerView.okBtn?.addTarget(self, action: #selector(selectPlayAxie), for: .touchUpInside)
+        tempPickerView.pickerView?.dataSource = self
+        tempPickerView.pickerView?.delegate = self
+        tempPickerView.backgroundColor = .white
+        view.addSubview(tempPickerView)
+        return tempPickerView
+    }()
 }
 
 extension  EditProfileController :UIPickerViewDataSource,UIPickerViewDelegate{
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return  3
+        if pickerView.tag == 30001 {
+            return  3
+        }else if pickerView.tag == 30002{
+            return  1
+        }else if pickerView.tag == 30003{
+            return  1
+        }
+        return  0
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         var title = ""
-        if  component == 0 {
-            let  countryDic =  self.countryArray[row]
-            title = (countryDic[ "countryName" ] as? String)!
-        } else  if  component == 1 {
-            let  countryDic =  self.countryArray[countryIndex]
-            if countryDic[ "states" ] != nil {
-                let statesArray : Array<[ String :  AnyObject ]> = countryDic[ "states" ] as! Array<[ String :  AnyObject ]>
-                let  stateDic : [String : AnyObject] = statesArray[row]
-                title = (stateDic[ "stateName" ] as? String)!
-            }else{
-                let citiesArray : Array<[ String :  AnyObject ]> = countryDic[ "cities" ] as! Array<[ String :  AnyObject ]>
-                let  cityDic : [String : AnyObject] = citiesArray[row]
-                title = (cityDic[ "cityName" ] as? String)!
+        if pickerView.tag == 30001  {
+            if  component == 0 {
+                let  countryDic =  self.countryArray[row]
+                title = (countryDic[ "countryName" ] as? String)!
+            } else  if  component == 1 {
+                let  countryDic =  self.countryArray[countryIndex]
+                if countryDic[ "states" ] != nil {
+                    let statesArray : Array<[ String :  AnyObject ]> = countryDic[ "states" ] as! Array<[ String :  AnyObject ]>
+                    let  stateDic : [String : AnyObject] = statesArray[row]
+                    title = (stateDic[ "stateName" ] as? String)!
+                }else{
+                    let citiesArray : Array<[ String :  AnyObject ]> = countryDic[ "cities" ] as! Array<[ String :  AnyObject ]>
+                    let  cityDic : [String : AnyObject] = citiesArray[row]
+                    title = (cityDic[ "cityName" ] as? String)!
+                }
+                
+            } else  {
+                let  country =  self.countryArray[countryIndex]
+                let statesArray : Array<[ String :  AnyObject ]> = country[ "states" ] as! Array<[ String :  AnyObject ]>
+                let  stateDic : [String : AnyObject] = statesArray[self.stateIndex]
+                let cityArry : Array<[ String :  AnyObject ]>  = stateDic["cities"] as! Array<[String : AnyObject]>
+                let  cityDic : [String : AnyObject] = cityArry[row]
+                title =  (cityDic[ "cityName" ] as? String)!
             }
             
-        } else  {
-            let  country =  self.countryArray[countryIndex]
-            let statesArray : Array<[ String :  AnyObject ]> = country[ "states" ] as! Array<[ String :  AnyObject ]>
-            let  stateDic : [String : AnyObject] = statesArray[self.stateIndex]
-            let cityArry : Array<[ String :  AnyObject ]>  = stateDic["cities"] as! Array<[String : AnyObject]>
-            let  cityDic : [String : AnyObject] = cityArry[row]
-            title =  (cityDic[ "cityName" ] as? String)!
+        }else if pickerView.tag == 30002{
+            title = availabelArray[row]
+        }else if pickerView.tag == 30003{
+            title = playAxieArray[row]
         }
+        
         
            let showLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 34))
            showLabel.textAlignment = .center
@@ -242,53 +333,69 @@ extension  EditProfileController :UIPickerViewDataSource,UIPickerViewDelegate{
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if  component == 0 {
-            return  self .countryArray.count
-        }  else  if  component == 1 {
-            let  countryDic =  self .countryArray[self.countryIndex]
-            if countryDic["states"]?.count == nil ||  countryDic["states"]?.count == 0{
-                if  countryDic[ "cities" ] != nil && countryDic[ "cities" ]!.count > 0{
-                    return  countryDic[ "cities" ]!.count
+        if pickerView.tag == 30001 {
+            if  component == 0 {
+                return  self .countryArray.count
+            }  else  if  component == 1 {
+                let  countryDic =  self .countryArray[self.countryIndex]
+                if countryDic["states"]?.count == nil ||  countryDic["states"]?.count == 0{
+                    if  countryDic[ "cities" ] != nil && countryDic[ "cities" ]!.count > 0{
+                        return  countryDic[ "cities" ]!.count
+                    }
+                    return 0
+                   
+                }else{
+                    return countryDic[ "states" ]!.count
                 }
-                return 0
-               
-            }else{
-                return countryDic[ "states" ]!.count
+                
+            }  else  {
+                let  countryDic =  self.countryArray[countryIndex]
+                if countryDic[ "states" ] == nil {
+                    return 0
+                }else{
+                    let statesArray : Array<[ String :  AnyObject ]> = countryDic[ "states" ] as! Array<[ String :  AnyObject ]>
+                    let  stateDic : [String : AnyObject] = statesArray[self.stateIndex]
+                    return  stateDic[ "cities" ]!.count
+                }
+                
             }
-            
-        }  else  {
-            let  countryDic =  self.countryArray[countryIndex]
-            if countryDic[ "states" ] == nil {
-                return 0
-            }else{
-                let statesArray : Array<[ String :  AnyObject ]> = countryDic[ "states" ] as! Array<[ String :  AnyObject ]>
-                let  stateDic : [String : AnyObject] = statesArray[self.stateIndex]
-                return  stateDic[ "cities" ]!.count
-            }
-            
+        }else if pickerView.tag == 30002{
+            return  availabelArray.count
+        }else if pickerView.tag == 30003{
+            return  playAxieArray.count
         }
+        
+        return 0
     }
         
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        switch component {
-        case 0:
-            countryIndex = row;
-            stateIndex = 0;
-            cityIndex = 0;
-            pickerView.reloadComponent(1);
-            pickerView.reloadComponent(2);
-            pickerView.selectRow(0, inComponent: 1, animated:  false )
-            pickerView.selectRow(0, inComponent: 2, animated:  false )
-        case 1:
-            stateIndex = row
-            cityIndex = 0
-            pickerView.reloadComponent(2)
-            pickerView.selectRow(0, inComponent: 2, animated:  false )
-        case  2:
-            cityIndex = row
-        default :
-            break ;
+        if pickerView.tag == 30001 {
+            switch component {
+            case 0:
+                countryIndex = row;
+                stateIndex = 0;
+                cityIndex = 0;
+                pickerView.reloadComponent(1);
+                pickerView.reloadComponent(2);
+                pickerView.selectRow(0, inComponent: 1, animated:  false )
+                pickerView.selectRow(0, inComponent: 2, animated:  false )
+            case 1:
+                stateIndex = row
+                cityIndex = 0
+                pickerView.reloadComponent(2)
+                pickerView.selectRow(0, inComponent: 2, animated:  false )
+            case  2:
+                cityIndex = row
+            default :
+                break ;
+            }
+        }else if pickerView.tag == 30002{
+            availableIndex = row
+        }else if pickerView.tag == 30003{
+           playAxieIndex = row
         }
+        
+        
     }
       
 }
@@ -376,7 +483,9 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
             cell = tempCell
         case 2:
             let tempCell : PickerViewCell = tableView.dequeueReusableCell(withIdentifier: pickerViewCellIdentifier + "0", for: indexPath) as! PickerViewCell
-            tempCell.titleLabel?.text = "Country/State/City"
+            if tempCell.titleLabel!.text == nil || tempCell.titleLabel!.text!.isEmpty {
+                tempCell.titleLabel?.text = "Country/State/City"
+            }
             self.countryLabel = tempCell.titleLabel
             cell = tempCell
         case 3:
@@ -387,7 +496,9 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
             cell = tempCell
         case 4:
             let tempCell : PickerViewCell = tableView.dequeueReusableCell(withIdentifier: pickerViewCellIdentifier + "1", for: indexPath) as! PickerViewCell
-            tempCell.titleLabel?.text = "Date of birth (MM/DD/YYY)"
+            if tempCell.titleLabel!.text == nil || tempCell.titleLabel!.text!.isEmpty {
+                tempCell.titleLabel?.text = "Date of birth (MM/DD/YYYY)"
+            }
             self.birthDayLabel = tempCell.titleLabel
             cell = tempCell
         case 5:
@@ -400,11 +511,18 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
         switch indexPath.row {
         case 0:
             let tempCell : PickerViewCell = tableView.dequeueReusableCell(withIdentifier: pickerViewCellIdentifier + "2", for: indexPath) as! PickerViewCell
-            tempCell.titleLabel?.text = "Available time / day (hours)"
+            if tempCell.titleLabel!.text == nil || tempCell.titleLabel!.text!.isEmpty {
+                tempCell.titleLabel?.text = "Available time / day (hours)"
+            }
+            self.availableLabel = tempCell.titleLabel
             cell = tempCell
         case 1:
             let tempCell : PickerViewCell = tableView.dequeueReusableCell(withIdentifier: pickerViewCellIdentifier + "3", for: indexPath) as! PickerViewCell
-            tempCell.titleLabel?.text = "Your experience in Axie Infinity"
+            if tempCell.titleLabel!.text == nil || tempCell.titleLabel!.text!.isEmpty {
+                tempCell.titleLabel?.text = "Your experience in Axie Infinity"
+            }
+           
+            self.playAxieLabel = tempCell.titleLabel
             cell = tempCell
         case 2:
             let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "3", for: indexPath) as! LabelTextFildCell
@@ -440,8 +558,10 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
             self.showBirthDayPickerView()
         }else if indexPath.section == 1 && indexPath.row == 0{
             //available time
+            self.showAvailablePickerView()
         }else if indexPath.section == 1 && indexPath.row == 1{
             //experience
+            self.showPlayAxiePickerView()
         }
     }
 }
