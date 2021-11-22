@@ -33,6 +33,12 @@ class IDPhotoCell: TableViewCell {
             make.right.equalToSuperview()
             make.bottom.equalToSuperview()
         }
+        self.reUploadBtn.snp.makeConstraints { make in
+            make.height.equalTo(30)
+            make.width.equalTo(70)
+            make.right.equalToSuperview().offset(-10)
+            make.bottom.equalToSuperview().offset(-10)
+        }
     }
     
     lazy var bgImgView : UIImageView = {
@@ -65,5 +71,16 @@ class IDPhotoCell: TableViewCell {
         tempLabel.textAlignment = .center
         self.contentView.addSubview(tempLabel)
         return tempLabel
+    }()
+    
+    lazy var reUploadBtn : UIButton = {
+        let tempBtn = UIButton.init(frame: CGRect.zero)
+        tempBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
+        tempBtn.setTitle("Re-upload", for: .normal)
+        tempBtn.titleLabel?.font = UIFont(name: "Avenir Next Regular", size: 12)
+        tempBtn.setTitleColor(.white, for: .normal)
+        tempBtn.isHidden = true
+        self.contentView.addSubview(tempBtn)
+        return tempBtn
     }()
 }

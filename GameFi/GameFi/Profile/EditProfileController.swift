@@ -207,13 +207,17 @@ class EditProfileController: ViewController {
     }
     
     func uploadIdPhoto(image:UIImage) {
-        self.mc_loading()        
+        self.mc_loading()
         DataManager.sharedInstance.uploadImage(url: self.uploadUrl!, image: image) { result,reponse in
             DispatchQueue.main.async { [self] in
                 self.mc_remove()
                 if result.success!{
                     self.mc_text("uploadsuccess")
                     self.idImgView?.image = image
+                    self.idPhotoCell?.contentView.bringSubviewToFront(self.idImgView!)
+                    self.idPhotoCell?.reUploadBtn.isHidden = false
+                    self.idPhotoCell?.contentView.bringSubviewToFront(self.idPhotoCell!.reUploadBtn)
+                    self.idPhotoCell?.reUploadBtn.addTarget(self, action: #selector(showPictureSheet), for: .touchUpInside)
                 }
             }
         }
@@ -347,6 +351,7 @@ class EditProfileController: ViewController {
         return tempPickerView
     }()
     lazy var imagePicker = HImagePickerUtils()
+    
 }
 
 extension  EditProfileController :UIPickerViewDataSource,UIPickerViewDelegate{
@@ -473,25 +478,139 @@ extension  EditProfileController :UIPickerViewDataSource,UIPickerViewDelegate{
 
 extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UITextViewDelegate{
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        guard textField.text != nil else {
-//                return true
-//            }
-//            //新输入的
-//            if string.count == 0 {
-//                return true
-//            }
-//
-//        if string.isBlank {
-//            return false
-//        }
-        return true
+    func updateTextField(textField:UITextField,focus:Bool)  {
+        if focus {
+            textField.layer.borderColor = UIColor.init(hexString: "0xB85050").cgColor
+        }else{
+            textField.layer.borderColor = UIColor(red: 0.27, green: 0.3, blue: 0.41, alpha: 1).cgColor
+        }
     }
- 
+    
+    func updateTextView(textView:UITextView,focus:Bool)  {
+        if focus {
+            textView.layer.borderColor = UIColor.init(hexString: "0xB85050").cgColor
+        }else{
+            textView.layer.borderColor = UIColor(red: 0.27, green: 0.3, blue: 0.41, alpha: 1).cgColor
+        }
+    }
+    
+    func valifyFirstName() -> Bool{
+        if self.firstnameTextField!.text == nil || self.firstnameTextField!.text!.isBlank {
+            self.showNoticeLabel(notice: "First name should be filled in")
+            self.updateTextField(textField: self.firstnameTextField!, focus: true)
+            return false
+        }else{
+            self.hideNoticeLabel()
+            self.updateTextField(textField: self.firstnameTextField!, focus: false)
+            return true
+        }
+    }
+    
+    func valifyLastName() -> Bool{
+        if self.lastnameTextField!.text == nil || self.lastnameTextField!.text!.isBlank {
+            self.showNoticeLabel(notice: "Last name should be filled in")
+            self.updateTextField(textField: self.lastnameTextField!, focus: true)
+            return false
+        }else{
+            self.hideNoticeLabel()
+            self.updateTextField(textField: self.lastnameTextField!, focus: false)
+            return true
+        }
+    }
+    
+    func valifyIdNO() -> Bool{
+        if self.idNoTextField!.text == nil || self.idNoTextField!.text!.isBlank {
+            self.showNoticeLabel(notice: "Id Number should be filled in")
+            self.updateTextField(textField: self.idNoTextField!, focus: true)
+            return false
+        }else{
+            self.hideNoticeLabel()
+            self.updateTextField(textField: self.idNoTextField!, focus: false)
+            return true
+        }
+    }
+    
+    func valifyMMR() -> Bool{
+        if self.mmrField!.text == nil || self.mmrField!.text!.isBlank {
+            self.showNoticeLabel(notice: "MMR should be filled in")
+            self.updateTextField(textField: self.mmrField!, focus: true)
+            return false
+        }else{
+            self.hideNoticeLabel()
+            self.updateTextField(textField: self.mmrField!, focus: false)
+            return true
+        }
+    }
+    
+    func valifyGamePlayed() -> Bool{
+        if self.gamesPlayedTextView!.text == nil || self.gamesPlayedTextView!.text!.isBlank {
+            self.showNoticeLabel(notice: "The game you played should be filled in")
+            self.updateTextView(textView:self.gamesPlayedTextView!, focus: true)
+            return false
+        }else{
+            self.hideNoticeLabel()
+            self.updateTextView(textView:self.gamesPlayedTextView!, focus: false)
+            return true
+        }
+    }
+    
+    func valifyIntroduction() -> Bool{
+        if self.introduceTextView!.text == nil || self.introduceTextView!.text!.isBlank {
+            self.showNoticeLabel(notice: "Introduce yourself briefly should be filled in")
+            self.updateTextView(textView:self.introduceTextView!, focus: true)
+            return false
+        }else{
+            self.hideNoticeLabel()
+            self.updateTextView(textView:self.introduceTextView!, focus: false)
+            return true
+        }
+    }
+    
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
-     
+        if textField == self.firstnameTextField {
+            self.valifyFirstName()
+        }else if textField == self.lastnameTextField {
+            self.valifyLastName()
+        }else if textField == self.idNoTextField {
+            self.valifyIdNO()
+        }else if textField == self.mmrField {
+            self.valifyMMR()
+        }
         
     }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView == self.gamesPlayedTextView {
+            self.valifyGamePlayed()
+            if textView.text.isEmpty {
+                textView.text = "Enter the gmes you played before"
+                textView.textColor = UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)
+            }
+        }else if textView == self.introduceTextView {
+            self.valifyIntroduction()
+            if textView.text.isEmpty {
+                textView.text = "Introduce yourself briefly"
+                textView.textColor = UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)
+            }
+        }
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        textView.textColor = .white
+        if textView == self.gamesPlayedTextView {
+            if textView.text == "Enter the gmes you played before" {
+                textView.text = nil
+            }
+        }else if textView == self.introduceTextView {
+            if textView.text == "Introduce yourself briefly" {
+                textView.text = nil
+            }
+            
+        }
+    }
+    
+   
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -611,11 +730,15 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
             let tempCell : TextViewCell = tableView.dequeueReusableCell(withIdentifier: textViewCellIdentifier + "0", for: indexPath) as! TextViewCell
             tempCell.textView?.delegate = self
             self.gamesPlayedTextView = tempCell.textView
+            gamesPlayedTextView!.text = "Enter the gmes you played before"
+            gamesPlayedTextView!.textColor = UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)
             cell = tempCell
         case 4:
             let tempCell : TextViewCell = tableView.dequeueReusableCell(withIdentifier: textViewCellIdentifier + "1", for: indexPath) as! TextViewCell
             tempCell.textView?.delegate = self
             self.introduceTextView = tempCell.textView
+            introduceTextView!.text = "Introduce yourself briefly"
+            introduceTextView!.textColor = UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)
             cell = tempCell
         default:
             cell = tableView.dequeueReusableCell(withIdentifier: emptyTableViewCellIdentifier, for: indexPath)

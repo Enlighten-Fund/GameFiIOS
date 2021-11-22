@@ -503,6 +503,7 @@ func uploadImage(url: String,image: UIImage,completeBlock: @escaping CompleteBlo
             completeBlock(result,error as Any)
         }else{
             let result = GFResult.init(reponse: [:])
+            result.code = 1
             completeBlock(result,response as Any)
         }
         
