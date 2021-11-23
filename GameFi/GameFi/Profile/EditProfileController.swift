@@ -12,6 +12,7 @@ import AWSMobileClient
 import MCToast
 import SCLAlertView
 import Amplify
+import Kingfisher
 
 class EditProfileController: ViewController {
     var firstnameTextField : UITextField?
@@ -39,6 +40,7 @@ class EditProfileController: ViewController {
     var idPhotoCell : IDPhotoCell?
     var idImgView : UIImageView?
     var uploadUrl : String?
+    var userInfoModel : UserInfoModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,10 +71,25 @@ class EditProfileController: ViewController {
                     print("读取本地数据出现错误!",error)
             }
         self.fetchUploadIdPhotoUrl()
+        self.requestData()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    func requestData() {
+        self.mc_loading()
+        DataManager.sharedInstance.fetchUserDetailinfo { result, reponse in
+            DispatchQueue.main.async { [self] in
+                self.mc_remove()
+                if result.success!{
+                    let userInfoModel : UserInfoModel = reponse as! UserInfoModel
+                    self.userInfoModel = userInfoModel
+                    self.country = userInfoModel.nation
+                    self.birthday = userInfoModel.dob
+                    self.available = userInfoModel.available_time
+                    self.playAxie = userInfoModel.axie_exp
+                    self.tableView?.reloadData()
+                }
+            }
+        }
     }
     
     func showNoticeLabel(notice:String){
@@ -747,18 +764,20 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
             tempCell.textFild?.delegate = self
             tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  First name", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
             self.firstnameTextField = tempCell.textFild
+            self.firstnameTextField?.text = userInfoModel?.first_name
             cell = tempCell
         case 1:
             let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "1", for: indexPath) as! LabelTextFildCell
             tempCell.textFild?.delegate = self
             tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Last name", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
             self.lastnameTextField = tempCell.textFild
-
+            self.lastnameTextField?.text = userInfoModel?.last_name
             cell = tempCell
         case 2:
             let tempCell : PickerViewCell = tableView.dequeueReusableCell(withIdentifier: pickerViewCellIdentifier + "0", for: indexPath) as! PickerViewCell
+            tempCell.titleLabel?.text = userInfoModel?.nation
             if tempCell.titleLabel!.text == nil || tempCell.titleLabel!.text!.isEmpty {
-                tempCell.titleLabel?.text = "Country/State/City"
+                tempCell.titleLabel?.text = "Country,State"
             }
             self.countryLabel = tempCell.titleLabel
             cell = tempCell
@@ -767,11 +786,13 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
             tempCell.textFild?.delegate = self
             tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  ID number", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
             self.idNoTextField = tempCell.textFild
+            self.idNoTextField?.text = userInfoModel?.id_num
             cell = tempCell
         case 4:
             let tempCell : PickerViewCell = tableView.dequeueReusableCell(withIdentifier: pickerViewCellIdentifier + "1", for: indexPath) as! PickerViewCell
+            tempCell.titleLabel?.text = userInfoModel?.dob
             if tempCell.titleLabel!.text == nil || tempCell.titleLabel!.text!.isEmpty {
-                tempCell.titleLabel?.text = "Date of birth (MM/DD/YYYY)"
+                tempCell.titleLabel?.text = "Date of birth (yyyy-MM-dd)"
             }
             self.birthDayLabel = tempCell.titleLabel
             cell = tempCell
@@ -782,6 +803,15 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
             self.idImgView = tempCell.bgImgView
             tempCell.contentView.layer.borderWidth = 1
             tempCell.contentView.layer.borderColor = UIColor.white.cgColor
+            if userInfoModel?.id_photo != nil {
+    //            self.iconImgView.kf.setImage(with:URL.init(string: userInfoModel.avatar!))fef
+                tempCell.bgImgView.kf.setImage(with: URL.init(string: userInfoModel!.id_photo!), placeholder:nil, options: nil) {result, error in
+                    self.idPhotoCell?.contentView.bringSubviewToFront(self.idImgView!)
+                    self.idPhotoCell?.reUploadBtn.isHidden = false
+                    self.idPhotoCell?.contentView.bringSubviewToFront(self.idPhotoCell!.reUploadBtn)
+                    self.hasUploadId = true
+                }
+            }
             cell = tempCell
         default:
             cell = tableView.dequeueReusableCell(withIdentifier: emptyTableViewCellIdentifier, for: indexPath)
@@ -790,6 +820,7 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
         switch indexPath.row {
         case 0:
             let tempCell : PickerViewCell = tableView.dequeueReusableCell(withIdentifier: pickerViewCellIdentifier + "2", for: indexPath) as! PickerViewCell
+            tempCell.titleLabel?.text = self.userInfoModel?.available_time
             if tempCell.titleLabel!.text == nil || tempCell.titleLabel!.text!.isEmpty {
                 tempCell.titleLabel?.text = "Available time / day (hours)"
             }
@@ -797,10 +828,10 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
             cell = tempCell
         case 1:
             let tempCell : PickerViewCell = tableView.dequeueReusableCell(withIdentifier: pickerViewCellIdentifier + "3", for: indexPath) as! PickerViewCell
+            tempCell.titleLabel?.text = self.userInfoModel?.axie_exp
             if tempCell.titleLabel!.text == nil || tempCell.titleLabel!.text!.isEmpty {
                 tempCell.titleLabel?.text = "Your experience in Axie Infinity"
             }
-           
             self.playAxieLabel = tempCell.titleLabel
             cell = tempCell
         case 2:
@@ -808,21 +839,32 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
             tempCell.textFild?.delegate = self
             tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Highest MMR", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
             self.mmrField = tempCell.textFild
-        
+            self.mmrField?.text = self.userInfoModel?.mmr
             cell = tempCell
         case 3:
             let tempCell : TextViewCell = tableView.dequeueReusableCell(withIdentifier: textViewCellIdentifier + "0", for: indexPath) as! TextViewCell
             tempCell.textView?.delegate = self
             self.gamesPlayedTextView = tempCell.textView
-            gamesPlayedTextView!.text = "Enter the gmes you played before"
-            gamesPlayedTextView!.textColor = UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)
+            if userInfoModel?.game_history != nil {
+                gamesPlayedTextView!.text = userInfoModel?.game_history
+                gamesPlayedTextView!.textColor = .white
+            }else{
+                gamesPlayedTextView!.text = "Enter the gmes you played before"
+                gamesPlayedTextView!.textColor = UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)
+            }
+            
             cell = tempCell
         case 4:
             let tempCell : TextViewCell = tableView.dequeueReusableCell(withIdentifier: textViewCellIdentifier + "1", for: indexPath) as! TextViewCell
             tempCell.textView?.delegate = self
             self.introduceTextView = tempCell.textView
-            introduceTextView!.text = "Introduce yourself briefly"
-            introduceTextView!.textColor = UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)
+            if userInfoModel?.self_intro != nil {
+                introduceTextView!.text = userInfoModel?.self_intro
+                introduceTextView!.textColor = .white
+            }else{
+                introduceTextView!.text = "Introduce yourself briefly"
+                introduceTextView!.textColor = UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)
+            }
             cell = tempCell
         default:
             cell = tableView.dequeueReusableCell(withIdentifier: emptyTableViewCellIdentifier, for: indexPath)
