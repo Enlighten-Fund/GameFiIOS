@@ -496,7 +496,6 @@ class DataManager: NSObject {
         var data = Data()
         data.append(imageData)
         session.uploadTask(with: urlRequest, from: data, completionHandler: { responseData, response, error in
-            
             if(error != nil){
                 print("\(error!.localizedDescription)")
                 let result = GFResult.init(error: error!)

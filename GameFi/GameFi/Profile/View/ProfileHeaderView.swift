@@ -67,7 +67,27 @@ class ProfileHeaderView: UIView {
         if userInfoModel.credit_score != nil {
             self.creditLabel.text = "Credit Score: \(userInfoModel.credit_score!)"
         }
-        
+        if userInfoModel.scholar_status != nil {
+            if userInfoModel.scholar_status == "NO" {
+                self.cetifiedBtn.setTitle("Certified now", for: .normal)
+                self.cetifiedBtn.setImage(UIImage.init(named: ""), for: .normal)
+                self.cetifiedBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
+                self.cetifiedBtn.setTitleColor(.white, for: .normal)
+                self.cetifiedBtn.layer.borderColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1).cgColor
+            }else if userInfoModel.scholar_status == "AUDIT" {
+                self.cetifiedBtn.setTitle("Auditing", for: .normal)
+                self.cetifiedBtn.setImage(UIImage.init(named: "audit"), for: .normal)
+                self.cetifiedBtn.backgroundColor = .clear
+                self.cetifiedBtn.setTitleColor(UIColor(red: 0.89, green: 0.57, blue: 0.35, alpha: 1), for: .normal)
+                self.cetifiedBtn.layer.borderColor = UIColor(red: 0.89, green: 0.57, blue: 0.35, alpha: 1).cgColor
+            }else{
+                self.cetifiedBtn.setTitle("Certificated", for: .normal)
+                self.cetifiedBtn.setImage(UIImage.init(named: "certificated"), for: .normal)
+                self.cetifiedBtn.backgroundColor = .clear
+                self.cetifiedBtn.setTitleColor(UIColor(red: 0.35, green: 1, blue: 0.34, alpha: 1), for: .normal)
+                self.cetifiedBtn.layer.borderColor = UIColor(red: 0.35, green: 1, blue: 0.34, alpha: 1).cgColor
+            }
+        }
     }
     
     lazy var iconImgView : UIImageView = {
@@ -101,7 +121,7 @@ class ProfileHeaderView: UIView {
     lazy var cetifiedBtn : UIButton = {
         let tempBtn = UIButton.init(frame: CGRect.zero)
         tempBtn.setTitle("Certified now", for: .normal)
-        tempBtn.setTitle("Certificated", for: .selected)
+        tempBtn.setTitle("Certified now", for: .selected)
         tempBtn.setTitleColor(.white, for: .normal)
         tempBtn.setTitleColor(UIColor(red: 0.3, green: 0.82, blue: 0.43, alpha: 1), for: .selected)
         tempBtn.layer.cornerRadius = 5

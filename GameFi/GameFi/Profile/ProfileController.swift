@@ -48,10 +48,10 @@ class ProfileController: ViewController {
     
     
     func requestData() {
-        self.mc_loading()
+//        self.mc_loading()
         DataManager.sharedInstance.fetchUserDetailinfo { result, reponse in
             DispatchQueue.main.async { [self] in
-                self.mc_remove()
+//                self.mc_remove()
                 if result.success!{
                     let userInfoModel : UserInfoModel = reponse as! UserInfoModel
                     self.userInfoModel = userInfoModel
@@ -82,22 +82,17 @@ class ProfileController: ViewController {
     }
     
     @objc func signBtnClick() {
-        let navVC = GFNavController.init(rootViewController: LoginController.init())
-        navVC.modalPresentationStyle = .fullScreen
-        self.navigationController?.present(navVC, animated: true, completion: {
-            
-        })
+        if userInfoModel!.scholar_status != nil {
+            if userInfoModel!.scholar_status == "NO" {
+                self.navigationController?.pushViewController(EditProfileController.init(), animated: true)
+            }
+        }
     }
     
     func uploadIdPhoto(image:UIImage) {
-        self.mc_loading()
         DataManager.sharedInstance.uploadImage(url: self.userInfoModel!.avatar!, image: image) { result,reponse in
             DispatchQueue.main.async { [self] in
-                self.mc_remove()
-                if result.success!{
-                    self.mc_text("uploadsuccess")
-                    self.headerView?.iconImgView.image = image
-                }
+                self.headerView?.iconImgView.image = image
             }
         }
 
@@ -150,7 +145,7 @@ class ProfileController: ViewController {
         let singleTapGesture = UITapGestureRecognizer(target: self, action: #selector(imageViewClick))
         tempView.iconImgView.addGestureRecognizer(singleTapGesture)
         tempView.iconImgView.isUserInteractionEnabled = true
-//        tempView.signBtn.addTarget(self, action: #selector(signBtnClick), for: .touchUpInside)
+        tempView.cetifiedBtn.addTarget(self, action: #selector(signBtnClick), for: .touchUpInside)
         view.addSubview(tempView)
         return tempView
     }()
