@@ -458,8 +458,7 @@ class EditProfileController: ViewController {
             DispatchQueue.main.async { [self] in
                 self.mc_remove()
                 if result.success!{
-                    self.navigationController?.popViewController(animated: true)
-                    
+                    self.navigationController?.pushViewController(UserInfoStateController.init(), animated: true)
                 }
             }
         }

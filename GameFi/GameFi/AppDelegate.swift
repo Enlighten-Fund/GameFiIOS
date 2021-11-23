@@ -153,7 +153,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         let currentRole = UserManager.sharedInstance.currentRole()
         if currentRole == 1 {
             v2 = ScholarAccountsController()
-            
         }else{
             v2 = ManagerAccountsController()
         }

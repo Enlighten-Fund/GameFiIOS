@@ -39,6 +39,7 @@
 		9811EA1B2726BB2700B0ACF0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9811EA1A2726BB2700B0ACF0 /* ViewController.swift */; };
 		9811EA202726BB2800B0ACF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9811EA1F2726BB2800B0ACF0 /* Assets.xcassets */; };
 		9811EA232726BB2800B0ACF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9811EA212726BB2800B0ACF0 /* LaunchScreen.storyboard */; };
+		984472B4274CD91300DAE315 /* UserInfoStateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984472B3274CD91300DAE315 /* UserInfoStateController.swift */; };
 		984BDB95272ACD0A00F6144B /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984BDB94272ACD0A00F6144B /* RegisterController.swift */; };
 		984BDB99272BA23600F6144B /* RegisterHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984BDB98272BA23600F6144B /* RegisterHeadView.swift */; };
 		984BDB9B272BC6C200F6144B /* LabelTextFildCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984BDB9A272BC6C200F6144B /* LabelTextFildCell.swift */; };
@@ -157,6 +158,7 @@
 		9811EA1F2726BB2800B0ACF0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9811EA222726BB2800B0ACF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9811EA242726BB2800B0ACF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		984472B3274CD91300DAE315 /* UserInfoStateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoStateController.swift; sourceTree = "<group>"; };
 		984BDB94272ACD0A00F6144B /* RegisterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
 		984BDB98272BA23600F6144B /* RegisterHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterHeadView.swift; sourceTree = "<group>"; };
 		984BDB9A272BC6C200F6144B /* LabelTextFildCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTextFildCell.swift; sourceTree = "<group>"; };
@@ -477,6 +479,7 @@
 				9876943127393CEC0075CA0F /* ProfileGuestController.swift */,
 				987694362739625A0075CA0F /* ProfileController.swift */,
 				98D99410273A7F31006AA8DC /* EditProfileController.swift */,
+				984472B3274CD91300DAE315 /* UserInfoStateController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -763,6 +766,7 @@
 				986C586E27300B9A0021280A /* LoginHeadView.swift in Sources */,
 				984BDBAA272C307B00F6144B /* RegisterFootView.swift in Sources */,
 				98D9941F273B9E22006AA8DC /* TrackCell.swift in Sources */,
+				984472B4274CD91300DAE315 /* UserInfoStateController.swift in Sources */,
 				980DB7C927356C85006ED3BE /* LabelAndLabelView.swift in Sources */,
 				9858172E273D205600D8CFCA /* PostScholarshipCell.swift in Sources */,
 				984BDBA4272C0E9300F6144B /* Extension.swift in Sources */,
