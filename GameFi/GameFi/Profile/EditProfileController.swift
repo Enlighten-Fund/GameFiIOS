@@ -23,7 +23,6 @@ class EditProfileController: ViewController {
     var countryArray = [[ String :  AnyObject ]]()
     var countryIndex = 0
     var stateIndex = 0
-    var cityIndex = 0
     var countryLabel : UILabel?
     var country : String?
     var birthDayLabel : UILabel?
@@ -59,7 +58,7 @@ class EditProfileController: ViewController {
         self.noticeLabel?.isHidden = true
         
         //初始化数据
-        let  path =  Bundle.main.path(forResource: "countries-heirarchy" , ofType: "json" )
+        let  path =  Bundle.main.path(forResource: "countries" , ofType: "json" )
         let url = URL(fileURLWithPath: path!)
             do {
                     let data = try Data(contentsOf: url)
@@ -192,25 +191,14 @@ class EditProfileController: ViewController {
         //获取选中的
         var country = ""
         var state = ""
-        var city = ""
         let  countryDic : Dictionary =  self.countryArray[countryIndex]
-        country = countryDic["countryName"] as! String
-        if countryDic[ "states" ] != nil {
+        country = countryDic["name"] as! String
+        if countryDic[ "states" ] != nil && (countryDic[ "states" ]?.count)! > 0{
             let statesArray : Array<[ String :  AnyObject ]> = countryDic[ "states" ] as! Array<[ String :  AnyObject ]>
             let  stateDic : [String : AnyObject] = statesArray[stateIndex]
-            state = (stateDic[ "stateName" ] as? String)!
-            let cityArry : Array<[ String :  AnyObject ]>  = stateDic["cities"] as! Array<[String : AnyObject]>
-            let  cityDic : [String : AnyObject] = cityArry[cityIndex]
-            city = (cityDic[ "cityName" ] as? String)!
-        }else{
-            if countryDic[ "cities" ] != nil {
-                let citiesArray : Array<[ String :  AnyObject ]> = countryDic[ "cities" ] as! Array<[ String :  AnyObject ]>
-                let  cityDic : [String : AnyObject] = citiesArray[stateIndex]
-                city = (cityDic[ "cityName" ] as? String)!
-            }
-            
+            state = (stateDic[ "name" ] as? String)!
         }
-        self.countryLabel?.text = "\(country)-\(state)-\(city)"
+        self.countryLabel?.text = "\(country),\(state)"
         self.hideCountryPickerView()
         self.country = self.countryLabel?.text
     }
@@ -427,7 +415,7 @@ class EditProfileController: ViewController {
 extension  EditProfileController :UIPickerViewDataSource,UIPickerViewDelegate{
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         if pickerView.tag == 30001 {
-            return  3
+            return  2
         }else if pickerView.tag == 30002{
             return  1
         }else if pickerView.tag == 30003{
@@ -441,26 +429,14 @@ extension  EditProfileController :UIPickerViewDataSource,UIPickerViewDelegate{
         if pickerView.tag == 30001  {
             if  component == 0 {
                 let  countryDic =  self.countryArray[row]
-                title = (countryDic[ "countryName" ] as? String)!
+                title = (countryDic[ "name" ] as? String)!
             } else  if  component == 1 {
                 let  countryDic =  self.countryArray[countryIndex]
                 if countryDic[ "states" ] != nil {
                     let statesArray : Array<[ String :  AnyObject ]> = countryDic[ "states" ] as! Array<[ String :  AnyObject ]>
                     let  stateDic : [String : AnyObject] = statesArray[row]
-                    title = (stateDic[ "stateName" ] as? String)!
-                }else{
-                    let citiesArray : Array<[ String :  AnyObject ]> = countryDic[ "cities" ] as! Array<[ String :  AnyObject ]>
-                    let  cityDic : [String : AnyObject] = citiesArray[row]
-                    title = (cityDic[ "cityName" ] as? String)!
+                    title = (stateDic[ "name" ] as? String)!
                 }
-                
-            } else  {
-                let  country =  self.countryArray[countryIndex]
-                let statesArray : Array<[ String :  AnyObject ]> = country[ "states" ] as! Array<[ String :  AnyObject ]>
-                let  stateDic : [String : AnyObject] = statesArray[self.stateIndex]
-                let cityArry : Array<[ String :  AnyObject ]>  = stateDic["cities"] as! Array<[String : AnyObject]>
-                let  cityDic : [String : AnyObject] = cityArry[row]
-                title =  (cityDic[ "cityName" ] as? String)!
             }
             
         }else if pickerView.tag == 30002{
@@ -484,26 +460,7 @@ extension  EditProfileController :UIPickerViewDataSource,UIPickerViewDelegate{
                 return  self .countryArray.count
             }  else  if  component == 1 {
                 let  countryDic =  self .countryArray[self.countryIndex]
-                if countryDic["states"]?.count == nil ||  countryDic["states"]?.count == 0{
-                    if  countryDic[ "cities" ] != nil && countryDic[ "cities" ]!.count > 0{
-                        return  countryDic[ "cities" ]!.count
-                    }
-                    return 0
-                   
-                }else{
-                    return countryDic[ "states" ]!.count
-                }
-                
-            }  else  {
-                let  countryDic =  self.countryArray[countryIndex]
-                if countryDic[ "states" ] == nil {
-                    return 0
-                }else{
-                    let statesArray : Array<[ String :  AnyObject ]> = countryDic[ "states" ] as! Array<[ String :  AnyObject ]>
-                    let  stateDic : [String : AnyObject] = statesArray[self.stateIndex]
-                    return  stateDic[ "cities" ]!.count
-                }
-                
+                return countryDic[ "states" ]!.count
             }
         }else if pickerView.tag == 30002{
             return  availabelArray.count
@@ -520,18 +477,10 @@ extension  EditProfileController :UIPickerViewDataSource,UIPickerViewDelegate{
             case 0:
                 countryIndex = row;
                 stateIndex = 0;
-                cityIndex = 0;
                 pickerView.reloadComponent(1);
-                pickerView.reloadComponent(2);
                 pickerView.selectRow(0, inComponent: 1, animated:  false )
-                pickerView.selectRow(0, inComponent: 2, animated:  false )
             case 1:
                 stateIndex = row
-                cityIndex = 0
-                pickerView.reloadComponent(2)
-                pickerView.selectRow(0, inComponent: 2, animated:  false )
-            case  2:
-                cityIndex = row
             default :
                 break ;
             }
@@ -540,10 +489,7 @@ extension  EditProfileController :UIPickerViewDataSource,UIPickerViewDelegate{
         }else if pickerView.tag == 30003{
            playAxieIndex = row
         }
-        
-        
     }
-      
 }
 
 extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UITextViewDelegate{

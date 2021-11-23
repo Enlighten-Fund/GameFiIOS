@@ -90,11 +90,11 @@
 		985817732747D3D200D8CFCA /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985817722747D3D200D8CFCA /* UserInfoModel.swift */; };
 		985817762749300500D8CFCA /* PickerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985817752749300500D8CFCA /* PickerViewCell.swift */; };
 		985817782749349700D8CFCA /* IDPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985817772749349700D8CFCA /* IDPhotoCell.swift */; };
-		9858177A274A6ED400D8CFCA /* countries-heirarchy.json in Resources */ = {isa = PBXBuildFile; fileRef = 98581779274A6ED400D8CFCA /* countries-heirarchy.json */; };
 		9858177C274A8CF200D8CFCA /* GFPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858177B274A8CF200D8CFCA /* GFPickerView.swift */; };
 		9858177E274B283500D8CFCA /* GFDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858177D274B283500D8CFCA /* GFDatePickerView.swift */; };
 		98581782274B67E300D8CFCA /* HImagePickerUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98581781274B67E200D8CFCA /* HImagePickerUtils.swift */; };
 		98581786274CAFD600D8CFCA /* ScholarApplyListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98581785274CAFD600D8CFCA /* ScholarApplyListModel.swift */; };
+		98581788274CB7B100D8CFCA /* countries.json in Resources */ = {isa = PBXBuildFile; fileRef = 98581787274CB7B100D8CFCA /* countries.json */; };
 		986C586E27300B9A0021280A /* LoginHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C586D27300B9A0021280A /* LoginHeadView.swift */; };
 		986C587027300BEB0021280A /* LoginFootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C586F27300BEB0021280A /* LoginFootView.swift */; };
 		987694272738ED150075CA0F /* ScholarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987694262738ED150075CA0F /* ScholarModel.swift */; };
@@ -208,11 +208,11 @@
 		985817722747D3D200D8CFCA /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
 		985817752749300500D8CFCA /* PickerViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewCell.swift; sourceTree = "<group>"; };
 		985817772749349700D8CFCA /* IDPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDPhotoCell.swift; sourceTree = "<group>"; };
-		98581779274A6ED400D8CFCA /* countries-heirarchy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "countries-heirarchy.json"; sourceTree = "<group>"; };
 		9858177B274A8CF200D8CFCA /* GFPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFPickerView.swift; sourceTree = "<group>"; };
 		9858177D274B283500D8CFCA /* GFDatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFDatePickerView.swift; sourceTree = "<group>"; };
 		98581781274B67E200D8CFCA /* HImagePickerUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HImagePickerUtils.swift; sourceTree = "<group>"; };
 		98581785274CAFD600D8CFCA /* ScholarApplyListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarApplyListModel.swift; sourceTree = "<group>"; };
+		98581787274CB7B100D8CFCA /* countries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countries.json; sourceTree = "<group>"; };
 		986C586D27300B9A0021280A /* LoginHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeadView.swift; sourceTree = "<group>"; };
 		986C586F27300BEB0021280A /* LoginFootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFootView.swift; sourceTree = "<group>"; };
 		987694262738ED150075CA0F /* ScholarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarModel.swift; sourceTree = "<group>"; };
@@ -364,7 +364,7 @@
 				98581734273E334100D8CFCA /* list_by_marketplace.json */,
 				98581736273E41A800D8CFCA /* list_scholar.json */,
 				985817482742955900D8CFCA /* tracksum.json */,
-				98581779274A6ED400D8CFCA /* countries-heirarchy.json */,
+				98581787274CB7B100D8CFCA /* countries.json */,
 				9811EA152726BB2700B0ACF0 /* GameFi */,
 				4199D9C3B4A28724DDAB9D9F /* AmplifyConfig */,
 				E53B31C82C867BF0D6041DEF /* Pods */,
@@ -642,7 +642,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9858177A274A6ED400D8CFCA /* countries-heirarchy.json in Resources */,
 				9811EA232726BB2800B0ACF0 /* LaunchScreen.storyboard in Resources */,
 				9811EA202726BB2800B0ACF0 /* Assets.xcassets in Resources */,
 				985817492742955900D8CFCA /* tracksum.json in Resources */,
@@ -652,6 +651,7 @@
 				985817522742A13100D8CFCA /* tracklist.json in Resources */,
 				7C326CFCDF747D3682D551F3 /* awsconfiguration.json in Resources */,
 				9858175F2745005900D8CFCA /* managerscholarshiplist.json in Resources */,
+				98581788274CB7B100D8CFCA /* countries.json in Resources */,
 				985817432742784B00D8CFCA /* axieability.json in Resources */,
 				7BCBC07F76E99519033E01A6 /* amplifyconfiguration.json in Resources */,
 				98581735273E334100D8CFCA /* list_by_marketplace.json in Resources */,
