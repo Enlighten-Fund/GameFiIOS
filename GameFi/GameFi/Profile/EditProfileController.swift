@@ -25,9 +25,14 @@ class EditProfileController: ViewController {
     var stateIndex = 0
     var cityIndex = 0
     var countryLabel : UILabel?
+    var country : String?
     var birthDayLabel : UILabel?
+    var birthday : String?
     var availableLabel : UILabel?
+    var available : String?
     var playAxieLabel : UILabel?
+    var playAxie : String?
+    var hasUploadId = false
     var availabelArray = ["1-3","3-5","5-7","7-9","9-11"]
     var playAxieArray = ["< 1","1-3","3-6",">6"]
     var availableIndex = 0
@@ -142,10 +147,12 @@ class EditProfileController: ViewController {
     @objc func selectAvailable() {
         self.availableLabel?.text = self.availabelArray[availableIndex]
         self.hideAvailablePickerView()
+        self.available = self.availabelArray[availableIndex]
     }
     @objc func selectPlayAxie() {
         self.playAxieLabel?.text = self.playAxieArray[playAxieIndex]
         self.hidePlayAxiePickerView()
+        self.playAxie = self.playAxieArray[playAxieIndex]
     }
     
     
@@ -178,6 +185,7 @@ class EditProfileController: ViewController {
         let birthDay = self.birthdayDatePickerView?.pickerView?.date
         self.birthDayLabel?.text = self.stringFromDate(date: birthDay! as NSDate)
         self.hideBirthdayPickerView()
+        self.birthday = self.birthDayLabel?.text
     }
     
     @objc func selectCountry() {
@@ -204,6 +212,7 @@ class EditProfileController: ViewController {
         }
         self.countryLabel?.text = "\(country)-\(state)-\(city)"
         self.hideCountryPickerView()
+        self.country = self.countryLabel?.text
     }
     
     func uploadIdPhoto(image:UIImage) {
@@ -218,6 +227,7 @@ class EditProfileController: ViewController {
                     self.idPhotoCell?.reUploadBtn.isHidden = false
                     self.idPhotoCell?.contentView.bringSubviewToFront(self.idPhotoCell!.reUploadBtn)
                     self.idPhotoCell?.reUploadBtn.addTarget(self, action: #selector(showPictureSheet), for: .touchUpInside)
+                    self.hasUploadId = true
                 }
             }
         }
@@ -274,6 +284,63 @@ class EditProfileController: ViewController {
         }
     }
     
+    @objc func updateUserinfo(){
+        if !self.valifyFirstName() {
+            return
+        }
+        if !self.valifyLastName() {
+            return
+        }
+        if !self.valifyCountry() {
+            return
+        }
+        if !self.valifyIdNO() {
+            return
+        }
+        if !self.valifyBirthDay() {
+            return
+        }
+        if !self.valifyIdPhoto() {
+            return
+        }
+        if !self.valifyAvailable() {
+            return
+        }
+        if !self.valifyExperience() {
+            return
+        }
+        if !self.valifyMMR() {
+            return
+        }
+        if !self.valifyGamePlayed() {
+            return
+        }
+        if !self.valifyIntroduction() {
+            return
+        }
+        let userinfoModel = UserInfoModel.init()
+        userinfoModel.first_name = self.firstnameTextField?.text
+        userinfoModel.last_name = self.lastnameTextField?.text
+        userinfoModel.nation = self.country
+        userinfoModel.id_num = self.idNoTextField?.text
+        userinfoModel.dob = self.birthday
+        userinfoModel.available_time = self.available
+        userinfoModel.axie_exp = self.playAxie
+        userinfoModel.mmr = self.mmrField?.text
+        userinfoModel.game_history = self.gamesPlayedTextView?.text
+        userinfoModel.self_intro = self.introduceTextView?.text
+        self.mc_loading()
+        DataManager.sharedInstance.updateUserinfo(userinfoModel: userinfoModel) { result, reponse in
+            DispatchQueue.main.async { [self] in
+                self.mc_remove()
+                if result.success!{
+                    self.navigationController?.popViewController(animated: true)
+                    
+                }
+            }
+        }
+    }
+    
     lazy var tableView: UITableView? = {
         let tempTableView = UITableView.init(frame: CGRect.zero, style: .grouped)
         tempTableView.backgroundColor = UIColor(red: 0.15, green: 0.16, blue: 0.24, alpha: 1)
@@ -293,6 +360,9 @@ class EditProfileController: ViewController {
         tempTableView.register(EmptyTableViewCell.classForCoder(), forCellReuseIdentifier: emptyTableViewCellIdentifier)
         tempTableView.dataSource = self
         tempTableView.delegate = self
+        let footView = SubmitView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 40))
+        footView.submitBtn.addTarget(self, action: #selector(updateUserinfo), for: .touchUpInside)
+        tempTableView.tableFooterView = footView
         view.addSubview(tempTableView)
         return tempTableView
     }()
@@ -494,6 +564,14 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
         }
     }
     
+    func updateLabel(label:UILabel,focus:Bool)  {
+        if focus {
+            label.layer.borderColor = UIColor.init(hexString: "0xB85050").cgColor
+        }else{
+            label.layer.borderColor = UIColor(red: 0.27, green: 0.3, blue: 0.41, alpha: 1).cgColor
+        }
+    }
+    
     func valifyFirstName() -> Bool{
         if self.firstnameTextField!.text == nil || self.firstnameTextField!.text!.isBlank {
             self.showNoticeLabel(notice: "First name should be filled in")
@@ -518,6 +596,18 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
         }
     }
     
+    func valifyCountry() -> Bool{
+        if self.country == nil || self.country.isBlank {
+            self.showNoticeLabel(notice: "Country should be selected")
+            self.updateLabel(label: self.countryLabel!, focus: true)
+            return false
+        }else{
+            self.hideNoticeLabel()
+            self.updateLabel(label: self.countryLabel!, focus: false)
+            return true
+        }
+    }
+    
     func valifyIdNO() -> Bool{
         if self.idNoTextField!.text == nil || self.idNoTextField!.text!.isBlank {
             self.showNoticeLabel(notice: "Id Number should be filled in")
@@ -526,6 +616,54 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
         }else{
             self.hideNoticeLabel()
             self.updateTextField(textField: self.idNoTextField!, focus: false)
+            return true
+        }
+    }
+    
+    func valifyBirthDay() -> Bool{
+        if self.birthday == nil || self.birthday.isBlank {
+            self.showNoticeLabel(notice: "Birthday should be selected")
+            self.updateLabel(label: self.birthDayLabel!, focus: true)
+            return false
+        }else{
+            self.hideNoticeLabel()
+            self.updateLabel(label: self.birthDayLabel!, focus: false)
+            return true
+        }
+    }
+    
+    func valifyIdPhoto() -> Bool{
+        if self.hasUploadId == false {
+            self.showNoticeLabel(notice: "Id photo should be upload")
+            self.idImgView!.layer.borderColor = UIColor.init(hexString: "0xB85050").cgColor
+            return false
+        }else{
+            self.hideNoticeLabel()
+            self.idImgView!.layer.borderColor = UIColor(red: 0.27, green: 0.3, blue: 0.41, alpha: 1).cgColor
+            return true
+        }
+    }
+    
+    func valifyAvailable() -> Bool{
+        if self.available == nil || self.available.isBlank {
+            self.showNoticeLabel(notice: "Available time per day should be selected")
+            self.updateLabel(label: self.availableLabel!, focus: true)
+            return false
+        }else{
+            self.hideNoticeLabel()
+            self.updateLabel(label: self.availableLabel!, focus: false)
+            return true
+        }
+    }
+    
+    func valifyExperience() -> Bool{
+        if self.playAxie == nil || self.playAxie.isBlank {
+            self.showNoticeLabel(notice: "Your experience in Axie Infinity should be selected")
+            self.updateLabel(label: self.playAxieLabel!, focus: true)
+            return false
+        }else{
+            self.hideNoticeLabel()
+            self.updateLabel(label: self.playAxieLabel!, focus: false)
             return true
         }
     }
@@ -543,7 +681,7 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
     }
     
     func valifyGamePlayed() -> Bool{
-        if self.gamesPlayedTextView!.text == nil || self.gamesPlayedTextView!.text!.isBlank {
+        if self.gamesPlayedTextView!.text == "Enter the gmes you played before" {
             self.showNoticeLabel(notice: "The game you played should be filled in")
             self.updateTextView(textView:self.gamesPlayedTextView!, focus: true)
             return false
@@ -555,7 +693,7 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
     }
     
     func valifyIntroduction() -> Bool{
-        if self.introduceTextView!.text == nil || self.introduceTextView!.text!.isBlank {
+        if self.introduceTextView!.text == "Introduce yourself briefly" {
             self.showNoticeLabel(notice: "Introduce yourself briefly should be filled in")
             self.updateTextView(textView:self.introduceTextView!, focus: true)
             return false

@@ -486,28 +486,40 @@ class DataManager: NSObject {
         }
     }
 
-func uploadImage(url: String,image: UIImage,completeBlock: @escaping CompleteBlock){
-    let imageData : Data  = UIImage.resetImgSize(sourceImage: image, maxImageLenght: IPhone_SCREEN_HEIGHT, maxSizeKB: 1024)
-    let config = URLSessionConfiguration.default
-    let session = URLSession(configuration: config)
-    var urlRequest = URLRequest(url: URL(string: url)!)
-    urlRequest.httpMethod = "PUT"
-    urlRequest.setValue("image/png", forHTTPHeaderField: "Content-Type")
-    var data = Data()
-    data.append(imageData)
-    session.uploadTask(with: urlRequest, from: data, completionHandler: { responseData, response, error in
-        
-        if(error != nil){
-            print("\(error!.localizedDescription)")
-            let result = GFResult.init(error: error!)
-            completeBlock(result,error as Any)
-        }else{
-            let result = GFResult.init(reponse: [:])
-            result.code = 1
-            completeBlock(result,response as Any)
+    func uploadImage(url: String,image: UIImage,completeBlock: @escaping CompleteBlock){
+        let imageData : Data  = UIImage.resetImgSize(sourceImage: image, maxImageLenght: IPhone_SCREEN_HEIGHT, maxSizeKB: 1024)
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        var urlRequest = URLRequest(url: URL(string: url)!)
+        urlRequest.httpMethod = "PUT"
+        urlRequest.setValue("image/png", forHTTPHeaderField: "Content-Type")
+        var data = Data()
+        data.append(imageData)
+        session.uploadTask(with: urlRequest, from: data, completionHandler: { responseData, response, error in
+            
+            if(error != nil){
+                print("\(error!.localizedDescription)")
+                let result = GFResult.init(error: error!)
+                completeBlock(result,error as Any)
+            }else{
+                let result = GFResult.init(reponse: [:])
+                result.code = 1
+                completeBlock(result,response as Any)
+            }
+            
+        }).resume()
+    }
+    
+    func updateUserinfo(userinfoModel:UserInfoModel, completeBlock: @escaping CompleteBlock) {
+        let json = JsonUtil.modelToJson(userinfoModel)
+        let dic = ["user_id" : "201" as Any,"scholar_info_dict": json] as [String : Any]
+        self.POST(url: "user/update_by_id", param: dic ) { result, reponse in
+            if result.success!{
+                let userInfoModel : UserInfoModel = JsonUtil.jsonToModel(reponse as! String, UserInfoModel.self) as! UserInfoModel
+                completeBlock(result,userInfoModel)
+            }else{
+                completeBlock(result,reponse)
+            }
         }
-        
-    }).resume()
-
-}
+    }
 }
