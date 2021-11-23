@@ -107,20 +107,15 @@ class EditProfileController: ViewController {
     }
     
     func showCountryPickerView() {
+        self.countryPickerView!.snp.remakeConstraints { make in
+            make.bottom.equalToSuperview().offset(IPhone_TabbarSafeBottomMargin)
+            make.height.equalTo(400)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+        }
         if self.userInfoModel?.nation == nil || self.userInfoModel!.nation!.isBlank {
-            self.countryPickerView!.snp.remakeConstraints { make in
-                make.bottom.equalToSuperview().offset(IPhone_TabbarSafeBottomMargin)
-                make.height.equalTo(400)
-                make.left.equalToSuperview()
-                make.right.equalToSuperview()
-            }
+
         }else{
-            self.countryPickerView!.snp.remakeConstraints { make in
-                make.bottom.equalToSuperview().offset(IPhone_TabbarSafeBottomMargin)
-                make.height.equalTo(400)
-                make.left.equalToSuperview()
-                make.right.equalToSuperview()
-            }
             let array = self.country?.split(separator: ",")
             if ((array?.isEmpty) != nil) && array!.count > 0 {
                 if array?.count == 1 {
@@ -186,13 +181,37 @@ class EditProfileController: ViewController {
         }
     }
     
+    func dateFromString(string:String) -> NSDate {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.date(from: string)! as NSDate
+    }
+    
+    func stringFromDate(date:NSDate) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.string(from: date as Date)
+    }
+    
     func showBirthDayPickerView() {
-        self.birthdayDatePickerView!.snp.remakeConstraints { make in
-            make.bottom.equalToSuperview().offset(IPhone_TabbarSafeBottomMargin)
-            make.height.equalTo(400)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
+        if self.userInfoModel?.dob == nil || self.userInfoModel!.dob!.isBlank {
+            self.birthdayDatePickerView!.snp.remakeConstraints { make in
+                make.bottom.equalToSuperview().offset(IPhone_TabbarSafeBottomMargin)
+                make.height.equalTo(400)
+                make.left.equalToSuperview()
+                make.right.equalToSuperview()
+            }
+        }else{
+            self.birthdayDatePickerView!.snp.remakeConstraints { make in
+                make.bottom.equalToSuperview().offset(IPhone_TabbarSafeBottomMargin)
+                make.height.equalTo(400)
+                make.left.equalToSuperview()
+                make.right.equalToSuperview()
+            }
+            let date = dateFromString(string: (self.userInfoModel?.dob)!)
+            self.birthdayDatePickerView?.pickerView?.date = date as Date
         }
+        
     }
     
     @objc func hideBirthdayPickerView() {
@@ -210,6 +229,21 @@ class EditProfileController: ViewController {
             make.height.equalTo(400)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
+        }
+        if self.userInfoModel?.available_time == nil || self.userInfoModel!.available_time!.isBlank {
+            
+        }else{
+            var availableIndex : Int?
+            for i in 0 ..< availabelArray.count {
+                if self.available == availabelArray[i] {
+                    availableIndex = i
+                    break
+                }
+            }
+            if availableIndex != nil {
+                self.availableIndex = availableIndex!
+                self.availablePickerView!.pickerView!.selectRow(availableIndex!, inComponent: 0, animated:  false )
+            }
         }
     }
     
@@ -241,6 +275,22 @@ class EditProfileController: ViewController {
             make.left.equalToSuperview()
             make.right.equalToSuperview()
         }
+        if self.userInfoModel?.axie_exp == nil || self.userInfoModel!.axie_exp!.isBlank {
+            
+        }else{
+            var playAxieIndex : Int?
+            for i in 0 ..< playAxieArray.count {
+                if self.playAxie == playAxieArray[i] {
+                    playAxieIndex = i
+                    break
+                }
+            }
+            if playAxieIndex != nil {
+                self.playAxieIndex = playAxieIndex!
+                self.playAxiePickerView!.pickerView!.selectRow(playAxieIndex!, inComponent: 0, animated:  false )
+            }
+        }
+        
     }
     
     @objc func hidePlayAxiePickerView() {
@@ -250,13 +300,6 @@ class EditProfileController: ViewController {
             make.left.equalToSuperview()
             make.right.equalToSuperview()
         }
-    }
-    
-    
-    func stringFromDate(date:NSDate) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        return dateFormatter.string(from: date as Date)
     }
     
     @objc func selectBirthDay() {
