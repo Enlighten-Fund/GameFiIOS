@@ -107,12 +107,74 @@ class EditProfileController: ViewController {
     }
     
     func showCountryPickerView() {
-        self.countryPickerView!.snp.remakeConstraints { make in
-            make.bottom.equalToSuperview().offset(IPhone_TabbarSafeBottomMargin)
-            make.height.equalTo(400)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
+        if self.userInfoModel?.nation == nil || self.userInfoModel!.nation!.isBlank {
+            self.countryPickerView!.snp.remakeConstraints { make in
+                make.bottom.equalToSuperview().offset(IPhone_TabbarSafeBottomMargin)
+                make.height.equalTo(400)
+                make.left.equalToSuperview()
+                make.right.equalToSuperview()
+            }
+        }else{
+            self.countryPickerView!.snp.remakeConstraints { make in
+                make.bottom.equalToSuperview().offset(IPhone_TabbarSafeBottomMargin)
+                make.height.equalTo(400)
+                make.left.equalToSuperview()
+                make.right.equalToSuperview()
+            }
+            let array = self.country?.split(separator: ",")
+            if ((array?.isEmpty) != nil) && array!.count > 0 {
+                if array?.count == 1 {
+                    let country : String = String(array![0])
+                    var countryIndex : Int?
+                    for i in 0 ..< countryArray.count {
+                        let dic = countryArray[i]
+                        if country == dic["name"] as! String {
+                            countryIndex = i
+                            break
+                        }
+                    }
+                    if countryIndex != nil {
+                        self.countryIndex = countryIndex!
+                        self.countryPickerView!.pickerView!.selectRow(countryIndex!, inComponent: 0, animated:  false )
+                    }
+                    
+                }else if array?.count == 2{
+                    let country : String = String(array![0])
+                    var countryIndex : Int?
+                    let state : String = String(array![1])
+                    var stateIndex : Int?
+                    for i in 0 ..< countryArray.count {
+                        let dic = countryArray[i]
+                        if country == dic["name"] as! String {
+                            countryIndex = i
+                            break
+                        }
+                    }
+                    if countryIndex != nil {
+                        let dic : [String : AnyObject]  = countryArray[countryIndex!]
+                        let states : [[String : AnyObject]] = dic["states"] as! [[String : AnyObject]]
+                        for i in 0 ..< states.count {
+                            let dic : [String : AnyObject] = states[i]
+                            if state == dic["name"] as! String {
+                                stateIndex = i
+                                break
+                            }
+                        }
+                    }
+                    
+                    if countryIndex != nil && stateIndex != nil{
+                        self.countryIndex = countryIndex!
+                        self.stateIndex = stateIndex!
+                        self.countryPickerView!.pickerView!.selectRow(countryIndex!, inComponent: 0, animated:  false )
+                        self.countryPickerView!.pickerView!.reloadComponent(1)
+                        self.countryPickerView!.pickerView!.selectRow(stateIndex!, inComponent: 1, animated:  false )
+                    }
+                    
+                }
+                
+            }
         }
+        
     }
     
     @objc func hideCountryPickerView() {
