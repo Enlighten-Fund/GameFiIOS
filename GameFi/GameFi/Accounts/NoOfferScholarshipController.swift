@@ -99,7 +99,7 @@ class NoOfferScholarshipController: UIViewController {
         ourCollectionView.dataSource = self
         ourCollectionView.register(NoOfferHeaderView.self, forSupplementaryViewOfKind:UICollectionView.elementKindSectionHeader, withReuseIdentifier: noOfferHeaderViewheaderIdentifier)
         ourCollectionView.register(NoOfferScholarshipCell.classForCoder(), forCellWithReuseIdentifier: noOfferScholarshipCellIdentifier)
-        ourCollectionView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
+        ourCollectionView.mj_header = MJChiBaoZiHeader.init(refreshingBlock: {
             self.refreshHttpRequest()
         })
         ourCollectionView.mj_footer = MJRefreshBackNormalFooter.init(refreshingBlock: {

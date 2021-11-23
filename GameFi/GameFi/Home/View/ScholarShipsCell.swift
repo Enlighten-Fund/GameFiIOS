@@ -92,10 +92,10 @@ class ScholarshipsCell: UICollectionViewCell {
             make.width.equalToSuperview()
         }
         self.slpImgView.snp.makeConstraints { make in
-            make.top.equalTo(self.creditLabel.snp.bottom)
+            make.centerY.equalTo(self.slpLabel.snp.centerY)
             make.left.equalToSuperview().offset(14)
-            make.height.equalTo(15)
-            make.width.equalTo(15)
+            make.height.equalTo(20)
+            make.width.equalTo(20)
         }
         self.slpLabel.snp.makeConstraints { make in
             make.top.equalTo(self.creditLabel.snp.bottom)
@@ -202,6 +202,7 @@ class ScholarshipsCell: UICollectionViewCell {
     
     lazy var slpImgView : UIImageView = {
         let tempImgView = UIImageView.init()
+        tempImgView.image = UIImage.init(named: "slp")
         self.contentView.addSubview(tempImgView)
         return tempImgView
     }()

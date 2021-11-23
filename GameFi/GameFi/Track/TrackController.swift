@@ -152,7 +152,7 @@ class TrackController: ViewController {
         tempTableView.dataSource = self
         tempTableView.delegate = self
         tempTableView.backgroundColor = self.view.backgroundColor
-        tempTableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
+        tempTableView.mj_header = MJChiBaoZiHeader.init(refreshingBlock: {
             self.requestData()
         })
         tempTableView.mj_header?.isAutomaticallyChangeAlpha = true

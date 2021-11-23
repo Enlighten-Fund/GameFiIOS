@@ -42,7 +42,7 @@ class OfferingScholarshipsController: UIViewController {
         ourCollectionView.delegate = self
         ourCollectionView.dataSource = self
         ourCollectionView.register(ManagerScholarshipCell.classForCoder(), forCellWithReuseIdentifier: managerScholarshipCellIdentifier)
-        ourCollectionView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
+        ourCollectionView.mj_header = MJChiBaoZiHeader.init(refreshingBlock: {
             self.refreshHttpRequest()
         })
         ourCollectionView.mj_footer = MJRefreshBackNormalFooter.init(refreshingBlock: {

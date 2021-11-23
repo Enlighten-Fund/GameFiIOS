@@ -17,7 +17,7 @@
 
     // 设置正在刷新状态的动画图片
     NSMutableArray *refreshingImages = [NSMutableArray array];
-    for (NSUInteger i = 0; i<=23; i++) {
+    for (NSUInteger i = 0; i<=11; i++) {
         UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"loading%lu", (unsigned long)i]];
         [refreshingImages addObject:image];
     }

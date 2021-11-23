@@ -18,7 +18,7 @@
     self.stateLabel.hidden = YES;
     // 设置普通状态的动画图片
     NSMutableArray *idleImages = [NSMutableArray array];
-    for (NSUInteger i = 0; i<=23; i++) {
+    for (NSUInteger i = 0; i<=11; i++) {
         UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"loading%lu", (unsigned long)i]];
         [idleImages addObject:image];
     }
@@ -26,7 +26,7 @@
     
     // 设置即将刷新状态的动画图片（一松开就会刷新的状态）
     NSMutableArray *refreshingImages = [NSMutableArray array];
-    for (NSUInteger i = 0; i<=23; i++) {
+    for (NSUInteger i = 0; i<=11; i++) {
         UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"loading%lu", (unsigned long)i]];
         [refreshingImages addObject:image];
     }

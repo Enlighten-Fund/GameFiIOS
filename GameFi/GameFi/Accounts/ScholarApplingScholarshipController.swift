@@ -41,7 +41,7 @@ class ScholarApplingScholarshipController: UIViewController {
         ourCollectionView.delegate = self
         ourCollectionView.dataSource = self
         ourCollectionView.register(ScholarApplyCell.classForCoder(), forCellWithReuseIdentifier: scholarApplyCellIdentifier)
-        ourCollectionView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
+        ourCollectionView.mj_header = MJChiBaoZiHeader.init(refreshingBlock: {
             self.refreshHttpRequest()
         })
         ourCollectionView.mj_footer = MJRefreshBackNormalFooter.init(refreshingBlock: {
