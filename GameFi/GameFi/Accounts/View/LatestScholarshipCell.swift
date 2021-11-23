@@ -71,27 +71,27 @@ class LatestScholarshipCell: UICollectionViewCell {
         }
     }
 
-    func update(managerApplicationModel:ManagerApplicationModel) {
-        if managerApplicationModel.username != nil {
-            self.scholarLabelView.rightLabel.text = managerApplicationModel.username
+    func update(scholarApplyModel:ScholarApplyModel) {
+        if scholarApplyModel.scholar_user_name != nil {
+            self.scholarLabelView.rightLabel.text = scholarApplyModel.scholar_user_name
         }
-        if managerApplicationModel.credit_score != nil {
-            self.creditScoreLabelView.rightLabel.text = managerApplicationModel.credit_score
+        if scholarApplyModel.scholar_credit_score != nil {
+            self.creditScoreLabelView.rightLabel.text = scholarApplyModel.scholar_credit_score
         }
-        if managerApplicationModel.mmr != nil {
-            self.highmmrLabelView.rightLabel.text = managerApplicationModel.mmr
+        if scholarApplyModel.scholar_mmr != nil {
+            self.highmmrLabelView.rightLabel.text = scholarApplyModel.scholar_mmr
         }
-        if managerApplicationModel.available_time != nil {
-            self.availabelLabelView.rightLabel.text = managerApplicationModel.available_time
+        if scholarApplyModel.scholar_available_time != nil {
+            self.availabelLabelView.rightLabel.text = scholarApplyModel.scholar_available_time
         }
-        if managerApplicationModel.scholar_since != nil {
-            self.experienceLabelView.rightLabel.text = managerApplicationModel.scholar_since
+        if scholarApplyModel.scholar_axie_exp != nil {
+            self.experienceLabelView.rightLabel.text = scholarApplyModel.scholar_axie_exp
         }
-        if managerApplicationModel.nation != nil {
-            self.countryLabelView.rightLabel.text = managerApplicationModel.nation
+        if scholarApplyModel.scholar_nation != nil {
+            self.countryLabelView.rightLabel.text = scholarApplyModel.scholar_nation
         }
-        if managerApplicationModel.accountApplied != nil {
-            self.accountAppliedLabelView.rightLabel.text = managerApplicationModel.accountApplied
+        if scholarApplyModel.scholarship_name != nil {
+            self.accountAppliedLabelView.rightLabel.text = scholarApplyModel.scholarship_name
         }
         
     }

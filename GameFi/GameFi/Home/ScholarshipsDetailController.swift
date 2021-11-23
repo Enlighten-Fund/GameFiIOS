@@ -71,12 +71,14 @@ class ScholarshipsDetailController: ViewController {
         if self.axieIds != nil && self.axieIds!.count > 0 {
             for axieId in self.axieIds! {
                 DataManager.sharedInstance.fetchAxieDetail(axieId: axieId) { result, reponse in
-                    let tempModel : AxieinfoModel = reponse as! AxieinfoModel
-                    self.dataSource?.append(tempModel)
-                    if self.dataSource?.count == self.axieIds?.count {
-                        DispatchQueue.main.async { [self] in
-                            self.tableView!.mj_header?.endRefreshing()
-                            self.tableView?.reloadData()
+                    if result.success!{
+                        let tempModel : AxieinfoModel = reponse as! AxieinfoModel
+                        self.dataSource?.append(tempModel)
+                        if self.dataSource?.count == self.axieIds?.count {
+                            DispatchQueue.main.async { [self] in
+                                self.tableView!.mj_header?.endRefreshing()
+                                self.tableView?.reloadData()
+                            }
                         }
                     }
                 }

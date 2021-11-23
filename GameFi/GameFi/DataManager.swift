@@ -280,7 +280,7 @@ class DataManager: NSObject {
     }
     
     //manager latest application
-    func fetechManagerLatestApplication(pageIndex:Int,completeBlock: @escaping CompleteBlock) {
+    func fetechScholarApplyListModel(pageIndex:Int,completeBlock: @escaping CompleteBlock) {
         let dic = ["page_index" : pageIndex,"page_size" : 20,"user_id": "201"] as [String : Any]
         self.POST(url: "application/list_by_manager", param: dic as [String : Any]) { result, reponse in
 //            let path = Bundle.main.path(forResource: "managerApplicationList", ofType: "json")
@@ -295,8 +295,8 @@ class DataManager: NSObject {
 //                    print("读取本地数据出现错误!",error)
 //            }
             if result.success!{
-                let managerApplicationListModel = JsonUtil.jsonToModel(reponse as! String, ManagerApplicationListModel.self)
-                completeBlock(result,managerApplicationListModel)
+                let scholarApplyListModel = JsonUtil.jsonToModel(reponse as! String, ScholarApplyListModel.self)
+                completeBlock(result,scholarApplyListModel)
             }else{
                 completeBlock(result,reponse)
             }

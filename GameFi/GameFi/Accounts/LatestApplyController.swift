@@ -11,7 +11,7 @@ import SnapKit
 import Foundation
 import SCLAlertView
 
-class LatestScholarshipController: UIViewController {
+class LatestApplyController: UIViewController {
     var pageIndex = 1
     var dataSource : Array<Any>? = Array.init()
 //    let sortArray:[String] = ["Latest","Highest credit","Modt everyday","SLP Most Axie","counts"]
@@ -100,7 +100,7 @@ class LatestScholarshipController: UIViewController {
 //    }()
 }
 
-extension  LatestScholarshipController : UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+extension  LatestApplyController : UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     // #MARK: --UICollectionViewDataSource的代理方法
     /**
     - 该方法是可选方法，默认为1
@@ -123,8 +123,8 @@ extension  LatestScholarshipController : UICollectionViewDelegate,UICollectionVi
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: latestScholarshipCellIdentifier, for: indexPath) as! LatestScholarshipCell
         cell.makeConstraints()
-        let managerApplicationModel = self.dataSource![indexPath.row]
-        cell.update(managerApplicationModel: managerApplicationModel as! ManagerApplicationModel)
+        let scholarApplyModel = self.dataSource![indexPath.row]
+        cell.update(scholarApplyModel: scholarApplyModel as! ScholarApplyModel)
         return cell
     }
 
@@ -146,22 +146,22 @@ extension  LatestScholarshipController : UICollectionViewDelegate,UICollectionVi
     }
     
     func requestListData() {
-        DataManager.sharedInstance.fetechManagerLatestApplication(pageIndex: pageIndex) { result, reponse in
+        DataManager.sharedInstance.fetechScholarApplyListModel(pageIndex: pageIndex) { result, reponse in
             DispatchQueue.main.async { [self] in
                 self.collectionView.mj_footer?.endRefreshing()
                 self.collectionView.mj_header?.endRefreshing()
                 if result.success!{
-                    let managerApplicationListModel : ManagerApplicationListModel = reponse as! ManagerApplicationListModel
+                    let scholarApplyListModel : ScholarApplyListModel = reponse as! ScholarApplyListModel
                     if self.pageIndex == 1{
-                        self.dataSource = managerApplicationListModel.data
+                        self.dataSource = scholarApplyListModel.data
                     }else{
-                        if managerApplicationListModel.data != nil {
-                            self.dataSource?.append(contentsOf: managerApplicationListModel.data!)
+                        if scholarApplyListModel.data != nil {
+                            self.dataSource?.append(contentsOf: scholarApplyListModel.data!)
                         }
 
                     }
-                    if managerApplicationListModel.next_page! > pageIndex {
-                        pageIndex = managerApplicationListModel.next_page!
+                    if scholarApplyListModel.next_page! > pageIndex {
+                        pageIndex = scholarApplyListModel.next_page!
                     }else{
                         self.collectionView.mj_footer?.endRefreshingWithNoMoreData()
                     }
