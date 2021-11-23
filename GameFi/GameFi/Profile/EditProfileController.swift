@@ -19,6 +19,7 @@ class EditProfileController: ViewController {
     var lastnameTextField : UITextField?
     var idNoTextField : UITextField?
     var mmrField : UITextField?
+    var roninField : UITextField?
     var gamesPlayedTextView : UITextView?
     var introduceTextView : UITextView?
     var countryArray = [[ String :  AnyObject ]]()
@@ -72,6 +73,16 @@ class EditProfileController: ViewController {
             }
         self.fetchUploadIdPhotoUrl()
         self.requestData()
+    }
+    
+    @objc override func leftBtnClick() {
+        GFAlert.showAlert(titleStr: "Notice:", msgStr: "Changes will not be saved", currentVC: self, cancelHandler: { action in
+            
+        }, otherBtns: ["YES"]) { index in
+            DispatchQueue.main.async { [self] in
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
     }
     
     func requestData() {
@@ -410,6 +421,9 @@ class EditProfileController: ViewController {
         if !self.valifyBirthDay() {
             return
         }
+        if !self.valifyRonin() {
+            return
+        }
         if !self.valifyIdPhoto() {
             return
         }
@@ -460,6 +474,7 @@ class EditProfileController: ViewController {
         tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "1")
         tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "2")
         tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "3")
+        tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "4")
         tempTableView.register(TextViewCell.classForCoder(), forCellReuseIdentifier: textViewCellIdentifier + "0")
         tempTableView.register(TextViewCell.classForCoder(), forCellReuseIdentifier: textViewCellIdentifier + "1")
         tempTableView.register(PickerViewCell.classForCoder(), forCellReuseIdentifier: pickerViewCellIdentifier + "0")
@@ -773,6 +788,27 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
     }
     
     
+    func valifyRonin() -> Bool{
+        if self.roninField!.text == nil || self.roninField!.text!.isBlank {
+            self.showNoticeLabel(notice: "Ronin address should be filled in")
+            self.updateTextField(textField: self.roninField!, focus: true)
+            return false
+        }else if !self.roninField!.text!.starts(with: "0x") && !self.roninField!.text!.starts(with: "ronin:"){
+            self.showNoticeLabel(notice: "Ronin address format is 0x...... or ronin:......")
+            self.updateTextField(textField: self.roninField!, focus: true)
+            return false
+        }else if self.roninField!.text!.count != 42 &&  self.roninField!.text!.count != 46{
+            self.showNoticeLabel(notice: "Ronin address format is 0x...... or ronin:......")
+            self.updateTextField(textField: self.roninField!, focus: true)
+            return false
+        }else{
+            self.hideNoticeLabel()
+            self.updateTextField(textField: self.roninField!, focus: false)
+            return true
+        }
+    }
+    
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == self.firstnameTextField {
             self.valifyFirstName()
@@ -782,6 +818,8 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
             self.valifyIdNO()
         }else if textField == self.mmrField {
             self.valifyMMR()
+        }else if textField == self.roninField {
+            self.valifyRonin()
         }
         
     }
@@ -824,7 +862,7 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 6
+            return 7
         }else if section == 1{
             return 5
         }
@@ -838,7 +876,7 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
         if indexPath.section == 1 && indexPath.row == 4 {
             return 150
         }
-        if indexPath.section == 0 && indexPath.row == 5 {
+        if indexPath.section == 0 && indexPath.row == 6 {
             return IPhone_SCREEN_WIDTH - 60
         }
            return 60
@@ -902,6 +940,13 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
             self.birthDayLabel = tempCell.titleLabel
             cell = tempCell
         case 5:
+            let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "4", for: indexPath) as! LabelTextFildCell
+            tempCell.textFild?.delegate = self
+            tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Ronin address", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
+            self.roninField = tempCell.textFild
+            self.idNoTextField?.text = userInfoModel?.billing_ronin_address
+            cell = tempCell
+        case 6:
             let tempCell : IDPhotoCell = tableView.dequeueReusableCell(withIdentifier: IDPhotoCellIdentifier, for: indexPath) as! IDPhotoCell
             self.idPhotoCell = tempCell
             tempCell.btn.addTarget(self, action: #selector(showPictureSheet), for: .touchUpInside)
