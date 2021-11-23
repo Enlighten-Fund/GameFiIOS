@@ -129,10 +129,11 @@ extension  LatestApplyController : UICollectionViewDelegate,UICollectionViewData
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let appdelegate : AppDelegate = UIApplication.shared.delegate! as! AppDelegate
-//        let scholarshipModel : ScholarshipModel = self.dataSource![indexPath.row] as! ScholarshipModel
-//        let scholarshipDetailVC = ScholarshipsDetailController.init(scholarshipId: scholarshipModel.scholarship_id!)
-//        appdelegate.homeVC?.navigationController!.pushViewController(scholarshipDetailVC, animated: true)
+        let appdelegate : AppDelegate = UIApplication.shared.delegate! as! AppDelegate
+        let vc : GFNavController = appdelegate.tabbarVC?.viewControllers![1] as! GFNavController
+        let scholarApplyModel : ScholarApplyModel = self.dataSource![indexPath.row] as! ScholarApplyModel
+        let scholarDetailVC = ScholarDetailController.init(scholarId: scholarApplyModel.scholar_user_id! )
+        vc.pushViewController(scholarDetailVC, animated: true)
     }
 
     //#MARK: --请求
