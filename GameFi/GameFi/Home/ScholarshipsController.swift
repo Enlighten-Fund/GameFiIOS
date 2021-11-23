@@ -12,6 +12,7 @@ import Foundation
 import SCLAlertView
 import AWSMobileClient
 
+
 class ScholarshipsController: UIViewController {
     var pageIndex = 1
     var dataSource : Array<Any>? = Array.init()
@@ -46,6 +47,7 @@ class ScholarshipsController: UIViewController {
             make.bottom.equalToSuperview().offset(-20)
         }
         self.collectionView.mj_header?.beginRefreshing()
+        
     }
 
     func showAddScholarshipVC() {
@@ -135,10 +137,12 @@ class ScholarshipsController: UIViewController {
         ourCollectionView.delegate = self
         ourCollectionView.dataSource = self
         ourCollectionView.register(ScholarshipsCell.classForCoder(), forCellWithReuseIdentifier: scholarshipsCelldentifier)
-        ourCollectionView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
+        ourCollectionView.mj_header = MJChiBaoZiHeader.init(refreshingBlock: {
             self.refreshHttpRequest()
         })
-        ourCollectionView.mj_footer = MJRefreshBackNormalFooter.init(refreshingBlock: {
+       
+
+        ourCollectionView.mj_footer = MJRefreshFooter.init(refreshingBlock: {
             self.loadMoreHttpRequest()
         })
         ourCollectionView.mj_header?.isAutomaticallyChangeAlpha = true

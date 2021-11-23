@@ -40,6 +40,8 @@
 		9811EA202726BB2800B0ACF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9811EA1F2726BB2800B0ACF0 /* Assets.xcassets */; };
 		9811EA232726BB2800B0ACF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9811EA212726BB2800B0ACF0 /* LaunchScreen.storyboard */; };
 		984472B4274CD91300DAE315 /* UserInfoStateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984472B3274CD91300DAE315 /* UserInfoStateController.swift */; };
+		984472BA274CF13800DAE315 /* MJChiBaoZiHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 984472B9274CF13800DAE315 /* MJChiBaoZiHeader.m */; };
+		984472BD274CF31000DAE315 /* MJChiBaoZiFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 984472BB274CF31000DAE315 /* MJChiBaoZiFooter.m */; };
 		984BDB95272ACD0A00F6144B /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984BDB94272ACD0A00F6144B /* RegisterController.swift */; };
 		984BDB99272BA23600F6144B /* RegisterHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984BDB98272BA23600F6144B /* RegisterHeadView.swift */; };
 		984BDB9B272BC6C200F6144B /* LabelTextFildCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984BDB9A272BC6C200F6144B /* LabelTextFildCell.swift */; };
@@ -159,6 +161,11 @@
 		9811EA222726BB2800B0ACF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9811EA242726BB2800B0ACF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		984472B3274CD91300DAE315 /* UserInfoStateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoStateController.swift; sourceTree = "<group>"; };
+		984472B7274CF13700DAE315 /* GameFi-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GameFi-Bridging-Header.h"; sourceTree = "<group>"; };
+		984472B8274CF13800DAE315 /* MJChiBaoZiHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJChiBaoZiHeader.h; sourceTree = "<group>"; };
+		984472B9274CF13800DAE315 /* MJChiBaoZiHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJChiBaoZiHeader.m; sourceTree = "<group>"; };
+		984472BB274CF31000DAE315 /* MJChiBaoZiFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJChiBaoZiFooter.m; sourceTree = "<group>"; };
+		984472BC274CF31000DAE315 /* MJChiBaoZiFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJChiBaoZiFooter.h; sourceTree = "<group>"; };
 		984BDB94272ACD0A00F6144B /* RegisterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
 		984BDB98272BA23600F6144B /* RegisterHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterHeadView.swift; sourceTree = "<group>"; };
 		984BDB9A272BC6C200F6144B /* LabelTextFildCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTextFildCell.swift; sourceTree = "<group>"; };
@@ -280,6 +287,10 @@
 		980DB78A27327DF9006ED3BE /* General */ = {
 			isa = PBXGroup;
 			children = (
+				984472B8274CF13800DAE315 /* MJChiBaoZiHeader.h */,
+				984472B9274CF13800DAE315 /* MJChiBaoZiHeader.m */,
+				984472BC274CF31000DAE315 /* MJChiBaoZiFooter.h */,
+				984472BB274CF31000DAE315 /* MJChiBaoZiFooter.m */,
 				98823A402729674500D9A7CD /* Define.swift */,
 				980A7DC927292034006AE4C4 /* GFResult.swift */,
 				980A7DC12728135B006AE4C4 /* GFNavController.swift */,
@@ -289,6 +300,7 @@
 				980DB7A62733F19E006ED3BE /* BaseModel.swift */,
 				980DB7A42733F158006ED3BE /* JsonUtil.swift */,
 				984BDBA3272C0E9300F6144B /* Extension.swift */,
+				984472B7274CF13700DAE315 /* GameFi-Bridging-Header.h */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -619,6 +631,7 @@
 				TargetAttributes = {
 					9811EA122726BB2700B0ACF0 = {
 						CreatedOnToolsVersion = 12.5.1;
+						LastSwiftMigration = 1250;
 					};
 				};
 			};
@@ -734,6 +747,7 @@
 				980DB78C27337D6F006ED3BE /* CollectionViewCell.swift in Sources */,
 				98581739273E921800D8CFCA /* UserManager.swift in Sources */,
 				9858176B2746907B00D8CFCA /* ScholarAccountsController.swift in Sources */,
+				984472BA274CF13800DAE315 /* MJChiBaoZiHeader.m in Sources */,
 				9858177E274B283500D8CFCA /* GFDatePickerView.swift in Sources */,
 				984BDB9D272BCDEF00F6144B /* EmptyTableViewCell.swift in Sources */,
 				9858177C274A8CF200D8CFCA /* GFPickerView.swift in Sources */,
@@ -761,6 +775,7 @@
 				987694372739625A0075CA0F /* ProfileController.swift in Sources */,
 				98581730273D2DBF00D8CFCA /* PostScholarFootView.swift in Sources */,
 				98D9940B273A46D2006AA8DC /* ScholarListModel.swift in Sources */,
+				984472BD274CF31000DAE315 /* MJChiBaoZiFooter.m in Sources */,
 				98581732273D3DB800D8CFCA /* TextViewCell.swift in Sources */,
 				98581782274B67E300D8CFCA /* HImagePickerUtils.swift in Sources */,
 				986C586E27300B9A0021280A /* LoginHeadView.swift in Sources */,
@@ -951,6 +966,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5W82Z6DS32;
 				INFOPLIST_FILE = GameFi/Info.plist;
@@ -961,6 +977,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.enlighten.gamefi.GameFi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "GameFi/General/GameFi-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -972,6 +990,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5W82Z6DS32;
 				INFOPLIST_FILE = GameFi/Info.plist;
@@ -982,6 +1001,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.enlighten.gamefi.GameFi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "GameFi/General/GameFi-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
