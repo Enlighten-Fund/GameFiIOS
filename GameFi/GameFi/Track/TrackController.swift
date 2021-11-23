@@ -123,6 +123,7 @@ class TrackController: ViewController {
                         let trackModel : TrackModel = dataSource![row] as! TrackModel
                         self.mc_loading()
                         DataManager.sharedInstance.deleteTracker(ronin_address: trackModel.ronin_address!) { result, reponse in
+                            self.mc_remove()
                             if result.success!{
                                 DispatchQueue.main.async { [self] in
                                     self.mc_text("delete success")

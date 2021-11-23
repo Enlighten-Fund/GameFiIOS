@@ -53,8 +53,8 @@ class ProfileHeaderView: UIView {
     func update(userInfoModel : UserInfoModel) {
 //        self.iconImgView.image = UIImage.init(named: "portrait")
         if userInfoModel.avatar != nil {
-//            self.iconImgView.kf.setImage(with:  URL.init(string: userInfoModel.avatar!))
-            self.iconImgView.kf.setImage(with: URL.init(string: userInfoModel.id_photo!), placeholder:  UIImage.init(named: "portrait"), options: nil) {result, error in
+//            self.iconImgView.kf.setImage(with:URL.init(string: userInfoModel.avatar!))
+            self.iconImgView.kf.setImage(with: URL.init(string: userInfoModel.avatar!), placeholder:  UIImage.init(named: "portrait"), options: nil) {result, error in
                 
             }
         }

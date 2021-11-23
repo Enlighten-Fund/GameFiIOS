@@ -112,7 +112,6 @@ extension  ScholarRentScholarshipController : UICollectionViewDelegate,UICollect
                         if managerScholarshipListModel.data != nil {
                             self.dataSource?.append(contentsOf: managerScholarshipListModel.data!)
                         }
-
                     }
                     if managerScholarshipListModel.next_page! > pageIndex {
                         pageIndex = managerScholarshipListModel.next_page!

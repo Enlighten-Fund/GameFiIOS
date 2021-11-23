@@ -89,9 +89,67 @@ class ProfileController: ViewController {
         })
     }
     
+    func uploadIdPhoto(image:UIImage) {
+        self.mc_loading()
+        DataManager.sharedInstance.uploadImage(url: self.userInfoModel!.avatar!, image: image) { result,reponse in
+            DispatchQueue.main.async { [self] in
+                self.mc_remove()
+                if result.success!{
+                    self.mc_text("uploadsuccess")
+                    self.headerView?.iconImgView.image = image
+                }
+            }
+        }
+
+    }
+    
+    @objc func  imageViewClick(){
+        GFAlert.showAlert(titleStr: nil, msgStr: nil, style: .actionSheet, currentVC: self, cancelBtn: "Cancel", cancelHandler: { (cancelAction) in
+            
+        }, otherBtns: ["Capture","Photo"]) { (idx) in
+            DispatchQueue.main.async { [self] in
+                if idx == 0{
+                    imagePicker.takePhoto(presentFrom: self, completion: { [unowned self] (image, status) in
+                        DispatchQueue.main.async { [self] in
+                            if status == .success {
+                                self.uploadIdPhoto(image: image!)
+                            }else{
+                                if status == .denied{
+                                    HImagePickerUtils.showTips(at: self,type: .takePhoto)
+                                }else{
+                                    print(status.description())
+                                }
+                                
+                            }
+                        }
+                    })
+                }else if idx == 1{
+                    imagePicker.choosePhoto(presentFrom: self, completion: { [unowned self] (image, status) in
+                        DispatchQueue.main.async { [self] in
+                            if status == .success {
+                                self.uploadIdPhoto(image: image!)
+                            }else{
+                                if status == .denied{
+                                    HImagePickerUtils.showTips(at: self,type: .choosePhoto)
+                                }else{
+                                    print(status.description())
+                                }
+                                
+                            }
+                        }
+                        
+                    })
+                }
+            }
+        }
+    }
+    
     lazy var headerView: ProfileHeaderView? = {
         let tempView = ProfileHeaderView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH - 30, height: 100))
         tempView.backgroundColor = self.view.backgroundColor
+        let singleTapGesture = UITapGestureRecognizer(target: self, action: #selector(imageViewClick))
+        tempView.iconImgView.addGestureRecognizer(singleTapGesture)
+        tempView.iconImgView.isUserInteractionEnabled = true
 //        tempView.signBtn.addTarget(self, action: #selector(signBtnClick), for: .touchUpInside)
         view.addSubview(tempView)
         return tempView
@@ -110,7 +168,7 @@ class ProfileController: ViewController {
         view.addSubview(tempTableView)
         return tempTableView
     }()
-    
+    lazy var imagePicker = HImagePickerUtils()
 }
 
 extension  ProfileController : UITableViewDelegate,UITableViewDataSource{
