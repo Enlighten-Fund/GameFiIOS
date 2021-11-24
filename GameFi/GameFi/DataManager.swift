@@ -241,8 +241,9 @@ class DataManager: NSObject {
     
     //Create Tracker
     func createTracker(accountName:String,ronin_address:String,manager_percentage:Float,completeBlock: @escaping CompleteBlock) {
+        let dealronin = ronin_address.replacingOccurrences(of: "ronin:", with: "0x")
         let dic = ["name" : accountName,
-                   "ronin_address" : ronin_address,
+                   "ronin_address" : dealronin,
                    "manager_percentage" : Float(manager_percentage),
                    "scholar_percentage": Float(100 - manager_percentage)
                   ] as [String : Any]
@@ -258,8 +259,9 @@ class DataManager: NSObject {
     
     //Edit Tracker
     func editTracker(accountName:String,ronin_address:String,manager_percentage:Float,completeBlock: @escaping CompleteBlock) {
+        let dealronin = ronin_address.replacingOccurrences(of: "ronin:", with: "0x")
         let dic = ["name" : accountName,
-                   "ronin_address" : ronin_address,
+                   "ronin_address" : dealronin,
                    "manager_percentage" : Float(manager_percentage),
                    "scholar_percentage": Float(100 - manager_percentage)
         ] as [String : Any]
@@ -275,7 +277,8 @@ class DataManager: NSObject {
     
     //Delete Tracker
     func deleteTracker(ronin_address:String,completeBlock: @escaping CompleteBlock) {
-        let dic = ["ronin_address" : ronin_address
+        let dealronin = ronin_address.replacingOccurrences(of: "ronin:", with: "0x")
+        let dic = ["ronin_address" : dealronin
         ] as [String : Any]
         self.POST(url: "game_accounts/delete_tracker", param: dic as [String : Any]) { result, reponse in
             if result.success!{

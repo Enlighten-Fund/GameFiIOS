@@ -82,10 +82,11 @@ class AddScholarshipController: ViewController {
         if !self.valifyPercentage() {
             return
         }
+        let dealronin = self.roninTextField?.text!.replacingOccurrences(of: "ronin:", with: "0x")
         let params = ["scholarship_name" : self.accountNameTextField?.text as Any,
                       "account_login" : self.emailTextField?.text as Any,
                       "account_passcode" : self.passwordTextField?.text as Any,
-                      "account_ronin_address":self.roninTextField?.text as Any,
+                      "account_ronin_address":dealronin as Any,
                       "manager_percentage":Float(self.managerPercentTextField!.text!)!,
                       "offer_period": Int(self.offerDaysTextField!.text!) as Any,
                       "scholar_percentage":95 - Float(self.managerPercentTextField!.text!)!,
@@ -96,7 +97,7 @@ class AddScholarshipController: ViewController {
             DispatchQueue.main.async { [self] in
                 self.mc_remove()
                 if result.success!{
-                    GFAlert.showAlert(titleStr: "Notice:", msgStr: "Finished！Waiting the review", currentVC: self, cancelHandler: { action in
+                    GFAlert.showAlert(titleStr: "Notice:", msgStr: "Finished！Waiting the review", currentVC: self,  cancelBtn: "OK", cancelHandler: { action in
                         DispatchQueue.main.async { [self] in
                             self.navigationController?.popViewController(animated: true)
                         }

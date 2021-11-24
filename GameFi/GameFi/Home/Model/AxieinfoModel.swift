@@ -9,7 +9,7 @@ import Foundation
 import HandyJSON
 
 class AxieinfoModel: BaseModel {
-    var id : String?
+    var id : Int?
     var axie_class : String?
     var stats_hp : String?
     var stats_speed : String?

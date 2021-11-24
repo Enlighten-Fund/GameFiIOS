@@ -334,15 +334,15 @@ class ScholarshipDetailCell: TableViewCell {
 
     func update(axieinfoModel:AxieinfoModel) {
         if axieinfoModel.id != nil {
-            let axiePic1 : String = axieinfoModel.id!
+            let axiePic1 = axieinfoModel.id!
             self.axieImgView.kf.setImage(with: URL.init(string: "https://storage.googleapis.com/assets.axieinfinity.com/axies/\(axiePic1)/axie/axie-full-transparent.png"))
         }
         if axieinfoModel.axie_class != nil {
             self.classBtn.setTitle(axieinfoModel.axie_class, for: .normal)
-            self.classBtn.setImage(UIImage.init(named: axieinfoModel.axie_class!), for: .normal)
+            self.classBtn.setImage(UIImage.init(named: axieinfoModel.axie_class!.lowercased()), for: .normal)
         }
         if axieinfoModel.id != nil {
-            self.idBtn.setTitle("#\(String(describing: axieinfoModel.id))", for: .normal)
+            self.idBtn.setTitle("#\(axieinfoModel.id!)", for: .normal)
         }
 
         if axieinfoModel.stats_hp != nil {
@@ -426,7 +426,7 @@ class ScholarshipDetailCell: TableViewCell {
     
     lazy var idBtn : UIButton = {
         let tempBtn = UIButton.init(frame: CGRect.zero)
-        tempBtn.titleLabel?.textColor = UIColor(red: 0.55, green: 0.75, blue: 0.28, alpha: 1)
+        tempBtn.setTitleColor(UIColor(red: 0.55, green: 0.75, blue: 0.28, alpha: 1), for: .normal)
         tempBtn.titleLabel?.font = UIFont(name: "Avenir Next Regular", size: 15)
         tempBtn.backgroundColor = UIColor(red: 0.17, green: 0.18, blue: 0.26, alpha: 1)
         tempBtn.layer.cornerRadius = 5
