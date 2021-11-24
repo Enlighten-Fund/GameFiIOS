@@ -192,10 +192,10 @@ class EditProfileController: ViewController {
         }
     }
     
-    func dateFromString(string:String) -> NSDate {
+    func dateFromString(string:String) -> Date? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        return dateFormatter.date(from: string)! as NSDate
+        return dateFormatter.date(from: string)
     }
     
     func stringFromDate(date:NSDate) -> String {
@@ -220,7 +220,9 @@ class EditProfileController: ViewController {
                 make.right.equalToSuperview()
             }
             let date = dateFromString(string: (self.userInfoModel?.dob)!)
-            self.birthdayDatePickerView?.pickerView?.date = date as Date
+            if date != nil {
+                self.birthdayDatePickerView?.pickerView?.date = date! as Date
+            }
         }
         
     }

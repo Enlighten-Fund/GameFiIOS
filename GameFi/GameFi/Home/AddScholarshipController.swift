@@ -371,6 +371,7 @@ extension  AddScholarshipController : UITableViewDelegate,UITableViewDataSource,
         tempCell.textFild?.delegate = self
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Manager percentage", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.managerPercentTextField = tempCell.textFild
+        tempCell.textFild?.keyboardType = .numberPad
         cell = tempCell
     case 6:
         let tempCell : PostScholarshipCell = tableView.dequeueReusableCell(withIdentifier: postScholarshipCellIdentifier + "6", for: indexPath) as! PostScholarshipCell
