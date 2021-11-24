@@ -43,6 +43,46 @@ class LatestApplyController: UIViewController {
         super.viewWillAppear(animated)
     }
     
+    @objc func applyBtnClick(btn:UIButton) {
+        if btn.tag - 60000 < self.dataSource!.count {
+            let applicationModel : ApplicationModel = self.dataSource![btn.tag - 60000] as! ApplicationModel
+            self.mc_loading()
+            DataManager.sharedInstance.updateApplicationStatus(scholarshipid: applicationModel.application_id!, status: "PASSED") { result, reponse in
+                DispatchQueue.main.async { [self] in
+                    self.mc_remove()
+                    if result.success!{
+                        self.collectionView.mj_header?.beginRefreshing()
+                    }else{
+                        if  result.msg != nil && !result.msg!.isBlank {
+                            self.mc_success(result.msg!)
+                        }
+                    }
+                }
+            }
+            
+        }
+    }
+    
+    @objc func refuseBtnClick(btn:UIButton) {
+        if btn.tag - 70000 < self.dataSource!.count {
+            let applicationModel : ApplicationModel = self.dataSource![btn.tag - 60000] as! ApplicationModel
+            self.mc_loading()
+            DataManager.sharedInstance.updateApplicationStatus(scholarshipid: applicationModel.application_id!, status: "MANAGER_REJ") { result, reponse in
+                DispatchQueue.main.async { [self] in
+                    self.mc_remove()
+                    if result.success!{
+                        self.collectionView.mj_header?.beginRefreshing()
+                    }else{
+                        if  result.msg != nil && !result.msg!.isBlank {
+                            self.mc_success(result.msg!)
+                        }
+                    }
+                }
+            }
+            
+        }
+    }
+    
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         //水平间隔
@@ -68,6 +108,8 @@ class LatestApplyController: UIViewController {
         self.view.addSubview(ourCollectionView)
         return ourCollectionView
     }()
+    
+    
     
 //    lazy var sortLabel:UILabel = {
 //        let label = UILabel()
@@ -122,16 +164,20 @@ extension  LatestApplyController : UICollectionViewDelegate,UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: latestScholarshipCellIdentifier, for: indexPath) as! LatestScholarshipCell
         cell.makeConstraints()
-        let scholarApplyModel = self.dataSource![indexPath.row]
-        cell.update(scholarApplyModel: scholarApplyModel as! ScholarApplyModel)
+        let applicationModel = self.dataSource![indexPath.row]
+        cell.update(applicationModel: applicationModel as! ApplicationModel)
+        cell.applyBtn.tag = 60000 + indexPath.row
+        cell.refuseBtn.tag = 70000 + indexPath.row
+        cell.applyBtn.addTarget(self, action: #selector(applyBtnClick), for: .touchUpInside)
+        cell.refuseBtn.addTarget(self, action: #selector(refuseBtnClick), for: .touchUpInside)
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let appdelegate : AppDelegate = UIApplication.shared.delegate! as! AppDelegate
         let vc : GFNavController = appdelegate.tabbarVC?.viewControllers![1] as! GFNavController
-        let scholarApplyModel : ScholarApplyModel = self.dataSource![indexPath.row] as! ScholarApplyModel
-        let scholarDetailVC = ScholarDetailController.init(scholarId: scholarApplyModel.scholar_user_id! )
+        let applicationModel : ApplicationModel = self.dataSource![indexPath.row] as! ApplicationModel
+        let scholarDetailVC = ScholarDetailController.init(scholarId: applicationModel.scholar_user_id! )
         vc.pushViewController(scholarDetailVC, animated: true)
     }
 
@@ -151,17 +197,17 @@ extension  LatestApplyController : UICollectionViewDelegate,UICollectionViewData
                 self.collectionView.mj_footer?.endRefreshing()
                 self.collectionView.mj_header?.endRefreshing()
                 if result.success!{
-                    let scholarApplyListModel : ScholarApplyListModel = reponse as! ScholarApplyListModel
+                    let applicationListModel : ApplicationListModel = reponse as! ApplicationListModel
                     if self.pageIndex == 1{
-                        self.dataSource = scholarApplyListModel.data
+                        self.dataSource = applicationListModel.data
                     }else{
-                        if scholarApplyListModel.data != nil {
-                            self.dataSource?.append(contentsOf: scholarApplyListModel.data!)
+                        if applicationListModel.data != nil {
+                            self.dataSource?.append(contentsOf: applicationListModel.data!)
                         }
 
                     }
-                    if scholarApplyListModel.next_page! > pageIndex {
-                        pageIndex = scholarApplyListModel.next_page!
+                    if applicationListModel.next_page! > pageIndex {
+                        pageIndex = applicationListModel.next_page!
                     }else{
                         self.collectionView.mj_footer?.endRefreshingWithNoMoreData()
                     }

@@ -16,7 +16,7 @@ class LabelAndLabelInterView: UIView{
         self.leftLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.left.equalToSuperview()
-            make.width.equalTo(IPhone_SCREEN_WIDTH / 2.0 - 30)
+            make.width.equalTo(IPhone_SCREEN_WIDTH / 2.0 - 30 - 30)
             make.height.equalTo(20)
         }
         self.rightLabel.snp.makeConstraints { make in
@@ -40,6 +40,7 @@ class LabelAndLabelInterView: UIView{
         let tempLabel = UILabel.init(frame: CGRect.zero)
         tempLabel.textColor =  UIColor(red: 0.58, green: 0.62, blue: 0.78, alpha: 1)
         tempLabel.font = UIFont(name: "Avenir Next Regular", size: 15)
+        tempLabel.adjustsFontSizeToFitWidth = true
         self.addSubview(tempLabel)
         return tempLabel
     }()
@@ -47,6 +48,7 @@ class LabelAndLabelInterView: UIView{
         let tempLabel = UILabel.init(frame: CGRect.zero)
         tempLabel.textColor = .white
         tempLabel.textAlignment = .right
+        tempLabel.adjustsFontSizeToFitWidth = true
         tempLabel.font = UIFont(name: "Avenir Next Medium", size: 15)
         self.addSubview(tempLabel)
         return tempLabel

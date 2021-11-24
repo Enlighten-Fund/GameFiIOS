@@ -312,8 +312,8 @@ class DataManager: NSObject {
 //                    print("读取本地数据出现错误!",error)
 //            }
             if result.success!{
-                let scholarApplyListModel = JsonUtil.jsonToModel(reponse as! String, ScholarApplyListModel.self)
-                completeBlock(result,scholarApplyListModel)
+                let applicationListModel = JsonUtil.jsonToModel(reponse as! String, ApplicationListModel.self)
+                completeBlock(result,applicationListModel)
             }else{
                 completeBlock(result,reponse)
             }
