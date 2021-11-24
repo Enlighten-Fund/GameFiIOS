@@ -65,7 +65,7 @@ class LatestApplyController: UIViewController {
     
     @objc func refuseBtnClick(btn:UIButton) {
         if btn.tag - 70000 < self.dataSource!.count {
-            let applicationModel : ApplicationModel = self.dataSource![btn.tag - 60000] as! ApplicationModel
+            let applicationModel : ApplicationModel = self.dataSource![btn.tag - 70000] as! ApplicationModel
             self.mc_loading()
             DataManager.sharedInstance.updateApplicationStatus(scholarshipid: applicationModel.application_id!, status: "MANAGER_REJ") { result, reponse in
                 DispatchQueue.main.async { [self] in

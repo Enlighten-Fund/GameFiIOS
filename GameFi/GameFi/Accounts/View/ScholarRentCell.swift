@@ -136,7 +136,7 @@ class ScholarRentCell: UICollectionViewCell {
 
         // 输出格式
         dateFormatter.timeZone = TimeZone.current
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
         let dateString = dateFormatter.string(from: dateFormatted)
 
         return dateString
