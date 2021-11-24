@@ -19,7 +19,7 @@ import MJRefresh
 
 class ScholarshipsDetailController: ViewController {
     var headerview : ScholarshipDetailHeaderView?
-    var scholarshipsDetailModel : ScholarshipDetailModel?
+    var scholarshipsDetailModel : ScholarshipModel?
     var scholarshipId : String?
     var axieIds : [String]?
     var dataSource : Array<Any>? = Array.init()
@@ -61,7 +61,7 @@ class ScholarshipsDetailController: ViewController {
             DispatchQueue.main.async { [self] in
                 self.tableView!.mj_header?.endRefreshing()
                 if result.success!{
-                    let tempModel : ScholarshipDetailModel = reponse as! ScholarshipDetailModel
+                    let tempModel : ScholarshipModel = reponse as! ScholarshipModel
                     self.scholarshipsDetailModel = tempModel
                     self.headerview?.update(scholarshipDetailModel: scholarshipsDetailModel!)
                 }
@@ -100,7 +100,8 @@ class ScholarshipsDetailController: ViewController {
     }
     
     func valifiyUserProfileStatus() {
-        if UserManager.sharedInstance.userinfoModel!.scholar_status! == "NO" {
+        if UserManager.sharedInstance.userinfoModel!.scholar_status == nil
+            || UserManager.sharedInstance.userinfoModel!.scholar_status! == "NO" {
             self.requestApplay()
 //            GFAlert.showAlert(titleStr: "Notice:", msgStr: "Please complete and submit your profile", currentVC: self, cancelHandler: { action in
 //
@@ -130,9 +131,10 @@ class ScholarshipsDetailController: ViewController {
                 self.mc_remove()
                 if result.success!{
                     DispatchQueue.main.async { [self] in
-                       
                         GFAlert.showAlert(titleStr: "Notice:", msgStr: "Apply success,please wait for the manager's consent", currentVC: self,cancelBtn:"OK", cancelHandler: { action in
-                            
+                            DispatchQueue.main.async { [self] in
+                                self.navigationController?.popViewController(animated: true)
+                            }
                         }, otherBtns: nil) { index in
                             
                         }

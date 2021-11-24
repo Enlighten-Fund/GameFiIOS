@@ -27,7 +27,30 @@ class OfferingScholarshipsController: UIViewController {
         self.collectionView.mj_header?.beginRefreshing()
     }
     
-    
+    @objc func stopOrPayBtnClick(btn:UIButton) {
+        if btn.tag - 90000 < self.dataSource!.count {
+            let managerScholarshipModel : ManagerScholarshipModel = self.dataSource![btn.tag - 90000] as! ManagerScholarshipModel
+            var status = ""
+            if managerScholarshipModel.status == "ACTIVE" {
+                status = "PENDING_PAYMENT"
+            } else if managerScholarshipModel.status == "PENDING_PAYMENT" {
+                status = "PENDING_PAYMENT"
+            }
+            self.mc_loading()
+            DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: managerScholarshipModel.scholarship_id!, status: status) { result, reponse in
+                DispatchQueue.main.async { [self] in
+                    self.mc_remove()
+                    if result.success!{
+                        self.collectionView.mj_header?.beginRefreshing()
+                    }else{
+                        if  result.msg != nil && !result.msg!.isBlank {
+                            self.mc_success(result.msg!)
+                        }
+                    }
+                }
+            }
+        }
+    }
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -81,6 +104,8 @@ extension  OfferingScholarshipsController : UICollectionViewDelegate,UICollectio
         cell.makeConstraints()
         let managerscholarshipModel = self.dataSource![indexPath.row]
         cell.update(managerScholarshipModel: managerscholarshipModel as! ManagerScholarshipModel)
+        cell.btn.tag = 90000 + indexPath.row
+        cell.btn.addTarget(self, action: #selector(stopOrPayBtnClick), for: .touchUpInside)
         return cell
     }
 

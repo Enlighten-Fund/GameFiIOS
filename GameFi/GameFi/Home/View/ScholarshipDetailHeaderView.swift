@@ -69,7 +69,7 @@ class ScholarshipDetailHeaderView: UIView {
         }
     }
     
-    func update(scholarshipDetailModel:ScholarshipDetailModel) {
+    func update(scholarshipDetailModel:ScholarshipModel) {
         if scholarshipDetailModel.manager_user_name != nil {
             self.managerNameLabelView.update(leftTitle: "Manager name", rithtTitle: scholarshipDetailModel.manager_user_name!)
         }

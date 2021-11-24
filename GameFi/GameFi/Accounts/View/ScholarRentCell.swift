@@ -154,15 +154,15 @@ class ScholarRentCell: UICollectionViewCell {
         return dateFormatter.string(from: date as Date)
     }
     
-    func update(scholarshipModel:NScholarshipModel) {
-        if scholarshipModel.myAxieArry == nil || scholarshipModel.myAxieArry!.count < 3{
+    func update(scholarshipModel:ScholarshipModel) {
+        if scholarshipModel.accountAxieArry == nil || scholarshipModel.accountAxieArry!.count < 3{
             
         }else{
-            let axiePic1 : String = scholarshipModel.myAxieArry![0]
+            let axiePic1 : String = scholarshipModel.accountAxieArry![0]
             self.axieImgView1.kf.setImage(with: URL.init(string: "https://storage.googleapis.com/assets.axieinfinity.com/axies/\(axiePic1)/axie/axie-full-transparent.png"))
-            let axiePic2 : String = scholarshipModel.myAxieArry![1]
+            let axiePic2 : String = scholarshipModel.accountAxieArry![1]
             self.axieImgView2.kf.setImage(with:  URL.init(string: "https://storage.googleapis.com/assets.axieinfinity.com/axies/\(axiePic2)/axie/axie-full-transparent.png"))
-            let axiePic3 : String = scholarshipModel.myAxieArry![2]
+            let axiePic3 : String = scholarshipModel.accountAxieArry![2]
             self.axieImgView3.kf.setImage(with: URL.init(string: "https://storage.googleapis.com/assets.axieinfinity.com/axies/\(axiePic3)/axie/axie-full-transparent.png"))
         }
         if scholarshipModel.manager_user_name != nil {

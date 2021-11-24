@@ -124,8 +124,8 @@ class DataManager: NSObject {
         let dic = ["id" : Int(scholarshipId)]
         self.POST(url: "scholarship/get_by_id", param: dic as [String : Any]) { result, reponse in
             if result.success!{
-                let scholarshipDetailModel : ScholarshipDetailModel = JsonUtil.jsonToModel(reponse as! String, ScholarshipDetailModel.self) as! ScholarshipDetailModel
-                completeBlock(result,scholarshipDetailModel)
+                let scholarshipModel : ScholarshipModel = JsonUtil.jsonToModel(reponse as! String, ScholarshipModel.self) as! ScholarshipModel
+                completeBlock(result,scholarshipModel)
             }else{
                 completeBlock(result,reponse)
             }
@@ -387,7 +387,7 @@ class DataManager: NSObject {
 //                }
             
             if result.success!{
-                let scholarshipListModel : NScholarshipListModel = JsonUtil.jsonToModel(reponse as! String, NScholarshipListModel.self) as! NScholarshipListModel
+                let scholarshipListModel : ScholarshipListModel = JsonUtil.jsonToModel(reponse as! String, ScholarshipListModel.self) as! ScholarshipListModel
                 completeBlock(result,scholarshipListModel)
             }else{
                 completeBlock(result,reponse)

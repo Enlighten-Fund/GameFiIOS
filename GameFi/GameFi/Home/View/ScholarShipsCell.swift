@@ -127,14 +127,14 @@ class ScholarshipsCell: UICollectionViewCell {
     }
 
     func update(scholarshipModel:ScholarshipModel) {
-        if scholarshipModel.myAxie_briefArry == nil || scholarshipModel.myAxie_briefArry!.count < 3{
+        if scholarshipModel.axie_briefArry == nil || scholarshipModel.axie_briefArry!.count < 3{
             
         }else{
-            let axiePic1 : String = String(scholarshipModel.myAxie_briefArry![0])
+            let axiePic1 : String = String(scholarshipModel.axie_briefArry![0])
             self.axieImgView1.kf.setImage(with: URL.init(string: "https://storage.googleapis.com/assets.axieinfinity.com/axies/\(axiePic1)/axie/axie-full-transparent.png"))
-            let axiePic2 : String = String(scholarshipModel.myAxie_briefArry![1])
+            let axiePic2 : String = String(scholarshipModel.axie_briefArry![1])
             self.axieImgView2.kf.setImage(with:  URL.init(string: "https://storage.googleapis.com/assets.axieinfinity.com/axies/\(axiePic2)/axie/axie-full-transparent.png"))
-            let axiePic3 : String = String(scholarshipModel.myAxie_briefArry![2])
+            let axiePic3 : String = String(scholarshipModel.axie_briefArry![2])
             let urls = "https://storage.googleapis.com/assets.axieinfinity.com/axies/\(axiePic3)/axie/axie-full-transparent.png"
             self.axieImgView3.kf.setImage(with: URL.init(string:urls))
         }

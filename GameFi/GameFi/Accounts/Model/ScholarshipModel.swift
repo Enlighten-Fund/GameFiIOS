@@ -8,7 +8,7 @@
 import Foundation
 import HandyJSON
 
-class NScholarshipModel: BaseModel {
+class ScholarshipModel: BaseModel {
     var scholarship_id : String?
     var scholarship_name : String?
     var account_ronin_address : String?
@@ -29,7 +29,7 @@ class NScholarshipModel: BaseModel {
     var manager_user_name : String?
     var manager_credit_score : String?
     var estimate_daily_slp : String?
-    var myAxieArry : Array<String>?{
+    var accountAxieArry : Array<String>?{
         get{
             if account_axie_brief == nil {
                 return []
@@ -39,7 +39,7 @@ class NScholarshipModel: BaseModel {
     }
    
     var axie_brief : String?//图片列表
-    var myAxie_briefArry : Array<String>?{
+    var axie_briefArry : Array<String>?{
         get{
             if axie_brief == nil {
                 return []
@@ -47,13 +47,20 @@ class NScholarshipModel: BaseModel {
             return axie_brief?.components(separatedBy: ",")
         }
     }
+    
+   
+    var credit_score : String?
+    var mmr : String?
+    var axie_count : String?
+    var security_deposit : String?
+ 
 
     required init() {}
 }
 
-class NScholarshipListModel: BaseModel {
+class ScholarshipListModel: BaseModel {
     var count : Int?
     var next_page : Int?
-    var data : Array<NScholarshipModel>?
+    var data : Array<ScholarshipModel>?
     required init() {}
 }

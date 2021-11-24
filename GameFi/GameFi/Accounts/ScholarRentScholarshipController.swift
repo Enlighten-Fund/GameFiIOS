@@ -29,7 +29,7 @@ class ScholarRentScholarshipController: UIViewController {
     
     @objc func stopRentBtnClick(btn:UIButton) {
         if btn.tag - 80000 < self.dataSource!.count {
-            let scholarshipModel : NScholarshipModel = self.dataSource![btn.tag - 80000] as! NScholarshipModel
+            let scholarshipModel : ScholarshipModel = self.dataSource![btn.tag - 80000] as! ScholarshipModel
             self.mc_loading()
             DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: scholarshipModel.scholarship_id!, status: "PENDING_PAYMENT") { result, reponse in
                 DispatchQueue.main.async { [self] in
@@ -97,7 +97,7 @@ extension  ScholarRentScholarshipController : UICollectionViewDelegate,UICollect
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: scholarRentCellIdentifier, for: indexPath) as! ScholarRentCell
         cell.makeConstraints()
         let scholarshipModel = self.dataSource![indexPath.row]
-        cell.update(scholarshipModel: scholarshipModel as! NScholarshipModel)
+        cell.update(scholarshipModel: scholarshipModel as! ScholarshipModel)
         cell.btn.tag = 80000 + indexPath.row
         cell.btn.addTarget(self, action: #selector(stopRentBtnClick), for: .touchUpInside)
         return cell
@@ -125,7 +125,7 @@ extension  ScholarRentScholarshipController : UICollectionViewDelegate,UICollect
                 DispatchQueue.main.async { [self] in
                     self.collectionView.mj_footer?.endRefreshing()
                     self.collectionView.mj_header?.endRefreshing()
-                    let scholarshipListModel : NScholarshipListModel = reponse as! NScholarshipListModel
+                    let scholarshipListModel : ScholarshipListModel = reponse as! ScholarshipListModel
                     if self.pageIndex == 1{
                         self.dataSource = scholarshipListModel.data
                     }else{
