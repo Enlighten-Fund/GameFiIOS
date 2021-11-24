@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 import SnapKit
 import AWSMobileClient
-
 import MJRefresh
 class AddScholarshipController: ViewController {
     var accountNameTextField : UITextField?
@@ -97,11 +96,23 @@ class AddScholarshipController: ViewController {
             DispatchQueue.main.async { [self] in
                 self.mc_remove()
                 if result.success!{
-                    self.mc_success("Finished！Waiting the review")
-                    self.navigationController?.popViewController(animated: true)
+                    GFAlert.showAlert(titleStr: "Notice:", msgStr: "Finished！Waiting the review", currentVC: self, cancelHandler: { action in
+                        DispatchQueue.main.async { [self] in
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                    }, otherBtns: nil) { index in
+                        DispatchQueue.main.async { [self] in
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                    }
+                   
                 }else{
-                    if  result.msg != nil && !result.msg!.isBlank {
-                        self.mc_success(result.msg!)
+                    if !result.msg!.isBlank {
+                        GFAlert.showAlert(titleStr: "Notice:", msgStr: result.msg!, currentVC: self, cancelHandler: { action in
+                            
+                        }, otherBtns: nil) { index in
+                            
+                        }
                     }
                 }
             }

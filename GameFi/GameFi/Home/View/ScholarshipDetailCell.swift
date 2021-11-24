@@ -339,9 +339,10 @@ class ScholarshipDetailCell: TableViewCell {
         }
         if axieinfoModel.axie_class != nil {
             self.classBtn.setTitle(axieinfoModel.axie_class, for: .normal)
+            self.classBtn.setImage(UIImage.init(named: axieinfoModel.axie_class!), for: .normal)
         }
         if axieinfoModel.id != nil {
-            self.idBtn.setTitle(axieinfoModel.id, for: .normal)
+            self.idBtn.setTitle("#\(String(describing: axieinfoModel.id))", for: .normal)
         }
 
         if axieinfoModel.stats_hp != nil {

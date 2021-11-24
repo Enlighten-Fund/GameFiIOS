@@ -123,6 +123,14 @@ class AddTrackController: ViewController {
                 self.mc_remove()
                 if result.success!{
                     self.navigationController?.popViewController(animated: true)
+                }else{
+                    if !result.msg!.isBlank {
+                        GFAlert.showAlert(titleStr: "Notice:", msgStr: result.msg!, currentVC: self, cancelHandler: { action in
+                            
+                        }, otherBtns: nil) { index in
+                            
+                        }
+                    }
                 }
             }
         }

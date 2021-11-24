@@ -90,6 +90,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         }
     }
     
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        let nav : GFNavController = viewController as! GFNavController
+        let vc = nav.viewControllers[0]
+        if vc.isKind(of: ManagerAccountsController.classForCoder()) ||  vc.isKind(of: ScholarAccountsController.classForCoder()){
+            if !UserManager.sharedInstance.isLogin() {
+                let navVC = GFNavController.init(rootViewController: LoginController.init())
+                navVC.modalPresentationStyle = .fullScreen
+                self.tabbarVC?.present(navVC, animated: true, completion: {
+                    
+                })
+                return false
+            }
+            return true
+        }
+        return true
+    }
     
     //Mark 配置AWS
     func configAWS() {
