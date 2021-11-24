@@ -45,7 +45,7 @@ class ScholarshipsDetailController: ViewController {
             make.right.equalToSuperview().offset(-15)
         }
         self.applyView!.snp.makeConstraints { make in
-            make.height.equalTo(57)
+            make.height.equalTo(40)
             make.bottom.equalToSuperview().offset(-IPhone_TabbarSafeBottomMargin)
             make.left.equalToSuperview().offset(0)
             make.right.equalToSuperview().offset(0)

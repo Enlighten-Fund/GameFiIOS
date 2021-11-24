@@ -335,7 +335,9 @@ class ScholarshipDetailCell: TableViewCell {
     func update(axieinfoModel:AxieinfoModel) {
         if axieinfoModel.id != nil {
             let axiePic1 = axieinfoModel.id!
-            self.axieImgView.kf.setImage(with: URL.init(string: "https://storage.googleapis.com/assets.axieinfinity.com/axies/\(axiePic1)/axie/axie-full-transparent.png"))
+            self.axieImgView.kf.setImage(with: URL.init(string: "https://storage.googleapis.com/assets.axieinfinity.com/axies/\(axiePic1)/axie/axie-full-transparent.png"), placeholder:  UIImage.init(named: "portrait"), options: nil) {result, error in
+                
+            }
         }
         if axieinfoModel.axie_class != nil {
             self.classBtn.setTitle(axieinfoModel.axie_class, for: .normal)

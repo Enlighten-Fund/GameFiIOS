@@ -20,14 +20,6 @@ class ScholarshipModel: BaseModel {
     }
     var scholarship_id : String?
     var estimate_daily_slp : String?
-    var myestimate_daily_slp : String?{
-        get{
-            if estimate_daily_slp == nil {
-                return ""
-            }
-            return estimate_daily_slp
-        }
-    }
     var scholar_percentage : String?
     var offer_period : String?
     var manager_user_name : String?
@@ -35,5 +27,6 @@ class ScholarshipModel: BaseModel {
     var mmr : String?
     var axie_count : String?
     var security_deposit : String?
+    var scholarship_name : String?
     required init() {}
 }

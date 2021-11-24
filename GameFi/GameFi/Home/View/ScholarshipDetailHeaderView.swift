@@ -19,38 +19,50 @@ class ScholarshipDetailHeaderView: UIView {
             make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
             make.height.equalTo(35)
         }
-        self.expectedLabelView.snp.makeConstraints { make in
+        self.creditScoreLabelView.snp.makeConstraints { make in
             make.top.equalTo(self.managerNameLabelView.snp.bottom).offset(0)
             make.left.equalToSuperview()
             make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
             make.height.equalTo(35)
         }
-        self.contractLabelView.snp.makeConstraints { make in
+        self.accountNameLabelView.snp.makeConstraints { make in
+            make.top.equalTo(self.creditScoreLabelView.snp.bottom).offset(0)
+            make.left.equalToSuperview()
+            make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
+            make.height.equalTo(35)
+        }
+        self.expectedLabelView.snp.makeConstraints { make in
+            make.top.equalTo(self.accountNameLabelView.snp.bottom).offset(0)
+            make.left.equalToSuperview()
+            make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
+            make.height.equalTo(35)
+        }
+        self.scholarPerLabelView.snp.makeConstraints { make in
             make.top.equalTo(self.expectedLabelView.snp.bottom).offset(0)
             make.left.equalToSuperview()
             make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
             make.height.equalTo(35)
         }
-        self.creditLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.contractLabelView.snp.bottom).offset(0)
+        self.offerContractLabelView.snp.makeConstraints { make in
+            make.top.equalTo(self.scholarPerLabelView.snp.bottom).offset(0)
             make.left.equalToSuperview()
             make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
             make.height.equalTo(35)
         }
         self.axieCountLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.creditLabelView.snp.bottom).offset(0)
+            make.top.equalTo(self.offerContractLabelView.snp.bottom).offset(0)
             make.left.equalToSuperview()
             make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
             make.height.equalTo(35)
         }
-        self.scholarLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.axieCountLabelView.snp.bottom).offset(0)
-            make.left.equalToSuperview()
-            make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
-            make.height.equalTo(35)
-        }
+//        self.rentLabelView.snp.makeConstraints { make in
+//            make.top.equalTo(self.axieCountLabelView.snp.bottom).offset(0)
+//            make.left.equalToSuperview()
+//            make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
+//            make.height.equalTo(35)
+//        }
         self.securityLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.scholarLabelView.snp.bottom).offset(0)
+            make.top.equalTo(self.axieCountLabelView.snp.bottom).offset(0)
             make.left.equalToSuperview()
             make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
             make.height.equalTo(35)
@@ -61,27 +73,33 @@ class ScholarshipDetailHeaderView: UIView {
         if scholarshipDetailModel.manager_user_name != nil {
             self.managerNameLabelView.update(leftTitle: "Manager name", rithtTitle: scholarshipDetailModel.manager_user_name!)
         }
-        if scholarshipDetailModel.myestimate_daily_slp != nil {
-            self.expectedLabelView.update(leftTitle: "Expected SLP per day", rithtTitle: scholarshipDetailModel.myestimate_daily_slp!)
+        if scholarshipDetailModel.credit_score != nil {
+            self.creditScoreLabelView.update(leftTitle: "Credit score", rithtTitle: scholarshipDetailModel.credit_score!)
         }
        
-        if scholarshipDetailModel.offer_period != nil {
-            self.contractLabelView.update(leftTitle: "Contract period", rithtTitle: scholarshipDetailModel.offer_period!)
+        if scholarshipDetailModel.scholarship_name != nil {
+            self.accountNameLabelView.update(leftTitle: "Account name", rithtTitle: scholarshipDetailModel.scholarship_name!)
         }
         
-        if scholarshipDetailModel.credit_score != nil {
-            self.creditLabelView.update(leftTitle: "Credit score", rithtTitle: scholarshipDetailModel.credit_score!)
+        if scholarshipDetailModel.estimate_daily_slp != nil {
+            self.expectedLabelView.update(leftTitle: "Expected SLP per day", rithtTitle: scholarshipDetailModel.estimate_daily_slp!)
         }
         
-        if scholarshipDetailModel.axie_count != nil {
-            self.axieCountLabelView.update(leftTitle: "Axie counts", rithtTitle: scholarshipDetailModel.axie_count!)
+        if scholarshipDetailModel.scholar_percentage != nil {
+            self.scholarPerLabelView.update(leftTitle: "Scholar's percentage", rithtTitle: scholarshipDetailModel.scholar_percentage!)
         }
         
-        if scholarshipDetailModel.scholar_percentage != nil  {
-            self.scholarLabelView.update(leftTitle: "Scholar’s percentage", rithtTitle: "\(scholarshipDetailModel.scholar_percentage!)%")
+        if scholarshipDetailModel.offer_period != nil  {
+            self.offerContractLabelView.update(leftTitle: "Offer contract days", rithtTitle: scholarshipDetailModel.offer_period!)
         }
+        if scholarshipDetailModel.axie_count != nil  {
+            self.axieCountLabelView.update(leftTitle: "Axie counts", rithtTitle: "\(scholarshipDetailModel.axie_count!)")
+        }
+//        if scholarshipDetailModel.rentedtimes != nil  {
+//            self.rentLabelView.update(leftTitle: "Rented times", rithtTitle: scholarshipDetailModel.rentedtimes!)
+//        }
         if scholarshipDetailModel.security_deposit != nil  {
-            self.securityLabelView.update(leftTitle: "Security deposit", rithtTitle: "\(scholarshipDetailModel.security_deposit!) SLP")
+            self.securityLabelView.update(leftTitle: "Security deposit", rithtTitle: scholarshipDetailModel.security_deposit!)
         }
         
     }
@@ -95,17 +113,27 @@ class ScholarshipDetailHeaderView: UIView {
         self.addSubview(tempLabelView)
         return tempLabelView
     }()
+    lazy var creditScoreLabelView : LabelAndLabelView = {
+        let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
+        self.addSubview(tempLabelView)
+        return tempLabelView
+    }()
+    lazy var accountNameLabelView : LabelAndLabelView = {
+        let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
+        self.addSubview(tempLabelView)
+        return tempLabelView
+    }()
     lazy var expectedLabelView : LabelAndLabelView = {
         let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
         self.addSubview(tempLabelView)
         return tempLabelView
     }()
-    lazy var contractLabelView : LabelAndLabelView = {
+    lazy var scholarPerLabelView : LabelAndLabelView = {
         let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
         self.addSubview(tempLabelView)
         return tempLabelView
     }()
-    lazy var creditLabelView : LabelAndLabelView = {
+    lazy var offerContractLabelView : LabelAndLabelView = {
         let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
         self.addSubview(tempLabelView)
         return tempLabelView
@@ -115,16 +143,11 @@ class ScholarshipDetailHeaderView: UIView {
         self.addSubview(tempLabelView)
         return tempLabelView
     }()
-    lazy var rentedLabelView : LabelAndLabelView = {
-        let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
-        self.addSubview(tempLabelView)
-        return tempLabelView
-    }()
-    lazy var scholarLabelView : LabelAndLabelView = {
-        let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
-        self.addSubview(tempLabelView)
-        return tempLabelView
-    }()
+//    lazy var rentLabelView : LabelAndLabelView = {
+//        let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
+//        self.addSubview(tempLabelView)
+//        return tempLabelView
+//    }()
     lazy var securityLabelView : LabelAndLabelView = {
         let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
         self.addSubview(tempLabelView)
