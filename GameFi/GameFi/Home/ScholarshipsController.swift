@@ -141,8 +141,7 @@ class ScholarshipsController: UIViewController {
             self.refreshHttpRequest()
         })
        
-
-        ourCollectionView.mj_footer = MJRefreshFooter.init(refreshingBlock: {
+        ourCollectionView.mj_footer = MJRefreshBackNormalFooter.init(refreshingBlock: {
             self.loadMoreHttpRequest()
         })
         ourCollectionView.mj_header?.isAutomaticallyChangeAlpha = true
