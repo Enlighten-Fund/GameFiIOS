@@ -40,6 +40,7 @@
 		9811EA202726BB2800B0ACF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9811EA1F2726BB2800B0ACF0 /* Assets.xcassets */; };
 		9811EA232726BB2800B0ACF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9811EA212726BB2800B0ACF0 /* LaunchScreen.storyboard */; };
 		9830EF1D274E626200352B26 /* ApplicationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830EF1C274E626200352B26 /* ApplicationModel.swift */; };
+		9830EF1F274E66E800352B26 /* NScholarshipModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830EF1E274E66E800352B26 /* NScholarshipModel.swift */; };
 		984472B4274CD91300DAE315 /* UserInfoStateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984472B3274CD91300DAE315 /* UserInfoStateController.swift */; };
 		984472BA274CF13800DAE315 /* MJChiBaoZiHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 984472B9274CF13800DAE315 /* MJChiBaoZiHeader.m */; };
 		984472BD274CF31000DAE315 /* MJChiBaoZiFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 984472BB274CF31000DAE315 /* MJChiBaoZiFooter.m */; };
@@ -161,6 +162,7 @@
 		9811EA222726BB2800B0ACF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9811EA242726BB2800B0ACF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9830EF1C274E626200352B26 /* ApplicationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationModel.swift; sourceTree = "<group>"; };
+		9830EF1E274E66E800352B26 /* NScholarshipModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NScholarshipModel.swift; sourceTree = "<group>"; };
 		984472B3274CD91300DAE315 /* UserInfoStateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoStateController.swift; sourceTree = "<group>"; };
 		984472B7274CF13700DAE315 /* GameFi-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GameFi-Bridging-Header.h"; sourceTree = "<group>"; };
 		984472B8274CF13800DAE315 /* MJChiBaoZiHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJChiBaoZiHeader.h; sourceTree = "<group>"; };
@@ -470,6 +472,7 @@
 				985817642746256600D8CFCA /* ManagerScholarshipListModel.swift */,
 				98581785274CAFD600D8CFCA /* ScholarApplyListModel.swift */,
 				9830EF1C274E626200352B26 /* ApplicationModel.swift */,
+				9830EF1E274E66E800352B26 /* NScholarshipModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -783,6 +786,7 @@
 				984BDBAA272C307B00F6144B /* RegisterFootView.swift in Sources */,
 				98D9941F273B9E22006AA8DC /* TrackCell.swift in Sources */,
 				984472B4274CD91300DAE315 /* UserInfoStateController.swift in Sources */,
+				9830EF1F274E66E800352B26 /* NScholarshipModel.swift in Sources */,
 				980DB7C927356C85006ED3BE /* LabelAndLabelView.swift in Sources */,
 				9858172E273D205600D8CFCA /* PostScholarshipCell.swift in Sources */,
 				984BDBA4272C0E9300F6144B /* Extension.swift in Sources */,

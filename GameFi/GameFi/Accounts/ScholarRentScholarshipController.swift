@@ -27,6 +27,24 @@ class ScholarRentScholarshipController: UIViewController {
         self.collectionView.mj_header?.beginRefreshing()
     }
     
+    @objc func stopRentBtnClick(btn:UIButton) {
+        if btn.tag - 80000 < self.dataSource!.count {
+            let scholarshipModel : NScholarshipModel = self.dataSource![btn.tag - 80000] as! NScholarshipModel
+            self.mc_loading()
+            DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: scholarshipModel.scholarship_id!, status: "PENDING_PAYMENT") { result, reponse in
+                DispatchQueue.main.async { [self] in
+                    self.mc_remove()
+                    if result.success!{
+                        self.collectionView.mj_header?.beginRefreshing()
+                    }else{
+                        if  result.msg != nil && !result.msg!.isBlank {
+                            self.mc_success(result.msg!)
+                        }
+                    }
+                }
+            }
+        }
+    }
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -78,8 +96,10 @@ extension  ScholarRentScholarshipController : UICollectionViewDelegate,UICollect
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: scholarRentCellIdentifier, for: indexPath) as! ScholarRentCell
         cell.makeConstraints()
-        let managerScholarshipModel = self.dataSource![indexPath.row]
-        cell.update(managerScholarshipModel: managerScholarshipModel as! ManagerScholarshipModel)
+        let scholarshipModel = self.dataSource![indexPath.row]
+        cell.update(scholarshipModel: scholarshipModel as! NScholarshipModel)
+        cell.btn.tag = 80000 + indexPath.row
+        cell.btn.addTarget(self, action: #selector(stopRentBtnClick), for: .touchUpInside)
         return cell
     }
 
@@ -105,16 +125,16 @@ extension  ScholarRentScholarshipController : UICollectionViewDelegate,UICollect
                 DispatchQueue.main.async { [self] in
                     self.collectionView.mj_footer?.endRefreshing()
                     self.collectionView.mj_header?.endRefreshing()
-                    let managerScholarshipListModel : ManagerScholarshipListModel = reponse as! ManagerScholarshipListModel
+                    let scholarshipListModel : NScholarshipListModel = reponse as! NScholarshipListModel
                     if self.pageIndex == 1{
-                        self.dataSource = managerScholarshipListModel.data
+                        self.dataSource = scholarshipListModel.data
                     }else{
-                        if managerScholarshipListModel.data != nil {
-                            self.dataSource?.append(contentsOf: managerScholarshipListModel.data!)
+                        if scholarshipListModel.data != nil {
+                            self.dataSource?.append(contentsOf: scholarshipListModel.data!)
                         }
                     }
-                    if managerScholarshipListModel.next_page! > pageIndex {
-                        pageIndex = managerScholarshipListModel.next_page!
+                    if scholarshipListModel.next_page! > pageIndex {
+                        pageIndex = scholarshipListModel.next_page!
                     }else{
                         self.collectionView.mj_footer?.endRefreshingWithNoMoreData()
                     }

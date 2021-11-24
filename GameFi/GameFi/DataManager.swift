@@ -387,8 +387,8 @@ class DataManager: NSObject {
 //                }
             
             if result.success!{
-                let managerScholarshipListModel : ManagerScholarshipListModel = JsonUtil.jsonToModel(reponse as! String, ManagerScholarshipListModel.self) as! ManagerScholarshipListModel
-                completeBlock(result,managerScholarshipListModel)
+                let scholarshipListModel : NScholarshipListModel = JsonUtil.jsonToModel(reponse as! String, NScholarshipListModel.self) as! NScholarshipListModel
+                completeBlock(result,scholarshipListModel)
             }else{
                 completeBlock(result,reponse)
             }
@@ -447,7 +447,7 @@ class DataManager: NSObject {
     
     //update scholarship status
     func updateScholarshipStatus(scholarshipid:String, status: String , completeBlock: @escaping CompleteBlock) {
-        let dic = ["id" : Int(scholarshipid) as Any,"status" : status] as [String : Any]
+        let dic = ["id" : Int(scholarshipid)!,"status" : status] as [String : Any]
         self.POST(url: "scholarship/update_status_by_id", param: dic ) { result, reponse in
             if result.success!{
                 completeBlock(result,reponse)
