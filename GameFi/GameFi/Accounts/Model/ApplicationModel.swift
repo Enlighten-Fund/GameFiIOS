@@ -28,6 +28,10 @@ class ApplicationModel: BaseModel {
     var scholar_axie_exp : String?
     var scholar_nation : String?
     
+//    var nation : String?
+//    var age : String?
+//    var game_history : String?
+//    var self_intro : String?
     
     required init() {}
 }

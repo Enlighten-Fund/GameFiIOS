@@ -62,26 +62,17 @@
 		9858172E273D205600D8CFCA /* PostScholarshipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858172D273D205600D8CFCA /* PostScholarshipCell.swift */; };
 		98581730273D2DBF00D8CFCA /* PostScholarFootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858172F273D2DBF00D8CFCA /* PostScholarFootView.swift */; };
 		98581732273D3DB800D8CFCA /* TextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98581731273D3DB800D8CFCA /* TextViewCell.swift */; };
-		98581735273E334100D8CFCA /* list_by_marketplace.json in Resources */ = {isa = PBXBuildFile; fileRef = 98581734273E334100D8CFCA /* list_by_marketplace.json */; };
-		98581737273E41A800D8CFCA /* list_scholar.json in Resources */ = {isa = PBXBuildFile; fileRef = 98581736273E41A800D8CFCA /* list_scholar.json */; };
 		98581739273E921800D8CFCA /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98581738273E921800D8CFCA /* UserManager.swift */; };
 		9858173B27422D3D00D8CFCA /* ScholarshipDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858173A27422D3D00D8CFCA /* ScholarshipDetailCell.swift */; };
 		9858173D27424F3700D8CFCA /* AxieinfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858173C27424F3700D8CFCA /* AxieinfoModel.swift */; };
-		985817412742565B00D8CFCA /* axieinfo.json in Resources */ = {isa = PBXBuildFile; fileRef = 985817402742565B00D8CFCA /* axieinfo.json */; };
 		985817432742784B00D8CFCA /* axieability.json in Resources */ = {isa = PBXBuildFile; fileRef = 985817422742784B00D8CFCA /* axieability.json */; };
 		985817452742788E00D8CFCA /* AbilityUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985817442742788E00D8CFCA /* AbilityUtil.swift */; };
 		985817472742793F00D8CFCA /* AxieAbilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985817462742793F00D8CFCA /* AxieAbilityModel.swift */; };
-		985817492742955900D8CFCA /* tracksum.json in Resources */ = {isa = PBXBuildFile; fileRef = 985817482742955900D8CFCA /* tracksum.json */; };
 		9858174B274295A500D8CFCA /* TrackSumModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858174A274295A500D8CFCA /* TrackSumModel.swift */; };
 		9858174E27429C1A00D8CFCA /* TrackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858174D27429C1A00D8CFCA /* TrackModel.swift */; };
 		9858175027429E6300D8CFCA /* TrackListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858174F27429E6300D8CFCA /* TrackListModel.swift */; };
-		985817522742A13100D8CFCA /* tracklist.json in Resources */ = {isa = PBXBuildFile; fileRef = 985817512742A13100D8CFCA /* tracklist.json */; };
 		985817542743990100D8CFCA /* GFAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985817532743990100D8CFCA /* GFAlert.swift */; };
 		985817562743EE5C00D8CFCA /* EditTrackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985817552743EE5C00D8CFCA /* EditTrackController.swift */; };
-		985817592744F48E00D8CFCA /* ManagerApplicationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985817582744F48E00D8CFCA /* ManagerApplicationModel.swift */; };
-		9858175B2744F50600D8CFCA /* ManagerApplicationListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858175A2744F50600D8CFCA /* ManagerApplicationListModel.swift */; };
-		9858175D2744F60F00D8CFCA /* managerApplicationList.json in Resources */ = {isa = PBXBuildFile; fileRef = 9858175C2744F60F00D8CFCA /* managerApplicationList.json */; };
-		9858175F2745005900D8CFCA /* managerscholarshiplist.json in Resources */ = {isa = PBXBuildFile; fileRef = 9858175E2745005900D8CFCA /* managerscholarshiplist.json */; };
 		9858176727467EBF00D8CFCA /* ScholarRentScholarshipController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858176627467EBF00D8CFCA /* ScholarRentScholarshipController.swift */; };
 		9858176927467EDF00D8CFCA /* ScholarApplingScholarshipController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858176827467EDF00D8CFCA /* ScholarApplingScholarshipController.swift */; };
 		9858176B2746907B00D8CFCA /* ScholarAccountsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858176A2746907B00D8CFCA /* ScholarAccountsController.swift */; };
@@ -94,7 +85,6 @@
 		9858177C274A8CF200D8CFCA /* GFPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858177B274A8CF200D8CFCA /* GFPickerView.swift */; };
 		9858177E274B283500D8CFCA /* GFDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858177D274B283500D8CFCA /* GFDatePickerView.swift */; };
 		98581782274B67E300D8CFCA /* HImagePickerUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98581781274B67E200D8CFCA /* HImagePickerUtils.swift */; };
-		98581786274CAFD600D8CFCA /* ScholarApplyListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98581785274CAFD600D8CFCA /* ScholarApplyListModel.swift */; };
 		98581788274CB7B100D8CFCA /* countries.json in Resources */ = {isa = PBXBuildFile; fileRef = 98581787274CB7B100D8CFCA /* countries.json */; };
 		986C586E27300B9A0021280A /* LoginHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C586D27300B9A0021280A /* LoginHeadView.swift */; };
 		986C587027300BEB0021280A /* LoginFootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C586F27300BEB0021280A /* LoginFootView.swift */; };
@@ -182,26 +172,17 @@
 		9858172D273D205600D8CFCA /* PostScholarshipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostScholarshipCell.swift; sourceTree = "<group>"; };
 		9858172F273D2DBF00D8CFCA /* PostScholarFootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostScholarFootView.swift; sourceTree = "<group>"; };
 		98581731273D3DB800D8CFCA /* TextViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewCell.swift; sourceTree = "<group>"; };
-		98581734273E334100D8CFCA /* list_by_marketplace.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = list_by_marketplace.json; sourceTree = "<group>"; };
-		98581736273E41A800D8CFCA /* list_scholar.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = list_scholar.json; sourceTree = "<group>"; };
 		98581738273E921800D8CFCA /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		9858173A27422D3D00D8CFCA /* ScholarshipDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarshipDetailCell.swift; sourceTree = "<group>"; };
 		9858173C27424F3700D8CFCA /* AxieinfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxieinfoModel.swift; sourceTree = "<group>"; };
-		985817402742565B00D8CFCA /* axieinfo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = axieinfo.json; sourceTree = "<group>"; };
 		985817422742784B00D8CFCA /* axieability.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = axieability.json; sourceTree = "<group>"; };
 		985817442742788E00D8CFCA /* AbilityUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityUtil.swift; sourceTree = "<group>"; };
 		985817462742793F00D8CFCA /* AxieAbilityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxieAbilityModel.swift; sourceTree = "<group>"; };
-		985817482742955900D8CFCA /* tracksum.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tracksum.json; sourceTree = "<group>"; };
 		9858174A274295A500D8CFCA /* TrackSumModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackSumModel.swift; sourceTree = "<group>"; };
 		9858174D27429C1A00D8CFCA /* TrackModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackModel.swift; sourceTree = "<group>"; };
 		9858174F27429E6300D8CFCA /* TrackListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListModel.swift; sourceTree = "<group>"; };
-		985817512742A13100D8CFCA /* tracklist.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = tracklist.json; sourceTree = "<group>"; };
 		985817532743990100D8CFCA /* GFAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFAlert.swift; sourceTree = "<group>"; };
 		985817552743EE5C00D8CFCA /* EditTrackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTrackController.swift; sourceTree = "<group>"; };
-		985817582744F48E00D8CFCA /* ManagerApplicationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerApplicationModel.swift; sourceTree = "<group>"; };
-		9858175A2744F50600D8CFCA /* ManagerApplicationListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerApplicationListModel.swift; sourceTree = "<group>"; };
-		9858175C2744F60F00D8CFCA /* managerApplicationList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = managerApplicationList.json; sourceTree = "<group>"; };
-		9858175E2745005900D8CFCA /* managerscholarshiplist.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = managerscholarshiplist.json; sourceTree = "<group>"; };
 		9858176627467EBF00D8CFCA /* ScholarRentScholarshipController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarRentScholarshipController.swift; sourceTree = "<group>"; };
 		9858176827467EDF00D8CFCA /* ScholarApplingScholarshipController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarApplingScholarshipController.swift; sourceTree = "<group>"; };
 		9858176A2746907B00D8CFCA /* ScholarAccountsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarAccountsController.swift; sourceTree = "<group>"; };
@@ -214,7 +195,6 @@
 		9858177B274A8CF200D8CFCA /* GFPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFPickerView.swift; sourceTree = "<group>"; };
 		9858177D274B283500D8CFCA /* GFDatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFDatePickerView.swift; sourceTree = "<group>"; };
 		98581781274B67E200D8CFCA /* HImagePickerUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HImagePickerUtils.swift; sourceTree = "<group>"; };
-		98581785274CAFD600D8CFCA /* ScholarApplyListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarApplyListModel.swift; sourceTree = "<group>"; };
 		98581787274CB7B100D8CFCA /* countries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countries.json; sourceTree = "<group>"; };
 		986C586D27300B9A0021280A /* LoginHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeadView.swift; sourceTree = "<group>"; };
 		986C586F27300BEB0021280A /* LoginFootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFootView.swift; sourceTree = "<group>"; };
@@ -359,14 +339,7 @@
 		9811EA0A2726BB2700B0ACF0 = {
 			isa = PBXGroup;
 			children = (
-				9858175E2745005900D8CFCA /* managerscholarshiplist.json */,
-				9858175C2744F60F00D8CFCA /* managerApplicationList.json */,
-				985817512742A13100D8CFCA /* tracklist.json */,
 				985817422742784B00D8CFCA /* axieability.json */,
-				985817402742565B00D8CFCA /* axieinfo.json */,
-				98581734273E334100D8CFCA /* list_by_marketplace.json */,
-				98581736273E41A800D8CFCA /* list_scholar.json */,
-				985817482742955900D8CFCA /* tracksum.json */,
 				98581787274CB7B100D8CFCA /* countries.json */,
 				9811EA152726BB2700B0ACF0 /* GameFi */,
 				4199D9C3B4A28724DDAB9D9F /* AmplifyConfig */,
@@ -453,9 +426,6 @@
 		985817572744F24700D8CFCA /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				985817582744F48E00D8CFCA /* ManagerApplicationModel.swift */,
-				9858175A2744F50600D8CFCA /* ManagerApplicationListModel.swift */,
-				98581785274CAFD600D8CFCA /* ScholarApplyListModel.swift */,
 				9830EF1C274E626200352B26 /* ApplicationModel.swift */,
 				9830EF1E274E66E800352B26 /* ScholarshipModel.swift */,
 			);
@@ -648,17 +618,10 @@
 			files = (
 				9811EA232726BB2800B0ACF0 /* LaunchScreen.storyboard in Resources */,
 				9811EA202726BB2800B0ACF0 /* Assets.xcassets in Resources */,
-				985817492742955900D8CFCA /* tracksum.json in Resources */,
-				98581737273E41A800D8CFCA /* list_scholar.json in Resources */,
-				985817412742565B00D8CFCA /* axieinfo.json in Resources */,
-				9858175D2744F60F00D8CFCA /* managerApplicationList.json in Resources */,
-				985817522742A13100D8CFCA /* tracklist.json in Resources */,
 				7C326CFCDF747D3682D551F3 /* awsconfiguration.json in Resources */,
-				9858175F2745005900D8CFCA /* managerscholarshiplist.json in Resources */,
 				98581788274CB7B100D8CFCA /* countries.json in Resources */,
 				985817432742784B00D8CFCA /* axieability.json in Resources */,
 				7BCBC07F76E99519033E01A6 /* amplifyconfiguration.json in Resources */,
-				98581735273E334100D8CFCA /* list_by_marketplace.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -747,7 +710,6 @@
 				98823A3F27295B0100D9A7CD /* HomeController.swift in Sources */,
 				980DB7AF2734F677006ED3BE /* LYCommon.swift in Sources */,
 				984BDBA8272C1D2400F6144B /* TableViewCell.swift in Sources */,
-				985817592744F48E00D8CFCA /* ManagerApplicationModel.swift in Sources */,
 				980DB7C727356393006ED3BE /* ScholarshipDetailHeaderView.swift in Sources */,
 				98581724273CF45900D8CFCA /* NoOfferScholarshipCell.swift in Sources */,
 				980DB7892732615E006ED3BE /* SubmitView.swift in Sources */,
@@ -794,7 +756,6 @@
 				980DB7982733D391006ED3BE /* TYPageView.swift in Sources */,
 				9830EF21274E709600352B26 /* ScholarDetailModel.swift in Sources */,
 				98581771274796B600D8CFCA /* EditScholarshipController.swift in Sources */,
-				98581786274CAFD600D8CFCA /* ScholarApplyListModel.swift in Sources */,
 				9858174E27429C1A00D8CFCA /* TrackModel.swift in Sources */,
 				9858172C273D1BCC00D8CFCA /* AddScholarshipController.swift in Sources */,
 				9858175027429E6300D8CFCA /* TrackListModel.swift in Sources */,
@@ -805,7 +766,6 @@
 				98D99423273BA9F0006AA8DC /* ManagerAccountsController.swift in Sources */,
 				985817472742793F00D8CFCA /* AxieAbilityModel.swift in Sources */,
 				9811EA172726BB2700B0ACF0 /* AppDelegate.swift in Sources */,
-				9858175B2744F50600D8CFCA /* ManagerApplicationListModel.swift in Sources */,
 				98E09B5C273129140020D97D /* Usermodel.swift in Sources */,
 				984BDB99272BA23600F6144B /* RegisterHeadView.swift in Sources */,
 				984BDB9B272BC6C200F6144B /* LabelTextFildCell.swift in Sources */,

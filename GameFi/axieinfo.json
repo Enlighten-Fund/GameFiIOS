@@ -1,5 +1,0 @@
-{
-  "code": 1,
-  "data": "{\"id\": 1621249, \"axie_class\": \"test_class\", \"stats_hp\": 23, \"stats_speed\": 34, \"stats_skill\": 56, \"stats_morale\": 78, \"ability_back\": \"aquatic-back-02\", \"ability_mouth\": \"beast-mouth-02\", \"ability_horn\": \"bird-horn-02\", \"ability_tail\": \"aquatic-tail-08\"}",
-  "msg": "success"
-}

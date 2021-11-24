@@ -306,8 +306,8 @@ class DataManager: NSObject {
 //                    let data = try Data(contentsOf: url)
 //                    let jsonData:Any = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
 //                let jsonDic : Dictionary = jsonData as! Dictionary<String, Any>
-//                let managerApplicationListModel : ManagerApplicationListModel = JsonUtil.jsonToModel(jsonDic["data"] as! String, ManagerApplicationListModel.self) as! ManagerApplicationListModel
-//                    completeBlock(result,managerApplicationListModel)
+//                let ApplicationListModel : ApplicationListModel = JsonUtil.jsonToModel(jsonDic["data"] as! String, ApplicationListModel.self) as! ApplicationListModel
+//                    completeBlock(result,ApplicationListModel)
 //            } catch let error as Error? {
 //                    print("读取本地数据出现错误!",error)
 //            }
