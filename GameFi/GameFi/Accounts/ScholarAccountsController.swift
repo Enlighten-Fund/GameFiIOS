@@ -13,7 +13,7 @@ import SnapKit
 class ScholarAccountsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: self.msgBtn!)
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: self.msgBtn!)
         self.pageView?.snp.makeConstraints({ make in
             make.top.equalToSuperview().offset(0)
             make.left.equalToSuperview()

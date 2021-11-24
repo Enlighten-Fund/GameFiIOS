@@ -192,7 +192,11 @@ class ForgetPwdController: ViewController {
                                         DispatchQueue.main.async {
                                             UserManager.sharedInstance.updateToken {
                                                 UserManager.sharedInstance.fetchAndUpdateRole()
-                                                self.navigationController?.popToRootViewController(animated: true)
+                                                DispatchQueue.main.async {
+                                                    self.navigationController?.dismiss(animated: true, completion: {
+                                                        
+                                                    })
+                                                }
                                             }
                                         }
                                     default:
@@ -226,7 +230,7 @@ class ForgetPwdController: ViewController {
         headerView.loginBtn.addTarget(self, action: #selector(loginBtnClick), for: .touchUpInside)
         headerView.welcomeLabel?.text = "Forget password?"
         tempTableView.tableHeaderView = headerView
-        let submitView = SubmitView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 80))
+        let submitView = SubmitView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 40))
         submitView.submitBtn.addTarget(self, action: #selector(resetPwdBtnClick), for: .touchUpInside)
         tempTableView.tableFooterView = submitView
         tempTableView.separatorStyle = .none
@@ -253,7 +257,6 @@ class ForgetPwdController: ViewController {
                     
                   print(">>> Timer has Stopped!")
                 } else {
-                    print(">>> Countdown Number: \(countDownNum)")
                     countDownNum -= 1
                     self.codeBtn!.setTitle(String(countDownNum), for: .normal)
                 }
@@ -342,6 +345,7 @@ extension  ForgetPwdController : UITableViewDelegate,UITableViewDataSource,UITex
         tempCell.codeBtn.addTarget(self, action: #selector(codeBtnClick), for: .touchUpInside)
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter code", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         cell = tempCell
+        tempCell.textFild?.keyboardType = .numberPad
     default:
         cell = tableView.dequeueReusableCell(withIdentifier: emptyTableViewCellIdentifier, for: indexPath)
     }
