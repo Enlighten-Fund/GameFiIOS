@@ -237,7 +237,9 @@ class RegisterController: ViewController {
                                        
                                         self.mc_success("注册成功", duration: 0.2) {
                                             self.dismiss(animated: true) {
-                                                UserManager.sharedInstance.updateToken()
+                                                UserManager.sharedInstance.updateToken {
+                                                    
+                                                }
                                                 UserManager.sharedInstance.updateRole(role: String(self.role))
                                             }
                                         }

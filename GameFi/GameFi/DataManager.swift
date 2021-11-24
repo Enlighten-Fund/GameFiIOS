@@ -5,7 +5,9 @@ import Amplify
 
 typealias CompleteBlock = (GFResult,Any) -> Void
  
-let BaseUrl = "http://a2a7cb64ab5d94072bc625bdedd3f7ff-1103167960.ap-northeast-1.elb.amazonaws.com/v2/"
+//let BaseUrl = "http://a2a7cb64ab5d94072bc625bdedd3f7ff-1103167960.ap-northeast-1.elb.amazonaws.com/v2/"
+let BaseUrl = "https://ykdrpt5lig.execute-api.ap-northeast-1.amazonaws.com/v2/"
+
 let jkver = "1.0"
 
 
@@ -69,10 +71,15 @@ class DataManager: NSObject {
                 
             }
             let urlPath:URL = URL(string: BaseUrl + url)!
-            let headers:HTTPHeaders = ["Content-Type":"application/json;charset=UTF-8"]
+            var headers:HTTPHeaders?
+            if Usermodel.shared.token != nil && Usermodel.shared.token != ""{
+                headers = ["Content-Type":"application/json;charset=UTF-8","token":Usermodel.shared.token!]
+            }else{
+                headers = ["Content-Type":"application/json;charset=UTF-8"]
+            }
             let request = AF.request(urlPath,method: .post,parameters: tempDic,encoding: JSONEncoding.default, headers: headers)
             request.responseJSON { (response) in
-                print("请求\(url)\n入参:\(tempDic)\n返回:\(response.result)")
+                print("请求:\(url)\n入参:\(tempDic)\n返回:\(response.result)")
                 switch response.result {
                 case let .success(result):
                     do {
@@ -185,8 +192,8 @@ class DataManager: NSObject {
     }
     //获取Tracker总数据
     func fetchTrackerSummary(completeBlock: @escaping CompleteBlock) {
-        let dic = ["user_id" : "201"]
-        self.POST(url: "game_accounts/get_summary_by_user", param: dic as [String : Any]) { result, reponse in
+//        let dic = ["user_id" : "201"]
+        self.POST(url: "game_accounts/get_summary_by_user", param: [:]) { result, reponse in
 //            let path = Bundle.main.path(forResource: "tracksum", ofType: "json")
 //            let url = URL(fileURLWithPath: path!)
 //            do {
@@ -210,7 +217,7 @@ class DataManager: NSObject {
     
     //获取Tracker 列表
     func fetchTrackerList(pageIndex:Int,completeBlock: @escaping CompleteBlock) {
-        let dic = ["page_index" : pageIndex,"page_size" : 20,"user_id" : "201"] as [String : Any]
+        let dic = ["page_index" : pageIndex,"page_size" : 20] as [String : Any]
         self.POST(url: "game_accounts/list_all_by_user", param: dic as [String : Any]) { result, reponse in
 //            let path = Bundle.main.path(forResource: "tracklist", ofType: "json")
 //            let url = URL(fileURLWithPath: path!)
@@ -237,8 +244,8 @@ class DataManager: NSObject {
         let dic = ["name" : accountName,
                    "ronin_address" : ronin_address,
                    "manager_percentage" : Float(manager_percentage),
-                   "scholar_percentage": Float(100 - manager_percentage),
-                   "user_id": "201"] as [String : Any]
+                   "scholar_percentage": Float(100 - manager_percentage)
+                  ] as [String : Any]
         self.POST(url: "game_accounts/update_tracker", param: dic as [String : Any]) { result, reponse in
             if result.success!{
                 let trackListModel = JsonUtil.jsonToModel(reponse as! String, TrackListModel.self)
@@ -254,8 +261,8 @@ class DataManager: NSObject {
         let dic = ["name" : accountName,
                    "ronin_address" : ronin_address,
                    "manager_percentage" : Float(manager_percentage),
-                   "scholar_percentage": Float(100 - manager_percentage),
-                   "user_id": "201"] as [String : Any]
+                   "scholar_percentage": Float(100 - manager_percentage)
+        ] as [String : Any]
         self.POST(url: "game_accounts/update_tracker", param: dic as [String : Any]) { result, reponse in
             if result.success!{
                 let trackListModel = JsonUtil.jsonToModel(reponse as! String, TrackListModel.self)
@@ -268,8 +275,8 @@ class DataManager: NSObject {
     
     //Delete Tracker
     func deleteTracker(ronin_address:String,completeBlock: @escaping CompleteBlock) {
-        let dic = ["ronin_address" : ronin_address,
-                   "user_id": "201"] as [String : Any]
+        let dic = ["ronin_address" : ronin_address
+        ] as [String : Any]
         self.POST(url: "game_accounts/delete_tracker", param: dic as [String : Any]) { result, reponse in
             if result.success!{
                 completeBlock(result,reponse)
@@ -281,7 +288,7 @@ class DataManager: NSObject {
     
     //manager latest application
     func fetechScholarApplyListModel(pageIndex:Int,completeBlock: @escaping CompleteBlock) {
-        let dic = ["page_index" : pageIndex,"page_size" : 20,"user_id": "201"] as [String : Any]
+        let dic = ["page_index" : pageIndex,"page_size" : 20] as [String : Any]
         self.POST(url: "application/list_by_manager", param: dic as [String : Any]) { result, reponse in
 //            let path = Bundle.main.path(forResource: "managerApplicationList", ofType: "json")
 //            let url = URL(fileURLWithPath: path!)
@@ -305,7 +312,7 @@ class DataManager: NSObject {
     
     //manager offering scholarships
     func fetchManagerOfferingScholarShip(pageIndex:Int, completeBlock: @escaping CompleteBlock) {
-        let dic = ["page_index" : pageIndex,"page_size" : 20,"user_id" : "201"] as [String : Any]
+        let dic = ["page_index" : pageIndex,"page_size" : 20] as [String : Any]
         self.POST(url: "scholarship/list_by_manager_offering", param: dic) { result, reponse in
 //            let path = Bundle.main.path(forResource: "managerscholarshiplist", ofType: "json")
 //            let url = URL(fileURLWithPath: path!)
@@ -330,7 +337,7 @@ class DataManager: NSObject {
     
     //manager nooffer scholarships
     func fetchManagerNoOfferScholarShip(pageIndex:Int, completeBlock: @escaping CompleteBlock) {
-        let dic = ["page_index" : pageIndex,"page_size" : 20,"user_id" : "201"] as [String : Any]
+        let dic = ["page_index" : pageIndex,"page_size" : 20] as [String : Any]
         self.POST(url: "scholarship/list_by_manager_not_offered", param: dic) { result, reponse in
 //            let path = Bundle.main.path(forResource: "managerscholarshiplist", ofType: "json")
 //            let url = URL(fileURLWithPath: path!)
@@ -355,7 +362,7 @@ class DataManager: NSObject {
     
     //scholar renting
     func fetchScholarRentScholarShip(pageIndex:Int, completeBlock: @escaping CompleteBlock) {
-        let dic = ["page_index" : pageIndex,"page_size" : 20,"user_id" : "201"] as [String : Any]
+        let dic = ["page_index" : pageIndex,"page_size" : 20] as [String : Any]
         self.POST(url: "scholarship/list_by_scholar", param: dic) { result, reponse in
 //            let path = Bundle.main.path(forResource: "managerscholarshiplist", ofType: "json")
 //            let url = URL(fileURLWithPath: path!)
@@ -380,7 +387,7 @@ class DataManager: NSObject {
     
     //scholar apping
     func fetchScholarApplyingScholarShip(pageIndex:Int, completeBlock: @escaping CompleteBlock) {
-        let dic = ["page_index" : pageIndex,"page_size" : 20,"user_id" : "201"] as [String : Any]
+        let dic = ["page_index" : pageIndex,"page_size" : 20] as [String : Any]
         self.POST(url: "application/list_by_scholar", param: dic) { result, reponse in
 //            let path = Bundle.main.path(forResource: "managerscholarshiplist", ofType: "json")
 //            let url = URL(fileURLWithPath: path!)
@@ -406,7 +413,6 @@ class DataManager: NSObject {
     func createScholarShip(dic:[String: Any], completeBlock: @escaping CompleteBlock) {
         let dicParam = NSMutableDictionary.init()
         dicParam.addEntries(from: dic)
-        dicParam["user_id"] = "201"
         self.POST(url: "scholarship/create", param: dicParam as! [String : Any]) { result, reponse in
             if result.success!{
                 completeBlock(result,reponse)
@@ -420,7 +426,6 @@ class DataManager: NSObject {
     func editScholarShip(dic:[String: Any], completeBlock: @escaping CompleteBlock) {
         let dicParam = NSMutableDictionary.init()
         dicParam.addEntries(from: dic)
-        dicParam["user_id"] = "201"
         self.POST(url: "scholarship/update_info_by_id", param: dicParam as! [String : Any]) { result, reponse in
             if result.success!{
                 completeBlock(result,reponse)
@@ -432,7 +437,7 @@ class DataManager: NSObject {
     
     //update scholarship status
     func updateScholarshipStatus(scholarshipid:String, status: String , completeBlock: @escaping CompleteBlock) {
-        let dic = ["id" : Int(scholarshipid) as Any,"status" : status,"user_id":"201"] as [String : Any]
+        let dic = ["id" : Int(scholarshipid) as Any,"status" : status] as [String : Any]
         self.POST(url: "scholarship/update_status_by_id", param: dic ) { result, reponse in
             if result.success!{
                 completeBlock(result,reponse)
@@ -444,7 +449,7 @@ class DataManager: NSObject {
     
     //
     func fetchUserinfo(completeBlock: @escaping CompleteBlock) {
-        let dic = ["user_id" : "201" as Any] as [String : Any]
+        let dic = [:] as [String : Any]
         self.POST(url: "user/get_by_id", param: dic ) { result, reponse in
             if result.success!{
                 let userInfoModel : UserInfoModel = JsonUtil.jsonToModel(reponse as! String, UserInfoModel.self) as! UserInfoModel
@@ -456,8 +461,7 @@ class DataManager: NSObject {
     }
     
     func fetchUserDetailinfo(completeBlock: @escaping CompleteBlock) {
-        let dic = ["user_id" : "201" as Any] as [String : Any]
-        self.POST(url: "user/get_all_by_id", param: dic ) { result, reponse in
+        self.POST(url: "user/get_all_by_id", param: [:] ) { result, reponse in
             if result.success!{
                 let userInfoModel : UserInfoModel = JsonUtil.jsonToModel(reponse as! String, UserInfoModel.self) as! UserInfoModel
                 completeBlock(result,userInfoModel)
@@ -468,7 +472,7 @@ class DataManager: NSObject {
     }
     
     func fetchUpdateUrl(resource : String,completeBlock: @escaping CompleteBlock) {
-        let dic = ["user_id" : "201" as Any,"resource" : resource] as [String : Any]
+        let dic = ["resource" : resource] as [String : Any]
         self.POST(url: "user/get_presigned_url_for_put", param: dic ) { result, reponse in
             if result.success!{
                 if let data = (reponse as AnyObject).data(using: String.Encoding.utf8.rawValue) {
@@ -511,7 +515,7 @@ class DataManager: NSObject {
     
     func updateUserinfo(userinfoModel:UserInfoModel, completeBlock: @escaping CompleteBlock) {
         let json = JsonUtil.modelToJson(userinfoModel)
-        let dic = ["user_id" : "201" as Any,"scholar_info_dict": json] as [String : Any]
+        let dic = ["scholar_info_dict": json] as [String : Any]
         self.POST(url: "user/update_by_id", param: dic ) { result, reponse in
             if result.success!{
                 let userInfoModel : UserInfoModel = JsonUtil.jsonToModel(reponse as! String, UserInfoModel.self) as! UserInfoModel

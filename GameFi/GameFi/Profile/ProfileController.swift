@@ -262,26 +262,20 @@ extension  ProfileController : UITableViewDelegate,UITableViewDataSource{
         {
         case 0:
             self.navigationController?.pushViewController(EditProfileController.init(), animated: true)
-        case 5:
-            self.navigationController?.pushViewController(ResetPwdController.init(), animated: true)
-        case 6:
-            SweetAlert().showAlert("notice:", subTitle: "Are you sure you want to log out？", style: .warning, buttonTitle:"Cancel", buttonColor:UIColorFromRGB(0xD0D0D0) , otherButtonTitle:  "OK", otherButtonColor: UIColorFromRGB(0xDD6B55)) { (isOtherButton) -> Void in
-                if isOtherButton == true {
-                    
-                    
-                }else{
-                    AWSMobileClient.default().signOut { error in
-                        DispatchQueue.main.async {
-                            if let error = error  {
-                                print("\(error.localizedDescription)")
-                                SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")
-                            }else{
-                                self.navigationController?.popViewController(animated: true)
-                               
-                            }
+        case 4:
+            GFAlert.showAlert(titleStr: "Notice:", msgStr: "Are you sure you want to log out？", currentVC: self, cancelHandler: { alertaction in
+                
+            }, otherBtns: ["YES"]) { index in
+                AWSMobileClient.default().signOut { error in
+                    DispatchQueue.main.async {
+                        if let error = error  {
+                            print("\(error.localizedDescription)")
+                        }else{
+                            self.navigationController?.popViewController(animated: true)
+                           
                         }
-                        
                     }
+                    
                 }
             }
         default:

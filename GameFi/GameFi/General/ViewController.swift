@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(red: 0.15, green: 0.16, blue: 0.24, alpha: 1)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: self.msgBtn!)
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: self.msgBtn!)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: self.leftBtn!)
         if (self.navigationController?.viewControllers.count)! > 1 {
             self.leftBtn?.isHidden = false

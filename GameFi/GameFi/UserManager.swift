@@ -10,7 +10,7 @@ import AWSMobileClient
 typealias CommonEmptyBlock = ()->Void
 class UserManager: NSObject {
     var fetchRoleBlock : CommonEmptyBlock?
-    
+//    var fetchTokenBlock : CommonEmptyBlock?
     static let sharedInstance = UserManager()
     private override init() {}
     
@@ -64,12 +64,13 @@ class UserManager: NSObject {
         return true
     }
     //login register forgetpassword时  把token保存在本地
-    func updateToken(){
+    func updateToken(updateTokenBlock:@escaping CommonEmptyBlock){
         AWSMobileClient.default().getTokens { [self] tokens, error in
             if let error = error {
                 print("Error getting token \(error.localizedDescription)")
             } else if let tokens = tokens {
                 Usermodel.shared.token = tokens.accessToken!.tokenString!
+                updateTokenBlock()
             }
         }
     }

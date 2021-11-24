@@ -92,12 +92,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
     
     //Mark 配置AWS
     func configAWS() {
+        let previousBuild = UserDefaults.standard.string(forKey: "build")
+            let currentBuild = Bundle.main.infoDictionary!["CFBundleVersion"] as! String
+            if previousBuild == nil {
+                //fresh install
+                AWSMobileClient.default().signOut()
+            } else if previousBuild != currentBuild {
+                //application updated
+            }
+            UserDefaults.standard.set(currentBuild, forKey: "build")
+        
         do {
             Amplify.Logging.logLevel = .verbose
             try Amplify.add(plugin: AWSCognitoAuthPlugin())
             try Amplify.configure()
             UserManager.sharedInstance.fetchAndUpdateRole()
-            
             AWSMobileClient.default().addUserStateListener(self) { (userState, info) in
                 switch (userState) {
                 case .guest:

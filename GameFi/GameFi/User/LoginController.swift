@@ -54,28 +54,53 @@ class LoginController: ViewController {
         }
     }
     
+    func updateTextField(textField:UITextField,focus:Bool)  {
+        if focus {
+            textField.layer.borderColor = UIColor.init(hexString: "0xB85050").cgColor
+        }else{
+            textField.layer.borderColor = UIColor(red: 0.27, green: 0.3, blue: 0.41, alpha: 1).cgColor
+        }
+    }
+    
     func valifyAccount() -> Bool {
-        var temp = false
-        if self.usernameTextField!.validateUsername() {
-            temp = true
-        }else if self.usernameTextField!.validateEmail(){
-            temp = true
-        }
-        if !temp {
-            self.showNoticeLabel(notice: "Your email or username format is incorrect")
+        if self.usernameTextField!.text == nil || self.usernameTextField!.text!.isBlank {
+            self.showNoticeLabel(notice: "Your email or username should be filled in")
+            self.updateTextField(textField: self.usernameTextField!, focus: true)
             return false
+        }else{
+            var temp = false
+            if self.usernameTextField!.validateUsername() {
+                temp = true
+            }else if self.usernameTextField!.validateEmail(){
+                temp = true
+            }
+            if !temp {
+                self.showNoticeLabel(notice: "Your email or username format is incorrect")
+                self.updateTextField(textField: self.usernameTextField!, focus: true)
+                return false
+            }
+            
+            self.hideNoticeLabel()
+            self.updateTextField(textField: self.usernameTextField!, focus: false)
+            return true
         }
-        self.hideNoticeLabel()
-        return true
     }
     
     func valifyPassword() -> Bool {
-        if self.passwordTextField!.validatePassword() {
-            self.hideNoticeLabel()
-            return true
-        }else{
-            self.showNoticeLabel(notice: "Your password format is incorrect")
+        if self.passwordTextField!.text == nil || self.passwordTextField!.text!.isBlank {
+            self.showNoticeLabel(notice: "Your password should be filled in")
+            self.updateTextField(textField: self.passwordTextField!, focus: true)
             return false
+        }else{
+            if self.passwordTextField!.validatePassword() {
+                self.hideNoticeLabel()
+                self.updateTextField(textField: self.passwordTextField!, focus: false)
+                return true
+            }else{
+                self.showNoticeLabel(notice: "Your password format is incorrect")
+                self.updateTextField(textField: self.passwordTextField!, focus: true)
+                return false
+            }
         }
     }
     
@@ -101,24 +126,27 @@ class LoginController: ViewController {
             DispatchQueue.main.async {
                 self.mc_remove()
                 if let error = error  {
-                    print("\(error.localizedDescription)")
-                    SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")
+                    print("\(error)")
+//                    SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")
                 } else if let signInResult = signInResult {
                     switch (signInResult.signInState) {
                     case .signedIn:
                         print("User is signed in.")
-                        
-                        self.mc_success("login success", duration: 0.5) {
-                            self.dismiss(animated: true) {
-                                UserManager.sharedInstance.updateToken()
-                                UserManager.sharedInstance.fetchRoleBlock = {
-                                    if self.loginSuccessBlock != nil{
-                                        self.loginSuccessBlock!()
+                        UserManager.sharedInstance.updateToken {
+                            DispatchQueue.main.async {
+                                self.mc_success("login success", duration: 0.5) {
+                                    self.dismiss(animated: true) {
+                                        UserManager.sharedInstance.fetchRoleBlock = {
+                                            if self.loginSuccessBlock != nil{
+                                                self.loginSuccessBlock!()
+                                            }
+                                        }
+                                        UserManager.sharedInstance.fetchAndUpdateRole()
                                     }
                                 }
-                                UserManager.sharedInstance.fetchAndUpdateRole()
                             }
                         }
+                        
                     default:
                         print("Sign In needs info which is not et supported.")
                     }
