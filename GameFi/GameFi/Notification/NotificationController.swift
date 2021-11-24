@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 import SnapKit
-import SCLAlertView
 import MJRefresh
 
 class NotificationController: ViewController {

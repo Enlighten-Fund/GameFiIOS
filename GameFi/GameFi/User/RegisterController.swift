@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import AWSMobileClient
 import MCToast
-import SCLAlertView
+
 
 class RegisterController: ViewController {
     var emailTextField : UITextField?
@@ -74,7 +74,11 @@ class RegisterController: ViewController {
     func fireTimerAndShowAlert(title:String) {
         DispatchQueue.main.async {
             self.timer.fire()
-            SCLAlertView.init().showInfo("系统提示", subTitle: title)
+            GFAlert.showAlert(titleStr: "Notice:", msgStr: title, currentVC: self, cancelHandler: { action in
+                
+            }, otherBtns: nil) { index in
+                
+            }
         }
     }
     
@@ -243,19 +247,18 @@ class RegisterController: ViewController {
                                 self.mc_remove()
                                 if let error = error  {
                                     print("\(error.localizedDescription)")
-                                    DispatchQueue.main.async {SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")}
                                     
                                 } else if let signInResult = signInResult {
                                     switch (signInResult.signInState) {
                                     case .signedIn:
                                         print("User is signed in.")
-                                       
-                                        self.mc_success("注册成功", duration: 0.2) {
-                                            self.dismiss(animated: true) {
-                                                UserManager.sharedInstance.updateToken {
-                                                    
+                                        DispatchQueue.main.async {
+                                            UserManager.sharedInstance.updateToken {
+                                                self.mc_success("注册成功", duration: 0.2) {
+                                                    self.dismiss(animated: true) {
+                                                        UserManager.sharedInstance.updateRole(role: String(self.role))
+                                                    }
                                                 }
-                                                UserManager.sharedInstance.updateRole(role: String(self.role))
                                             }
                                         }
                                     default:
@@ -273,13 +276,7 @@ class RegisterController: ViewController {
                     } else if let error = error {
                         self.mc_remove()
                         if let error = error as? AWSMobileClientError {
-                            switch(error) {
-                            case .aliasExists(let message):
-                                DispatchQueue.main.async {SCLAlertView.init().showError("系统提示：", subTitle: "\(message),please change another email")}
-                            default:
-                                DispatchQueue.main.async {SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")}
-                                break
-                            }
+                            debugPrint(error)
                         }
                         
                         DispatchQueue.main.async { [self] in

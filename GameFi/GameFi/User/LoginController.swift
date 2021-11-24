@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 import SnapKit
 import AWSMobileClient
-import SCLAlertView
 import MJRefresh
 
 //定义

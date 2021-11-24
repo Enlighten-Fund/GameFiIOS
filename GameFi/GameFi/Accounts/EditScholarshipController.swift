@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SnapKit
 import AWSMobileClient
-import SCLAlertView
+
 import MJRefresh
 class EditScholarshipController: ViewController {
     var accountNameTextField : UITextField?

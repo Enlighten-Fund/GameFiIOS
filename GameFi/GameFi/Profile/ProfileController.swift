@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 import SnapKit
-import SCLAlertView
+
 import MJRefresh
 import AWSMobileClient
 
@@ -160,6 +160,7 @@ class ProfileController: ViewController {
         tempTableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "profileCellIdentifier")
         tempTableView.dataSource = self
         tempTableView.delegate = self
+        tempTableView.separatorColor = UIColor(red: 0.19, green: 0.21, blue: 0.29, alpha: 1)
         view.addSubview(tempTableView)
         return tempTableView
     }()
@@ -286,29 +287,18 @@ extension  ProfileController : UITableViewDelegate,UITableViewDataSource{
             switch indexPath.row
             {
             case 0:
-                let url = URL(string: "")
+                let url = URL(string: "https://discord.gg/Kpsk9tWXS4")
                 // 注意: 跳转之前, 可以使用 canOpenURL: 判断是否可以跳转
                 if !UIApplication.shared.canOpenURL(url!) {
                      // 不能跳转就不要往下执行了
                      return
                 }
-                if #available(iOS 10.0, *) {
-                  
-                      UIApplication.shared.open(url!, options: [:]) { (success) in
-                           if (success) {
-                                print("10以后可以跳转url")
-                           }else{
-                                print("10以后不能完成跳转")
-                           }
-                       }
-                } else {
-                       // Fallback on earlier versions
-                       let success = UIApplication.shared.openURL(url!)
-                       if (success) {
-                             print("10以下可以跳转")
-                       }else{
-                             print("10以下不能完成跳转")
-                       }
+                UIApplication.shared.open(url!, options: [:]) { (success) in
+                     if (success) {
+                          print("10以后可以跳转url")
+                     }else{
+                          print("10以后不能完成跳转")
+                     }
                  }
             case 1:
                 let url = URL(string: "https://twitter.com/0xcyberninja?s=11")
@@ -317,23 +307,12 @@ extension  ProfileController : UITableViewDelegate,UITableViewDataSource{
                      // 不能跳转就不要往下执行了
                      return
                 }
-                if #available(iOS 10.0, *) {
-                  
-                      UIApplication.shared.open(url!, options: [:]) { (success) in
-                           if (success) {
-                                print("10以后可以跳转url")
-                           }else{
-                                print("10以后不能完成跳转")
-                           }
-                       }
-                } else {
-                       // Fallback on earlier versions
-                       let success = UIApplication.shared.openURL(url!)
-                       if (success) {
-                             print("10以下可以跳转")
-                       }else{
-                             print("10以下不能完成跳转")
-                       }
+                UIApplication.shared.open(url!, options: [:]) { (success) in
+                     if (success) {
+                          print("10以后可以跳转url")
+                     }else{
+                          print("10以后不能完成跳转")
+                     }
                  }
             case 2:
                 let url = URL(string: "https://youtube.com/channel/UC65EXHxwic4cEcebK8iJCjg")
@@ -342,23 +321,12 @@ extension  ProfileController : UITableViewDelegate,UITableViewDataSource{
                      // 不能跳转就不要往下执行了
                      return
                 }
-                if #available(iOS 10.0, *) {
-                  
-                      UIApplication.shared.open(url!, options: [:]) { (success) in
-                           if (success) {
-                                print("10以后可以跳转url")
-                           }else{
-                                print("10以后不能完成跳转")
-                           }
-                       }
-                } else {
-                       // Fallback on earlier versions
-                       let success = UIApplication.shared.openURL(url!)
-                       if (success) {
-                             print("10以下可以跳转")
-                       }else{
-                             print("10以下不能完成跳转")
-                       }
+                UIApplication.shared.open(url!, options: [:]) { (success) in
+                     if (success) {
+                          print("10以后可以跳转url")
+                     }else{
+                          print("10以后不能完成跳转")
+                     }
                  }
             case 3:
                 let url = URL(string: "https://loud-macaroon-715.notion.site/CyberNinja-WiKi-e6709296d97445b988a3bb87b552e3f9")
@@ -367,23 +335,12 @@ extension  ProfileController : UITableViewDelegate,UITableViewDataSource{
                      // 不能跳转就不要往下执行了
                      return
                 }
-                if #available(iOS 10.0, *) {
-                  
-                      UIApplication.shared.open(url!, options: [:]) { (success) in
-                           if (success) {
-                                print("10以后可以跳转url")
-                           }else{
-                                print("10以后不能完成跳转")
-                           }
-                       }
-                } else {
-                       // Fallback on earlier versions
-                       let success = UIApplication.shared.openURL(url!)
-                       if (success) {
-                             print("10以下可以跳转")
-                       }else{
-                             print("10以下不能完成跳转")
-                       }
+                UIApplication.shared.open(url!, options: [:]) { (success) in
+                     if (success) {
+                          print("10以后可以跳转url")
+                     }else{
+                          print("10以后不能完成跳转")
+                     }
                  }
             default:
                 break

@@ -1,52 +1,52 @@
 PODS:
   - Alamofire (5.4.4)
-  - Amplify (1.15.5):
-    - Amplify/Default (= 1.15.5)
-  - Amplify/Default (1.15.5)
-  - AmplifyPlugins/AWSCognitoAuthPlugin (1.15.5):
-    - AWSAuthCore (~> 2.26.1)
-    - AWSCognitoIdentityProvider (~> 2.26.1)
-    - AWSCognitoIdentityProviderASF (~> 2.26.1)
-    - AWSCore (~> 2.26.1)
-    - AWSMobileClient (~> 2.26.1)
-    - AWSPluginsCore (= 1.15.5)
-  - AWSAuthCore (2.26.3):
-    - AWSCore (= 2.26.3)
-  - AWSCognitoIdentityProvider (2.26.3):
-    - AWSCognitoIdentityProviderASF (= 2.26.3)
-    - AWSCore (= 2.26.3)
-  - AWSCognitoIdentityProviderASF (2.26.3)
-  - AWSCore (2.26.3)
-  - AWSMobileClient (2.26.3):
-    - AWSAuthCore (= 2.26.3)
-    - AWSCognitoIdentityProvider (= 2.26.3)
-    - AWSCognitoIdentityProviderASF (= 2.26.3)
-    - AWSCore (= 2.26.3)
-  - AWSPluginsCore (1.15.5):
-    - Amplify (= 1.15.5)
-    - AWSCore (~> 2.26.1)
+  - Amplify (1.16.1):
+    - Amplify/Default (= 1.16.1)
+  - Amplify/Default (1.16.1)
+  - AmplifyPlugins/AWSCognitoAuthPlugin (1.16.1):
+    - AWSAuthCore (~> 2.26.5)
+    - AWSCognitoIdentityProvider (~> 2.26.5)
+    - AWSCognitoIdentityProviderASF (~> 2.26.5)
+    - AWSCore (~> 2.26.5)
+    - AWSMobileClient (~> 2.26.5)
+    - AWSPluginsCore (= 1.16.1)
+  - AWSAuthCore (2.26.5):
+    - AWSCore (= 2.26.5)
+  - AWSCognitoIdentityProvider (2.26.5):
+    - AWSCognitoIdentityProviderASF (= 2.26.5)
+    - AWSCore (= 2.26.5)
+  - AWSCognitoIdentityProviderASF (2.26.5)
+  - AWSCore (2.26.5)
+  - AWSMobileClient (2.26.5):
+    - AWSAuthCore (= 2.26.5)
+    - AWSCognitoIdentityProvider (= 2.26.5)
+    - AWSCognitoIdentityProviderASF (= 2.26.5)
+    - AWSCore (= 2.26.5)
+  - AWSPluginsCore (1.16.1):
+    - Amplify (= 1.16.1)
+    - AWSCore (~> 2.26.5)
+  - Bugly (2.5.90)
   - ESTabBarController-swift (2.8.0)
   - HandyJSON (5.0.2)
-  - IQKeyboardManager (6.5.6)
+  - IQKeyboardManager (6.5.9)
   - Kingfisher (6.3.1)
   - lottie-ios (3.2.3)
   - MCToast (0.1.0):
     - lottie-ios
   - MJRefresh (3.7.2)
-  - SCLAlertView (0.8)
   - SnapKit (5.0.1)
 
 DEPENDENCIES:
   - Alamofire
   - Amplify
   - AmplifyPlugins/AWSCognitoAuthPlugin
+  - Bugly
   - ESTabBarController-swift
   - HandyJSON
   - IQKeyboardManager
   - Kingfisher
   - MCToast
   - MJRefresh
-  - SCLAlertView
   - SnapKit
 
 SPEC REPOS:
@@ -60,6 +60,7 @@ SPEC REPOS:
     - AWSCore
     - AWSMobileClient
     - AWSPluginsCore
+    - Bugly
     - ESTabBarController-swift
     - HandyJSON
     - IQKeyboardManager
@@ -67,29 +68,28 @@ SPEC REPOS:
     - lottie-ios
     - MCToast
     - MJRefresh
-    - SCLAlertView
     - SnapKit
 
 SPEC CHECKSUMS:
   Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
-  Amplify: 4d248001a7fe2fe3707cb280c8961fe5cb55ae65
-  AmplifyPlugins: 829c1ef5ed5d05e35d9cad3a9f0a9565913da411
-  AWSAuthCore: ce2089f8af1680aa433f6302b028ac786632cc5b
-  AWSCognitoIdentityProvider: a7e5caaade68cc93a92e3a888db30053dc167ee0
-  AWSCognitoIdentityProviderASF: ddcd5b1d919dccc15422b040ba4f99f5fbe85d9f
-  AWSCore: 7077ecff07ae3b184e65e2fa9855f6da048f9ae7
-  AWSMobileClient: 32f38bdb37ee29b2ac2c81739054f95bf3265f66
-  AWSPluginsCore: f56a627f972d2ee9557f6a367e9875746b989b43
+  Amplify: 6537202e60db68f911ca9382bfc19be3cdd3a78e
+  AmplifyPlugins: 874492f1351a54eaf503fd529dc1af61c4b4eb78
+  AWSAuthCore: ac6f2bf01b136251f816ca99a21f142d4a1a17ef
+  AWSCognitoIdentityProvider: c7983af57977cf463041e818e3e0414add5dd02b
+  AWSCognitoIdentityProviderASF: e34812b1308d41a0d026ab5d54693fdc93e412b3
+  AWSCore: e84c89bded6fae98ae9c297c71f10f2c87eedc3d
+  AWSMobileClient: 29692a65143c9262e37a2a1c4d4c58c6bc2a85c3
+  AWSPluginsCore: 7e22a2df766dbfea3aec1e7d88916a74ae94be71
+  Bugly: 88bc32c0acc6fef7b74d610f0319ee7560d6b9fe
   ESTabBarController-swift: 05593a6ad64700b03c0eb60ff625916370aa4136
   HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
-  IQKeyboardManager: 2a6e97afdafc7becf0cb17a9a8d795e3a980717f
+  IQKeyboardManager: 241cc94ccabc9deb8f8bd7d12f00d73288d13ecc
   Kingfisher: 016c8b653a35add51dd34a3aba36b580041acc74
   lottie-ios: c058aeafa76daa4cf64d773554bccc8385d0150e
   MCToast: accd8b0d4653bcd6b3b1a9770802c2358614e6a5
   MJRefresh: 30997d30b347c8e9508a4db11e3a690da0c9b85a
-  SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: 9c0683a54efdd223ad5d3345899cd23124f50446
+PODFILE CHECKSUM: 4e2d10b9219ad586295a9855fa9f52b48f9f916b
 
 COCOAPODS: 1.11.2

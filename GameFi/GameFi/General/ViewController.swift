@@ -7,7 +7,7 @@
 
 import UIKit
 import AWSMobileClient
-import SCLAlertView
+
 
 
 class ViewController: UIViewController {

@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SnapKit
 import MCToast
-import SCLAlertView
+
 import AWSMobileClient
 
 class ForgetPwdController: ViewController {
@@ -114,7 +114,11 @@ class ForgetPwdController: ViewController {
     func fireTimerAndShowAlert(title:String) {
         DispatchQueue.main.async {
             self.timer.fire()
-            SCLAlertView.init().showInfo("系统提示", subTitle: title)
+            GFAlert.showAlert(titleStr: "Notice:", msgStr: title, currentVC: self, cancelHandler: { action in
+                
+            }, otherBtns: nil) { index in
+                
+            }
         }
     }
     
@@ -147,7 +151,6 @@ class ForgetPwdController: ViewController {
                 }
             } else if let error = error {
                 print("Error occurred: \(error.localizedDescription)")
-                SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")
             }
         }
     }
@@ -183,19 +186,15 @@ class ForgetPwdController: ViewController {
                                 self.mc_remove()
                                 if let error = error  {
                                     print("\(error.localizedDescription)")
-                                    SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")
                                 } else if let signInResult = signInResult {
                                     switch (signInResult.signInState) {
                                     case .signedIn:
-                                        UserManager.sharedInstance.updateToken {
-                                            
+                                        DispatchQueue.main.async {
+                                            UserManager.sharedInstance.updateToken {
+                                                UserManager.sharedInstance.fetchAndUpdateRole()
+                                                self.navigationController?.popToRootViewController(animated: true)
+                                            }
                                         }
-                                        UserManager.sharedInstance.fetchAndUpdateRole()
-                                        SCLAlertView.init().showError("系统提示：", subTitle: "修改密码并登录成功")
-                                        self.navigationController?.popToRootViewController(animated: true)
-                                    case .smsMFA:
-                                        print("SMS message sent to \(signInResult.codeDetails!.destination!)")
-                                        SCLAlertView.init().showError("系统提示：", subTitle: "\(signInResult.codeDetails!.destination!)")
                                     default:
                                         print("Sign In needs info which is not et supported.")
                                     }
@@ -211,7 +210,6 @@ class ForgetPwdController: ViewController {
                     self.mc_remove()
                     DispatchQueue.main.async {
                         print("Error occurred: \(error.localizedDescription)")
-                        SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")
                         self.stopTimerAndUpdateCodeBtn()
                     }
                     

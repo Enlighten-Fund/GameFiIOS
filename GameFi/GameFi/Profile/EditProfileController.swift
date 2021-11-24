@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import AWSMobileClient
 import MCToast
-import SCLAlertView
+
 import Amplify
 import Kingfisher
 

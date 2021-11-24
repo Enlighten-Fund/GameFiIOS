@@ -9,7 +9,6 @@ import UIKit
 import MJRefresh
 import SnapKit
 import Foundation
-import SCLAlertView
 
 class LatestApplyController: UIViewController {
     var pageIndex = 1

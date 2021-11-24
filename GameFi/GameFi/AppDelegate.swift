@@ -13,13 +13,14 @@ import ESTabBarController_swift
 import IQKeyboardManager
 import AWSCognitoIdentityProvider
 import AWSMobileClient
-
+import Bugly
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate{
     var homeVC : HomeController? = nil
     var managerAccontVC : ManagerAccountsController? = nil
     var scholarAccontVC : ScholarAccountsController? = nil
    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        Bugly.start(withAppId: "95913c773a")
         self.window?.rootViewController = self.tabbarVC
         IQKeyboardManager.shared().isEnabled = true
         IQKeyboardManager.shared().isEnableAutoToolbar = true

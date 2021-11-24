@@ -113,7 +113,6 @@
 		98D99407273A107D006AA8DC /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D99406273A107D006AA8DC /* ProfileHeaderView.swift */; };
 		98D99409273A3A45006AA8DC /* SweetAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D99408273A3A45006AA8DC /* SweetAlert.swift */; };
 		98D9940B273A46D2006AA8DC /* ScholarListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D9940A273A46D2006AA8DC /* ScholarListModel.swift */; };
-		98D9940D273A5C67006AA8DC /* ResetPwdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D9940C273A5C67006AA8DC /* ResetPwdController.swift */; };
 		98D99411273A7F31006AA8DC /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D99410273A7F31006AA8DC /* EditProfileController.swift */; };
 		98D99414273A8CFE006AA8DC /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D99413273A8CFE006AA8DC /* NotificationController.swift */; };
 		98D99417273A8DDC006AA8DC /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D99416273A8DDB006AA8DC /* NotificationCell.swift */; };
@@ -237,7 +236,6 @@
 		98D99406273A107D006AA8DC /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		98D99408273A3A45006AA8DC /* SweetAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SweetAlert.swift; sourceTree = "<group>"; };
 		98D9940A273A46D2006AA8DC /* ScholarListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarListModel.swift; sourceTree = "<group>"; };
-		98D9940C273A5C67006AA8DC /* ResetPwdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwdController.swift; sourceTree = "<group>"; };
 		98D99410273A7F31006AA8DC /* EditProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileController.swift; sourceTree = "<group>"; };
 		98D99413273A8CFE006AA8DC /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		98D99416273A8DDB006AA8DC /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
@@ -424,7 +422,6 @@
 				984BDBAB272E494600F6144B /* LoginController.swift */,
 				984BDB94272ACD0A00F6144B /* RegisterController.swift */,
 				98E09B592731121B0020D97D /* ForgetPwdController.swift */,
-				98D9940C273A5C67006AA8DC /* ResetPwdController.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -825,7 +822,6 @@
 				984BDB99272BA23600F6144B /* RegisterHeadView.swift in Sources */,
 				984BDB9B272BC6C200F6144B /* LabelTextFildCell.swift in Sources */,
 				985817542743990100D8CFCA /* GFAlert.swift in Sources */,
-				98D9940D273A5C67006AA8DC /* ResetPwdController.swift in Sources */,
 				985817732747D3D200D8CFCA /* UserInfoModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 import SnapKit
-import SCLAlertView
+
 import MJRefresh
 import AWSMobileClient
 
@@ -118,6 +118,59 @@ extension  ProfileGuestController : UITableViewDelegate,UITableViewDataSource{
     cell.contentView.backgroundColor = UIColor(red: 0.27, green: 0.3, blue: 0.41, alpha: 1)
     return cell
    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            switch indexPath.row
+            {
+            case 1:
+                let url = URL(string: "https://discord.gg/Kpsk9tWXS4")
+                // 注意: 跳转之前, 可以使用 canOpenURL: 判断是否可以跳转
+                if !UIApplication.shared.canOpenURL(url!) {
+                     // 不能跳转就不要往下执行了
+                     return
+                }
+                UIApplication.shared.open(url!, options: [:]) { (success) in
+                     if (success) {
+                          print("10以后可以跳转url")
+                     }else{
+                          print("10以后不能完成跳转")
+                     }
+                 }
+            case 2:
+                let url = URL(string: "https://discord.gg/Kpsk9tWXS4")
+                // 注意: 跳转之前, 可以使用 canOpenURL: 判断是否可以跳转
+                if !UIApplication.shared.canOpenURL(url!) {
+                     // 不能跳转就不要往下执行了
+                     return
+                }
+                UIApplication.shared.open(url!, options: [:]) { (success) in
+                     if (success) {
+                          print("10以后可以跳转url")
+                     }else{
+                          print("10以后不能完成跳转")
+                     }
+                 }
+            case 3:
+                let url = URL(string: "https://discord.gg/Kpsk9tWXS4")
+                // 注意: 跳转之前, 可以使用 canOpenURL: 判断是否可以跳转
+                if !UIApplication.shared.canOpenURL(url!) {
+                     // 不能跳转就不要往下执行了
+                     return
+                }
+                UIApplication.shared.open(url!, options: [:]) { (success) in
+                     if (success) {
+                          print("10以后可以跳转url")
+                     }else{
+                          print("10以后不能完成跳转")
+                     }
+                 }
+            default:
+                break
+            }
+        }
+        
+    }
 }
 
 

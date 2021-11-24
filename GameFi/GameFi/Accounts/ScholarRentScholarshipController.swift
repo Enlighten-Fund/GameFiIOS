@@ -9,7 +9,7 @@ import UIKit
 import MJRefresh
 import SnapKit
 import Foundation
-import SCLAlertView
+
 
 class ScholarRentScholarshipController: UIViewController {
     var pageIndex = 1

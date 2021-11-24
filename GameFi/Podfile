@@ -13,6 +13,6 @@ target 'GameFi' do
   pod 'MJRefresh'
   pod 'IQKeyboardManager'
   pod 'MCToast'
-  pod 'SCLAlertView'
+  pod 'Bugly'
   
 end
