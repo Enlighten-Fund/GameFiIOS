@@ -128,50 +128,50 @@ class NoOfferScholarshipCell: UICollectionViewCell {
         self.pwdTextFild?.isSecureTextEntry = !self.pwdTextFild!.isSecureTextEntry
     }
     
-    func update(managerScholarshipModel:ManagerScholarshipModel) {
-        if managerScholarshipModel.myAxieArry == nil || managerScholarshipModel.myAxieArry!.count < 3{
+    func update(scholarshipModel:ScholarshipModel) {
+        if scholarshipModel.accountAxieArry == nil || scholarshipModel.accountAxieArry!.count < 3{
             
         }else{
-            let axiePic1 : String = managerScholarshipModel.myAxieArry![0]
+            let axiePic1 : String = scholarshipModel.accountAxieArry![0]
             self.axieImgView1.kf.setImage(with: URL.init(string: "https://storage.googleapis.com/assets.axieinfinity.com/axies/\(axiePic1)/axie/axie-full-transparent.png"))
-            let axiePic2 : String = managerScholarshipModel.myAxieArry![1]
+            let axiePic2 : String = scholarshipModel.accountAxieArry![1]
             self.axieImgView2.kf.setImage(with:  URL.init(string: "https://storage.googleapis.com/assets.axieinfinity.com/axies/\(axiePic2)/axie/axie-full-transparent.png"))
-            let axiePic3 : String = managerScholarshipModel.myAxieArry![2]
+            let axiePic3 : String = scholarshipModel.accountAxieArry![2]
             self.axieImgView3.kf.setImage(with: URL.init(string: "https://storage.googleapis.com/assets.axieinfinity.com/axies/\(axiePic3)/axie/axie-full-transparent.png"))
         }
-        if managerScholarshipModel.scholarship_name != nil {
-            self.scholarshipNameLabelView.rightLabel.text = managerScholarshipModel.scholarship_name
+        if scholarshipModel.scholarship_name != nil {
+            self.scholarshipNameLabelView.rightLabel.text = scholarshipModel.scholarship_name
         }
-        if managerScholarshipModel.estimate_daily_slp != nil {
-            self.returnPerDayLabelView.rightLabel.text = managerScholarshipModel.estimate_daily_slp
+        if scholarshipModel.estimate_daily_slp != nil {
+            self.returnPerDayLabelView.rightLabel.text = scholarshipModel.estimate_daily_slp
         }
-        if managerScholarshipModel.manager_percentage != nil {
-            self.managerPercentLabelView.rightLabel.text = managerScholarshipModel.manager_percentage
+        if scholarshipModel.manager_percentage != nil {
+            self.managerPercentLabelView.rightLabel.text = scholarshipModel.manager_percentage
         }
-        if managerScholarshipModel.account_mmr != nil {
-            self.mmrLabelView.rightLabel.text = managerScholarshipModel.account_mmr
+        if scholarshipModel.account_mmr != nil {
+            self.mmrLabelView.rightLabel.text = scholarshipModel.account_mmr
         }
-        if managerScholarshipModel.offer_period != nil {
-            self.OfferContractLabelView.rightLabel.text = managerScholarshipModel.offer_period
+        if scholarshipModel.offer_period != nil {
+            self.OfferContractLabelView.rightLabel.text = scholarshipModel.offer_period
         }
-        if managerScholarshipModel.account_ronin_address != nil {
-            self.roninAddressLabelView.rightLabel.text = managerScholarshipModel.account_ronin_address
+        if scholarshipModel.account_ronin_address != nil {
+            self.roninAddressLabelView.rightLabel.text = scholarshipModel.account_ronin_address
         }
-        if managerScholarshipModel.account_ronin_address != nil {
-            self.roninAddressLabelView.rightLabel.text = managerScholarshipModel.account_ronin_address
+        if scholarshipModel.account_ronin_address != nil {
+            self.roninAddressLabelView.rightLabel.text = scholarshipModel.account_ronin_address
         }
-        if managerScholarshipModel.account_login != nil {
-            self.emailLabel.text = managerScholarshipModel.account_login
+        if scholarshipModel.account_login != nil {
+            self.emailLabel.text = scholarshipModel.account_login
         }
-        if managerScholarshipModel.account_passcode != nil {
-            self.pwdTextFild!.text = managerScholarshipModel.account_passcode
+        if scholarshipModel.account_passcode != nil {
+            self.pwdTextFild!.text = scholarshipModel.account_passcode
         }
-        if managerScholarshipModel.status != nil {
-            if managerScholarshipModel.status == "DRAFT" {
+        if scholarshipModel.status != nil {
+            if scholarshipModel.status == "DRAFT" {
                 self.btn.isHidden = true
                 self.leftBtn.isHidden = false
                 self.rightBtn.isHidden = false
-            } else if managerScholarshipModel.status == "LISTING" {
+            } else if scholarshipModel.status == "LISTING" {
                 self.btn.isHidden = false
                 self.leftBtn.isHidden = true
                 self.rightBtn.isHidden = true

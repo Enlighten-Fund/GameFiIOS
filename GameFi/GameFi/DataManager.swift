@@ -330,15 +330,15 @@ class DataManager: NSObject {
 //                        let data = try Data(contentsOf: url)
 //                        let jsonData:Any = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
 //                    let jsonDic : Dictionary = jsonData as! Dictionary<String, Any>
-//                    let managerScholarshipListModel : ManagerScholarshipListModel = JsonUtil.jsonToModel(jsonDic["data"] as! String, ManagerScholarshipListModel.self) as! ManagerScholarshipListModel
-//                        completeBlock(result,managerScholarshipListModel)
+//                    let scholarshipListModel : scholarshipListModel = JsonUtil.jsonToModel(jsonDic["data"] as! String, scholarshipListModel.self) as! scholarshipListModel
+//                        completeBlock(result,scholarshipListModel)
 //                } catch let error as Error? {
 //                        print("读取本地数据出现错误!",error)
 //                }
             
             if result.success!{
-                let managerScholarshipListModel : ManagerScholarshipListModel = JsonUtil.jsonToModel(reponse as! String, ManagerScholarshipListModel.self) as! ManagerScholarshipListModel
-                completeBlock(result,managerScholarshipListModel)
+                let scholarshipListModel : ScholarshipListModel = JsonUtil.jsonToModel(reponse as! String, ScholarshipListModel.self) as! ScholarshipListModel
+                completeBlock(result,scholarshipListModel)
             }else{
                 completeBlock(result,reponse)
             }
@@ -355,15 +355,15 @@ class DataManager: NSObject {
 //                        let data = try Data(contentsOf: url)
 //                        let jsonData:Any = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
 //                    let jsonDic : Dictionary = jsonData as! Dictionary<String, Any>
-//                    let managerScholarshipListModel : ManagerScholarshipListModel = JsonUtil.jsonToModel(jsonDic["data"] as! String, ManagerScholarshipListModel.self) as! ManagerScholarshipListModel
-//                        completeBlock(result,managerScholarshipListModel)
+//                    let scholarshipListModel : scholarshipListModel = JsonUtil.jsonToModel(jsonDic["data"] as! String, scholarshipListModel.self) as! scholarshipListModel
+//                        completeBlock(result,scholarshipListModel)
 //                } catch let error as Error? {
 //                        print("读取本地数据出现错误!",error)
 //                }
 //
             if result.success!{
-                let managerScholarshipListModel : ManagerScholarshipListModel = JsonUtil.jsonToModel(reponse as! String, ManagerScholarshipListModel.self) as! ManagerScholarshipListModel
-                completeBlock(result,managerScholarshipListModel)
+                let scholarshipListModel : ScholarshipListModel = JsonUtil.jsonToModel(reponse as! String, ScholarshipListModel.self) as! ScholarshipListModel
+                completeBlock(result,scholarshipListModel)
             }else{
                 completeBlock(result,reponse)
             }
@@ -380,8 +380,8 @@ class DataManager: NSObject {
 //                        let data = try Data(contentsOf: url)
 //                        let jsonData:Any = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
 //                    let jsonDic : Dictionary = jsonData as! Dictionary<String, Any>
-//                    let managerScholarshipListModel : ManagerScholarshipListModel = JsonUtil.jsonToModel(jsonDic["data"] as! String, ManagerScholarshipListModel.self) as! ManagerScholarshipListModel
-//                        completeBlock(result,managerScholarshipListModel)
+//                    let scholarshipListModel : scholarshipListModel = JsonUtil.jsonToModel(jsonDic["data"] as! String, scholarshipListModel.self) as! scholarshipListModel
+//                        completeBlock(result,scholarshipListModel)
 //                } catch let error as Error? {
 //                        print("读取本地数据出现错误!",error)
 //                }
@@ -405,14 +405,14 @@ class DataManager: NSObject {
 //                        let data = try Data(contentsOf: url)
 //                        let jsonData:Any = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
 //                    let jsonDic : Dictionary = jsonData as! Dictionary<String, Any>
-//                    let managerScholarshipListModel : ManagerScholarshipListModel = JsonUtil.jsonToModel(jsonDic["data"] as! String, ManagerScholarshipListModel.self) as! ManagerScholarshipListModel
-//                        completeBlock(result,managerScholarshipListModel)
+//                    let scholarshipListModel : scholarshipListModel = JsonUtil.jsonToModel(jsonDic["data"] as! String, scholarshipListModel.self) as! scholarshipListModel
+//                        completeBlock(result,scholarshipListModel)
 //                } catch let error as Error? {
 //                        print("读取本地数据出现错误!",error)
 //                }
             if result.success!{
-                let managerScholarshipListModel : ManagerScholarshipListModel = JsonUtil.jsonToModel(reponse as! String, ManagerScholarshipListModel.self) as! ManagerScholarshipListModel
-                completeBlock(result,managerScholarshipListModel)
+                let scholarshipListModel : ScholarshipListModel = JsonUtil.jsonToModel(reponse as! String, ScholarshipListModel.self) as! ScholarshipListModel
+                completeBlock(result,scholarshipListModel)
             }else{
                 completeBlock(result,reponse)
             }

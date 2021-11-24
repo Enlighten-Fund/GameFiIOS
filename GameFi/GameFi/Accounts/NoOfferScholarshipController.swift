@@ -35,8 +35,8 @@ class NoOfferScholarshipController: UIViewController {
     
     @objc func showEditScholarshipVC(btn:UIButton) {
         if btn.tag - 10000 < self.dataSource!.count {
-            let managerScholarshipModel = self.dataSource![btn.tag - 10000]
-            let editScholarshipVC = EditScholarshipController.init(managerScholarshipModel: managerScholarshipModel as! ManagerScholarshipModel)
+            let scholarshipModel = self.dataSource![btn.tag - 10000]
+            let editScholarshipVC = EditScholarshipController.init(scholarshipModel: scholarshipModel as! ScholarshipModel)
             let appdelegate : AppDelegate = UIApplication.shared.delegate! as! AppDelegate
             let vc : GFNavController = appdelegate.tabbarVC?.viewControllers![1] as! GFNavController
             vc.pushViewController(editScholarshipVC, animated: true)
@@ -46,9 +46,9 @@ class NoOfferScholarshipController: UIViewController {
     
     @objc func postScholarship(btn:UIButton) {
         if btn.tag - 20000 < self.dataSource!.count {
-            let managerScholarshipModel : ManagerScholarshipModel = self.dataSource![btn.tag - 20000] as! ManagerScholarshipModel
+            let scholarshipModel : ScholarshipModel = self.dataSource![btn.tag - 20000] as! ScholarshipModel
             self.mc_loading()
-            DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: managerScholarshipModel.scholarship_id!, status: "LISTING") { result, reponse in
+            DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: scholarshipModel.scholarship_id!, status: "LISTING") { result, reponse in
                 DispatchQueue.main.async { [self] in
                     self.mc_remove()
                     if result.success!{
@@ -67,9 +67,9 @@ class NoOfferScholarshipController: UIViewController {
     
     @objc func recallScholarship(btn:UIButton) {
         if btn.tag - 30000 < self.dataSource!.count {
-            let managerScholarshipModel : ManagerScholarshipModel = self.dataSource![btn.tag - 30000] as! ManagerScholarshipModel
+            let scholarshipModel : ScholarshipModel = self.dataSource![btn.tag - 30000] as! ScholarshipModel
             self.mc_loading()
-            DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: managerScholarshipModel.scholarship_id!, status: "DRAFT") { result, reponse in
+            DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: scholarshipModel.scholarship_id!, status: "DRAFT") { result, reponse in
                 DispatchQueue.main.async { [self] in
                     self.mc_remove()
                     if result.success!{
@@ -149,8 +149,8 @@ extension  NoOfferScholarshipController : UICollectionViewDelegate,UICollectionV
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: noOfferScholarshipCellIdentifier, for: indexPath) as! NoOfferScholarshipCell
         cell.makeConstraints()
-        let managerScholarshipModel = self.dataSource![indexPath.row]
-        cell.update(managerScholarshipModel: managerScholarshipModel as! ManagerScholarshipModel)
+        let scholarshipModel = self.dataSource![indexPath.row]
+        cell.update(scholarshipModel: scholarshipModel as! ScholarshipModel)
         cell.leftBtn.addTarget(self, action: #selector(showEditScholarshipVC), for: .touchUpInside)
         cell.leftBtn.tag = 10000 + indexPath.row
         cell.rightBtn.addTarget(self, action: #selector(postScholarship), for: .touchUpInside)
@@ -183,17 +183,17 @@ extension  NoOfferScholarshipController : UICollectionViewDelegate,UICollectionV
                 self.collectionView.mj_footer?.endRefreshing()
                 self.collectionView.mj_header?.endRefreshing()
                 if result.success!{
-                    let managerScholarshipListModel : ManagerScholarshipListModel = reponse as! ManagerScholarshipListModel
+                    let scholarshipListModel : ScholarshipListModel = reponse as! ScholarshipListModel
                     if self.pageIndex == 1{
-                        self.dataSource = managerScholarshipListModel.data
+                        self.dataSource = scholarshipListModel.data
                     }else{
-                        if managerScholarshipListModel.data != nil {
-                            self.dataSource?.append(contentsOf: managerScholarshipListModel.data!)
+                        if scholarshipListModel.data != nil {
+                            self.dataSource?.append(contentsOf: scholarshipListModel.data!)
                         }
 
                     }
-                    if managerScholarshipListModel.next_page! > pageIndex {
-                        pageIndex = managerScholarshipListModel.next_page!
+                    if scholarshipListModel.next_page! > pageIndex {
+                        pageIndex = scholarshipListModel.next_page!
                     }else{
                         self.collectionView.mj_footer?.endRefreshingWithNoMoreData()
                     }

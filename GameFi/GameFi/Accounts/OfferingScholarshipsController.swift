@@ -29,15 +29,15 @@ class OfferingScholarshipsController: UIViewController {
     
     @objc func stopOrPayBtnClick(btn:UIButton) {
         if btn.tag - 90000 < self.dataSource!.count {
-            let managerScholarshipModel : ManagerScholarshipModel = self.dataSource![btn.tag - 90000] as! ManagerScholarshipModel
+            let scholarshipModel : ScholarshipModel = self.dataSource![btn.tag - 90000] as! ScholarshipModel
             var status = ""
-            if managerScholarshipModel.status == "ACTIVE" {
+            if scholarshipModel.status == "ACTIVE" {
                 status = "PENDING_PAYMENT"
-            } else if managerScholarshipModel.status == "PENDING_PAYMENT" {
+            } else if scholarshipModel.status == "PENDING_PAYMENT" {
                 status = "PENDING_PAYMENT"
             }
             self.mc_loading()
-            DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: managerScholarshipModel.scholarship_id!, status: status) { result, reponse in
+            DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: scholarshipModel.scholarship_id!, status: status) { result, reponse in
                 DispatchQueue.main.async { [self] in
                     self.mc_remove()
                     if result.success!{
@@ -102,8 +102,8 @@ extension  OfferingScholarshipsController : UICollectionViewDelegate,UICollectio
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: managerScholarshipCellIdentifier, for: indexPath) as! ManagerScholarshipCell
         cell.makeConstraints()
-        let managerscholarshipModel = self.dataSource![indexPath.row]
-        cell.update(managerScholarshipModel: managerscholarshipModel as! ManagerScholarshipModel)
+        let scholarshipModel = self.dataSource![indexPath.row]
+        cell.update(scholarshipModel: scholarshipModel as! ScholarshipModel)
         cell.btn.tag = 90000 + indexPath.row
         cell.btn.addTarget(self, action: #selector(stopOrPayBtnClick), for: .touchUpInside)
         return cell
@@ -132,17 +132,17 @@ extension  OfferingScholarshipsController : UICollectionViewDelegate,UICollectio
                     self.collectionView.mj_footer?.endRefreshing()
                     self.collectionView.mj_header?.endRefreshing()
                     if result.success!{
-                        let managerScholarshipListModel : ManagerScholarshipListModel = reponse as! ManagerScholarshipListModel
+                        let scholarshipListModel : ScholarshipListModel = reponse as! ScholarshipListModel
                         if self.pageIndex == 1{
-                            self.dataSource = managerScholarshipListModel.data
+                            self.dataSource = scholarshipListModel.data
                         }else{
-                            if managerScholarshipListModel.data != nil {
-                                self.dataSource?.append(contentsOf: managerScholarshipListModel.data!)
+                            if scholarshipListModel.data != nil {
+                                self.dataSource?.append(contentsOf: scholarshipListModel.data!)
                             }
 
                         }
-                        if managerScholarshipListModel.next_page! > pageIndex {
-                            pageIndex = managerScholarshipListModel.next_page!
+                        if scholarshipListModel.next_page! > pageIndex {
+                            pageIndex = scholarshipListModel.next_page!
                         }else{
                             self.collectionView.mj_footer?.endRefreshingWithNoMoreData()
                         }

@@ -47,14 +47,15 @@ class ScholarshipModel: BaseModel {
             return axie_brief?.components(separatedBy: ",")
         }
     }
-    
-   
     var credit_score : String?
     var mmr : String?
     var axie_count : String?
     var security_deposit : String?
- 
-
+    var scholar_user_name : String?
+    var scholar_credit_score : String?
+    var application_id : String?
+    var scholar_portrait : String?
+    var account_mmr : String?
     required init() {}
 }
 

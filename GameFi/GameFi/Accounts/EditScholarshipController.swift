@@ -19,11 +19,11 @@ class EditScholarshipController: ViewController {
     var managerPercentTextField : UITextField?
     var offerDaysTextField : UITextField?
     var scholarpercentageLabel : UILabel?
-    var managerScholarshipModel : ManagerScholarshipModel?
+    var scholarshipModel : ScholarshipModel?
     
-    init(managerScholarshipModel:ManagerScholarshipModel) {
+    init(scholarshipModel:ScholarshipModel) {
         super.init(nibName: nil, bundle: nil)
-        self.managerScholarshipModel = managerScholarshipModel
+        self.scholarshipModel = scholarshipModel
     }
     
     required init?(coder: NSCoder) {
@@ -91,7 +91,7 @@ class EditScholarshipController: ViewController {
                       "manager_percentage":Float(self.managerPercentTextField!.text!)!,
                       "offer_period": Int(self.offerDaysTextField!.text!) as Any,
                       "scholar_percentage":95 - Float(self.managerPercentTextField!.text!)!,
-                      "id":Int(self.managerScholarshipModel!.scholarship_id!) as Any
+                      "id":Int(self.scholarshipModel!.scholarship_id!) as Any
         ] as [String : Any]
         self.mc_loading()
         DataManager.sharedInstance.editScholarShip(dic: params) { result, reponse in
@@ -325,28 +325,28 @@ extension  EditScholarshipController : UITableViewDelegate,UITableViewDataSource
         tempCell.textFild?.delegate = self
         self.accountNameTextField = tempCell.textFild
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Account name", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
-        self.accountNameTextField?.text = self.managerScholarshipModel?.scholarship_name
+        self.accountNameTextField?.text = self.scholarshipModel?.scholarship_name
         cell = tempCell
     case 1:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "1", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.delegate = self
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Ronin address: 550fc6aee0126b5d31d347…", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.roninTextField = tempCell.textFild
-        self.roninTextField?.text = self.managerScholarshipModel?.account_ronin_address
+        self.roninTextField?.text = self.scholarshipModel?.account_ronin_address
         cell = tempCell
     case 2:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "2", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.delegate = self
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Axie account email", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.emailTextField = tempCell.textFild
-        self.emailTextField?.text = self.managerScholarshipModel?.account_login
+        self.emailTextField?.text = self.scholarshipModel?.account_login
         cell = tempCell
     case 3:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "3", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.delegate = self
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Axie account password", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.passwordTextField = tempCell.textFild
-        self.passwordTextField?.text = self.managerScholarshipModel?.account_passcode
+        self.passwordTextField?.text = self.scholarshipModel?.account_passcode
         cell = tempCell
     case 4:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "4", for: indexPath) as! LabelTextFildCell
@@ -354,19 +354,19 @@ extension  EditScholarshipController : UITableViewDelegate,UITableViewDataSource
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Offer contract days", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.offerDaysTextField = tempCell.textFild
         self.offerDaysTextField?.keyboardType = .numberPad
-        self.offerDaysTextField?.text = self.managerScholarshipModel?.offer_period
+        self.offerDaysTextField?.text = self.scholarshipModel?.offer_period
         cell = tempCell
     case 5:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "5", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.delegate = self
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Manager percentage", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.managerPercentTextField = tempCell.textFild
-        self.managerPercentTextField?.text = self.managerScholarshipModel?.manager_percentage
+        self.managerPercentTextField?.text = self.scholarshipModel?.manager_percentage
         cell = tempCell
     case 6:
         let tempCell : PostScholarshipCell = tableView.dequeueReusableCell(withIdentifier: postScholarshipCellIdentifier + "6", for: indexPath) as! PostScholarshipCell
         self.scholarpercentageLabel = tempCell.rightLabel
-        self.scholarpercentageLabel?.text = managerScholarshipModel?.scholar_percentage
+        self.scholarpercentageLabel?.text = scholarshipModel?.scholar_percentage
         cell = tempCell
     default:
         cell = tableView.dequeueReusableCell(withIdentifier: emptyTableViewCellIdentifier, for: indexPath)

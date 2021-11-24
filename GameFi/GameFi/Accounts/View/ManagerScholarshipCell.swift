@@ -142,65 +142,65 @@ class ManagerScholarshipCell: UICollectionViewCell {
         return dateFormatter.string(from: date as Date)
     }
     
-    func update(managerScholarshipModel:ManagerScholarshipModel) {
+    func update(scholarshipModel:ScholarshipModel) {
         self.accountImgView.image = UIImage.init(named: "portrait")
-        if managerScholarshipModel.scholar_portrait != nil {
-            self.accountImgView.kf.setImage(with: URL.init(string: managerScholarshipModel.scholar_portrait!))
+        if scholarshipModel.scholar_portrait != nil {
+            self.accountImgView.kf.setImage(with: URL.init(string: scholarshipModel.scholar_portrait!))
         }
-        if managerScholarshipModel.scholar_user_name != nil {
-            self.accountLabel.text = managerScholarshipModel.scholar_user_name
+        if scholarshipModel.scholar_user_name != nil {
+            self.accountLabel.text = scholarshipModel.scholar_user_name
         }
-        if managerScholarshipModel.scholar_credit_score != nil {
-            self.creditLabel.text = "Credit: \(managerScholarshipModel.scholar_credit_score!)"
+        if scholarshipModel.scholar_credit_score != nil {
+            self.creditLabel.text = "Credit: \(scholarshipModel.scholar_credit_score!)"
         }
-        if managerScholarshipModel.scholarship_name != nil {
-            self.scholarshipNameLabelView.rightLabel.text = managerScholarshipModel.scholarship_name
+        if scholarshipModel.scholarship_name != nil {
+            self.scholarshipNameLabelView.rightLabel.text = scholarshipModel.scholarship_name
         }
-        if managerScholarshipModel.account_lifecycle_slp_latest != nil &&  managerScholarshipModel.account_lifecycle_slp_start != nil{
+        if scholarshipModel.account_lifecycle_slp_latest != nil &&  scholarshipModel.account_lifecycle_slp_start != nil{
             self.returnAmountLabelView.rightLabel.textColor =  UIColor(red: 1, green: 0.72, blue: 0.07, alpha: 1)
-            self.returnAmountLabelView.rightLabel.text = "\(lroundf( Float(managerScholarshipModel.account_lifecycle_slp_latest!)! - Float(managerScholarshipModel.account_lifecycle_slp_start!)!)) SLP"
+            self.returnAmountLabelView.rightLabel.text = "\(lroundf( Float(scholarshipModel.account_lifecycle_slp_latest!)! - Float(scholarshipModel.account_lifecycle_slp_start!)!)) SLP"
         }
-        if managerScholarshipModel.account_mmr_latest != nil && managerScholarshipModel.account_mmr_start != nil{
-            let mmrlatestStr : NSMutableAttributedString = NSMutableAttributedString.init(string: managerScholarshipModel.account_mmr_start!, attributes:[.font: UIFont(name: "PingFang SC Medium", size: 15) as Any,.foregroundColor: UIColor(red: 1, green: 1, blue: 1,alpha:1.0)])
+        if scholarshipModel.account_mmr_latest != nil && scholarshipModel.account_mmr_start != nil{
+            let mmrlatestStr : NSMutableAttributedString = NSMutableAttributedString.init(string: scholarshipModel.account_mmr_start!, attributes:[.font: UIFont(name: "PingFang SC Medium", size: 15) as Any,.foregroundColor: UIColor(red: 1, green: 1, blue: 1,alpha:1.0)])
             var mmrAddStr : NSAttributedString?
-            if Float(managerScholarshipModel.account_mmr_latest!)! > Float(managerScholarshipModel.account_mmr_start!)! {
-                let addFloat = Float(managerScholarshipModel.account_mmr_latest!)! - Float(managerScholarshipModel.account_mmr_start!)!
+            if Float(scholarshipModel.account_mmr_latest!)! > Float(scholarshipModel.account_mmr_start!)! {
+                let addFloat = Float(scholarshipModel.account_mmr_latest!)! - Float(scholarshipModel.account_mmr_start!)!
                 mmrAddStr = NSAttributedString.init(string: " (+\(lroundf(addFloat)))", attributes: [.font: UIFont(name: "PingFang SC Medium", size: 15) as Any,.foregroundColor: UIColor(red: 0.23, green: 0.9, blue: 0.37,alpha:1.0)])
             }else{
-                let addFloat = Float(managerScholarshipModel.account_mmr_latest!)! - Float(managerScholarshipModel.account_mmr_start!)!
+                let addFloat = Float(scholarshipModel.account_mmr_latest!)! - Float(scholarshipModel.account_mmr_start!)!
                 mmrAddStr = NSAttributedString.init(string: " (\(lroundf(addFloat)))", attributes: [.font: UIFont(name: "Avenir Next Medium", size: 15) as Any,.foregroundColor: UIColor(red: 0.97, green: 0.24, blue: 0.24,alpha:1.0)])
             }
             mmrlatestStr.append(mmrAddStr!)
             self.mmrLabelView.rightLabel.attributedText = mmrlatestStr
         }
         
-        if managerScholarshipModel.start_timestamp != nil{
-            self.startDateLabelView.rightLabel.text = getLocalDate(from: managerScholarshipModel.start_timestamp!)        }
+        if scholarshipModel.start_timestamp != nil{
+            self.startDateLabelView.rightLabel.text = getLocalDate(from: scholarshipModel.start_timestamp!)        }
         
-        if managerScholarshipModel.start_timestamp != nil && managerScholarshipModel.offer_period != nil{
-            let date = dateFromString(string: managerScholarshipModel.start_timestamp!)
-            let new = date.addingTimeInterval(TimeInterval(Int(managerScholarshipModel.offer_period!)! * 24 * 60 * 60))
+        if scholarshipModel.start_timestamp != nil && scholarshipModel.offer_period != nil{
+            let date = dateFromString(string: scholarshipModel.start_timestamp!)
+            let new = date.addingTimeInterval(TimeInterval(Int(scholarshipModel.offer_period!)! * 24 * 60 * 60))
             self.endDateLabelView.rightLabel.text = getLocalDate(from: stringFromDate(date: new))
         }
         
-        if managerScholarshipModel.account_ronin_address != nil{
-            self.roninLabelView.rightLabel.text = managerScholarshipModel.account_ronin_address
+        if scholarshipModel.account_ronin_address != nil{
+            self.roninLabelView.rightLabel.text = scholarshipModel.account_ronin_address
         }
         
-        if managerScholarshipModel.account_login != nil {
-            self.emailLabel.text = managerScholarshipModel.account_login
+        if scholarshipModel.account_login != nil {
+            self.emailLabel.text = scholarshipModel.account_login
         }
-        if managerScholarshipModel.account_passcode != nil {
-            self.pwdTextFild!.text = managerScholarshipModel.account_passcode
+        if scholarshipModel.account_passcode != nil {
+            self.pwdTextFild!.text = scholarshipModel.account_passcode
         }
         
-        if managerScholarshipModel.status != nil {
-            if managerScholarshipModel.status == "ACTIVE" {
+        if scholarshipModel.status != nil {
+            if scholarshipModel.status == "ACTIVE" {
                 self.btn.setTitle("Stop offering", for: .normal)
                 self.btn.layer.borderColor = UIColor(red: 0.59, green: 0.59, blue: 0.59, alpha: 1).cgColor
                 self.btn.layer.borderWidth = 0.5
                 self.btn.backgroundColor = .clear
-            } else if managerScholarshipModel.status == "PENDING_PAYMENT" {
+            } else if scholarshipModel.status == "PENDING_PAYMENT" {
                 self.btn.setTitle("Pay now (24 hours left)", for: .normal)
                 self.btn.layer.borderColor = UIColor.clear.cgColor
                 self.btn.layer.borderWidth = 0

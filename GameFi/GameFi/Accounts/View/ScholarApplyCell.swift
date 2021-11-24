@@ -86,38 +86,38 @@ class ScholarApplyCell: UICollectionViewCell {
         }
     }
     
-    func update(managerScholarshipModel:ManagerScholarshipModel) {
-        if managerScholarshipModel.myAxieArry == nil || managerScholarshipModel.myAxieArry!.count < 3{
+    func update(scholarshipModel:ScholarshipModel) {
+        if scholarshipModel.axie_briefArry == nil || scholarshipModel.axie_briefArry!.count < 3{
             
         }else{
-            let axiePic1 : String = managerScholarshipModel.myAxieArry![0]
+            let axiePic1 : String = scholarshipModel.axie_briefArry![0]
             self.axieImgView1.kf.setImage(with: URL.init(string: "https://storage.googleapis.com/assets.axieinfinity.com/axies/\(axiePic1)/axie/axie-full-transparent.png"))
-            let axiePic2 : String = managerScholarshipModel.myAxieArry![1]
+            let axiePic2 : String = scholarshipModel.axie_briefArry![1]
             self.axieImgView2.kf.setImage(with:  URL.init(string: "https://storage.googleapis.com/assets.axieinfinity.com/axies/\(axiePic2)/axie/axie-full-transparent.png"))
-            let axiePic3 : String = managerScholarshipModel.myAxieArry![2]
+            let axiePic3 : String = scholarshipModel.axie_briefArry![2]
             self.axieImgView3.kf.setImage(with: URL.init(string: "https://storage.googleapis.com/assets.axieinfinity.com/axies/\(axiePic3)/axie/axie-full-transparent.png"))
         }
-        if managerScholarshipModel.manager_user_name != nil {
-            self.accountLabel.text = managerScholarshipModel.manager_user_name
+        if scholarshipModel.manager_user_name != nil {
+            self.accountLabel.text = scholarshipModel.manager_user_name
         }
-        if managerScholarshipModel.manager_credit_score != nil {
-            self.creditLabel.text = managerScholarshipModel.manager_credit_score
+        if scholarshipModel.manager_credit_score != nil {
+            self.creditLabel.text = scholarshipModel.manager_credit_score
         }
-        if managerScholarshipModel.estimate_daily_slp != nil{
+        if scholarshipModel.estimate_daily_slp != nil{
             self.returnPerDayLabelView.rightLabel.textColor =  UIColor(red: 1, green: 0.72, blue: 0.07, alpha: 1)
-            self.returnPerDayLabelView.rightLabel.text = "\(lroundf(Float(managerScholarshipModel.estimate_daily_slp!)!)) SLP"
+            self.returnPerDayLabelView.rightLabel.text = "\(lroundf(Float(scholarshipModel.estimate_daily_slp!)!)) SLP"
         }
-        if managerScholarshipModel.scholar_percentage != nil {
-            self.scholarPercentLabelView.rightLabel.text = String (format: "%.2f",Float(managerScholarshipModel.scholar_percentage!)!)
+        if scholarshipModel.scholar_percentage != nil {
+            self.scholarPercentLabelView.rightLabel.text = String (format: "%.2f",Float(scholarshipModel.scholar_percentage!)!)
         }
-        if managerScholarshipModel.offer_period != nil {
-            self.offerdaysLabelView.rightLabel.text = "\(managerScholarshipModel.offer_period!) days"
+        if scholarshipModel.offer_period != nil {
+            self.offerdaysLabelView.rightLabel.text = "\(scholarshipModel.offer_period!) days"
         }
-        if managerScholarshipModel.account_mmr != nil {
-            self.offerdaysLabelView.rightLabel.text = managerScholarshipModel.account_mmr!
+        if scholarshipModel.account_mmr != nil {
+            self.offerdaysLabelView.rightLabel.text = scholarshipModel.account_mmr!
         }
-        if managerScholarshipModel.account_axie_count != nil{
-            self.axieCountLabelView.rightLabel.text = "\(managerScholarshipModel.account_axie_count!)"
+        if scholarshipModel.account_axie_count != nil{
+            self.axieCountLabelView.rightLabel.text = "\(scholarshipModel.account_axie_count!)"
         }
        
         
