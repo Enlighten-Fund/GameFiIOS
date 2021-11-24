@@ -258,29 +258,138 @@ extension  ProfileController : UITableViewDelegate,UITableViewDataSource{
    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row
-        {
-        case 0:
-            self.navigationController?.pushViewController(EditProfileController.init(), animated: true)
-        case 4:
-            GFAlert.showAlert(titleStr: "Notice:", msgStr: "Are you sure you want to log out？", currentVC: self, cancelHandler: { alertaction in
-                
-            }, otherBtns: ["YES"]) { index in
-                AWSMobileClient.default().signOut { error in
-                    DispatchQueue.main.async {
-                        if let error = error  {
-                            print("\(error.localizedDescription)")
-                        }else{
-                            self.navigationController?.popViewController(animated: true)
-                           
-                        }
-                    }
+        if indexPath.section == 0 {
+            switch indexPath.row
+            {
+            case 0:
+                self.navigationController?.pushViewController(EditProfileController.init(), animated: true)
+            case 4:
+                GFAlert.showAlert(titleStr: "Notice:", msgStr: "Are you sure you want to log out？", currentVC: self, cancelHandler: { alertaction in
                     
+                }, otherBtns: ["YES"]) { index in
+                    AWSMobileClient.default().signOut { error in
+                        DispatchQueue.main.async {
+                            if let error = error  {
+                                print("\(error.localizedDescription)")
+                            }else{
+                                self.navigationController?.popViewController(animated: true)
+                               
+                            }
+                        }
+                        
+                    }
                 }
+            default:
+                break
             }
-        default:
-            break
+        }else{
+            switch indexPath.row
+            {
+            case 0:
+                let url = URL(string: "")
+                // 注意: 跳转之前, 可以使用 canOpenURL: 判断是否可以跳转
+                if !UIApplication.shared.canOpenURL(url!) {
+                     // 不能跳转就不要往下执行了
+                     return
+                }
+                if #available(iOS 10.0, *) {
+                  
+                      UIApplication.shared.open(url!, options: [:]) { (success) in
+                           if (success) {
+                                print("10以后可以跳转url")
+                           }else{
+                                print("10以后不能完成跳转")
+                           }
+                       }
+                } else {
+                       // Fallback on earlier versions
+                       let success = UIApplication.shared.openURL(url!)
+                       if (success) {
+                             print("10以下可以跳转")
+                       }else{
+                             print("10以下不能完成跳转")
+                       }
+                 }
+            case 1:
+                let url = URL(string: "https://twitter.com/0xcyberninja?s=11")
+                // 注意: 跳转之前, 可以使用 canOpenURL: 判断是否可以跳转
+                if !UIApplication.shared.canOpenURL(url!) {
+                     // 不能跳转就不要往下执行了
+                     return
+                }
+                if #available(iOS 10.0, *) {
+                  
+                      UIApplication.shared.open(url!, options: [:]) { (success) in
+                           if (success) {
+                                print("10以后可以跳转url")
+                           }else{
+                                print("10以后不能完成跳转")
+                           }
+                       }
+                } else {
+                       // Fallback on earlier versions
+                       let success = UIApplication.shared.openURL(url!)
+                       if (success) {
+                             print("10以下可以跳转")
+                       }else{
+                             print("10以下不能完成跳转")
+                       }
+                 }
+            case 2:
+                let url = URL(string: "https://youtube.com/channel/UC65EXHxwic4cEcebK8iJCjg")
+                // 注意: 跳转之前, 可以使用 canOpenURL: 判断是否可以跳转
+                if !UIApplication.shared.canOpenURL(url!) {
+                     // 不能跳转就不要往下执行了
+                     return
+                }
+                if #available(iOS 10.0, *) {
+                  
+                      UIApplication.shared.open(url!, options: [:]) { (success) in
+                           if (success) {
+                                print("10以后可以跳转url")
+                           }else{
+                                print("10以后不能完成跳转")
+                           }
+                       }
+                } else {
+                       // Fallback on earlier versions
+                       let success = UIApplication.shared.openURL(url!)
+                       if (success) {
+                             print("10以下可以跳转")
+                       }else{
+                             print("10以下不能完成跳转")
+                       }
+                 }
+            case 3:
+                let url = URL(string: "https://loud-macaroon-715.notion.site/CyberNinja-WiKi-e6709296d97445b988a3bb87b552e3f9")
+                // 注意: 跳转之前, 可以使用 canOpenURL: 判断是否可以跳转
+                if !UIApplication.shared.canOpenURL(url!) {
+                     // 不能跳转就不要往下执行了
+                     return
+                }
+                if #available(iOS 10.0, *) {
+                  
+                      UIApplication.shared.open(url!, options: [:]) { (success) in
+                           if (success) {
+                                print("10以后可以跳转url")
+                           }else{
+                                print("10以后不能完成跳转")
+                           }
+                       }
+                } else {
+                       // Fallback on earlier versions
+                       let success = UIApplication.shared.openURL(url!)
+                       if (success) {
+                             print("10以下可以跳转")
+                       }else{
+                             print("10以下不能完成跳转")
+                       }
+                 }
+            default:
+                break
+            }
         }
+        
     }
 }
 

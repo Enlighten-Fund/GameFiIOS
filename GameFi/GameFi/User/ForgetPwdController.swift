@@ -60,22 +60,41 @@ class ForgetPwdController: ViewController {
         }
     }
     
-    func valifyEmail() -> Bool {
-        if self.emailTextField!.validateEmail(){
-            self.hideNoticeLabel()
-            return true
-        }else {
-            self.showNoticeLabel(notice: "Your email format is incorrect")
-            return false
+    func updateTextField(textField:UITextField,focus:Bool)  {
+        if focus {
+            textField.layer.borderColor = UIColor.init(hexString: "0xB85050").cgColor
+        }else{
+            textField.layer.borderColor = UIColor(red: 0.27, green: 0.3, blue: 0.41, alpha: 1).cgColor
         }
     }
+    
+    func valifyEmail() -> Bool {
+        if self.emailTextField!.text == nil || self.emailTextField!.text!.isBlank {
+            self.showNoticeLabel(notice: "Your email should be filled in")
+            self.updateTextField(textField: self.emailTextField!, focus: true)
+            return false
+        }else{
+            if self.emailTextField!.validateEmail(){
+                self.hideNoticeLabel()
+                self.updateTextField(textField: self.emailTextField!, focus: false)
+                return true
+            }else {
+                self.showNoticeLabel(notice: "Your email format is incorrect")
+                self.updateTextField(textField: self.emailTextField!, focus: true)
+                return false
+            }
+        }
+    }
+    
     
     func valifyPassword() -> Bool {
         if self.passwordTextField!.validatePassword() {
             self.hideNoticeLabel()
+            self.updateTextField(textField: self.passwordTextField!, focus: false)
             return true
         }else{
             self.showNoticeLabel(notice: "Your password format is incorrect")
+            self.updateTextField(textField: self.passwordTextField!, focus: true)
             return false
         }
     }
@@ -83,9 +102,11 @@ class ForgetPwdController: ViewController {
     func valifyCode() -> Bool {
         if self.codeTextField!.text == nil || self.codeTextField!.text!.isBlank{
             self.showNoticeLabel(notice: "Your code format is incorrect")
+            self.updateTextField(textField: self.codeTextField!, focus: true)
             return false
         }else{
             self.hideNoticeLabel()
+            self.updateTextField(textField: self.codeTextField!, focus: false)
             return true
         }
     }

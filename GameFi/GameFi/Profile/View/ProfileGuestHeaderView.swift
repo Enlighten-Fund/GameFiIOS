@@ -14,7 +14,7 @@ class ProfileGuestHeaderView: UIView {
         super.init(frame: frame)
         self.iconImgView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
-            make.left.equalToSuperview()
+            make.left.equalToSuperview().offset(15)
             make.width.equalTo(65)
             make.height.equalTo(65)
         }
@@ -41,6 +41,7 @@ class ProfileGuestHeaderView: UIView {
         let tempImgView = UIImageView.init(frame: CGRect.zero)
         tempImgView.layer.cornerRadius = 65 / 2.0
         tempImgView.layer.masksToBounds = true
+        tempImgView.image = UIImage.init(named: "portrait")
         self.addSubview(tempImgView)
         return tempImgView
     }()
