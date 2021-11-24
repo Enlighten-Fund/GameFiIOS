@@ -79,7 +79,7 @@ class DataManager: NSObject {
             }
             let request = AF.request(urlPath,method: .post,parameters: tempDic,encoding: JSONEncoding.default, headers: headers)
             request.responseJSON { (response) in
-                print("请求:\(url)\nHeader:\(headers)\n入参:\(tempDic)\n返回:\(response.result)")
+                print("请求:\(url)\n入参:\(tempDic)\n返回:\(response.result)")
                 switch response.result {
                 case let .success(result):
                     do {
@@ -129,6 +129,13 @@ class DataManager: NSObject {
             }else{
                 completeBlock(result,reponse)
             }
+        }
+    }
+    
+    func applyScholarShipDetail(scholarshipId:String, completeBlock: @escaping CompleteBlock) {
+        let dic = ["id" : Int(scholarshipId)]
+        self.POST(url: "application/create", param: dic as [String : Any]) { result, reponse in
+            completeBlock(result,reponse)
         }
     }
     
@@ -467,6 +474,7 @@ class DataManager: NSObject {
         self.POST(url: "user/get_all_by_id", param: [:] ) { result, reponse in
             if result.success!{
                 let userInfoModel : UserInfoModel = JsonUtil.jsonToModel(reponse as! String, UserInfoModel.self) as! UserInfoModel
+                UserManager.sharedInstance.userinfoModel = userInfoModel
                 completeBlock(result,userInfoModel)
             }else{
                 completeBlock(result,reponse)

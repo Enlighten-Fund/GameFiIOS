@@ -124,6 +124,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
             try Amplify.add(plugin: AWSCognitoAuthPlugin())
             try Amplify.configure()
             UserManager.sharedInstance.fetchAndUpdateRole()
+            UserManager.sharedInstance.updateToken {
+                DataManager.sharedInstance.fetchUserDetailinfo { result, reponse in
+                    
+                }
+            }
             AWSMobileClient.default().addUserStateListener(self) { (userState, info) in
                 switch (userState) {
                 case .guest:

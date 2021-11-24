@@ -42,7 +42,7 @@ class EditProfileController: ViewController {
     var idImgView : UIImageView?
     var uploadUrl : String?
     var userInfoModel : UserInfoModel?
-    
+    var editProfileSuccessBlock:CommonEmptyBlock?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Edit Profile"

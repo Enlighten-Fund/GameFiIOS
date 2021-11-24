@@ -87,8 +87,92 @@ class ScholarshipsDetailController: ViewController {
         
     }
     
-    @objc func submitBtnClick() {
+    func changeRoleToScholar() {
+        DispatchQueue.main.async {
+            GFAlert.showAlert(titleStr: "Notice:", msgStr: "Please switch your role to a scholar", currentVC: self, cancelHandler: { aletAction in
+                
+            }, otherBtns: ["YES"]) { idex in
+                UserManager.sharedInstance.updateRole(role: "1")
+                NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: CHANGEROLE_NOFI), object: nil)
+            }
+        }
         
+    }
+    
+    func valifiyUserProfileStatus() {
+        if UserManager.sharedInstance.userinfoModel!.scholar_status! == "NO" {
+            GFAlert.showAlert(titleStr: "Notice:", msgStr: "Please complete and submit your profile", currentVC: self, cancelHandler: { action in
+                
+            }, otherBtns: ["Go now"]) { index in
+                DispatchQueue.main.async { [self] in
+                    let editProfileVC = EditProfileController.init()
+                    self.navigationController?.pushViewController(editProfileVC, animated: true)
+                }
+            }
+        }else if UserManager.sharedInstance.userinfoModel!.scholar_status! == "AUDIT" {
+            GFAlert.showAlert(titleStr: "Notice:", msgStr: "Your information is auditing, please try again in a few minutes", currentVC: self, cancelHandler: { action in
+                
+            }, otherBtns: ["Get help"]) { index in
+                DispatchQueue.main.async { [self] in
+                    //show Join our discord link
+                }
+            }
+        }else if UserManager.sharedInstance.userinfoModel!.scholar_status! == "YES" {
+            self.requestApplay()
+        }
+    }
+    
+    func requestApplay() {
+        self.mc_loading()
+        DataManager.sharedInstance.applyScholarShipDetail(scholarshipId: self.scholarshipId!) { result, reponse in
+            DispatchQueue.main.async { [self] in
+                self.mc_remove()
+                if result.success!{
+                    DispatchQueue.main.async { [self] in
+                        GFAlert.showAlert(titleStr: "Notice:", msgStr: "Apply success,please wait for the manager's consent", currentVC: self, cancelHandler: { action in
+                            
+                        }, otherBtns: nil) { index in
+                            
+                        }
+                    }
+                }else{
+                    if !result.msg!.isBlank {
+                        DispatchQueue.main.async { [self] in
+                            GFAlert.showAlert(titleStr: "Notice:", msgStr: result.msg!, currentVC: self, cancelHandler: { action in
+                                
+                            }, otherBtns: nil) { index in
+                                
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    @objc func submitBtnClick() {
+        if UserManager.sharedInstance.isLogin() {
+            if UserManager.sharedInstance.currentRole() == 1 {
+                self.valifiyUserProfileStatus()
+            }else if UserManager.sharedInstance.currentRole() == 2{
+                self.changeRoleToScholar()
+                
+            }
+        }else{
+            let loginVC = LoginController.init()
+            loginVC.loginSuccessBlock = {()  in
+                if UserManager.sharedInstance.currentRole() == 1 {
+                    self.valifiyUserProfileStatus()
+                }else if UserManager.sharedInstance.currentRole() == 2{
+                    self.changeRoleToScholar()
+                }
+            }
+            let navVC = GFNavController.init(rootViewController: loginVC)
+            navVC.modalPresentationStyle = .fullScreen
+            self.navigationController!.present(navVC, animated: true, completion: {
+                
+            })
+        }
     }
     
     lazy var tableView: UITableView? = {

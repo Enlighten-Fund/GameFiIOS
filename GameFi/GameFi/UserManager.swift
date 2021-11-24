@@ -9,6 +9,7 @@ import Foundation
 import AWSMobileClient
 typealias CommonEmptyBlock = ()->Void
 class UserManager: NSObject {
+    var userinfoModel : UserInfoModel?
     var fetchRoleBlock : CommonEmptyBlock?
 //    var fetchTokenBlock : CommonEmptyBlock?
     static let sharedInstance = UserManager()
