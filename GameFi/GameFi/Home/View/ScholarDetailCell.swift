@@ -46,6 +46,8 @@ class ScholarDetailCell: TableViewCell {
         tempLabel.layer.cornerRadius = 10
         tempLabel.layer.masksToBounds = true
         tempLabel.numberOfLines = 0
+        tempLabel.layer.borderColor = UIColor(red: 0.27, green: 0.3, blue: 0.41, alpha: 1).cgColor
+        tempLabel.layer.borderWidth = 0.5
         self.contentView.addSubview(tempLabel)
         return tempLabel
     }()

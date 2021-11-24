@@ -20,38 +20,44 @@ class ScholarDetailHeaderView: UIView {
             make.width.equalTo(75)
             make.height.equalTo(75)
         }
-        self.managerNameLabelView.snp.makeConstraints { make in
+        self.scholarNameLabelView.snp.makeConstraints { make in
             make.top.equalTo(iconImgView.snp.bottom)
             make.left.equalToSuperview()
             make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
             make.height.equalTo(35)
         }
-        self.nationalityLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.managerNameLabelView.snp.bottom).offset(0)
+        self.creditScoreLabelView.snp.makeConstraints { make in
+            make.top.equalTo(self.scholarNameLabelView.snp.bottom).offset(0)
             make.left.equalToSuperview()
             make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
             make.height.equalTo(35)
         }
-        self.contractAgeLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.nationalityLabelView.snp.bottom).offset(0)
+        self.locationLabelView.snp.makeConstraints { make in
+            make.top.equalTo(self.creditScoreLabelView.snp.bottom).offset(0)
             make.left.equalToSuperview()
             make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
             make.height.equalTo(35)
         }
-        self.availableLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.contractAgeLabelView.snp.bottom).offset(0)
-            make.left.equalToSuperview()
-            make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
-            make.height.equalTo(35)
-        }
-        self.highestLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.availableLabelView.snp.bottom).offset(0)
+        self.ageLabelView.snp.makeConstraints { make in
+            make.top.equalTo(self.locationLabelView.snp.bottom).offset(0)
             make.left.equalToSuperview()
             make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
             make.height.equalTo(35)
         }
         self.experienceLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.highestLabelView.snp.bottom).offset(0)
+            make.top.equalTo(self.ageLabelView.snp.bottom).offset(0)
+            make.left.equalToSuperview()
+            make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
+            make.height.equalTo(35)
+        }
+        self.availableLabelView.snp.makeConstraints { make in
+            make.top.equalTo(self.experienceLabelView.snp.bottom).offset(0)
+            make.left.equalToSuperview()
+            make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
+            make.height.equalTo(35)
+        }
+        self.mmrLabelView.snp.makeConstraints { make in
+            make.top.equalTo(self.availableLabelView.snp.bottom).offset(0)
             make.left.equalToSuperview()
             make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
             make.height.equalTo(35)
@@ -59,28 +65,31 @@ class ScholarDetailHeaderView: UIView {
     }
     
     func update(scholarDetailModel:ScholarDetailModel) {
-        
-        self.iconImgView.image = UIImage.init(named: "portrait")
-        if scholarDetailModel.scholar_portrait != nil {
-            self.iconImgView.kf.setImage(with: URL.init(string: scholarDetailModel.scholar_portrait!))
+        if scholarDetailModel.avatar != nil {
+            self.iconImgView.kf.setImage(with: URL.init(string: scholarDetailModel.avatar!), placeholder:  UIImage.init(named: "portrait"), options: nil) {result, error in
+                
+            }
         }
         if scholarDetailModel.username != nil {
-            self.managerNameLabelView.update(leftTitle: "Manager name", rithtTitle: scholarDetailModel.username!)
+            self.scholarNameLabelView.update(leftTitle: "Scholar name", rithtTitle: scholarDetailModel.username!)
+        }
+        if scholarDetailModel.credit_score != nil {
+            self.creditScoreLabelView.update(leftTitle: "Credit score", rithtTitle: scholarDetailModel.credit_score!)
         }
         if scholarDetailModel.nation != nil {
-            self.nationalityLabelView.update(leftTitle: "Nationality", rithtTitle: scholarDetailModel.nation!)
+            self.locationLabelView.update(leftTitle: "Location", rithtTitle: scholarDetailModel.nation!)
         }
         if scholarDetailModel.age != nil {
-            self.contractAgeLabelView.update(leftTitle: "Contract age", rithtTitle: scholarDetailModel.age!)
+            self.ageLabelView.update(leftTitle: "Age", rithtTitle: scholarDetailModel.age!)
+        }
+        if scholarDetailModel.axie_exp != nil {
+            self.experienceLabelView.update(leftTitle: "Experience in Axie", rithtTitle: scholarDetailModel.axie_exp!)
         }
         if scholarDetailModel.available_time != nil {
             self.availableLabelView.update(leftTitle: "Available time", rithtTitle: scholarDetailModel.available_time!)
         }
         if scholarDetailModel.mmr != nil {
-            self.highestLabelView.update(leftTitle: "Highest MMR", rithtTitle: scholarDetailModel.mmr!)
-        }
-        if scholarDetailModel.scholar_since != nil {
-            self.experienceLabelView.update(leftTitle: "Experience", rithtTitle: scholarDetailModel.scholar_since!)
+            self.mmrLabelView.update(leftTitle: "Highest MMR", rithtTitle: scholarDetailModel.mmr!)
         }
     }
     
@@ -92,24 +101,34 @@ class ScholarDetailHeaderView: UIView {
         let tempImgView = UIImageView.init(frame: CGRect.zero)
         tempImgView.layer.cornerRadius = 75 / 2.0
         tempImgView.layer.masksToBounds = true
-        tempImgView.backgroundColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1)
+//        tempImgView.backgroundColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1)
         tempImgView.layer.shadowRadius = 0.5
         tempImgView.layer.shadowColor = UIColor.white.cgColor
         self.addSubview(tempImgView)
         return tempImgView
     }()
     
-    lazy var managerNameLabelView : LabelAndLabelView = {
+    lazy var scholarNameLabelView : LabelAndLabelView = {
         let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
         self.addSubview(tempLabelView)
         return tempLabelView
     }()
-    lazy var nationalityLabelView : LabelAndLabelView = {
+    lazy var creditScoreLabelView : LabelAndLabelView = {
         let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
         self.addSubview(tempLabelView)
         return tempLabelView
     }()
-    lazy var contractAgeLabelView : LabelAndLabelView = {
+    lazy var locationLabelView : LabelAndLabelView = {
+        let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
+        self.addSubview(tempLabelView)
+        return tempLabelView
+    }()
+    lazy var ageLabelView : LabelAndLabelView = {
+        let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
+        self.addSubview(tempLabelView)
+        return tempLabelView
+    }()
+    lazy var experienceLabelView : LabelAndLabelView = {
         let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
         self.addSubview(tempLabelView)
         return tempLabelView
@@ -119,12 +138,7 @@ class ScholarDetailHeaderView: UIView {
         self.addSubview(tempLabelView)
         return tempLabelView
     }()
-    lazy var highestLabelView : LabelAndLabelView = {
-        let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
-        self.addSubview(tempLabelView)
-        return tempLabelView
-    }()
-    lazy var experienceLabelView : LabelAndLabelView = {
+    lazy var mmrLabelView : LabelAndLabelView = {
         let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
         self.addSubview(tempLabelView)
         return tempLabelView

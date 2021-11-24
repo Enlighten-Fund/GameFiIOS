@@ -41,14 +41,8 @@ class ScholarsCell: UICollectionViewCell {
             make.height.equalTo(25)
             make.left.equalToSuperview()
         }
-        self.winRateLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.mmrLabelView.snp.bottom)
-            make.right.equalToSuperview()
-            make.height.equalTo(25)
-            make.left.equalToSuperview()
-        }
         self.expLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.winRateLabelView.snp.bottom)
+            make.top.equalTo(self.mmrLabelView.snp.bottom)
             make.right.equalToSuperview()
             make.height.equalTo(25)
             make.left.equalToSuperview()
@@ -62,9 +56,10 @@ class ScholarsCell: UICollectionViewCell {
     }
 
     func update(scholarModel:ScholarModel) {
-        self.accountImgView.image = UIImage.init(named: "portrait")
-        if scholarModel.scholar_portrait != nil {
-            self.accountImgView.kf.setImage(with: URL.init(string: scholarModel.scholar_portrait!))
+        if scholarModel.avatar != nil {
+            self.accountImgView.kf.setImage(with: URL.init(string: scholarModel.avatar!), placeholder:  UIImage.init(named: "portrait"), options: nil) {result, error in
+                
+            }
         }
         if scholarModel.username != nil {
             self.accountLabel.text = scholarModel.username
@@ -76,21 +71,21 @@ class ScholarsCell: UICollectionViewCell {
             self.mmrLabelView.update(leftTitle: "MMR(avg)", rithtTitle: scholarModel.mmr!)
             self.mmrLabelView.rightLabel.textColor = UIColor(red: 1, green: 0.72, blue: 0.07, alpha: 1)
         }
-        if scholarModel.winrate != nil {
-            self.winRateLabelView.update(leftTitle: "Win rate", rithtTitle: scholarModel.winrate!)
-        }
       
-        if scholarModel.scholar_since != nil {
-            self.expLabelView.update(leftTitle: "Exp.", rithtTitle: scholarModel.scholar_since!)
+        if scholarModel.axie_exp != nil {
+            
+            self.expLabelView.update(leftTitle: "Exp.", rithtTitle: "\(scholarModel.axie_exp!) months")
         }
         if scholarModel.available_time != nil {
-            self.availabelLabelView.update(leftTitle: "Available", rithtTitle: scholarModel.available_time!)
+            self.availabelLabelView.update(leftTitle: "Available", rithtTitle: "\(scholarModel.available_time!) hrs/day")
         }
 
     }
     
     lazy var accountImgView : UIImageView = {
         let tempImgView = UIImageView.init()
+        tempImgView.layer.masksToBounds = true
+        tempImgView.layer.cornerRadius = 25
         self.contentView.addSubview(tempImgView)
         return tempImgView
     }()

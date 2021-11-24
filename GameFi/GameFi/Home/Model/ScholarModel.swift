@@ -23,11 +23,8 @@ class ScholarModel: BaseModel {
     var mmr : String?
     var available_time : String?
     var scholar_since : String?
-    
-    
-    //缺失
-    var scholar_portrait:String?
-    var winrate : String?
+    var avatar:String?
+    var axie_exp:String?
     required init() {}
 }
 
