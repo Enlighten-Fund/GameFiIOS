@@ -133,7 +133,7 @@ class DataManager: NSObject {
     }
     
     func applyScholarShipDetail(scholarshipId:String, completeBlock: @escaping CompleteBlock) {
-        let dic = ["id" : Int(scholarshipId)]
+        let dic = ["scholarship_id" : Int(scholarshipId)]
         self.POST(url: "application/create", param: dic as [String : Any]) { result, reponse in
             completeBlock(result,reponse)
         }
@@ -531,6 +531,18 @@ class DataManager: NSObject {
             if result.success!{
                 let userInfoModel : UserInfoModel = JsonUtil.jsonToModel(reponse as! String, UserInfoModel.self) as! UserInfoModel
                 completeBlock(result,userInfoModel)
+            }else{
+                completeBlock(result,reponse)
+            }
+        }
+    }
+    
+    //update scholarship status
+    func updateApplicationStatus(scholarshipid:String, status: String , completeBlock: @escaping CompleteBlock) {
+        let dic = ["id" : Int(scholarshipid)! as Any,"status" : status] as [String : Any]
+        self.POST(url: "application/update_by_id", param: dic ) { result, reponse in
+            if result.success!{
+                completeBlock(result,reponse)
             }else{
                 completeBlock(result,reponse)
             }

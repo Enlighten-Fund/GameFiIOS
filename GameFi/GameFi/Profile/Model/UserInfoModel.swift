@@ -29,7 +29,6 @@ class UserInfoModel: BaseModel {
     var last_name : String?
     var id_num : String?
     var dob : String?
-    
     var email : String?
     required init() {}
 }

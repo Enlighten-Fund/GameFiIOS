@@ -39,6 +39,8 @@ class ManagerScholarshipModel: BaseModel {
     var account_security_deposit : String?
     var manager_user_name : String?
     var manager_credit_score : String?
+    
+    var application_id : String?
     //缺失
     var scholar_portrait : String?
     var account_mmr : String?

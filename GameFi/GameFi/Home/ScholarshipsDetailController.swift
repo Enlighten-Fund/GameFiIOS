@@ -101,14 +101,15 @@ class ScholarshipsDetailController: ViewController {
     
     func valifiyUserProfileStatus() {
         if UserManager.sharedInstance.userinfoModel!.scholar_status! == "NO" {
-            GFAlert.showAlert(titleStr: "Notice:", msgStr: "Please complete and submit your profile", currentVC: self, cancelHandler: { action in
-                
-            }, otherBtns: ["Go now"]) { index in
-                DispatchQueue.main.async { [self] in
-                    let editProfileVC = EditProfileController.init()
-                    self.navigationController?.pushViewController(editProfileVC, animated: true)
-                }
-            }
+            self.requestApplay()
+//            GFAlert.showAlert(titleStr: "Notice:", msgStr: "Please complete and submit your profile", currentVC: self, cancelHandler: { action in
+//
+//            }, otherBtns: ["Go now"]) { index in
+//                DispatchQueue.main.async { [self] in
+//                    let editProfileVC = EditProfileController.init()
+//                    self.navigationController?.pushViewController(editProfileVC, animated: true)
+//                }
+//            }
         }else if UserManager.sharedInstance.userinfoModel!.scholar_status! == "AUDIT" {
             GFAlert.showAlert(titleStr: "Notice:", msgStr: "Your information is auditing, please try again in a few minutes", currentVC: self, cancelHandler: { action in
                 
@@ -129,7 +130,8 @@ class ScholarshipsDetailController: ViewController {
                 self.mc_remove()
                 if result.success!{
                     DispatchQueue.main.async { [self] in
-                        GFAlert.showAlert(titleStr: "Notice:", msgStr: "Apply success,please wait for the manager's consent", currentVC: self, cancelHandler: { action in
+                       
+                        GFAlert.showAlert(titleStr: "Notice:", msgStr: "Apply success,please wait for the manager's consent", currentVC: self,cancelBtn:"OK", cancelHandler: { action in
                             
                         }, otherBtns: nil) { index in
                             

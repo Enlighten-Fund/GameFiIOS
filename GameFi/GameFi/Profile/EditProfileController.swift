@@ -455,6 +455,8 @@ class EditProfileController: ViewController {
         userinfoModel.mmr = self.mmrField?.text
         userinfoModel.game_history = self.gamesPlayedTextView?.text
         userinfoModel.self_intro = self.introduceTextView?.text
+        userinfoModel.billing_ronin_address = self.roninField?.text
+        
         self.mc_loading()
         DataManager.sharedInstance.updateUserinfo(userinfoModel: userinfoModel) { result, reponse in
             DispatchQueue.main.async { [self] in
@@ -945,7 +947,7 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
             tempCell.textFild?.delegate = self
             tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Ronin address", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
             self.roninField = tempCell.textFild
-            self.idNoTextField?.text = userInfoModel?.billing_ronin_address
+            self.roninField?.text = userInfoModel?.billing_ronin_address
             cell = tempCell
         case 6:
             let tempCell : IDPhotoCell = tableView.dequeueReusableCell(withIdentifier: IDPhotoCellIdentifier, for: indexPath) as! IDPhotoCell

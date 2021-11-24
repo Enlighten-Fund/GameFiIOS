@@ -192,12 +192,12 @@ class ScholarApplyCell: UICollectionViewCell {
         let tempBtn = UIButton.init(frame: CGRect.zero)
         tempBtn.layer.cornerRadius = 3
         tempBtn.layer.masksToBounds = true
-        tempBtn.layer.borderWidth = 0.5
-        tempBtn.layer.borderColor = UIColor.white.cgColor
+//        tempBtn.layer.borderWidth = 0.5
+//        tempBtn.layer.borderColor = UIColor.white.cgColor
         tempBtn.setTitleColor(.white, for: .normal)
         tempBtn.titleLabel?.font = UIFont(name: "Avenir Next Medium", size: 14)
         tempBtn.setTitle("Delete", for: .normal)
-        tempBtn.backgroundColor = .clear
+        tempBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
         self.contentView.addSubview(tempBtn)
         return tempBtn
     }()

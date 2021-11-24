@@ -28,6 +28,31 @@ class ScholarApplingScholarshipController: UIViewController {
     }
     
     
+    @objc func deleteBtnClick(btn:UIButton) {
+        if btn.tag - 50000 < self.dataSource!.count {
+            let managerScholarshipModel : ManagerScholarshipModel = self.dataSource![btn.tag - 50000] as! ManagerScholarshipModel
+            GFAlert.showAlert(titleStr: "Notice:", msgStr: "Do you want to give up this application？", currentVC: self,cancelBtn:"NO", cancelHandler: { action in
+                
+            }, otherBtns: ["YES"]) { index in
+                self.mc_loading()
+                DataManager.sharedInstance.updateApplicationStatus(scholarshipid: managerScholarshipModel.application_id!, status: "SCHOLAR_REJ") { result, reponse in
+                    DispatchQueue.main.async { [self] in
+                        self.mc_remove()
+                        if result.success!{
+                            self.collectionView.mj_header?.beginRefreshing()
+                        }else{
+                            if  result.msg != nil && !result.msg!.isBlank {
+                                self.mc_success(result.msg!)
+                            }
+                        }
+                    }
+                }
+            }
+            
+        }
+    }
+
+    
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         //水平间隔
@@ -80,6 +105,8 @@ extension  ScholarApplingScholarshipController : UICollectionViewDelegate,UIColl
         cell.makeConstraints()
         let managerScholarshipModel = self.dataSource![indexPath.row]
         cell.update(managerScholarshipModel: managerScholarshipModel as! ManagerScholarshipModel)
+        cell.btn.tag = 50000 + indexPath.row
+        cell.btn.addTarget(self, action: #selector(deleteBtnClick), for: .touchUpInside)
         return cell
     }
 
