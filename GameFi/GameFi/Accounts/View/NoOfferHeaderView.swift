@@ -41,6 +41,8 @@ class NoOfferHeaderView: UICollectionReusableView {
         let tempImgView = UIImageView.init(frame: CGRect.zero)
         tempImgView.layer.cornerRadius = 5
         tempImgView.layer.masksToBounds = true
+        tempImgView.layer.borderWidth = 1
+        tempImgView.layer.borderColor = UIColor.white.cgColor
         self.addSubview(tempImgView)
         return tempImgView
     }()
