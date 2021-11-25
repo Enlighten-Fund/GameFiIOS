@@ -53,14 +53,14 @@ class ScholarRentCell: UICollectionViewCell {
             make.height.equalTo(25)
             make.left.equalToSuperview().offset(15)
         }
-        self.scholarPercentLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.earnTotalLabelView.snp.bottom)
-            make.right.equalToSuperview().offset(-15)
-            make.height.equalTo(25)
-            make.left.equalToSuperview().offset(15)
-        }
+//        self.scholarPercentLabelView.snp.makeConstraints { make in
+//            make.top.equalTo(self.earnTotalLabelView.snp.bottom)
+//            make.right.equalToSuperview().offset(-15)
+//            make.height.equalTo(25)
+//            make.left.equalToSuperview().offset(15)
+//        }
         self.mmrLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.scholarPercentLabelView.snp.bottom)
+            make.top.equalTo(self.earnTotalLabelView.snp.bottom)
             make.right.equalToSuperview().offset(-15)
             make.height.equalTo(25)
             make.left.equalToSuperview().offset(15)
@@ -169,15 +169,15 @@ class ScholarRentCell: UICollectionViewCell {
             self.accountLabel.text = scholarshipModel.manager_user_name
         }
         if scholarshipModel.manager_credit_score != nil {
-            self.creditLabel.text = scholarshipModel.manager_credit_score
+            self.creditLabel.text = "Credit score: \(Int(scholarshipModel.manager_credit_score!)!)"
+        }else{
+            self.creditLabel.text = "Credit score: 0"
         }
-        if scholarshipModel.account_lifecycle_slp_latest != nil &&  scholarshipModel.account_lifecycle_slp_start != nil{
+        if scholarshipModel.account_lifecycle_slp_latest != nil &&  scholarshipModel.account_lifecycle_slp_start != nil && scholarshipModel.scholar_percentage != nil{
             self.earnTotalLabelView.rightLabel.textColor =  UIColor(red: 1, green: 0.72, blue: 0.07, alpha: 1)
-            self.earnTotalLabelView.rightLabel.text = "\(lroundf( Float(scholarshipModel.account_lifecycle_slp_latest!)! - Float(scholarshipModel.account_lifecycle_slp_start!)!)) SLP"
+            self.earnTotalLabelView.rightLabel.text = "\(lroundf( Float(scholarshipModel.account_lifecycle_slp_latest!)! - Float(scholarshipModel.account_lifecycle_slp_start!)!)) SLP(\(scholarshipModel.scholar_percentage!)%)"
         }
-        if scholarshipModel.scholar_percentage != nil {
-            self.scholarPercentLabelView.rightLabel.text = String (format: "%.2f",Float(scholarshipModel.scholar_percentage!)!)
-        }
+
         if scholarshipModel.account_mmr_latest != nil && scholarshipModel.account_mmr_start != nil{
             let mmrlatestStr : NSMutableAttributedString = NSMutableAttributedString.init(string: scholarshipModel.account_mmr_start!, attributes:[.font: UIFont(name: "PingFang SC Medium", size: 15) as Any,.foregroundColor: UIColor(red: 1, green: 1, blue: 1,alpha:1.0)])
             var mmrAddStr : NSAttributedString?
@@ -250,16 +250,16 @@ class ScholarRentCell: UICollectionViewCell {
     
     lazy var earnTotalLabelView : LabelAndLabelInterView = {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
-        tempLabelView.leftLabel.text = "Earned"
+        tempLabelView.leftLabel.text = "Total return"
         self.contentView.addSubview(tempLabelView)
         return tempLabelView
     }()
-    lazy var scholarPercentLabelView : LabelAndLabelInterView = {
-        let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
-        tempLabelView.leftLabel.text = "Scholar percentage"
-        self.contentView.addSubview(tempLabelView)
-        return tempLabelView
-    }()
+//    lazy var scholarPercentLabelView : LabelAndLabelInterView = {
+//        let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
+//        tempLabelView.leftLabel.text = "Scholar percentage"
+//        self.contentView.addSubview(tempLabelView)
+//        return tempLabelView
+//    }()
     lazy var mmrLabelView : LabelAndLabelInterView = {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
         tempLabelView.leftLabel.text = "MMR"

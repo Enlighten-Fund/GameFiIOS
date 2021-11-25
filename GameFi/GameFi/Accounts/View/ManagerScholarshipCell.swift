@@ -158,7 +158,7 @@ class ManagerScholarshipCell: UICollectionViewCell {
         }
         if scholarshipModel.account_lifecycle_slp_latest != nil &&  scholarshipModel.account_lifecycle_slp_start != nil{
             self.returnAmountLabelView.rightLabel.textColor =  UIColor(red: 1, green: 0.72, blue: 0.07, alpha: 1)
-            self.returnAmountLabelView.rightLabel.text = "\(lroundf( Float(scholarshipModel.account_lifecycle_slp_latest!)! - Float(scholarshipModel.account_lifecycle_slp_start!)!)) SLP"
+            self.returnAmountLabelView.rightLabel.text = "\(lroundf( Float(scholarshipModel.account_lifecycle_slp_latest!)! - Float(scholarshipModel.account_lifecycle_slp_start!)!)) SLP(\(scholarshipModel.scholar_percentage!)%)"
         }
         if scholarshipModel.account_mmr_latest != nil && scholarshipModel.account_mmr_start != nil{
             let mmrlatestStr : NSMutableAttributedString = NSMutableAttributedString.init(string: scholarshipModel.account_mmr_start!, attributes:[.font: UIFont(name: "PingFang SC Medium", size: 15) as Any,.foregroundColor: UIColor(red: 1, green: 1, blue: 1,alpha:1.0)])
@@ -246,7 +246,7 @@ class ManagerScholarshipCell: UICollectionViewCell {
     }()
     lazy var returnAmountLabelView : LabelAndLabelInterView = {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
-        tempLabelView.leftLabel.text = "Return amount"
+        tempLabelView.leftLabel.text = "Total return"
         self.contentView.addSubview(tempLabelView)
         return tempLabelView
     }()

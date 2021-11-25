@@ -75,7 +75,7 @@ class ScholarRentScholarshipController: UIViewController {
         //垂直行间距
         layout.minimumLineSpacing = 10
         layout.scrollDirection = UICollectionView.ScrollDirection.vertical  //滚动方向
-        layout.itemSize = CGSize(width: IPhone_SCREEN_WIDTH - 30, height: 400)
+        layout.itemSize = CGSize(width: IPhone_SCREEN_WIDTH - 30, height: 370)
         // 设置CollectionView
         let ourCollectionView : UICollectionView = UICollectionView(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: IPhone_SCREEN_HEIGHT), collectionViewLayout: layout)
         ourCollectionView.delegate = self
