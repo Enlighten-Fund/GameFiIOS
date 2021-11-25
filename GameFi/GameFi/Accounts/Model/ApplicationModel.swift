@@ -14,6 +14,13 @@ class ApplicationModel: BaseModel {
     var scholar_user_id : String?
     var manager_user_id : String?
     var application_status : String?
+    var manager_user_name : String?
+    var manager_credit_score : String?
+    var account_mmr : String?
+    var account_axie_count : String?
+    
+    var account_security_deposit : String?
+    
     
     var scholarship_name : String?
     var scholarship_estimate_daily_slp : String?
@@ -27,6 +34,16 @@ class ApplicationModel: BaseModel {
     var scholar_available_time : String?
     var scholar_axie_exp : String?
     var scholar_nation : String?
+    
+    var account_axie_brief : String?
+    var accountAxieArry : Array<String>?{
+        get{
+            if account_axie_brief == nil {
+                return []
+            }
+            return account_axie_brief?.components(separatedBy: ",")
+        }
+    }
     
 //    var nation : String?
 //    var age : String?

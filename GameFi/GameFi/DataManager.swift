@@ -411,8 +411,8 @@ class DataManager: NSObject {
 //                        print("读取本地数据出现错误!",error)
 //                }
             if result.success!{
-                let scholarshipListModel : ScholarshipListModel = JsonUtil.jsonToModel(reponse as! String, ScholarshipListModel.self) as! ScholarshipListModel
-                completeBlock(result,scholarshipListModel)
+                let applicationListModel : ApplicationListModel = JsonUtil.jsonToModel(reponse as! String, ApplicationListModel.self) as! ApplicationListModel
+                completeBlock(result,applicationListModel)
             }else{
                 completeBlock(result,reponse)
             }
@@ -550,9 +550,9 @@ class DataManager: NSObject {
         }
     }
     
-    //update scholarship status
-    func updateApplicationStatus(scholarshipid:String, status: String , completeBlock: @escaping CompleteBlock) {
-        let dic = ["id" : Int(scholarshipid)! as Any,"status" : status] as [String : Any]
+    //update Application status
+    func updateApplicationStatus(applicationId:String, status: String , completeBlock: @escaping CompleteBlock) {
+        let dic = ["id" : Int(applicationId)! as Any,"status" : status] as [String : Any]
         self.POST(url: "application/update_by_id", param: dic ) { result, reponse in
             if result.success!{
                 completeBlock(result,reponse)

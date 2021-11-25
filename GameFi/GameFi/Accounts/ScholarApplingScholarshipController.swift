@@ -30,12 +30,12 @@ class ScholarApplingScholarshipController: UIViewController {
     
     @objc func deleteBtnClick(btn:UIButton) {
         if btn.tag - 50000 < self.dataSource!.count {
-            let scholarshipModel : ScholarshipModel = self.dataSource![btn.tag - 50000] as! ScholarshipModel
+            let applicationModel : ApplicationModel = self.dataSource![btn.tag - 50000] as! ApplicationModel
             GFAlert.showAlert(titleStr: "Notice:", msgStr: "Do you want to give up this application？", currentVC: self,cancelBtn:"NO", cancelHandler: { action in
                 
             }, otherBtns: ["YES"]) { index in
                 self.mc_loading()
-                DataManager.sharedInstance.updateApplicationStatus(scholarshipid: scholarshipModel.application_id!, status: "SCHOLAR_REJ") { result, reponse in
+                DataManager.sharedInstance.updateApplicationStatus(applicationId: applicationModel.application_id!, status: "SCHOLAR_REJ") { result, reponse in
                     DispatchQueue.main.async { [self] in
                         self.mc_remove()
                         if result.success!{
@@ -103,8 +103,8 @@ extension  ScholarApplingScholarshipController : UICollectionViewDelegate,UIColl
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: scholarApplyCellIdentifier, for: indexPath) as! ScholarApplyCell
         cell.makeConstraints()
-        let scholarshipModel = self.dataSource![indexPath.row]
-        cell.update(scholarshipModel: scholarshipModel as! ScholarshipModel)
+        let applicationModel = self.dataSource![indexPath.row]
+        cell.update(applicationModel: applicationModel as! ApplicationModel)
         cell.btn.tag = 50000 + indexPath.row
         cell.btn.addTarget(self, action: #selector(deleteBtnClick), for: .touchUpInside)
         return cell
@@ -132,17 +132,17 @@ extension  ScholarApplingScholarshipController : UICollectionViewDelegate,UIColl
                 DispatchQueue.main.async { [self] in
                     self.collectionView.mj_footer?.endRefreshing()
                     self.collectionView.mj_header?.endRefreshing()
-                    let scholarshipListModel : ScholarshipListModel = reponse as! ScholarshipListModel
+                    let applicationListModel : ApplicationListModel = reponse as! ApplicationListModel
                     if self.pageIndex == 1{
-                        self.dataSource = scholarshipListModel.data
+                        self.dataSource = applicationListModel.data
                     }else{
-                        if scholarshipListModel.data != nil {
-                            self.dataSource?.append(contentsOf: scholarshipListModel.data!)
+                        if applicationListModel.data != nil {
+                            self.dataSource?.append(contentsOf: applicationListModel.data!)
                         }
 
                     }
-                    if scholarshipListModel.next_page! > pageIndex {
-                        pageIndex = scholarshipListModel.next_page!
+                    if applicationListModel.next_page! > pageIndex {
+                        pageIndex = applicationListModel.next_page!
                     }else{
                         self.collectionView.mj_footer?.endRefreshingWithNoMoreData()
                     }

@@ -285,11 +285,13 @@ class EditProfileController: ViewController {
         self.availableLabel?.text = self.availabelArray[availableIndex]
         self.hideAvailablePickerView()
         self.available = self.availabelArray[availableIndex]
+        self.userInfoModel?.available_time = self.available
     }
     @objc func selectPlayAxie() {
         self.playAxieLabel?.text = self.playAxieArray[playAxieIndex]
         self.hidePlayAxiePickerView()
         self.playAxie = self.playAxieArray[playAxieIndex]
+        self.userInfoModel?.axie_exp = self.playAxie
     }
     
     
@@ -336,6 +338,7 @@ class EditProfileController: ViewController {
         self.birthDayLabel?.text = self.stringFromDate(date: birthDay! as NSDate)
         self.hideBirthdayPickerView()
         self.birthday = self.birthDayLabel?.text
+        self.userInfoModel?.dob = self.birthday
     }
     
     @objc func selectCountry() {
@@ -352,6 +355,7 @@ class EditProfileController: ViewController {
         self.countryLabel?.text = "\(country),\(state)"
         self.hideCountryPickerView()
         self.country = self.countryLabel?.text
+        self.userInfoModel?.nation = self.country
     }
     
     func uploadIdPhoto(image:UIImage) {
@@ -460,21 +464,29 @@ class EditProfileController: ViewController {
         if !self.valifyIntroduction() {
             return
         }
-        let userinfoModel = UserInfoModel.init()
-        userinfoModel.first_name = self.firstnameTextField?.text
-        userinfoModel.last_name = self.lastnameTextField?.text
-        userinfoModel.nation = self.country
-        userinfoModel.id_num = self.idNoTextField?.text
-        userinfoModel.dob = self.birthday
-        userinfoModel.available_time = self.available
-        userinfoModel.axie_exp = self.playAxie
-        userinfoModel.mmr = self.mmrField?.text
-        userinfoModel.game_history = self.gamesPlayedTextView?.text
-        userinfoModel.self_intro = self.introduceTextView?.text
-        userinfoModel.billing_ronin_address = self.roninField?.text
+        let dealronin = self.roninField!.text!.replacingOccurrences(of: "ronin:", with: "0x")
+        let auserinfoModel = UserInfoModel.init()
+        auserinfoModel.first_name = self.firstnameTextField?.text
+        auserinfoModel.last_name = self.lastnameTextField?.text
+        auserinfoModel.nation = self.country
+        auserinfoModel.id_num = self.idNoTextField?.text
+        auserinfoModel.dob = self.birthday
+        auserinfoModel.available_time = self.available
+        auserinfoModel.axie_exp = self.playAxie
+        auserinfoModel.mmr = self.mmrField?.text
+        auserinfoModel.game_history = self.gamesPlayedTextView?.text
+        auserinfoModel.self_intro = self.introduceTextView?.text
+        auserinfoModel.billing_ronin_address = dealronin
+        
+        let now = Date()
+        let birthday: Date = self.dateFromString(string: (userInfoModel?.dob)!)!
+        let calendar = Calendar.current
+        let ageComponents = calendar.dateComponents([.year], from: birthday, to: now)
+        let age = ageComponents.year!
+        auserinfoModel.age = String(age)
         
         self.mc_loading()
-        DataManager.sharedInstance.updateUserinfo(userinfoModel: userinfoModel) { result, reponse in
+        DataManager.sharedInstance.updateUserinfo(userinfoModel: auserinfoModel) { result, reponse in
             DispatchQueue.main.async { [self] in
                 self.mc_remove()
                 if result.success!{
@@ -839,14 +851,19 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
         self.hidePlayAxiePickerView()
         if textField == self.firstnameTextField {
             self.valifyFirstName()
+            self.userInfoModel?.first_name = textField.text
         }else if textField == self.lastnameTextField {
             self.valifyLastName()
+            self.userInfoModel?.last_name = textField.text
         }else if textField == self.idNoTextField {
             self.valifyIdNO()
+            self.userInfoModel?.id_num = textField.text
         }else if textField == self.mmrField {
             self.valifyMMR()
+            self.userInfoModel?.mmr = textField.text
         }else if textField == self.roninField {
             self.valifyRonin()
+            self.userInfoModel?.billing_ronin_address = textField.text
         }
         
     }
@@ -854,12 +871,14 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView == self.gamesPlayedTextView {
             self.valifyGamePlayed()
+            self.userInfoModel?.game_history = textView.text
             if textView.text.isEmpty {
                 textView.text = "Enter the gmes you played before"
                 textView.textColor = UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)
             }
         }else if textView == self.introduceTextView {
             self.valifyIntroduction()
+            self.userInfoModel?.self_intro = textView.text
             if textView.text.isEmpty {
                 textView.text = "Introduce yourself briefly"
                 textView.textColor = UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)

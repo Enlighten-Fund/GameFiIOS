@@ -102,15 +102,14 @@ class ScholarshipsDetailController: ViewController {
     func valifiyUserProfileStatus() {
         if UserManager.sharedInstance.userinfoModel!.scholar_status == nil
             || UserManager.sharedInstance.userinfoModel!.scholar_status! == "NO" {
-            self.requestApplay()
-//            GFAlert.showAlert(titleStr: "Notice:", msgStr: "Please complete and submit your profile", currentVC: self, cancelHandler: { action in
-//
-//            }, otherBtns: ["Go now"]) { index in
-//                DispatchQueue.main.async { [self] in
-//                    let editProfileVC = EditProfileController.init()
-//                    self.navigationController?.pushViewController(editProfileVC, animated: true)
-//                }
-//            }
+            GFAlert.showAlert(titleStr: "Notice:", msgStr: "Please complete and submit your profile", currentVC: self, cancelHandler: { action in
+
+            }, otherBtns: ["Go now"]) { index in
+                DispatchQueue.main.async { [self] in
+                    let editProfileVC = EditProfileController.init()
+                    self.navigationController?.pushViewController(editProfileVC, animated: true)
+                }
+            }
         }else if UserManager.sharedInstance.userinfoModel!.scholar_status! == "AUDIT" {
             GFAlert.showAlert(titleStr: "Notice:", msgStr: "Your information is auditing, please try again in a few minutes", currentVC: self, cancelHandler: { action in
                 

@@ -110,36 +110,43 @@ class ScholarDetailHeaderView: UIView {
     
     lazy var scholarNameLabelView : LabelAndLabelView = {
         let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
+        tempLabelView.leftLabel.text = "Scholar name"
         self.addSubview(tempLabelView)
         return tempLabelView
     }()
     lazy var creditScoreLabelView : LabelAndLabelView = {
         let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
+        tempLabelView.leftLabel.text = "Credit score"
         self.addSubview(tempLabelView)
         return tempLabelView
     }()
     lazy var locationLabelView : LabelAndLabelView = {
         let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
+        tempLabelView.leftLabel.text = "Location"
         self.addSubview(tempLabelView)
         return tempLabelView
     }()
     lazy var ageLabelView : LabelAndLabelView = {
         let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
+        tempLabelView.leftLabel.text = "Age"
         self.addSubview(tempLabelView)
         return tempLabelView
     }()
     lazy var experienceLabelView : LabelAndLabelView = {
         let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
+        tempLabelView.leftLabel.text = "Experience in Axie"
         self.addSubview(tempLabelView)
         return tempLabelView
     }()
     lazy var availableLabelView : LabelAndLabelView = {
         let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
+        tempLabelView.leftLabel.text = "Available time"
         self.addSubview(tempLabelView)
         return tempLabelView
     }()
     lazy var mmrLabelView : LabelAndLabelView = {
         let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
+        tempLabelView.leftLabel.text = "Highest MMR"
         self.addSubview(tempLabelView)
         return tempLabelView
     }()
