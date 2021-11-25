@@ -145,6 +145,16 @@ class RegisterController: ViewController {
         }
     }
     
+    func valifyPrivacy() -> Bool {
+        if !self.privacySelect{
+            self.showNoticeLabel(notice: "Privacy should be selected")
+            return false
+        }else{
+            self.hideNoticeLabel()
+            return true
+        }
+    }
+    
     //发送验证码
     @objc func codeBtnClick(btn:UIButton) {
         self.emailTextField?.resignFirstResponder()
@@ -228,10 +238,7 @@ class RegisterController: ViewController {
             return
         }
         
-        if !self.privacySelect {
-            self.privacyBtn?.shake(direction: .horizontal, times: 2, interval: 0.1, offset: 5, completion: {
-                
-            })
+        if !self.valifyPrivacy() {
             return
         }
         
@@ -277,6 +284,13 @@ class RegisterController: ViewController {
                         self.mc_remove()
                         if let error = error as? AWSMobileClientError {
                             debugPrint(error)
+                            DispatchQueue.main.async { [self] in
+                                GFAlert.showAlert(titleStr: "Notice:", msgStr: "注册失败", currentVC: self, cancelHandler: { alertAction in
+                                    
+                                }, otherBtns:nil) { indx in
+                                    
+                                }
+                            }
                         }
                         
                         DispatchQueue.main.async { [self] in

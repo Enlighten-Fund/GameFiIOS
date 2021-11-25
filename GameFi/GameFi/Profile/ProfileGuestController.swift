@@ -25,7 +25,7 @@ class ProfileGuestController: ViewController {
         }
         self.tableView!.snp.makeConstraints { make in
             make.top.equalTo(self.headerView!.snp.bottom)
-            make.height.equalTo(235)
+            make.bottom.equalToSuperview().offset(-IPhone_TabbarHeight)
             make.left.equalToSuperview().offset(15)
             make.right.equalToSuperview().offset(-15)
         }
@@ -69,6 +69,7 @@ class ProfileGuestController: ViewController {
         tempTableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "profileCellIdentifier")
         tempTableView.dataSource = self
         tempTableView.delegate = self
+        tempTableView.separatorColor = UIColor(red: 0.19, green: 0.21, blue: 0.29, alpha: 1)
         view.addSubview(tempTableView)
         return tempTableView
     }()

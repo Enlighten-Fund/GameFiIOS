@@ -27,8 +27,8 @@ class RegisterFootView: UIView {
         self.privacyBtn.snp.makeConstraints { make in
             make.top.equalTo(self.scholarTitleBtn.snp.bottom).offset(20)
             make.left.equalToSuperview().offset(20)
-            make.width.equalTo(30)
-            make.height.equalTo(30)
+            make.width.equalTo(20)
+            make.height.equalTo(20)
         }
         self.privacyLabel1.snp.makeConstraints { make in
             make.centerY.equalTo(self.privacyBtn)
@@ -106,7 +106,11 @@ class RegisterFootView: UIView {
         let tempBtn = UIButton.init(frame: CGRect.zero)
         tempBtn.setBackgroundImage(UIImage.init(named: ""), for: .normal)
         tempBtn.setBackgroundImage(UIImage.init(named: ""), for: .highlighted)
-        tempBtn.setBackgroundImage(UIImage.init(named: ""), for: .selected)
+        tempBtn.setBackgroundImage(UIImage.init(named: "pravicy_select"), for: .selected)
+        tempBtn.backgroundColor = UIColor(red: 0.11, green: 0.12, blue: 0.18, alpha: 1)
+        tempBtn.layer.cornerRadius = 3
+        tempBtn.layer.borderWidth = 1
+        tempBtn.layer.borderColor = UIColor(red: 0.27, green: 0.3, blue: 0.41, alpha: 1).cgColor
         self.addSubview(tempBtn)
         return tempBtn
     }()

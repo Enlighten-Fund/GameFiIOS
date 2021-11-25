@@ -65,7 +65,7 @@ extension UITextField{
 
 
     func validatePassword() -> Bool {
-        let temp = self.validate(value: "(?!^[0-9]+$)(?!^[A-z]+$)(?!^[^A-z0-9]+$)^.{6,}$")
+        let temp = self.validate(value: "(?!^[0-9]+$)(?!^[A-z]+$)(?!^[^A-z0-9]+$)^.{8,}$")
         return temp
     }
     
