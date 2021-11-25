@@ -25,14 +25,17 @@ class NoOfferHeaderView: UICollectionReusableView {
     
     func makeConstraints(){
         self.bgImgView.snp.makeConstraints { make in
-            make.edges.equalTo(UIEdgeInsets.zero)
+            make.top.equalToSuperview()
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.height.equalTo(165)
         }
         self.interImgView.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.width.height.equalTo(60)
         }
         self.btn.snp.makeConstraints { make in
-            make.center.equalToSuperview()
+            make.center.equalTo(self.interImgView.snp.center)
             make.width.height.equalTo(60)
         }
     }
@@ -42,7 +45,7 @@ class NoOfferHeaderView: UICollectionReusableView {
         tempImgView.layer.cornerRadius = 5
         tempImgView.layer.masksToBounds = true
         tempImgView.layer.borderWidth = 1
-        tempImgView.layer.borderColor = UIColor.white.cgColor
+        tempImgView.layer.borderColor = UIColor(red: 0.27, green: 0.3, blue: 0.41, alpha: 1).cgColor
         self.addSubview(tempImgView)
         return tempImgView
     }()
