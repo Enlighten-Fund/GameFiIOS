@@ -457,6 +457,19 @@ class DataManager: NSObject {
         }
     }
     
+    //fetch payment status
+    func fetchPaymentStatus(scholarshipid:String, completeBlock: @escaping CompleteBlock) {
+        let dic = ["scholarship_id" : Int(scholarshipid)!] as [String : Any]
+        self.POST(url: "payment/get_by_scholarship", param: dic ) { result, reponse in
+            if result.success!{
+                let paymentModel : PaymentModel = JsonUtil.jsonToModel(reponse as! String, PaymentModel.self) as! PaymentModel
+                completeBlock(result,paymentModel)
+            }else{
+                completeBlock(result,reponse)
+            }
+        }
+    }
+    
     //
     func fetchUserinfo(completeBlock: @escaping CompleteBlock) {
         let dic = [:] as [String : Any]

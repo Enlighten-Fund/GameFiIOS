@@ -205,6 +205,13 @@ class ScholarRentCell: UICollectionViewCell {
         if scholarshipModel.account_passcode != nil {
             self.pwdTextFild!.text = scholarshipModel.account_passcode
         }
+        if scholarshipModel.status != nil {
+            if scholarshipModel.status == "PENDING_PAYMENT"{
+                self.btn.setTitle("Waiting payment", for: .normal)
+            }else if scholarshipModel.status == "ACTIVE"{
+                self.btn.setTitle("Stop renting", for: .normal)
+            }
+        }
     }
     
     lazy var axieImgView1 : UIImageView = {

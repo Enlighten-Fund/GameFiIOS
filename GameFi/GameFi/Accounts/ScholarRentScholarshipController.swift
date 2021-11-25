@@ -30,19 +30,41 @@ class ScholarRentScholarshipController: UIViewController {
     @objc func stopRentBtnClick(btn:UIButton) {
         if btn.tag - 80000 < self.dataSource!.count {
             let scholarshipModel : ScholarshipModel = self.dataSource![btn.tag - 80000] as! ScholarshipModel
-            self.mc_loading()
-            DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: scholarshipModel.scholarship_id!, status: "PENDING_PAYMENT") { result, reponse in
-                DispatchQueue.main.async { [self] in
-                    self.mc_remove()
-                    if result.success!{
-                        self.collectionView.mj_header?.beginRefreshing()
-                    }else{
-                        if  result.msg != nil && !result.msg!.isBlank {
-                            self.mc_success(result.msg!)
+            if scholarshipModel.status == "PENDING_PAYMENT"{
+                self.mc_loading()
+                DataManager.sharedInstance.fetchPaymentStatus(scholarshipid: scholarshipModel.scholarship_id!) { result, reponse in
+                    DispatchQueue.main.async { [self] in
+                        self.mc_remove()
+                        if result.success!{
+                            let paymentModel : PaymentModel = reponse as! PaymentModel
+                            GFAlert.showAlert(titleStr: "Notice:", msgStr: "\(Int(paymentModel.scholar_value!)!) SLP will be sent to [\(String(paymentModel.ronin_address!))].Please wait a moment or contact us", currentVC: self,cancelBtn:"OK", cancelHandler: { alertAction in
+                                
+                            }, otherBtns: nil) { index in
+                                
+                            }
+                        }else{
+                            if  result.msg != nil && !result.msg!.isBlank {
+                                self.mc_success(result.msg!)
+                            }
+                        }
+                    }
+                }
+            }else if scholarshipModel.status == "ACTIVE"{
+                self.mc_loading()
+                DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: scholarshipModel.scholarship_id!, status: "PENDING_PAYMENT") { result, reponse in
+                    DispatchQueue.main.async { [self] in
+                        self.mc_remove()
+                        if result.success!{
+                            self.collectionView.mj_header?.beginRefreshing()
+                        }else{
+                            if  result.msg != nil && !result.msg!.isBlank {
+                                self.mc_success(result.msg!)
+                            }
                         }
                     }
                 }
             }
+           
         }
     }
     

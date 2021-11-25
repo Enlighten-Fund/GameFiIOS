@@ -36,6 +36,7 @@
 		9811EA1B2726BB2700B0ACF0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9811EA1A2726BB2700B0ACF0 /* ViewController.swift */; };
 		9811EA202726BB2800B0ACF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9811EA1F2726BB2800B0ACF0 /* Assets.xcassets */; };
 		9811EA232726BB2800B0ACF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9811EA212726BB2800B0ACF0 /* LaunchScreen.storyboard */; };
+		982B4770274F3B3C004C3B52 /* PaymentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982B476F274F3B3C004C3B52 /* PaymentModel.swift */; };
 		9830EF1D274E626200352B26 /* ApplicationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830EF1C274E626200352B26 /* ApplicationModel.swift */; };
 		9830EF1F274E66E800352B26 /* ScholarshipModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830EF1E274E66E800352B26 /* ScholarshipModel.swift */; };
 		9830EF21274E709600352B26 /* ScholarDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830EF20274E709600352B26 /* ScholarDetailModel.swift */; };
@@ -143,6 +144,7 @@
 		9811EA1F2726BB2800B0ACF0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9811EA222726BB2800B0ACF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9811EA242726BB2800B0ACF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		982B476F274F3B3C004C3B52 /* PaymentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentModel.swift; sourceTree = "<group>"; };
 		9830EF1C274E626200352B26 /* ApplicationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationModel.swift; sourceTree = "<group>"; };
 		9830EF1E274E66E800352B26 /* ScholarshipModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarshipModel.swift; sourceTree = "<group>"; };
 		9830EF20274E709600352B26 /* ScholarDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScholarDetailModel.swift; sourceTree = "<group>"; };
@@ -428,6 +430,7 @@
 			children = (
 				9830EF1C274E626200352B26 /* ApplicationModel.swift */,
 				9830EF1E274E66E800352B26 /* ScholarshipModel.swift */,
+				982B476F274F3B3C004C3B52 /* PaymentModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -762,6 +765,7 @@
 				9858173B27422D3D00D8CFCA /* ScholarshipDetailCell.swift in Sources */,
 				980DB7962733D391006ED3BE /* TYPageTitleView.swift in Sources */,
 				980DB79E2733D486006ED3BE /* ScholarsController.swift in Sources */,
+				982B4770274F3B3C004C3B52 /* PaymentModel.swift in Sources */,
 				987694272738ED150075CA0F /* ScholarModel.swift in Sources */,
 				98D99423273BA9F0006AA8DC /* ManagerAccountsController.swift in Sources */,
 				985817472742793F00D8CFCA /* AxieAbilityModel.swift in Sources */,
