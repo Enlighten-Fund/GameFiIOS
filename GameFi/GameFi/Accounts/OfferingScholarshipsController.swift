@@ -30,25 +30,43 @@ class OfferingScholarshipsController: UIViewController {
     @objc func stopOrPayBtnClick(btn:UIButton) {
         if btn.tag - 90000 < self.dataSource!.count {
             let scholarshipModel : ScholarshipModel = self.dataSource![btn.tag - 90000] as! ScholarshipModel
-            var status = ""
             if scholarshipModel.status == "ACTIVE" {
-                status = "PENDING_PAYMENT"
+                self.mc_loading()
+                DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: scholarshipModel.scholarship_id!, status: "PENDING_PAYMENT") { result, reponse in
+                    DispatchQueue.main.async { [self] in
+                        self.mc_remove()
+                        if result.success!{
+                            self.collectionView.mj_header?.beginRefreshing()
+                        }else{
+                            if  result.msg != nil && !result.msg!.isBlank {
+                                self.mc_success(result.msg!)
+                            }
+                        }
+                    }
+                }
             } else if scholarshipModel.status == "PENDING_PAYMENT" {
-                status = "PENDING_PAYMENT"
-            }
-            self.mc_loading()
-            DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: scholarshipModel.scholarship_id!, status: status) { result, reponse in
-                DispatchQueue.main.async { [self] in
-                    self.mc_remove()
-                    if result.success!{
-                        self.collectionView.mj_header?.beginRefreshing()
-                    }else{
-                        if  result.msg != nil && !result.msg!.isBlank {
-                            self.mc_success(result.msg!)
+                self.mc_loading()
+                DataManager.sharedInstance.fetchPaymentStatus(scholarshipid: scholarshipModel.scholarship_id!) { result, reponse in
+                    DispatchQueue.main.async { [self] in
+                        self.mc_remove()
+                        if result.success!{
+                            let paymentModel : PaymentModel = reponse as! PaymentModel
+                            let slp : Int = Int(paymentModel.value!)! - Int(paymentModel.paid_value!)!
+                            GFAlert.showAlert(titleStr: "Notice:", msgStr:
+                                                "Please send \(slp) SLP from[\(String(scholarshipModel.account_ronin_address!))]to [our platform ronin address.There is a little delay. If you have already done this，don't do it again.", currentVC: self,cancelBtn:"OK", cancelHandler: { alertAction in
+                                
+                            }, otherBtns: nil) { index in
+                                
+                            }
+                        }else{
+                            if  result.msg != nil && !result.msg!.isBlank {
+                                self.mc_success(result.msg!)
+                            }
                         }
                     }
                 }
             }
+            
         }
     }
     
