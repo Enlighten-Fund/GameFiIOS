@@ -7,7 +7,7 @@ typealias CompleteBlock = (GFResult,Any) -> Void
  
 //let BaseUrl = "http://a2a7cb64ab5d94072bc625bdedd3f7ff-1103167960.ap-northeast-1.elb.amazonaws.com/v2/"
 let BaseUrl = "https://ykdrpt5lig.execute-api.ap-northeast-1.amazonaws.com/v2/"
-
+//let BaseUrl = "https://api.cyberninja.xyz/v2/scholarship/list_by_marketplace/v2/"
 let jkver = "1.0"
 
 

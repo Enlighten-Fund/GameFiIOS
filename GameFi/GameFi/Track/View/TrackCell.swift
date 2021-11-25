@@ -119,8 +119,8 @@ class TrackCell: TableViewCell {
         self.accountLabel.text = trackModel.name
         self.totalInterView.rightLabel.text = trackModel.slp_total
         self.unclaimedLabelInterView.rightLabel.text = String(lroundf(Float(trackModel.slp_total!)! - Float(trackModel.slp_balance!)!))
-        self.managerInterView.rightLabel.text = trackModel.slp_manager
-        self.scholarLabelInterView.rightLabel.text = trackModel.slp_scholar
+        self.managerInterView.rightLabel.text = String(lroundf(Float(trackModel.manager_percentage!)! / 100.0 * Float(trackModel.slp_total!)!))
+        self.scholarLabelInterView.rightLabel.text = String(lroundf(Float(trackModel.scholar_percentage!)! / 100.0 * Float(trackModel.slp_total!)!))
         self.mmrLabelInterView.rightLabel.text = trackModel.mmr
         if trackModel.type == "MANAGER" {
             self.accountView.backgroundColor = UIColor(red: 0.11, green: 0.4, blue: 0.4, alpha: 1)

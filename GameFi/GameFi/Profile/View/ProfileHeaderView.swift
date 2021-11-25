@@ -66,6 +66,8 @@ class ProfileHeaderView: UIView {
         }
         if userInfoModel.credit_score != nil {
             self.creditLabel.text = "Credit Score: \(userInfoModel.credit_score!)"
+        }else{
+            self.creditLabel.text = "Credit Score: 0"
         }
         if userInfoModel.scholar_status != nil {
             if userInfoModel.scholar_status == "NO" {
