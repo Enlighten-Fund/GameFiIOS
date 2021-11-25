@@ -254,7 +254,7 @@ class DataManager: NSObject {
                    "manager_percentage" : Float(manager_percentage),
                    "scholar_percentage": Float(100 - manager_percentage)
                   ] as [String : Any]
-        self.POST(url: "game_accounts/update_tracker", param: dic as [String : Any]) { result, reponse in
+        self.POST(url: "game_accounts/create_tracker", param: dic as [String : Any]) { result, reponse in
             if result.success!{
                 let trackListModel = JsonUtil.jsonToModel(reponse as! String, TrackListModel.self)
                 completeBlock(result,trackListModel)

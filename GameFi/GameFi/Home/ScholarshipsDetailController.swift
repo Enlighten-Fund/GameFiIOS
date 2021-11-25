@@ -22,6 +22,7 @@ class ScholarshipsDetailController: ViewController {
     var scholarshipsDetailModel : ScholarshipModel?
     var scholarshipId : String?
     var axieIds : [String]?
+    var newAxieIds : [String]?
     var dataSource : Array<Any>? = Array.init()
     
     
@@ -29,6 +30,16 @@ class ScholarshipsDetailController: ViewController {
         super.init(nibName: nil, bundle: nil)
         self.scholarshipId = scholarshipId
         self.axieIds = axieIds
+        self.newAxieIds = []
+        if self.axieIds!.count > 20 {
+            for i in 0..<20 {
+                self.newAxieIds?.append(axieIds[i])
+            }
+        }else{
+            for axieId in self.axieIds! {
+                self.newAxieIds?.append(axieId)
+            }
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -67,13 +78,13 @@ class ScholarshipsDetailController: ViewController {
                 }
             }
         }
-        if self.axieIds != nil && self.axieIds!.count > 0 {
-            for axieId in self.axieIds! {
+        if self.newAxieIds != nil && self.newAxieIds!.count > 0 {
+            for axieId in self.newAxieIds! {
                 DataManager.sharedInstance.fetchAxieDetail(axieId: axieId) { result, reponse in
                     if result.success!{
                         let tempModel : AxieinfoModel = reponse as! AxieinfoModel
                         self.dataSource?.append(tempModel)
-                        if self.dataSource?.count == self.axieIds?.count {
+                        if self.dataSource?.count == self.newAxieIds?.count {
                             DispatchQueue.main.async { [self] in
                                 self.tableView!.mj_header?.endRefreshing()
                                 self.tableView?.reloadData()
@@ -210,10 +221,10 @@ class ScholarshipsDetailController: ViewController {
 extension  ScholarshipsDetailController : UITableViewDelegate,UITableViewDataSource{
    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.axieIds == nil || self.axieIds!.count == 0 {
+        if self.newAxieIds == nil || self.newAxieIds!.count == 0 {
             return 0
         }
-           return self.axieIds!.count
+           return self.newAxieIds!.count
     }
         
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

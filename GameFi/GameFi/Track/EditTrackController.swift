@@ -245,6 +245,7 @@ extension  EditTrackController : UITableViewDelegate,UITableViewDataSource,UITex
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "1", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.delegate = self
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Ronin address", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
+        tempCell.textFild?.isEnabled = false
         self.roninTextField = tempCell.textFild
         cell = tempCell
         roninTextField?.text = trackModel?.ronin_address

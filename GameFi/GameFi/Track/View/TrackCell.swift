@@ -65,6 +65,12 @@ class TrackCell: TableViewCell {
             make.top.equalToSuperview()
             make.height.equalTo(165)
         }
+        self.accountView.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(0)
+            make.right.equalToSuperview().offset(0)
+            make.top.equalToSuperview()
+            make.height.equalTo(30)
+        }
         self.accountLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(15)
             make.right.equalToSuperview().offset(-15)
@@ -116,6 +122,16 @@ class TrackCell: TableViewCell {
         self.managerInterView.rightLabel.text = trackModel.slp_manager
         self.scholarLabelInterView.rightLabel.text = trackModel.slp_scholar
         self.mmrLabelInterView.rightLabel.text = trackModel.mmr
+        if trackModel.type == "MANAGER" {
+            self.accountView.backgroundColor = UIColor(red: 0.11, green: 0.4, blue: 0.4, alpha: 1)
+            self.moreBtn.isHidden = true
+        }else if trackModel.type == "SCHOLAR"{
+            self.accountView.backgroundColor = UIColor(red: 0.16, green: 0.29, blue: 0.5, alpha: 1)
+            self.moreBtn.isHidden = true
+        }else{
+            self.accountView.backgroundColor = .clear
+            self.moreBtn.isHidden = false
+        }
     }
     
     lazy var bgView : UIView = {
@@ -123,6 +139,13 @@ class TrackCell: TableViewCell {
         temp.backgroundColor = UIColor(red: 0.19, green: 0.21, blue: 0.29, alpha: 1)
         temp.layer.cornerRadius = 5
         temp.layer.masksToBounds = true
+        self.contentView.addSubview(temp)
+        return temp
+    }()
+    
+    lazy var accountView : UIView = {
+        let temp = UIView.init(frame: CGRect.zero)
+        temp.backgroundColor = UIColor(red: 0.16, green: 0.29, blue: 0.5, alpha: 1)
         self.contentView.addSubview(temp)
         return temp
     }()
