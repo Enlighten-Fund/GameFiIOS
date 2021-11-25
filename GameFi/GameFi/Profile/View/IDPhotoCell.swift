@@ -24,8 +24,8 @@ class IDPhotoCell: TableViewCell {
         self.btn.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(20)
-            make.width.equalTo(30)
-            make.height.equalTo(30)
+            make.width.equalTo(80)
+            make.height.equalTo(80)
         }
         self.noticeLabel.snp.makeConstraints { make in
             make.left.equalToSuperview()

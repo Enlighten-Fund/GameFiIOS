@@ -118,6 +118,10 @@ class EditProfileController: ViewController {
     }
     
     func showCountryPickerView() {
+        UIApplication.shared.keyWindow?.endEditing(true)
+        self.hideBirthdayPickerView()
+        self.hideAvailablePickerView()
+        self.hidePlayAxiePickerView()
         self.countryPickerView!.snp.remakeConstraints { make in
             make.bottom.equalToSuperview().offset(IPhone_TabbarSafeBottomMargin)
             make.height.equalTo(400)
@@ -205,6 +209,10 @@ class EditProfileController: ViewController {
     }
     
     func showBirthDayPickerView() {
+        UIApplication.shared.keyWindow?.endEditing(true)
+        self.hideCountryPickerView()
+        self.hideAvailablePickerView()
+        self.hidePlayAxiePickerView()
         if self.userInfoModel?.dob == nil || self.userInfoModel!.dob!.isBlank {
             self.birthdayDatePickerView!.snp.remakeConstraints { make in
                 make.bottom.equalToSuperview().offset(IPhone_TabbarSafeBottomMargin)
@@ -237,6 +245,10 @@ class EditProfileController: ViewController {
     }
 
     func showAvailablePickerView() {
+        self.hideCountryPickerView()
+        self.hideBirthdayPickerView()
+        self.hidePlayAxiePickerView()
+        UIApplication.shared.keyWindow?.endEditing(true)
         self.availablePickerView!.snp.remakeConstraints { make in
             make.bottom.equalToSuperview().offset(IPhone_TabbarSafeBottomMargin)
             make.height.equalTo(400)
@@ -282,6 +294,10 @@ class EditProfileController: ViewController {
     
     
     func showPlayAxiePickerView() {
+        self.hideCountryPickerView()
+        self.hideAvailablePickerView()
+        self.hideBirthdayPickerView()
+        UIApplication.shared.keyWindow?.endEditing(true)
         self.playAxiePickerView!.snp.remakeConstraints { make in
             make.bottom.equalToSuperview().offset(IPhone_TabbarSafeBottomMargin)
             make.height.equalTo(400)
@@ -507,18 +523,19 @@ class EditProfileController: ViewController {
     }()
     lazy var countryPickerView: GFPickerView? = {
         let tempPickerView = GFPickerView.init(frame: CGRect.zero)
+        tempPickerView.titleLabel?.text = "Country,State"
         tempPickerView.pickerView?.tag = 30001
         tempPickerView.cancelBtn?.addTarget(self, action: #selector(hideCountryPickerView), for: .touchUpInside)
         tempPickerView.okBtn?.addTarget(self, action: #selector(selectCountry), for: .touchUpInside)
         tempPickerView.pickerView?.dataSource = self
         tempPickerView.pickerView?.delegate = self
-        tempPickerView.backgroundColor = .white
         view.addSubview(tempPickerView)
         return tempPickerView
     }()
     
     lazy var birthdayDatePickerView: GFDatePickerView? = {
         let birthdayDatePickerView = GFDatePickerView.init(frame: CGRect.zero)
+        birthdayDatePickerView.titleLabel?.text = "Date of birth (yyyy-MM-dd)"
         birthdayDatePickerView.cancelBtn?.addTarget(self, action: #selector(hideBirthdayPickerView), for: .touchUpInside)
         birthdayDatePickerView.okBtn?.addTarget(self, action: #selector(selectBirthDay), for: .touchUpInside)
         birthdayDatePickerView.backgroundColor = UIColor.init(hexString: "0x30354B")
@@ -528,23 +545,25 @@ class EditProfileController: ViewController {
     
     lazy var availablePickerView: GFPickerView? = {
         let tempPickerView = GFPickerView.init(frame: CGRect.zero)
+        tempPickerView.titleLabel?.text = "Available time / day (hours)"
         tempPickerView.pickerView?.tag = 30002
         tempPickerView.cancelBtn?.addTarget(self, action: #selector(hideAvailablePickerView), for: .touchUpInside)
         tempPickerView.okBtn?.addTarget(self, action: #selector(selectAvailable), for: .touchUpInside)
         tempPickerView.pickerView?.dataSource = self
         tempPickerView.pickerView?.delegate = self
-        tempPickerView.backgroundColor = .white
+//        tempPickerView.backgroundColor = .white
         view.addSubview(tempPickerView)
         return tempPickerView
     }()
     lazy var playAxiePickerView: GFPickerView? = {
         let tempPickerView = GFPickerView.init(frame: CGRect.zero)
+        tempPickerView.titleLabel?.text = "Your experience in Axie Infinity"
         tempPickerView.pickerView?.tag = 30003
         tempPickerView.cancelBtn?.addTarget(self, action: #selector(hidePlayAxiePickerView), for: .touchUpInside)
         tempPickerView.okBtn?.addTarget(self, action: #selector(selectPlayAxie), for: .touchUpInside)
         tempPickerView.pickerView?.dataSource = self
         tempPickerView.pickerView?.delegate = self
-        tempPickerView.backgroundColor = .white
+//        tempPickerView.backgroundColor = .white
         view.addSubview(tempPickerView)
         return tempPickerView
     }()
@@ -586,12 +605,13 @@ extension  EditProfileController :UIPickerViewDataSource,UIPickerViewDelegate{
         }
         
         
-           let showLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 34))
-           showLabel.textAlignment = .center
-           showLabel.adjustsFontSizeToFitWidth = true
-           showLabel.textColor = .black
-           showLabel.text = title
-           return showLabel
+       let showLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
+       showLabel.textAlignment = .center
+       showLabel.adjustsFontSizeToFitWidth = true
+       showLabel.textColor = .white
+       showLabel.font = UIFont(name: "Avenir Next Medium", size: 15)
+       showLabel.text = title
+       return showLabel
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -813,6 +833,10 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
     
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        self.hideCountryPickerView()
+        self.hideBirthdayPickerView()
+        self.hideAvailablePickerView()
+        self.hidePlayAxiePickerView()
         if textField == self.firstnameTextField {
             self.valifyFirstName()
         }else if textField == self.lastnameTextField {
@@ -955,7 +979,7 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
             tempCell.btn.addTarget(self, action: #selector(showPictureSheet), for: .touchUpInside)
             self.idImgView = tempCell.bgImgView
             tempCell.contentView.layer.borderWidth = 1
-            tempCell.contentView.layer.borderColor = UIColor.white.cgColor
+            tempCell.contentView.layer.borderColor = UIColor(red: 0.27, green: 0.3, blue: 0.41, alpha: 1).cgColor
             if userInfoModel?.id_photo != nil {
     //            self.iconImgView.kf.setImage(with:URL.init(string: userInfoModel.avatar!))fef
                 tempCell.bgImgView.kf.setImage(with: URL.init(string: userInfoModel!.id_photo!), placeholder:nil, options: nil) {result, error in
