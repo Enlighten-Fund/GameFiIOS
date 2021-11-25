@@ -110,36 +110,43 @@ class ScholarshipDetailHeaderView: UIView {
     
     lazy var managerNameLabelView : LabelAndLabelView = {
         let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
+        tempLabelView.leftLabel.text = "Manager name"
         self.addSubview(tempLabelView)
         return tempLabelView
     }()
     lazy var creditScoreLabelView : LabelAndLabelView = {
         let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
+        tempLabelView.leftLabel.text = "Credit score"
         self.addSubview(tempLabelView)
         return tempLabelView
     }()
     lazy var accountNameLabelView : LabelAndLabelView = {
         let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
+        tempLabelView.leftLabel.text = "Account name"
         self.addSubview(tempLabelView)
         return tempLabelView
     }()
     lazy var expectedLabelView : LabelAndLabelView = {
         let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
+        tempLabelView.leftLabel.text = "Expected SLP per day"
         self.addSubview(tempLabelView)
         return tempLabelView
     }()
     lazy var scholarPerLabelView : LabelAndLabelView = {
         let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
+        tempLabelView.leftLabel.text = "Scholar's percentage"
         self.addSubview(tempLabelView)
         return tempLabelView
     }()
     lazy var offerContractLabelView : LabelAndLabelView = {
         let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
+        tempLabelView.leftLabel.text = "Offer contract days"
         self.addSubview(tempLabelView)
         return tempLabelView
     }()
     lazy var axieCountLabelView : LabelAndLabelView = {
         let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
+        tempLabelView.leftLabel.text = "Axie counts"
         self.addSubview(tempLabelView)
         return tempLabelView
     }()
@@ -150,6 +157,7 @@ class ScholarshipDetailHeaderView: UIView {
 //    }()
     lazy var securityLabelView : LabelAndLabelView = {
         let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
+        tempLabelView.leftLabel.text = "Security deposit"
         self.addSubview(tempLabelView)
         return tempLabelView
     }()

@@ -89,12 +89,18 @@ extension  ScholarDetailController : UITableViewDelegate,UITableViewDataSource{
             let attributes = [NSAttributedString.Key.font:font]
             let option = NSStringDrawingOptions.usesLineFragmentOrigin
             let size = (self.scholarDetailModel?.game_history!.boundingRect(with: CGSize.init(width: IPhone_SCREEN_WIDTH - 30, height: 10000),options: option,attributes: attributes as [NSAttributedString.Key : Any],context: nil))!
+            if size.height < 60 {
+                return 60 + 50 + 10
+            }
             return size.height + 50 + 10
         }else if indexPath.row == 1{
             let font:UIFont! = UIFont(name: "Avenir Next Regular", size: 15)
             let attributes = [NSAttributedString.Key.font:font]
             let option = NSStringDrawingOptions.usesLineFragmentOrigin
             let size = (self.scholarDetailModel?.self_intro!.boundingRect(with: CGSize.init(width: IPhone_SCREEN_WIDTH - 30, height: 10000),options: option,attributes: attributes as [NSAttributedString.Key : Any],context: nil))!
+            if size.height < 60 {
+                return 60 + 50 + 10
+            }
             return size.height + 50 + 10
         }
         return 0.01
@@ -115,6 +121,7 @@ extension  ScholarDetailController : UITableViewDelegate,UITableViewDataSource{
         cell = tableView.dequeueReusableCell(withIdentifier: emptyTableViewCellIdentifier, for: indexPath)
     }
     cell.contentView.backgroundColor = self.view.backgroundColor
+    cell.backgroundColor = self.view.backgroundColor
     return cell
    }
 }

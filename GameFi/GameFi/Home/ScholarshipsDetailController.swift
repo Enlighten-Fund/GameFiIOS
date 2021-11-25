@@ -233,6 +233,8 @@ extension  ScholarshipsDetailController : UITableViewDelegate,UITableViewDataSou
         }
     
        cell.contentView.backgroundColor = self.view.backgroundColor
+       cell.isUserInteractionEnabled = false
+       cell.contentView.isUserInteractionEnabled = false
        return cell
    }
 }
