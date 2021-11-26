@@ -33,7 +33,7 @@ PODS:
   - lottie-ios (3.2.3)
   - MCToast (0.1.0):
     - lottie-ios
-  - MJRefresh (3.7.2)
+  - MJRefresh (3.7.3)
   - SnapKit (5.0.1)
 
 DEPENDENCIES:
@@ -87,9 +87,9 @@ SPEC CHECKSUMS:
   Kingfisher: 016c8b653a35add51dd34a3aba36b580041acc74
   lottie-ios: c058aeafa76daa4cf64d773554bccc8385d0150e
   MCToast: accd8b0d4653bcd6b3b1a9770802c2358614e6a5
-  MJRefresh: 30997d30b347c8e9508a4db11e3a690da0c9b85a
+  MJRefresh: ec9c53ff4abf3a9237b4283862f1bd51c2ee3fdb
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: 4e2d10b9219ad586295a9855fa9f52b48f9f916b
+PODFILE CHECKSUM: fd18a0bc1cf816e50c987fb2d8f5b4d1984e1ab8
 
 COCOAPODS: 1.11.2

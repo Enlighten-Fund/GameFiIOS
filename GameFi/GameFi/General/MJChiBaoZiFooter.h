@@ -6,7 +6,7 @@
 //  Copyright © 2015年 小码哥. All rights reserved.
 //
 
-#import "MJRefreshAutoGifFooter.h"
+#import <MJRefresh/MJRefreshAutoGifFooter.h>
 
 @interface MJChiBaoZiFooter : MJRefreshAutoGifFooter
 

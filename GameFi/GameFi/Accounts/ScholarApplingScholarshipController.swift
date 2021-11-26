@@ -10,7 +10,6 @@ import MJRefresh
 import SnapKit
 import Foundation
 
-
 class ScholarApplingScholarshipController: UIViewController {
     var pageIndex = 1
     var dataSource : Array<Any>? = Array.init()
@@ -132,21 +131,32 @@ extension  ScholarApplingScholarshipController : UICollectionViewDelegate,UIColl
                 DispatchQueue.main.async { [self] in
                     self.collectionView.mj_footer?.endRefreshing()
                     self.collectionView.mj_header?.endRefreshing()
-                    let applicationListModel : ApplicationListModel = reponse as! ApplicationListModel
-                    if self.pageIndex == 1{
-                        self.dataSource = applicationListModel.data
-                    }else{
-                        if applicationListModel.data != nil {
-                            self.dataSource?.append(contentsOf: applicationListModel.data!)
-                        }
+                    if result.success!{
+                        let applicationListModel : ApplicationListModel = reponse as! ApplicationListModel
+                        if self.pageIndex == 1{
+                            self.dataSource = applicationListModel.data
+                            if self.dataSource!.count == 0 {
+//                                tblView.setState(.noDataAvailable(noDataImg: nil, noDataLabelTitle: nil))
+//                                let a = CollectionView.init(frame: <#T##CGRect#>, collectionViewLayout: <#T##UICollectionViewLayout#>)
+                            }
+                        }else{
+                            if applicationListModel.data != nil {
+                                self.dataSource?.append(contentsOf: applicationListModel.data!)
+                            }
 
-                    }
-                    if applicationListModel.next_page! > pageIndex {
-                        pageIndex = applicationListModel.next_page!
+                        }
+                        if applicationListModel.next_page! > pageIndex {
+                            pageIndex = applicationListModel.next_page!
+                        }else{
+                            self.collectionView.mj_footer?.endRefreshingWithNoMoreData()
+                        }
+                        self.collectionView.reloadData()
                     }else{
-                        self.collectionView.mj_footer?.endRefreshingWithNoMoreData()
+                        if  result.msg != nil && !result.msg!.isBlank {
+                            self.mc_success(result.msg!)
+                        }
                     }
-                    self.collectionView.reloadData()
+                    
                 }
         }
     }
