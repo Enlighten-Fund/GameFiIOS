@@ -9,8 +9,9 @@ import UIKit
 import MJRefresh
 import SnapKit
 import Foundation
+import EmptyKit
 
-class ScholarApplingScholarshipController: UIViewController {
+class ScholarApplingScholarshipController: UIViewController,EmptyDataSource,EmptyDelegate{
     var pageIndex = 1
     var dataSource : Array<Any>? = Array.init()
     override func viewDidLoad() {
@@ -115,6 +116,38 @@ extension  ScholarApplingScholarshipController : UICollectionViewDelegate,UIColl
 //        let scholarshipDetailVC = ScholarshipsDetailController.init(scholarshipId: scholarshipModel.scholarship_id!)
 //        appdelegate.homeVC?.navigationController!.pushViewController(scholarshipDetailVC, animated: true)
     }
+    
+    
+    func imageForEmpty(in view: UIView) -> UIImage? {
+            return UIImage(named: "nointernet")
+        }
+
+        func titleForEmpty(in view: UIView) -> NSAttributedString? {
+            let title = "no data"
+            let font = UIFont.systemFont(ofSize: 14)
+            let attributes: [NSAttributedString.Key : Any] = [.foregroundColor: UIColor.black, .font: font]
+            return NSAttributedString(string: title, attributes: attributes)
+        }
+
+    func buttonTitleForEmpty(forState state: UIControl.State, in view: UIView) -> NSAttributedString? {
+            let title = "click me"
+            let font = UIFont.systemFont(ofSize: 17)
+        let attributes: [NSAttributedString.Key : Any] = [.foregroundColor: UIColor.white, .font: font]
+            return NSAttributedString(string: title, attributes: attributes)
+        }
+
+        func buttonBackgroundColorForEmpty(in view: UIView) -> UIColor {
+            return UIColor.blue
+        }
+    
+    func emptyButton(_ button: UIButton, didTappedIn view: UIView) {
+            print( #function, #line, type(of: self))
+        }
+
+        func emptyView(_ emptyView: UIView, didTapppedIn view: UIView) {
+            print( #function, #line, type(of: self))
+        }
+    
 
     //#MARK: --请求
     func refreshHttpRequest() {
@@ -136,8 +169,9 @@ extension  ScholarApplingScholarshipController : UICollectionViewDelegate,UIColl
                         if self.pageIndex == 1{
                             self.dataSource = applicationListModel.data
                             if self.dataSource!.count == 0 {
-//                                tblView.setState(.noDataAvailable(noDataImg: nil, noDataLabelTitle: nil))
-//                                let a = CollectionView.init(frame: <#T##CGRect#>, collectionViewLayout: <#T##UICollectionViewLayout#>)
+//                                self.collectionView.ept.reloadData()
+//                                collectionView.ept.dataSource = self
+//                                collectionView.ept.delegate = self
                             }
                         }else{
                             if applicationListModel.data != nil {

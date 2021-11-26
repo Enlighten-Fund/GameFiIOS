@@ -114,6 +114,7 @@ class LoginController: ViewController {
     
     //登录
     @objc func loginBtnClick(){
+        UIApplication.shared.keyWindow?.endEditing(true)
         if !self.valifyAccount() {
             return
         }
@@ -126,6 +127,11 @@ class LoginController: ViewController {
                 self.mc_remove()
                 if let error = error  {
                     print("\(error)")
+                    GFAlert.showAlert(titleStr: "Notice:", msgStr: "\(error)", currentVC: self, cancelBtn: "OK", cancelHandler: { action in
+                        
+                    }, otherBtns: nil) { index in
+                        
+                    }
 //                    SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")
                 } else if let signInResult = signInResult {
                     switch (signInResult.signInState) {
