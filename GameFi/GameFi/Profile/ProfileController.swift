@@ -274,6 +274,8 @@ extension  ProfileController : UITableViewDelegate,UITableViewDataSource{
                             if let error = error  {
                                 print("\(error.localizedDescription)")
                             }else{
+                                Usermodel.shared.token = nil
+                                Usermodel.shared.gfrole = nil
                                 self.navigationController?.popViewController(animated: true)
                                
                             }

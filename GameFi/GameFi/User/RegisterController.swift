@@ -127,7 +127,7 @@ class RegisterController: ViewController {
             self.updateTextField(textField: self.passwordTextField!, focus: false)
             return true
         }else{
-            self.showNoticeLabel(notice: "Your password format is incorrect")
+            self.showNoticeLabel(notice: "Password must be at least 8 characters and contain letters and numbers.")
             self.updateTextField(textField: self.passwordTextField!, focus: true)
             return false
         }
@@ -261,14 +261,9 @@ class RegisterController: ViewController {
                                         print("User is signed in.")
                                         UserManager.sharedInstance.updateToken {
                                             UserManager.sharedInstance.updateRole(role: String(self.role)){
-                                                NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: CHANGEROLE_NOFI), object: String(self.role))
                                                 DispatchQueue.main.async {
                                                     GFAlert.showAlert(titleStr: "Notice:", msgStr: "Sign up successfully", currentVC: self, cancelBtn: "OK", cancelHandler: { alertion in
-                                                        DispatchQueue.main.async {
-                                                            self.navigationController?.dismiss(animated: true, completion: {
-                                                                
-                                                            })
-                                                        }
+                                                        NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: CHANGEROLE_NOFI), object: String(self.role))
                                                     }, otherBtns: nil) { index in
                                                         
                                                     }

@@ -233,7 +233,7 @@ class ScholarRentCell: UICollectionViewCell {
     lazy var accountLabel : UILabel = {
         let tempLabel = UILabel.init(frame: CGRect.zero)
         tempLabel.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
-        tempLabel.font = UIFont.systemFont(ofSize: 13)
+        tempLabel.font = UIFont.systemFont(ofSize: 16)
         tempLabel.textAlignment = .center
         self.contentView.addSubview(tempLabel)
         return tempLabel
@@ -242,7 +242,7 @@ class ScholarRentCell: UICollectionViewCell {
     lazy var creditLabel : UILabel = {
         let tempLabel = UILabel.init(frame: CGRect.zero)
         tempLabel.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
-        tempLabel.font = UIFont.systemFont(ofSize: 12)
+        tempLabel.font = UIFont.systemFont(ofSize: 14)
         tempLabel.textAlignment = .center
         self.contentView.addSubview(tempLabel)
         return tempLabel

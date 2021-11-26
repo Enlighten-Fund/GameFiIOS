@@ -186,15 +186,6 @@ class AddScholarshipController: ViewController {
             self.updateTextField(textField: self.passwordTextField!, focus: true)
             return false
         }
-        var temp = false
-        if self.passwordTextField!.validatePassword() {
-            temp = true
-        }
-        if !temp {
-            self.showNoticeLabel(notice: "The password shall be at least 6 digits in length and shall contain at least two of letters, numbers and symbols")
-            self.updateTextField(textField: self.passwordTextField!, focus: true)
-            return false
-        }
         self.hideNoticeLabel()
         self.updateTextField(textField: self.passwordTextField!, focus: false)
         return true
