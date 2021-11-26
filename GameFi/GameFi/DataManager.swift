@@ -6,8 +6,8 @@ import Amplify
 typealias CompleteBlock = (GFResult,Any) -> Void
  
 //let BaseUrl = "http://a2a7cb64ab5d94072bc625bdedd3f7ff-1103167960.ap-northeast-1.elb.amazonaws.com/v2/"
-let BaseUrl = "https://ykdrpt5lig.execute-api.ap-northeast-1.amazonaws.com/v2/"
-//let BaseUrl = "https://api.cyberninja.xyz/v2/scholarship/list_by_marketplace/v2/"
+//let BaseUrl = "https://ykdrpt5lig.execute-api.ap-northeast-1.amazonaws.com/v2/"
+let BaseUrl = "https://api.cyberninja.xyz/v2/"
 let jkver = "1.0"
 
 
@@ -79,7 +79,7 @@ class DataManager: NSObject {
             }
             let request = AF.request(urlPath,method: .post,parameters: tempDic,encoding: JSONEncoding.default, headers: headers)
             request.responseJSON { (response) in
-                print("请求:\(url)\n入参:\(tempDic)\n返回:\(response.result)")
+                print("请求:\(BaseUrl + url)\nheader:\(headers)\n入参:\(tempDic)\n返回:\(response.result)")
                 switch response.result {
                 case let .success(result):
                     do {
@@ -89,7 +89,7 @@ class DataManager: NSObject {
                         
                     }
                 case let .failure(error):
-                    print(error)
+                    debugPrint(error)
                     let result = GFResult.init(error: error)
                     completeBlock(result,error)
                 }

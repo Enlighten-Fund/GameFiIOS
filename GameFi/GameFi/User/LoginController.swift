@@ -145,8 +145,12 @@ class LoginController: ViewController {
 //                                            self.loginSuccessBlock!()
 //                                        }
                                         NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: CHANGEROLE_NOFI), object: String(UserManager.sharedInstance.currentRole()))
+                                        self.navigationController?.dismiss(animated: true, completion: {
+                                            
+                                        })
+
                                     }, otherBtns: nil) { index in
-                                        
+
                                     }
                                 }
                             }

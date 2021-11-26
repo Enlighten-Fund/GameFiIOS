@@ -193,6 +193,7 @@ class RegisterController: ViewController {
                    }
                } else if let error = error {
                    if let error = error as? AWSMobileClientError {
+                        debugPrint("\(error)")
                        switch(error) {
                        case .usernameExists(let message):
                            print(message)
@@ -264,8 +265,11 @@ class RegisterController: ViewController {
                                                 DispatchQueue.main.async {
                                                     GFAlert.showAlert(titleStr: "Notice:", msgStr: "Sign up successfully", currentVC: self, cancelBtn: "OK", cancelHandler: { alertion in
                                                         NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: CHANGEROLE_NOFI), object: String(self.role))
+                                                        self.navigationController?.dismiss(animated: true, completion: {
+                                                            
+                                                        })
                                                     }, otherBtns: nil) { index in
-                                                        
+
                                                     }
                                                 }
                                             }

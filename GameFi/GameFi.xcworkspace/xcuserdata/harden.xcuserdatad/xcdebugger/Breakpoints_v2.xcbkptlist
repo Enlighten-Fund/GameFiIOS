@@ -48,5 +48,53 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8F27DFE6-F4CF-46AE-B60A-D922F9E5EEC9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GameFi/User/LoginController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
+            landmarkName = "loginBtnClick()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "8F27DFE6-F4CF-46AE-B60A-D922F9E5EEC9 - 9b4176221092be26"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.UIAlertAction) -&gt; () in closure #1 () -&gt; () in closure #1 () -&gt; () in closure #3 () -&gt; () in closure #1 () -&gt; () in closure #1 (Swift.Optional&lt;AWSMobileClient.SignInResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in GameFi.LoginController.loginBtnClick() -&gt; ()"
+                  moduleName = "GameFi"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/harden/Desktop/GameFiIOS/GameFi/GameFi/User/LoginController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "152"
+                  endingLineNumber = "152"
+                  offsetFromSymbolStart = "809">
+               </Location>
+               <Location
+                  uuid = "8F27DFE6-F4CF-46AE-B60A-D922F9E5EEC9 - c7f6674226f36782"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Int) -&gt; () in closure #1 () -&gt; () in closure #1 () -&gt; () in closure #3 () -&gt; () in closure #1 () -&gt; () in closure #1 (Swift.Optional&lt;AWSMobileClient.SignInResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in GameFi.LoginController.loginBtnClick() -&gt; ()"
+                  moduleName = "GameFi"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/harden/Desktop/GameFiIOS/GameFi/GameFi/User/LoginController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "154"
+                  endingLineNumber = "154"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

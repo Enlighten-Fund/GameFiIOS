@@ -147,20 +147,23 @@ extension  ScholarRentScholarshipController : UICollectionViewDelegate,UICollect
                 DispatchQueue.main.async { [self] in
                     self.collectionView.mj_footer?.endRefreshing()
                     self.collectionView.mj_header?.endRefreshing()
-                    let scholarshipListModel : ScholarshipListModel = reponse as! ScholarshipListModel
-                    if self.pageIndex == 1{
-                        self.dataSource = scholarshipListModel.data
-                    }else{
-                        if scholarshipListModel.data != nil {
-                            self.dataSource?.append(contentsOf: scholarshipListModel.data!)
+                    if result.success!{
+                        let scholarshipListModel : ScholarshipListModel = reponse as! ScholarshipListModel
+                        if self.pageIndex == 1{
+                            self.dataSource = scholarshipListModel.data
+                        }else{
+                            if scholarshipListModel.data != nil {
+                                self.dataSource?.append(contentsOf: scholarshipListModel.data!)
+                            }
                         }
+                        if scholarshipListModel.next_page! > pageIndex {
+                            pageIndex = scholarshipListModel.next_page!
+                        }else{
+                            self.collectionView.mj_footer?.endRefreshingWithNoMoreData()
+                        }
+                        self.collectionView.reloadData()
                     }
-                    if scholarshipListModel.next_page! > pageIndex {
-                        pageIndex = scholarshipListModel.next_page!
-                    }else{
-                        self.collectionView.mj_footer?.endRefreshingWithNoMoreData()
-                    }
-                    self.collectionView.reloadData()
+                    
                 }
         }
     }

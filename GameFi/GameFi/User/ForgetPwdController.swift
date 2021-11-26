@@ -194,8 +194,11 @@ class ForgetPwdController: ViewController {
                                                 DispatchQueue.main.async {
                                                     GFAlert.showAlert(titleStr: "Notice:", msgStr: "Password changed successfully", currentVC: self, cancelBtn: "OK", cancelHandler: { alertion in
                                                         NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: CHANGEROLE_NOFI), object: String(UserManager.sharedInstance.currentRole()))
+                                                        self.navigationController?.dismiss(animated: true, completion: {
+                                                            
+                                                        })
                                                     }, otherBtns: nil) { index in
-                                                        
+
                                                     }
                                                 }
                                             }
