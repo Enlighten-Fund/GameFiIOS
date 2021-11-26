@@ -138,15 +138,15 @@ class LoginController: ViewController {
                     case .signedIn:
                         print("User is signed in.")
                         UserManager.sharedInstance.updateToken {
-                            DispatchQueue.main.async {
-                                self.mc_success("login success", duration: 0.5) {
-                                    self.dismiss(animated: true) {
-                                        UserManager.sharedInstance.fetchRoleBlock = {
-                                            if self.loginSuccessBlock != nil{
-                                                self.loginSuccessBlock!()
-                                            }
+                            UserManager.sharedInstance.fetchAndUpdateRole {
+                                NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: CHANGEROLE_NOFI), object: String(UserManager.sharedInstance.currentRole()))
+                                DispatchQueue.main.async {
+                                    GFAlert.showAlert(titleStr: "Notice:", msgStr: "Sign in success", currentVC: self, cancelBtn: "OK", cancelHandler: { alertion in
+                                        if self.loginSuccessBlock != nil{
+                                            self.loginSuccessBlock!()
                                         }
-                                        UserManager.sharedInstance.fetchAndUpdateRole()
+                                    }, otherBtns: nil) { index in
+                                        
                                     }
                                 }
                             }

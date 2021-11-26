@@ -76,8 +76,9 @@ class ProfileController: ViewController {
         GFAlert.showAlert(titleStr: "Notice:", msgStr: notiMsg, currentVC: self, cancelHandler: { aletAction in
             
         }, otherBtns: ["YES"]) { idex in
-            UserManager.sharedInstance.updateRole(role: torole)
-            NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: CHANGEROLE_NOFI), object: nil)
+            UserManager.sharedInstance.updateRole(role: torole){
+                NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: CHANGEROLE_NOFI), object: torole)
+            }
         }
     }
     

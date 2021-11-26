@@ -34,60 +34,63 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
     
     /// 接受到通知后的方法回调
     @objc private func changeRole(noti: Notification) {
-        let currentRole = UserManager.sharedInstance.currentRole()
-        if currentRole == 1 {
-            let tabBarController = ESTabBarController()
-            tabBarController.tabBar.barTintColor = UIColor(red: 0.13, green: 0.14, blue: 0.2, alpha: 1)
-            tabBarController.delegate = self
-            let v1 = HomeController()
-            let v2 = ScholarAccountsController()
-            let v3 = TrackController()
-            let v4 = ProfileGuestController()
-            self.homeVC = v1
-            v1.tabBarItem = ESTabBarItem.init(title: "Tavern", image: UIImage(named: "explore"), selectedImage: UIImage(named: "explore_select"))
-            v2.tabBarItem = ESTabBarItem.init(title: "Accounts", image: UIImage(named: "accounts"), selectedImage: UIImage(named: "accounts_select"))
-            v3.tabBarItem = ESTabBarItem.init(title: "Tracker", image: UIImage(named: "tracker"), selectedImage: UIImage(named: "tracker_select"))
-            v4.tabBarItem = ESTabBarItem.init(title: "Profile", image: UIImage(named: "profile"), selectedImage: UIImage(named: "profile_select"))
-            
-            let n1 = GFNavController.init(rootViewController: v1)
-            let n2 = GFNavController.init(rootViewController: v2)
-            let n3 = GFNavController.init(rootViewController: v3)
-            let n4 = GFNavController.init(rootViewController: v4)
-            
-            v1.title = "Tavern"
-            v2.title = "Accounts"
-            v3.title = "Tracker"
-            v4.title = "Profile"
-            tabBarController.viewControllers = [n1, n2, n3, n4]
-            self.tabbarVC = tabBarController
-            self.window?.rootViewController = self.tabbarVC
-        }else if currentRole == 2{
-            let tabBarController = ESTabBarController()
-            tabBarController.tabBar.barTintColor = UIColor(red: 0.13, green: 0.14, blue: 0.2, alpha: 1)
-            tabBarController.delegate = self
-            let v1 = HomeController()
-            let v2 = ManagerAccountsController()
-            let v3 = TrackController()
-            let v4 = ProfileGuestController()
-            self.homeVC = v1
-            v1.tabBarItem = ESTabBarItem.init(title: "Tavern", image: UIImage(named: "explore"), selectedImage: UIImage(named: "explore_select"))
-            v2.tabBarItem = ESTabBarItem.init(title: "Accounts", image: UIImage(named: "accounts"), selectedImage: UIImage(named: "accounts_select"))
-            v3.tabBarItem = ESTabBarItem.init(title: "Tracker", image: UIImage(named: "tracker"), selectedImage: UIImage(named: "tracker_select"))
-            v4.tabBarItem = ESTabBarItem.init(title: "Profile", image: UIImage(named: "profile"), selectedImage: UIImage(named: "profile_select"))
-            
-            let n1 = GFNavController.init(rootViewController: v1)
-            let n2 = GFNavController.init(rootViewController: v2)
-            let n3 = GFNavController.init(rootViewController: v3)
-            let n4 = GFNavController.init(rootViewController: v4)
-            
-            v1.title = "Tavern"
-            v2.title = "Accounts"
-            v3.title = "Tracker"
-            v4.title = "Profile"
-            tabBarController.viewControllers = [n1, n2, n3, n4]
-            self.tabbarVC = tabBarController
-            self.window?.rootViewController = self.tabbarVC
+        DispatchQueue.main.async {
+            let str = noti.object as! String
+            if str == "1" {
+                let tabBarController = ESTabBarController()
+                tabBarController.tabBar.barTintColor = UIColor(red: 0.13, green: 0.14, blue: 0.2, alpha: 1)
+                tabBarController.delegate = self
+                let v1 = HomeController()
+                let v2 = ScholarAccountsController()
+                let v3 = TrackController()
+                let v4 = ProfileGuestController()
+                self.homeVC = v1
+                v1.tabBarItem = ESTabBarItem.init(title: "Tavern", image: UIImage(named: "explore"), selectedImage: UIImage(named: "explore_select"))
+                v2.tabBarItem = ESTabBarItem.init(title: "Accounts", image: UIImage(named: "accounts"), selectedImage: UIImage(named: "accounts_select"))
+                v3.tabBarItem = ESTabBarItem.init(title: "Tracker", image: UIImage(named: "tracker"), selectedImage: UIImage(named: "tracker_select"))
+                v4.tabBarItem = ESTabBarItem.init(title: "Profile", image: UIImage(named: "profile"), selectedImage: UIImage(named: "profile_select"))
+                
+                let n1 = GFNavController.init(rootViewController: v1)
+                let n2 = GFNavController.init(rootViewController: v2)
+                let n3 = GFNavController.init(rootViewController: v3)
+                let n4 = GFNavController.init(rootViewController: v4)
+                
+                v1.title = "Tavern"
+                v2.title = "Accounts"
+                v3.title = "Tracker"
+                v4.title = "Profile"
+                tabBarController.viewControllers = [n1, n2, n3, n4]
+                self.tabbarVC = tabBarController
+                self.window?.rootViewController = self.tabbarVC
+            }else if str == "2"{
+                let tabBarController = ESTabBarController()
+                tabBarController.tabBar.barTintColor = UIColor(red: 0.13, green: 0.14, blue: 0.2, alpha: 1)
+                tabBarController.delegate = self
+                let v1 = HomeController()
+                let v2 = ManagerAccountsController()
+                let v3 = TrackController()
+                let v4 = ProfileGuestController()
+                self.homeVC = v1
+                v1.tabBarItem = ESTabBarItem.init(title: "Tavern", image: UIImage(named: "explore"), selectedImage: UIImage(named: "explore_select"))
+                v2.tabBarItem = ESTabBarItem.init(title: "Accounts", image: UIImage(named: "accounts"), selectedImage: UIImage(named: "accounts_select"))
+                v3.tabBarItem = ESTabBarItem.init(title: "Tracker", image: UIImage(named: "tracker"), selectedImage: UIImage(named: "tracker_select"))
+                v4.tabBarItem = ESTabBarItem.init(title: "Profile", image: UIImage(named: "profile"), selectedImage: UIImage(named: "profile_select"))
+                
+                let n1 = GFNavController.init(rootViewController: v1)
+                let n2 = GFNavController.init(rootViewController: v2)
+                let n3 = GFNavController.init(rootViewController: v3)
+                let n4 = GFNavController.init(rootViewController: v4)
+                
+                v1.title = "Tavern"
+                v2.title = "Accounts"
+                v3.title = "Tracker"
+                v4.title = "Profile"
+                tabBarController.viewControllers = [n1, n2, n3, n4]
+                self.tabbarVC = tabBarController
+                self.window?.rootViewController = self.tabbarVC
+            }
         }
+        
     }
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
@@ -123,7 +126,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
             Amplify.Logging.logLevel = .verbose
             try Amplify.add(plugin: AWSCognitoAuthPlugin())
             try Amplify.configure()
-            UserManager.sharedInstance.fetchAndUpdateRole()
+            UserManager.sharedInstance.fetchAndUpdateRole {
+                
+            }
             UserManager.sharedInstance.updateToken {
                 DataManager.sharedInstance.fetchUserDetailinfo { result, reponse in
                     

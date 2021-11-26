@@ -259,11 +259,18 @@ class RegisterController: ViewController {
                                     switch (signInResult.signInState) {
                                     case .signedIn:
                                         print("User is signed in.")
-                                        DispatchQueue.main.async {
-                                            UserManager.sharedInstance.updateToken {
-                                                self.mc_success("注册成功", duration: 0.2) {
-                                                    self.dismiss(animated: true) {
-                                                        UserManager.sharedInstance.updateRole(role: String(self.role))
+                                        UserManager.sharedInstance.updateToken {
+                                            UserManager.sharedInstance.updateRole(role: String(self.role)){
+                                                NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: CHANGEROLE_NOFI), object: String(self.role))
+                                                DispatchQueue.main.async {
+                                                    GFAlert.showAlert(titleStr: "Notice:", msgStr: "Sign up successfully", currentVC: self, cancelBtn: "OK", cancelHandler: { alertion in
+                                                        DispatchQueue.main.async {
+                                                            self.navigationController?.dismiss(animated: true, completion: {
+                                                                
+                                                            })
+                                                        }
+                                                    }, otherBtns: nil) { index in
+                                                        
                                                     }
                                                 }
                                             }

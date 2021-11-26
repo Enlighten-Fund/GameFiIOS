@@ -103,8 +103,9 @@ class ScholarshipsDetailController: ViewController {
             GFAlert.showAlert(titleStr: "Notice:", msgStr: "Please switch your role to a scholar", currentVC: self, cancelHandler: { aletAction in
                 
             }, otherBtns: ["YES"]) { idex in
-                UserManager.sharedInstance.updateRole(role: "1")
-                NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: CHANGEROLE_NOFI), object: nil)
+                UserManager.sharedInstance.updateRole(role: "1"){
+                    NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: CHANGEROLE_NOFI), object: "1")
+                }
             }
         }
         

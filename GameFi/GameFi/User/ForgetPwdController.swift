@@ -189,13 +189,19 @@ class ForgetPwdController: ViewController {
                                 } else if let signInResult = signInResult {
                                     switch (signInResult.signInState) {
                                     case .signedIn:
-                                        DispatchQueue.main.async {
-                                            UserManager.sharedInstance.updateToken {
-                                                UserManager.sharedInstance.fetchAndUpdateRole()
+                                        UserManager.sharedInstance.updateToken {
+                                            UserManager.sharedInstance.fetchAndUpdateRole {
+                                                NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: CHANGEROLE_NOFI), object: String(UserManager.sharedInstance.currentRole()))
                                                 DispatchQueue.main.async {
-                                                    self.navigationController?.dismiss(animated: true, completion: {
+                                                    GFAlert.showAlert(titleStr: "Notice:", msgStr: "Password changed successfully", currentVC: self, cancelBtn: "OK", cancelHandler: { alertion in
+                                                        DispatchQueue.main.async {
+                                                            self.navigationController?.dismiss(animated: true, completion: {
+                                                                
+                                                            })
+                                                        }
+                                                    }, otherBtns: nil) { index in
                                                         
-                                                    })
+                                                    }
                                                 }
                                             }
                                         }

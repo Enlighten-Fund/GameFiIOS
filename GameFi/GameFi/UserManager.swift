@@ -10,8 +10,6 @@ import AWSMobileClient
 typealias CommonEmptyBlock = ()->Void
 class UserManager: NSObject {
     var userinfoModel : UserInfoModel?
-    var fetchRoleBlock : CommonEmptyBlock?
-//    var fetchTokenBlock : CommonEmptyBlock?
     static let sharedInstance = UserManager()
     private override init() {}
     
@@ -28,7 +26,7 @@ class UserManager: NSObject {
         return 0
     }
     //更新role aws服务器，本地缓存，内存
-    func updateRole(role:String) {
+    func updateRole(role:String,block:@escaping CommonEmptyBlock) {
         if role.isEmpty {
             return
         }
@@ -37,13 +35,14 @@ class UserManager: NSObject {
             if let error = error  {
                 print("\(error.localizedDescription)")
             }
+            block()
         }
     }
     //从AWS查询role 并更新本地缓存，内存，查询成功后回调block
-    func fetchAndUpdateRole()  {
-        AWSMobileClient.default().getUserAttributes { [self]attributes, error in
+    func fetchAndUpdateRole(block:@escaping CommonEmptyBlock)  {
+        AWSMobileClient.default().getUserAttributes { attributes, error in
             if(error != nil){
-                print("ERROR: \(error)")
+                debugPrint(error as Any)
             }else{
                 if let attributesDict = attributes{
                     if attributesDict["custom:gfrole"] != nil {
@@ -51,9 +50,7 @@ class UserManager: NSObject {
                     }
                 }
             }
-            if self.fetchRoleBlock != nil{
-                self.fetchRoleBlock!()
-            }
+            block()
         }
     }
     
@@ -65,14 +62,14 @@ class UserManager: NSObject {
         return true
     }
     //login register forgetpassword时  把token保存在本地
-    func updateToken(updateTokenBlock:@escaping CommonEmptyBlock){
-        AWSMobileClient.default().getTokens { [self] tokens, error in
+    func updateToken(block:@escaping CommonEmptyBlock){
+        AWSMobileClient.default().getTokens {  tokens, error in
             if let error = error {
                 print("Error getting token \(error.localizedDescription)")
             } else if let tokens = tokens {
                 Usermodel.shared.token = tokens.accessToken!.tokenString!
-                updateTokenBlock()
             }
+            block()
         }
     }
 }
