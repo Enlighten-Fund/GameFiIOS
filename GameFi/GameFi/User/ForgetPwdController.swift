@@ -122,6 +122,13 @@ class ForgetPwdController: ViewController {
         }
     }
     
+    func updateCodeBtnToResend() {
+        DispatchQueue.main.async {
+            self.codeBtn?.isEnabled = true
+            self.codeBtn?.setTitle("Resend code", for: .normal)
+        }
+    }
+    
     @objc func codeBtnClick(btn:UIButton) {
         self.emailTextField?.resignFirstResponder()
         self.passwordTextField?.resignFirstResponder()
@@ -139,24 +146,56 @@ class ForgetPwdController: ViewController {
             btn.isEnabled = false
         }
         mc_loading()
-        AWSMobileClient.default().forgotPassword(username: (self.emailTextField?.text)!) { (forgotPasswordResult, error) in
-            self.mc_remove()
-            if let forgotPasswordResult = forgotPasswordResult {
-                switch(forgotPasswordResult.forgotPasswordState) {
-                case .confirmationCodeSent:
-                    self.fireTimerAndShowAlert(title: "A verification code has been sent via \(forgotPasswordResult.codeDeliveryDetails!.deliveryMedium) at \(forgotPasswordResult.codeDeliveryDetails!.destination!)")
-                default:
-                    print("Error: Invalid case.")
-                }
-            } else if let error = error {
-                GFAlert.showAlert(titleStr: "Forgot password fail:", msgStr: "\(error.localizedDescription)", currentVC: self, cancelStr: "OK", cancelHandler: { alertAction in
-                    
-                }, otherBtns:nil) { indx in
-                    
+        if btn.title(for: .normal) == "Resend code" {
+            DispatchQueue.main.async {
+                AWSMobileClient.default().resendSignUpCode(username: self.emailTextField!.text!, completionHandler: { (result, error) in
+                    self.mc_remove()
+                    if let signUpResult = result {
+                        self.fireTimerAndShowAlert(title: "A verification code has been sent via \(signUpResult.codeDeliveryDetails!.deliveryMedium) at \(signUpResult.codeDeliveryDetails!.destination!)")
+                    } else if let error = error {
+                        debugPrint("\(error)")
+                        DispatchQueue.main.async { [self] in
+                            GFAlert.showAlert(titleStr: "Resend code fail:", msgStr: "\(error.localizedDescription)", currentVC: self, cancelStr: "Cancel", cancelHandler: { alertAction in
+                                
+                            }, otherBtns:nil) { indx in
+                                
+                            }
+                        }
+                    }
+                })
+            }
+
+        }else{
+            AWSMobileClient.default().forgotPassword(username: (self.emailTextField?.text)!) { (forgotPasswordResult, error) in
+                self.mc_remove()
+                if let forgotPasswordResult = forgotPasswordResult {
+                    switch(forgotPasswordResult.forgotPasswordState) {
+                    case .confirmationCodeSent:
+                        self.fireTimerAndShowAlert(title: "A verification code has been sent via \(forgotPasswordResult.codeDeliveryDetails!.deliveryMedium) at \(forgotPasswordResult.codeDeliveryDetails!.destination!)")
+                    default:
+                        print("Error: Invalid case.")
+                    }
+                } else if let error = error {
+                    self.stopTimerAndUpdateCodeBtn()
+                       if let error = error as? AWSMobileClientError {
+                            debugPrint("\(error)")
+                           switch(error) {
+                           case .usernameExists(_):
+                            DispatchQueue.main.async { [self] in
+                                GFAlert.showAlert(titleStr: "Sign up fail:", msgStr: "Username has already been taken. Please choose another.", currentVC: self, cancelStr: "OK", cancelHandler: { alertAction in
+                                    
+                                }, otherBtns:nil) { indx in
+                                    
+                                }
+                            }
+                           default:
+                            break
+                           }
+                       }
+                   }
                 }
             }
         }
-    }
     
    
     
@@ -224,13 +263,36 @@ class ForgetPwdController: ViewController {
                     }
                 } else if let error = error {
                     self.mc_remove()
-                    DispatchQueue.main.async {
-                        GFAlert.showAlert(titleStr: "Confirm forgot password:", msgStr: "\(error.localizedDescription)", currentVC: self, cancelStr: "OK", cancelHandler: { alertAction in
-                            
-                        }, otherBtns:nil) { indx in
-                            
+                    self.stopTimerAndUpdateCodeBtn()
+                    if let error = error as? AWSMobileClientError {
+                         debugPrint("\(error)")
+                        switch(error) {
+                        case .aliasExists(_):
+                         DispatchQueue.main.async { [self] in
+                             GFAlert.showAlert(titleStr: "Sign up fail:", msgStr: "Email has already been taken. Please choose another.", currentVC: self, cancelStr: "OK", cancelHandler: { alertAction in
+                                 
+                             }, otherBtns:nil) { indx in
+                                 
+                             }
+                         }
+                        case .expiredCode(let message):
+                        DispatchQueue.main.async { [self] in
+                            GFAlert.showAlert(titleStr: "Sign up fail:", msgStr: message, currentVC: self, cancelStr: "OK", cancelHandler: { alertAction in
+                                self.updateCodeBtnToResend()
+                            }, otherBtns:nil) { indx in
+                                
+                            }
                         }
-                        self.stopTimerAndUpdateCodeBtn()
+                        default:
+                            DispatchQueue.main.async { [self] in
+                                GFAlert.showAlert(titleStr: "Sign up fail:", msgStr: "Please contact us", currentVC: self, cancelStr: "OK", cancelHandler: { alertAction in
+                                    
+                                }, otherBtns:nil) { indx in
+                                    
+                                }
+                            }
+                            break
+                        }
                     }
                     
                 }

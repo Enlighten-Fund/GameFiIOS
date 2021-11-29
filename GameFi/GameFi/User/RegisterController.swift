@@ -90,6 +90,13 @@ class RegisterController: ViewController {
         }
     }
     
+    func updateCodeBtnToResend() {
+        DispatchQueue.main.async {
+            self.codeBtn?.isEnabled = true
+            self.codeBtn?.setTitle("Resend code", for: .normal)
+        }
+    }
+    
     
     func valifyEmail() -> Bool {
         if self.emailTextField!.text == nil || self.emailTextField!.text!.isBlank {
@@ -178,56 +185,63 @@ class RegisterController: ViewController {
             btn.isEnabled = false
         }
         mc_loading()
-        AWSMobileClient.default().signUp(username: (self.usernameTextField?.text)!, password: self.passwordTextField!.text!,userAttributes: ["email":self.emailTextField!.text!]) { signUpResult, error in
-            self.mc_remove()
-            if let signUpResult = signUpResult {
-                   switch(signUpResult.signUpConfirmationState) {
-                   case .confirmed:
-                    DispatchQueue.main.async { [self] in
-                        GFAlert.showAlert(titleStr: "Send code fail:", msgStr: "User is signed up and confirmed.", currentVC: self, cancelStr: "OK", cancelHandler: { alertAction in
-                        }, otherBtns:nil) { indx in
-                        }
-                    }
-                   case .unconfirmed:
-                    self.fireTimerAndShowAlert(title: "A verification code has been sent via \(signUpResult.codeDeliveryDetails!.deliveryMedium) at \(signUpResult.codeDeliveryDetails!.destination!)")
-                   case .unknown:
-                       print("Unexpected case")
-                   }
-               } else if let error = error {
-                   if let error = error as? AWSMobileClientError {
+        if btn.title(for: .normal) == "Resend code" {
+            DispatchQueue.main.async {
+                AWSMobileClient.default().resendSignUpCode(username: self.usernameTextField!.text!, completionHandler: { (result, error) in
+                    self.mc_remove()
+                    if let signUpResult = result {
+                        self.fireTimerAndShowAlert(title: "A verification code has been sent via \(signUpResult.codeDeliveryDetails!.deliveryMedium) at \(signUpResult.codeDeliveryDetails!.destination!)")
+                    } else if let error = error {
                         debugPrint("\(error)")
                         DispatchQueue.main.async { [self] in
-                            GFAlert.showAlert(titleStr: "Sign up fail:", msgStr: "\(error.localizedDescription)", currentVC: self, cancelStr: "OK", cancelHandler: { alertAction in
+                            GFAlert.showAlert(titleStr: "Resend code fail:", msgStr: "\(error.localizedDescription)", currentVC: self, cancelStr: "Cancel", cancelHandler: { alertAction in
                                 
                             }, otherBtns:nil) { indx in
                                 
                             }
                         }
-                       switch(error) {
-                       case .usernameExists(let message):
-                           print(message)
-                        DispatchQueue.main.async {
-                            AWSMobileClient.default().resendSignUpCode(username: self.usernameTextField!.text!, completionHandler: { (result, error) in
-                                if let signUpResult = result {
-                                    self.fireTimerAndShowAlert(title: "A verification code has been sent via \(signUpResult.codeDeliveryDetails!.deliveryMedium) at \(signUpResult.codeDeliveryDetails!.destination!)")
-                                } else if let error = error {
-                                    DispatchQueue.main.async { [self] in
-                                        GFAlert.showAlert(titleStr: "Resend code fail:", msgStr: "\(error.localizedDescription)", currentVC: self, cancelStr: "Cancel", cancelHandler: { alertAction in
-                                            
-                                        }, otherBtns:nil) { indx in
-                                            
-                                        }
-                                    }
-                                }
-                            })
+                    }
+                })
+            }
+
+        }else{
+            AWSMobileClient.default().signUp(username: (self.usernameTextField?.text)!, password: self.passwordTextField!.text!,userAttributes: ["email":self.emailTextField!.text!]) { signUpResult, error in
+                self.mc_remove()
+                if let signUpResult = signUpResult {
+                       switch(signUpResult.signUpConfirmationState) {
+                       case .confirmed:
+                        DispatchQueue.main.async { [self] in
+                            GFAlert.showAlert(titleStr: "Send code fail:", msgStr: "User is signed up and confirmed.", currentVC: self, cancelStr: "OK", cancelHandler: { alertAction in
+                            }, otherBtns:nil) { indx in
+                            }
                         }
-                       default:
-                           break
+                       case .unconfirmed:
+                        self.fireTimerAndShowAlert(title: "A verification code has been sent via \(signUpResult.codeDeliveryDetails!.deliveryMedium) at \(signUpResult.codeDeliveryDetails!.destination!)")
+                       case .unknown:
+                           print("Unexpected case")
+                       }
+                   } else if let error = error {
+                    self.stopTimerAndUpdateCodeBtn()
+                       if let error = error as? AWSMobileClientError {
+                            debugPrint("\(error)")
+                           switch(error) {
+                           case .usernameExists(_):
+                            DispatchQueue.main.async { [self] in
+                                GFAlert.showAlert(titleStr: "Sign up fail:", msgStr: "Username has already been taken. Please choose another.", currentVC: self, cancelStr: "OK", cancelHandler: { alertAction in
+                                    
+                                }, otherBtns:nil) { indx in
+                                    
+                                }
+                            }
+                           default:
+                            break
+                           }
                        }
                    }
-               }
-            
+                
+            }
         }
+
     }
     
     
@@ -305,24 +319,38 @@ class RegisterController: ViewController {
                         }
                     } else if let error = error {
                         self.mc_remove()
+                        self.stopTimerAndUpdateCodeBtn()
                         if let error = error as? AWSMobileClientError {
-                            debugPrint(error)
+                             debugPrint("\(error)")
+                            switch(error) {
+                            case .aliasExists(_):
+                             DispatchQueue.main.async { [self] in
+                                 GFAlert.showAlert(titleStr: "Sign up fail:", msgStr: "Email has already been taken. Please choose another.", currentVC: self, cancelStr: "OK", cancelHandler: { alertAction in
+                                     
+                                 }, otherBtns:nil) { indx in
+                                     
+                                 }
+                             }
+                            case .expiredCode(let message):
                             DispatchQueue.main.async { [self] in
-                                GFAlert.showAlert(titleStr: "Sign up fail:", msgStr: "\(error.localizedDescription)", currentVC: self, cancelStr: "OK", cancelHandler: { alertAction in
-                                    
+                                GFAlert.showAlert(titleStr: "Sign up fail:", msgStr: message, currentVC: self, cancelStr: "OK", cancelHandler: { alertAction in
+                                    self.updateCodeBtnToResend()
                                 }, otherBtns:nil) { indx in
                                     
                                 }
                             }
+                            default:
+                                DispatchQueue.main.async { [self] in
+                                    GFAlert.showAlert(titleStr: "Sign up fail:", msgStr: "Please contact us", currentVC: self, cancelStr: "OK", cancelHandler: { alertAction in
+                                        
+                                    }, otherBtns:nil) { indx in
+                                        
+                                    }
+                                }
+                                break
+                            }
                         }
-                        
-                        DispatchQueue.main.async { [self] in
-                            stopTimerAndUpdateCodeBtn()
-                        }
-                        print("\(error.localizedDescription)")
-                        
                     }
-
             }
         }
         
