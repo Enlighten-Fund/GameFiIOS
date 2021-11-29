@@ -51,16 +51,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1767ADEB-FB61-43AE-8510-BA5C296F9C82"
+            uuid = "7141C44B-5417-4F2E-8781-B5405A93FC22"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GameFi/Home/View/ScholarShipsCell.swift"
+            filePath = "GameFi/Profile/ProfileController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
-            landmarkName = "update(scholarshipModel:)"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "leftBtnClick()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

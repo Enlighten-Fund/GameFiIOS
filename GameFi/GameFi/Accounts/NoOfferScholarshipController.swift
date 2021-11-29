@@ -23,11 +23,19 @@ class NoOfferScholarshipController: UIViewController {
             make.right.equalToSuperview().offset(-15)
         }
         
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.collectionView.mj_header?.beginRefreshing()
     }
     
     @objc func showAddScholarshipVC() {
         let addScholarshipVC = AddScholarshipController.init(status: "DRAFT")
+        addScholarshipVC.addScholarBlock = {
+            self.collectionView.mj_header?.beginRefreshing()
+        }
         let appdelegate : AppDelegate = UIApplication.shared.delegate! as! AppDelegate
         let vc : GFNavController = appdelegate.tabbarVC?.viewControllers![1] as! GFNavController
         vc.pushViewController(addScholarshipVC, animated: true)
