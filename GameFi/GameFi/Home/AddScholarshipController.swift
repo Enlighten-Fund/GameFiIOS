@@ -19,10 +19,10 @@ class AddScholarshipController: ViewController {
     var offerDaysTextField : UITextField?
     var scholarpercentageLabel : UILabel?
     var addScholarBlock:CommonEmptyBlock?
-    var status : String?
-    init(status : String) {
+    var isFromHome : Bool? // marketplace
+    init(isFromHome : Bool) {
         super.init(nibName: nil, bundle: nil)
-        self.status = status
+        self.isFromHome = isFromHome
     }
     
     required init?(coder: NSCoder) {
@@ -63,8 +63,19 @@ class AddScholarshipController: ViewController {
         }
     }
     
+    @objc func cancelBtnClick() {
+        if self.isFromHome!{
+            self.leftBtnClick()
+        }else {
+            self.createScholarship(toStatus: "DRAFT")
+        }
+    }
     
-    @objc func addScholarship(){
+    @objc func postBtnBtnClick() {
+        self.createScholarship(toStatus: "LISTING")
+    }
+    
+    @objc func createScholarship(toStatus : String){
         if !self.valifyAccount() {
             return
         }
@@ -91,7 +102,7 @@ class AddScholarshipController: ViewController {
                       "manager_percentage":Float(self.managerPercentTextField!.text!)!,
                       "offer_period": Int(self.offerDaysTextField!.text!) as Any,
                       "scholar_percentage":95 - Float(self.managerPercentTextField!.text!)!,
-                      "status": self.status as Any,
+                      "status": toStatus as Any,
         ] as [String : Any]
         self.mc_loading()
         DataManager.sharedInstance.createScholarShip(dic: params) { result, reponse in
@@ -240,11 +251,13 @@ class AddScholarshipController: ViewController {
     lazy var tableView: UITableView? = {
         let tempTableView = UITableView.init(frame: CGRect.zero, style: .plain)
         let footView = PostScholarFootView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 60))
-        footView.cancelBtn.addTarget(self, action: #selector(leftBtnClick), for: .touchUpInside)
-        footView.postBtn.addTarget(self, action: #selector(addScholarship), for: .touchUpInside)
-        if self.status == "DRAFT"{
-            footView.postBtn.setTitle("Save", for: .normal)
+        footView.cancelBtn.addTarget(self, action: #selector(cancelBtnClick), for: .touchUpInside)
+        footView.postBtn.addTarget(self, action: #selector(postBtnBtnClick), for: .touchUpInside)
+        if self.isFromHome!{
+            footView.cancelBtn.setTitle("Cancel", for: .normal)
+            footView.postBtn.setTitle("Post", for: .normal)
         }else {
+            footView.cancelBtn.setTitle("Save", for: .normal)
             footView.postBtn.setTitle("Post", for: .normal)
         }
         tempTableView.tableFooterView = footView

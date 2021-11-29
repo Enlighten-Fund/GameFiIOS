@@ -53,7 +53,7 @@ class ScholarshipsController: UIViewController {
     func showAddScholarshipVC() {
         DispatchQueue.main.async {
             let appdelegate : AppDelegate = UIApplication.shared.delegate! as! AppDelegate
-            let addScholarVC = AddScholarshipController.init(status: "LISTING")
+            let addScholarVC = AddScholarshipController.init(isFromHome: true)
             appdelegate.homeVC?.navigationController!.pushViewController(addScholarVC, animated: true)
         }
     }

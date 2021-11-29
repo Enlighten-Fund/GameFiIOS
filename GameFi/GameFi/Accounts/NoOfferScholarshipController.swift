@@ -32,7 +32,7 @@ class NoOfferScholarshipController: UIViewController {
     }
     
     @objc func showAddScholarshipVC() {
-        let addScholarshipVC = AddScholarshipController.init(status: "DRAFT")
+        let addScholarshipVC = AddScholarshipController.init(isFromHome: false)
         addScholarshipVC.addScholarBlock = {
             self.collectionView.mj_header?.beginRefreshing()
         }
