@@ -65,19 +65,16 @@ class EditScholarshipController: ViewController {
     }
     
     @objc func cancelBtnClick() {
-//        if self.isFromHome!{
-//            self.leftBtnClick()
-//        }else {
-//            self.createScholarship(toStatus: "DRAFT")
-//        }
+        self.editScholarship(toStatus: "DRAFT")
+        
     }
     
-    @objc func postBtnBtnClick() {
-//        self.createScholarship(toStatus: "LISTING")
+    @objc func postBtnClick() {
+        self.editScholarship(toStatus: "LISTING")
     }
     
     
-    @objc func editScholarship(){
+    @objc func editScholarship(toStatus:String){
         if !self.valifyAccount() {
             return
         }
@@ -108,11 +105,26 @@ class EditScholarshipController: ViewController {
         self.mc_loading()
         DataManager.sharedInstance.editScholarShip(dic: params) { result, reponse in
             DispatchQueue.main.async { [self] in
-                self.mc_remove()
                 if result.success!{
-                    self.mc_success("Finished！Waiting the review")
-                    self.navigationController?.popViewController(animated: true)
+                    if toStatus == "DRAFT" {
+                        self.mc_remove()
+                        self.mc_success("Finished！Waiting the review")
+                        self.navigationController?.popViewController(animated: true)
+                    }else{
+                        DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: self.scholarshipModel!.scholarship_id!, status: toStatus) { result, reponse in
+                            self.mc_remove()
+                            if result.success!{
+                                self.mc_success("Finished！Waiting the review")
+                                self.navigationController?.popViewController(animated: true)
+                            }else{
+                                if  result.msg != nil && !result.msg!.isBlank {
+                                    self.mc_success(result.msg!)
+                                }
+                            }
+                        }
+                    }
                 }else{
+                    self.mc_remove()
                     if  result.msg != nil && !result.msg!.isBlank {
                         self.mc_success(result.msg!)
                     }
@@ -187,15 +199,6 @@ class EditScholarshipController: ViewController {
             self.updateTextField(textField: self.passwordTextField!, focus: true)
             return false
         }
-        var temp = false
-        if self.passwordTextField!.validatePassword() {
-            temp = true
-        }
-        if !temp {
-            self.showNoticeLabel(notice: "The password shall be at least 6 digits in length and shall contain at least two of letters, numbers and symbols")
-            self.updateTextField(textField: self.passwordTextField!, focus: true)
-            return false
-        }
         self.hideNoticeLabel()
         self.updateTextField(textField: self.passwordTextField!, focus: false)
         return true
@@ -251,7 +254,7 @@ class EditScholarshipController: ViewController {
         footView.cancelBtn.setTitle("Save", for: .normal)
         footView.postBtn.setTitle("Post", for: .normal)
         footView.cancelBtn.addTarget(self, action: #selector(cancelBtnClick), for: .touchUpInside)
-//        footView.postBtn.addTarget(self, action: #selector(postBtnClick), for: .touchUpInside)
+        footView.postBtn.addTarget(self, action: #selector(postBtnClick), for: .touchUpInside)
         tempTableView.tableFooterView = footView
         tempTableView.separatorStyle = .none
         tempTableView.keyboardDismissMode = .onDrag
