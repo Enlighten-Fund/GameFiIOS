@@ -125,7 +125,7 @@ class AddTrackController: ViewController {
                     self.navigationController?.popViewController(animated: true)
                 }else{
                     if !result.msg!.isBlank {
-                        GFAlert.showAlert(titleStr: "Notice:", msgStr: result.msg!, currentVC: self, cancelHandler: { action in
+                        GFAlert.showAlert(titleStr: "Notice:", msgStr: result.msg!, currentVC: self, cancelStr: "OK", cancelHandler: { action in
                             
                         }, otherBtns: nil) { index in
                             

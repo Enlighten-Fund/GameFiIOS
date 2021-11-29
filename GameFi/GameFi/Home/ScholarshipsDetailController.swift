@@ -100,7 +100,7 @@ class ScholarshipsDetailController: ViewController {
     
     func changeRoleToScholar() {
         DispatchQueue.main.async {
-            GFAlert.showAlert(titleStr: "Notice:", msgStr: "Please switch your role to a scholar", currentVC: self, cancelHandler: { aletAction in
+            GFAlert.showAlert(titleStr: "Notice:", msgStr: "Please switch your role to a scholar", currentVC: self, cancelStr: "Cancel", cancelHandler: { aletAction in
                 
             }, otherBtns: ["YES"]) { idex in
                 UserManager.sharedInstance.updateRole(role: "1"){
@@ -114,8 +114,8 @@ class ScholarshipsDetailController: ViewController {
     func valifiyUserProfileStatus() {
         if UserManager.sharedInstance.userinfoModel!.scholar_status == nil
             || UserManager.sharedInstance.userinfoModel!.scholar_status! == "NO" {
-            GFAlert.showAlert(titleStr: "Notice:", msgStr: "Please complete and submit your profile", currentVC: self, cancelHandler: { action in
-
+            GFAlert.showAlert(titleStr: "Notice:", msgStr: "Please complete and submit your profile", currentVC: self, cancelStr: "Cancel", cancelHandler: { action in
+                
             }, otherBtns: ["Go now"]) { index in
                 DispatchQueue.main.async { [self] in
                     let editProfileVC = EditProfileController.init()
@@ -123,7 +123,7 @@ class ScholarshipsDetailController: ViewController {
                 }
             }
         }else if UserManager.sharedInstance.userinfoModel!.scholar_status! == "AUDIT" {
-            GFAlert.showAlert(titleStr: "Notice:", msgStr: "Your information is auditing, please try again in a few minutes", currentVC: self, cancelHandler: { action in
+            GFAlert.showAlert(titleStr: "Notice:", msgStr: "Your information is auditing, please try again in a few minutes", currentVC: self, cancelStr: "Cancel", cancelHandler: { action in
                 
             }, otherBtns: ["Get help"]) { index in
                 DispatchQueue.main.async { [self] in
@@ -142,7 +142,7 @@ class ScholarshipsDetailController: ViewController {
                 self.mc_remove()
                 if result.success!{
                     DispatchQueue.main.async { [self] in
-                        GFAlert.showAlert(titleStr: "Notice:", msgStr: "Apply success,please wait for the manager's consent", currentVC: self,cancelBtn:"OK", cancelHandler: { action in
+                        GFAlert.showAlert(titleStr: "Notice:", msgStr: "Apply success,please wait for the manager's consent", currentVC: self,cancelStr:"OK", cancelHandler: { action in
                             DispatchQueue.main.async { [self] in
                                 self.navigationController?.popViewController(animated: true)
                             }
@@ -153,7 +153,7 @@ class ScholarshipsDetailController: ViewController {
                 }else{
                     if !result.msg!.isBlank {
                         DispatchQueue.main.async { [self] in
-                            GFAlert.showAlert(titleStr: "Notice:", msgStr: result.msg!, currentVC: self, cancelHandler: { action in
+                            GFAlert.showAlert(titleStr: "Notice:", msgStr: result.msg!, currentVC: self, cancelStr: "Cancel", cancelHandler: { action in
                                 
                             }, otherBtns: nil) { index in
                                 

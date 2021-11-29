@@ -46,7 +46,7 @@ class LatestApplyController: UIViewController {
     @objc func applyBtnClick(btn:UIButton) {
         if btn.tag - 60000 < self.dataSource!.count {
             let applicationModel : ApplicationModel = self.dataSource![btn.tag - 60000] as! ApplicationModel
-            GFAlert.showAlert(titleStr: "Notice:", msgStr: "Offer \(applicationModel.scholarship_name!) to \(applicationModel.scholar_user_name!) in next \(applicationModel.scholarship_offer_period!) days", currentVC: self, cancelHandler: { alertAction in
+            GFAlert.showAlert(titleStr: "Notice:", msgStr: "Offer \(applicationModel.scholarship_name!) to \(applicationModel.scholar_user_name!) in next \(applicationModel.scholarship_offer_period!) days", currentVC: self, cancelStr: "Cancel", cancelHandler: { alertAction in
                 
             }, otherBtns: ["Offer"]) { index in
                 self.mc_loading()
@@ -69,7 +69,7 @@ class LatestApplyController: UIViewController {
     @objc func refuseBtnClick(btn:UIButton) {
         if btn.tag - 70000 < self.dataSource!.count {
             let applicationModel : ApplicationModel = self.dataSource![btn.tag - 70000] as! ApplicationModel
-            GFAlert.showAlert(titleStr: "Notice:", msgStr: "Reject the application of \(applicationModel.scholar_user_name!)", currentVC: self, cancelHandler: { alertAction in
+            GFAlert.showAlert(titleStr: "Notice:", msgStr: "Reject the application of \(applicationModel.scholar_user_name!)", currentVC: self, cancelStr: "Cancel", cancelHandler: { alertAction in
                 
             }, otherBtns: ["Reject"]) { index in
                 self.mc_loading()

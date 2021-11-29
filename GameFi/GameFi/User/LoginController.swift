@@ -127,12 +127,11 @@ class LoginController: ViewController {
                 self.mc_remove()
                 if let error = error  {
                     print("\(error)")
-                    GFAlert.showAlert(titleStr: "Notice:", msgStr: "\(error)", currentVC: self, cancelBtn: "OK", cancelHandler: { action in
+                    GFAlert.showAlert(titleStr: "Notice:", msgStr: "\(error.localizedDescription)", currentVC: self, cancelStr: "OK", cancelHandler: { action in
                         
                     }, otherBtns: nil) { index in
                         
                     }
-//                    SCLAlertView.init().showError("系统提示：", subTitle: "\(error)")
                 } else if let signInResult = signInResult {
                     switch (signInResult.signInState) {
                     case .signedIn:
@@ -140,7 +139,7 @@ class LoginController: ViewController {
                         UserManager.sharedInstance.updateToken {
                             UserManager.sharedInstance.fetchAndUpdateRole {
                                 DispatchQueue.main.async {
-                                    GFAlert.showAlert(titleStr: "Notice:", msgStr: "Sign in success", currentVC: self, cancelBtn: "OK", cancelHandler: { alertion in
+                                    GFAlert.showAlert(titleStr: "Notice:", msgStr: "Sign in success", currentVC: self, cancelStr: "OK", cancelHandler: { alertion in
 //                                        if self.loginSuccessBlock != nil{
 //                                            self.loginSuccessBlock!()
 //                                        }

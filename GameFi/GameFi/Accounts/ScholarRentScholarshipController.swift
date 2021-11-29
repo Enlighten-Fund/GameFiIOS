@@ -37,7 +37,7 @@ class ScholarRentScholarshipController: UIViewController {
                         self.mc_remove()
                         if result.success!{
                             let paymentModel : PaymentModel = reponse as! PaymentModel
-                            GFAlert.showAlert(titleStr: "Notice:", msgStr: "\(Int(paymentModel.scholar_value!)!) SLP will be sent to [\(String(paymentModel.ronin_address!))].Please wait a moment or contact us", currentVC: self,cancelBtn:"OK", cancelHandler: { alertAction in
+                            GFAlert.showAlert(titleStr: "Notice:", msgStr: "\(Int(paymentModel.scholar_value!)!) SLP will be sent to [\(String(paymentModel.ronin_address!))].Please wait a moment or contact us", currentVC: self,cancelStr:"OK", cancelHandler: { alertAction in
                                 
                             }, otherBtns: nil) { index in
                                 

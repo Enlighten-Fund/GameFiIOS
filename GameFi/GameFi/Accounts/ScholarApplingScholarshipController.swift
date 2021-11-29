@@ -31,7 +31,7 @@ class ScholarApplingScholarshipController: UIViewController,EmptyDataSource,Empt
     @objc func deleteBtnClick(btn:UIButton) {
         if btn.tag - 50000 < self.dataSource!.count {
             let applicationModel : ApplicationModel = self.dataSource![btn.tag - 50000] as! ApplicationModel
-            GFAlert.showAlert(titleStr: "Notice:", msgStr: "Do you want to give up this application？", currentVC: self,cancelBtn:"NO", cancelHandler: { action in
+            GFAlert.showAlert(titleStr: "Notice:", msgStr: "Do you want to give up this application？", currentVC: self,cancelStr:"NO", cancelHandler: { action in
                 
             }, otherBtns: ["YES"]) { index in
                 self.mc_loading()

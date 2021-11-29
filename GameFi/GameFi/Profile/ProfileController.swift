@@ -73,7 +73,7 @@ class ProfileController: ViewController {
             torole = "1"
         }
         //change role
-        GFAlert.showAlert(titleStr: "Notice:", msgStr: notiMsg, currentVC: self, cancelHandler: { aletAction in
+        GFAlert.showAlert(titleStr: "Notice:", msgStr: notiMsg, currentVC: self, cancelStr: "Cancel", cancelHandler: { aletAction in
             
         }, otherBtns: ["YES"]) { idex in
             UserManager.sharedInstance.updateRole(role: torole){
@@ -100,7 +100,7 @@ class ProfileController: ViewController {
     }
     
     @objc func  imageViewClick(){
-        GFAlert.showAlert(titleStr: nil, msgStr: nil, style: .actionSheet, currentVC: self, cancelBtn: "Cancel", cancelHandler: { (cancelAction) in
+        GFAlert.showAlert(titleStr: nil, msgStr: nil, style: .actionSheet, currentVC: self, cancelStr: "Cancel", cancelHandler: { (cancelAction) in
             
         }, otherBtns: ["Capture","Photo"]) { (idx) in
             DispatchQueue.main.async { [self] in
@@ -266,7 +266,7 @@ extension  ProfileController : UITableViewDelegate,UITableViewDataSource{
             case 0:
                 self.navigationController?.pushViewController(EditProfileController.init(), animated: true)
             case 4:
-                GFAlert.showAlert(titleStr: "Notice:", msgStr: "Are you sure you want to log out？", currentVC: self, cancelHandler: { alertaction in
+                GFAlert.showAlert(titleStr: "Notice:", msgStr: "Are you sure you want to log out？", currentVC: self, cancelStr: "Cancel", cancelHandler: { alertaction in
                     
                 }, otherBtns: ["YES"]) { index in
                     AWSMobileClient.default().signOut { error in

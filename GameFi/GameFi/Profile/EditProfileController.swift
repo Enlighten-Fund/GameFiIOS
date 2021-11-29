@@ -76,7 +76,7 @@ class EditProfileController: ViewController {
     }
     
     @objc override func leftBtnClick() {
-        GFAlert.showAlert(titleStr: "Notice:", msgStr: "Changes will not be saved", currentVC: self, cancelHandler: { action in
+        GFAlert.showAlert(titleStr: "Notice:", msgStr: "Changes will not be saved", currentVC: self, cancelStr: "Cancel", cancelHandler: { action in
             
         }, otherBtns: ["YES"]) { index in
             DispatchQueue.main.async { [self] in
@@ -378,7 +378,7 @@ class EditProfileController: ViewController {
     }
     
     @objc func showPictureSheet() {
-        GFAlert.showAlert(titleStr: nil, msgStr: nil, style: .actionSheet, currentVC: self, cancelBtn: "Cancel", cancelHandler: { (cancelAction) in
+        GFAlert.showAlert(titleStr: nil, msgStr: nil, style: .actionSheet, currentVC: self, cancelStr: "Cancel", cancelHandler: { (cancelAction) in
             
         }, otherBtns: ["Capture","Photo"]) { (idx) in
             DispatchQueue.main.async { [self] in

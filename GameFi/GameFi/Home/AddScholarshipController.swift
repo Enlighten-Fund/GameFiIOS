@@ -97,7 +97,7 @@ class AddScholarshipController: ViewController {
             DispatchQueue.main.async { [self] in
                 self.mc_remove()
                 if result.success!{
-                    GFAlert.showAlert(titleStr: "Notice:", msgStr: "Finished！Waiting the review", currentVC: self,  cancelBtn: "OK", cancelHandler: { action in
+                    GFAlert.showAlert(titleStr: "Notice:", msgStr: "Finished！Waiting the review", currentVC: self,  cancelStr: "OK", cancelHandler: { action in
                         DispatchQueue.main.async { [self] in
                             self.navigationController?.popViewController(animated: true)
                         }
@@ -109,7 +109,7 @@ class AddScholarshipController: ViewController {
                    
                 }else{
                     if !result.msg!.isBlank {
-                        GFAlert.showAlert(titleStr: "Notice:", msgStr: result.msg!, currentVC: self, cancelHandler: { action in
+                        GFAlert.showAlert(titleStr: "Notice:", msgStr: result.msg!, currentVC: self, cancelStr: "OK", cancelHandler: { action in
                             
                         }, otherBtns: nil) { index in
                             

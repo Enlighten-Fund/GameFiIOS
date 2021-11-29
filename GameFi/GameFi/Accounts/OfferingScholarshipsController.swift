@@ -53,7 +53,7 @@ class OfferingScholarshipsController: UIViewController {
                             let paymentModel : PaymentModel = reponse as! PaymentModel
                             let slp : Int = Int(paymentModel.value!)! - Int(paymentModel.paid_value!)!
                             GFAlert.showAlert(titleStr: "Notice:", msgStr:
-                                                "Please send \(slp) SLP from[\(String(scholarshipModel.account_ronin_address!))]to [our platform ronin address.There is a little delay. If you have already done this，don't do it again.", currentVC: self,cancelBtn:"OK", cancelHandler: { alertAction in
+                                                "Please send \(slp) SLP from[\(String(scholarshipModel.account_ronin_address!))]to [our platform ronin address.There is a little delay. If you have already done this，don't do it again.", currentVC: self,cancelStr:"OK", cancelHandler: { alertAction in
                                 
                             }, otherBtns: nil) { index in
                                 

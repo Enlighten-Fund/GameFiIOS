@@ -114,7 +114,7 @@ class ForgetPwdController: ViewController {
     func fireTimerAndShowAlert(title:String) {
         DispatchQueue.main.async {
             self.timer.fire()
-            GFAlert.showAlert(titleStr: "Notice:", msgStr: title, currentVC: self, cancelHandler: { action in
+            GFAlert.showAlert(titleStr: "Notice:", msgStr: title, currentVC: self, cancelStr: "OK", cancelHandler: { action in
                 
             }, otherBtns: nil) { index in
                 
@@ -144,13 +144,16 @@ class ForgetPwdController: ViewController {
             if let forgotPasswordResult = forgotPasswordResult {
                 switch(forgotPasswordResult.forgotPasswordState) {
                 case .confirmationCodeSent:
-                    print("Confirmation code sent via \(forgotPasswordResult.codeDeliveryDetails!.deliveryMedium) to: \(forgotPasswordResult.codeDeliveryDetails!.destination!)")
                     self.fireTimerAndShowAlert(title: "A verification code has been sent via \(forgotPasswordResult.codeDeliveryDetails!.deliveryMedium) at \(forgotPasswordResult.codeDeliveryDetails!.destination!)")
                 default:
                     print("Error: Invalid case.")
                 }
             } else if let error = error {
-                print("Error occurred: \(error.localizedDescription)")
+                GFAlert.showAlert(titleStr: "Forgot password fail:", msgStr: "\(error.localizedDescription)", currentVC: self, cancelStr: "OK", cancelHandler: { alertAction in
+                    
+                }, otherBtns:nil) { indx in
+                    
+                }
             }
         }
     }
@@ -186,13 +189,18 @@ class ForgetPwdController: ViewController {
                                 self.mc_remove()
                                 if let error = error  {
                                     print("\(error.localizedDescription)")
+                                    GFAlert.showAlert(titleStr: "Sign in fail:", msgStr: "\(error.localizedDescription)", currentVC: self, cancelStr: "OK", cancelHandler: { alertAction in
+                                        
+                                    }, otherBtns:nil) { indx in
+                                        
+                                    }
                                 } else if let signInResult = signInResult {
                                     switch (signInResult.signInState) {
                                     case .signedIn:
                                         UserManager.sharedInstance.updateToken {
                                             UserManager.sharedInstance.fetchAndUpdateRole {
                                                 DispatchQueue.main.async {
-                                                    GFAlert.showAlert(titleStr: "Notice:", msgStr: "Password changed successfully", currentVC: self, cancelBtn: "OK", cancelHandler: { alertion in
+                                                    GFAlert.showAlert(titleStr: "Notice:", msgStr: "Password changed successfully", currentVC: self, cancelStr: "OK", cancelHandler: { alertion in
                                                         NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: CHANGEROLE_NOFI), object: String(UserManager.sharedInstance.currentRole()))
                                                         self.navigationController?.dismiss(animated: true, completion: {
                                                             
@@ -217,7 +225,11 @@ class ForgetPwdController: ViewController {
                 } else if let error = error {
                     self.mc_remove()
                     DispatchQueue.main.async {
-                        print("Error occurred: \(error.localizedDescription)")
+                        GFAlert.showAlert(titleStr: "Confirm forgot password:", msgStr: "\(error.localizedDescription)", currentVC: self, cancelStr: "OK", cancelHandler: { alertAction in
+                            
+                        }, otherBtns:nil) { indx in
+                            
+                        }
                         self.stopTimerAndUpdateCodeBtn()
                     }
                     

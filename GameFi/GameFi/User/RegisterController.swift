@@ -74,7 +74,7 @@ class RegisterController: ViewController {
     func fireTimerAndShowAlert(title:String) {
         DispatchQueue.main.async {
             self.timer.fire()
-            GFAlert.showAlert(titleStr: "Notice:", msgStr: title, currentVC: self, cancelHandler: { action in
+            GFAlert.showAlert(titleStr: "Notice:", msgStr: title, currentVC: self, cancelStr: "OK", cancelHandler: { action in
                 
             }, otherBtns: nil) { index in
                 
@@ -183,31 +183,43 @@ class RegisterController: ViewController {
             if let signUpResult = signUpResult {
                    switch(signUpResult.signUpConfirmationState) {
                    case .confirmed:
-                       print("User is signed up and confirmed.")
+                    DispatchQueue.main.async { [self] in
+                        GFAlert.showAlert(titleStr: "Send code fail:", msgStr: "User is signed up and confirmed.", currentVC: self, cancelStr: "OK", cancelHandler: { alertAction in
+                        }, otherBtns:nil) { indx in
+                        }
+                    }
                    case .unconfirmed:
-                       print("User is not confirmed and needs verification via \(signUpResult.codeDeliveryDetails!.deliveryMedium) sent at \(signUpResult.codeDeliveryDetails!.destination!)")
                     self.fireTimerAndShowAlert(title: "A verification code has been sent via \(signUpResult.codeDeliveryDetails!.deliveryMedium) at \(signUpResult.codeDeliveryDetails!.destination!)")
-                    
                    case .unknown:
                        print("Unexpected case")
                    }
                } else if let error = error {
                    if let error = error as? AWSMobileClientError {
                         debugPrint("\(error)")
+                        DispatchQueue.main.async { [self] in
+                            GFAlert.showAlert(titleStr: "Sign up fail:", msgStr: "\(error.localizedDescription)", currentVC: self, cancelStr: "OK", cancelHandler: { alertAction in
+                                
+                            }, otherBtns:nil) { indx in
+                                
+                            }
+                        }
                        switch(error) {
                        case .usernameExists(let message):
                            print(message)
                         DispatchQueue.main.async {
                             AWSMobileClient.default().resendSignUpCode(username: self.usernameTextField!.text!, completionHandler: { (result, error) in
                                 if let signUpResult = result {
-                                    print("A verification code has been sent via \(signUpResult.codeDeliveryDetails!.deliveryMedium) at \(signUpResult.codeDeliveryDetails!.destination!)")
                                     self.fireTimerAndShowAlert(title: "A verification code has been sent via \(signUpResult.codeDeliveryDetails!.deliveryMedium) at \(signUpResult.codeDeliveryDetails!.destination!)")
-                                    
                                 } else if let error = error {
-                                    print("\(error.localizedDescription)")
+                                    DispatchQueue.main.async { [self] in
+                                        GFAlert.showAlert(titleStr: "Resend code fail:", msgStr: "\(error.localizedDescription)", currentVC: self, cancelStr: "Cancel", cancelHandler: { alertAction in
+                                            
+                                        }, otherBtns:nil) { indx in
+                                            
+                                        }
+                                    }
                                 }
                             })
-                            
                         }
                        default:
                            break
@@ -254,8 +266,13 @@ class RegisterController: ViewController {
                             AWSMobileClient.default().signIn(username: (self.usernameTextField?.text)!, password: (self.passwordTextField?.text)!) { (signInResult, error) in
                                 self.mc_remove()
                                 if let error = error  {
-                                    print("\(error.localizedDescription)")
-                                    
+                                    DispatchQueue.main.async { [self] in
+                                        GFAlert.showAlert(titleStr: "Sign in fail:", msgStr: "\(error.localizedDescription)", currentVC: self, cancelStr: "OK", cancelHandler: { alertAction in
+                                            
+                                        }, otherBtns:nil) { indx in
+                                            
+                                        }
+                                    }
                                 } else if let signInResult = signInResult {
                                     switch (signInResult.signInState) {
                                     case .signedIn:
@@ -263,7 +280,7 @@ class RegisterController: ViewController {
                                         UserManager.sharedInstance.updateToken {
                                             UserManager.sharedInstance.updateRole(role: String(self.role)){
                                                 DispatchQueue.main.async {
-                                                    GFAlert.showAlert(titleStr: "Notice:", msgStr: "Sign up successfully", currentVC: self, cancelBtn: "OK", cancelHandler: { alertion in
+                                                    GFAlert.showAlert(titleStr: "Notice:", msgStr: "Sign up successfully", currentVC: self, cancelStr: "OK", cancelHandler: { alertion in
                                                         NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: CHANGEROLE_NOFI), object: String(self.role))
                                                         self.navigationController?.dismiss(animated: true, completion: {
                                                             
@@ -291,7 +308,7 @@ class RegisterController: ViewController {
                         if let error = error as? AWSMobileClientError {
                             debugPrint(error)
                             DispatchQueue.main.async { [self] in
-                                GFAlert.showAlert(titleStr: "Notice:", msgStr: "注册失败", currentVC: self, cancelHandler: { alertAction in
+                                GFAlert.showAlert(titleStr: "Sign up fail:", msgStr: "\(error.localizedDescription)", currentVC: self, cancelStr: "OK", cancelHandler: { alertAction in
                                     
                                 }, otherBtns:nil) { indx in
                                     
