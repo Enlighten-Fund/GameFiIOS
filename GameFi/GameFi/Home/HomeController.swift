@@ -20,8 +20,54 @@ class HomeController: UIViewController {
             make.bottom.equalToSuperview().offset(-IPhone_TabbarHeight)
             make.right.equalToSuperview()
         })
+        self.checkVersion()
     }
     
+    
+    func checkVersion() {
+        DataManager.sharedInstance.fetchAppVersion { result, reponse in
+            if result.success!{
+                let localV : String = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+                let dic : [String:AnyObject] = reponse as! [String : AnyObject]
+                let str : String = dic["data"] as! String
+                let data = Data(str.utf8)
+                do {
+                    if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                        if let dic2 = json as? [String : String] {
+                            let lastV : String = dic2["version"]!
+                            if localV != lastV {
+                                DispatchQueue.main.async { [self] in
+                                    GFAlert.showAlert(titleStr: "App notice：", msgStr: "We have a new version", currentVC: self, cancelStr: "OK", cancelHandler: { alert in
+                                        let url = URL(string: "https://www.pgyer.com/rrZh")
+                                        // 注意: 跳转之前, 可以使用 canOpenURL: 判断是否可以跳转
+                                        if !UIApplication.shared.canOpenURL(url!) {
+                                             // 不能跳转就不要往下执行了
+                                             return
+                                        }
+                                        UIApplication.shared.open(url!, options: [:]) { (success) in
+                                             if (success) {
+                                                  print("10以后可以跳转url")
+                                             }else{
+                                                  print("10以后不能完成跳转")
+                                             }
+                                         }
+                                    }, otherBtns: nil) { index in
+
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                } catch let error as NSError {
+                    print("Failed to load: \(error.localizedDescription)")
+                }
+
+            }
+            
+          
+        }
+    }
     
     @objc func msgBtnClick() {
         self.navigationController?.pushViewController(NotificationController.init(), animated: true)

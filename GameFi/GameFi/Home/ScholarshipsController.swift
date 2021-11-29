@@ -17,7 +17,7 @@ class ScholarshipsController: UIViewController {
     var pageIndex = 1
     var dataSource : Array<Any>? = Array.init()
     var filter : String? = ""
-    let sortArray:[String] = ["Latest","Highest credit","Modt everyday","SLP Most Axie","counts"]
+    let sortArray:[String] = ["modified_timestamp_desc", "estimate_daily_slp_desc", "credit_score_desc"]
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(red: 0.15, green: 0.16, blue: 0.24, alpha: 1)

@@ -55,6 +55,7 @@ class ProfileGuestController: ViewController {
         let tempView = ProfileGuestHeaderView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH - 30, height: 170))
         tempView.backgroundColor = self.view.backgroundColor
         tempView.signBtn.addTarget(self, action: #selector(signBtnClick), for: .touchUpInside)
+        
         view.addSubview(tempView)
         return tempView
     }()

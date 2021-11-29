@@ -153,6 +153,7 @@ class ForgetPwdController: ViewController {
                     if let signUpResult = result {
                         self.fireTimerAndShowAlert(title: "A verification code has been sent via \(signUpResult.codeDeliveryDetails!.deliveryMedium) at \(signUpResult.codeDeliveryDetails!.destination!)")
                     } else if let error = error {
+                        self.stopTimerAndUpdateCodeBtn()
                         debugPrint("\(error)")
                         DispatchQueue.main.async { [self] in
                             GFAlert.showAlert(titleStr: "Resend code fail:", msgStr: "\(error.localizedDescription)", currentVC: self, cancelStr: "Cancel", cancelHandler: { alertAction in
@@ -174,6 +175,7 @@ class ForgetPwdController: ViewController {
                         self.fireTimerAndShowAlert(title: "A verification code has been sent via \(forgotPasswordResult.codeDeliveryDetails!.deliveryMedium) at \(forgotPasswordResult.codeDeliveryDetails!.destination!)")
                     default:
                         print("Error: Invalid case.")
+                        self.stopTimerAndUpdateCodeBtn()
                     }
                 } else if let error = error {
                     self.stopTimerAndUpdateCodeBtn()

@@ -14,7 +14,7 @@ import Foundation
 class ScholarsController: UIViewController {
     var pageIndex = 1
     var dataSource : Array<Any>? = Array.init()
-    let sortArray:[String] = ["Latest","Highest credit","Modt everyday","SLP Most Axie","counts"]
+    let sortArray:[String] = ["scholar_since", "mmr"]
     var filter : String? = ""
     override func viewDidLoad() {
         super.viewDidLoad()

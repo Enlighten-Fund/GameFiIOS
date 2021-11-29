@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
     var managerAccontVC : ManagerAccountsController? = nil
     var scholarAccontVC : ScholarAccountsController? = nil
    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
         Bugly.start(withAppId: "95913c773a")
         self.window?.rootViewController = self.tabbarVC
         IQKeyboardManager.shared().isEnabled = true
@@ -31,7 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
     NotificationCenter.default.addObserver(self, selector: #selector(changeRole), name: NSNotification.Name(rawValue: CHANGEROLE_NOFI), object: nil)
         return true
     }
-    
     /// 接受到通知后的方法回调
     @objc private func changeRole(noti: Notification) {
         DispatchQueue.main.async {

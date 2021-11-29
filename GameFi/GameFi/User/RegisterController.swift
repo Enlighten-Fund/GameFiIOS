@@ -117,32 +117,47 @@ class RegisterController: ViewController {
     }
     
     func valifyUsername() -> Bool {
-        if self.usernameTextField!.validateUsername(){
-            self.hideNoticeLabel()
-            self.updateTextField(textField: self.usernameTextField!, focus: false)
-            return true
-        }else {
-            self.showNoticeLabel(notice: "Your username format is incorrect")
+        if self.usernameTextField!.text == nil || self.usernameTextField!.text!.isBlank {
+            self.showNoticeLabel(notice: "Your username should be filled in")
             self.updateTextField(textField: self.usernameTextField!, focus: true)
             return false
+        }else{
+            if self.usernameTextField!.validateUsername(){
+                self.hideNoticeLabel()
+                self.updateTextField(textField: self.usernameTextField!, focus: false)
+                return true
+            }else {
+                self.showNoticeLabel(notice: "Username should be between 5 and 16 characters.\nUsername only can contain letters, numbers and '_'")
+                self.updateTextField(textField: self.usernameTextField!, focus: true)
+                return false
+            }
         }
+ 
     }
     
     func valifyPassword() -> Bool {
-        if self.passwordTextField!.validatePassword() {
-            self.hideNoticeLabel()
-            self.updateTextField(textField: self.passwordTextField!, focus: false)
-            return true
-        }else{
-            self.showNoticeLabel(notice: "Password must be at least 8 characters and contain letters and numbers.")
+        
+        if self.passwordTextField!.text == nil || self.passwordTextField!.text!.isBlank {
+            self.showNoticeLabel(notice: "Your password should be filled in")
             self.updateTextField(textField: self.passwordTextField!, focus: true)
             return false
+        }else{
+            if self.passwordTextField!.validatePassword() {
+                self.hideNoticeLabel()
+                self.updateTextField(textField: self.passwordTextField!, focus: false)
+                return true
+            }else{
+                self.showNoticeLabel(notice: "Password must be at least 8 characters and contain letters and numbers.")
+                self.updateTextField(textField: self.passwordTextField!, focus: true)
+                return false
+            }
         }
+        
     }
     
     func valifyCode() -> Bool {
         if self.codeTextField!.text == nil || self.codeTextField!.text!.isBlank{
-            self.showNoticeLabel(notice: "Your code format is incorrect")
+            self.showNoticeLabel(notice: "Your code should be filled in")
             self.updateTextField(textField: self.codeTextField!, focus: true)
             return false
         }else{
@@ -192,6 +207,7 @@ class RegisterController: ViewController {
                     if let signUpResult = result {
                         self.fireTimerAndShowAlert(title: "A verification code has been sent via \(signUpResult.codeDeliveryDetails!.deliveryMedium) at \(signUpResult.codeDeliveryDetails!.destination!)")
                     } else if let error = error {
+                        self.stopTimerAndUpdateCodeBtn()
                         debugPrint("\(error)")
                         DispatchQueue.main.async { [self] in
                             GFAlert.showAlert(titleStr: "Resend code fail:", msgStr: "\(error.localizedDescription)", currentVC: self, cancelStr: "Cancel", cancelHandler: { alertAction in
@@ -203,13 +219,13 @@ class RegisterController: ViewController {
                     }
                 })
             }
-
         }else{
             AWSMobileClient.default().signUp(username: (self.usernameTextField?.text)!, password: self.passwordTextField!.text!,userAttributes: ["email":self.emailTextField!.text!]) { signUpResult, error in
                 self.mc_remove()
                 if let signUpResult = signUpResult {
                        switch(signUpResult.signUpConfirmationState) {
                        case .confirmed:
+                        self.stopTimerAndUpdateCodeBtn()
                         DispatchQueue.main.async { [self] in
                             GFAlert.showAlert(titleStr: "Send code fail:", msgStr: "User is signed up and confirmed.", currentVC: self, cancelStr: "OK", cancelHandler: { alertAction in
                             }, otherBtns:nil) { indx in
@@ -219,6 +235,7 @@ class RegisterController: ViewController {
                         self.fireTimerAndShowAlert(title: "A verification code has been sent via \(signUpResult.codeDeliveryDetails!.deliveryMedium) at \(signUpResult.codeDeliveryDetails!.destination!)")
                        case .unknown:
                            print("Unexpected case")
+                        self.stopTimerAndUpdateCodeBtn()
                        }
                    } else if let error = error {
                     self.stopTimerAndUpdateCodeBtn()

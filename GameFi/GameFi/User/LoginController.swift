@@ -125,12 +125,21 @@ class LoginController: ViewController {
         AWSMobileClient.default().signIn(username: (self.usernameTextField?.text)!, password: (self.passwordTextField?.text)!) { (signInResult, error) in
             DispatchQueue.main.async {
                 self.mc_remove()
-                if let error = error  {
-                    print("\(error)")
-                    GFAlert.showAlert(titleStr: "Notice:", msgStr: "\(error.localizedDescription)", currentVC: self, cancelStr: "OK", cancelHandler: { action in
-                        
-                    }, otherBtns: nil) { index in
-                        
+                if let error = error {
+                    if let error = error as? AWSMobileClientError {
+                         debugPrint("\(error)")
+                        switch(error) {
+                        case .notAuthorized(_):
+                         DispatchQueue.main.async { [self] in
+                             GFAlert.showAlert(titleStr: "Sign in fail:", msgStr: "Incorrect username or password.", currentVC: self, cancelStr: "OK", cancelHandler: { alertAction in
+                                 
+                             }, otherBtns:nil) { indx in
+                                 
+                             }
+                         }
+                        default:
+                         break
+                        }
                     }
                 } else if let signInResult = signInResult {
                     switch (signInResult.signInState) {
