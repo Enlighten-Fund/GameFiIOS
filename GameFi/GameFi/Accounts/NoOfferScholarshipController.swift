@@ -34,7 +34,10 @@ class NoOfferScholarshipController: UIViewController {
     @objc func showAddScholarshipVC() {
         let addScholarshipVC = AddScholarshipController.init(isFromHome: false)
         addScholarshipVC.addScholarBlock = {
-            self.collectionView.mj_header?.beginRefreshing()
+            DispatchQueue.main.async { [self] in
+                self.collectionView.mj_header?.beginRefreshing()
+            }
+           
         }
         let appdelegate : AppDelegate = UIApplication.shared.delegate! as! AppDelegate
         let vc : GFNavController = appdelegate.tabbarVC?.viewControllers![1] as! GFNavController
@@ -45,6 +48,11 @@ class NoOfferScholarshipController: UIViewController {
         if btn.tag - 10000 < self.dataSource!.count {
             let scholarshipModel = self.dataSource![btn.tag - 10000]
             let editScholarshipVC = EditScholarshipController.init(scholarshipModel: scholarshipModel as! ScholarshipModel)
+            editScholarshipVC.editScholarBlock = {
+                DispatchQueue.main.async { [self] in
+                    self.collectionView.mj_header?.beginRefreshing()
+                }
+            }
             let appdelegate : AppDelegate = UIApplication.shared.delegate! as! AppDelegate
             let vc : GFNavController = appdelegate.tabbarVC?.viewControllers![1] as! GFNavController
             vc.pushViewController(editScholarshipVC, animated: true)
@@ -55,7 +63,7 @@ class NoOfferScholarshipController: UIViewController {
     @objc func postScholarship(btn:UIButton) {
         if btn.tag - 20000 < self.dataSource!.count {
             let scholarshipModel : ScholarshipModel = self.dataSource![btn.tag - 20000] as! ScholarshipModel
-            self.mc_loading()
+            self.mc_loading(text: "Loding")
             DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: scholarshipModel.scholarship_id!, status: "LISTING") { result, reponse in
                 DispatchQueue.main.async { [self] in
                     self.mc_remove()
@@ -76,7 +84,7 @@ class NoOfferScholarshipController: UIViewController {
     @objc func recallScholarship(btn:UIButton) {
         if btn.tag - 30000 < self.dataSource!.count {
             let scholarshipModel : ScholarshipModel = self.dataSource![btn.tag - 30000] as! ScholarshipModel
-            self.mc_loading()
+            self.mc_loading(text: "Loding")
             DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: scholarshipModel.scholarship_id!, status: "DRAFT") { result, reponse in
                 DispatchQueue.main.async { [self] in
                     self.mc_remove()

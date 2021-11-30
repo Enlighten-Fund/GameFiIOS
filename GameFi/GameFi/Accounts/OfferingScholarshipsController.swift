@@ -31,7 +31,7 @@ class OfferingScholarshipsController: UIViewController {
         if btn.tag - 90000 < self.dataSource!.count {
             let scholarshipModel : ScholarshipModel = self.dataSource![btn.tag - 90000] as! ScholarshipModel
             if scholarshipModel.status == "ACTIVE" {
-                self.mc_loading()
+                self.mc_loading(text: "Loding")
                 DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: scholarshipModel.scholarship_id!, status: "PENDING_PAYMENT") { result, reponse in
                     DispatchQueue.main.async { [self] in
                         self.mc_remove()
@@ -45,7 +45,7 @@ class OfferingScholarshipsController: UIViewController {
                     }
                 }
             } else if scholarshipModel.status == "PENDING_PAYMENT" {
-                self.mc_loading()
+                self.mc_loading(text: "Loding")
                 DataManager.sharedInstance.fetchPaymentStatus(scholarshipid: scholarshipModel.scholarship_id!) { result, reponse in
                     DispatchQueue.main.async { [self] in
                         self.mc_remove()

@@ -104,7 +104,13 @@ class TrackController: ViewController {
     }
     
     @objc func showAddTrack(){
-        self.navigationController?.pushViewController(AddTrackController.init(), animated: true)
+        let addTrackerVC = AddTrackController.init()
+        addTrackerVC.addTrackBlock = {
+            DispatchQueue.main.async { [self] in
+                self.tableView?.mj_header?.beginRefreshing()
+            }
+        }
+        self.navigationController?.pushViewController(addTrackerVC, animated: true)
     }
     @objc func showOpertate(btn:UIButton){
         GFAlert.showAlert(titleStr: nil, msgStr: nil, style: .actionSheet, currentVC: self, cancelStr: "Cancel", cancelHandler: { (cancelAction) in
@@ -121,7 +127,7 @@ class TrackController: ViewController {
                     }, otherBtns: ["OK"]) { idx in
                         let row = btn.tag - 88888
                         let trackModel : TrackModel = dataSource![row] as! TrackModel
-                        self.mc_loading()
+                        self.mc_loading(text: "Loding")
                         DataManager.sharedInstance.deleteTracker(ronin_address: trackModel.ronin_address!) { result, reponse in
                             self.mc_remove()
                             if result.success!{

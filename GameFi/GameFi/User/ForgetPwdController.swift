@@ -218,7 +218,7 @@ class ForgetPwdController: ViewController {
         }
         
         //本地验证通过
-        self.mc_loading()
+        self.mc_loading(text: "Loding")
         AWSMobileClient.default().confirmForgotPassword(username: (self.emailTextField?.text)!, newPassword: (self.passwordTextField?.text)!, confirmationCode: (self.codeTextField?.text)!) { (forgotPasswordResult, error) in
             DispatchQueue.main.async {
                 if let forgotPasswordResult = forgotPasswordResult {

@@ -18,7 +18,7 @@ class EditTrackController: ViewController {
     var managerPercentTextField : UITextField?
     var scholarpercentageLabel : UILabel?
     var trackModel : TrackModel?
-    
+    var editTrackBlock:CommonEmptyBlock?
     init(trackModel:TrackModel) {
         super.init(nibName: nil, bundle: nil)
         self.trackModel = trackModel
@@ -113,12 +113,15 @@ class EditTrackController: ViewController {
         if !self.valifyPercent() {
             return
         }
-        self.mc_loading()
+        self.mc_loading(text: "Loding")
         DataManager.sharedInstance.editTracker(accountName: accountNameTextField!.text!, ronin_address: roninTextField!.text!, manager_percentage: Float(managerPercentTextField!.text!)!) { result, reponse in
             DispatchQueue.main.async { [self] in
                 self.mc_remove()
                 if result.success!{
                     self.navigationController?.popViewController(animated: true)
+                    if self.editTrackBlock != nil{
+                        self.editTrackBlock!()
+                    }
                 }else{
                     if !result.msg!.isBlank {
                         GFAlert.showAlert(titleStr: "Notice:", msgStr: result.msg!, currentVC: self, cancelStr: "Cancel", cancelHandler: { action in

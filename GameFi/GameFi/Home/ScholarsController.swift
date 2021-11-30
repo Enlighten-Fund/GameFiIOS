@@ -14,7 +14,7 @@ import Foundation
 class ScholarsController: UIViewController {
     var pageIndex = 1
     var dataSource : Array<Any>? = Array.init()
-    let sortArray:[String] = ["scholar_since", "mmr"]
+    let sortArray:[String] = ["Latest", "Highest MMR"]
     var filter : String? = ""
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -143,7 +143,14 @@ extension  ScholarsController : UICollectionViewDelegate,UICollectionViewDataSou
     }
     
     func requestListData() {
-        DataManager.sharedInstance.fetchScholar(filter: self.filter!, pageIndex: pageIndex) { result, reponse in
+        var desc = ""
+        if self.filter == "Latest" {
+            desc = "scholar_since"
+        }else if self.filter == "Highest MMR"{
+            desc = "mmr"
+        }
+        
+        DataManager.sharedInstance.fetchScholar(filter: desc, pageIndex: pageIndex) { result, reponse in
             DispatchQueue.main.async { [self] in
                 self.collectionView.mj_footer?.endRefreshing()
                 self.collectionView.mj_header?.endRefreshing()

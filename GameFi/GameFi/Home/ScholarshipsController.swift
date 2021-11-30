@@ -17,7 +17,7 @@ class ScholarshipsController: UIViewController {
     var pageIndex = 1
     var dataSource : Array<Any>? = Array.init()
     var filter : String? = ""
-    let sortArray:[String] = ["modified_timestamp_desc", "estimate_daily_slp_desc", "credit_score_desc"]
+    let sortArray:[String] = ["Latest","Highest credit","Most SLP"]
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(red: 0.15, green: 0.16, blue: 0.24, alpha: 1)
@@ -54,6 +54,11 @@ class ScholarshipsController: UIViewController {
         DispatchQueue.main.async {
             let appdelegate : AppDelegate = UIApplication.shared.delegate! as! AppDelegate
             let addScholarVC = AddScholarshipController.init(isFromHome: true)
+            addScholarVC.addScholarBlock = {
+                DispatchQueue.main.async {
+                    self.collectionView.mj_header?.beginRefreshing()
+                }
+            }
             appdelegate.homeVC?.navigationController!.pushViewController(addScholarVC, animated: true)
         }
     }
@@ -209,7 +214,16 @@ extension  ScholarshipsController : UICollectionViewDelegate,UICollectionViewDat
     }
     
     func requestListData() {
-        DataManager.sharedInstance.fetchMarketPlaceScholarShip(filter:self.filter!, pageIndex: pageIndex) { result, reponse in
+        var desc = ""
+        if self.filter == "Latest" {
+            desc = "modified_timestamp_desc"
+        }else if self.filter == "Highest credit"{
+            desc = "credit_score_desc"
+        }else if self.filter == "Most SLP"{
+            desc = "estimate_daily_slp_desc"
+        }
+        
+        DataManager.sharedInstance.fetchMarketPlaceScholarShip(filter:desc, pageIndex: pageIndex) { result, reponse in
             DispatchQueue.main.async { [self] in
                 self.collectionView.mj_footer?.endRefreshing()
                 self.collectionView.mj_header?.endRefreshing()

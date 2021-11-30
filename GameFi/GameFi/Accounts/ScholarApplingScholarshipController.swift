@@ -34,7 +34,7 @@ class ScholarApplingScholarshipController: UIViewController,EmptyDataSource,Empt
             GFAlert.showAlert(titleStr: "Notice:", msgStr: "Do you want to give up this application？", currentVC: self,cancelStr:"NO", cancelHandler: { action in
                 
             }, otherBtns: ["YES"]) { index in
-                self.mc_loading()
+                self.mc_loading(text: "Loding")
                 DataManager.sharedInstance.updateApplicationStatus(applicationId: applicationModel.application_id!, status: "SCHOLAR_REJ") { result, reponse in
                     DispatchQueue.main.async { [self] in
                         self.mc_remove()

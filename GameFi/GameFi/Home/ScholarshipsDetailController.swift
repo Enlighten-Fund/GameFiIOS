@@ -136,7 +136,7 @@ class ScholarshipsDetailController: ViewController {
     }
     
     func requestApplay() {
-        self.mc_loading()
+        self.mc_loading(text: "Loding")
         DataManager.sharedInstance.applyScholarShipDetail(scholarshipId: self.scholarshipId!) { result, reponse in
             DispatchQueue.main.async { [self] in
                 self.mc_remove()

@@ -20,7 +20,7 @@ class EditScholarshipController: ViewController {
     var offerDaysTextField : UITextField?
     var scholarpercentageLabel : UILabel?
     var scholarshipModel : ScholarshipModel?
-    
+    var editScholarBlock:CommonEmptyBlock?
     init(scholarshipModel:ScholarshipModel) {
         super.init(nibName: nil, bundle: nil)
         self.scholarshipModel = scholarshipModel
@@ -102,7 +102,7 @@ class EditScholarshipController: ViewController {
                       "scholar_percentage":95 - Float(self.managerPercentTextField!.text!)!,
                       "id":Int(self.scholarshipModel!.scholarship_id!) as Any
         ] as [String : Any]
-        self.mc_loading()
+        self.mc_loading(text: "Loding")
         DataManager.sharedInstance.editScholarShip(dic: params) { result, reponse in
             DispatchQueue.main.async { [self] in
                 if result.success!{
@@ -110,12 +110,18 @@ class EditScholarshipController: ViewController {
                         self.mc_remove()
                         self.mc_success("Finished！Waiting the review")
                         self.navigationController?.popViewController(animated: true)
+                        if editScholarBlock != nil {
+                            editScholarBlock!()
+                        }
                     }else{
                         DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: self.scholarshipModel!.scholarship_id!, status: toStatus) { result, reponse in
                             self.mc_remove()
                             if result.success!{
                                 self.mc_success("Finished！Waiting the review")
                                 self.navigationController?.popViewController(animated: true)
+                                if editScholarBlock != nil {
+                                    editScholarBlock!()
+                                }
                             }else{
                                 if  result.msg != nil && !result.msg!.isBlank {
                                     self.mc_success(result.msg!)

@@ -104,7 +104,7 @@ class AddScholarshipController: ViewController {
                       "scholar_percentage":95 - Float(self.managerPercentTextField!.text!)!,
                       "status": toStatus as Any,
         ] as [String : Any]
-        self.mc_loading()
+        self.mc_loading(text: "Loding")
         DataManager.sharedInstance.createScholarShip(dic: params) { result, reponse in
             DispatchQueue.main.async { [self] in
                 self.mc_remove()

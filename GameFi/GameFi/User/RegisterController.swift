@@ -287,7 +287,7 @@ class RegisterController: ViewController {
         }
         
         //本地验证通过
-        self.mc_loading()
+        self.mc_loading(text: "Loding")
         AWSMobileClient.default().confirmSignUp(username: (self.usernameTextField?.text)!, confirmationCode: (self.codeTextField?.text)!) { signUpResult, error in
             DispatchQueue.main.async {
                 if let signUpResult = signUpResult {

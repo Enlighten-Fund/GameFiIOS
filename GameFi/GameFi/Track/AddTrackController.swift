@@ -16,6 +16,7 @@ class AddTrackController: ViewController {
     var roninTextField : UITextField?
     var managerPercentTextField : UITextField?
     var scholarpercentageLabel : UILabel?
+    var addTrackBlock:CommonEmptyBlock?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Track account"
@@ -117,12 +118,15 @@ class AddTrackController: ViewController {
         if !self.valifyPercent() {
             return
         }
-        self.mc_loading()
+        self.mc_loading(text: "Loding")
         DataManager.sharedInstance.createTracker(accountName: accountNameTextField!.text!, ronin_address: roninTextField!.text!, manager_percentage: Float(managerPercentTextField!.text!)!) { result, reponse in
             DispatchQueue.main.async { [self] in
                 self.mc_remove()
                 if result.success!{
                     self.navigationController?.popViewController(animated: true)
+                    if self.addTrackBlock != nil{
+                        self.addTrackBlock!()
+                    }
                 }else{
                     if !result.msg!.isBlank {
                         GFAlert.showAlert(titleStr: "Notice:", msgStr: result.msg!, currentVC: self, cancelStr: "OK", cancelHandler: { action in

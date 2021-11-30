@@ -86,7 +86,7 @@ class EditProfileController: ViewController {
     }
     
     func requestData() {
-        self.mc_loading()
+        self.mc_loading(text: "Loding")
         DataManager.sharedInstance.fetchUserDetailinfo { result, reponse in
             DispatchQueue.main.async { [self] in
                 self.mc_remove()
@@ -359,7 +359,7 @@ class EditProfileController: ViewController {
     }
     
     func uploadIdPhoto(image:UIImage) {
-        self.mc_loading()
+        self.mc_loading(text: "Loding")
         DataManager.sharedInstance.uploadImage(url: self.uploadUrl!, image: image) { result,reponse in
             DispatchQueue.main.async { [self] in
                 self.mc_remove()
@@ -485,7 +485,7 @@ class EditProfileController: ViewController {
         let age = ageComponents.year!
         auserinfoModel.age = String(age)
         
-        self.mc_loading()
+        self.mc_loading(text: "Loding")
         DataManager.sharedInstance.updateUserinfo(userinfoModel: auserinfoModel) { result, reponse in
             DispatchQueue.main.async { [self] in
                 self.mc_remove()
