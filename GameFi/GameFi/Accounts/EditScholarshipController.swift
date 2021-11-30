@@ -48,6 +48,15 @@ class EditScholarshipController: ViewController {
         self.noticeLabel?.isHidden = true
     }
     
+    override func leftBtnClick() {
+        GFAlert.showAlert(titleStr: "Notice:", msgStr: "If you leave now, the changes won't be saved.", currentVC: self, cancelStr: "Leave", cancelHandler: { action in
+            DispatchQueue.main.async {
+                super.leftBtnClick()
+            }
+        }, otherBtns: ["Cancel"]) { index in
+            
+        }
+    }
     
     func showNoticeLabel(notice:String){
         DispatchQueue.main.async {

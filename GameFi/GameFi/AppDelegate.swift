@@ -25,8 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         self.window?.rootViewController = self.tabbarVC
         IQKeyboardManager.shared().isEnabled = true
         IQKeyboardManager.shared().isEnableAutoToolbar = true
-        configAWS()
         AbilityUtil.sharedInstance.config()
+        configAWS()
+  
     
     /// 自定义通知
     NotificationCenter.default.addObserver(self, selector: #selector(changeRole), name: NSNotification.Name(rawValue: CHANGEROLE_NOFI), object: nil)
