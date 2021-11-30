@@ -17,7 +17,7 @@ class ScholarshipsController: UIViewController {
     var pageIndex = 1
     var dataSource : Array<Any>? = Array.init()
     var filter : String? = ""
-    let sortArray:[String] = ["Latest","Highest credit","Most SLP"]
+    let sortArray:[String] = ["Latest","Highest Credit","Most SLP"]
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(red: 0.15, green: 0.16, blue: 0.24, alpha: 1)
@@ -217,7 +217,7 @@ extension  ScholarshipsController : UICollectionViewDelegate,UICollectionViewDat
         var desc = ""
         if self.filter == "Latest" {
             desc = "modified_timestamp_desc"
-        }else if self.filter == "Highest credit"{
+        }else if self.filter == "Highest Credit"{
             desc = "credit_score_desc"
         }else if self.filter == "Most SLP"{
             desc = "estimate_daily_slp_desc"

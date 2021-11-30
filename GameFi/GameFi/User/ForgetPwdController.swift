@@ -17,6 +17,7 @@ class ForgetPwdController: ViewController {
     var passwordTextField : UITextField?
     var codeTextField : UITextField?
     var codeBtn : UIButton?
+    var timer : Timer?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Forget password"
@@ -41,9 +42,13 @@ class ForgetPwdController: ViewController {
     }
     
     func stopTimerAndUpdateCodeBtn() {
-        self.timer.invalidate()
-        self.codeBtn?.isEnabled = true
-        self.codeBtn?.setTitle("Send code", for: .normal)
+        DispatchQueue.main.async {
+            if ((self.timer?.isValid) != nil){
+                self.timer!.invalidate()
+            }
+            self.codeBtn?.isEnabled = true
+            self.codeBtn?.setTitle("Send code", for: .normal)
+        }
     }
     
     func showNoticeLabel(notice:String){
@@ -113,7 +118,24 @@ class ForgetPwdController: ViewController {
     
     func fireTimerAndShowAlert(title:String) {
         DispatchQueue.main.async {
-            self.timer.fire()
+            var countDownNum = 120
+            let countdownTimer = Timer(timeInterval: 1.0, repeats: true) { timer in
+                DispatchQueue.main.async{
+                    if countDownNum == 0 {
+                        // 销毁计时器
+                        timer.invalidate()
+                        self.updateCodeBtnToResend()
+                      print(">>> Timer has Stopped!")
+                    } else {
+                        countDownNum -= 1
+                        self.codeBtn!.setTitle(String(countDownNum), for: .normal)
+                    }
+                }
+                
+            }
+            self.timer = countdownTimer
+            RunLoop.current.add(countdownTimer, forMode: .default)
+            countdownTimer.fire()
             GFAlert.showAlert(titleStr: "Notice:", msgStr: title, currentVC: self, cancelStr: "OK", cancelHandler: { action in
                 
             }, otherBtns: nil) { index in
@@ -147,6 +169,7 @@ class ForgetPwdController: ViewController {
         }
         mc_loading()
         if btn.title(for: .normal) == "Resend code" {
+            print("email:\((self.emailTextField?.text)!)")
             DispatchQueue.main.async {
                 AWSMobileClient.default().resendSignUpCode(username: self.emailTextField!.text!, completionHandler: { (result, error) in
                     self.mc_remove()
@@ -167,6 +190,7 @@ class ForgetPwdController: ViewController {
             }
 
         }else{
+            print("email:\((self.emailTextField?.text)!)")
             AWSMobileClient.default().forgotPassword(username: (self.emailTextField?.text)!) { (forgotPasswordResult, error) in
                 self.mc_remove()
                 if let forgotPasswordResult = forgotPasswordResult {
@@ -185,6 +209,14 @@ class ForgetPwdController: ViewController {
                            case .usernameExists(_):
                             DispatchQueue.main.async { [self] in
                                 GFAlert.showAlert(titleStr: "Sign up fail:", msgStr: "Username has already been taken. Please choose another.", currentVC: self, cancelStr: "OK", cancelHandler: { alertAction in
+                                    
+                                }, otherBtns:nil) { indx in
+                                    
+                                }
+                            }
+                           case .limitExceeded(let msg):
+                            DispatchQueue.main.async { [self] in
+                                GFAlert.showAlert(titleStr: "Sign up fail:", msgStr: msg, currentVC: self, cancelStr: "OK", cancelHandler: { alertAction in
                                     
                                 }, otherBtns:nil) { indx in
                                     
@@ -325,30 +357,6 @@ class ForgetPwdController: ViewController {
         return tempTableView
     }()
     
-    lazy var timer : Timer = {
-        var countDownNum = 120
-        let countdownTimer = Timer(timeInterval: 1.0, repeats: true) { timer in
-            DispatchQueue.main.async{
-                if countDownNum == 0 {
-                    // 销毁计时器
-                    timer.invalidate()
-                    self.codeBtn!.isEnabled = true
-                    self.codeBtn!.setTitle("Send code", for: .normal)
-                    
-                  print(">>> Timer has Stopped!")
-                } else {
-                    countDownNum -= 1
-                    self.codeBtn!.setTitle(String(countDownNum), for: .normal)
-                }
-            }
-            
-        }
-        // 设置宽容度
-        countdownTimer.tolerance = 0.2
-        // 添加到当前 RunLoop，mode为默认。
-        RunLoop.current.add(countdownTimer, forMode: .default)
-        return countdownTimer
-    }()
     lazy var noticeLabel: UILabel? = {
         let tempLabel = UILabel.init(frame: CGRect.zero)
         tempLabel.backgroundColor = UIColor(red: 0.96, green: 0.3, blue: 0.3, alpha: 1)

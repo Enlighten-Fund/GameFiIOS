@@ -22,6 +22,7 @@ class RegisterController: ViewController {
     var role : Int = 1 //1代表scholar 2 代表manager
     var privacySelect = false
     var privacyBtn : UIButton?
+    var timer : Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +44,6 @@ class RegisterController: ViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.timer.invalidate()
     }
     
     @objc func loginBtnClick(btn:UIButton) {
@@ -73,7 +73,24 @@ class RegisterController: ViewController {
     
     func fireTimerAndShowAlert(title:String) {
         DispatchQueue.main.async {
-            self.timer.fire()
+            var countDownNum = 120
+            let countdownTimer = Timer(timeInterval: 1.0, repeats: true) { timer in
+                DispatchQueue.main.async{
+                    if countDownNum == 0 {
+                        // 销毁计时器
+                        timer.invalidate()
+                        self.updateCodeBtnToResend()
+                      print(">>> Timer has Stopped!")
+                    } else {
+                        countDownNum -= 1
+                        self.codeBtn!.setTitle(String(countDownNum), for: .normal)
+                    }
+                }
+                
+            }
+            self.timer = countdownTimer
+            RunLoop.current.add(countdownTimer, forMode: .default)
+            countdownTimer.fire()
             GFAlert.showAlert(titleStr: "Notice:", msgStr: title, currentVC: self, cancelStr: "OK", cancelHandler: { action in
                 
             }, otherBtns: nil) { index in
@@ -84,7 +101,9 @@ class RegisterController: ViewController {
     
     func stopTimerAndUpdateCodeBtn() {
         DispatchQueue.main.async {
-            self.timer.invalidate()
+            if ((self.timer?.isValid) != nil){
+                self.timer!.invalidate()
+            }
             self.codeBtn?.isEnabled = true
             self.codeBtn?.setTitle("Send code", for: .normal)
         }
@@ -96,6 +115,8 @@ class RegisterController: ViewController {
             self.codeBtn?.setTitle("Resend code", for: .normal)
         }
     }
+    
+
     
     
     func valifyEmail() -> Bool {
@@ -435,29 +456,6 @@ class RegisterController: ViewController {
         tempTableView.delegate = self
         view.addSubview(tempTableView)
         return tempTableView
-    }()
-    
-    lazy var timer : Timer = {
-        var countDownNum = 120
-        let countdownTimer = Timer(timeInterval: 1.0, repeats: true) { timer in
-            DispatchQueue.main.async{
-                if countDownNum == 0 {
-                    // 销毁计时器
-                    timer.invalidate()
-                    self.codeBtn!.isEnabled = true
-                    self.codeBtn!.setTitle("Send code", for: .normal)
-                    
-                  print(">>> Timer has Stopped!")
-                } else {
-                    countDownNum -= 1
-                    self.codeBtn!.setTitle(String(countDownNum), for: .normal)
-                }
-            }
-            
-        }
-        self.timer = countdownTimer
-        RunLoop.current.add(countdownTimer, forMode: .default)
-        return countdownTimer
     }()
     lazy var noticeLabel: UILabel? = {
         let tempLabel = UILabel.init(frame: CGRect.zero)

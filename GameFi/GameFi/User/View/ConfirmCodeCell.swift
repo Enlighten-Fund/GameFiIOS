@@ -16,7 +16,7 @@ class ConfirmCodeCell: LabelTextFildCell {
         self.codeBtn.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.right.equalToSuperview().offset(-20)
-            make.width.equalTo(80)
+            make.width.equalTo(100)
             make.height.equalTo(30)
         }
     }
