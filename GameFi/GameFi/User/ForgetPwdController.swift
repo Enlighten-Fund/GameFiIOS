@@ -167,7 +167,7 @@ class ForgetPwdController: ViewController {
         DispatchQueue.main.async {
             btn.isEnabled = false
         }
-        mc_loading()
+        mc_loading(text:"Loading")
         if btn.title(for: .normal) == "Resend code" {
             print("email:\((self.emailTextField?.text)!)")
             DispatchQueue.main.async {
@@ -250,7 +250,7 @@ class ForgetPwdController: ViewController {
         }
         
         //本地验证通过
-        self.mc_loading(text: "Loding")
+        self.mc_loading(text: "Loading")
         AWSMobileClient.default().confirmForgotPassword(username: (self.emailTextField?.text)!, newPassword: (self.passwordTextField?.text)!, confirmationCode: (self.codeTextField?.text)!) { (forgotPasswordResult, error) in
             DispatchQueue.main.async {
                 if let forgotPasswordResult = forgotPasswordResult {

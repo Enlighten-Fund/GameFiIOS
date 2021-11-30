@@ -83,10 +83,10 @@ class ScholarDetailHeaderView: UIView {
             self.ageLabelView.update(leftTitle: "Age", rithtTitle: scholarDetailModel.age!)
         }
         if scholarDetailModel.axie_exp != nil {
-            self.experienceLabelView.update(leftTitle: "Experience in Axie", rithtTitle: scholarDetailModel.axie_exp!)
+            self.experienceLabelView.update(leftTitle: "Experience in Axie", rithtTitle:"\(scholarDetailModel.axie_exp!) months")
         }
         if scholarDetailModel.available_time != nil {
-            self.availableLabelView.update(leftTitle: "Available time", rithtTitle: scholarDetailModel.available_time!)
+            self.availableLabelView.update(leftTitle: "Available time", rithtTitle: "\(scholarDetailModel.available_time!) hrs/day")
         }
         if scholarDetailModel.mmr != nil {
             self.mmrLabelView.update(leftTitle: "Highest MMR", rithtTitle: scholarDetailModel.mmr!)

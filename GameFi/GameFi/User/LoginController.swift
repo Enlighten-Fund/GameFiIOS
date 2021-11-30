@@ -121,7 +121,7 @@ class LoginController: ViewController {
         if !self.valifyPassword() {
             return
         }
-        self.mc_loading(text: "Loding")
+        self.mc_loading(text: "Loading")
         AWSMobileClient.default().signIn(username: (self.usernameTextField?.text)!, password: (self.passwordTextField?.text)!) { (signInResult, error) in
             DispatchQueue.main.async {
                 self.mc_remove()

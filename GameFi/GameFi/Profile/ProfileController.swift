@@ -48,7 +48,7 @@ class ProfileController: ViewController {
     
     
     func requestData() {
-//        self.mc_loading(text: "Loding")
+//        self.mc_loading(text: "Loading")
         DataManager.sharedInstance.fetchUserDetailinfo { result, reponse in
             DispatchQueue.main.async { [self] in
 //                self.mc_remove()

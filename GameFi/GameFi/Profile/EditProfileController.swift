@@ -86,7 +86,7 @@ class EditProfileController: ViewController {
     }
     
     func requestData() {
-        self.mc_loading(text: "Loding")
+        self.mc_loading(text: "Loading")
         DataManager.sharedInstance.fetchUserDetailinfo { result, reponse in
             DispatchQueue.main.async { [self] in
                 self.mc_remove()
@@ -359,7 +359,7 @@ class EditProfileController: ViewController {
     }
     
     func uploadIdPhoto(image:UIImage) {
-        self.mc_loading(text: "Loding")
+        self.mc_loading(text: "Loading")
         DataManager.sharedInstance.uploadImage(url: self.uploadUrl!, image: image) { result,reponse in
             DispatchQueue.main.async { [self] in
                 self.mc_remove()
@@ -485,7 +485,7 @@ class EditProfileController: ViewController {
         let age = ageComponents.year!
         auserinfoModel.age = String(age)
         
-        self.mc_loading(text: "Loding")
+        self.mc_loading(text: "Loading")
         DataManager.sharedInstance.updateUserinfo(userinfoModel: auserinfoModel) { result, reponse in
             DispatchQueue.main.async { [self] in
                 self.mc_remove()
@@ -557,7 +557,7 @@ class EditProfileController: ViewController {
     
     lazy var availablePickerView: GFPickerView? = {
         let tempPickerView = GFPickerView.init(frame: CGRect.zero)
-        tempPickerView.titleLabel?.text = "Available time / day (hours)"
+        tempPickerView.titleLabel?.text = "Available hours per day"
         tempPickerView.pickerView?.tag = 30002
         tempPickerView.cancelBtn?.addTarget(self, action: #selector(hideAvailablePickerView), for: .touchUpInside)
         tempPickerView.okBtn?.addTarget(self, action: #selector(selectAvailable), for: .touchUpInside)
@@ -569,7 +569,7 @@ class EditProfileController: ViewController {
     }()
     lazy var playAxiePickerView: GFPickerView? = {
         let tempPickerView = GFPickerView.init(frame: CGRect.zero)
-        tempPickerView.titleLabel?.text = "Your experience in Axie Infinity"
+        tempPickerView.titleLabel?.text = "Length of experience in game (months)"
         tempPickerView.pickerView?.tag = 30003
         tempPickerView.cancelBtn?.addTarget(self, action: #selector(hidePlayAxiePickerView), for: .touchUpInside)
         tempPickerView.okBtn?.addTarget(self, action: #selector(selectPlayAxie), for: .touchUpInside)
@@ -829,11 +829,11 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
             self.updateTextField(textField: self.roninField!, focus: true)
             return false
         }else if !self.roninField!.text!.starts(with: "0x") && !self.roninField!.text!.starts(with: "ronin:"){
-            self.showNoticeLabel(notice: "Ronin address format is 0x...... or ronin:......")
+            self.showNoticeLabel(notice: "The ronin address should start with ronin: or 0x.")
             self.updateTextField(textField: self.roninField!, focus: true)
             return false
         }else if self.roninField!.text!.count != 42 &&  self.roninField!.text!.count != 46{
-            self.showNoticeLabel(notice: "Ronin address format is 0x...... or ronin:......")
+            self.showNoticeLabel(notice: "The ronin address should start with ronin: or 0x.")
             self.updateTextField(textField: self.roninField!, focus: true)
             return false
         }else{
@@ -1018,7 +1018,7 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
             let tempCell : PickerViewCell = tableView.dequeueReusableCell(withIdentifier: pickerViewCellIdentifier + "2", for: indexPath) as! PickerViewCell
             tempCell.titleLabel?.text = self.userInfoModel?.available_time
             if tempCell.titleLabel!.text == nil || tempCell.titleLabel!.text!.isEmpty {
-                tempCell.titleLabel?.text = "Available time / day (hours)"
+                tempCell.titleLabel?.text = "Available hours per day"
             }
             self.availableLabel = tempCell.titleLabel
             cell = tempCell
@@ -1026,7 +1026,7 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
             let tempCell : PickerViewCell = tableView.dequeueReusableCell(withIdentifier: pickerViewCellIdentifier + "3", for: indexPath) as! PickerViewCell
             tempCell.titleLabel?.text = self.userInfoModel?.axie_exp
             if tempCell.titleLabel!.text == nil || tempCell.titleLabel!.text!.isEmpty {
-                tempCell.titleLabel?.text = "Your experience in Axie Infinity"
+                tempCell.titleLabel?.text = "Length of experience in game (months)"
             }
             self.playAxieLabel = tempCell.titleLabel
             cell = tempCell

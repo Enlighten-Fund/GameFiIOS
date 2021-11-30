@@ -223,7 +223,7 @@ class RegisterController: ViewController {
         DispatchQueue.main.async {
             btn.isEnabled = false
         }
-        mc_loading()
+        mc_loading(text:"Loading")
         if btn.title(for: .normal) == "Resend code" {
             DispatchQueue.main.async {
                 AWSMobileClient.default().resendSignUpCode(username: self.usernameTextField!.text!, completionHandler: { (result, error) in
@@ -311,7 +311,7 @@ class RegisterController: ViewController {
         }
         
         //本地验证通过
-        self.mc_loading(text: "Loding")
+        self.mc_loading(text: "Loading")
         AWSMobileClient.default().confirmSignUp(username: (self.usernameTextField?.text)!, confirmationCode: (self.codeTextField?.text)!) { signUpResult, error in
             DispatchQueue.main.async {
                 if let signUpResult = signUpResult {

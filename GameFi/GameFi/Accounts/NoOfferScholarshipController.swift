@@ -63,7 +63,7 @@ class NoOfferScholarshipController: UIViewController {
     @objc func postScholarship(btn:UIButton) {
         if btn.tag - 20000 < self.dataSource!.count {
             let scholarshipModel : ScholarshipModel = self.dataSource![btn.tag - 20000] as! ScholarshipModel
-            self.mc_loading(text: "Loding")
+            self.mc_loading(text: "Loading")
             DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: scholarshipModel.scholarship_id!, status: "LISTING") { result, reponse in
                 DispatchQueue.main.async { [self] in
                     self.mc_remove()
@@ -82,22 +82,27 @@ class NoOfferScholarshipController: UIViewController {
     }
     
     @objc func recallScholarship(btn:UIButton) {
-        if btn.tag - 30000 < self.dataSource!.count {
-            let scholarshipModel : ScholarshipModel = self.dataSource![btn.tag - 30000] as! ScholarshipModel
-            self.mc_loading(text: "Loding")
-            DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: scholarshipModel.scholarship_id!, status: "DRAFT") { result, reponse in
-                DispatchQueue.main.async { [self] in
-                    self.mc_remove()
-                    if result.success!{
-                        self.collectionView.mj_header?.beginRefreshing()
-                    }else{
-                        if  result.msg != nil && !result.msg!.isBlank {
-                            self.mc_success(result.msg!)
+        GFAlert.showAlert(titleStr: "Notice:", msgStr: "Recall from the marketplace and you won't receive the application anymore.", currentVC: self, cancelStr: "Cancel", cancelHandler: { alertAction in
+            
+        }, otherBtns: ["Recall"]) { index in
+            if btn.tag - 30000 < self.dataSource!.count {
+                let scholarshipModel : ScholarshipModel = self.dataSource![btn.tag - 30000] as! ScholarshipModel
+                self.mc_loading(text: "Loading")
+                DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: scholarshipModel.scholarship_id!, status: "DRAFT") { result, reponse in
+                    DispatchQueue.main.async { [self] in
+                        self.mc_remove()
+                        if result.success!{
+                            self.collectionView.mj_header?.beginRefreshing()
+                        }else{
+                            if  result.msg != nil && !result.msg!.isBlank {
+                                self.mc_success(result.msg!)
+                            }
                         }
                     }
                 }
             }
         }
+        
     }
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()

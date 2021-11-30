@@ -114,7 +114,7 @@ class AddScholarshipController: ViewController {
                       "scholar_percentage":95 - Float(self.managerPercentTextField!.text!)!,
                       "status": toStatus as Any,
         ] as [String : Any]
-        self.mc_loading(text: "Loding")
+        self.mc_loading(text: "Loading")
         DataManager.sharedInstance.createScholarShip(dic: params) { result, reponse in
             DispatchQueue.main.async { [self] in
                 self.mc_remove()
@@ -169,11 +169,11 @@ class AddScholarshipController: ViewController {
             self.updateTextField(textField: self.roninTextField!, focus: true)
             return false
         }else if !self.roninTextField!.text!.starts(with: "0x") && !self.roninTextField!.text!.starts(with: "ronin:"){
-            self.showNoticeLabel(notice: "Ronin address format is 0x...... or ronin:......")
+            self.showNoticeLabel(notice: "The ronin address should start with ronin: or 0x.")
             self.updateTextField(textField: self.roninTextField!, focus: true)
             return false
         }else if self.roninTextField!.text!.count != 42 &&  self.roninTextField!.text!.count != 46{
-            self.showNoticeLabel(notice: "Ronin address format is 0x...... or ronin:......")
+            self.showNoticeLabel(notice: "The ronin address should start with ronin: or 0x.")
             self.updateTextField(textField: self.roninTextField!, focus: true)
             return false
         }else{

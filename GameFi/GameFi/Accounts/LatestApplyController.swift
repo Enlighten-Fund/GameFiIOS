@@ -49,7 +49,7 @@ class LatestApplyController: UIViewController {
             GFAlert.showAlert(titleStr: "Notice:", msgStr: "Offer \(applicationModel.scholarship_name!) to \(applicationModel.scholar_user_name!) in next \(applicationModel.scholarship_offer_period!) days", currentVC: self, cancelStr: "Cancel", cancelHandler: { alertAction in
                 
             }, otherBtns: ["Offer"]) { index in
-                self.mc_loading(text: "Loding")
+                self.mc_loading(text: "Loading")
                 DataManager.sharedInstance.updateApplicationStatus(applicationId: applicationModel.application_id!, status: "PASSED") { result, reponse in
                     DispatchQueue.main.async { [self] in
                         self.mc_remove()
@@ -72,7 +72,7 @@ class LatestApplyController: UIViewController {
             GFAlert.showAlert(titleStr: "Notice:", msgStr: "Reject the application of \(applicationModel.scholar_user_name!)", currentVC: self, cancelStr: "Cancel", cancelHandler: { alertAction in
                 
             }, otherBtns: ["Reject"]) { index in
-                self.mc_loading(text: "Loding")
+                self.mc_loading(text: "Loading")
                 DataManager.sharedInstance.updateApplicationStatus(applicationId: applicationModel.application_id!, status: "MANAGER_REJ") { result, reponse in
                     DispatchQueue.main.async { [self] in
                         self.mc_remove()

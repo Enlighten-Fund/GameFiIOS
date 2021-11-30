@@ -127,7 +127,7 @@ class TrackController: ViewController {
                     }, otherBtns: ["OK"]) { idx in
                         let row = btn.tag - 88888
                         let trackModel : TrackModel = dataSource![row] as! TrackModel
-                        self.mc_loading(text: "Loding")
+                        self.mc_loading(text: "Loading")
                         DataManager.sharedInstance.deleteTracker(ronin_address: trackModel.ronin_address!) { result, reponse in
                             self.mc_remove()
                             if result.success!{
