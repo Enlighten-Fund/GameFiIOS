@@ -11,7 +11,6 @@ import SnapKit
 import AWSMobileClient
 import MCToast
 
-
 class RegisterController: ViewController {
     var emailTextField : UITextField?
     var usernameTextField : UITextField?
@@ -197,6 +196,10 @@ class RegisterController: ViewController {
             return true
         }
     }
+    
+    func checkEmail(_ email: String, completion: @escaping (Bool) -> Void) {
+        
+        }
     
     //发送验证码
     @objc func codeBtnClick(btn:UIButton) {
