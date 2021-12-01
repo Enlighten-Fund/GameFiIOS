@@ -141,6 +141,7 @@ class ScholarshipsDetailController: ViewController {
             DispatchQueue.main.async { [self] in
                 self.mc_remove()
                 if result.success!{
+                    NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: APPLYSUCCESS_NOFI), object: nil)
                     DispatchQueue.main.async { [self] in
                         GFAlert.showAlert(titleStr: "Notice:", msgStr: "Apply success,please wait for the manager's consent", currentVC: self,cancelStr:"OK", cancelHandler: { action in
                             DispatchQueue.main.async { [self] in

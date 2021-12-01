@@ -25,8 +25,15 @@ class ScholarApplingScholarshipController: UIViewController,EmptyDataSource,Empt
         }
         
         self.collectionView.mj_header?.beginRefreshing()
+        /// 自定义通知
+        NotificationCenter.default.addObserver(self, selector: #selector(applySuccess), name: NSNotification.Name(rawValue: APPLYSUCCESS_NOFI), object: nil)
     }
     
+    @objc func applySuccess()  {
+        DispatchQueue.main.async { [self] in
+            self.collectionView.mj_header?.beginRefreshing()
+        }
+    }
     
     @objc func deleteBtnClick(btn:UIButton) {
         if btn.tag - 50000 < self.dataSource!.count {

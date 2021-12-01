@@ -54,6 +54,7 @@ class LatestApplyController: UIViewController {
                     DispatchQueue.main.async { [self] in
                         self.mc_remove()
                         if result.success!{
+                            NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: OFFERSUCCESS_NOFI), object: nil)
                             self.collectionView.mj_header?.beginRefreshing()
                         }else{
                             if  result.msg != nil && !result.msg!.isBlank {

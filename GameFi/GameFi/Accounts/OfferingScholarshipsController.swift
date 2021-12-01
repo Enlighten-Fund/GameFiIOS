@@ -25,6 +25,14 @@ class OfferingScholarshipsController: UIViewController {
         }
         
         self.collectionView.mj_header?.beginRefreshing()
+        /// 自定义通知
+        NotificationCenter.default.addObserver(self, selector: #selector(offerSuccess), name: NSNotification.Name(rawValue: OFFERSUCCESS_NOFI), object: nil)
+    }
+    
+    @objc func offerSuccess()  {
+        DispatchQueue.main.async { [self] in
+            self.collectionView.mj_header?.beginRefreshing()
+        }
     }
     
     @objc func stopOrPayBtnClick(btn:UIButton) {

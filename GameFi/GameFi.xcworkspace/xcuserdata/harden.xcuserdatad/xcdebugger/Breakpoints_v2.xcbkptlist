@@ -51,22 +51,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7141C44B-5417-4F2E-8781-B5405A93FC22"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GameFi/Profile/ProfileController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
-            landmarkName = "leftBtnClick()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "F6ACE367-C5BF-41ED-8D9D-C0C86E81FB25"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -77,6 +61,22 @@
             startingLineNumber = "176"
             endingLineNumber = "176"
             landmarkName = "codeBtnClick(btn:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A960C9C6-97A4-4A61-9A53-B53C10905A81"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GameFi/Home/ScholarshipsDetailController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
+            landmarkName = "requestApplay()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
