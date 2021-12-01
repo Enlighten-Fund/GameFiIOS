@@ -141,6 +141,18 @@ extension  ProfileGuestController : UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row{
+        case 0:
+            let webVC = GFWebController.init()
+            webVC.webView.load(URLRequest(url: URL.init(string: "https://web.cyberninja.xyz/privacyPolicy.html")!))
+            self.navigationController?.pushViewController(webVC, animated: true)
+        case 1:
+            let webVC = GFWebController.init()
+            webVC.webView.load(URLRequest(url: URL.init(string: "https://web.cyberninja.xyz/privacyPolicy.html")!))
+            self.navigationController?.pushViewController(webVC, animated: true)
+        case 2:
+            let webVC = GFWebController.init()
+            webVC.webView.load(URLRequest(url: URL.init(string: "https://web.cyberninja.xyz/termsOfServie.html")!))
+            self.navigationController?.pushViewController(webVC, animated: true)
         case 3:
             let url = URL(string: "https://discord.gg/Kpsk9tWXS4")
             // 注意: 跳转之前, 可以使用 canOpenURL: 判断是否可以跳转

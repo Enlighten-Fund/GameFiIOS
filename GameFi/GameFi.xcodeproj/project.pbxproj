@@ -43,6 +43,7 @@
 		984472B4274CD91300DAE315 /* UserInfoStateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984472B3274CD91300DAE315 /* UserInfoStateController.swift */; };
 		984472BA274CF13800DAE315 /* MJChiBaoZiHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 984472B9274CF13800DAE315 /* MJChiBaoZiHeader.m */; };
 		984472BD274CF31000DAE315 /* MJChiBaoZiFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 984472BB274CF31000DAE315 /* MJChiBaoZiFooter.m */; };
+		9847CDE327574EEF007E645E /* GFWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9847CDE227574EEF007E645E /* GFWebController.swift */; };
 		984BDB95272ACD0A00F6144B /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984BDB94272ACD0A00F6144B /* RegisterController.swift */; };
 		984BDB99272BA23600F6144B /* RegisterHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984BDB98272BA23600F6144B /* RegisterHeadView.swift */; };
 		984BDB9B272BC6C200F6144B /* LabelTextFildCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984BDB9A272BC6C200F6144B /* LabelTextFildCell.swift */; };
@@ -154,6 +155,7 @@
 		984472B9274CF13800DAE315 /* MJChiBaoZiHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJChiBaoZiHeader.m; sourceTree = "<group>"; };
 		984472BB274CF31000DAE315 /* MJChiBaoZiFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJChiBaoZiFooter.m; sourceTree = "<group>"; };
 		984472BC274CF31000DAE315 /* MJChiBaoZiFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJChiBaoZiFooter.h; sourceTree = "<group>"; };
+		9847CDE227574EEF007E645E /* GFWebController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFWebController.swift; sourceTree = "<group>"; };
 		984BDB94272ACD0A00F6144B /* RegisterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
 		984BDB98272BA23600F6144B /* RegisterHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterHeadView.swift; sourceTree = "<group>"; };
 		984BDB9A272BC6C200F6144B /* LabelTextFildCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTextFildCell.swift; sourceTree = "<group>"; };
@@ -453,6 +455,7 @@
 				987694362739625A0075CA0F /* ProfileController.swift */,
 				98D99410273A7F31006AA8DC /* EditProfileController.swift */,
 				984472B3274CD91300DAE315 /* UserInfoStateController.swift */,
+				9847CDE227574EEF007E645E /* GFWebController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -677,6 +680,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9847CDE327574EEF007E645E /* GFWebController.swift in Sources */,
 				9876942D2738F2950075CA0F /* ScholarDetailHeaderView.swift in Sources */,
 				9876942F2738FD500075CA0F /* ScholarDetailCell.swift in Sources */,
 				98D99409273A3A45006AA8DC /* SweetAlert.swift in Sources */,

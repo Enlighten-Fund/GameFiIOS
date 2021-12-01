@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 import SnapKit
-
+import JXWebViewController
 import MJRefresh
 import AWSMobileClient
 
@@ -265,6 +265,18 @@ extension  ProfileController : UITableViewDelegate,UITableViewDataSource{
             {
             case 0:
                 self.navigationController?.pushViewController(EditProfileController.init(), animated: true)
+            case 1:
+                let webVC = GFWebController.init()
+                webVC.webView.load(URLRequest(url: URL.init(string: "https://web.cyberninja.xyz/privacyPolicy.html")!))
+                self.navigationController?.pushViewController(webVC, animated: true)
+            case 2:
+                let webVC = GFWebController.init()
+                webVC.webView.load(URLRequest(url: URL.init(string: "https://web.cyberninja.xyz/privacyPolicy.html")!))
+                self.navigationController?.pushViewController(webVC, animated: true)
+            case 3:
+                let webVC = GFWebController.init()
+                webVC.webView.load(URLRequest(url: URL.init(string: "https://web.cyberninja.xyz/termsOfServie.html")!))
+                self.navigationController?.pushViewController(webVC, animated: true)
             case 4:
                 GFAlert.showAlert(titleStr: "Notice:", msgStr: "Are you sure you want to log out？", currentVC: self, cancelStr: "Cancel", cancelHandler: { alertaction in
                     

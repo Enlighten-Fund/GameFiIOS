@@ -12,6 +12,7 @@ ${BUILT_PRODUCTS_DIR}/ESTabBarController-swift/ESTabBarController_swift.framewor
 ${BUILT_PRODUCTS_DIR}/EmptyKit/EmptyKit.framework
 ${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework
 ${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework
+${BUILT_PRODUCTS_DIR}/JXWebViewController/JXWebViewController.framework
 ${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework
 ${BUILT_PRODUCTS_DIR}/MCToast/MCToast.framework
 ${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework

@@ -15,4 +15,5 @@ target 'GameFi' do
   pod 'MCToast'
   pod 'Bugly'
   pod 'EmptyKit'
+  pod 'JXWebViewController'
 end
