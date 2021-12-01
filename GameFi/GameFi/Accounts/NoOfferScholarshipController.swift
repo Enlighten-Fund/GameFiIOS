@@ -68,7 +68,7 @@ class NoOfferScholarshipController: UIViewController {
                 DispatchQueue.main.async { [self] in
                     self.mc_remove()
                     if result.success!{
-                        self.mc_success("Finished！Waiting the review")
+                        self.mc_success("Finished! Under review.")
                         self.collectionView.mj_header?.beginRefreshing()
                     }else{
                         if  result.msg != nil && !result.msg!.isBlank {
@@ -82,7 +82,7 @@ class NoOfferScholarshipController: UIViewController {
     }
     
     @objc func recallScholarship(btn:UIButton) {
-        GFAlert.showAlert(titleStr: "Notice:", msgStr: "Recall from the marketplace and you won't receive the application anymore.", currentVC: self, cancelStr: "Cancel", cancelHandler: { alertAction in
+        GFAlert.showAlert(titleStr: "Notice:", msgStr: "Recall from the Tavern and you won't receive the application anymore.", currentVC: self, cancelStr: "Cancel", cancelHandler: { alertAction in
             
         }, otherBtns: ["Recall"]) { index in
             if btn.tag - 30000 < self.dataSource!.count {
