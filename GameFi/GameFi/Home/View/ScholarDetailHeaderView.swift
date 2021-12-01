@@ -64,6 +64,12 @@ class ScholarDetailHeaderView: UIView {
         }
     }
     
+    func dateFromString(string:String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.date(from: string)
+    }
+    
     func update(scholarDetailModel:ScholarDetailModel) {
         if scholarDetailModel.avatar != nil {
             self.iconImgView.kf.setImage(with: URL.init(string: scholarDetailModel.avatar!), placeholder:  UIImage.init(named: "portrait"), options: nil) {result, error in
@@ -79,8 +85,13 @@ class ScholarDetailHeaderView: UIView {
         if scholarDetailModel.nation != nil {
             self.locationLabelView.update(leftTitle: "Location", rithtTitle: scholarDetailModel.nation!)
         }
-        if scholarDetailModel.age != nil {
-            self.ageLabelView.update(leftTitle: "Age", rithtTitle: scholarDetailModel.age!)
+        if scholarDetailModel.dob != nil {
+            let now = Date()
+            let birthday: Date = self.dateFromString(string: scholarDetailModel.dob!)!
+            let calendar = Calendar.current
+            let ageComponents = calendar.dateComponents([.year], from: birthday, to: now)
+            let age = ageComponents.year!
+            self.ageLabelView.update(leftTitle: "Age", rithtTitle: String(age))
         }
         if scholarDetailModel.axie_exp != nil {
             self.experienceLabelView.update(leftTitle: "Experience in Axie", rithtTitle:"\(scholarDetailModel.axie_exp!) months")

@@ -13,6 +13,6 @@ class ScholarDetailModel: ScholarModel {
     var age : String?
     var game_history : String?
     var self_intro : String?
-    
+    var dob : String?
     required init() {}
 }

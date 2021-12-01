@@ -34,8 +34,8 @@ class EditProfileController: ViewController {
     var playAxieLabel : UILabel?
     var playAxie : String?
     var hasUploadId = false
-    var availabelArray = ["1-3","3-5","5-7","7-9","9-11"]
-    var playAxieArray = ["< 1","1-3","3-6",">6"]
+    var availabelArray = ["<4","4-6","6-8",">8"]
+    var playAxieArray = ["<1","1-3","3-5","5-7",">7"]
     var availableIndex = 0
     var playAxieIndex = 0
     var idPhotoCell : IDPhotoCell?
