@@ -85,7 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
                 v1.title = "Tavern"
                 v2.title = "Accounts"
                 v3.title = "Tracker"
-                v4.title = "Profile"
+                v4.title = "Me"
                 tabBarController.viewControllers = [n1, n2, n3, n4]
                 self.tabbarVC = tabBarController
                 self.window?.rootViewController = self.tabbarVC

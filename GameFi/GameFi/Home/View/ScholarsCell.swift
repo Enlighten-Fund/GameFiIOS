@@ -68,7 +68,7 @@ class ScholarsCell: UICollectionViewCell {
             self.creditLabel.text = "Credit: \(scholarModel.credit_score!)"
         }
         if scholarModel.mmr != nil {
-            self.mmrLabelView.update(leftTitle: "MMR(avg)", rithtTitle: scholarModel.mmr!)
+            self.mmrLabelView.update(leftTitle: "MMR", rithtTitle: scholarModel.mmr!)
             self.mmrLabelView.rightLabel.textColor = UIColor(red: 1, green: 0.72, blue: 0.07, alpha: 1)
         }
       

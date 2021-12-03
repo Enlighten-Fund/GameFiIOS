@@ -195,7 +195,7 @@ extension  TrackController : UITableViewDelegate,UITableViewDataSource{
     }
         
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 175
+        return 175 + 15 + 25
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

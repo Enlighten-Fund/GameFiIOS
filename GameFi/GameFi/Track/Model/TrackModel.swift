@@ -18,7 +18,7 @@ class TrackModel: BaseModel {
     var slp_balance : String?
     var slp_checkpoint : String?
     var mmr : String?
-    var last_claim_timestamp_sec : String?
+    var last_claim_timestamp_sec : TimeInterval?
     var stats_update_timestamp_sec : String?
     required init() {}
 }
