@@ -179,7 +179,7 @@ class ScholarRentCell: UICollectionViewCell {
         }
 
         if scholarshipModel.account_mmr_latest != nil && scholarshipModel.account_mmr_start != nil{
-            let mmrlatestStr : NSMutableAttributedString = NSMutableAttributedString.init(string: scholarshipModel.account_mmr_start!, attributes:[.font: UIFont(name: "PingFang SC Medium", size: 15) as Any,.foregroundColor: UIColor(red: 1, green: 1, blue: 1,alpha:1.0)])
+            let mmrlatestStr : NSMutableAttributedString = NSMutableAttributedString.init(string: scholarshipModel.account_mmr_latest!, attributes:[.font: UIFont(name: "PingFang SC Medium", size: 15) as Any,.foregroundColor: UIColor(red: 1, green: 1, blue: 1,alpha:1.0)])
             var mmrAddStr : NSAttributedString?
             if Float(scholarshipModel.account_mmr_latest!)! > Float(scholarshipModel.account_mmr_start!)! {
                 let addFloat = Float(scholarshipModel.account_mmr_latest!)! - Float(scholarshipModel.account_mmr_start!)!
