@@ -115,6 +115,14 @@ extension  ScholarRentScholarshipController : UICollectionViewDelegate,UICollect
         return self.dataSource!.count
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let scholarshipModel : ScholarshipModel = self.dataSource![indexPath.row] as! ScholarshipModel
+        if scholarshipModel.status == "END" {
+            return CGSize.init(width: IPhone_SCREEN_WIDTH - 30, height: 270)
+        }
+        return CGSize(width: IPhone_SCREEN_WIDTH - 30, height: 370)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: scholarRentCellIdentifier, for: indexPath) as! ScholarRentCell
         cell.makeConstraints()
