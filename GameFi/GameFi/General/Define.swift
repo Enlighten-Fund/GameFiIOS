@@ -22,7 +22,7 @@ let IPhone_TabbarSafeBottomMargin = (iPhoneX ? 34 : 0)
 // 适配iPhone X 导航栏高度
 let IPhone_NavHeight = (iPhoneX ? 88 : 64)
 
-
+let kAppId = "1598869169"
 let CHANGEROLE_NOFI = "CHANGEROLE"
 let APPLYSUCCESS_NOFI = "APPLYSUCCESS"
 let OFFERSUCCESS_NOFI = "OFFERSUCCESS"

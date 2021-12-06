@@ -25,7 +25,7 @@ PODS:
   - AWSPluginsCore (1.16.1):
     - Amplify (= 1.16.1)
     - AWSCore (~> 2.26.5)
-  - Bugly (2.5.90)
+  - Bugly (2.5.91)
   - EmptyKit (4.2.0)
   - ESTabBarController-swift (2.8.0)
   - HandyJSON (5.0.2)
@@ -86,7 +86,7 @@ SPEC CHECKSUMS:
   AWSCore: e84c89bded6fae98ae9c297c71f10f2c87eedc3d
   AWSMobileClient: 29692a65143c9262e37a2a1c4d4c58c6bc2a85c3
   AWSPluginsCore: 7e22a2df766dbfea3aec1e7d88916a74ae94be71
-  Bugly: 88bc32c0acc6fef7b74d610f0319ee7560d6b9fe
+  Bugly: afe841bba2ea6de6d432a3c125240a5e75949c55
   EmptyKit: 95d75cad79476379124e929488116e409043c1d5
   ESTabBarController-swift: 05593a6ad64700b03c0eb60ff625916370aa4136
   HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03

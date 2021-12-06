@@ -38,6 +38,7 @@ class HomeController: UIViewController {
                             if localV != lastV {
                                 DispatchQueue.main.async { [self] in
                                     GFAlert.showAlert(titleStr: "App notice：", msgStr: "We have a new version", currentVC: self, cancelStr: "OK", cancelHandler: { alert in
+//                                        let url = URL(string: "itms-apps://itunes.apple.com/cn/app/id1598869169?mt=8")
                                         let url = URL(string: "https://www.pgyer.com/rrZh")
                                         // 注意: 跳转之前, 可以使用 canOpenURL: 判断是否可以跳转
                                         if !UIApplication.shared.canOpenURL(url!) {
@@ -64,9 +65,8 @@ class HomeController: UIViewController {
                 }
 
             }
-            
-          
         }
+        
     }
     
     @objc func msgBtnClick() {
