@@ -200,11 +200,25 @@ class ManagerScholarshipCell: UICollectionViewCell {
                 self.btn.layer.borderColor = UIColor(red: 0.59, green: 0.59, blue: 0.59, alpha: 1).cgColor
                 self.btn.layer.borderWidth = 0.5
                 self.btn.backgroundColor = .clear
+                self.btn.isEnabled = true
             } else if scholarshipModel.status == "PENDING_PAYMENT" {
                 self.btn.setTitle("Pay now (24 hours left)", for: .normal)
                 self.btn.layer.borderColor = UIColor.clear.cgColor
                 self.btn.layer.borderWidth = 0
                 self.btn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
+                self.btn.isEnabled = true
+            } else if scholarshipModel.status == "MANAGER_PAID" {
+                self.btn.setTitle("Already ended", for: .normal)
+                self.btn.layer.borderColor = UIColor.clear.cgColor
+                self.btn.layer.borderWidth = 0
+                self.btn.backgroundColor = .gray
+                self.btn.isEnabled = false
+            } else if scholarshipModel.status == "END" {
+                self.btn.setTitle("Already ended", for: .normal)
+                self.btn.layer.borderColor = UIColor.clear.cgColor
+                self.btn.layer.borderWidth = 0
+                self.btn.backgroundColor = .gray
+                self.btn.isEnabled = false
             }
         }
     }

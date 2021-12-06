@@ -62,13 +62,12 @@ class ScholarshipsDetailController: ViewController {
             make.left.equalToSuperview().offset(0)
             make.right.equalToSuperview().offset(0)
         }
-        if status == "ACTIVE" {
+        if status == "ACTIVE" || status == "PENDING_PAYMENT"{
             self.applyView?.submitBtn.backgroundColor = .gray
             self.applyView?.submitBtn.isEnabled = false
             self.applyView?.submitBtn.setTitle("Offered", for: .normal)
         }
         self.tableView?.mj_header?.beginRefreshing()
-     
     }
     
     func requestData() {
