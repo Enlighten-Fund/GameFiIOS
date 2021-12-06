@@ -35,11 +35,11 @@
 		9811EA172726BB2700B0ACF0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9811EA162726BB2700B0ACF0 /* AppDelegate.swift */; };
 		9811EA1B2726BB2700B0ACF0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9811EA1A2726BB2700B0ACF0 /* ViewController.swift */; };
 		9811EA202726BB2800B0ACF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9811EA1F2726BB2800B0ACF0 /* Assets.xcassets */; };
-		9811EA232726BB2800B0ACF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9811EA212726BB2800B0ACF0 /* LaunchScreen.storyboard */; };
 		982B4770274F3B3C004C3B52 /* PaymentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982B476F274F3B3C004C3B52 /* PaymentModel.swift */; };
 		9830EF1D274E626200352B26 /* ApplicationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830EF1C274E626200352B26 /* ApplicationModel.swift */; };
 		9830EF1F274E66E800352B26 /* ScholarshipModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830EF1E274E66E800352B26 /* ScholarshipModel.swift */; };
 		9830EF21274E709600352B26 /* ScholarDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830EF20274E709600352B26 /* ScholarDetailModel.swift */; };
+		9837EC77275A249C004C3C27 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9837EC76275A249C004C3C27 /* LaunchScreen.storyboard */; };
 		984472B4274CD91300DAE315 /* UserInfoStateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984472B3274CD91300DAE315 /* UserInfoStateController.swift */; };
 		984472BA274CF13800DAE315 /* MJChiBaoZiHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 984472B9274CF13800DAE315 /* MJChiBaoZiHeader.m */; };
 		984472BD274CF31000DAE315 /* MJChiBaoZiFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 984472BB274CF31000DAE315 /* MJChiBaoZiFooter.m */; };
@@ -143,12 +143,12 @@
 		9811EA162726BB2700B0ACF0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9811EA1A2726BB2700B0ACF0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9811EA1F2726BB2800B0ACF0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		9811EA222726BB2800B0ACF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9811EA242726BB2800B0ACF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		982B476F274F3B3C004C3B52 /* PaymentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentModel.swift; sourceTree = "<group>"; };
 		9830EF1C274E626200352B26 /* ApplicationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationModel.swift; sourceTree = "<group>"; };
 		9830EF1E274E66E800352B26 /* ScholarshipModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarshipModel.swift; sourceTree = "<group>"; };
 		9830EF20274E709600352B26 /* ScholarDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScholarDetailModel.swift; sourceTree = "<group>"; };
+		9837EC76275A249C004C3C27 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		984472B3274CD91300DAE315 /* UserInfoStateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoStateController.swift; sourceTree = "<group>"; };
 		984472B7274CF13700DAE315 /* GameFi-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GameFi-Bridging-Header.h"; sourceTree = "<group>"; };
 		984472B8274CF13800DAE315 /* MJChiBaoZiHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJChiBaoZiHeader.h; sourceTree = "<group>"; };
@@ -376,8 +376,8 @@
 				980A7DC3272828FD006AE4C4 /* DataManager.swift */,
 				98581738273E921800D8CFCA /* UserManager.swift */,
 				9811EA1F2726BB2800B0ACF0 /* Assets.xcassets */,
-				9811EA212726BB2800B0ACF0 /* LaunchScreen.storyboard */,
 				9811EA242726BB2800B0ACF0 /* Info.plist */,
+				9837EC76275A249C004C3C27 /* LaunchScreen.storyboard */,
 			);
 			path = GameFi;
 			sourceTree = "<group>";
@@ -622,10 +622,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9811EA232726BB2800B0ACF0 /* LaunchScreen.storyboard in Resources */,
 				9811EA202726BB2800B0ACF0 /* Assets.xcassets in Resources */,
 				7C326CFCDF747D3682D551F3 /* awsconfiguration.json in Resources */,
 				98581788274CB7B100D8CFCA /* countries.json in Resources */,
+				9837EC77275A249C004C3C27 /* LaunchScreen.storyboard in Resources */,
 				985817432742784B00D8CFCA /* axieability.json in Resources */,
 				7BCBC07F76E99519033E01A6 /* amplifyconfiguration.json in Resources */,
 			);
@@ -784,17 +784,6 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-		9811EA212726BB2800B0ACF0 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9811EA222726BB2800B0ACF0 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		9811EA252726BB2800B0ACF0 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -921,7 +910,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = GB62JTZ689;
 				INFOPLIST_FILE = GameFi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -929,7 +918,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.enlighten.CryptoNinja;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -949,7 +938,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = GB62JTZ689;
 				INFOPLIST_FILE = GameFi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -957,7 +946,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.enlighten.CryptoNinja;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

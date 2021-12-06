@@ -197,8 +197,8 @@ extension  ScholarshipsController : UICollectionViewDelegate,UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let appdelegate : AppDelegate = UIApplication.shared.delegate! as! AppDelegate
         let scholarshipModel : ScholarshipModel = self.dataSource![indexPath.row] as! ScholarshipModel
-        if scholarshipModel.scholarship_id != nil &&  scholarshipModel.axie_brief != nil {
-            let scholarshipDetailVC = ScholarshipsDetailController.init(scholarshipId: scholarshipModel.scholarship_id!, axieIds: scholarshipModel.axie_briefArry!)
+        if scholarshipModel.scholarship_id != nil &&  scholarshipModel.axie_brief != nil &&  scholarshipModel.status != nil{
+            let scholarshipDetailVC = ScholarshipsDetailController.init(scholarshipId: scholarshipModel.scholarship_id!, axieIds: scholarshipModel.axie_briefArry!, status: scholarshipModel.status!)
             appdelegate.homeVC?.navigationController!.pushViewController(scholarshipDetailVC, animated: true)
         }
     }

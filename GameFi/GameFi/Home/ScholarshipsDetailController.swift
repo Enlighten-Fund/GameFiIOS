@@ -24,9 +24,9 @@ class ScholarshipsDetailController: ViewController {
     var axieIds : [String]?
     var newAxieIds : [String]?
     var dataSource : Array<Any>? = Array.init()
+    var status : String?
     
-    
-    init(scholarshipId : String,axieIds:[String]) {
+    init(scholarshipId : String,axieIds:[String],status:String) {
         super.init(nibName: nil, bundle: nil)
         self.scholarshipId = scholarshipId
         self.axieIds = axieIds
@@ -40,6 +40,7 @@ class ScholarshipsDetailController: ViewController {
                 self.newAxieIds?.append(axieId)
             }
         }
+        self.status = status
     }
     
     required init?(coder: NSCoder) {
@@ -60,6 +61,11 @@ class ScholarshipsDetailController: ViewController {
             make.bottom.equalToSuperview().offset(-IPhone_TabbarSafeBottomMargin)
             make.left.equalToSuperview().offset(0)
             make.right.equalToSuperview().offset(0)
+        }
+        if status == "ACTIVE" {
+            self.applyView?.submitBtn.backgroundColor = .gray
+            self.applyView?.submitBtn.isEnabled = false
+            self.applyView?.submitBtn.setTitle("Offered", for: .normal)
         }
         self.tableView?.mj_header?.beginRefreshing()
      

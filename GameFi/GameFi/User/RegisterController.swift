@@ -398,11 +398,15 @@ class RegisterController: ViewController {
     }
     
     @objc func privacy() {
-        
+        let webVC = GFWebController.init()
+        webVC.webView.load(URLRequest(url: URL.init(string: "https://web.cyberninja.xyz/privacyPolicy.html")!))
+        self.navigationController?.pushViewController(webVC, animated: true)
     }
     
     @objc func service() {
-        
+        let webVC = GFWebController.init()
+        webVC.webView.load(URLRequest(url: URL.init(string: "https://web.cyberninja.xyz/termsOfServie.html")!))
+        self.navigationController?.pushViewController(webVC, animated: true)
     }
     
     func showNoticeLabel(notice:String){

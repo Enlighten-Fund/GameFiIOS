@@ -211,16 +211,17 @@ extension  ProfileController : UITableViewDelegate,UITableViewDataSource{
         cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
     case 4:
         cell = tableView.dequeueReusableCell(withIdentifier: "profileCellIdentifier", for: indexPath)
-        cell.imageView?.image = UIImage.init(named: "profile_youtube")
-        cell.textLabel?.text = "Join our Youtube"
-        cell.textLabel?.textColor = .white
-        cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
-    case 5:
-        cell = tableView.dequeueReusableCell(withIdentifier: "profileCellIdentifier", for: indexPath)
         cell.imageView?.image = UIImage.init(named: "profile_notion")
         cell.textLabel?.text = "Join our Notion"
         cell.textLabel?.textColor = .white
         cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
+    case 5:
+        cell = tableView.dequeueReusableCell(withIdentifier: "profileCellIdentifier", for: indexPath)
+        cell.imageView?.image = UIImage.init(named: "profile_youtube")
+        cell.textLabel?.text = "Join our Youtube"
+        cell.textLabel?.textColor = .white
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
+        
     case 6:
         cell = tableView.dequeueReusableCell(withIdentifier: "profileCellIdentifier", for: indexPath)
         cell.imageView?.image = UIImage.init(named: "profile_privacy")
@@ -282,7 +283,7 @@ extension  ProfileController : UITableViewDelegate,UITableViewDataSource{
                  }
              }
         case 3:
-            let url = URL(string: "https://twitter.com/0xcyberninja?s=11")
+            let url = URL(string: "https://twitter.com/NinjaDAOs")
             // 注意: 跳转之前, 可以使用 canOpenURL: 判断是否可以跳转
             if !UIApplication.shared.canOpenURL(url!) {
                  // 不能跳转就不要往下执行了
@@ -296,7 +297,7 @@ extension  ProfileController : UITableViewDelegate,UITableViewDataSource{
                  }
              }
         case 4:
-            let url = URL(string: "https://youtube.com/channel/UC65EXHxwic4cEcebK8iJCjg")
+            let url = URL(string: "https://ninjadaos.notion.site/NinjaDAOs-WiKi-e6709296d97445b988a3bb87b552e3f9")
             // 注意: 跳转之前, 可以使用 canOpenURL: 判断是否可以跳转
             if !UIApplication.shared.canOpenURL(url!) {
                  // 不能跳转就不要往下执行了
@@ -310,7 +311,7 @@ extension  ProfileController : UITableViewDelegate,UITableViewDataSource{
                  }
              }
         case 5:
-            let url = URL(string: "https://loud-macaroon-715.notion.site/CyberNinja-WiKi-e6709296d97445b988a3bb87b552e3f9")
+            let url = URL(string: "https://youtube.com/channel/UC65EXHxwic4cEcebK8iJCjg")
             // 注意: 跳转之前, 可以使用 canOpenURL: 判断是否可以跳转
             if !UIApplication.shared.canOpenURL(url!) {
                  // 不能跳转就不要往下执行了
@@ -323,6 +324,7 @@ extension  ProfileController : UITableViewDelegate,UITableViewDataSource{
                       print("10以后不能完成跳转")
                  }
              }
+            
         case 6:
             let webVC = GFWebController.init()
             webVC.webView.load(URLRequest(url: URL.init(string: "https://web.cyberninja.xyz/privacyPolicy.html")!))
