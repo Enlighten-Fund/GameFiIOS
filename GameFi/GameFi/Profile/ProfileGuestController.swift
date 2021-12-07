@@ -158,11 +158,11 @@ extension  ProfileGuestController : UITableViewDelegate,UITableViewDataSource{
              }
         case 1:
             let webVC = GFWebController.init()
-            webVC.webView.load(URLRequest(url: URL.init(string: "https://web.cyberninja.xyz/privacyPolicy.html")!))
+            webVC.webView.load(URLRequest(url: URL.init(string: "https://app.ninjadaos.com/web-ui-resource/privacyPolicy.html")!))
             self.navigationController?.pushViewController(webVC, animated: true)
         case 2:
             let webVC = GFWebController.init()
-            webVC.webView.load(URLRequest(url: URL.init(string: "https://web.cyberninja.xyz/termsOfServie.html")!))
+            webVC.webView.load(URLRequest(url: URL.init(string: "https://app.ninjadaos.com/web-ui-resource/termsOfServie.html")!))
             self.navigationController?.pushViewController(webVC, animated: true)
         case 3:
             let url = URL(string: "https://discord.gg/Kpsk9tWXS4")

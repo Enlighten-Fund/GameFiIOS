@@ -153,7 +153,7 @@ class TrackCell: TableViewCell {
             self.moreBtn.isHidden = true
             self.typeImgView.image = UIImage.init(named: "track_scholar")
         }else{
-            self.accountView.backgroundColor = UIColor(red: 0.47, green: 0.25, blue: 0.36, alpha: 1)
+            self.accountView.backgroundColor = .clear
             self.moreBtn.isHidden = false
             self.typeImgView.image = UIImage.init(named: "track_self")
         }

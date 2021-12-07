@@ -399,13 +399,13 @@ class RegisterController: ViewController {
     
     @objc func privacy() {
         let webVC = GFWebController.init()
-        webVC.webView.load(URLRequest(url: URL.init(string: "https://web.cyberninja.xyz/privacyPolicy.html")!))
+        webVC.webView.load(URLRequest(url: URL.init(string: "https://app.ninjadaos.com/web-ui-resource/privacyPolicy.html")!))
         self.navigationController?.pushViewController(webVC, animated: true)
     }
     
     @objc func service() {
         let webVC = GFWebController.init()
-        webVC.webView.load(URLRequest(url: URL.init(string: "https://web.cyberninja.xyz/termsOfServie.html")!))
+        webVC.webView.load(URLRequest(url: URL.init(string: "https://app.ninjadaos.com/web-ui-resource/termsOfServie.html")!))
         self.navigationController?.pushViewController(webVC, animated: true)
     }
     

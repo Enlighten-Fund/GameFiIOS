@@ -82,13 +82,18 @@ class LatestScholarshipCell: UICollectionViewCell {
             self.highmmrLabelView.rightLabel.text = applicationModel.scholar_mmr
         }
         if applicationModel.scholar_available_time != nil {
-            self.availabelLabelView.rightLabel.text = applicationModel.scholar_available_time
+            self.availabelLabelView.rightLabel.text = "\(applicationModel.scholar_available_time!) hrs/day"
         }
         if applicationModel.scholar_axie_exp != nil {
-            self.experienceLabelView.rightLabel.text = applicationModel.scholar_axie_exp
+            self.experienceLabelView.rightLabel.text = "\(applicationModel.scholar_axie_exp!) months"
         }
         if applicationModel.scholar_nation != nil {
-            self.countryLabelView.rightLabel.text = applicationModel.scholar_nation
+            let nation : String = applicationModel.scholar_nation!
+            let country : [String] = nation.components(separatedBy: ",")
+            if country.count > 0 {
+                self.countryLabelView.rightLabel.text = country[0]
+            }
+            
         }
         if applicationModel.scholarship_name != nil {
             self.accountAppliedLabelView.rightLabel.text = applicationModel.scholarship_name
@@ -141,7 +146,7 @@ class LatestScholarshipCell: UICollectionViewCell {
    
     lazy var accountAppliedLabelView : LabelAndLabelInterView = {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
-        tempLabelView.leftLabel.text = "Account applied"
+        tempLabelView.leftLabel.text = "Scholarship applied"
         self.contentView.addSubview(tempLabelView)
         return tempLabelView
     }()

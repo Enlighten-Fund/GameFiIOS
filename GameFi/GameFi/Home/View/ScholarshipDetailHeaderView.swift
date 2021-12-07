@@ -78,7 +78,7 @@ class ScholarshipDetailHeaderView: UIView {
         }
        
         if scholarshipDetailModel.scholarship_name != nil {
-            self.accountNameLabelView.update(leftTitle: "Account name", rithtTitle: scholarshipDetailModel.scholarship_name!)
+            self.accountNameLabelView.update(leftTitle: "Scholarship name", rithtTitle: scholarshipDetailModel.scholarship_name!)
         }
         
         if scholarshipDetailModel.estimate_daily_slp != nil {

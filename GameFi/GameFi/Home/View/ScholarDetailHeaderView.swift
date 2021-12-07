@@ -66,7 +66,7 @@ class ScholarDetailHeaderView: UIView {
     
     func dateFromString(string:String) -> Date? {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.dateFormat = "yyyy-MM-dd  HH:mm:ss"
         return dateFormatter.date(from: string)
     }
     
@@ -83,9 +83,13 @@ class ScholarDetailHeaderView: UIView {
             self.creditScoreLabelView.update(leftTitle: "Credit score", rithtTitle: scholarDetailModel.credit_score!)
         }
         if scholarDetailModel.nation != nil {
-            self.locationLabelView.update(leftTitle: "Location", rithtTitle: scholarDetailModel.nation!)
+            let nation : String = scholarDetailModel.nation!
+            let country : [String] = nation.components(separatedBy: ",")
+            if country.count > 0 {
+                self.locationLabelView.update(leftTitle: "Location", rithtTitle: country[0])
+            }
         }
-        if scholarDetailModel.dob != nil {
+        if scholarDetailModel.dob != nil && self.dateFromString(string: scholarDetailModel.dob!) != nil{
             let now = Date()
             let birthday: Date = self.dateFromString(string: scholarDetailModel.dob!)!
             let calendar = Calendar.current

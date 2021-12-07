@@ -327,11 +327,11 @@ extension  ProfileController : UITableViewDelegate,UITableViewDataSource{
             
         case 6:
             let webVC = GFWebController.init()
-            webVC.webView.load(URLRequest(url: URL.init(string: "https://web.cyberninja.xyz/privacyPolicy.html")!))
+            webVC.webView.load(URLRequest(url: URL.init(string: "https://app.ninjadaos.com/web-ui-resource/privacyPolicy.html")!))
             self.navigationController?.pushViewController(webVC, animated: true)
         case 7:
             let webVC = GFWebController.init()
-            webVC.webView.load(URLRequest(url: URL.init(string: "https://web.cyberninja.xyz/termsOfServie.html")!))
+            webVC.webView.load(URLRequest(url: URL.init(string: "https://app.ninjadaos.com/web-ui-resource/termsOfServie.html")!))
             self.navigationController?.pushViewController(webVC, animated: true)
         case 8:
             GFAlert.showAlert(titleStr: "Notice:", msgStr: "Are you sure you want to log out？", currentVC: self, cancelStr: "Cancel", cancelHandler: { alertaction in

@@ -39,6 +39,7 @@ class LabelAndLabelView: UIView{
         let tempLabel = UILabel.init(frame: CGRect.zero)
         tempLabel.textColor = UIColor(red: 0.58, green: 0.62, blue: 0.78, alpha: 1)
         tempLabel.font = UIFont(name: "PingFang SC Regular", size: 15)
+        tempLabel.adjustsFontSizeToFitWidth = true
         self.addSubview(tempLabel)
         return tempLabel
     }()
@@ -47,6 +48,7 @@ class LabelAndLabelView: UIView{
         tempLabel.textColor = .white
         tempLabel.textAlignment = .right
         tempLabel.font = UIFont(name: "PingFang SC Medium", size: 15)
+        tempLabel.adjustsFontSizeToFitWidth = true
         self.addSubview(tempLabel)
         return tempLabel
     }()

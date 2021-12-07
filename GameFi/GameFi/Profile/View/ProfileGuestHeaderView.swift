@@ -55,8 +55,8 @@ class ProfileGuestHeaderView: UIView {
     }()
     lazy var signBtn : UIButton = {
         let tempBtn = UIButton.init(frame: CGRect.zero)
-        let text = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
-        tempBtn.setTitle("Sign in \(text!)", for: .normal)
+//        let text = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
+        tempBtn.setTitle("Sign in", for: .normal)
         tempBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
         tempBtn.layer.cornerRadius = 5
         tempBtn.layer.masksToBounds = true

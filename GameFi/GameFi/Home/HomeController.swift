@@ -20,9 +20,13 @@ class HomeController: UIViewController {
             make.bottom.equalToSuperview().offset(-IPhone_TabbarHeight)
             make.right.equalToSuperview()
         })
-        self.checkVersion()
+        
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+//        self.checkVersion()
+    }
     
     func checkVersion() {
         DataManager.sharedInstance.fetchAppVersion { result, reponse in
@@ -82,7 +86,7 @@ class HomeController: UIViewController {
     
     lazy var pageView : TYPageView? = {
         let pageView = TYPageView(frame: view.bounds,
-                                titles: ["Scholarships","Scholars"],
+                                titles: ["Scholarship","Scholar"],
                                 childControllers: [ScholarshipsController(),ScholarsController()],
                                 parentController: self)
         view.addSubview(pageView)

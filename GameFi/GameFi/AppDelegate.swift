@@ -47,9 +47,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
                 let v4 = ProfileGuestController()
                 self.homeVC = v1
                 v1.tabBarItem = ESTabBarItem.init(title: "Tavern", image: UIImage(named: "explore"), selectedImage: UIImage(named: "explore_select"))
-                v2.tabBarItem = ESTabBarItem.init(title: "Accounts", image: UIImage(named: "accounts"), selectedImage: UIImage(named: "accounts_select"))
+                v2.tabBarItem = ESTabBarItem.init(title: "Account", image: UIImage(named: "accounts"), selectedImage: UIImage(named: "accounts_select"))
                 v3.tabBarItem = ESTabBarItem.init(title: "Tracker", image: UIImage(named: "tracker"), selectedImage: UIImage(named: "tracker_select"))
-                v4.tabBarItem = ESTabBarItem.init(title: "Profile", image: UIImage(named: "profile"), selectedImage: UIImage(named: "profile_select"))
+                v4.tabBarItem = ESTabBarItem.init(title: "Me", image: UIImage(named: "profile"), selectedImage: UIImage(named: "profile_select"))
                 
                 let n1 = GFNavController.init(rootViewController: v1)
                 let n2 = GFNavController.init(rootViewController: v2)
@@ -57,9 +57,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
                 let n4 = GFNavController.init(rootViewController: v4)
                 
                 v1.title = "Tavern"
-                v2.title = "Accounts"
+                v2.title = "Account"
                 v3.title = "Tracker"
-                v4.title = "Profile"
+                v4.title = "Me"
                 tabBarController.viewControllers = [n1, n2, n3, n4]
                 self.tabbarVC = tabBarController
                 self.window?.rootViewController = self.tabbarVC
@@ -73,9 +73,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
                 let v4 = ProfileGuestController()
                 self.homeVC = v1
                 v1.tabBarItem = ESTabBarItem.init(title: "Tavern", image: UIImage(named: "explore"), selectedImage: UIImage(named: "explore_select"))
-                v2.tabBarItem = ESTabBarItem.init(title: "Accounts", image: UIImage(named: "accounts"), selectedImage: UIImage(named: "accounts_select"))
+                v2.tabBarItem = ESTabBarItem.init(title: "Account", image: UIImage(named: "accounts"), selectedImage: UIImage(named: "accounts_select"))
                 v3.tabBarItem = ESTabBarItem.init(title: "Tracker", image: UIImage(named: "tracker"), selectedImage: UIImage(named: "tracker_select"))
-                v4.tabBarItem = ESTabBarItem.init(title: "Profile", image: UIImage(named: "profile"), selectedImage: UIImage(named: "profile_select"))
+                v4.tabBarItem = ESTabBarItem.init(title: "Me", image: UIImage(named: "profile"), selectedImage: UIImage(named: "profile_select"))
                 
                 let n1 = GFNavController.init(rootViewController: v1)
                 let n2 = GFNavController.init(rootViewController: v2)
@@ -83,7 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
                 let n4 = GFNavController.init(rootViewController: v4)
                 
                 v1.title = "Tavern"
-                v2.title = "Accounts"
+                v2.title = "Account"
                 v3.title = "Tracker"
                 v4.title = "Me"
                 tabBarController.viewControllers = [n1, n2, n3, n4]
@@ -197,9 +197,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         let v4 = ProfileGuestController()
         self.homeVC = v1
         v1.tabBarItem = ESTabBarItem.init(title: "Tavern", image: UIImage(named: "explore"), selectedImage: UIImage(named: "explore_select"))
-        v2!.tabBarItem = ESTabBarItem.init(title: "Accounts", image: UIImage(named: "accounts"), selectedImage: UIImage(named: "accounts_select"))
+        v2!.tabBarItem = ESTabBarItem.init(title: "Account", image: UIImage(named: "accounts"), selectedImage: UIImage(named: "accounts_select"))
         v3.tabBarItem = ESTabBarItem.init(title: "Tracker", image: UIImage(named: "tracker"), selectedImage: UIImage(named: "tracker_select"))
-        v4.tabBarItem = ESTabBarItem.init(title: "Profile", image: UIImage(named: "profile"), selectedImage: UIImage(named: "profile_select"))
+        v4.tabBarItem = ESTabBarItem.init(title: "Me", image: UIImage(named: "profile"), selectedImage: UIImage(named: "profile_select"))
         
         let n1 = GFNavController.init(rootViewController: v1)
         let n2 = GFNavController.init(rootViewController: v2!)
@@ -207,9 +207,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         let n4 = GFNavController.init(rootViewController: v4)
         
         v1.title = "Tavern"
-        v2!.title = "Accounts"
+        v2!.title = "Account"
         v3.title = "Tracker"
-        v4.title = "Profile"
+        v4.title = "Me"
         tabBarController.viewControllers = [n1, n2, n3, n4]
         return tabBarController
     }()

@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>CyberNinja</string>
+	<string>NinjaDAOs</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -28,9 +28,9 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>使用相机</string>
+	<string>CyberNinja needs your consent to access the camera to shoot the product information. If it is prohibited, it will not be able to take photos and update the information</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>使用图像</string>
+	<string>CyberNinja requires your consent to access the photo album to select photo upload / release information. If prohibited, the selected photo upload / release information cannot be uploaded</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
