@@ -20,7 +20,7 @@ class ForgetPwdController: ViewController {
     var timer : Timer?
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Forget password"
+        self.title = "Forgot password"
         self.tableView!.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(0)
             make.bottom.equalToSuperview().offset(0)
@@ -340,7 +340,7 @@ class ForgetPwdController: ViewController {
         tempTableView.backgroundColor = self.view.backgroundColor
         let headerView = RegisterHeadView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 80))
         headerView.loginBtn.addTarget(self, action: #selector(loginBtnClick), for: .touchUpInside)
-        headerView.welcomeLabel?.text = "Forget password?"
+        headerView.welcomeLabel?.text = "Forgot password?"
         tempTableView.tableHeaderView = headerView
         let submitView = SubmitView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 40))
         submitView.submitBtn.addTarget(self, action: #selector(resetPwdBtnClick), for: .touchUpInside)
@@ -423,7 +423,7 @@ extension  ForgetPwdController : UITableViewDelegate,UITableViewDataSource,UITex
         tempCell.textFild?.isSecureTextEntry = true
         tempCell.textFild?.delegate = self
         self.passwordTextField = tempCell.textFild
-        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter password", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter new password", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         cell = tempCell
     case 2:
         let tempCell : ConfirmCodeCell = tableView.dequeueReusableCell(withIdentifier: confirmCodeCellIdentifier, for: indexPath) as! ConfirmCodeCell

@@ -89,11 +89,15 @@ class ScholarshipsDetailController: ViewController {
                     if result.success!{
                         let tempModel : AxieinfoModel = reponse as! AxieinfoModel
                         self.dataSource?.append(tempModel)
-                        if self.dataSource?.count == self.newAxieIds?.count {
-                            DispatchQueue.main.async { [self] in
-                                self.tableView!.mj_header?.endRefreshing()
-                                self.tableView?.reloadData()
-                            }
+//                        if self.dataSource?.count == self.newAxieIds?.count {
+//                            DispatchQueue.main.async { [self] in
+//                                self.tableView!.mj_header?.endRefreshing()
+//                                self.tableView?.reloadData()
+//                            }
+//                        }
+                        DispatchQueue.main.async { [self] in
+                            self.tableView!.mj_header?.endRefreshing()
+                            self.tableView?.reloadData()
                         }
                     }
                 }

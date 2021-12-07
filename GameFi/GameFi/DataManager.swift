@@ -79,7 +79,7 @@ class DataManager: NSObject {
             }
             let request = AF.request(urlPath,method: .post,parameters: tempDic,encoding: JSONEncoding.default, headers: headers)
             request.responseJSON { (response) in
-                print("请求:\(BaseUrl + url)\nheader:\(headers)\n入参:\(tempDic)\n返回:\(response.result)")
+                print("请求:\(BaseUrl + url)\n入参:\(tempDic)\n返回:\(response.result)")
                 switch response.result {
                 case let .success(result):
                     do {
