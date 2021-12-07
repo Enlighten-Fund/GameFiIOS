@@ -14,11 +14,11 @@
     "categories": {
       "auth": {
         "gamefi96cf3769": {},
-        "gamefi362b1b25": {
-          "userPoolId": "ap-northeast-1_3LhbX6qn4",
-          "userPoolName": "EnlightenGamefiUserPool_Prod",
-          "webClientId": "79fatovkb108t9pfvsheo6nd5p",
-          "nativeClientId": "79fatovkb108t9pfvsheo6nd5p"
+        "gamefi24ec292f": {
+          "userPoolId": "ap-northeast-1_9Fa2QXxzo",
+          "userPoolName": "EnlightenGamefiUserPool",
+          "webClientId": "3iiomvqvqmsscl5csuqkmoqis5",
+          "nativeClientId": "3iiomvqvqmsscl5csuqkmoqis5"
         }
       }
     }

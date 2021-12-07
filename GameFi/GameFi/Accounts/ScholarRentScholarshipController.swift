@@ -30,7 +30,7 @@ class ScholarRentScholarshipController: UIViewController {
     @objc func stopRentBtnClick(btn:UIButton) {
         if btn.tag - 80000 < self.dataSource!.count {
             let scholarshipModel : ScholarshipModel = self.dataSource![btn.tag - 80000] as! ScholarshipModel
-            if scholarshipModel.status == "PENDING_PAYMENT"{
+            if scholarshipModel.status == "PENDING_PAYMENT" || scholarshipModel.status == "MANAGER_PAID"{
                 self.mc_loading(text: "Loading")
                 DataManager.sharedInstance.fetchPaymentStatus(scholarshipid: scholarshipModel.scholarship_id!) { result, reponse in
                     DispatchQueue.main.async { [self] in
