@@ -49,8 +49,14 @@ class ScholarshipDetailHeaderView: UIView {
             make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
             make.height.equalTo(35)
         }
-        self.axieCountLabelView.snp.makeConstraints { make in
+        self.mmrLabelView.snp.makeConstraints { make in
             make.top.equalTo(self.offerContractLabelView.snp.bottom).offset(0)
+            make.left.equalToSuperview()
+            make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
+            make.height.equalTo(35)
+        }
+        self.axieCountLabelView.snp.makeConstraints { make in
+            make.top.equalTo(self.mmrLabelView.snp.bottom).offset(0)
             make.left.equalToSuperview()
             make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
             make.height.equalTo(35)
@@ -91,6 +97,9 @@ class ScholarshipDetailHeaderView: UIView {
         
         if scholarshipDetailModel.offer_period != nil  {
             self.offerContractLabelView.update(leftTitle: "Offer period", rithtTitle: scholarshipDetailModel.offer_period!)
+        }
+        if scholarshipDetailModel.mmr != nil  {
+            self.mmrLabelView.update(leftTitle: "MMR", rithtTitle: scholarshipDetailModel.mmr!)
         }
         if scholarshipDetailModel.axie_count != nil  {
             self.axieCountLabelView.update(leftTitle: "Axie counts", rithtTitle: "\(scholarshipDetailModel.axie_count!)")
@@ -141,6 +150,12 @@ class ScholarshipDetailHeaderView: UIView {
     lazy var offerContractLabelView : LabelAndLabelView = {
         let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
         tempLabelView.leftLabel.text = "Offer contract days"
+        self.addSubview(tempLabelView)
+        return tempLabelView
+    }()
+    lazy var mmrLabelView : LabelAndLabelView = {
+        let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
+        tempLabelView.leftLabel.text = "MMR"
         self.addSubview(tempLabelView)
         return tempLabelView
     }()

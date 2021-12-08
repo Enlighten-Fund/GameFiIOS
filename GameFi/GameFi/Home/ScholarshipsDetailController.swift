@@ -32,7 +32,7 @@ class ScholarshipsDetailController: ViewController {
         self.axieIds = axieIds
         self.newAxieIds = []
         if self.axieIds!.count > 20 {
-            for i in 0..<20 {
+            for i in 0..<3 {
                 self.newAxieIds?.append(axieIds[i])
             }
         }else{
@@ -203,7 +203,7 @@ class ScholarshipsDetailController: ViewController {
     lazy var tableView: UITableView? = {
         let tempTableView = UITableView.init(frame: CGRect.zero, style: .plain)
         tempTableView.backgroundColor = self.view.backgroundColor
-        let theaderView = ScholarshipDetailHeaderView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 300))
+        let theaderView = ScholarshipDetailHeaderView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 330))
         self.headerview = theaderView
         tempTableView.tableHeaderView = theaderView
         tempTableView.separatorStyle = .none
