@@ -9,9 +9,9 @@ import UIKit
 import MJRefresh
 import SnapKit
 import Foundation
-import EmptyKit
+//import EmptyKit
 
-class ScholarApplingScholarshipController: UIViewController,EmptyDataSource,EmptyDelegate{
+class ScholarApplingScholarshipController: UIViewController{
     var pageIndex = 1
     var dataSource : Array<Any>? = Array.init()
     override func viewDidLoad() {
@@ -136,24 +136,24 @@ extension  ScholarApplingScholarshipController : UICollectionViewDelegate,UIColl
             return NSAttributedString(string: title, attributes: attributes)
         }
 
-    func buttonTitleForEmpty(forState state: UIControl.State, in view: UIView) -> NSAttributedString? {
-            let title = "click me"
-            let font = UIFont.systemFont(ofSize: 17)
-        let attributes: [NSAttributedString.Key : Any] = [.foregroundColor: UIColor.white, .font: font]
-            return NSAttributedString(string: title, attributes: attributes)
-        }
-
-        func buttonBackgroundColorForEmpty(in view: UIView) -> UIColor {
-            return UIColor.blue
-        }
-    
-    func emptyButton(_ button: UIButton, didTappedIn view: UIView) {
-            print( #function, #line, type(of: self))
-        }
-
-        func emptyView(_ emptyView: UIView, didTapppedIn view: UIView) {
-            print( #function, #line, type(of: self))
-        }
+//    func buttonTitleForEmpty(forState state: UIControl.State, in view: UIView) -> NSAttributedString? {
+//            let title = "click me"
+//            let font = UIFont.systemFont(ofSize: 17)
+//        let attributes: [NSAttributedString.Key : Any] = [.foregroundColor: UIColor.white, .font: font]
+//            return NSAttributedString(string: title, attributes: attributes)
+//        }
+//
+//        func buttonBackgroundColorForEmpty(in view: UIView) -> UIColor {
+//            return UIColor.blue
+//        }
+//    
+//    func emptyButton(_ button: UIButton, didTappedIn view: UIView) {
+//            print( #function, #line, type(of: self))
+//        }
+//
+//        func emptyView(_ emptyView: UIView, didTapppedIn view: UIView) {
+//            print( #function, #line, type(of: self))
+//        }
     
 
     //#MARK: --请求
