@@ -66,7 +66,7 @@ class ScholarDetailHeaderView: UIView {
     
     func dateFromString(string:String) -> Date? {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd  HH:mm:ss"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         return dateFormatter.date(from: string)
     }
     

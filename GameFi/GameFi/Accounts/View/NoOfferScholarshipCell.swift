@@ -53,20 +53,21 @@ class NoOfferScholarshipCell: UICollectionViewCell {
             make.height.equalTo(25)
             make.left.equalToSuperview().offset(15)
         }
-        self.mmrLabelView.snp.makeConstraints { make in
+        
+        self.OfferContractLabelView.snp.makeConstraints { make in
             make.top.equalTo(self.managerPercentLabelView.snp.bottom)
             make.right.equalToSuperview().offset(-15)
             make.height.equalTo(25)
             make.left.equalToSuperview().offset(15)
         }
-        self.OfferContractLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.mmrLabelView.snp.bottom)
+        self.mmrLabelView.snp.makeConstraints { make in
+            make.top.equalTo(self.OfferContractLabelView.snp.bottom)
             make.right.equalToSuperview().offset(-15)
             make.height.equalTo(25)
             make.left.equalToSuperview().offset(15)
         }
         self.roninAddressLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.OfferContractLabelView.snp.bottom)
+            make.top.equalTo(self.mmrLabelView.snp.bottom)
             make.right.equalToSuperview().offset(-15)
             make.height.equalTo(25)
             make.left.equalToSuperview().offset(15)
@@ -143,10 +144,10 @@ class NoOfferScholarshipCell: UICollectionViewCell {
             self.scholarshipNameLabelView.rightLabel.text = scholarshipModel.scholarship_name
         }
         if scholarshipModel.estimate_daily_slp != nil {
-            self.returnPerDayLabelView.rightLabel.text = scholarshipModel.estimate_daily_slp
+            self.returnPerDayLabelView.rightLabel.text = "\(scholarshipModel.estimate_daily_slp!)SLP/day"
         }
         if scholarshipModel.manager_percentage != nil {
-            self.managerPercentLabelView.rightLabel.text = scholarshipModel.manager_percentage
+            self.managerPercentLabelView.rightLabel.text = "\(scholarshipModel.manager_percentage!)%"
         }
         if scholarshipModel.account_mmr != nil {
             self.mmrLabelView.rightLabel.text = scholarshipModel.account_mmr
@@ -197,13 +198,13 @@ class NoOfferScholarshipCell: UICollectionViewCell {
     
     lazy var scholarshipNameLabelView : LabelAndLabelInterView = {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
-        tempLabelView.leftLabel.text = "Account name"
+        tempLabelView.leftLabel.text = "Scholarship name"
         self.contentView.addSubview(tempLabelView)
         return tempLabelView
     }()
     lazy var returnPerDayLabelView : LabelAndLabelInterView = {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
-        tempLabelView.leftLabel.text = "Return per day"
+        tempLabelView.leftLabel.text = "Estimate SLP"
         self.contentView.addSubview(tempLabelView)
         return tempLabelView
     }()
@@ -221,7 +222,7 @@ class NoOfferScholarshipCell: UICollectionViewCell {
     }()
     lazy var OfferContractLabelView : LabelAndLabelInterView = {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
-        tempLabelView.leftLabel.text = "Offer contract days"
+        tempLabelView.leftLabel.text = "Offer period"
         self.contentView.addSubview(tempLabelView)
         return tempLabelView
     }()

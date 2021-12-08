@@ -82,15 +82,15 @@ class ScholarshipDetailHeaderView: UIView {
         }
         
         if scholarshipDetailModel.estimate_daily_slp != nil {
-            self.expectedLabelView.update(leftTitle: "Expected SLP per day", rithtTitle: scholarshipDetailModel.estimate_daily_slp!)
+            self.expectedLabelView.update(leftTitle: "Estimate SLP", rithtTitle: scholarshipDetailModel.estimate_daily_slp!)
         }
         
         if scholarshipDetailModel.scholar_percentage != nil {
-            self.scholarPerLabelView.update(leftTitle: "Scholar's percentage", rithtTitle: scholarshipDetailModel.scholar_percentage!)
+            self.scholarPerLabelView.update(leftTitle: "Scholar cut", rithtTitle: scholarshipDetailModel.scholar_percentage!)
         }
         
         if scholarshipDetailModel.offer_period != nil  {
-            self.offerContractLabelView.update(leftTitle: "Offer contract days", rithtTitle: scholarshipDetailModel.offer_period!)
+            self.offerContractLabelView.update(leftTitle: "Offer period", rithtTitle: scholarshipDetailModel.offer_period!)
         }
         if scholarshipDetailModel.axie_count != nil  {
             self.axieCountLabelView.update(leftTitle: "Axie counts", rithtTitle: "\(scholarshipDetailModel.axie_count!)")
