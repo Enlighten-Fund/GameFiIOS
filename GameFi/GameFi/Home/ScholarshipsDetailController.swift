@@ -163,7 +163,7 @@ class ScholarshipsDetailController: ViewController {
                 }else{
                     if !result.msg!.isBlank {
                         DispatchQueue.main.async { [self] in
-                            GFAlert.showAlert(titleStr: "Notice:", msgStr: result.msg!, currentVC: self, cancelStr: "Cancel", cancelHandler: { action in
+                            GFAlert.showAlert(titleStr: "Notice:", msgStr: result.msg!, currentVC: self, cancelStr: "OK", cancelHandler: { action in
                                 
                             }, otherBtns: nil) { index in
                                 

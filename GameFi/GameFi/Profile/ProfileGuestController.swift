@@ -16,7 +16,7 @@ class ProfileGuestController: ViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Profile"
+        self.title = "Me"
         self.headerView!.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(0)
             make.height.equalTo(170)
