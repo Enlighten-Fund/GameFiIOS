@@ -217,23 +217,55 @@ class ScholarRentCell: UICollectionViewCell {
                 self.btn.setTitle("Waiting payment", for: .normal)
                 self.btn.isEnabled = true
                 self.emailLabel.isHidden = false
-                self.pwdTextFild?.isHidden = false
+                self.emailTitleLabel.isHidden = false
+                self.pwdTextFild!.isHidden = false
+                self.secretTitleLabel.isHidden = false
+                self.btn.snp.remakeConstraints { make in
+                    make.top.equalTo(self.pwdTextFild!.snp.bottom).offset(10)
+                    make.right.equalToSuperview().offset(-15)
+                    make.height.equalTo(40)
+                    make.left.equalToSuperview().offset(15)
+                }
             }else if scholarshipModel.status == "ACTIVE"{
                 self.btn.setTitle("Stop renting", for: .normal)
                 self.btn.isEnabled = true
                 self.emailLabel.isHidden = false
-                self.pwdTextFild?.isHidden = false
+                self.emailTitleLabel.isHidden = false
+                self.pwdTextFild!.isHidden = false
+                self.secretTitleLabel.isHidden = false
+                self.btn.snp.remakeConstraints { make in
+                    make.top.equalTo(self.pwdTextFild!.snp.bottom).offset(10)
+                    make.right.equalToSuperview().offset(-15)
+                    make.height.equalTo(40)
+                    make.left.equalToSuperview().offset(15)
+                }
             }else if scholarshipModel.status == "MANAGER_PAID"{
                 self.btn.setTitle("Waiting payment", for: .normal)
                 self.btn.isEnabled = true
                 self.emailLabel.isHidden = false
-                self.pwdTextFild?.isHidden = false
+                self.emailTitleLabel.isHidden = false
+                self.pwdTextFild!.isHidden = false
+                self.secretTitleLabel.isHidden = false
+                self.btn.snp.remakeConstraints { make in
+                    make.top.equalTo(self.pwdTextFild!.snp.bottom).offset(10)
+                    make.right.equalToSuperview().offset(-15)
+                    make.height.equalTo(40)
+                    make.left.equalToSuperview().offset(15)
+                }
             }else if scholarshipModel.status == "END"{
                 self.btn.setTitle("Already ended", for: .normal)
                 self.btn.backgroundColor = .gray
                 self.btn.isEnabled = false
                 self.emailLabel.isHidden = true
-                self.pwdTextFild?.isHidden = true
+                self.emailTitleLabel.isHidden = true
+                self.pwdTextFild!.isHidden = true
+                self.secretTitleLabel.isHidden = true
+                self.btn.snp.remakeConstraints { make in
+                    make.top.equalTo(self.endDateLabelView.snp.bottom).offset(10)
+                    make.right.equalToSuperview().offset(-15)
+                    make.height.equalTo(40)
+                    make.left.equalToSuperview().offset(15)
+                }
             }
         }
     }
