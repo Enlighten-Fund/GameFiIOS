@@ -21,6 +21,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
     var scholarAccontVC : ScholarAccountsController? = nil
    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+       if #available(iOS 15, *) {
+           let appearance = UINavigationBarAppearance()
+           appearance.configureWithOpaqueBackground()
+           appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+           appearance.backgroundColor = UIColor(red: 0.13, green: 0.14, blue: 0.2, alpha: 1)
+           UINavigationBar.appearance().standardAppearance = appearance
+           UINavigationBar.appearance().scrollEdgeAppearance = appearance
+                   
+           /// 额外的填充表视图标题在iOS 15
+           UITableView.appearance().sectionHeaderTopPadding = 0
+           let color = UIColor(red: 0.13, green: 0.14, blue: 0.2, alpha: 1)
+           ///修复uitabbar 顶部视图莫名横线消失
+           let tabBarAppearance = UITabBarAppearance()
+           tabBarAppearance.backgroundColor = color
+           UITabBar.appearance().standardAppearance = tabBarAppearance
+           UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+           // 设置tabbar 为选中文字颜色
+           tabBarAppearance.stackedLayoutAppearance.normal.titleTextAttributes = [
+               NSAttributedString.Key.foregroundColor: UIColor.white]
+       } else {
+       // 设置tabbar 未选中文字颜色
+       UITabBar.appearance().unselectedItemTintColor = UIColor.red
+       // 设置tabbar 选中文字颜色
+           UITabBar.appearance().tintColor = UIColor.gray
+       }
+       
         Bugly.start(withAppId: "95913c773a")
         self.window?.rootViewController = self.tabbarVC
         IQKeyboardManager.shared().isEnabled = true

@@ -56,6 +56,7 @@ class ScholarshipModel: BaseModel {
     var application_id : String?
     var scholar_portrait : String?
     var account_mmr : String?
+    var end_timestamp : String?
     required init() {}
 }
 

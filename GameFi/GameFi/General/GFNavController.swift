@@ -16,6 +16,15 @@ class GFNavController: UINavigationController,UINavigationControllerDelegate {
         self.navigationBar.barTintColor = UIColor(red: 0.13, green: 0.14, blue: 0.2, alpha: 1)
         self.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor(red: 1, green: 1, blue: 1, alpha: 1), NSAttributedString.Key.font: UIFont(name: "PingFang SC Semibold", size: 15) as Any]
       self.navigationBar.tintColor = UIColor(red: 0.13, green: 0.14, blue: 0.2, alpha: 1)
+        
+//        if #available(iOS 13.0, *) {
+//            let appearance = UINavigationBarAppearance()
+//            appearance.configureWithOpaqueBackground()
+//            appearance.backgroundColor = UIColor(red: 0.13, green: 0.14, blue: 0.2, alpha: 1)
+//            appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor(red: 1, green: 1, blue: 1, alpha: 1), NSAttributedString.Key.font: UIFont(name: "PingFang SC Semibold", size: 15) as Any]
+//            navigationBar.standardAppearance = appearance
+//            navigationBar.scrollEdgeAppearance = navigationBar.standardAppearance
+//        }
     }
     
     

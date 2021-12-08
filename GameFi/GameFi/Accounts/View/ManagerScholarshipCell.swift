@@ -175,12 +175,17 @@ class ManagerScholarshipCell: UICollectionViewCell {
         }
         
         if scholarshipModel.start_timestamp != nil{
-            self.startDateLabelView.rightLabel.text = getLocalDate(from: scholarshipModel.start_timestamp!)        }
-        
-        if scholarshipModel.start_timestamp != nil && scholarshipModel.offer_period != nil{
-            let date = dateFromString(string: scholarshipModel.start_timestamp!)
-            let new = date.addingTimeInterval(TimeInterval(Int(scholarshipModel.offer_period!)! * 24 * 60 * 60))
-            self.endDateLabelView.rightLabel.text = getLocalDate(from: stringFromDate(date: new))
+            self.startDateLabelView.rightLabel.text = getLocalDate(from: scholarshipModel.start_timestamp!)
+        }
+        if scholarshipModel.end_timestamp != nil{
+            let date = dateFromString(string: scholarshipModel.end_timestamp!)
+            self.endDateLabelView.rightLabel.text = getLocalDate(from: stringFromDate(date: date))
+        }else{
+            if scholarshipModel.start_timestamp != nil && scholarshipModel.offer_period != nil{
+                let date = dateFromString(string: scholarshipModel.start_timestamp!)
+                let new = date.addingTimeInterval(TimeInterval(Int(scholarshipModel.offer_period!)! * 24 * 60 * 60))
+                self.endDateLabelView.rightLabel.text = getLocalDate(from: stringFromDate(date: new))
+            }
         }
         
         if scholarshipModel.account_ronin_address != nil{
