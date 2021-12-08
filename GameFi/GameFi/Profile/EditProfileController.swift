@@ -491,6 +491,13 @@ class EditProfileController: ViewController {
                 self.mc_remove()
                 if result.success!{
                     self.navigationController?.pushViewController(UserInfoStateController.init(), animated: true)
+                    DataManager.sharedInstance.fetchUserDetailinfo { resulet, reponse in
+                        
+                    }
+                }else{
+                    if  result.msg != nil && !result.msg!.isBlank {
+                        self.mc_success(result.msg!)
+                    }
                 }
             }
         }
@@ -1041,7 +1048,7 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
             let tempCell : TextViewCell = tableView.dequeueReusableCell(withIdentifier: textViewCellIdentifier + "0", for: indexPath) as! TextViewCell
             tempCell.textView?.delegate = self
             self.gamesPlayedTextView = tempCell.textView
-            if userInfoModel?.game_history != nil {
+            if userInfoModel?.game_history != nil &&  !(userInfoModel!.game_history!.isEmpty){
                 gamesPlayedTextView!.text = userInfoModel?.game_history
                 gamesPlayedTextView!.textColor = .white
             }else{
@@ -1054,7 +1061,7 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
             let tempCell : TextViewCell = tableView.dequeueReusableCell(withIdentifier: textViewCellIdentifier + "1", for: indexPath) as! TextViewCell
             tempCell.textView?.delegate = self
             self.introduceTextView = tempCell.textView
-            if userInfoModel?.self_intro != nil {
+            if userInfoModel?.self_intro != nil &&  !(userInfoModel!.self_intro!.isEmpty){
                 introduceTextView!.text = userInfoModel?.self_intro
                 introduceTextView!.textColor = .white
             }else{
