@@ -159,7 +159,7 @@ class AddScholarshipController: ViewController {
     
     func valifyAccount() -> Bool {
         if self.accountNameTextField!.text == nil || self.accountNameTextField!.text!.isBlank {
-            self.showNoticeLabel(notice: "Account name should be filled in")
+            self.showNoticeLabel(notice: "Scholarship name should be filled in")
             self.updateTextField(textField: self.accountNameTextField!, focus: true)
             return false
         }else{
@@ -362,7 +362,7 @@ extension  AddScholarshipController : UITableViewDelegate,UITableViewDataSource,
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "0", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.delegate = self
         self.accountNameTextField = tempCell.textFild
-        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Account name", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Scholarship name", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         cell = tempCell
     case 1:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "1", for: indexPath) as! LabelTextFildCell
@@ -385,7 +385,7 @@ extension  AddScholarshipController : UITableViewDelegate,UITableViewDataSource,
     case 4:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "4", for: indexPath) as! LabelTextFildCell
         tempCell.textFild?.delegate = self
-        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Offer contract days", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Offer period", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.offerDaysTextField = tempCell.textFild
         self.offerDaysTextField?.keyboardType = .numberPad
         cell = tempCell

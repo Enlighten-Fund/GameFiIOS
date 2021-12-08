@@ -88,11 +88,11 @@ class ScholarshipDetailHeaderView: UIView {
         }
         
         if scholarshipDetailModel.estimate_daily_slp != nil {
-            self.expectedLabelView.update(leftTitle: "Estimate SLP", rithtTitle: scholarshipDetailModel.estimate_daily_slp!)
+            self.expectedLabelView.update(leftTitle: "Estimate SLP", rithtTitle:"\(lroundf(Float(scholarshipDetailModel.estimate_daily_slp!)!)) SLP/day")
         }
         
         if scholarshipDetailModel.scholar_percentage != nil {
-            self.scholarPerLabelView.update(leftTitle: "Scholar cut", rithtTitle: scholarshipDetailModel.scholar_percentage!)
+            self.scholarPerLabelView.update(leftTitle: "Scholar cut", rithtTitle: "\(scholarshipDetailModel.scholar_percentage!)%")
         }
         
         if scholarshipDetailModel.offer_period != nil  {
@@ -131,7 +131,7 @@ class ScholarshipDetailHeaderView: UIView {
     }()
     lazy var accountNameLabelView : LabelAndLabelView = {
         let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
-        tempLabelView.leftLabel.text = "Account name"
+        tempLabelView.leftLabel.text = "Scholarship name"
         self.addSubview(tempLabelView)
         return tempLabelView
     }()
@@ -149,7 +149,7 @@ class ScholarshipDetailHeaderView: UIView {
     }()
     lazy var offerContractLabelView : LabelAndLabelView = {
         let tempLabelView = LabelAndLabelView.init(frame: CGRect.zero)
-        tempLabelView.leftLabel.text = "Offer contract days"
+        tempLabelView.leftLabel.text = "Offer period"
         self.addSubview(tempLabelView)
         return tempLabelView
     }()

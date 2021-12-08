@@ -144,7 +144,7 @@ class NoOfferScholarshipCell: UICollectionViewCell {
             self.scholarshipNameLabelView.rightLabel.text = scholarshipModel.scholarship_name
         }
         if scholarshipModel.estimate_daily_slp != nil {
-            self.returnPerDayLabelView.rightLabel.text = "\(scholarshipModel.estimate_daily_slp!)SLP/day"
+            self.returnPerDayLabelView.rightLabel.text = "\(lroundf(Float(scholarshipModel.estimate_daily_slp!)!)) SLP/day"
         }
         if scholarshipModel.manager_percentage != nil {
             self.managerPercentLabelView.rightLabel.text = "\(scholarshipModel.manager_percentage!)%"

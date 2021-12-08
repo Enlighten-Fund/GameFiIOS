@@ -259,7 +259,7 @@ class ManagerScholarshipCell: UICollectionViewCell {
     
     lazy var scholarshipNameLabelView : LabelAndLabelInterView = {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
-        tempLabelView.leftLabel.text = "Account name"
+        tempLabelView.leftLabel.text = "Scholarship name"
         self.contentView.addSubview(tempLabelView)
         return tempLabelView
     }()

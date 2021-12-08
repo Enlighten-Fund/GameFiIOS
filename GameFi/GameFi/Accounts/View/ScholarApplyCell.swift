@@ -107,10 +107,10 @@ class ScholarApplyCell: UICollectionViewCell {
         }
         if applicationModel.scholarship_estimate_daily_slp != nil{
             self.returnPerDayLabelView.rightLabel.textColor =  UIColor(red: 1, green: 0.72, blue: 0.07, alpha: 1)
-            self.returnPerDayLabelView.rightLabel.text = "\(lroundf(Float(applicationModel.scholarship_estimate_daily_slp!)!)) SLP"
+            self.returnPerDayLabelView.rightLabel.text = "\(lroundf(Float(applicationModel.scholarship_estimate_daily_slp!)!)) SLP/day"
         }
         if applicationModel.scholarship_scholar_percentage != nil {
-            self.scholarPercentLabelView.rightLabel.text = String (format: "%.2f",Float(applicationModel.scholarship_scholar_percentage!)!)
+            self.scholarPercentLabelView.rightLabel.text = String (format: "%.2f%",Float(applicationModel.scholarship_scholar_percentage!)!)
         }
         if applicationModel.scholarship_offer_period != nil {
             self.offerdaysLabelView.rightLabel.text = "\(applicationModel.scholarship_offer_period!) days"
@@ -161,7 +161,7 @@ class ScholarApplyCell: UICollectionViewCell {
     
     lazy var returnPerDayLabelView : LabelAndLabelInterView = {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
-        tempLabelView.leftLabel.text = "Return per day"
+        tempLabelView.leftLabel.text = "Estimate SLP"
         self.contentView.addSubview(tempLabelView)
         return tempLabelView
     }()
@@ -173,7 +173,7 @@ class ScholarApplyCell: UICollectionViewCell {
     }()
     lazy var offerdaysLabelView : LabelAndLabelInterView = {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
-        tempLabelView.leftLabel.text = "Offer contract days"
+        tempLabelView.leftLabel.text = "Offer period"
         self.contentView.addSubview(tempLabelView)
         return tempLabelView
     }()
