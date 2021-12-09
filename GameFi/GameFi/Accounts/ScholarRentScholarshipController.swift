@@ -50,7 +50,7 @@ class ScholarRentScholarshipController: UIViewController {
                     }
                 }
             }else if scholarshipModel.status == "ACTIVE"{
-                GFAlert.showAlert(titleStr: "Notice:", msgStr: "If you terminate the contract, your credit score will drop by 30.", currentVC: self,cancelStr:"Cancel", cancelHandler: { alertAction in
+                GFAlert.showAlert(titleStr: "Notice:", msgStr: "If you terminate the contract, your credit score will drop", currentVC: self,cancelStr:"Cancel", cancelHandler: { alertAction in
                     
                 }, otherBtns: ["Stop"]) { index in
                     self.mc_loading(text: "Loading")

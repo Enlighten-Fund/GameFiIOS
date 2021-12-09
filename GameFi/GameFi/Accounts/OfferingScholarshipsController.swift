@@ -39,19 +39,24 @@ class OfferingScholarshipsController: UIViewController {
         if btn.tag - 90000 < self.dataSource!.count {
             let scholarshipModel : ScholarshipModel = self.dataSource![btn.tag - 90000] as! ScholarshipModel
             if scholarshipModel.status == "ACTIVE" {
-                self.mc_loading(text: "Loading")
-                DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: scholarshipModel.scholarship_id!, status: "PENDING_PAYMENT") { result, reponse in
-                    DispatchQueue.main.async { [self] in
-                        self.mc_remove()
-                        if result.success!{
-                            self.collectionView.mj_header?.beginRefreshing()
-                        }else{
-                            if  result.msg != nil && !result.msg!.isBlank {
-                                self.mc_success(result.msg!)
+                GFAlert.showAlert(titleStr: "Notice:", msgStr: "If you terminate the contract, your credit score will drop", currentVC: self,cancelStr:"Cancel", cancelHandler: { alertAction in
+                    
+                }, otherBtns: ["Stop"]) { index in
+                    self.mc_loading(text: "Loading")
+                    DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: scholarshipModel.scholarship_id!, status: "PENDING_PAYMENT") { result, reponse in
+                        DispatchQueue.main.async { [self] in
+                            self.mc_remove()
+                            if result.success!{
+                                self.collectionView.mj_header?.beginRefreshing()
+                            }else{
+                                if  result.msg != nil && !result.msg!.isBlank {
+                                    self.mc_success(result.msg!)
+                                }
                             }
                         }
                     }
                 }
+                
             } else if scholarshipModel.status == "PENDING_PAYMENT" {
                 self.mc_loading(text: "Loading")
                 DataManager.sharedInstance.fetchPaymentStatus(scholarshipid: scholarshipModel.scholarship_id!) { result, reponse in
