@@ -110,7 +110,7 @@ class ScholarApplyCell: UICollectionViewCell {
             self.returnPerDayLabelView.rightLabel.text = "\(lroundf(Float(applicationModel.scholarship_estimate_daily_slp!)!)) SLP/day"
         }
         if applicationModel.scholarship_scholar_percentage != nil {
-            self.scholarPercentLabelView.rightLabel.text = String (format: "%.2f%",Float(applicationModel.scholarship_scholar_percentage!)!)
+            self.scholarPercentLabelView.rightLabel.text = "\(applicationModel.scholarship_scholar_percentage!)%"
         }
         if applicationModel.scholarship_offer_period != nil {
             self.offerdaysLabelView.rightLabel.text = "\(applicationModel.scholarship_offer_period!) days"
