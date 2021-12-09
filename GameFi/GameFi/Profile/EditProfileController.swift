@@ -208,6 +208,19 @@ class EditProfileController: ViewController {
         return dateFormatter.string(from: date as Date)
     }
     
+    func dateFromString2(string:String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.date(from: string)
+    }
+    
+    func stringFromDate2(date:NSDate) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.string(from: date as Date)
+    }
+    
+    
     func showBirthDayPickerView() {
         UIApplication.shared.keyWindow?.endEditing(true)
         self.hideCountryPickerView()
@@ -335,7 +348,7 @@ class EditProfileController: ViewController {
     
     @objc func selectBirthDay() {
         let birthDay = self.birthdayDatePickerView?.pickerView?.date
-        self.birthDayLabel?.text = self.stringFromDate(date: birthDay! as NSDate)
+        self.birthDayLabel?.text = self.stringFromDate2(date: birthDay! as NSDate)
         self.hideBirthdayPickerView()
         self.birthday = self.birthDayLabel?.text
         self.userInfoModel?.dob = self.birthday
@@ -479,7 +492,7 @@ class EditProfileController: ViewController {
         auserinfoModel.billing_ronin_address = dealronin
         
         let now = Date()
-        let birthday: Date = self.dateFromString(string: (userInfoModel?.dob)!)!
+        let birthday: Date = self.dateFromString2(string: (userInfoModel?.dob)!)!
         let calendar = Calendar.current
         let ageComponents = calendar.dateComponents([.year], from: birthday, to: now)
         let age = ageComponents.year!
@@ -986,7 +999,13 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
             cell = tempCell
         case 4:
             let tempCell : PickerViewCell = tableView.dequeueReusableCell(withIdentifier: pickerViewCellIdentifier + "1", for: indexPath) as! PickerViewCell
-            tempCell.titleLabel?.text = userInfoModel?.dob
+            var dobS = ""
+            if userInfoModel?.dob != nil{
+                if let a = userInfoModel?.dob?.prefix(10){
+                    dobS = String(a)
+                }
+            }
+            tempCell.titleLabel?.text = dobS
             if tempCell.titleLabel!.text == nil || tempCell.titleLabel!.text!.isEmpty {
                 tempCell.titleLabel?.text = "Date of birth (yyyy-MM-dd)"
             }

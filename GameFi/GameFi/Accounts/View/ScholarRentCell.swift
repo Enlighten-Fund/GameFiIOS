@@ -216,6 +216,7 @@ class ScholarRentCell: UICollectionViewCell {
             if scholarshipModel.status == "PENDING_PAYMENT"{
                 self.btn.setTitle("Waiting payment", for: .normal)
                 self.btn.isEnabled = true
+                self.btn.backgroundColor = .clear
                 self.emailLabel.isHidden = false
                 self.emailTitleLabel.isHidden = false
                 self.pwdTextFild!.isHidden = false
@@ -229,6 +230,7 @@ class ScholarRentCell: UICollectionViewCell {
             }else if scholarshipModel.status == "ACTIVE"{
                 self.btn.setTitle("Stop renting", for: .normal)
                 self.btn.isEnabled = true
+                self.btn.backgroundColor = .clear
                 self.emailLabel.isHidden = false
                 self.emailTitleLabel.isHidden = false
                 self.pwdTextFild!.isHidden = false
@@ -242,6 +244,7 @@ class ScholarRentCell: UICollectionViewCell {
             }else if scholarshipModel.status == "MANAGER_PAID"{
                 self.btn.setTitle("Waiting payment", for: .normal)
                 self.btn.isEnabled = true
+                self.btn.backgroundColor = .clear
                 self.emailLabel.isHidden = false
                 self.emailTitleLabel.isHidden = false
                 self.pwdTextFild!.isHidden = false
