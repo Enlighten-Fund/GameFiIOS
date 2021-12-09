@@ -50,15 +50,19 @@ class ScholarRentScholarshipController: UIViewController {
                     }
                 }
             }else if scholarshipModel.status == "ACTIVE"{
-                self.mc_loading(text: "Loading")
-                DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: scholarshipModel.scholarship_id!, status: "PENDING_PAYMENT") { result, reponse in
-                    DispatchQueue.main.async { [self] in
-                        self.mc_remove()
-                        if result.success!{
-                            self.collectionView.mj_header?.beginRefreshing()
-                        }else{
-                            if  result.msg != nil && !result.msg!.isBlank {
-                                self.mc_success(result.msg!)
+                GFAlert.showAlert(titleStr: "Notice:", msgStr: "If you terminate the contract, your credit score will drop by 30.", currentVC: self,cancelStr:"Cancel", cancelHandler: { alertAction in
+                    
+                }, otherBtns: ["Stop"]) { index in
+                    self.mc_loading(text: "Loading")
+                    DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: scholarshipModel.scholarship_id!, status: "PENDING_PAYMENT") { result, reponse in
+                        DispatchQueue.main.async { [self] in
+                            self.mc_remove()
+                            if result.success!{
+                                self.collectionView.mj_header?.beginRefreshing()
+                            }else{
+                                if  result.msg != nil && !result.msg!.isBlank {
+                                    self.mc_success(result.msg!)
+                                }
                             }
                         }
                     }

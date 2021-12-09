@@ -174,8 +174,19 @@ class NoOfferScholarshipCell: UICollectionViewCell {
                 self.rightBtn.isHidden = false
             } else if scholarshipModel.status == "LISTING" {
                 self.btn.isHidden = false
+                self.btn.setTitle("Recall", for: .normal)
+                self.btn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
+                self.btn.isEnabled = true
+                
                 self.leftBtn.isHidden = true
                 self.rightBtn.isHidden = true
+            }else if scholarshipModel.status == "END"{
+                self.leftBtn.isHidden = true
+                self.rightBtn.isHidden = true
+                self.btn.isHidden = false
+                self.btn.setTitle("Already ended", for: .normal)
+                self.btn.backgroundColor = .gray
+                self.btn.isEnabled = false
             }
         }
     }

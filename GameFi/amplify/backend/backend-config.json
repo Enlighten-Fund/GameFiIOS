@@ -18,7 +18,7 @@
     }
   },
   "auth": {
-    "gamefi3a1e5b6d": {
+    "gamefi4e6dc4c3": {
       "service": "Cognito",
       "serviceType": "imported",
       "providerPlugin": "awscloudformation",
