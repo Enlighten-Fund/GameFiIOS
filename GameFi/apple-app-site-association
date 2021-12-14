@@ -1,0 +1,15 @@
+{
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "GB62JTZ689.com.enlighten.CryptoNinjaLocal",
+                "paths": [ "/chenlu/signup/*","/signup/*","/register"]
+            },
+            {
+                "appID": "GB62JTZ689.com.enlighten.CryptoNinja",
+                "paths": [ "/chenlu/signup/*","/signup/*","/register"]
+            }
+        ]
+    }
+}

@@ -59,6 +59,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
     NotificationCenter.default.addObserver(self, selector: #selector(changeRole), name: NSNotification.Name(rawValue: CHANGEROLE_NOFI), object: nil)
         return true
     }
+    
+    
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        //判断是从Universal Links进来的链接
+        if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
+            let webpageURL = userActivity.webpageURL
+            print("点击的链接是：\(webpageURL)")
+            //进行后续的处理
+            //......
+        }
+        return true
+    }
+    
     /// 接受到通知后的方法回调
     @objc private func changeRole(noti: Notification) {
         DispatchQueue.main.async {
