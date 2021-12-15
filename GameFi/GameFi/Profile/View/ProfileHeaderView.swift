@@ -76,6 +76,12 @@ class ProfileHeaderView: UIView {
                 self.cetifiedBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
                 self.cetifiedBtn.setTitleColor(.white, for: .normal)
                 self.cetifiedBtn.layer.borderColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1).cgColor
+            }else if userInfoModel.scholar_status == "DRAFT" {
+                self.cetifiedBtn.setTitle("Certified now", for: .normal)
+                self.cetifiedBtn.setImage(UIImage.init(named: ""), for: .normal)
+                self.cetifiedBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
+                self.cetifiedBtn.setTitleColor(.white, for: .normal)
+                self.cetifiedBtn.layer.borderColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1).cgColor
             }else if userInfoModel.scholar_status == "AUDIT" {
                 self.cetifiedBtn.setTitle("Auditing", for: .normal)
                 self.cetifiedBtn.setImage(UIImage.init(named: "audit"), for: .normal)

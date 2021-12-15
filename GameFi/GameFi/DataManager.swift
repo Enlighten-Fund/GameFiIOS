@@ -552,6 +552,21 @@ class DataManager: NSObject {
         }
     }
     
+    func updateUserScholarStatus(userinfoModel:UserInfoModel,submit:Int, completeBlock: @escaping CompleteBlock) {
+        let json = JsonUtil.modelToJson(userinfoModel)
+//        let dic = ["scholar_info_dict": json] as [String : Any]
+        let dic = ["submit": submit,"scholar_info_dict":json] as [String : Any]
+        self.POST(url: "user/update_by_id", param: dic ) { result, reponse in
+            if result.success!{
+                let userInfoModel : UserInfoModel = JsonUtil.jsonToModel(reponse as! String, UserInfoModel.self) as! UserInfoModel
+                completeBlock(result,userInfoModel)
+            }else{
+                completeBlock(result,reponse)
+            }
+        }
+    }
+    
+    
     //update Application status
     func updateApplicationStatus(applicationId:String, status: String , completeBlock: @escaping CompleteBlock) {
         let dic = ["id" : Int(applicationId)! as Any,"status" : status] as [String : Any]

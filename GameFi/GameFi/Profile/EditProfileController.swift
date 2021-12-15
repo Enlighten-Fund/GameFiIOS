@@ -43,9 +43,10 @@ class EditProfileController: ViewController {
     var uploadUrl : String?
     var userInfoModel : UserInfoModel?
     var editProfileSuccessBlock:CommonEmptyBlock?
+    var editBtnView : EditProfileBtnView?
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Edit Profile"
+        self.title = "Profile"
         self.tableView!.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(0)
             make.bottom.equalToSuperview().offset(0)
@@ -75,13 +76,67 @@ class EditProfileController: ViewController {
         self.requestData()
     }
     
+    //点击事件
     @objc override func leftBtnClick() {
-        GFAlert.showAlert(titleStr: "Notice:", msgStr: "Changes will not be saved", currentVC: self, cancelStr: "Cancel", cancelHandler: { action in
-            
-        }, otherBtns: ["YES"]) { index in
+        if self.userInfoModel?.scholar_status == "YES" || self.userInfoModel?.scholar_status == "AUDIT"{
             DispatchQueue.main.async { [self] in
                 self.navigationController?.popViewController(animated: true)
             }
+        }else{
+            GFAlert.showAlert(titleStr: "Notice:", msgStr: "Changes will not be saved", currentVC: self, cancelStr: "Cancel", cancelHandler: { action in
+                
+            }, otherBtns: ["YES"]) { index in
+                DispatchQueue.main.async { [self] in
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
+        }
+        
+    }
+    
+    @objc func saveBtnClick(){
+        self.updateUserinfo(submit: 0)
+    }
+    @objc func submitBtnClick(){
+        self.updateUserinfo(submit: 1)
+    }
+    @objc func recallBtnClick(){
+        self.mc_loading(text: "Loading")
+        DataManager.sharedInstance.updateUserScholarStatus(userinfoModel:self.userInfoModel!, submit: -1) { result, reponse in
+            DispatchQueue.main.async { [self] in
+                self.mc_remove()
+                if result.success!{
+                    self.requestData()
+                }else{
+                    if  result.msg != nil && !result.msg!.isBlank {
+                        self.mc_success(result.msg!)
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    @objc func updateBtnClick(){
+        GFAlert.showAlert(titleStr: "Notice:", msgStr: "Are you sure to update your profile?", currentVC: self, cancelStr: "YES", cancelHandler: { action in
+            DispatchQueue.main.async { [self] in
+                self.mc_loading(text: "Loading")
+                DataManager.sharedInstance.updateUserScholarStatus(userinfoModel:self.userInfoModel!, submit: -1) { result, reponse in
+                    DispatchQueue.main.async { [self] in
+                        self.mc_remove()
+                        if result.success!{
+                            self.requestData()
+                        }else{
+                            if  result.msg != nil && !result.msg!.isBlank {
+                                self.mc_success(result.msg!)
+                            }
+                        }
+                    }
+                }
+            }
+            
+        }, otherBtns: ["Cancel"]) { index in
+             
         }
     }
     
@@ -98,6 +153,15 @@ class EditProfileController: ViewController {
                     self.available = userInfoModel.available_time
                     self.playAxie = userInfoModel.axie_exp
                     self.tableView?.reloadData()
+                    self.editBtnView?.update(userInfoModel: userInfoModel)
+                    if userInfoModel.scholar_status == "DRAFT" || userInfoModel.scholar_status == "NO"{
+                        self.editBtnView?.leftBtn.addTarget(self, action: #selector(saveBtnClick), for: .touchUpInside)
+                        self.editBtnView?.rightBtn.addTarget(self, action: #selector(submitBtnClick), for: .touchUpInside)
+                     }else if userInfoModel.scholar_status == "AUDIT"{
+                         self.editBtnView?.btn.addTarget(self, action: #selector(recallBtnClick), for: .touchUpInside)
+                     }else if userInfoModel.scholar_status == "YES"{
+                         self.editBtnView?.btn.addTarget(self, action: #selector(updateBtnClick), for: .touchUpInside)
+                     }
                 }
             }
         }
@@ -440,7 +504,7 @@ class EditProfileController: ViewController {
         }
     }
     
-    @objc func updateUserinfo(){
+    @objc func updateUserinfo(submit:Int){
         if !self.valifyFirstName() {
             return
         }
@@ -499,14 +563,20 @@ class EditProfileController: ViewController {
         auserinfoModel.age = String(age)
         
         self.mc_loading(text: "Loading")
-        DataManager.sharedInstance.updateUserinfo(userinfoModel: auserinfoModel) { result, reponse in
+        DataManager.sharedInstance.updateUserScholarStatus(userinfoModel: auserinfoModel,submit: submit) { result, reponse in
             DispatchQueue.main.async { [self] in
                 self.mc_remove()
                 if result.success!{
-                    self.navigationController?.pushViewController(UserInfoStateController.init(), animated: true)
-                    DataManager.sharedInstance.fetchUserDetailinfo { resulet, reponse in
-                        
+                    if submit == 0{
+                        self.mc_text("You've saved your profile successfully")
+                    }else if submit == 1{
+                        self.mc_text("You've submitted your profile successfully")
+                        self.navigationController?.popViewController(animated: true)
                     }
+//                    self.navigationController?.pushViewController(UserInfoStateController.init(), animated: true)
+//                    DataManager.sharedInstance.fetchUserDetailinfo { resulet, reponse in
+//
+//                    }
                 }else{
                     if  result.msg != nil && !result.msg!.isBlank {
                         self.mc_success(result.msg!)
@@ -536,8 +606,9 @@ class EditProfileController: ViewController {
         tempTableView.register(EmptyTableViewCell.classForCoder(), forCellReuseIdentifier: emptyTableViewCellIdentifier)
         tempTableView.dataSource = self
         tempTableView.delegate = self
-        let footView = SubmitView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 40))
-        footView.submitBtn.addTarget(self, action: #selector(updateUserinfo), for: .touchUpInside)
+        let footView = EditProfileBtnView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 50))
+        self.editBtnView = footView
+//        footView.submitBtn.addTarget(self, action: #selector(updateUserinfo), for: .touchUpInside)
         tempTableView.tableFooterView = footView
         view.addSubview(tempTableView)
         return tempTableView
@@ -974,6 +1045,11 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
             tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  First name", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
             self.firstnameTextField = tempCell.textFild
             self.firstnameTextField?.text = userInfoModel?.first_name
+            if self.userInfoModel?.scholar_status == "YES" || self.userInfoModel?.scholar_status == "AUDIT"{
+                self.firstnameTextField?.isUserInteractionEnabled = false
+            }else{
+                self.firstnameTextField?.isUserInteractionEnabled = true
+            }
             cell = tempCell
         case 1:
             let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "1", for: indexPath) as! LabelTextFildCell
@@ -981,6 +1057,11 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
             tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Last name", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
             self.lastnameTextField = tempCell.textFild
             self.lastnameTextField?.text = userInfoModel?.last_name
+            if self.userInfoModel?.scholar_status == "YES" || self.userInfoModel?.scholar_status == "AUDIT"{
+                self.lastnameTextField?.isUserInteractionEnabled = false
+            }else{
+                self.lastnameTextField?.isUserInteractionEnabled = true
+            }
             cell = tempCell
         case 2:
             let tempCell : PickerViewCell = tableView.dequeueReusableCell(withIdentifier: pickerViewCellIdentifier + "0", for: indexPath) as! PickerViewCell
@@ -996,6 +1077,11 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
             tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  ID number", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
             self.idNoTextField = tempCell.textFild
             self.idNoTextField?.text = userInfoModel?.id_num
+            if self.userInfoModel?.scholar_status == "YES" || self.userInfoModel?.scholar_status == "AUDIT"{
+                self.idNoTextField?.isUserInteractionEnabled = false
+            }else{
+                self.idNoTextField?.isUserInteractionEnabled = true
+            }
             cell = tempCell
         case 4:
             let tempCell : PickerViewCell = tableView.dequeueReusableCell(withIdentifier: pickerViewCellIdentifier + "1", for: indexPath) as! PickerViewCell
@@ -1017,6 +1103,11 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
             tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  ronin:5550fc7bbe0126d5d31d347ae584fdd8906af29f", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
             self.roninField = tempCell.textFild
             self.roninField?.text = userInfoModel?.billing_ronin_address
+            if self.userInfoModel?.scholar_status == "YES" || self.userInfoModel?.scholar_status == "AUDIT"{
+                self.roninField?.isUserInteractionEnabled = false
+            }else{
+                self.roninField?.isUserInteractionEnabled = true
+            }
             cell = tempCell
         case 6:
             let tempCell : IDPhotoCell = tableView.dequeueReusableCell(withIdentifier: IDPhotoCellIdentifier, for: indexPath) as! IDPhotoCell
@@ -1027,11 +1118,19 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
             tempCell.contentView.layer.borderColor = UIColor(red: 0.27, green: 0.3, blue: 0.41, alpha: 1).cgColor
             if userInfoModel?.id_photo != nil {
     //            self.iconImgView.kf.setImage(with:URL.init(string: userInfoModel.avatar!))fef
-                tempCell.bgImgView.kf.setImage(with: URL.init(string: userInfoModel!.id_photo!), placeholder:nil, options: nil) {result, error in
+                tempCell.bgImgView.kf.setImage(with: URL.init(string: userInfoModel!.id_photo!), placeholder:nil, options: nil) { [self]result, error in
                     self.idPhotoCell?.contentView.bringSubviewToFront(self.idImgView!)
                     self.idPhotoCell?.reUploadBtn.isHidden = false
                     self.idPhotoCell?.contentView.bringSubviewToFront(self.idPhotoCell!.reUploadBtn)
+                    self.idPhotoCell?.reUploadBtn.addTarget(self, action: #selector(showPictureSheet), for: .touchUpInside)
                     self.hasUploadId = true
+                    if self.userInfoModel?.scholar_status == "YES" || self.userInfoModel?.scholar_status == "AUDIT"{
+                        tempCell.btn.isHidden = true
+                        tempCell.reUploadBtn.isHidden = true
+                    }else{
+                        tempCell.btn.isHidden = false
+                        tempCell.reUploadBtn.isHidden = false
+                    }
                 }
             }
             cell = tempCell
@@ -1062,6 +1161,11 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
             tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Highest MMR", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
             self.mmrField = tempCell.textFild
             self.mmrField?.text = self.userInfoModel?.mmr
+            if self.userInfoModel?.scholar_status == "YES" || self.userInfoModel?.scholar_status == "AUDIT"{
+                self.mmrField?.isUserInteractionEnabled = false
+            }else{
+                self.mmrField?.isUserInteractionEnabled = true
+            }
             cell = tempCell
         case 3:
             let tempCell : TextViewCell = tableView.dequeueReusableCell(withIdentifier: textViewCellIdentifier + "0", for: indexPath) as! TextViewCell
@@ -1074,7 +1178,11 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
                 gamesPlayedTextView!.text = "Enter the gmes you played before"
                 gamesPlayedTextView!.textColor = UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)
             }
-            
+            if self.userInfoModel?.scholar_status == "YES" || self.userInfoModel?.scholar_status == "AUDIT"{
+                self.gamesPlayedTextView?.isUserInteractionEnabled = false
+            }else{
+                self.gamesPlayedTextView?.isUserInteractionEnabled = true
+            }
             cell = tempCell
         case 4:
             let tempCell : TextViewCell = tableView.dequeueReusableCell(withIdentifier: textViewCellIdentifier + "1", for: indexPath) as! TextViewCell
@@ -1086,6 +1194,11 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
             }else{
                 introduceTextView!.text = "Introduce yourself briefly"
                 introduceTextView!.textColor = UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)
+            }
+            if self.userInfoModel?.scholar_status == "YES" || self.userInfoModel?.scholar_status == "AUDIT"{
+                self.introduceTextView?.isUserInteractionEnabled = false
+            }else{
+                self.introduceTextView?.isUserInteractionEnabled = true
             }
             cell = tempCell
         default:
@@ -1099,16 +1212,36 @@ extension  EditProfileController : UITableViewDelegate,UITableViewDataSource,UIT
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 && indexPath.row == 2 {
             //country
-            self.showCountryPickerView()
+            if self.userInfoModel?.scholar_status == "YES" || self.userInfoModel?.scholar_status == "AUDIT"{
+                
+            }else{
+                self.showCountryPickerView()
+            }
+           
         }else if indexPath.section == 0 && indexPath.row == 4{
             //birthday
-            self.showBirthDayPickerView()
+            if self.userInfoModel?.scholar_status == "YES" || self.userInfoModel?.scholar_status == "AUDIT"{
+                
+            }else{
+                self.showBirthDayPickerView()
+            }
+            
         }else if indexPath.section == 1 && indexPath.row == 0{
             //available time
-            self.showAvailablePickerView()
+            if self.userInfoModel?.scholar_status == "YES" || self.userInfoModel?.scholar_status == "AUDIT"{
+                
+            }else{
+                self.showAvailablePickerView()
+            }
+            
         }else if indexPath.section == 1 && indexPath.row == 1{
             //experience
-            self.showPlayAxiePickerView()
+            if self.userInfoModel?.scholar_status == "YES" || self.userInfoModel?.scholar_status == "AUDIT"{
+                
+            }else{
+                self.showPlayAxiePickerView()
+            }
+            
         }
     }
 }
