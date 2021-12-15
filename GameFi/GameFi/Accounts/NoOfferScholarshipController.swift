@@ -82,20 +82,40 @@ class NoOfferScholarshipController: UIViewController {
     }
     
     @objc func recallScholarship(btn:UIButton) {
-        GFAlert.showAlert(titleStr: "Notice:", msgStr: "Recall from the Tavern and you won't receive the application anymore.", currentVC: self, cancelStr: "Cancel", cancelHandler: { alertAction in
-            
-        }, otherBtns: ["Recall"]) { index in
-            if btn.tag - 30000 < self.dataSource!.count {
-                let scholarshipModel : ScholarshipModel = self.dataSource![btn.tag - 30000] as! ScholarshipModel
-                self.mc_loading(text: "Loading")
-                DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: scholarshipModel.scholarship_id!, status: "DRAFT") { result, reponse in
-                    DispatchQueue.main.async { [self] in
-                        self.mc_remove()
-                        if result.success!{
-                            self.collectionView.mj_header?.beginRefreshing()
-                        }else{
-                            if  result.msg != nil && !result.msg!.isBlank {
-                                self.mc_success(result.msg!)
+        if btn.tag - 30000 < self.dataSource!.count {
+            let scholarshipModel : ScholarshipModel = self.dataSource![btn.tag - 30000] as! ScholarshipModel
+            if scholarshipModel.status == "AUDIT"{
+                GFAlert.showAlert(titleStr: "Notice:", msgStr: "Are you sure to suspend the scholarship auditting?", currentVC: self, cancelStr: "YES", cancelHandler: { alertAction in
+                    self.mc_loading(text: "Loading")
+                    DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: scholarshipModel.scholarship_id!, status: "DRAFT") { result, reponse in
+                        DispatchQueue.main.async { [self] in
+                            self.mc_remove()
+                            if result.success!{
+                                self.collectionView.mj_header?.beginRefreshing()
+                            }else{
+                                if  result.msg != nil && !result.msg!.isBlank {
+                                    self.mc_success(result.msg!)
+                                }
+                            }
+                        }
+                    }
+                }, otherBtns: ["Exit"]) { index in
+                    
+                }
+            }else if scholarshipModel.status == "LISTING"{
+                GFAlert.showAlert(titleStr: "Notice:", msgStr: "Recall from the Tavern and you won't receive the application anymore.", currentVC: self, cancelStr: "Cancel", cancelHandler: { alertAction in
+                    
+                }, otherBtns: ["Recall"]) { index in
+                    self.mc_loading(text: "Loading")
+                    DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: scholarshipModel.scholarship_id!, status: "DRAFT") { result, reponse in
+                        DispatchQueue.main.async { [self] in
+                            self.mc_remove()
+                            if result.success!{
+                                self.collectionView.mj_header?.beginRefreshing()
+                            }else{
+                                if  result.msg != nil && !result.msg!.isBlank {
+                                    self.mc_success(result.msg!)
+                                }
                             }
                         }
                     }

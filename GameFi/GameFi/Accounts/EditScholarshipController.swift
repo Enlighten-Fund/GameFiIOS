@@ -267,7 +267,7 @@ class EditScholarshipController: ViewController {
         let tempTableView = UITableView.init(frame: CGRect.zero, style: .plain)
         let footView = PostScholarFootView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 60))
         footView.cancelBtn.setTitle("Save", for: .normal)
-        footView.postBtn.setTitle("Post", for: .normal)
+        footView.postBtn.setTitle("Submit", for: .normal)
         footView.cancelBtn.addTarget(self, action: #selector(cancelBtnClick), for: .touchUpInside)
         footView.postBtn.addTarget(self, action: #selector(postBtnClick), for: .touchUpInside)
         tempTableView.tableFooterView = footView
