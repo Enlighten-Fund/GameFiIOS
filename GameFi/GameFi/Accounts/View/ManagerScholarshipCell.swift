@@ -101,6 +101,19 @@ class ManagerScholarshipCell: UICollectionViewCell {
             make.width.equalTo(30)
         }
         
+        self.leftBtn.snp.makeConstraints { make in
+            make.top.equalTo(self.pwdTextFild!.snp.bottom).offset(10)
+            make.width.equalTo((IPhone_SCREEN_WIDTH - 70)/2.0)
+            make.height.equalTo(40)
+            make.left.equalToSuperview().offset(15)
+        }
+        self.rightBtn.snp.makeConstraints { make in
+            make.top.equalTo(self.pwdTextFild!.snp.bottom).offset(10)
+            make.width.equalTo((IPhone_SCREEN_WIDTH - 70)/2.0)
+            make.height.equalTo(40)
+            make.right.equalToSuperview().offset(-15)
+        }
+        
         self.btn.snp.makeConstraints { make in
             make.top.equalTo(self.pwdTextFild!.snp.bottom).offset(10)
             make.right.equalToSuperview().offset(-15)
@@ -201,29 +214,52 @@ class ManagerScholarshipCell: UICollectionViewCell {
         
         if scholarshipModel.status != nil {
             if scholarshipModel.status == "ACTIVE" {
-                self.btn.setTitle("Stop offering", for: .normal)
-                self.btn.layer.borderColor = UIColor(red: 0.59, green: 0.59, blue: 0.59, alpha: 1).cgColor
-                self.btn.layer.borderWidth = 0.5
-                self.btn.backgroundColor = .clear
-                self.btn.isEnabled = true
+                if scholarshipModel.is_evergreen != nil{
+                    self.btn.isHidden = true
+                    self.leftBtn.isHidden = false
+                    self.rightBtn.isHidden = false
+                    if scholarshipModel.is_evergreen == 0{//scholar manager都未发起renew
+                        self.rightBtn.setTitle("Renew", for: .normal)
+                        self.rightBtn.isEnabled = true
+                    }else if scholarshipModel.is_evergreen == 1{//scholar 发起renew
+                        self.rightBtn.setTitle("Accept Renewal", for: .normal)
+                        self.rightBtn.isEnabled = true
+                    }else if scholarshipModel.is_evergreen == 2{//manager 发起renew
+                        self.rightBtn.setTitle("Withdraw Renewal", for: .normal)
+                        self.rightBtn.isEnabled = true
+                    }else if scholarshipModel.is_evergreen == 3{//manager scholar 都同意renew
+                        self.rightBtn.setTitle("Renewed", for: .normal)
+                        self.rightBtn.isEnabled = false
+                    }
+                }
+                
             } else if scholarshipModel.status == "PENDING_PAYMENT" {
                 self.btn.setTitle("Pay now (24 hours left)", for: .normal)
                 self.btn.layer.borderColor = UIColor.clear.cgColor
                 self.btn.layer.borderWidth = 0
                 self.btn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
                 self.btn.isEnabled = true
+                self.btn.isHidden = false
+                self.leftBtn.isHidden = true
+                self.rightBtn.isHidden = true
             } else if scholarshipModel.status == "MANAGER_PAID" {
                 self.btn.setTitle("Already ended", for: .normal)
                 self.btn.layer.borderColor = UIColor.clear.cgColor
                 self.btn.layer.borderWidth = 0
                 self.btn.backgroundColor = .gray
                 self.btn.isEnabled = false
+                self.btn.isHidden = false
+                self.leftBtn.isHidden = true
+                self.rightBtn.isHidden = true
             } else if scholarshipModel.status == "END" {
                 self.btn.setTitle("Already ended", for: .normal)
                 self.btn.layer.borderColor = UIColor.clear.cgColor
                 self.btn.layer.borderWidth = 0
                 self.btn.backgroundColor = .gray
                 self.btn.isEnabled = false
+                self.btn.isHidden = false
+                self.leftBtn.isHidden = true
+                self.rightBtn.isHidden = true
             }
         }
     }
@@ -343,6 +379,32 @@ class ManagerScholarshipCell: UICollectionViewCell {
         tempBtn.setTitleColor(.white, for: .normal)
         tempBtn.titleLabel?.font = UIFont(name: "Avenir Next Medium", size: 14)
         tempBtn.setTitle("Pay now", for: .normal)
+        tempBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
+        self.contentView.addSubview(tempBtn)
+        return tempBtn
+    }()
+    
+    lazy var leftBtn : UIButton = {
+        let tempBtn = UIButton.init(frame: CGRect.zero)
+        tempBtn.layer.cornerRadius = 3
+        tempBtn.layer.masksToBounds = true
+        tempBtn.setTitleColor(.white, for: .normal)
+        tempBtn.setTitle("Stop offering", for: .normal)
+        tempBtn.titleLabel?.font = UIFont(name: "Avenir Next Medium", size: 14)
+        tempBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
+//        tempBtn.layer.borderWidth = 0.5
+//        tempBtn.layer.borderColor = UIColor.white.cgColor
+        self.contentView.addSubview(tempBtn)
+        return tempBtn
+    }()
+    
+    lazy var rightBtn : UIButton = {
+        let tempBtn = UIButton.init(frame: CGRect.zero)
+        tempBtn.layer.cornerRadius = 3
+        tempBtn.layer.masksToBounds = true
+        tempBtn.setTitleColor(.white, for: .normal)
+        tempBtn.setTitle("Submit", for: .normal)
+        tempBtn.titleLabel?.font = UIFont(name: "Avenir Next Medium", size: 14)
         tempBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
         self.contentView.addSubview(tempBtn)
         return tempBtn

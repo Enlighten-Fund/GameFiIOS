@@ -57,6 +57,7 @@ class ScholarshipModel: BaseModel {
     var scholar_portrait : String?
     var account_mmr : String?
     var end_timestamp : String?
+    var is_evergreen:Int?
     required init() {}
 }
 

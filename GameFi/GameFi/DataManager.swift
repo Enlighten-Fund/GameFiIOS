@@ -589,5 +589,12 @@ class DataManager: NSObject {
             }
         }
     }
+    
+    func updateRenewState(id : Int,is_evergreen : Int,completeBlock: @escaping CompleteBlock) {
+        let dic = ["is_evergreen":is_evergreen,"id":id] as [String : Any]
+        self.POST(url: "scholarship/update_evergreen_by_id", param: dic ) { result, reponse in
+            completeBlock(result,reponse)
+        }
+    }
 }
 
