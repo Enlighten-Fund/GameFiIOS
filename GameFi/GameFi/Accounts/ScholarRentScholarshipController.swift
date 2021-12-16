@@ -28,8 +28,8 @@ class ScholarRentScholarshipController: UIViewController {
     }
     
     @objc func stopRentBtnClick(btn:UIButton) {
-        if btn.tag - 80000 < self.dataSource!.count {
-            let scholarshipModel : ScholarshipModel = self.dataSource![btn.tag - 80000] as! ScholarshipModel
+        if btn.tag - 90000 < self.dataSource!.count {
+            let scholarshipModel : ScholarshipModel = self.dataSource![btn.tag - 90000] as! ScholarshipModel
             if scholarshipModel.status == "PENDING_PAYMENT" || scholarshipModel.status == "MANAGER_PAID"{
                 self.mc_loading(text: "Loading")
                 DataManager.sharedInstance.fetchPaymentStatus(scholarshipid: scholarshipModel.scholarship_id!) { result, reponse in
@@ -71,6 +71,135 @@ class ScholarRentScholarshipController: UIViewController {
            
         }
     }
+    
+    @objc func stopRentBtnClick2(btn:UIButton) {
+        if btn.tag - 70000 < self.dataSource!.count {
+            let scholarshipModel : ScholarshipModel = self.dataSource![btn.tag - 70000] as! ScholarshipModel
+            if scholarshipModel.status == "PENDING_PAYMENT" || scholarshipModel.status == "MANAGER_PAID"{
+                self.mc_loading(text: "Loading")
+                DataManager.sharedInstance.fetchPaymentStatus(scholarshipid: scholarshipModel.scholarship_id!) { result, reponse in
+                    DispatchQueue.main.async { [self] in
+                        self.mc_remove()
+                        if result.success!{
+                            let paymentModel : PaymentModel = reponse as! PaymentModel
+                            GFAlert.showAlert(titleStr: "Notice:", msgStr: "\(Int(paymentModel.scholar_value!)!) SLP will be sent to [\(String(paymentModel.ronin_address!))].Please wait a moment or contact us", currentVC: self,cancelStr:"OK", cancelHandler: { alertAction in
+                                
+                            }, otherBtns: nil) { index in
+                                
+                            }
+                        }else{
+                            if  result.msg != nil && !result.msg!.isBlank {
+                                self.mc_success(result.msg!)
+                            }
+                        }
+                    }
+                }
+            }else if scholarshipModel.status == "ACTIVE"{
+                GFAlert.showAlert(titleStr: "Notice:", msgStr: "If you terminate the contract, your credit score will drop", currentVC: self,cancelStr:"Cancel", cancelHandler: { alertAction in
+                    
+                }, otherBtns: ["Stop"]) { index in
+                    self.mc_loading(text: "Loading")
+                    DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: scholarshipModel.scholarship_id!, status: "PENDING_PAYMENT") { result, reponse in
+                        DispatchQueue.main.async { [self] in
+                            self.mc_remove()
+                            if result.success!{
+                                self.collectionView.mj_header?.beginRefreshing()
+                            }else{
+                                if  result.msg != nil && !result.msg!.isBlank {
+                                    self.mc_success(result.msg!)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+           
+        }
+    }
+    
+    @objc func renewBtnClick(btn:UIButton) {
+        if btn.tag - 80000 < self.dataSource!.count {
+            let scholarshipModel : ScholarshipModel = self.dataSource![btn.tag - 80000] as! ScholarshipModel
+            if scholarshipModel.status == "ACTIVE" {
+                if scholarshipModel.is_evergreen != nil{
+                    if scholarshipModel.is_evergreen == 0{//scholar manager都未发起renew
+                        GFAlert.showAlert(titleStr: "Notice:", msgStr:
+                                            "Your renewal Offer Period will be the same as the previous Offer Period. The Manager has not requested a Renewal on this Scholarship. You will need to wait for their response after you click on Confirm", currentVC: self,cancelStr:"Confirm", cancelHandler: { alertAction in
+                            DispatchQueue.main.async { [self] in self.mc_loading()}
+                            DataManager.sharedInstance.updateRenewState(id: Int(scholarshipModel.scholarship_id!)!, is_evergreen: 1){ result, reponse in
+                                DispatchQueue.main.async { [self] in
+                                    self.mc_remove()
+                                    if result.success!{
+                                        GFAlert.showAlert(titleStr: "Notice:", msgStr:
+                                                            "We have notified the Manager about your Renewal Request. Once they accept, the Offer automatically starts. You can withdraw your Renewal Request anytime before the Scholar responses.", currentVC: self,cancelStr:"Confirm", cancelHandler: { alertAction in
+                                            DispatchQueue.main.async { [self] in
+                                                self.collectionView.mj_header?.beginRefreshing()
+                                            }
+                                        }, otherBtns: ["Cancel"]) { index in
+            
+                                        }
+                                    }else{
+                                        if  result.msg != nil && !result.msg!.isBlank {
+                                            self.mc_success(result.msg!)
+                                        }
+                                    }
+                                    
+                                }
+                        }
+                        }, otherBtns: ["Cancel"]) { index in
+                            
+                        }
+                    }else if scholarshipModel.is_evergreen == 1{//scholar 发起renew
+                        GFAlert.showAlert(titleStr: "Notice:", msgStr:
+                                            "Your renewal Offer Period will be the same as the previous Offer Period. The Manager has requested a Renewal on this Scholarship. This Scholarship will immediately start once you click on Confirm", currentVC: self,cancelStr:"Confirm", cancelHandler: { alertAction in
+                            DispatchQueue.main.async { [self] in self.mc_loading()}
+                            DataManager.sharedInstance.updateRenewState(id: Int(scholarshipModel.scholarship_id!)!, is_evergreen: -1){ result, reponse in
+                                DispatchQueue.main.async { [self] in
+                                    self.mc_remove()
+                                    if result.success!{
+                                        GFAlert.showAlert(titleStr: "Notice:", msgStr:
+                                                            "Congratulations! Your Renewed Scholarship starts from now.", currentVC: self,cancelStr:"Confirm", cancelHandler: { alertAction in
+                                            DispatchQueue.main.async { [self] in
+                                                self.collectionView.mj_header?.beginRefreshing()
+                                            }
+                                        }, otherBtns: ["Cancel"]) { index in
+            
+                                        }
+                                    }else{
+                                        if  result.msg != nil && !result.msg!.isBlank {
+                                            self.mc_success(result.msg!)
+                                        }
+                                    }
+                                    
+                                }
+                        }
+                        }, otherBtns: ["Cancel"]) { index in
+                            
+                        }
+
+                    }else if scholarshipModel.is_evergreen == 2{//manager 发起renew
+                        DispatchQueue.main.async { [self] in self.mc_loading()}
+                        DataManager.sharedInstance.updateRenewState(id: Int(scholarshipModel.scholarship_id!)!, is_evergreen: 1){ result, reponse in
+                            DispatchQueue.main.async { [self] in
+                                self.mc_remove()
+                                if result.success!{
+                                    self.collectionView.mj_header?.beginRefreshing()
+                                }else{
+                                    if  result.msg != nil && !result.msg!.isBlank {
+                                        self.mc_success(result.msg!)
+                                    }
+                                }
+                            }
+                    }
+                    }else if scholarshipModel.is_evergreen == 3{//manager scholar 都同意renew
+                       
+                    }
+                }
+            }
+            
+        }
+    }
+    
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -132,8 +261,12 @@ extension  ScholarRentScholarshipController : UICollectionViewDelegate,UICollect
         cell.makeConstraints()
         let scholarshipModel = self.dataSource![indexPath.row]
         cell.update(scholarshipModel: scholarshipModel as! ScholarshipModel)
-        cell.btn.tag = 80000 + indexPath.row
+        cell.leftBtn.tag = 70000 + indexPath.row
+        cell.rightBtn.tag = 80000 + indexPath.row
+        cell.btn.tag = 90000 + indexPath.row
         cell.btn.addTarget(self, action: #selector(stopRentBtnClick), for: .touchUpInside)
+        cell.leftBtn.addTarget(self, action: #selector(stopRentBtnClick2), for: .touchUpInside)
+        cell.rightBtn.addTarget(self, action: #selector(renewBtnClick), for: .touchUpInside)
         return cell
     }
 

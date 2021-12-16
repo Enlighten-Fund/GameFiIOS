@@ -221,15 +221,19 @@ class ManagerScholarshipCell: UICollectionViewCell {
                     if scholarshipModel.is_evergreen == 0{//scholar manager都未发起renew
                         self.rightBtn.setTitle("Renew", for: .normal)
                         self.rightBtn.isEnabled = true
+                        self.rightBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
                     }else if scholarshipModel.is_evergreen == 1{//scholar 发起renew
                         self.rightBtn.setTitle("Accept Renewal", for: .normal)
                         self.rightBtn.isEnabled = true
+                        self.rightBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
                     }else if scholarshipModel.is_evergreen == 2{//manager 发起renew
                         self.rightBtn.setTitle("Withdraw Renewal", for: .normal)
                         self.rightBtn.isEnabled = true
+                        self.rightBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
                     }else if scholarshipModel.is_evergreen == 3{//manager scholar 都同意renew
                         self.rightBtn.setTitle("Renewed", for: .normal)
                         self.rightBtn.isEnabled = false
+                        self.rightBtn.backgroundColor = .gray
                     }
                 }
                 

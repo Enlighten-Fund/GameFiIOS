@@ -109,6 +109,19 @@ class ScholarRentCell: UICollectionViewCell {
             make.width.equalTo(30)
         }
 
+        self.leftBtn.snp.makeConstraints { make in
+            make.top.equalTo(self.pwdTextFild!.snp.bottom).offset(10)
+            make.width.equalTo((IPhone_SCREEN_WIDTH - 70)/2.0)
+            make.height.equalTo(40)
+            make.left.equalToSuperview().offset(15)
+        }
+        self.rightBtn.snp.makeConstraints { make in
+            make.top.equalTo(self.pwdTextFild!.snp.bottom).offset(10)
+            make.width.equalTo((IPhone_SCREEN_WIDTH - 70)/2.0)
+            make.height.equalTo(40)
+            make.right.equalToSuperview().offset(-15)
+        }
+        
         self.btn.snp.makeConstraints { make in
             make.top.equalTo(self.pwdTextFild!.snp.bottom).offset(10)
             make.right.equalToSuperview().offset(-15)
@@ -221,6 +234,19 @@ class ScholarRentCell: UICollectionViewCell {
                 self.emailTitleLabel.isHidden = false
                 self.pwdTextFild!.isHidden = false
                 self.secretTitleLabel.isHidden = false
+                self.leftBtn.snp.remakeConstraints { make in
+                    make.top.equalTo(self.pwdTextFild!.snp.bottom).offset(10)
+                    make.width.equalTo((IPhone_SCREEN_WIDTH - 70)/2.0)
+                    make.height.equalTo(0)
+                    make.left.equalToSuperview().offset(15)
+                }
+                self.rightBtn.snp.remakeConstraints { make in
+                    make.top.equalTo(self.pwdTextFild!.snp.bottom).offset(10)
+                    make.width.equalTo((IPhone_SCREEN_WIDTH - 70)/2.0)
+                    make.height.equalTo(0)
+                    make.right.equalToSuperview().offset(-15)
+                }
+                
                 self.btn.snp.remakeConstraints { make in
                     make.top.equalTo(self.pwdTextFild!.snp.bottom).offset(10)
                     make.right.equalToSuperview().offset(-15)
@@ -228,18 +254,47 @@ class ScholarRentCell: UICollectionViewCell {
                     make.left.equalToSuperview().offset(15)
                 }
             }else if scholarshipModel.status == "ACTIVE"{
-                self.btn.setTitle("Stop renting", for: .normal)
-                self.btn.isEnabled = true
-                self.btn.backgroundColor = .clear
                 self.emailLabel.isHidden = false
                 self.emailTitleLabel.isHidden = false
                 self.pwdTextFild!.isHidden = false
                 self.secretTitleLabel.isHidden = false
-                self.btn.snp.remakeConstraints { make in
-                    make.top.equalTo(self.pwdTextFild!.snp.bottom).offset(10)
-                    make.right.equalToSuperview().offset(-15)
-                    make.height.equalTo(40)
-                    make.left.equalToSuperview().offset(15)
+                if scholarshipModel.is_evergreen != nil{
+                    self.leftBtn.snp.remakeConstraints { make in
+                        make.top.equalTo(self.pwdTextFild!.snp.bottom).offset(10)
+                        make.width.equalTo((IPhone_SCREEN_WIDTH - 70)/2.0)
+                        make.height.equalTo(40)
+                        make.left.equalToSuperview().offset(15)
+                    }
+                    self.rightBtn.snp.remakeConstraints { make in
+                        make.top.equalTo(self.pwdTextFild!.snp.bottom).offset(10)
+                        make.width.equalTo((IPhone_SCREEN_WIDTH - 70)/2.0)
+                        make.height.equalTo(40)
+                        make.right.equalToSuperview().offset(-15)
+                    }
+                    
+                    self.btn.snp.remakeConstraints { make in
+                        make.top.equalTo(self.pwdTextFild!.snp.bottom).offset(10)
+                        make.right.equalToSuperview().offset(-15)
+                        make.height.equalTo(0)
+                        make.left.equalToSuperview().offset(15)
+                    }
+                    if scholarshipModel.is_evergreen == 0{//scholar manager都未发起renew
+                        self.rightBtn.setTitle("Renew", for: .normal)
+                        self.rightBtn.isEnabled = true
+                        self.rightBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
+                    }else if scholarshipModel.is_evergreen == 1{//scholar 发起renew
+                        self.rightBtn.setTitle("Withdraw Renewal", for: .normal)
+                        self.rightBtn.isEnabled = true
+                        self.rightBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
+                    }else if scholarshipModel.is_evergreen == 2{//manager 发起renew
+                        self.rightBtn.setTitle("Accept Renewal", for: .normal)
+                        self.rightBtn.isEnabled = true
+                        self.rightBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
+                    }else if scholarshipModel.is_evergreen == 3{//manager scholar 都同意renew
+                        self.rightBtn.setTitle("Renewed", for: .normal)
+                        self.rightBtn.isEnabled = false
+                        self.rightBtn.backgroundColor = .gray
+                    }
                 }
             }else if scholarshipModel.status == "MANAGER_PAID"{
                 self.btn.setTitle("Waiting payment", for: .normal)
@@ -249,6 +304,19 @@ class ScholarRentCell: UICollectionViewCell {
                 self.emailTitleLabel.isHidden = false
                 self.pwdTextFild!.isHidden = false
                 self.secretTitleLabel.isHidden = false
+                self.leftBtn.snp.remakeConstraints { make in
+                    make.top.equalTo(self.pwdTextFild!.snp.bottom).offset(10)
+                    make.width.equalTo((IPhone_SCREEN_WIDTH - 70)/2.0)
+                    make.height.equalTo(0)
+                    make.left.equalToSuperview().offset(15)
+                }
+                self.rightBtn.snp.remakeConstraints { make in
+                    make.top.equalTo(self.pwdTextFild!.snp.bottom).offset(10)
+                    make.width.equalTo((IPhone_SCREEN_WIDTH - 70)/2.0)
+                    make.height.equalTo(0)
+                    make.right.equalToSuperview().offset(-15)
+                }
+                
                 self.btn.snp.remakeConstraints { make in
                     make.top.equalTo(self.pwdTextFild!.snp.bottom).offset(10)
                     make.right.equalToSuperview().offset(-15)
@@ -263,6 +331,19 @@ class ScholarRentCell: UICollectionViewCell {
                 self.emailTitleLabel.isHidden = true
                 self.pwdTextFild!.isHidden = true
                 self.secretTitleLabel.isHidden = true
+                self.leftBtn.snp.remakeConstraints { make in
+                    make.top.equalTo(self.pwdTextFild!.snp.bottom).offset(10)
+                    make.width.equalTo((IPhone_SCREEN_WIDTH - 70)/2.0)
+                    make.height.equalTo(0)
+                    make.left.equalToSuperview().offset(15)
+                }
+                self.rightBtn.snp.remakeConstraints { make in
+                    make.top.equalTo(self.pwdTextFild!.snp.bottom).offset(10)
+                    make.width.equalTo((IPhone_SCREEN_WIDTH - 70)/2.0)
+                    make.height.equalTo(0)
+                    make.right.equalToSuperview().offset(-15)
+                }
+                
                 self.btn.snp.remakeConstraints { make in
                     make.top.equalTo(self.endDateLabelView.snp.bottom).offset(10)
                     make.right.equalToSuperview().offset(-15)
@@ -390,6 +471,32 @@ class ScholarRentCell: UICollectionViewCell {
         tempBtn.titleLabel?.font = UIFont(name: "Avenir Next Medium", size: 14)
         tempBtn.setTitle("Stop renting", for: .normal)
         tempBtn.backgroundColor = .clear
+        self.contentView.addSubview(tempBtn)
+        return tempBtn
+    }()
+    
+    lazy var leftBtn : UIButton = {
+        let tempBtn = UIButton.init(frame: CGRect.zero)
+        tempBtn.layer.cornerRadius = 3
+        tempBtn.layer.masksToBounds = true
+        tempBtn.setTitleColor(.white, for: .normal)
+        tempBtn.setTitle("Stop renting", for: .normal)
+        tempBtn.titleLabel?.font = UIFont(name: "Avenir Next Medium", size: 14)
+        tempBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
+//        tempBtn.layer.borderWidth = 0.5
+//        tempBtn.layer.borderColor = UIColor.white.cgColor
+        self.contentView.addSubview(tempBtn)
+        return tempBtn
+    }()
+    
+    lazy var rightBtn : UIButton = {
+        let tempBtn = UIButton.init(frame: CGRect.zero)
+        tempBtn.layer.cornerRadius = 3
+        tempBtn.layer.masksToBounds = true
+        tempBtn.setTitleColor(.white, for: .normal)
+        tempBtn.setTitle("Submit", for: .normal)
+        tempBtn.titleLabel?.font = UIFont(name: "Avenir Next Medium", size: 14)
+        tempBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
         self.contentView.addSubview(tempBtn)
         return tempBtn
     }()
