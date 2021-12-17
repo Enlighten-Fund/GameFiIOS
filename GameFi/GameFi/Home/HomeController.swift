@@ -89,6 +89,7 @@ class HomeController: UIViewController {
                                 titles: ["Scholarship","Scholar"],
                                 childControllers: [ScholarshipsController(),ScholarsController()],
                                 parentController: self)
+        pageView.style.labelLayout = .divide
         view.addSubview(pageView)
         return pageView
     }()

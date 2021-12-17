@@ -13,7 +13,7 @@ class TYPageView: UIView {
     private var titles = [String]()
     private var controllers = [UIViewController]()
     private weak var parentVc: UIViewController!
-    private var style: TYPageStyle!
+    var style: TYPageStyle!
     
     fileprivate var startOffsetX:CGFloat = 0  //按下瞬间的offsetX
     fileprivate var isForbideScroll:Bool = false

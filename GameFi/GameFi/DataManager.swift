@@ -372,6 +372,32 @@ class DataManager: NSObject {
         }
     }
     
+    //manager history scholarships
+    func fetchManagerHistoryScholarShip(pageIndex:Int, completeBlock: @escaping CompleteBlock) {
+        let dic = ["page_index" : pageIndex,"page_size" : 20] as [String : Any]
+        self.POST(url: "scholarship/list_by_manager_historical", param: dic) { result, reponse in
+            if result.success!{
+                let scholarshipListModel : ScholarshipListModel = JsonUtil.jsonToModel(reponse as! String, ScholarshipListModel.self) as! ScholarshipListModel
+                completeBlock(result,scholarshipListModel)
+            }else{
+                completeBlock(result,reponse)
+            }
+        }
+    }
+    
+    //schorlar history scholarships
+    func fetchScholarHistoryScholarShip(pageIndex:Int, completeBlock: @escaping CompleteBlock) {
+        let dic = ["page_index" : pageIndex,"page_size" : 20] as [String : Any]
+        self.POST(url: "scholarship/list_by_scholar_historical", param: dic) { result, reponse in
+            if result.success!{
+                let scholarshipListModel : ScholarshipListModel = JsonUtil.jsonToModel(reponse as! String, ScholarshipListModel.self) as! ScholarshipListModel
+                completeBlock(result,scholarshipListModel)
+            }else{
+                completeBlock(result,reponse)
+            }
+        }
+    }
+    
     //scholar renting
     func fetchScholarRentScholarShip(pageIndex:Int, completeBlock: @escaping CompleteBlock) {
         let dic = ["page_index" : pageIndex,"page_size" : 20] as [String : Any]

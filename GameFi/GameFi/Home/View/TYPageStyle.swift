@@ -30,12 +30,12 @@ enum MoveAnimation {
 class TYPageStyle {
     
     var labelHeight: CGFloat = 44            //标签高度
-    var labelMargin: CGFloat = 0            //标签间隔
+    var labelMargin: CGFloat = 10            //标签间隔
     var labelFont: CGFloat = 15              //标签字体大小
     var labelSelFont: CGFloat = 15          //选中字体大小
     var labelCenterWidth: CGFloat = 50      //居中模式下label的默认宽度
     
-    var labelLayout: LabelLayout = .divide   //默认可以滚动
+    var labelLayout: LabelLayout = .scroll   //默认可以滚动
     var moveAnimation: MoveAnimation = .scroll  //底部线运动d动画
     
     var isShowBottomLine: Bool = true        //是否显示底部的线
