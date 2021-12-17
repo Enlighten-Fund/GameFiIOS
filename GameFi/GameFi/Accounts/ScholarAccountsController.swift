@@ -33,10 +33,10 @@ class ScholarAccountsController: UIViewController {
        return tempBtn
     }()
     
-    lazy var pageView : TYPageView? = {
-        let pageView = TYPageView(frame: view.bounds,
-                                titles: ["Renting","Applying"],
-                                childControllers: [ScholarRentScholarshipController(),ScholarApplingScholarshipController()],
+    lazy var pageView : TYPageViewDivide? = {
+        let pageView = TYPageViewDivide(frame: view.bounds,
+                                titles: ["Renting","Applying","Historical Offers"],
+                                childControllers: [ScholarRentScholarshipController(),ScholarApplingScholarshipController(),ScholarHistoryController()],
                                 parentController: self)
         view.addSubview(pageView)
         return pageView

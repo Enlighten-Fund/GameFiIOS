@@ -1,8 +1,8 @@
 //
-//  NoOfferScholarshipCell.swift
+//  AccountScholarshipCell.swift
 //  GameFi
 //
-//  Created by harden on 2021/11/11.
+//  Created by harden on 2021/11/10.
 //
 
 import Foundation
@@ -14,66 +14,63 @@ class ManagerHistoryCell: UICollectionViewCell {
         self.contentView.layer.cornerRadius = 5
         self.contentView.layer.masksToBounds = true
         self.contentView.backgroundColor = UIColor.init(hexString: "0x30354B")
-        self.axieImgView1.snp.makeConstraints { make in
-            make.top.equalToSuperview()
+        self.accountImgView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.height.equalTo(80)
-            make.width.equalTo(100)
+            make.top.equalToSuperview().offset(10)
+            make.height.equalTo(50)
+            make.width.equalTo(50)
         }
-        
-        self.axieImgView2.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.right.equalTo(self.axieImgView1.snp.left).offset(60)
-            make.height.equalTo(80)
-            make.width.equalTo(100)
+        self.accountLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.accountImgView.snp.bottom).offset(10)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(25)
+            make.width.equalToSuperview()
         }
-        
-        self.axieImgView3.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.left.equalTo(self.axieImgView1.snp.right).offset(-60)
-            make.height.equalTo(80)
-            make.width.equalTo(100)
+        self.creditLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.accountLabel.snp.bottom)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(25)
+            make.width.equalToSuperview()
         }
       
         self.scholarshipNameLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.axieImgView3.snp.bottom).offset(10)
+            make.top.equalTo(self.creditLabel.snp.bottom).offset(10)
             make.right.equalToSuperview().offset(-15)
             make.height.equalTo(25)
             make.left.equalToSuperview().offset(15)
         }
-        self.returnPerDayLabelView.snp.makeConstraints { make in
+        self.returnAmountLabelView.snp.makeConstraints { make in
             make.top.equalTo(self.scholarshipNameLabelView.snp.bottom)
             make.right.equalToSuperview().offset(-15)
             make.height.equalTo(25)
             make.left.equalToSuperview().offset(15)
         }
-        self.managerPercentLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.returnPerDayLabelView.snp.bottom)
-            make.right.equalToSuperview().offset(-15)
-            make.height.equalTo(25)
-            make.left.equalToSuperview().offset(15)
-        }
-        
-        self.OfferContractLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.managerPercentLabelView.snp.bottom)
-            make.right.equalToSuperview().offset(-15)
-            make.height.equalTo(25)
-            make.left.equalToSuperview().offset(15)
-        }
         self.mmrLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.OfferContractLabelView.snp.bottom)
+            make.top.equalTo(self.returnAmountLabelView.snp.bottom)
             make.right.equalToSuperview().offset(-15)
             make.height.equalTo(25)
             make.left.equalToSuperview().offset(15)
         }
-        self.roninAddressLabelView.snp.makeConstraints { make in
+        self.startDateLabelView.snp.makeConstraints { make in
             make.top.equalTo(self.mmrLabelView.snp.bottom)
             make.right.equalToSuperview().offset(-15)
             make.height.equalTo(25)
             make.left.equalToSuperview().offset(15)
         }
+        self.endDateLabelView.snp.makeConstraints { make in
+            make.top.equalTo(self.startDateLabelView.snp.bottom)
+            make.right.equalToSuperview().offset(-15)
+            make.height.equalTo(25)
+            make.left.equalToSuperview().offset(15)
+        }
+        self.roninLabelView.snp.makeConstraints { make in
+            make.top.equalTo(self.endDateLabelView.snp.bottom)
+            make.right.equalToSuperview().offset(-15)
+            make.height.equalTo(25)
+            make.left.equalToSuperview().offset(15)
+        }
         self.emailTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.roninAddressLabelView.snp.bottom)
+            make.top.equalTo(self.roninLabelView.snp.bottom)
             make.right.equalToSuperview().offset(-15)
             make.height.equalTo(25)
             make.left.equalToSuperview().offset(15)
@@ -103,115 +100,126 @@ class ManagerHistoryCell: UICollectionViewCell {
             make.height.equalTo(20)
             make.width.equalTo(30)
         }
-        
-        self.leftBtn.snp.makeConstraints { make in
-            make.top.equalTo(self.pwdTextFild!.snp.bottom).offset(10)
-            make.width.equalTo((IPhone_SCREEN_WIDTH - 70)/2.0)
-            make.height.equalTo(40)
-            make.left.equalToSuperview().offset(15)
-        }
-        self.rightBtn.snp.makeConstraints { make in
-            make.top.equalTo(self.pwdTextFild!.snp.bottom).offset(10)
-            make.width.equalTo((IPhone_SCREEN_WIDTH - 70)/2.0)
-            make.height.equalTo(40)
-            make.right.equalToSuperview().offset(-15)
-        }
-        
-        self.btn.snp.makeConstraints { make in
-            make.top.equalTo(self.pwdTextFild!.snp.bottom).offset(10)
-            make.right.equalToSuperview().offset(-15)
-            make.height.equalTo(40)
-            make.left.equalToSuperview().offset(15)
-        }
     }
-    @objc func pwdSecureBtnClick(abtn:UIButton) {
-        abtn.isSelected = !abtn.isSelected
-        self.pwdTextFild?.isSecureTextEntry = !self.pwdTextFild!.isSecureTextEntry
+
+    func getLocalDate(from UTCDate: String) -> String {
+            
+        let dateFormatter = DateFormatter.init()
+
+        // UTC 时间格式
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let utcTimeZone = TimeZone(abbreviation: "UTC")
+        dateFormatter.timeZone = utcTimeZone
+
+        guard let dateFormatted = dateFormatter.date(from: UTCDate) else {
+            return ""
+        }
+
+        // 输出格式
+        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let dateString = dateFormatter.string(from: dateFormatted)
+
+        return dateString
+    }
+    
+    func dateFromString(string:String) -> NSDate {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return dateFormatter.date(from: string)! as NSDate
+    }
+    
+    func stringFromDate(date:NSDate) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return dateFormatter.string(from: date as Date)
     }
     
     func update(scholarshipModel:ScholarshipModel) {
-        if scholarshipModel.accountAxieArry == nil || scholarshipModel.accountAxieArry!.count < 3{
-            
-        }else{
-            let axiePic1 : String = scholarshipModel.accountAxieArry![0]
-            self.axieImgView1.kf.setImage(with: URL.init(string: "https://storage.googleapis.com/assets.axieinfinity.com/axies/\(axiePic1)/axie/axie-full-transparent.png"))
-            let axiePic2 : String = scholarshipModel.accountAxieArry![1]
-            self.axieImgView2.kf.setImage(with:  URL.init(string: "https://storage.googleapis.com/assets.axieinfinity.com/axies/\(axiePic2)/axie/axie-full-transparent.png"))
-            let axiePic3 : String = scholarshipModel.accountAxieArry![2]
-            self.axieImgView3.kf.setImage(with: URL.init(string: "https://storage.googleapis.com/assets.axieinfinity.com/axies/\(axiePic3)/axie/axie-full-transparent.png"))
+        self.accountImgView.image = UIImage.init(named: "portrait")
+        if scholarshipModel.scholar_portrait != nil {
+            self.accountImgView.kf.setImage(with: URL.init(string: scholarshipModel.scholar_portrait!))
+        }
+        if scholarshipModel.scholar_user_name != nil {
+            self.accountLabel.text = scholarshipModel.scholar_user_name
+        }
+        if scholarshipModel.scholar_credit_score != nil {
+            self.creditLabel.text = "Credit: \(scholarshipModel.scholar_credit_score!)"
         }
         if scholarshipModel.scholarship_name != nil {
             self.scholarshipNameLabelView.rightLabel.text = scholarshipModel.scholarship_name
         }
-        if scholarshipModel.estimate_daily_slp != nil {
-            self.returnPerDayLabelView.rightLabel.text = "\(lroundf(Float(scholarshipModel.estimate_daily_slp!)!)) SLP/day"
+        if scholarshipModel.account_lifecycle_slp_latest != nil &&  scholarshipModel.account_lifecycle_slp_start != nil{
+            self.returnAmountLabelView.rightLabel.textColor =  UIColor(red: 1, green: 0.72, blue: 0.07, alpha: 1)
+            self.returnAmountLabelView.rightLabel.text = "\(lroundf( Float(scholarshipModel.account_lifecycle_slp_latest!)! - Float(scholarshipModel.account_lifecycle_slp_start!)!)) SLP(\(scholarshipModel.scholar_percentage!)%)"
         }
-        if scholarshipModel.manager_percentage != nil {
-            self.managerPercentLabelView.rightLabel.text = "\(scholarshipModel.manager_percentage!)%"
+        if scholarshipModel.account_mmr_latest != nil && scholarshipModel.account_mmr_start != nil{
+            let mmrlatestStr : NSMutableAttributedString = NSMutableAttributedString.init(string: scholarshipModel.account_mmr_start!, attributes:[.font: UIFont(name: "PingFang SC Medium", size: 15) as Any,.foregroundColor: UIColor(red: 1, green: 1, blue: 1,alpha:1.0)])
+            var mmrAddStr : NSAttributedString?
+            if Float(scholarshipModel.account_mmr_latest!)! > Float(scholarshipModel.account_mmr_start!)! {
+                let addFloat = Float(scholarshipModel.account_mmr_latest!)! - Float(scholarshipModel.account_mmr_start!)!
+                mmrAddStr = NSAttributedString.init(string: " (+\(lroundf(addFloat)))", attributes: [.font: UIFont(name: "PingFang SC Medium", size: 15) as Any,.foregroundColor: UIColor(red: 0.23, green: 0.9, blue: 0.37,alpha:1.0)])
+            }else{
+                let addFloat = Float(scholarshipModel.account_mmr_latest!)! - Float(scholarshipModel.account_mmr_start!)!
+                mmrAddStr = NSAttributedString.init(string: " (\(lroundf(addFloat)))", attributes: [.font: UIFont(name: "Avenir Next Medium", size: 15) as Any,.foregroundColor: UIColor(red: 0.97, green: 0.24, blue: 0.24,alpha:1.0)])
+            }
+            mmrlatestStr.append(mmrAddStr!)
+            self.mmrLabelView.rightLabel.attributedText = mmrlatestStr
         }
-        if scholarshipModel.account_mmr != nil {
-            self.mmrLabelView.rightLabel.text = scholarshipModel.account_mmr
+        
+        if scholarshipModel.start_timestamp != nil{
+            self.startDateLabelView.rightLabel.text = getLocalDate(from: scholarshipModel.start_timestamp!)
         }
-        if scholarshipModel.offer_period != nil {
-            self.OfferContractLabelView.rightLabel.text = scholarshipModel.offer_period
+        if scholarshipModel.end_timestamp != nil{
+            let date = dateFromString(string: scholarshipModel.end_timestamp!)
+            self.endDateLabelView.rightLabel.text = getLocalDate(from: stringFromDate(date: date))
+        }else{
+            if scholarshipModel.start_timestamp != nil && scholarshipModel.offer_period != nil{
+                let date = dateFromString(string: scholarshipModel.start_timestamp!)
+                let new = date.addingTimeInterval(TimeInterval(Int(scholarshipModel.offer_period!)! * 24 * 60 * 60))
+                self.endDateLabelView.rightLabel.text = getLocalDate(from: stringFromDate(date: new))
+            }
         }
-        if scholarshipModel.account_ronin_address != nil {
-            self.roninAddressLabelView.rightLabel.text = scholarshipModel.account_ronin_address
+        
+        if scholarshipModel.account_ronin_address != nil{
+            self.roninLabelView.rightLabel.text = scholarshipModel.account_ronin_address
         }
-        if scholarshipModel.account_ronin_address != nil {
-            self.roninAddressLabelView.rightLabel.text = scholarshipModel.account_ronin_address
-        }
+        
         if scholarshipModel.account_login != nil {
             self.emailLabel.text = scholarshipModel.account_login
         }
         if scholarshipModel.account_passcode != nil {
             self.pwdTextFild!.text = scholarshipModel.account_passcode
         }
-        if scholarshipModel.status != nil {
-            if scholarshipModel.status == "DRAFT" {
-                self.btn.isHidden = true
-                self.leftBtn.isHidden = false
-                self.rightBtn.isHidden = false
-            } else if scholarshipModel.status == "LISTING" {
-                self.btn.isHidden = false
-                self.btn.setTitle("Recall", for: .normal)
-                self.btn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
-                self.btn.isEnabled = true
-                
-                self.leftBtn.isHidden = true
-                self.rightBtn.isHidden = true
-            }else if scholarshipModel.status == "END"{
-                self.leftBtn.isHidden = true
-                self.rightBtn.isHidden = true
-                self.btn.isHidden = false
-                self.btn.setTitle("Already ended", for: .normal)
-                self.btn.backgroundColor = .gray
-                self.btn.isEnabled = false
-            }else if scholarshipModel.status == "AUDIT"{
-                self.leftBtn.isHidden = true
-                self.rightBtn.isHidden = true
-                self.btn.isHidden = false
-                self.btn.setTitle("Cancel", for: .normal)
-                self.btn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
-                self.btn.isEnabled = true
-            }
-        }
     }
     
-    lazy var axieImgView1 : UIImageView = {
+    @objc func pwdSecureBtnClick(abtn:UIButton) {
+        abtn.isSelected = !abtn.isSelected
+        self.pwdTextFild?.isSecureTextEntry = !self.pwdTextFild!.isSecureTextEntry
+    }
+    
+    lazy var accountImgView : UIImageView = {
         let tempImgView = UIImageView.init()
         self.contentView.addSubview(tempImgView)
         return tempImgView
     }()
-    lazy var axieImgView2 : UIImageView = {
-        let tempImgView = UIImageView.init()
-        self.contentView.addSubview(tempImgView)
-        return tempImgView
+    
+    lazy var accountLabel : UILabel = {
+        let tempLabel = UILabel.init(frame: CGRect.zero)
+        tempLabel.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+        tempLabel.font = UIFont.systemFont(ofSize: 16)
+        tempLabel.textAlignment = .center
+        self.contentView.addSubview(tempLabel)
+        return tempLabel
     }()
-    lazy var axieImgView3 : UIImageView = {
-        let tempImgView = UIImageView.init()
-        self.contentView.addSubview(tempImgView)
-        return tempImgView
+    
+    lazy var creditLabel : UILabel = {
+        let tempLabel = UILabel.init(frame: CGRect.zero)
+        tempLabel.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+        tempLabel.font = UIFont.systemFont(ofSize: 14)
+        tempLabel.textAlignment = .center
+        self.contentView.addSubview(tempLabel)
+        return tempLabel
     }()
     
     lazy var scholarshipNameLabelView : LabelAndLabelInterView = {
@@ -220,15 +228,9 @@ class ManagerHistoryCell: UICollectionViewCell {
         self.contentView.addSubview(tempLabelView)
         return tempLabelView
     }()
-    lazy var returnPerDayLabelView : LabelAndLabelInterView = {
+    lazy var returnAmountLabelView : LabelAndLabelInterView = {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
-        tempLabelView.leftLabel.text = "Estimate SLP"
-        self.contentView.addSubview(tempLabelView)
-        return tempLabelView
-    }()
-    lazy var managerPercentLabelView : LabelAndLabelInterView = {
-        let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
-        tempLabelView.leftLabel.text = "Manager percentage"
+        tempLabelView.leftLabel.text = "Total return"
         self.contentView.addSubview(tempLabelView)
         return tempLabelView
     }()
@@ -238,13 +240,19 @@ class ManagerHistoryCell: UICollectionViewCell {
         self.contentView.addSubview(tempLabelView)
         return tempLabelView
     }()
-    lazy var OfferContractLabelView : LabelAndLabelInterView = {
+    lazy var startDateLabelView : LabelAndLabelInterView = {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
-        tempLabelView.leftLabel.text = "Offer period"
+        tempLabelView.leftLabel.text = "Start date"
         self.contentView.addSubview(tempLabelView)
         return tempLabelView
     }()
-    lazy var roninAddressLabelView : LabelAndLabelInterView = {
+    lazy var endDateLabelView : LabelAndLabelInterView = {
+        let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
+        tempLabelView.leftLabel.text = "End date"
+        self.contentView.addSubview(tempLabelView)
+        return tempLabelView
+    }()
+    lazy var roninLabelView : LabelAndLabelInterView = {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
         tempLabelView.leftLabel.text = "Ronin address"
         self.contentView.addSubview(tempLabelView)
@@ -260,6 +268,7 @@ class ManagerHistoryCell: UICollectionViewCell {
     }()
     lazy var emailLabel : UILabel = {
         let tempLabel = UILabel.init(frame: CGRect.zero)
+        
         tempLabel.font = UIFont(name: "Avenir Next Medium", size: 15)
         tempLabel.textColor = .white
         self.contentView.addSubview(tempLabel)
@@ -288,43 +297,6 @@ class ManagerHistoryCell: UICollectionViewCell {
         tempBtn.setImage(UIImage.init(named: "eye"), for: .normal)
         tempBtn.setImage(UIImage.init(named: "eye_look"), for: .selected)
         tempBtn.addTarget(self, action: #selector(pwdSecureBtnClick), for: .touchUpInside)
-        self.contentView.addSubview(tempBtn)
-        return tempBtn
-    }()
-    
-    lazy var leftBtn : UIButton = {
-        let tempBtn = UIButton.init(frame: CGRect.zero)
-        tempBtn.layer.cornerRadius = 3
-        tempBtn.layer.masksToBounds = true
-        tempBtn.setTitleColor(.white, for: .normal)
-        tempBtn.setTitle("Edit", for: .normal)
-        tempBtn.titleLabel?.font = UIFont(name: "Avenir Next Medium", size: 14)
-        tempBtn.layer.borderWidth = 0.5
-        tempBtn.layer.borderColor = UIColor.white.cgColor
-        self.contentView.addSubview(tempBtn)
-        return tempBtn
-    }()
-    
-    lazy var rightBtn : UIButton = {
-        let tempBtn = UIButton.init(frame: CGRect.zero)
-        tempBtn.layer.cornerRadius = 3
-        tempBtn.layer.masksToBounds = true
-        tempBtn.setTitleColor(.white, for: .normal)
-        tempBtn.setTitle("Submit", for: .normal)
-        tempBtn.titleLabel?.font = UIFont(name: "Avenir Next Medium", size: 14)
-        tempBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
-        self.contentView.addSubview(tempBtn)
-        return tempBtn
-    }()
-    
-    lazy var btn : UIButton = {
-        let tempBtn = UIButton.init(frame: CGRect.zero)
-        tempBtn.layer.cornerRadius = 3
-        tempBtn.layer.masksToBounds = true
-        tempBtn.setTitleColor(.white, for: .normal)
-        tempBtn.titleLabel?.font = UIFont(name: "Avenir Next Medium", size: 14)
-        tempBtn.setTitle("Recall", for: .normal)
-        tempBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
         self.contentView.addSubview(tempBtn)
         return tempBtn
     }()
