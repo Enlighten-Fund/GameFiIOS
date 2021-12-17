@@ -84,8 +84,8 @@ class HomeController: UIViewController {
        return tempBtn
     }()
     
-    lazy var pageView : TYPageView? = {
-        let pageView = TYPageView(frame: view.bounds,
+    lazy var pageView : TYPageViewDivide? = {
+        let pageView = TYPageViewDivide(frame: view.bounds,
                                 titles: ["Scholarship","Scholar"],
                                 childControllers: [ScholarshipsController(),ScholarsController()],
                                 parentController: self)

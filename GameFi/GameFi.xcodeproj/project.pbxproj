@@ -103,6 +103,9 @@
 		98986675276C2F5800BF4BE0 /* ManagerHistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98986674276C2F5800BF4BE0 /* ManagerHistoryController.swift */; };
 		98986677276C2F6B00BF4BE0 /* ScholarHistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98986676276C2F6B00BF4BE0 /* ScholarHistoryController.swift */; };
 		98986679276C376200BF4BE0 /* ManagerHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98986678276C376200BF4BE0 /* ManagerHistoryCell.swift */; };
+		9898667B276C63D600BF4BE0 /* TYPageStyleDivide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9898667A276C63D600BF4BE0 /* TYPageStyleDivide.swift */; };
+		9898667D276C644500BF4BE0 /* TYPageTitleViewDivide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9898667C276C644500BF4BE0 /* TYPageTitleViewDivide.swift */; };
+		9898667F276C650800BF4BE0 /* TYPageViewDivide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9898667E276C650800BF4BE0 /* TYPageViewDivide.swift */; };
 		98D99407273A107D006AA8DC /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D99406273A107D006AA8DC /* ProfileHeaderView.swift */; };
 		98D99409273A3A45006AA8DC /* SweetAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D99408273A3A45006AA8DC /* SweetAlert.swift */; };
 		98D9940B273A46D2006AA8DC /* ScholarListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D9940A273A46D2006AA8DC /* ScholarListModel.swift */; };
@@ -221,6 +224,9 @@
 		98986674276C2F5800BF4BE0 /* ManagerHistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerHistoryController.swift; sourceTree = "<group>"; };
 		98986676276C2F6B00BF4BE0 /* ScholarHistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarHistoryController.swift; sourceTree = "<group>"; };
 		98986678276C376200BF4BE0 /* ManagerHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerHistoryCell.swift; sourceTree = "<group>"; };
+		9898667A276C63D600BF4BE0 /* TYPageStyleDivide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TYPageStyleDivide.swift; sourceTree = "<group>"; };
+		9898667C276C644500BF4BE0 /* TYPageTitleViewDivide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TYPageTitleViewDivide.swift; sourceTree = "<group>"; };
+		9898667E276C650800BF4BE0 /* TYPageViewDivide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TYPageViewDivide.swift; sourceTree = "<group>"; };
 		98D99406273A107D006AA8DC /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		98D99408273A3A45006AA8DC /* SweetAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SweetAlert.swift; sourceTree = "<group>"; };
 		98D9940A273A46D2006AA8DC /* ScholarListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarListModel.swift; sourceTree = "<group>"; };
@@ -314,6 +320,9 @@
 				980DB7912733D391006ED3BE /* TYPageTitleView.swift */,
 				980DB7932733D391006ED3BE /* TYPageView.swift */,
 				980DB7942733D391006ED3BE /* TYPageViewConst.swift */,
+				9898667A276C63D600BF4BE0 /* TYPageStyleDivide.swift */,
+				9898667C276C644500BF4BE0 /* TYPageTitleViewDivide.swift */,
+				9898667E276C650800BF4BE0 /* TYPageViewDivide.swift */,
 				980DB7952733D391006ED3BE /* UIView+FastKit.swift */,
 				980DB78F27337F7C006ED3BE /* ScholarShipsCell.swift */,
 				9858173A27422D3D00D8CFCA /* ScholarshipDetailCell.swift */,
@@ -732,6 +741,7 @@
 				98D99414273A8CFE006AA8DC /* NotificationController.swift in Sources */,
 				980A7DC4272828FD006AE4C4 /* DataManager.swift in Sources */,
 				9858176D2747309300D8CFCA /* ScholarRentCell.swift in Sources */,
+				9898667B276C63D600BF4BE0 /* TYPageStyleDivide.swift in Sources */,
 				985817452742788E00D8CFCA /* AbilityUtil.swift in Sources */,
 				989866732768950000BF4BE0 /* EditProfileBtnView.swift in Sources */,
 				980DB7CD2738E9F6006ED3BE /* ScholarsCell.swift in Sources */,
@@ -777,6 +787,7 @@
 				980DB7C927356C85006ED3BE /* LabelAndLabelView.swift in Sources */,
 				9858172E273D205600D8CFCA /* PostScholarshipCell.swift in Sources */,
 				984BDBA4272C0E9300F6144B /* Extension.swift in Sources */,
+				9898667D276C644500BF4BE0 /* TYPageTitleViewDivide.swift in Sources */,
 				9858171E273CE4CE00D8CFCA /* LatestApplyController.swift in Sources */,
 				984BDB95272ACD0A00F6144B /* RegisterController.swift in Sources */,
 				980DB7AE2734F677006ED3BE /* LYDropListView.swift in Sources */,
@@ -787,6 +798,7 @@
 				98581726273CF70900D8CFCA /* NoOfferHeaderView.swift in Sources */,
 				980DB79A2733D391006ED3BE /* UIView+FastKit.swift in Sources */,
 				9858174B274295A500D8CFCA /* TrackSumModel.swift in Sources */,
+				9898667F276C650800BF4BE0 /* TYPageViewDivide.swift in Sources */,
 				980DB7A72733F19E006ED3BE /* BaseModel.swift in Sources */,
 				985817782749349700D8CFCA /* IDPhotoCell.swift in Sources */,
 				984BDBA6272C1C3800F6144B /* ConfirmCodeCell.swift in Sources */,
