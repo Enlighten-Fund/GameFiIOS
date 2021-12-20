@@ -191,7 +191,7 @@ class NoOfferScholarshipCell: UICollectionViewCell {
                 self.leftBtn.isHidden = true
                 self.rightBtn.isHidden = true
                 self.btn.isHidden = false
-                self.btn.setTitle("Cancel", for: .normal)
+                self.btn.setTitle("Recall", for: .normal)
                 self.btn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
                 self.btn.isEnabled = true
             }
@@ -310,7 +310,7 @@ class NoOfferScholarshipCell: UICollectionViewCell {
         tempBtn.layer.cornerRadius = 3
         tempBtn.layer.masksToBounds = true
         tempBtn.setTitleColor(.white, for: .normal)
-        tempBtn.setTitle("Submit", for: .normal)
+        tempBtn.setTitle("Post", for: .normal)
         tempBtn.titleLabel?.font = UIFont(name: "Avenir Next Medium", size: 14)
         tempBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
         self.contentView.addSubview(tempBtn)
