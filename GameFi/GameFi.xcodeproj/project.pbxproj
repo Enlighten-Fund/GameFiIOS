@@ -107,6 +107,7 @@
 		9898667D276C644500BF4BE0 /* TYPageTitleViewDivide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9898667C276C644500BF4BE0 /* TYPageTitleViewDivide.swift */; };
 		9898667F276C650800BF4BE0 /* TYPageViewDivide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9898667E276C650800BF4BE0 /* TYPageViewDivide.swift */; };
 		98986681276C82B200BF4BE0 /* ScholarHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98986680276C82B200BF4BE0 /* ScholarHistoryCell.swift */; };
+		98986683277042ED00BF4BE0 /* InvitateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98986682277042ED00BF4BE0 /* InvitateController.swift */; };
 		98D99407273A107D006AA8DC /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D99406273A107D006AA8DC /* ProfileHeaderView.swift */; };
 		98D99409273A3A45006AA8DC /* SweetAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D99408273A3A45006AA8DC /* SweetAlert.swift */; };
 		98D9940B273A46D2006AA8DC /* ScholarListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D9940A273A46D2006AA8DC /* ScholarListModel.swift */; };
@@ -229,6 +230,7 @@
 		9898667C276C644500BF4BE0 /* TYPageTitleViewDivide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TYPageTitleViewDivide.swift; sourceTree = "<group>"; };
 		9898667E276C650800BF4BE0 /* TYPageViewDivide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TYPageViewDivide.swift; sourceTree = "<group>"; };
 		98986680276C82B200BF4BE0 /* ScholarHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarHistoryCell.swift; sourceTree = "<group>"; };
+		98986682277042ED00BF4BE0 /* InvitateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitateController.swift; sourceTree = "<group>"; };
 		98D99406273A107D006AA8DC /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		98D99408273A3A45006AA8DC /* SweetAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SweetAlert.swift; sourceTree = "<group>"; };
 		98D9940A273A46D2006AA8DC /* ScholarListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarListModel.swift; sourceTree = "<group>"; };
@@ -479,6 +481,7 @@
 				98D99410273A7F31006AA8DC /* EditProfileController.swift */,
 				984472B3274CD91300DAE315 /* UserInfoStateController.swift */,
 				9847CDE227574EEF007E645E /* GFWebController.swift */,
+				98986682277042ED00BF4BE0 /* InvitateController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -749,6 +752,7 @@
 				985817452742788E00D8CFCA /* AbilityUtil.swift in Sources */,
 				989866732768950000BF4BE0 /* EditProfileBtnView.swift in Sources */,
 				980DB7CD2738E9F6006ED3BE /* ScholarsCell.swift in Sources */,
+				98986683277042ED00BF4BE0 /* InvitateController.swift in Sources */,
 				980DB78C27337D6F006ED3BE /* CollectionViewCell.swift in Sources */,
 				98581739273E921800D8CFCA /* UserManager.swift in Sources */,
 				9858176B2746907B00D8CFCA /* ScholarAccountsController.swift in Sources */,

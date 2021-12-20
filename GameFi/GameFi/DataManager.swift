@@ -622,5 +622,19 @@ class DataManager: NSObject {
             completeBlock(result,reponse)
         }
     }
+    
+    func fetchInviatateCode(completeBlock: @escaping CompleteBlock) {
+        let dic = [:] as [String : Any]
+        self.POST(url: "user/get_invite_code", param: dic ) { result, reponse in
+            if result.success!{
+                let jsonstr : String = result.data!["data"] as! String
+                let jsonData:Data = jsonstr.data(using: .utf8)!
+                   let dict = try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)
+                completeBlock(result,dict as Any)
+            }else{
+                completeBlock(result,result.data)
+            }
+        }
+    }
 }
 

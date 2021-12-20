@@ -175,7 +175,7 @@ extension  ProfileController : UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 9
+        return 10
     }
         
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -193,48 +193,54 @@ extension  ProfileController : UITableViewDelegate,UITableViewDataSource{
         cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
     case 1:
         cell = tableView.dequeueReusableCell(withIdentifier: "profileCellIdentifier", for: indexPath)
+        cell.imageView?.image = UIImage.init(named: "invitation_icon")
+        cell.textLabel?.text = "Invitation"
+        cell.textLabel?.textColor = .white
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
+    case 2:
+        cell = tableView.dequeueReusableCell(withIdentifier: "profileCellIdentifier", for: indexPath)
         cell.imageView?.image = UIImage.init(named: "profile_help")
         cell.textLabel?.text = "Help document"
         cell.textLabel?.textColor = .white
         cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
-    case 2:
+    case 3:
         cell = tableView.dequeueReusableCell(withIdentifier: "profileCellIdentifier", for: indexPath)
         cell.imageView?.image = UIImage.init(named: "profile_discord")
         cell.textLabel?.text = "Join our Discord"
         cell.textLabel?.textColor = .white
         cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
-    case 3:
+    case 4:
         cell = tableView.dequeueReusableCell(withIdentifier: "profileCellIdentifier", for: indexPath)
         cell.imageView?.image = UIImage.init(named: "profile_twitter")
         cell.textLabel?.text = "Join our Twitter"
         cell.textLabel?.textColor = .white
         cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
-    case 4:
+    case 5:
         cell = tableView.dequeueReusableCell(withIdentifier: "profileCellIdentifier", for: indexPath)
         cell.imageView?.image = UIImage.init(named: "profile_notion")
         cell.textLabel?.text = "Join our Notion"
         cell.textLabel?.textColor = .white
         cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
-    case 5:
+    case 6:
         cell = tableView.dequeueReusableCell(withIdentifier: "profileCellIdentifier", for: indexPath)
         cell.imageView?.image = UIImage.init(named: "profile_youtube")
         cell.textLabel?.text = "Join our Youtube"
         cell.textLabel?.textColor = .white
         cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
         
-    case 6:
+    case 7:
         cell = tableView.dequeueReusableCell(withIdentifier: "profileCellIdentifier", for: indexPath)
         cell.imageView?.image = UIImage.init(named: "profile_privacy")
         cell.textLabel?.text = "Privacy policy"
         cell.textLabel?.textColor = .white
         cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
-    case 7:
+    case 8:
         cell = tableView.dequeueReusableCell(withIdentifier: "profileCellIdentifier", for: indexPath)
         cell.imageView?.image = UIImage.init(named: "profile_term")
         cell.textLabel?.text = "Terms of Service"
         cell.textLabel?.textColor = .white
         cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
-    case 8:
+    case 9:
         cell = tableView.dequeueReusableCell(withIdentifier: "profileCellIdentifier", for: indexPath)
         cell.imageView?.image = UIImage.init(named: "profile_logout")
         cell.textLabel?.text = "Logout"
@@ -255,6 +261,8 @@ extension  ProfileController : UITableViewDelegate,UITableViewDataSource{
         case 0:
             self.navigationController?.pushViewController(EditProfileController.init(), animated: true)
         case 1:
+            self.navigationController?.pushViewController(InvitateController.init(), animated: true)
+        case 2:
             let url = URL(string: "https://ninjadaos.notion.site/FAQ-eda7e207a6504470b2dac8e705c7100d")
             // 注意: 跳转之前, 可以使用 canOpenURL: 判断是否可以跳转
             if !UIApplication.shared.canOpenURL(url!) {
@@ -268,7 +276,7 @@ extension  ProfileController : UITableViewDelegate,UITableViewDataSource{
                       print("10以后不能完成跳转")
                  }
              }
-        case 2:
+        case 3:
             let url = URL(string: "https://discord.gg/Kpsk9tWXS4")
             // 注意: 跳转之前, 可以使用 canOpenURL: 判断是否可以跳转
             if !UIApplication.shared.canOpenURL(url!) {
@@ -282,7 +290,7 @@ extension  ProfileController : UITableViewDelegate,UITableViewDataSource{
                       print("10以后不能完成跳转")
                  }
              }
-        case 3:
+        case 4:
             let url = URL(string: "https://twitter.com/NinjaDAOs")
             // 注意: 跳转之前, 可以使用 canOpenURL: 判断是否可以跳转
             if !UIApplication.shared.canOpenURL(url!) {
@@ -296,7 +304,7 @@ extension  ProfileController : UITableViewDelegate,UITableViewDataSource{
                       print("10以后不能完成跳转")
                  }
              }
-        case 4:
+        case 5:
             let url = URL(string: "https://ninjadaos.notion.site/NinjaDAOs-WiKi-e6709296d97445b988a3bb87b552e3f9")
             // 注意: 跳转之前, 可以使用 canOpenURL: 判断是否可以跳转
             if !UIApplication.shared.canOpenURL(url!) {
@@ -310,7 +318,7 @@ extension  ProfileController : UITableViewDelegate,UITableViewDataSource{
                       print("10以后不能完成跳转")
                  }
              }
-        case 5:
+        case 6:
             let url = URL(string: "https://youtube.com/channel/UC65EXHxwic4cEcebK8iJCjg")
             // 注意: 跳转之前, 可以使用 canOpenURL: 判断是否可以跳转
             if !UIApplication.shared.canOpenURL(url!) {
@@ -325,15 +333,15 @@ extension  ProfileController : UITableViewDelegate,UITableViewDataSource{
                  }
              }
             
-        case 6:
+        case 7:
             let webVC = GFWebController.init()
             webVC.webView.load(URLRequest(url: URL.init(string: "https://app.ninjadaos.com/web-ui-resource/privacyPolicy.html")!))
             self.navigationController?.pushViewController(webVC, animated: true)
-        case 7:
+        case 8:
             let webVC = GFWebController.init()
             webVC.webView.load(URLRequest(url: URL.init(string: "https://app.ninjadaos.com/web-ui-resource/termsOfServie.html")!))
             self.navigationController?.pushViewController(webVC, animated: true)
-        case 8:
+        case 9:
             GFAlert.showAlert(titleStr: "Notice:", msgStr: "Are you sure you want to log out？", currentVC: self, cancelStr: "Cancel", cancelHandler: { alertaction in
                 
             }, otherBtns: ["YES"]) { index in
