@@ -25,6 +25,12 @@ class ScholarModel: BaseModel {
     var scholar_since : String?
     var avatar:String?
     var axie_exp:String?
+    
+    var rent_times:Int?
+    var rent_days: Float?
+    var total_slp: Int?
+    var total_mmr_change: Int?
+    var total_mmr_day: Int? // avg_mmr = total_mmr_day / rent_days
     required init() {}
 }
 

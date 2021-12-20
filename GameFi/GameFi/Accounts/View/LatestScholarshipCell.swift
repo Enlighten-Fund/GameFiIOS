@@ -33,26 +33,21 @@ class LatestScholarshipCell: UICollectionViewCell {
             make.height.equalTo(30)
             make.left.equalToSuperview().offset(15)
         }
-        self.availabelLabelView.snp.makeConstraints { make in
+        self.mmrIncreaseLabelView.snp.makeConstraints { make in
             make.top.equalTo(self.highmmrLabelView.snp.bottom)
             make.right.equalToSuperview().offset(-15)
             make.height.equalTo(30)
             make.left.equalToSuperview().offset(15)
         }
         self.experienceLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.availabelLabelView.snp.bottom)
+            make.top.equalTo(self.mmrIncreaseLabelView.snp.bottom)
             make.right.equalToSuperview().offset(-15)
             make.height.equalTo(30)
             make.left.equalToSuperview().offset(15)
         }
-        self.countryLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.experienceLabelView.snp.bottom)
-            make.right.equalToSuperview().offset(-15)
-            make.height.equalTo(30)
-            make.left.equalToSuperview().offset(15)
-        }
+    
         self.accountAppliedLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.countryLabelView.snp.bottom)
+            make.top.equalTo(self.experienceLabelView.snp.bottom)
             make.right.equalToSuperview().offset(-15)
             make.height.equalTo(30)
             make.left.equalToSuperview().offset(15)
@@ -78,22 +73,23 @@ class LatestScholarshipCell: UICollectionViewCell {
         if applicationModel.scholar_credit_score != nil {
             self.creditScoreLabelView.rightLabel.text = applicationModel.scholar_credit_score
         }
-        if applicationModel.scholar_mmr != nil {
-            self.highmmrLabelView.rightLabel.text = applicationModel.scholar_mmr
+        if applicationModel.scholar_rent_days != nil {
+            if applicationModel.scholar_rent_days! >= 5 && applicationModel.scholar_total_mmr_day != nil && applicationModel.scholar_rent_days != nil{
+                let averageMMR = applicationModel.scholar_total_mmr_day! / applicationModel.scholar_rent_days!
+                self.highmmrLabelView.rightLabel.text = String(averageMMR)
+                self.highmmrLabelView.rightLabel.textColor = .green
+            }else{
+                if applicationModel.scholar_mmr != nil{
+                    self.highmmrLabelView.rightLabel.text = applicationModel.scholar_mmr
+                    self.highmmrLabelView.rightLabel.textColor = .white
+                }
+            }
         }
-        if applicationModel.scholar_available_time != nil {
-            self.availabelLabelView.rightLabel.text = "\(applicationModel.scholar_available_time!) hrs/day"
+        if applicationModel.scholar_total_mmr_change != nil {
+            self.mmrIncreaseLabelView.rightLabel.text =  String(applicationModel.scholar_total_mmr_change!)
         }
         if applicationModel.scholar_axie_exp != nil {
             self.experienceLabelView.rightLabel.text = "\(applicationModel.scholar_axie_exp!) months"
-        }
-        if applicationModel.scholar_nation != nil {
-            let nation : String = applicationModel.scholar_nation!
-            let country : [String] = nation.components(separatedBy: ",")
-            if country.count > 0 {
-                self.countryLabelView.rightLabel.text = country[0]
-            }
-            
         }
         if applicationModel.scholarship_name != nil {
             self.accountAppliedLabelView.rightLabel.text = applicationModel.scholarship_name
@@ -103,7 +99,7 @@ class LatestScholarshipCell: UICollectionViewCell {
     
     lazy var scholarLabelView : LabelAndLabelInterView = {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
-        tempLabelView.leftLabel.text = "Scholar"
+        tempLabelView.leftLabel.text = "Username"
         self.contentView.addSubview(tempLabelView)
         return tempLabelView
     }()
@@ -115,31 +111,20 @@ class LatestScholarshipCell: UICollectionViewCell {
     }()
     lazy var highmmrLabelView : LabelAndLabelInterView = {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
-        tempLabelView.leftLabel.text = "Highest MMR"
+        tempLabelView.leftLabel.text = "MMR"
         self.contentView.addSubview(tempLabelView)
         return tempLabelView
     }()
-    lazy var availabelLabelView : LabelAndLabelInterView = {
+    lazy var mmrIncreaseLabelView : LabelAndLabelInterView = {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
-        tempLabelView.leftLabel.text = "Available time"
+        tempLabelView.leftLabel.text = "MMR increase"
         self.contentView.addSubview(tempLabelView)
         return tempLabelView
     }()
-//    lazy var pvpLabelView : LabelAndLabelInterView = {
-//        let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
-//        tempLabelView.leftLabel.text = "Highest MMR"
-//        self.contentView.addSubview(tempLabelView)
-//        return tempLabelView
-//    }()
+
     lazy var experienceLabelView : LabelAndLabelInterView = {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
-        tempLabelView.leftLabel.text = "Experience in Axie"
-        self.contentView.addSubview(tempLabelView)
-        return tempLabelView
-    }()
-    lazy var countryLabelView : LabelAndLabelInterView = {
-        let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
-        tempLabelView.leftLabel.text = "Location"
+        tempLabelView.leftLabel.text = "Experience in NinjaDAOs"
         self.contentView.addSubview(tempLabelView)
         return tempLabelView
     }()
