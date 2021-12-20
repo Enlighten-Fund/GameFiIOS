@@ -16,6 +16,7 @@ class RegisterController: ViewController {
     var usernameTextField : UITextField?
     var passwordTextField : UITextField?
     var codeTextField : UITextField?
+    var invitateCodeTextField : UITextField?
     var codeBtn : UIButton?
     var footView : RegisterFootView?
     var role : Int = 1 //1代表scholar 2 代表manager
@@ -333,6 +334,18 @@ class RegisterController: ViewController {
                                     case .signedIn:
                                         print("User is signed in.")
                                         UserManager.sharedInstance.updateToken {
+                                            //填写邀请码
+                                            DispatchQueue.main.async {
+                                                if self.invitateCodeTextField?.text != nil && !self.invitateCodeTextField!.text.isBlank{
+                                                    AWSMobileClient.default().updateUserAttributes(attributeMap: ["custom:invite_by":self.invitateCodeTextField!.text!]) { result, error in
+                                                        if let error = error  {
+                                                            print("\(error.localizedDescription)")
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            
+                                            
                                             UserManager.sharedInstance.updateRole(role: String(self.role)){
                                                 DispatchQueue.main.async {
                                                     GFAlert.showAlert(titleStr: "Notice:", msgStr: "Sign up successfully", currentVC: self, cancelStr: "OK", cancelHandler: { alertion in
@@ -457,6 +470,7 @@ class RegisterController: ViewController {
         tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "0")
         tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "1")
         tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "2")
+        tempTableView.register(LabelTextFildCell.classForCoder(), forCellReuseIdentifier: labelTextFildCellIdentifier + "3")
         tempTableView.register(EmptyTableViewCell.classForCoder(), forCellReuseIdentifier: emptyTableViewCellIdentifier)
         tempTableView.register(ConfirmCodeCell.classForCoder(), forCellReuseIdentifier: confirmCodeCellIdentifier)
         tempTableView.dataSource = self
@@ -508,7 +522,7 @@ extension  RegisterController : UITableViewDelegate,UITableViewDataSource,UIText
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             
-           return 4
+           return 5
     }
         
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -549,6 +563,13 @@ extension  RegisterController : UITableViewDelegate,UITableViewDataSource,UIText
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter code", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.codeBtn = tempCell.codeBtn
         tempCell.codeBtn.addTarget(self, action: #selector(codeBtnClick), for: .touchUpInside)
+        cell = tempCell
+    case 4:
+        let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "3", for: indexPath) as! LabelTextFildCell
+        tempCell.textFild?.delegate = self
+        tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Enter invitation code", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
+        self.invitateCodeTextField = tempCell.textFild
+
         cell = tempCell
     default:
         cell = tableView.dequeueReusableCell(withIdentifier: emptyTableViewCellIdentifier, for: indexPath)
