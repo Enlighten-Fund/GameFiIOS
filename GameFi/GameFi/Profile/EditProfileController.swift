@@ -13,6 +13,7 @@ import MCToast
 
 import Amplify
 import Kingfisher
+import HandyJSON
 
 class EditProfileController: ViewController {
     var firstnameTextField : UITextField?
@@ -46,7 +47,12 @@ class EditProfileController: ViewController {
     var editBtnView : EditProfileBtnView?
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Profile"
+        self.title = ""
+        self.titleLabel!.snp.makeConstraints({ make in
+            make.center.equalToSuperview()
+            make.width.equalTo(200)
+            make.height.equalTo(30)
+        })
         self.tableView!.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(0)
             make.bottom.equalToSuperview().offset(0)
@@ -76,6 +82,11 @@ class EditProfileController: ViewController {
         self.requestData()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.titleLabel?.removeFromSuperview()
+    }
+    
     //点击事件
     @objc override func leftBtnClick() {
         if self.userInfoModel?.scholar_status == "YES" || self.userInfoModel?.scholar_status == "AUDIT"{
@@ -101,24 +112,31 @@ class EditProfileController: ViewController {
         self.updateUserinfo(submit: 1)
     }
     @objc func recallBtnClick(){
-        self.mc_loading(text: "Loading")
-        DataManager.sharedInstance.updateUserScholarStatus(userinfoModel:self.userInfoModel!, submit: -1) { result, reponse in
+        GFAlert.showAlert(titleStr: "Notice:", msgStr: "If you recall the profile the verification process will be terminated.", currentVC: self, cancelStr: "Cancel", cancelHandler: { action in
+            
+        }, otherBtns: ["OK"]) { index in
             DispatchQueue.main.async { [self] in
-                self.mc_remove()
-                if result.success!{
-                    self.requestData()
-                }else{
-                    if  result.msg != nil && !result.msg!.isBlank {
-                        self.mc_success(result.msg!)
+                self.mc_loading(text: "Loading")
+                DataManager.sharedInstance.updateUserScholarStatus(userinfoModel:self.userInfoModel!, submit: -1) { result, reponse in
+                    DispatchQueue.main.async { [self] in
+                        self.mc_remove()
+                        if result.success!{
+                            self.requestData()
+                        }else{
+                            if  result.msg != nil && !result.msg!.isBlank {
+                                self.mc_success(result.msg!)
+                            }
+                        }
                     }
                 }
             }
         }
+        
     }
     
     
     @objc func updateBtnClick(){
-        GFAlert.showAlert(titleStr: "Notice:", msgStr: "Are you sure to update your profile?", currentVC: self, cancelStr: "YES", cancelHandler: { action in
+        GFAlert.showAlert(titleStr: "Notice:", msgStr: "Update profile needs to be verified again and the scholarship you applied will expire.", currentVC: self, cancelStr: "YES", cancelHandler: { action in
             DispatchQueue.main.async { [self] in
                 self.mc_loading(text: "Loading")
                 DataManager.sharedInstance.updateUserScholarStatus(userinfoModel:self.userInfoModel!, submit: -1) { result, reponse in
@@ -157,10 +175,21 @@ class EditProfileController: ViewController {
                     if userInfoModel.scholar_status == "DRAFT" || userInfoModel.scholar_status == "NO"{
                         self.editBtnView?.leftBtn.addTarget(self, action: #selector(saveBtnClick), for: .touchUpInside)
                         self.editBtnView?.rightBtn.addTarget(self, action: #selector(submitBtnClick), for: .touchUpInside)
+                        let attributeString = NSMutableAttributedString(string:"Profile")
+                        attributeString.addAttributes([NSAttributedString.Key.foregroundColor : UIColor(red: 1, green: 1, blue: 1, alpha: 1), NSAttributedString.Key.font: UIFont(name: "PingFang SC Semibold", size: 15) as Any], range: NSMakeRange(0, 7))
+                        self.titleLabel?.attributedText = attributeString
                      }else if userInfoModel.scholar_status == "AUDIT"{
                          self.editBtnView?.btn.addTarget(self, action: #selector(recallBtnClick), for: .touchUpInside)
+                         let attributeString = NSMutableAttributedString(string:"Profile (Verifying)")
+                         attributeString.addAttributes([NSAttributedString.Key.foregroundColor : UIColor(red: 1, green: 1, blue: 1, alpha: 1), NSAttributedString.Key.font: UIFont(name: "PingFang SC Semibold", size: 15) as Any], range: NSMakeRange(0, 8))
+                         attributeString.addAttributes([NSAttributedString.Key.foregroundColor :UIColor.init(hexString: "0xE29258"), NSAttributedString.Key.font: UIFont(name: "PingFang SC Semibold", size: 15) as Any], range: NSMakeRange(8, 11))
+                         self.titleLabel?.attributedText = attributeString
                      }else if userInfoModel.scholar_status == "YES"{
                          self.editBtnView?.btn.addTarget(self, action: #selector(updateBtnClick), for: .touchUpInside)
+                         let attributeString = NSMutableAttributedString(string:"Profile (Verified)")
+                         attributeString.addAttributes([NSAttributedString.Key.foregroundColor : UIColor(red: 1, green: 1, blue: 1, alpha: 1), NSAttributedString.Key.font: UIFont(name: "PingFang SC Semibold", size: 15) as Any], range: NSMakeRange(0, 8))
+                         attributeString.addAttributes([NSAttributedString.Key.foregroundColor :UIColor.init(hexString: "0x4DD16D"), NSAttributedString.Key.font: UIFont(name: "PingFang SC Semibold", size: 15) as Any], range: NSMakeRange(8, 11))
+                         self.titleLabel?.attributedText = attributeString
                      }
                 }
             }
@@ -585,6 +614,14 @@ class EditProfileController: ViewController {
             }
         }
     }
+    
+    lazy var titleLabel: UILabel? = {
+        let tempLabel = UILabel.init(frame: CGRect.zero)
+        tempLabel.textAlignment = .center
+        self.navigationController?.navigationBar.addSubview(tempLabel)
+        return tempLabel
+    }()
+    
     
     lazy var tableView: UITableView? = {
         let tempTableView = UITableView.init(frame: CGRect.zero, style: .grouped)
