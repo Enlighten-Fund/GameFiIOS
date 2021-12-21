@@ -92,7 +92,6 @@ class ScholarDetailHeaderView: UIView {
             if scholarDetailModel.rent_days! >= 3 && scholarDetailModel.total_mmr_day != nil && scholarDetailModel.rent_days != nil{
                 let averageMMR = scholarDetailModel.total_mmr_day! / scholarDetailModel.rent_days!
                 self.avgMmrLabelView.rightLabel.text = String(averageMMR)
-                self.avgMmrLabelView.rightLabel.textColor = .green
                 if scholarDetailModel.total_mmr_change != nil && scholarDetailModel.rent_times != nil{
                     let a = scholarDetailModel.total_mmr_change! / scholarDetailModel.rent_times!
                     if a > 0{

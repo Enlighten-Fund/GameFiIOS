@@ -83,7 +83,6 @@ class LatestScholarshipCell: UICollectionViewCell {
             if applicationModel.scholar_rent_days! >= 3 && applicationModel.scholar_total_mmr_day != nil && applicationModel.scholar_rent_days != nil{
                 let averageMMR = applicationModel.scholar_total_mmr_day! / applicationModel.scholar_rent_days!
                 self.avgMmrLabelView.rightLabel.text = String(averageMMR)
-                self.avgMmrLabelView.rightLabel.textColor = .green
                 if applicationModel.scholar_total_mmr_change != nil && applicationModel.scholar_rent_times != nil{
                     let a = applicationModel.scholar_total_mmr_change! / applicationModel.scholar_rent_times!
                     if a > 0{
@@ -103,7 +102,7 @@ class LatestScholarshipCell: UICollectionViewCell {
         
         
         if applicationModel.scholar_rent_days != nil {
-            self.totalPlayTimeLabelView.rightLabel.text =  "\(scholarDetailModel.rent_days!) days"
+            self.totalPlayTimeLabelView.rightLabel.text =  "\(applicationModel.scholar_rent_days!) days"
         }
         if applicationModel.scholar_available_time != nil {
             self.availableLabelView.rightLabel.text = "\(applicationModel.scholar_available_time!) hrs/day"
