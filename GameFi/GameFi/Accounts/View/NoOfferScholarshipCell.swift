@@ -173,8 +173,8 @@ class NoOfferScholarshipCell: UICollectionViewCell {
         if scholarshipModel.account_passcode != nil {
             self.pwdTextFild!.text = scholarshipModel.account_passcode
         }
-//        self.flagImgView.image = UIImage.init(named: "")
-        self.flagImgView.image = UIImage.init(named: "verfive")
+        self.flagImgView.image = UIImage.init(named: "")
+//        self.flagImgView.image = UIImage.init(named: "verfive")
         if scholarshipModel.status != nil {
             if scholarshipModel.status == "DRAFT" {
                 self.btn.isHidden = true

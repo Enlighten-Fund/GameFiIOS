@@ -27,27 +27,33 @@ class LatestScholarshipCell: UICollectionViewCell {
             make.height.equalTo(30)
             make.left.equalToSuperview().offset(15)
         }
-        self.highmmrLabelView.snp.makeConstraints { make in
+        self.avgMmrLabelView.snp.makeConstraints { make in
             make.top.equalTo(self.creditScoreLabelView.snp.bottom)
             make.right.equalToSuperview().offset(-15)
             make.height.equalTo(30)
             make.left.equalToSuperview().offset(15)
         }
-        self.mmrIncreaseLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.highmmrLabelView.snp.bottom)
+        self.avgPerformaceLabelView.snp.makeConstraints { make in
+            make.top.equalTo(self.avgMmrLabelView.snp.bottom)
             make.right.equalToSuperview().offset(-15)
             make.height.equalTo(30)
             make.left.equalToSuperview().offset(15)
         }
-        self.experienceLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.mmrIncreaseLabelView.snp.bottom)
+        self.totalPlayTimeLabelView.snp.makeConstraints { make in
+            make.top.equalTo(self.avgPerformaceLabelView.snp.bottom)
+            make.right.equalToSuperview().offset(-15)
+            make.height.equalTo(30)
+            make.left.equalToSuperview().offset(15)
+        }
+        self.availableLabelView.snp.makeConstraints { make in
+            make.top.equalTo(self.totalPlayTimeLabelView.snp.bottom)
             make.right.equalToSuperview().offset(-15)
             make.height.equalTo(30)
             make.left.equalToSuperview().offset(15)
         }
     
         self.accountAppliedLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.experienceLabelView.snp.bottom)
+            make.top.equalTo(self.availableLabelView.snp.bottom)
             make.right.equalToSuperview().offset(-15)
             make.height.equalTo(30)
             make.left.equalToSuperview().offset(15)
@@ -74,22 +80,33 @@ class LatestScholarshipCell: UICollectionViewCell {
             self.creditScoreLabelView.rightLabel.text = applicationModel.scholar_credit_score
         }
         if applicationModel.scholar_rent_days != nil {
-            if applicationModel.scholar_rent_days! >= 5 && applicationModel.scholar_total_mmr_day != nil && applicationModel.scholar_rent_days != nil{
+            if applicationModel.scholar_rent_days! >= 3 && applicationModel.scholar_total_mmr_day != nil && applicationModel.scholar_rent_days != nil{
                 let averageMMR = applicationModel.scholar_total_mmr_day! / applicationModel.scholar_rent_days!
-                self.highmmrLabelView.rightLabel.text = String(averageMMR)
-                self.highmmrLabelView.rightLabel.textColor = .green
+                self.avgMmrLabelView.rightLabel.text = String(averageMMR)
+                self.avgMmrLabelView.rightLabel.textColor = .green
+                if applicationModel.scholar_total_mmr_change != nil && applicationModel.scholar_rent_times != nil{
+                    let a = applicationModel.scholar_total_mmr_change! / applicationModel.scholar_rent_times!
+                    if a > 0{
+                        self.avgPerformaceLabelView.rightLabel.attributedText = NSAttributedString.init(string: "+\(a)", attributes: [.font: UIFont(name: "PingFang SC Medium", size: 15) as Any,.foregroundColor: UIColor(red: 0.23, green: 0.9, blue: 0.37,alpha:1.0)])
+                    }else{
+                        self.avgPerformaceLabelView.rightLabel.attributedText = NSAttributedString.init(string: "\(a)", attributes: [.font: UIFont(name: "Avenir Next Medium", size: 15) as Any,.foregroundColor: UIColor(red: 0.97, green: 0.24, blue: 0.24,alpha:1.0)])
+                    }
+                }
             }else{
                 if applicationModel.scholar_mmr != nil{
-                    self.highmmrLabelView.rightLabel.text = applicationModel.scholar_mmr
-                    self.highmmrLabelView.rightLabel.textColor = .white
+                    self.avgMmrLabelView.rightLabel.text = applicationModel.scholar_mmr
+                    self.avgMmrLabelView.rightLabel.textColor = .white
                 }
+                self.avgPerformaceLabelView.rightLabel.text = "-"
             }
         }
-        if applicationModel.scholar_total_mmr_change != nil {
-            self.mmrIncreaseLabelView.rightLabel.text =  String(applicationModel.scholar_total_mmr_change!)
+        
+        
+        if applicationModel.scholar_rent_days != nil {
+            self.totalPlayTimeLabelView.rightLabel.text =  "\(scholarDetailModel.rent_days!) days"
         }
-        if applicationModel.scholar_axie_exp != nil {
-            self.experienceLabelView.rightLabel.text = "\(applicationModel.scholar_axie_exp!) months"
+        if applicationModel.scholar_available_time != nil {
+            self.availableLabelView.rightLabel.text = "\(applicationModel.scholar_available_time!) hrs/day"
         }
         if applicationModel.scholarship_name != nil {
             self.accountAppliedLabelView.rightLabel.text = applicationModel.scholarship_name
@@ -99,7 +116,7 @@ class LatestScholarshipCell: UICollectionViewCell {
     
     lazy var scholarLabelView : LabelAndLabelInterView = {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
-        tempLabelView.leftLabel.text = "Username"
+        tempLabelView.leftLabel.text = "Scholar name"
         self.contentView.addSubview(tempLabelView)
         return tempLabelView
     }()
@@ -109,22 +126,28 @@ class LatestScholarshipCell: UICollectionViewCell {
         self.contentView.addSubview(tempLabelView)
         return tempLabelView
     }()
-    lazy var highmmrLabelView : LabelAndLabelInterView = {
+    lazy var avgMmrLabelView : LabelAndLabelInterView = {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
-        tempLabelView.leftLabel.text = "MMR"
+        tempLabelView.leftLabel.text = "Avg MMR"
         self.contentView.addSubview(tempLabelView)
         return tempLabelView
     }()
-    lazy var mmrIncreaseLabelView : LabelAndLabelInterView = {
+    lazy var avgPerformaceLabelView : LabelAndLabelInterView = {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
-        tempLabelView.leftLabel.text = "MMR increase"
+        tempLabelView.leftLabel.text = "Avg Performace"
+        self.contentView.addSubview(tempLabelView)
+        return tempLabelView
+    }()
+    lazy var totalPlayTimeLabelView : LabelAndLabelInterView = {
+        let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
+        tempLabelView.leftLabel.text = "Total Play Time"
         self.contentView.addSubview(tempLabelView)
         return tempLabelView
     }()
 
-    lazy var experienceLabelView : LabelAndLabelInterView = {
+    lazy var availableLabelView : LabelAndLabelInterView = {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
-        tempLabelView.leftLabel.text = "Experience in NinjaDAOs"
+        tempLabelView.leftLabel.text = "Availability"
         self.contentView.addSubview(tempLabelView)
         return tempLabelView
     }()

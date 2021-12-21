@@ -236,8 +236,8 @@ class ScholarshipDetailCell: TableViewCell {
         self.axieImgView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.centerX.equalToSuperview()
-            make.height.equalTo(139)
-            make.width.equalTo(145)
+            make.height.equalTo(120)
+            make.width.equalTo(150)
         }
         self.classLabel.snp.makeConstraints { make in
             make.top.equalTo(self.axieImgView.snp.bottom)
