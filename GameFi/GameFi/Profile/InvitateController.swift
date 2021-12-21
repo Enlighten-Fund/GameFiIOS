@@ -25,11 +25,11 @@ class InvitateController: ViewController {
         self.contentLabel?.snp.makeConstraints({ make in
             make.center.equalTo(self.view)
             make.width.equalTo(200)
-            make.height.equalTo(40)
+            make.height.equalTo(100)
         })
         self.copyBtn?.snp.makeConstraints({ make in
             make.centerX.equalTo(self.view)
-            make.top.equalTo(self.contentLabel!.snp.bottom)
+            make.top.equalTo(self.contentLabel!.snp.bottom).offset(20)
             make.width.equalTo(200)
             make.height.equalTo(40)
         })
@@ -43,7 +43,7 @@ class InvitateController: ViewController {
     }
     
     @objc func copyBtnClick(){
-        UIPasteboard.general.string = String(self.invitateCode)
+        UIPasteboard.general.string = "https://app.ninjadaos.com/signUp \n invitation:\(self.invitateCode)"
         self.mc_text("Copied successfully!")
     }
     
@@ -55,7 +55,7 @@ class InvitateController: ViewController {
                 if result.success!{
                     let dic : [String:AnyObject] = reponse as! [String : AnyObject]
                     self.invitateCode = dic["invite_code"] as! Int
-                    
+                    self.contentLabel?.text = "\(self.invitateCode)"
                 }
             }
         }
@@ -71,8 +71,8 @@ class InvitateController: ViewController {
     }()
     lazy var contentLabel: UILabel? = {
         let temp = UILabel.init(frame: CGRect.zero)
-        temp.font = UIFont(name: "Avenir Heavy", size: 14)
-        temp.text = "invitation_code"
+        temp.font = UIFont(name: "Avenir Heavy", size: 28)
+        temp.text = ""
         temp.textColor = .white
         temp.textAlignment = .center
         view.addSubview(temp)

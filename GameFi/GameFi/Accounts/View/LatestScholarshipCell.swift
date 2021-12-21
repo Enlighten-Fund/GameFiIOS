@@ -83,7 +83,7 @@ class LatestScholarshipCell: UICollectionViewCell {
             if applicationModel.scholar_rent_days! >= 3 && applicationModel.scholar_total_mmr_day != nil && applicationModel.scholar_rent_days != nil{
                 let averageMMR = applicationModel.scholar_total_mmr_day! / applicationModel.scholar_rent_days!
                 self.avgMmrLabelView.rightLabel.text = String(averageMMR)
-                if applicationModel.scholar_total_mmr_change != nil && applicationModel.scholar_rent_times != nil{
+                if applicationModel.scholar_total_mmr_change != nil && applicationModel.scholar_rent_times != nil && applicationModel.scholar_rent_times != 0{
                     let a = applicationModel.scholar_total_mmr_change! / applicationModel.scholar_rent_times!
                     if a > 0{
                         self.avgPerformaceLabelView.rightLabel.attributedText = NSAttributedString.init(string: "+\(a)", attributes: [.font: UIFont(name: "PingFang SC Medium", size: 15) as Any,.foregroundColor: UIColor(red: 0.23, green: 0.9, blue: 0.37,alpha:1.0)])
@@ -102,7 +102,7 @@ class LatestScholarshipCell: UICollectionViewCell {
         
         
         if applicationModel.scholar_rent_days != nil {
-            self.totalPlayTimeLabelView.rightLabel.text =  "\(applicationModel.scholar_rent_days!) days"
+            self.totalPlayTimeLabelView.rightLabel.text =  "\(Int(applicationModel.scholar_rent_days!)) days"
         }
         if applicationModel.scholar_available_time != nil {
             self.availableLabelView.rightLabel.text = "\(applicationModel.scholar_available_time!) hrs/day"

@@ -92,7 +92,7 @@ class ScholarDetailHeaderView: UIView {
             if scholarDetailModel.rent_days! >= 3 && scholarDetailModel.total_mmr_day != nil && scholarDetailModel.rent_days != nil{
                 let averageMMR = scholarDetailModel.total_mmr_day! / scholarDetailModel.rent_days!
                 self.avgMmrLabelView.rightLabel.text = String(averageMMR)
-                if scholarDetailModel.total_mmr_change != nil && scholarDetailModel.rent_times != nil{
+                if scholarDetailModel.total_mmr_change != nil && scholarDetailModel.rent_times != nil && scholarDetailModel.rent_times != 0{
                     let a = scholarDetailModel.total_mmr_change! / scholarDetailModel.rent_times!
                     if a > 0{
                         self.avgPerformaceLabelView.rightLabel.attributedText = NSAttributedString.init(string: "+\(a)", attributes: [.font: UIFont(name: "PingFang SC Medium", size: 15) as Any,.foregroundColor: UIColor(red: 0.23, green: 0.9, blue: 0.37,alpha:1.0)])
@@ -111,7 +111,7 @@ class ScholarDetailHeaderView: UIView {
         
         
         if scholarDetailModel.rent_days != nil {
-            self.totalPlayTimeLabelView.rightLabel.text =  "\(scholarDetailModel.rent_days!) days"
+            self.totalPlayTimeLabelView.rightLabel.text =  "\(Int(scholarDetailModel.rent_days!)) days"
         }
         
         if scholarDetailModel.available_time != nil {

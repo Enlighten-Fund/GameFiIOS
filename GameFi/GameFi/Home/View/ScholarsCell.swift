@@ -74,11 +74,10 @@ class ScholarsCell: UICollectionViewCell {
             self.creditLabel.text = "Credit: \(scholarModel.credit_score!)"
         }
         if scholarModel.rent_days != nil {
-            self.avgMmrLabelView.rightLabel.textColor = UIColor(red: 1, green: 0.72, blue: 0.07, alpha: 1)
             if scholarModel.rent_days! >= 3 && scholarModel.total_mmr_day != nil && scholarModel.rent_days != nil{
                 let averageMMR = scholarModel.total_mmr_day! / scholarModel.rent_days!
-                self.avgMmrLabelView.rightLabel.text = String(averageMMR)
-                if scholarModel.total_mmr_change != nil && scholarModel.rent_times != nil{
+                self.avgMmrLabelView.rightLabel.text = "\(Int(averageMMR))"
+                if scholarModel.total_mmr_change != nil && scholarModel.rent_times != nil && scholarModel.rent_times != 0{
                     let a = scholarModel.total_mmr_change! / scholarModel.rent_times!
                     if a > 0{
                         self.avgPerformaceLabelView.rightLabel.attributedText = NSAttributedString.init(string: "+\(a)", attributes: [.font: UIFont(name: "PingFang SC Medium", size: 15) as Any,.foregroundColor: UIColor(red: 0.23, green: 0.9, blue: 0.37,alpha:1.0)])
@@ -87,19 +86,19 @@ class ScholarsCell: UICollectionViewCell {
                     }
                 }
             }else{
-                if scholarModel.mmr != nil{
-                    self.avgMmrLabelView.rightLabel.text = scholarModel.mmr
+                if scholarModel.mmr != nil && Int(scholarModel.mmr!) != nil{
+                    self.avgMmrLabelView.rightLabel.text = "\(Int(scholarModel.mmr!)!)"
                     self.avgMmrLabelView.rightLabel.textColor = .white
                 }
                 self.avgPerformaceLabelView.rightLabel.text = "-"
             }
         }
         if scholarModel.rent_days != nil {
-            self.totalPlayTimeLabelView.rightLabel.text =  "\(scholarModel.rent_days!) days"
+            self.totalPlayTimeLabelView.rightLabel.text =  "\(Int(scholarModel.rent_days!)) days"
         }
         
         if scholarModel.available_time != nil {
-            self.availableLabelView.update(leftTitle: "Available time", rithtTitle: "\(scholarModel.available_time!) hrs/day")
+            self.availableLabelView.update(leftTitle: "Availability", rithtTitle: "\(scholarModel.available_time!) hrs/day")
         }
     }
     
@@ -137,13 +136,13 @@ class ScholarsCell: UICollectionViewCell {
     }()
     lazy var avgPerformaceLabelView : HomeLabelAndLabelView = {
         let tempLabelView = HomeLabelAndLabelView.init(frame: CGRect.zero)
-        tempLabelView.leftLabel.text = "Avg Performace"
+        tempLabelView.leftLabel.text = "Avg Perf"
         self.addSubview(tempLabelView)
         return tempLabelView
     }()
     lazy var totalPlayTimeLabelView : HomeLabelAndLabelView = {
         let tempLabelView = HomeLabelAndLabelView.init(frame: CGRect.zero)
-        tempLabelView.leftLabel.text = "Total Play Time"
+        tempLabelView.leftLabel.text = "Play Time"
         self.addSubview(tempLabelView)
         return tempLabelView
     }()
