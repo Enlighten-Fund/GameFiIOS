@@ -62,22 +62,22 @@ class ScholarshipsCell: UICollectionViewCell {
         self.axieImgView1.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.centerX.equalToSuperview()
-            make.height.equalTo(80)
-            make.width.equalTo(100)
+            make.height.equalTo(64)
+            make.width.equalTo(80)
         }
         
         self.axieImgView2.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.right.equalTo(self.axieImgView1.snp.left).offset(60)
-            make.height.equalTo(80)
-            make.width.equalTo(100)
+            make.right.equalTo(self.axieImgView1.snp.left).offset(30)
+            make.height.equalTo(64)
+            make.width.equalTo(80)
         }
         
         self.axieImgView3.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.left.equalTo(self.axieImgView1.snp.right).offset(-60)
-            make.height.equalTo(80)
-            make.width.equalTo(100)
+            make.left.equalTo(self.axieImgView1.snp.right).offset(-30)
+            make.height.equalTo(64)
+            make.width.equalTo(80)
         }
         self.accountLabel.snp.makeConstraints { make in
             make.top.equalTo(self.axieImgView1.snp.bottom).offset(-20)

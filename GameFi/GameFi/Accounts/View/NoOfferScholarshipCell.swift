@@ -14,6 +14,12 @@ class NoOfferScholarshipCell: UICollectionViewCell {
         self.contentView.layer.cornerRadius = 5
         self.contentView.layer.masksToBounds = true
         self.contentView.backgroundColor = UIColor.init(hexString: "0x30354B")
+        self.flagImgView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.left.equalToSuperview()
+            make.height.equalTo(64)
+            make.width.equalTo(78)
+        }
         self.axieImgView1.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.centerX.equalToSuperview()
@@ -23,14 +29,14 @@ class NoOfferScholarshipCell: UICollectionViewCell {
         
         self.axieImgView2.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.right.equalTo(self.axieImgView1.snp.left).offset(60)
+            make.right.equalTo(self.axieImgView1.snp.left).offset(30)
             make.height.equalTo(80)
             make.width.equalTo(100)
         }
         
         self.axieImgView3.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.left.equalTo(self.axieImgView1.snp.right).offset(-60)
+            make.left.equalTo(self.axieImgView1.snp.right).offset(-30)
             make.height.equalTo(80)
             make.width.equalTo(100)
         }
@@ -167,6 +173,8 @@ class NoOfferScholarshipCell: UICollectionViewCell {
         if scholarshipModel.account_passcode != nil {
             self.pwdTextFild!.text = scholarshipModel.account_passcode
         }
+//        self.flagImgView.image = UIImage.init(named: "")
+        self.flagImgView.image = UIImage.init(named: "verfive")
         if scholarshipModel.status != nil {
             if scholarshipModel.status == "DRAFT" {
                 self.btn.isHidden = true
@@ -194,9 +202,16 @@ class NoOfferScholarshipCell: UICollectionViewCell {
                 self.btn.setTitle("Recall", for: .normal)
                 self.btn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
                 self.btn.isEnabled = true
+                self.flagImgView.image = UIImage.init(named: "verfive")
             }
         }
     }
+    
+    lazy var flagImgView : UIImageView = {
+        let tempImgView = UIImageView.init()
+        self.contentView.addSubview(tempImgView)
+        return tempImgView
+    }()
     
     lazy var axieImgView1 : UIImageView = {
         let tempImgView = UIImageView.init()
