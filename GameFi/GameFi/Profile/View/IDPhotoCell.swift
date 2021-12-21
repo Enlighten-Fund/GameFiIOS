@@ -66,7 +66,7 @@ class IDPhotoCell: TableViewCell {
         let tempLabel = UILabel.init(frame: CGRect.zero)
         tempLabel.font = UIFont(name: "Avenir Next Regular", size: 14)
         tempLabel.textColor = .white
-        tempLabel.text = "Upload a photo holding your ID card.\nOnly used for authentication.\nDon't worry about the security."
+        tempLabel.text = "This is only for verification purpose. Your information is strictly protected and will not be used for any other purpose."
         tempLabel.numberOfLines = 0
         tempLabel.textAlignment = .center
         self.contentView.addSubview(tempLabel)

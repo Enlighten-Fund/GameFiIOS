@@ -441,7 +441,7 @@ class ScholarshipDetailCell: TableViewCell {
         let tempLabel = UILabel.init(frame: CGRect.zero)
         tempLabel.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         tempLabel.font = UIFont(name: "Avenir Next Medium", size: 15)
-        tempLabel.text = "Stats"
+        tempLabel.text = "Statistics"
         self.contentView.addSubview(tempLabel)
         return tempLabel
     }()

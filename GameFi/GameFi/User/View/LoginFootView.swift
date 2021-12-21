@@ -54,7 +54,7 @@ class LoginFootView: UIView {
     
     lazy var loginBtn : UIButton = {
         let tempBtn = UIButton.init(frame: CGRect.zero)
-        tempBtn.setTitle("Login in", for: .normal)
+        tempBtn.setTitle("Log in", for: .normal)
         tempBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
         tempBtn.layer.cornerRadius = 5
         tempBtn.layer.masksToBounds = true
