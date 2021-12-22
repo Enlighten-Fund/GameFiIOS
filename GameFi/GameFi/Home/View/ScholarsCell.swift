@@ -47,18 +47,19 @@ class ScholarsCell: UICollectionViewCell {
             make.height.equalTo(25)
             make.left.equalToSuperview()
         }
-        self.totalPlayTimeLabelView.snp.makeConstraints { make in
+        self.avgReturnLabelView.snp.makeConstraints { make in
             make.top.equalTo(self.avgPerformaceLabelView.snp.bottom)
             make.right.equalToSuperview()
             make.height.equalTo(25)
             make.left.equalToSuperview()
         }
-        self.availableLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.totalPlayTimeLabelView.snp.bottom)
+        self.totalPlayTimeLabelView.snp.makeConstraints { make in
+            make.top.equalTo(self.avgReturnLabelView.snp.bottom)
             make.right.equalToSuperview()
             make.height.equalTo(25)
             make.left.equalToSuperview()
         }
+      
     }
 
     func update(scholarModel:ScholarModel) {
@@ -75,10 +76,17 @@ class ScholarsCell: UICollectionViewCell {
         }
         if scholarModel.rent_days != nil {
             if scholarModel.rent_days! >= 3 && scholarModel.total_mmr_day != nil && scholarModel.rent_days != nil{
-                let averageMMR = scholarModel.total_mmr_day! / scholarModel.rent_days!
-                self.avgMmrLabelView.rightLabel.text = "\(Int(averageMMR))"
+                self.avgMmrLabelView.rightLabel.text = "\(lroundf(scholarModel.total_mmr_day! / scholarModel.rent_days!))"
+            }else{
+                if scholarModel.mmr != nil{
+                    self.avgMmrLabelView.rightLabel.text = scholarModel.mmr
+                }
+            }
+        }
+        if scholarModel.rent_days != nil {
+            if scholarModel.rent_days! >= 3{
                 if scholarModel.total_mmr_change != nil && scholarModel.rent_times != nil && scholarModel.rent_times != 0{
-                    let a = scholarModel.total_mmr_change! / Float(scholarModel.rent_times!)
+                    let a = lroundf(scholarModel.total_mmr_change! / Float(scholarModel.rent_times!))
                     if a > 0{
                         self.avgPerformaceLabelView.rightLabel.attributedText = NSAttributedString.init(string: "+\(a)", attributes: [.font: UIFont(name: "PingFang SC Medium", size: 15) as Any,.foregroundColor: UIColor(red: 0.23, green: 0.9, blue: 0.37,alpha:1.0)])
                     }else{
@@ -86,19 +94,21 @@ class ScholarsCell: UICollectionViewCell {
                     }
                 }
             }else{
-                if scholarModel.mmr != nil && Int(scholarModel.mmr!) != nil{
-                    self.avgMmrLabelView.rightLabel.text = "\(Int(scholarModel.mmr!)!)"
-                    self.avgMmrLabelView.rightLabel.textColor = .white
-                }
                 self.avgPerformaceLabelView.rightLabel.text = "-"
             }
         }
+        
         if scholarModel.rent_days != nil {
-            self.totalPlayTimeLabelView.rightLabel.text =  "\(Int(scholarModel.rent_days!)) days"
+            if scholarModel.rent_days! >= 3 && scholarModel.total_slp != nil{
+                self.avgReturnLabelView.rightLabel.text =  "\(lroundf(scholarModel.total_slp! / scholarModel.rent_days!)) SLP/day"
+            }else{
+                self.avgReturnLabelView.rightLabel.text =  "-"
+            }
+            
         }
         
-        if scholarModel.available_time != nil {
-            self.availableLabelView.update(leftTitle: "Availability", rithtTitle: "\(scholarModel.available_time!) hrs/day")
+        if scholarModel.rent_days != nil {
+            self.totalPlayTimeLabelView.rightLabel.text =  "\(Int(scholarModel.rent_days!)) days"
         }
     }
     
@@ -140,6 +150,12 @@ class ScholarsCell: UICollectionViewCell {
         self.addSubview(tempLabelView)
         return tempLabelView
     }()
+    lazy var avgReturnLabelView : HomeLabelAndLabelView = {
+        let tempLabelView = HomeLabelAndLabelView.init(frame: CGRect.zero)
+        tempLabelView.leftLabel.text = "Avg Return"
+        self.addSubview(tempLabelView)
+        return tempLabelView
+    }()
     lazy var totalPlayTimeLabelView : HomeLabelAndLabelView = {
         let tempLabelView = HomeLabelAndLabelView.init(frame: CGRect.zero)
         tempLabelView.leftLabel.text = "Play Time"
@@ -147,10 +163,5 @@ class ScholarsCell: UICollectionViewCell {
         return tempLabelView
     }()
 
-    lazy var availableLabelView : HomeLabelAndLabelView = {
-        let tempLabelView = HomeLabelAndLabelView.init(frame: CGRect.zero)
-        tempLabelView.leftLabel.text = "Availability"
-        self.addSubview(tempLabelView)
-        return tempLabelView
-    }()
+   
 }

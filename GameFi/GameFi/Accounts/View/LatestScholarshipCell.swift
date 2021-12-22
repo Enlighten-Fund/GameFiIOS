@@ -39,21 +39,21 @@ class LatestScholarshipCell: UICollectionViewCell {
             make.height.equalTo(30)
             make.left.equalToSuperview().offset(15)
         }
-        self.totalPlayTimeLabelView.snp.makeConstraints { make in
+        self.avgReturnLabelView.snp.makeConstraints { make in
             make.top.equalTo(self.avgPerformaceLabelView.snp.bottom)
             make.right.equalToSuperview().offset(-15)
             make.height.equalTo(30)
             make.left.equalToSuperview().offset(15)
         }
-        self.availableLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.totalPlayTimeLabelView.snp.bottom)
+        self.totalPlayTimeLabelView.snp.makeConstraints { make in
+            make.top.equalTo(self.avgReturnLabelView.snp.bottom)
             make.right.equalToSuperview().offset(-15)
             make.height.equalTo(30)
             make.left.equalToSuperview().offset(15)
         }
     
         self.accountAppliedLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.availableLabelView.snp.bottom)
+            make.top.equalTo(self.totalPlayTimeLabelView.snp.bottom)
             make.right.equalToSuperview().offset(-15)
             make.height.equalTo(30)
             make.left.equalToSuperview().offset(15)
@@ -79,12 +79,20 @@ class LatestScholarshipCell: UICollectionViewCell {
         if applicationModel.scholar_credit_score != nil {
             self.creditScoreLabelView.rightLabel.text = applicationModel.scholar_credit_score
         }
+        
         if applicationModel.scholar_rent_days != nil {
             if applicationModel.scholar_rent_days! >= 3 && applicationModel.scholar_total_mmr_day != nil && applicationModel.scholar_rent_days != nil{
-                let averageMMR = applicationModel.scholar_total_mmr_day! / applicationModel.scholar_rent_days!
-                self.avgMmrLabelView.rightLabel.text = String(averageMMR)
+                self.avgMmrLabelView.rightLabel.text = "\(lroundf(applicationModel.scholar_total_mmr_day! / applicationModel.scholar_rent_days!))"
+            }else{
+                if applicationModel.scholar_mmr != nil{
+                    self.avgMmrLabelView.rightLabel.text = applicationModel.scholar_mmr
+                }
+            }
+        }
+        if applicationModel.scholar_rent_days != nil {
+            if applicationModel.scholar_rent_days! >= 3{
                 if applicationModel.scholar_total_mmr_change != nil && applicationModel.scholar_rent_times != nil && applicationModel.scholar_rent_times != 0{
-                    let a = applicationModel.scholar_total_mmr_change! / applicationModel.scholar_rent_times!
+                    let a = lroundf(applicationModel.scholar_total_mmr_change! / Float(applicationModel.scholar_rent_times!))
                     if a > 0{
                         self.avgPerformaceLabelView.rightLabel.attributedText = NSAttributedString.init(string: "+\(a)", attributes: [.font: UIFont(name: "PingFang SC Medium", size: 15) as Any,.foregroundColor: UIColor(red: 0.23, green: 0.9, blue: 0.37,alpha:1.0)])
                     }else{
@@ -92,21 +100,23 @@ class LatestScholarshipCell: UICollectionViewCell {
                     }
                 }
             }else{
-                if applicationModel.scholar_mmr != nil{
-                    self.avgMmrLabelView.rightLabel.text = applicationModel.scholar_mmr
-                    self.avgMmrLabelView.rightLabel.textColor = .white
-                }
                 self.avgPerformaceLabelView.rightLabel.text = "-"
             }
         }
         
+        if applicationModel.scholar_rent_days != nil {
+            if applicationModel.scholar_rent_days! >= 3 && applicationModel.scholar_total_slp != nil{
+                self.avgReturnLabelView.rightLabel.text =  "\(lroundf(applicationModel.scholar_total_slp! / applicationModel.scholar_rent_days!)) SLP/day"
+            }else{
+                self.avgReturnLabelView.rightLabel.text =  "-"
+            }
+            
+        }
         
         if applicationModel.scholar_rent_days != nil {
             self.totalPlayTimeLabelView.rightLabel.text =  "\(Int(applicationModel.scholar_rent_days!)) days"
         }
-        if applicationModel.scholar_available_time != nil {
-            self.availableLabelView.rightLabel.text = "\(applicationModel.scholar_available_time!) hrs/day"
-        }
+
         if applicationModel.scholarship_name != nil {
             self.accountAppliedLabelView.rightLabel.text = applicationModel.scholarship_name
         }
@@ -137,6 +147,12 @@ class LatestScholarshipCell: UICollectionViewCell {
         self.contentView.addSubview(tempLabelView)
         return tempLabelView
     }()
+    lazy var avgReturnLabelView : LabelAndLabelInterView = {
+        let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
+        tempLabelView.leftLabel.text = "Avg Return"
+        self.contentView.addSubview(tempLabelView)
+        return tempLabelView
+    }()
     lazy var totalPlayTimeLabelView : LabelAndLabelInterView = {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
         tempLabelView.leftLabel.text = "Total Play Time"
@@ -144,13 +160,6 @@ class LatestScholarshipCell: UICollectionViewCell {
         return tempLabelView
     }()
 
-    lazy var availableLabelView : LabelAndLabelInterView = {
-        let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
-        tempLabelView.leftLabel.text = "Availability"
-        self.contentView.addSubview(tempLabelView)
-        return tempLabelView
-    }()
-   
     lazy var accountAppliedLabelView : LabelAndLabelInterView = {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
         tempLabelView.leftLabel.text = "Scholarship applied"

@@ -47,8 +47,8 @@ class ApplicationModel: BaseModel {
     
     var scholar_rent_times:Int?
     var scholar_rent_days: Float?
-    var scholar_total_slp: Int?
-    var scholar_total_mmr_change: Int?
+    var scholar_total_slp: Float?
+    var scholar_total_mmr_change: Float?
     var scholar_total_mmr_day: Float? // avg_mmr = total_mmr_day / rent_days
     
 //    var nation : String?
