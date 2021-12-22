@@ -143,7 +143,7 @@ class ScholarDetailHeaderView: UIView {
         }
         
         if scholarDetailModel.available_time != nil {
-            self.availableLabelView.update(leftTitle: "Available time", rithtTitle: "\(scholarDetailModel.available_time!) hrs/day")
+            self.availableLabelView.update(leftTitle: "Availability", rithtTitle: "\(scholarDetailModel.available_time!) hrs/day")
         }
         if scholarDetailModel.dob != nil && self.dateFromString(string: scholarDetailModel.dob!) != nil{
             let now = Date()
