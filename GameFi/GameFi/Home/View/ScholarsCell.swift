@@ -78,7 +78,7 @@ class ScholarsCell: UICollectionViewCell {
                 let averageMMR = scholarModel.total_mmr_day! / scholarModel.rent_days!
                 self.avgMmrLabelView.rightLabel.text = "\(Int(averageMMR))"
                 if scholarModel.total_mmr_change != nil && scholarModel.rent_times != nil && scholarModel.rent_times != 0{
-                    let a = scholarModel.total_mmr_change! / scholarModel.rent_times!
+                    let a = scholarModel.total_mmr_change! / Float(scholarModel.rent_times!)
                     if a > 0{
                         self.avgPerformaceLabelView.rightLabel.attributedText = NSAttributedString.init(string: "+\(a)", attributes: [.font: UIFont(name: "PingFang SC Medium", size: 15) as Any,.foregroundColor: UIColor(red: 0.23, green: 0.9, blue: 0.37,alpha:1.0)])
                     }else{

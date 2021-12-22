@@ -28,8 +28,8 @@ class ScholarModel: BaseModel {
     
     var rent_times:Int?
     var rent_days: Float?
-    var total_slp: Int?
-    var total_mmr_change: Int?
+    var total_slp: Float?
+    var total_mmr_change: Float?
     var total_mmr_day: Float? // avg_mmr = total_mmr_day / rent_days
     required init() {}
 }

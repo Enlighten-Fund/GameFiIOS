@@ -92,7 +92,7 @@ class ScholarshipDetailHeaderView: UIView {
         }
         
         if scholarshipDetailModel.scholar_percentage != nil {
-            self.scholarPerLabelView.update(leftTitle: "Scholar cut", rithtTitle: "\(scholarshipDetailModel.scholar_percentage!)%")
+            self.scholarPerLabelView.update(leftTitle: "Scholar Percentage", rithtTitle: "\(scholarshipDetailModel.scholar_percentage!)%")
         }
         
         if scholarshipDetailModel.offer_period != nil  {

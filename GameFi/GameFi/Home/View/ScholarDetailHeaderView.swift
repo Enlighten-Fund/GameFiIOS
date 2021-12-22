@@ -38,14 +38,29 @@ class ScholarDetailHeaderView: UIView {
             make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
             make.height.equalTo(35)
         }
+        
+        self.tipLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.avgMmrLabelView.snp.bottom).offset(-10)
+            make.right.equalToSuperview()
+            make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
+            make.height.equalTo(15)
+        }
         self.avgPerformaceLabelView.snp.makeConstraints { make in
             make.top.equalTo(self.avgMmrLabelView.snp.bottom).offset(0)
             make.left.equalToSuperview()
             make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
             make.height.equalTo(35)
         }
-        self.totalPlayTimeLabelView.snp.makeConstraints { make in
+        
+        self.avgReturnLabelView.snp.makeConstraints { make in
             make.top.equalTo(self.avgPerformaceLabelView.snp.bottom).offset(0)
+            make.left.equalToSuperview()
+            make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
+            make.height.equalTo(35)
+        }
+        
+        self.totalPlayTimeLabelView.snp.makeConstraints { make in
+            make.top.equalTo(self.avgReturnLabelView.snp.bottom).offset(0)
             make.left.equalToSuperview()
             make.width.equalTo(IPhone_SCREEN_WIDTH - 30)
             make.height.equalTo(35)
@@ -90,10 +105,19 @@ class ScholarDetailHeaderView: UIView {
         }
         if scholarDetailModel.rent_days != nil {
             if scholarDetailModel.rent_days! >= 3 && scholarDetailModel.total_mmr_day != nil && scholarDetailModel.rent_days != nil{
-                let averageMMR = scholarDetailModel.total_mmr_day! / scholarDetailModel.rent_days!
-                self.avgMmrLabelView.rightLabel.text = String(averageMMR)
+                self.tipLabel.isHidden = true
+                self.avgMmrLabelView.rightLabel.text = "\(lroundf(scholarDetailModel.total_mmr_day! / scholarDetailModel.rent_days!))"
+            }else{
+                if scholarDetailModel.mmr != nil{
+                    self.avgMmrLabelView.rightLabel.text = scholarDetailModel.mmr
+                    self.tipLabel.isHidden = false
+                }
+            }
+        }
+        if scholarDetailModel.rent_days != nil {
+            if scholarDetailModel.rent_days! >= 3{
                 if scholarDetailModel.total_mmr_change != nil && scholarDetailModel.rent_times != nil && scholarDetailModel.rent_times != 0{
-                    let a = scholarDetailModel.total_mmr_change! / scholarDetailModel.rent_times!
+                    let a = lroundf(scholarDetailModel.total_mmr_change! / Float(scholarDetailModel.rent_times!))
                     if a > 0{
                         self.avgPerformaceLabelView.rightLabel.attributedText = NSAttributedString.init(string: "+\(a)", attributes: [.font: UIFont(name: "PingFang SC Medium", size: 15) as Any,.foregroundColor: UIColor(red: 0.23, green: 0.9, blue: 0.37,alpha:1.0)])
                     }else{
@@ -101,14 +125,18 @@ class ScholarDetailHeaderView: UIView {
                     }
                 }
             }else{
-                if scholarDetailModel.mmr != nil{
-                    self.avgMmrLabelView.rightLabel.text = scholarDetailModel.mmr
-                    self.avgMmrLabelView.rightLabel.textColor = .white
-                }
                 self.avgPerformaceLabelView.rightLabel.text = "-"
             }
         }
         
+        if scholarDetailModel.rent_days != nil {
+            if scholarDetailModel.rent_days! >= 3 && scholarDetailModel.total_slp != nil{
+                self.avgReturnLabelView.rightLabel.text =  "\(lroundf(scholarDetailModel.total_slp! / scholarDetailModel.rent_days!)) SLP/day"
+            }else{
+                self.avgReturnLabelView.rightLabel.text =  "-"
+            }
+            
+        }
         
         if scholarDetailModel.rent_days != nil {
             self.totalPlayTimeLabelView.rightLabel.text =  "\(Int(scholarDetailModel.rent_days!)) days"
@@ -170,18 +198,40 @@ class ScholarDetailHeaderView: UIView {
         self.addSubview(tempLabelView)
         return tempLabelView
     }()
+    
+    lazy var tipLabel : UILabel = {
+        let tempLabel = UILabel.init(frame: CGRect.zero)
+        tempLabel.textColor =  UIColor(red: 0.58, green: 0.62, blue: 0.78, alpha: 1)
+        tempLabel.font = UIFont(name: "Avenir Next Regular", size: 13)
+        tempLabel.adjustsFontSizeToFitWidth = true
+        tempLabel.textAlignment = .right
+        tempLabel.text = "The score is not tracked by NinjaDAOs."
+        self.addSubview(tempLabel)
+        return tempLabel
+    }()
+    
     lazy var avgPerformaceLabelView : LabelAndLabelInterView = {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
         tempLabelView.leftLabel.text = "Avg Performace"
         self.addSubview(tempLabelView)
         return tempLabelView
     }()
+    
+    
+    lazy var avgReturnLabelView : LabelAndLabelInterView = {
+        let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
+        tempLabelView.leftLabel.text = "Avg Return"
+        self.addSubview(tempLabelView)
+        return tempLabelView
+    }()
+    
     lazy var totalPlayTimeLabelView : LabelAndLabelInterView = {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
         tempLabelView.leftLabel.text = "Total Play Time"
         self.addSubview(tempLabelView)
         return tempLabelView
     }()
+    
 
     lazy var availableLabelView : LabelAndLabelInterView = {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)

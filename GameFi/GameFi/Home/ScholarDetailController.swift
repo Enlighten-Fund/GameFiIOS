@@ -55,7 +55,7 @@ class ScholarDetailController: ViewController {
     lazy var tableView: UITableView? = {
         let tempTableView = UITableView.init(frame: CGRect.zero, style: .plain)
         tempTableView.backgroundColor = self.view.backgroundColor
-        let headerView = ScholarDetailHeaderView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 365))
+        let headerView = ScholarDetailHeaderView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 400))
         self.headerView = headerView
         tempTableView.tableHeaderView = headerView
         tempTableView.separatorStyle = .none
