@@ -251,8 +251,8 @@ class EditScholarshipController: ViewController {
             return false
         }else{
             let percent : Float = Float(self.managerPercentTextField!.text!)!
-            if percent < 0.00 || percent > 95.00 {
-                self.showNoticeLabel(notice: "Manager Percentage must be a number from 0 to 95")
+            if percent < 0.00 || percent > 100 - (UserManager.sharedInstance.userinfoModel?.platform_fee)! {
+                self.showNoticeLabel(notice: "Manager Percentage must be a number from 0 to \((UserManager.sharedInstance.userinfoModel?.platform_fee)!)")
                 self.updateTextField(textField: self.managerPercentTextField!, focus: true)
                 return false
             }else{
@@ -325,7 +325,7 @@ extension  EditScholarshipController : UITableViewDelegate,UITableViewDataSource
             self.valifyEmail()
         }else if textField == self.managerPercentTextField{
             if self.valifyPercentage(){
-                let str = String(format: "%.2f", 95 - Float(textField.text!)!)
+                let str = String(format: "%.2f", 100 - (UserManager.sharedInstance.userinfoModel?.platform_fee)! - Float(textField.text!)!)
                 self.scholarpercentageLabel!.text = "\(str)%    "
             }
         }else if textField == self.passwordTextField{

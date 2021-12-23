@@ -460,11 +460,25 @@ class DataManager: NSObject {
         }
     }
     
+    
     //edit scholarship
     func editScholarShip(dic:[String: Any], completeBlock: @escaping CompleteBlock) {
         let dicParam = NSMutableDictionary.init()
         dicParam.addEntries(from: dic)
         self.POST(url: "scholarship/update_info_by_id", param: dicParam as! [String : Any]) { result, reponse in
+            if result.success!{
+                completeBlock(result,reponse)
+            }else{
+                completeBlock(result,reponse)
+            }
+        }
+    }
+    
+    //create staking scholarship
+    func createStakingScholarShip(dic:[String: Any], completeBlock: @escaping CompleteBlock) {
+        let dicParam = NSMutableDictionary.init()
+        dicParam.addEntries(from: dic)
+        self.POST(url: "scholarship/staking/create", param: dicParam as! [String : Any]) { result, reponse in
             if result.success!{
                 completeBlock(result,reponse)
             }else{

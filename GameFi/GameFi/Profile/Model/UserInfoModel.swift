@@ -31,5 +31,6 @@ class UserInfoModel: BaseModel {
     var id_num : String?
     var dob : String?
     var email : String?
+    var platform_fee : Float?
     required init() {}
 }

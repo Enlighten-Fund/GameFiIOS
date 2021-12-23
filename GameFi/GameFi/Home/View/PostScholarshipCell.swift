@@ -44,6 +44,14 @@ class PostScholarshipCell: TableViewCell {
         }
     }
     
+    func update(isDeposit: Bool){
+        if UserManager.sharedInstance.userinfoModel?.platform_fee != nil{
+            self.rightLabel1.text = "\(UserManager.sharedInstance.userinfoModel!.platform_fee!)%"
+            self.rightLabel.text = "\(100 - 50 - UserManager.sharedInstance.userinfoModel!.platform_fee!)%"
+        }
+       
+    }
+    
     lazy var bgView : UIView = {
         let tempView = UIView.init(frame: CGRect.zero)
         tempView.backgroundColor = UIColor(red: 0.19, green: 0.21, blue: 0.29, alpha: 1)
@@ -86,7 +94,7 @@ class PostScholarshipCell: TableViewCell {
         tempLabel.textAlignment = .right
         tempLabel.backgroundColor = UIColor(red: 0.19, green: 0.21, blue: 0.29, alpha: 1)
         tempLabel.font = UIFont(name: "Avenir Next Regular", size: 15)
-        tempLabel.text = "5%"
+        tempLabel.text = "\(UserManager.sharedInstance.userinfoModel?.platform_fee)%"
         self.contentView.addSubview(tempLabel)
         return tempLabel
     }()

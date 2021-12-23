@@ -18,6 +18,8 @@ class AddScholarshipController: ViewController {
     var managerPercentTextField : UITextField?
     var offerDaysTextField : UITextField?
     var scholarpercentageLabel : UILabel?
+    var depositView : DepositView?
+    var isDeposit : Bool?
     var addScholarBlock:CommonEmptyBlock?
     var isFromHome : Bool? // marketplace
     init(isFromHome : Bool) {
@@ -45,6 +47,7 @@ class AddScholarshipController: ViewController {
             make.right.equalToSuperview()
         }
         self.noticeLabel?.isHidden = true
+        isDeposit = true
     }
     
     
@@ -73,16 +76,89 @@ class AddScholarshipController: ViewController {
         }
     }
     
+    @objc func depositSwitchClick(aswitch:UISwitch) {
+        self.isDeposit = aswitch.isOn
+        self.tableView?.reloadRows(at: [IndexPath.init(row: 4, section: 0),IndexPath.init(row: 5, section: 0),IndexPath.init(row: 6, section: 0)], with: .none)
+    }
+    
+    
     @objc func cancelBtnClick() {
         if self.isFromHome!{
             self.leftBtnClick()
         }else {
-            self.createScholarship(toStatus: "DRAFT")
+            if self.isDeposit == true{
+                self.createStakingScholarship(toStatus: "DRAFT")
+            }else{
+                self.createScholarship(toStatus: "DRAFT")
+            }
         }
     }
     
     @objc func postBtnBtnClick() {
-        self.createScholarship(toStatus: "LISTING")
+        if self.isDeposit == true{
+            self.createStakingScholarship(toStatus: "LISTING")
+        }else{
+            self.createScholarship(toStatus: "LISTING")
+        }
+    }
+    
+    @objc func createStakingScholarship(toStatus : String){
+        if !self.valifyAccount() {
+            return
+        }
+        if !self.valifyRonin() {
+            return
+        }
+        if !self.valifyEmail() {
+            return
+        }
+        if !self.valifyPassword() {
+            return
+        }
+
+        let dealronin = self.roninTextField?.text!.replacingOccurrences(of: "ronin:", with: "0x")
+        let params = ["scholarship_name" : self.accountNameTextField?.text as Any,
+                      "account_login" : self.emailTextField?.text as Any,
+                      "account_passcode" : self.passwordTextField?.text as Any,
+                      "account_ronin_address":dealronin as Any,
+                      "manager_percentage":50,
+                      "offer_period": -1,
+                      "scholar_percentage":100 - (UserManager.sharedInstance.userinfoModel?.platform_fee)! - 50,
+                      "status": toStatus as Any,
+        ] as [String : Any]
+        self.mc_loading(text: "Loading")
+        DataManager.sharedInstance.createStakingScholarShip(dic: params) { result, reponse in
+            DispatchQueue.main.async { [self] in
+                self.mc_remove()
+                if result.success!{
+                    var msg = ""
+                    if toStatus == "DRAFT" {
+                        msg = "Saved successfully."
+                    }else{
+                        msg = "We will verify your account and notify you with the minimum SLP return by email within 24 hours. "
+                    }
+                    GFAlert.showAlert(titleStr: "Notice:", msgStr: msg, currentVC: self,  cancelStr: "OK", cancelHandler: { action in
+                        DispatchQueue.main.async { [self] in
+                            self.navigationController?.popViewController(animated: true)
+                            if self.addScholarBlock != nil {
+                                self.addScholarBlock!()
+                            }
+                        }
+                    }, otherBtns: nil) { index in
+                       
+                    }
+                   
+                }else{
+                    if !result.msg!.isBlank {
+                        GFAlert.showAlert(titleStr: "Notice:", msgStr: result.msg!, currentVC: self, cancelStr: "OK", cancelHandler: { action in
+                            
+                        }, otherBtns: nil) { index in
+                            
+                        }
+                    }
+                }
+            }
+        }
     }
     
     @objc func createScholarship(toStatus : String){
@@ -111,7 +187,7 @@ class AddScholarshipController: ViewController {
                       "account_ronin_address":dealronin as Any,
                       "manager_percentage":Float(self.managerPercentTextField!.text!)!,
                       "offer_period": Int(self.offerDaysTextField!.text!) as Any,
-                      "scholar_percentage":95 - Float(self.managerPercentTextField!.text!)!,
+                      "scholar_percentage":100 - (UserManager.sharedInstance.userinfoModel?.platform_fee)! - Float(self.managerPercentTextField!.text!)!,
                       "status": toStatus as Any,
         ] as [String : Any]
         self.mc_loading(text: "Loading")
@@ -251,15 +327,21 @@ class AddScholarshipController: ViewController {
             self.updateTextField(textField: self.managerPercentTextField!, focus: true)
             return false
         }else{
-            let percent : Float = Float(self.managerPercentTextField!.text!)!
-            if percent < 0.00 || percent > 95.00 {
-                self.showNoticeLabel(notice: "Manager Percentage must be a number from 0 to 95")
+            if Float(self.managerPercentTextField!.text!) != nil{
+                let percent : Float = Float(self.managerPercentTextField!.text!)!
+                if percent < 0.00 || percent > 100 - (UserManager.sharedInstance.userinfoModel?.platform_fee)! {
+                    self.showNoticeLabel(notice: "Manager Percentage must be a number from 0 to \(100 - (UserManager.sharedInstance.userinfoModel?.platform_fee)!)")
+                    self.updateTextField(textField: self.managerPercentTextField!, focus: true)
+                    return false
+                }else{
+                    self.hideNoticeLabel()
+                    self.updateTextField(textField: self.managerPercentTextField!, focus: false)
+                    return true
+                }
+            }else{
+                self.showNoticeLabel(notice: "Manager Percentage must be a number from 0 to \(100 - (UserManager.sharedInstance.userinfoModel?.platform_fee)!)")
                 self.updateTextField(textField: self.managerPercentTextField!, focus: true)
                 return false
-            }else{
-                self.hideNoticeLabel()
-                self.updateTextField(textField: self.managerPercentTextField!, focus: false)
-                return true
             }
         }
     }
@@ -290,6 +372,10 @@ class AddScholarshipController: ViewController {
         tempTableView.dataSource = self
         tempTableView.delegate = self
         tempTableView.backgroundColor = self.view.backgroundColor
+        let tdepostiView = DepositView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 40))
+        self.depositView = tdepostiView
+        tdepostiView.depositSwitch.addTarget(self, action: #selector(depositSwitchClick), for: .touchUpInside)
+        tempTableView.tableHeaderView = tdepostiView
         view.addSubview(tempTableView)
         return tempTableView
     }()
@@ -331,7 +417,7 @@ extension  AddScholarshipController : UITableViewDelegate,UITableViewDataSource,
             self.valifyEmail()
         }else if textField == self.managerPercentTextField{
             if self.valifyPercentage(){
-                let str = String(format: "%.2f", 95 - Float(textField.text!)!)
+                let str = String(format: "%.2f", 100 - (UserManager.sharedInstance.userinfoModel?.platform_fee)! - Float(textField.text!)!)
                 self.scholarpercentageLabel!.text = "\(str)%    "
             }
         }else if textField == self.passwordTextField{
@@ -388,6 +474,14 @@ extension  AddScholarshipController : UITableViewDelegate,UITableViewDataSource,
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Offer period", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.offerDaysTextField = tempCell.textFild
         self.offerDaysTextField?.keyboardType = .numberPad
+        if self.isDeposit == true {
+            self.offerDaysTextField!.isEnabled = false
+            self.offerDaysTextField?.backgroundColor = .gray
+            self.offerDaysTextField?.text = "Offer period:on going"
+        }else{
+            self.offerDaysTextField!.isEnabled = true
+            self.offerDaysTextField?.backgroundColor = UIColor(red: 0.11, green: 0.12, blue: 0.18, alpha: 1)
+        }
         cell = tempCell
     case 5:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "5", for: indexPath) as! LabelTextFildCell
@@ -395,10 +489,19 @@ extension  AddScholarshipController : UITableViewDelegate,UITableViewDataSource,
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Manager percentage", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.managerPercentTextField = tempCell.textFild
         tempCell.textFild?.keyboardType = .numberPad
+        if self.isDeposit == true {
+            self.managerPercentTextField!.isEnabled = false
+            self.managerPercentTextField?.backgroundColor = .gray
+            self.managerPercentTextField?.text = "Manager percentage:50%"
+        }else{
+            self.managerPercentTextField!.isEnabled = true
+            self.managerPercentTextField?.backgroundColor = UIColor(red: 0.11, green: 0.12, blue: 0.18, alpha: 1)
+        }
         cell = tempCell
     case 6:
         let tempCell : PostScholarshipCell = tableView.dequeueReusableCell(withIdentifier: postScholarshipCellIdentifier + "6", for: indexPath) as! PostScholarshipCell
         self.scholarpercentageLabel = tempCell.rightLabel
+        tempCell.update(isDeposit: self.isDeposit!)
         cell = tempCell
     default:
         cell = tableView.dequeueReusableCell(withIdentifier: emptyTableViewCellIdentifier, for: indexPath)
