@@ -18,6 +18,7 @@ class AxieAbilityModel: BaseModel {
     var expectType : String?
     var triggerText : String?
     var description : String?
+    var iconId : String?
     required init() {}
 }
 

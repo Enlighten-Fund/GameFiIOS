@@ -95,46 +95,78 @@ class AbilityView: UIView{
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.clipsToBounds = true
+        self.partImgView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.left.equalToSuperview().offset(30)
+            make.width.equalTo(30)
+            make.height.equalTo(30)
+        }
         self.titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(10)
-            make.left.equalToSuperview()
+            make.centerY.equalTo(self.partImgView.snp.centerY)
+            make.left.equalTo(self.partImgView.snp.right)
             make.right.equalToSuperview()
             make.height.equalTo(25)
         }
-        self.abilityBgView.snp.makeConstraints { make in
-            make.top.equalTo(self.titleLabel.snp.bottom)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-            make.height.equalTo(225)
-        }
-        self.nameLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.abilityBgView.snp.top).offset(15)
+        self.abilityImgView.snp.makeConstraints { make in
+            make.top.equalTo(self.titleLabel.snp.bottom).offset(10)
             make.left.equalToSuperview().offset(10)
             make.right.equalToSuperview()
+            make.height.equalTo((screenWidth - 70) / 2.0 * (311 / 233.0))
+        }
+        self.energyLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.abilityImgView.snp.top).offset(3)
+            make.left.equalToSuperview().offset(13)
+            make.width.equalTo(35)
+            make.height.equalTo(35)
+        }
+        self.nameLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(self.energyLabel.snp.centerY).offset(2)
+            make.left.equalTo(self.energyLabel.snp.right).offset(6)
+            make.right.equalToSuperview()
             make.height.equalTo(20)
         }
-        self.energyLabelView.snp.makeConstraints { make in
-            make.left.equalTo(self.abilityBgView.snp.left).offset(10)
-            make.top.equalTo(nameLabel.snp.bottom)
-            make.right.equalToSuperview().offset(-10)
-            make.height.equalTo(20)
+        self.attactBgImgView.snp.makeConstraints { make in
+            make.top.equalTo(self.energyLabel.snp.bottom).offset(15)
+            make.left.equalToSuperview()
+            make.width.equalTo(30)
+            make.height.equalTo(35)
         }
-        self.attackLabelView.snp.makeConstraints { make in
-            make.left.equalTo(self.abilityBgView.snp.left).offset(10)
-            make.top.equalTo(energyLabelView.snp.bottom)
-            make.right.equalToSuperview().offset(-10)
-            make.height.equalTo(20)
+        self.attactImgView.snp.makeConstraints { make in
+            make.center.equalTo(self.attactBgImgView)
+            make.width.equalTo(20)
+            make.height.equalTo(25)
         }
-        self.defenceLabelView.snp.makeConstraints { make in
-            make.left.equalTo(self.abilityBgView.snp.left).offset(10)
-            make.top.equalTo(attackLabelView.snp.bottom)
-            make.right.equalToSuperview().offset(-10)
-            make.height.equalTo(20)
+        self.attackLabel.snp.makeConstraints { make in
+            make.center.equalTo(self.attactBgImgView)
+            make.width.equalTo(20)
+            make.height.equalTo(25)
+        }
+        self.defenceBgImgView.snp.makeConstraints { make in
+            make.top.equalTo(self.attactBgImgView.snp.bottom)
+            make.left.equalToSuperview()
+            make.width.equalTo(30)
+            make.height.equalTo(35)
+        }
+        self.defenceImgView.snp.makeConstraints { make in
+            make.center.equalTo(self.defenceBgImgView)
+            make.width.equalTo(20)
+            make.height.equalTo(25)
+        }
+        self.defLabel.snp.makeConstraints { make in
+            make.center.equalTo(self.defenceBgImgView)
+            make.width.equalTo(20)
+            make.height.equalTo(25)
+        }
+        self.cardImgView.snp.makeConstraints { make in
+            make.bottom.equalTo(self.abilityImgView.snp.bottom).offset(-30)
+            make.left.equalToSuperview().offset(16)
+            make.width.equalTo(15)
+            make.height.equalTo(15)
         }
         self.descLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(8)
-            make.top.equalTo(defenceLabelView.snp.bottom).offset(5)
-            make.right.equalToSuperview().offset(-8)
+            make.centerY.equalTo(self.cardImgView)
+            make.left.equalTo(self.cardImgView.snp.right)
+            make.right.equalTo(self.abilityImgView)
             make.height.equalTo(80)
         }
     }
@@ -144,79 +176,116 @@ class AbilityView: UIView{
     }
     
     func update(abilityModel:AxieAbilityModel) {
+        let partIconName = "\(abilityModel.id!.components(separatedBy: "-")[0])-\(abilityModel.id!.components(separatedBy: "-")[1])"
+        self.partImgView.image = UIImage.init(named:partIconName)
         if abilityModel.partName != nil {
             self.titleLabel.text = abilityModel.partName
         }
-        if abilityModel.skillName != nil {
-            self.nameLabel.text = abilityModel.skillName
+        self.abilityImgView.kf.setImage(with: URL.init(string: "https://storage.googleapis.com/axie-cdn/game/cards/base/\(abilityModel.id!).png"), placeholder:  UIImage.init(named: "portrait"), options: nil) {result, error in
+            
         }
-        if abilityModel.defaultEnergy != nil {
-            self.energyLabelView.leftLabel.text = "Energy"
-            self.energyLabelView.rightLabel.text = abilityModel.defaultEnergy
+        self.energyLabel.text = abilityModel.defaultEnergy
+        self.nameLabel.text = abilityModel.skillName
+        self.attactBgImgView.image = UIImage.init(named:"bg-\(abilityModel.id!.components(separatedBy: "-")[0])")
+        self.attactImgView.image = UIImage.init(named: "icon-atk")
+        self.attackLabel.text = abilityModel.defaultAttack
+        self.defenceBgImgView.image = UIImage.init(named:"bg-\(abilityModel.id!.components(separatedBy: "-")[0])")
+        self.defenceImgView.image = UIImage.init(named: "icon-def")
+        self.defLabel.text = abilityModel.defaultDefense
+        self.cardImgView.kf.setImage(with: URL.init(string: "https://storage.googleapis.com/axie-cdn/game/cards/effect-icons/\(abilityModel.iconId!).png"), placeholder:  UIImage.init(named: "portrait"), options: nil) {result, error in
+            
         }
-        if abilityModel.defaultAttack != nil {
-            self.attackLabelView.leftLabel.text = "Attack"
-            self.attackLabelView.rightLabel.text = abilityModel.defaultAttack
-        }
-        if abilityModel.defaultDefense != nil {
-            self.defenceLabelView.leftLabel.text = "Defence"
-            self.defenceLabelView.rightLabel.text = abilityModel.defaultDefense
-        }
-        if abilityModel.description != nil {
-            self.descLabel.text = abilityModel.description
-        }
+        self.descLabel.text = abilityModel.description
     }
+    
+    lazy var partImgView : UIImageView = {
+        let temp = UIImageView.init(frame: CGRect.zero)
+        self.addSubview(temp)
+        return temp
+    }()
     
     lazy var titleLabel : UILabel = {
         let tempLabel = UILabel.init(frame: CGRect.zero)
         tempLabel.font = UIFont(name: "Avenir Next Bold", size: 12.2)
         tempLabel.textColor = UIColor(red: 0.58, green: 0.62, blue: 0.78, alpha: 1)
-        tempLabel.textAlignment = .center
+        tempLabel.textAlignment = .left
+        tempLabel.adjustsFontSizeToFitWidth = true
         self.addSubview(tempLabel)
         return tempLabel
     }()
-    lazy var abilityBgView : UIView = {
-        let tempView = UIView.init(frame: CGRect.zero)
-        tempView.backgroundColor = UIColor(red: 0.19, green: 0.21, blue: 0.29, alpha: 1)
-        tempView.layer.cornerRadius = 6
-        tempView.layer.masksToBounds = true
+    lazy var abilityImgView : UIImageView = {
+        let tempView = UIImageView.init(frame: CGRect.zero)
         self.addSubview(tempView)
         return tempView
+    }()
+    lazy var energyLabel : UILabel = {
+        let tempLabel = UILabel.init(frame: CGRect.zero)
+        tempLabel.font = UIFont.boldSystemFont(ofSize: 25)
+        tempLabel.textColor = .white
+        tempLabel.textAlignment = .center
+        tempLabel.backgroundColor = .clear
+        tempLabel.adjustsFontSizeToFitWidth = true
+        self.addSubview(tempLabel)
+        return tempLabel
     }()
     lazy var nameLabel : UILabel = {
         let tempLabel = UILabel.init(frame: CGRect.zero)
         tempLabel.font = UIFont(name: "Avenir Next Medium", size: 12)
         tempLabel.textColor = .white
+        tempLabel.textAlignment = .left
+        tempLabel.adjustsFontSizeToFitWidth = true
+        self.addSubview(tempLabel)
+        return tempLabel
+    }()
+    lazy var attactBgImgView : UIImageView = {
+        let tempView = UIImageView.init(frame: CGRect.zero)
+        self.addSubview(tempView)
+        return tempView
+    }()
+    lazy var attactImgView : UIImageView = {
+        let tempView = UIImageView.init(frame: CGRect.zero)
+        self.addSubview(tempView)
+        return tempView
+    }()
+    lazy var attackLabel : UILabel = {
+        let tempLabel = UILabel.init(frame: CGRect.zero)
+        tempLabel.font = UIFont.boldSystemFont(ofSize: 17)
+        tempLabel.textColor = .white
+        tempLabel.adjustsFontSizeToFitWidth = true
         tempLabel.textAlignment = .center
         self.addSubview(tempLabel)
         return tempLabel
     }()
-    lazy var energyLabelView : AbilityLabelView = {
-        let tempLabelView = AbilityLabelView.init(frame: CGRect.zero)
-        tempLabelView.leftLabel.text = "Energy"
-        self.addSubview(tempLabelView)
-        return tempLabelView
+    lazy var defenceBgImgView : UIImageView = {
+        let tempView = UIImageView.init(frame: CGRect.zero)
+        self.addSubview(tempView)
+        return tempView
     }()
-    lazy var attackLabelView : AbilityLabelView = {
-        let tempLabelView = AbilityLabelView.init(frame: CGRect.zero)
-        tempLabelView.leftLabel.text = "Attack"
-        self.addSubview(tempLabelView)
-        return tempLabelView
+    lazy var defenceImgView : UIImageView = {
+        let tempView = UIImageView.init(frame: CGRect.zero)
+        self.addSubview(tempView)
+        return tempView
     }()
-    lazy var defenceLabelView : AbilityLabelView = {
-        let tempLabelView = AbilityLabelView.init(frame: CGRect.zero)
-        tempLabelView.leftLabel.text = "Defence"
-        self.addSubview(tempLabelView)
-        return tempLabelView
+    lazy var defLabel : UILabel = {
+        let tempLabel = UILabel.init(frame: CGRect.zero)
+        tempLabel.font = UIFont.boldSystemFont(ofSize: 17)
+        tempLabel.textColor = .white
+        tempLabel.adjustsFontSizeToFitWidth = true
+        tempLabel.textAlignment = .center
+        self.addSubview(tempLabel)
+        return tempLabel
+    }()
+    lazy var cardImgView : UIImageView = {
+        let tempView = UIImageView.init(frame: CGRect.zero)
+        self.addSubview(tempView)
+        return tempView
     }()
     lazy var descLabel : UILabel = {
         let tempLabel = UILabel.init(frame: CGRect.zero)
         tempLabel.font = UIFont(name: "Avenir Next Regular", size: 11)
-        tempLabel.textColor = UIColor(red: 0.58, green: 0.62, blue: 0.78, alpha: 1)
-        tempLabel.backgroundColor = UIColor(red: 0.14, green: 0.15, blue: 0.21, alpha: 1)
-        tempLabel.layer.cornerRadius = 6
-        tempLabel.layer.masksToBounds = true
+        tempLabel.textColor = .white
         tempLabel.numberOfLines = 0
+        tempLabel.adjustsFontSizeToFitWidth = true
         self.addSubview(tempLabel)
         return tempLabel
     }()
@@ -309,25 +378,25 @@ class ScholarshipDetailCell: TableViewCell {
         self.abilityBack.snp.makeConstraints { make in
             make.top.equalTo(self.abilityLabel.snp.bottom)
             make.left.equalToSuperview().offset(15)
-            make.height.equalTo(225)
+            make.height.equalTo((screenWidth - 70) / 2.0 * (311 / 233.0) + 50)
             make.width.equalTo((screenWidth - 70) / 2.0)
         }
         self.abilityMouth.snp.makeConstraints { make in
             make.top.equalTo(self.abilityLabel.snp.bottom)
             make.right.equalToSuperview().offset(-15)
-            make.height.equalTo(225)
+            make.height.equalTo((screenWidth - 70) / 2.0 * (311 / 233.0) + 50)
             make.width.equalTo((screenWidth - 70) / 2.0)
         }
         self.abilityHorn.snp.makeConstraints { make in
             make.top.equalTo(self.abilityBack.snp.bottom).offset(10)
             make.left.equalToSuperview().offset(15)
-            make.height.equalTo(225)
+            make.height.equalTo((screenWidth - 70) / 2.0 * (311 / 233.0) + 50)
             make.width.equalTo((screenWidth - 70) / 2.0)
         }
         self.abilityTail.snp.makeConstraints { make in
             make.top.equalTo(self.abilityMouth.snp.bottom).offset(10)
             make.right.equalToSuperview().offset(-15)
-            make.height.equalTo(225)
+            make.height.equalTo((screenWidth - 70) / 2.0 * (311 / 233.0) + 50)
             make.width.equalTo((screenWidth - 70) / 2.0)
         }
     }

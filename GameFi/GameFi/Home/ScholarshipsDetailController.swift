@@ -239,7 +239,7 @@ extension  ScholarshipsDetailController : UITableViewDelegate,UITableViewDataSou
     }
         
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 850
+        return 880
     }
         
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
