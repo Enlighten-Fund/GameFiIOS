@@ -63,16 +63,38 @@ class NoOfferScholarshipController: UIViewController {
     @objc func postScholarship(btn:UIButton) {
         if btn.tag - 20000 < self.dataSource!.count {
             let scholarshipModel : ScholarshipModel = self.dataSource![btn.tag - 20000] as! ScholarshipModel
-            self.mc_loading(text: "Loading")
-            DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: scholarshipModel.scholarship_id!, status: "LISTING") { result, reponse in
-                DispatchQueue.main.async { [self] in
-                    self.mc_remove()
-                    if result.success!{
-                        self.mc_success("Finished! Under review.")
-                        self.collectionView.mj_header?.beginRefreshing()
-                    }else{
-                        if  result.msg != nil && !result.msg!.isBlank {
-                            self.mc_success(result.msg!)
+            if scholarshipModel.staking == true{
+                self.mc_loading(text: "Loading")
+                DataManager.sharedInstance.editStakingScholarShip(dic: ["id":Int(scholarshipModel.scholarship_id!) as Any,"status":"LISTING"]){ result, reponse in
+                    DispatchQueue.main.async { [self] in
+                        self.mc_remove()
+                        if result.success!{
+                            GFAlert.showAlert(titleStr: "Notice:", msgStr: "We will verify your account and notify you with the minimum SLP return by email within 24 hours. ", currentVC: self,  cancelStr: "OK", cancelHandler: { action in
+                                DispatchQueue.main.async { [self] in
+                                    self.collectionView.mj_header?.beginRefreshing()
+                                }
+                            }, otherBtns: nil) { index in
+                               
+                            }
+                        }else{
+                            if  result.msg != nil && !result.msg!.isBlank {
+                                self.mc_success(result.msg!)
+                            }
+                        }
+                    }
+                }
+            }else{
+                self.mc_loading(text: "Loading")
+                DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: scholarshipModel.scholarship_id!, status: "LISTING") { result, reponse in
+                    DispatchQueue.main.async { [self] in
+                        self.mc_remove()
+                        if result.success!{
+                            self.mc_success("Finished! Under review.")
+                            self.collectionView.mj_header?.beginRefreshing()
+                        }else{
+                            if  result.msg != nil && !result.msg!.isBlank {
+                                self.mc_success(result.msg!)
+                            }
                         }
                     }
                 }
@@ -84,43 +106,84 @@ class NoOfferScholarshipController: UIViewController {
     @objc func recallScholarship(btn:UIButton) {
         if btn.tag - 30000 < self.dataSource!.count {
             let scholarshipModel : ScholarshipModel = self.dataSource![btn.tag - 30000] as! ScholarshipModel
-            if scholarshipModel.status == "AUDIT"{
-                GFAlert.showAlert(titleStr: "Notice:", msgStr: "If you recall the scholarship, the verification process will be terminated.", currentVC: self, cancelStr: "Cancel", cancelHandler: { alertAction in
-                    
-                }, otherBtns: ["OK"]) { index in
-                    self.mc_loading(text: "Loading")
-                    DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: scholarshipModel.scholarship_id!, status: "DRAFT") { result, reponse in
-                        DispatchQueue.main.async { [self] in
-                            self.mc_remove()
-                            if result.success!{
-                                self.collectionView.mj_header?.beginRefreshing()
-                            }else{
-                                if  result.msg != nil && !result.msg!.isBlank {
-                                    self.mc_success(result.msg!)
+            if scholarshipModel.staking == true{
+                if scholarshipModel.status == "AUDIT"{
+                    GFAlert.showAlert(titleStr: "Notice:", msgStr: "If you recall the scholarship, the verification process will be terminated.", currentVC: self, cancelStr: "Cancel", cancelHandler: { alertAction in
+                        
+                    }, otherBtns: ["OK"]) { index in
+                        self.mc_loading(text: "Loading")
+                        DataManager.sharedInstance.editStakingScholarShip(dic: ["id":Int(scholarshipModel.scholarship_id!) as Any,"status":"DRAFT"]) { result, reponse in
+                            DispatchQueue.main.async { [self] in
+                                self.mc_remove()
+                                if result.success!{
+                                    self.collectionView.mj_header?.beginRefreshing()
+                                }else{
+                                    if  result.msg != nil && !result.msg!.isBlank {
+                                        self.mc_success(result.msg!)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }else if scholarshipModel.status == "LISTING"{
+                    GFAlert.showAlert(titleStr: "Notice:", msgStr: "If you recall the scholarship, the application you received will expire.", currentVC: self, cancelStr: "Cancel", cancelHandler: { alertAction in
+                        
+                    }, otherBtns: ["OK"]) { index in
+                        self.mc_loading(text: "Loading")
+                        DataManager.sharedInstance.editStakingScholarShip(dic: ["id":Int(scholarshipModel.scholarship_id!) as Any,"status":"DRAFT"]) { result, reponse in
+                            DispatchQueue.main.async { [self] in
+                                self.mc_remove()
+                                if result.success!{
+                                    self.collectionView.mj_header?.beginRefreshing()
+                                }else{
+                                    if  result.msg != nil && !result.msg!.isBlank {
+                                        self.mc_success(result.msg!)
+                                    }
                                 }
                             }
                         }
                     }
                 }
-            }else if scholarshipModel.status == "LISTING"{
-                GFAlert.showAlert(titleStr: "Notice:", msgStr: "If you recall the scholarship, the application you received will expire.", currentVC: self, cancelStr: "Cancel", cancelHandler: { alertAction in
-                    
-                }, otherBtns: ["OK"]) { index in
-                    self.mc_loading(text: "Loading")
-                    DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: scholarshipModel.scholarship_id!, status: "DRAFT") { result, reponse in
-                        DispatchQueue.main.async { [self] in
-                            self.mc_remove()
-                            if result.success!{
-                                self.collectionView.mj_header?.beginRefreshing()
-                            }else{
-                                if  result.msg != nil && !result.msg!.isBlank {
-                                    self.mc_success(result.msg!)
+            }else{
+                if scholarshipModel.status == "AUDIT"{
+                    GFAlert.showAlert(titleStr: "Notice:", msgStr: "If you recall the scholarship, the verification process will be terminated.", currentVC: self, cancelStr: "Cancel", cancelHandler: { alertAction in
+                        
+                    }, otherBtns: ["OK"]) { index in
+                        self.mc_loading(text: "Loading")
+                        DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: scholarshipModel.scholarship_id!, status: "DRAFT") { result, reponse in
+                            DispatchQueue.main.async { [self] in
+                                self.mc_remove()
+                                if result.success!{
+                                    self.collectionView.mj_header?.beginRefreshing()
+                                }else{
+                                    if  result.msg != nil && !result.msg!.isBlank {
+                                        self.mc_success(result.msg!)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }else if scholarshipModel.status == "LISTING"{
+                    GFAlert.showAlert(titleStr: "Notice:", msgStr: "If you recall the scholarship, the application you received will expire.", currentVC: self, cancelStr: "Cancel", cancelHandler: { alertAction in
+                        
+                    }, otherBtns: ["OK"]) { index in
+                        self.mc_loading(text: "Loading")
+                        DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: scholarshipModel.scholarship_id!, status: "DRAFT") { result, reponse in
+                            DispatchQueue.main.async { [self] in
+                                self.mc_remove()
+                                if result.success!{
+                                    self.collectionView.mj_header?.beginRefreshing()
+                                }else{
+                                    if  result.msg != nil && !result.msg!.isBlank {
+                                        self.mc_success(result.msg!)
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
+
         }
         
     }

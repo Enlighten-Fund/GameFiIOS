@@ -58,6 +58,7 @@ class ScholarshipModel: BaseModel {
     var account_mmr : String?
     var end_timestamp : String?
     var is_evergreen:Int?
+    var staking:Bool?
     required init() {}
 }
 

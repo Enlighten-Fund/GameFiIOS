@@ -326,20 +326,8 @@ class DataManager: NSObject {
     func fetchManagerOfferingScholarShip(pageIndex:Int, completeBlock: @escaping CompleteBlock) {
         let dic = ["page_index" : pageIndex,"page_size" : 20] as [String : Any]
         self.POST(url: "scholarship/list_by_manager_offering", param: dic) { result, reponse in
-//            let path = Bundle.main.path(forResource: "managerscholarshiplist", ofType: "json")
-//            let url = URL(fileURLWithPath: path!)
-//                do {
-//                        let data = try Data(contentsOf: url)
-//                        let jsonData:Any = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
-//                    let jsonDic : Dictionary = jsonData as! Dictionary<String, Any>
-//                    let scholarshipListModel : scholarshipListModel = JsonUtil.jsonToModel(jsonDic["data"] as! String, scholarshipListModel.self) as! scholarshipListModel
-//                        completeBlock(result,scholarshipListModel)
-//                } catch let error as Error? {
-//                        print("读取本地数据出现错误!",error)
-//                }
-            
             if result.success!{
-                let scholarshipListModel : ScholarshipListModel = JsonUtil.jsonToModel(reponse as! String, ScholarshipListModel.self) as! ScholarshipListModel
+                let scholarshipListModel : ScholarshipListModel = JsonUtil.dictionaryToModel(reponse as! [String : Any], ScholarshipListModel.self) as! ScholarshipListModel
                 completeBlock(result,scholarshipListModel)
             }else{
                 completeBlock(result,reponse)
@@ -351,20 +339,8 @@ class DataManager: NSObject {
     func fetchManagerNoOfferScholarShip(pageIndex:Int, completeBlock: @escaping CompleteBlock) {
         let dic = ["page_index" : pageIndex,"page_size" : 20] as [String : Any]
         self.POST(url: "scholarship/list_by_manager_not_offered", param: dic) { result, reponse in
-//            let path = Bundle.main.path(forResource: "managerscholarshiplist", ofType: "json")
-//            let url = URL(fileURLWithPath: path!)
-//                do {
-//                        let data = try Data(contentsOf: url)
-//                        let jsonData:Any = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
-//                    let jsonDic : Dictionary = jsonData as! Dictionary<String, Any>
-//                    let scholarshipListModel : scholarshipListModel = JsonUtil.jsonToModel(jsonDic["data"] as! String, scholarshipListModel.self) as! scholarshipListModel
-//                        completeBlock(result,scholarshipListModel)
-//                } catch let error as Error? {
-//                        print("读取本地数据出现错误!",error)
-//                }
-//
             if result.success!{
-                let scholarshipListModel : ScholarshipListModel = JsonUtil.jsonToModel(reponse as! String, ScholarshipListModel.self) as! ScholarshipListModel
+                let scholarshipListModel : ScholarshipListModel = JsonUtil.dictionaryToModel(reponse as! [String : Any], ScholarshipListModel.self) as! ScholarshipListModel
                 completeBlock(result,scholarshipListModel)
             }else{
                 completeBlock(result,reponse)
@@ -491,6 +467,31 @@ class DataManager: NSObject {
     func updateScholarshipStatus(scholarshipid:String, status: String , completeBlock: @escaping CompleteBlock) {
         let dic = ["id" : Int(scholarshipid)!,"status" : status] as [String : Any]
         self.POST(url: "scholarship/update_status_by_id", param: dic ) { result, reponse in
+            if result.success!{
+                completeBlock(result,reponse)
+            }else{
+                completeBlock(result,reponse)
+            }
+        }
+    }
+    
+    //edit staking scholarship
+    func editStakingScholarShip(dic:[String: Any], completeBlock: @escaping CompleteBlock) {
+        let dicParam = NSMutableDictionary.init()
+        dicParam.addEntries(from: dic)
+        self.POST(url: "scholarship/staking/update", param: dicParam as! [String : Any]) { result, reponse in
+            if result.success!{
+                completeBlock(result,reponse)
+            }else{
+                completeBlock(result,reponse)
+            }
+        }
+    }
+    
+    //stop staking scholarship status
+    func stopStakingScholarship(scholarshipid:String,completeBlock: @escaping CompleteBlock) {
+        let dic = ["id" : Int(scholarshipid)!] as [String : Any]
+        self.POST(url: "scholarship/staking/stop", param: dic ) { result, reponse in
             if result.success!{
                 completeBlock(result,reponse)
             }else{

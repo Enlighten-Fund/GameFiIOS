@@ -21,9 +21,17 @@ class EditScholarshipController: ViewController {
     var scholarpercentageLabel : UILabel?
     var scholarshipModel : ScholarshipModel?
     var editScholarBlock:CommonEmptyBlock?
+    var depositView : DepositView?
+    var isDeposit : Bool?
     init(scholarshipModel:ScholarshipModel) {
         super.init(nibName: nil, bundle: nil)
         self.scholarshipModel = scholarshipModel
+        if self.scholarshipModel?.staking == nil || self.scholarshipModel?.staking == false{
+            self.isDeposit = false
+        }else{
+            self.isDeposit = true
+        }
+        
     }
     
     required init?(coder: NSCoder) {
@@ -32,7 +40,7 @@ class EditScholarshipController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Post my scholarship"
+        self.title = "Edit my scholarship"
         self.tableView!.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(50)
             make.bottom.equalToSuperview().offset(0)
@@ -58,6 +66,11 @@ class EditScholarshipController: ViewController {
         }
     }
     
+    @objc func depositSwitchClick(aswitch:UISwitch) {
+        self.isDeposit = aswitch.isOn
+        self.tableView?.reloadRows(at: [IndexPath.init(row: 4, section: 0),IndexPath.init(row: 5, section: 0),IndexPath.init(row: 6, section: 0)], with: .none)
+    }
+    
     func showNoticeLabel(notice:String){
         DispatchQueue.main.async {
             self.noticeLabel?.text = notice
@@ -74,14 +87,75 @@ class EditScholarshipController: ViewController {
     }
     
     @objc func cancelBtnClick() {
-        self.editScholarship(toStatus: "DRAFT")
-        
+        if self.isDeposit == true{
+            self.editStakingScholarship(toStatus: "DRAFT")
+        }else{
+            self.editScholarship(toStatus: "DRAFT")
+        }
     }
     
     @objc func postBtnClick() {
-        self.editScholarship(toStatus: "LISTING")
+        if self.isDeposit == true{
+            self.editStakingScholarship(toStatus: "LISTING")
+        }else{
+            self.editScholarship(toStatus: "LISTING")
+        }
+       
     }
     
+    
+    @objc func editStakingScholarship(toStatus:String){
+        if !self.valifyAccount() {
+            return
+        }
+        if !self.valifyRonin() {
+            return
+        }
+        if !self.valifyEmail() {
+            return
+        }
+        if !self.valifyPassword() {
+            return
+        }
+        let params = ["scholarship_name" : self.accountNameTextField?.text as Any,
+                      "account_login" : self.emailTextField?.text as Any,
+                      "account_passcode" : self.passwordTextField?.text as Any,
+                      "account_ronin_address":self.roninTextField?.text as Any,
+                      "manager_percentage":50,
+                      "offer_period": -1,
+                      "scholar_percentage":100 - (UserManager.sharedInstance.userinfoModel?.platform_fee)! - 50,
+                      "id":Int(self.scholarshipModel!.scholarship_id!) as Any,
+                      "status": toStatus
+        ] as [String : Any]
+        self.mc_loading(text: "Loading")
+        DataManager.sharedInstance.editStakingScholarShip(dic: params) { result, reponse in
+            DispatchQueue.main.async { [self] in
+                self.mc_remove()
+                if result.success!{
+                    var msg = ""
+                    if toStatus == "DRAFT" {
+                        msg = "Saved successfully."
+                    }else{
+                        msg = "We will verify your account and notify you with the minimum SLP return by email within 24 hours. "
+                    }
+                    GFAlert.showAlert(titleStr: "Notice:", msgStr: msg, currentVC: self,  cancelStr: "OK", cancelHandler: { action in
+                        DispatchQueue.main.async { [self] in
+                            self.navigationController?.popViewController(animated: true)
+                            if editScholarBlock != nil {
+                                editScholarBlock!()
+                            }
+                        }
+                    }, otherBtns: nil) { index in
+                       
+                    }
+                }else{
+                    if  result.msg != nil && !result.msg!.isBlank {
+                        self.mc_success(result.msg!)
+                    }
+                }
+            }
+        }
+    }
     
     @objc func editScholarship(toStatus:String){
         if !self.valifyAccount() {
@@ -284,6 +358,11 @@ class EditScholarshipController: ViewController {
         tempTableView.dataSource = self
         tempTableView.delegate = self
         tempTableView.backgroundColor = self.view.backgroundColor
+        let tdepostiView = DepositView.init(frame: CGRect.init(x: 0, y: 0, width: IPhone_SCREEN_WIDTH, height: 40))
+        self.depositView = tdepostiView
+        tdepostiView.depositSwitch.addTarget(self, action: #selector(depositSwitchClick), for: .touchUpInside)
+        tdepostiView.depositSwitch.isEnabled = false
+        tempTableView.tableHeaderView = tdepostiView
         view.addSubview(tempTableView)
         return tempTableView
     }()
@@ -387,6 +466,14 @@ extension  EditScholarshipController : UITableViewDelegate,UITableViewDataSource
         self.offerDaysTextField = tempCell.textFild
         self.offerDaysTextField?.keyboardType = .numberPad
         self.offerDaysTextField?.text = self.scholarshipModel?.offer_period
+        if self.isDeposit == true {
+            self.offerDaysTextField!.isEnabled = false
+            self.offerDaysTextField?.backgroundColor = .gray
+            self.offerDaysTextField?.text = "Offer period:on going"
+        }else{
+            self.offerDaysTextField!.isEnabled = true
+            self.offerDaysTextField?.backgroundColor = UIColor(red: 0.11, green: 0.12, blue: 0.18, alpha: 1)
+        }
         cell = tempCell
     case 5:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "5", for: indexPath) as! LabelTextFildCell
@@ -394,11 +481,20 @@ extension  EditScholarshipController : UITableViewDelegate,UITableViewDataSource
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Manager percentage", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.managerPercentTextField = tempCell.textFild
         self.managerPercentTextField?.text = self.scholarshipModel?.manager_percentage
+        if self.isDeposit == true {
+            self.managerPercentTextField!.isEnabled = false
+            self.managerPercentTextField?.backgroundColor = .gray
+            self.managerPercentTextField?.text = "Manager percentage:50%"
+        }else{
+            self.managerPercentTextField!.isEnabled = true
+            self.managerPercentTextField?.backgroundColor = UIColor(red: 0.11, green: 0.12, blue: 0.18, alpha: 1)
+        }
         cell = tempCell
     case 6:
         let tempCell : PostScholarshipCell = tableView.dequeueReusableCell(withIdentifier: postScholarshipCellIdentifier + "6", for: indexPath) as! PostScholarshipCell
         self.scholarpercentageLabel = tempCell.rightLabel
         self.scholarpercentageLabel?.text = scholarshipModel?.scholar_percentage
+        tempCell.update(isDeposit: self.isDeposit!)
         cell = tempCell
     default:
         cell = tableView.dequeueReusableCell(withIdentifier: emptyTableViewCellIdentifier, for: indexPath)

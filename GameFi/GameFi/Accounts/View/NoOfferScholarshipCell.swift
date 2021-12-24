@@ -159,7 +159,14 @@ class NoOfferScholarshipCell: UICollectionViewCell {
             self.mmrLabelView.rightLabel.text = scholarshipModel.account_mmr
         }
         if scholarshipModel.offer_period != nil {
-            self.OfferContractLabelView.rightLabel.text = scholarshipModel.offer_period
+            if scholarshipModel.staking == true{
+                self.OfferContractLabelView.rightLabel.text = "On going"
+                self.OfferContractLabelView.rightLabel.textColor = .green
+            }else{
+                self.OfferContractLabelView.rightLabel.text = scholarshipModel.offer_period
+                self.OfferContractLabelView.rightLabel.textColor = .white
+            }
+     
         }
         if scholarshipModel.account_ronin_address != nil {
             self.roninAddressLabelView.rightLabel.text = scholarshipModel.account_ronin_address
