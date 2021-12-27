@@ -160,7 +160,7 @@ class NoOfferScholarshipCell: UICollectionViewCell {
         }
         if scholarshipModel.offer_period != nil {
             if scholarshipModel.staking == true{
-                self.OfferContractLabelView.rightLabel.text = "On going"
+                self.OfferContractLabelView.rightLabel.text = "Ongoing"
                 self.OfferContractLabelView.rightLabel.textColor = .green
             }else{
                 self.OfferContractLabelView.rightLabel.text = scholarshipModel.offer_period

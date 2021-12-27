@@ -217,12 +217,14 @@ class ManagerScholarshipCell: UICollectionViewCell {
         if scholarshipModel.account_passcode != nil {
             self.pwdTextFild!.text = scholarshipModel.account_passcode
         }
+        self.endDateLabelView.rightLabel.textColor = .white
         self.flagImgView.image = UIImage.init(named: "")
         if scholarshipModel.status != nil {
                 if scholarshipModel.status == "ACTIVE" {
                     if scholarshipModel.staking == true{
                         self.flagImgView.image = UIImage.init(named: "auto")
                         self.endDateLabelView.rightLabel.text = "Ongoing"
+                        self.endDateLabelView.rightLabel.textColor = .green
                         self.btn.isHidden = true
                         self.leftBtn.isHidden = false
                         self.rightBtn.isHidden = false

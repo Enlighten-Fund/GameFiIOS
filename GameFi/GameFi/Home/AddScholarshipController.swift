@@ -477,7 +477,7 @@ extension  AddScholarshipController : UITableViewDelegate,UITableViewDataSource,
         if self.isDeposit == true {
             self.offerDaysTextField!.isEnabled = false
             self.offerDaysTextField?.backgroundColor = .gray
-            self.offerDaysTextField?.text = "Offer period:on going"
+            self.offerDaysTextField?.text = "Offer period:Ongoing"
         }else{
             self.offerDaysTextField!.isEnabled = true
             self.offerDaysTextField?.backgroundColor = UIColor(red: 0.11, green: 0.12, blue: 0.18, alpha: 1)
