@@ -58,22 +58,44 @@ class OfferingScholarshipsController: UIViewController {
                 }
                 
             } else if scholarshipModel.status == "PENDING_PAYMENT" {
-                self.mc_loading(text: "Loading")
-                DataManager.sharedInstance.fetchPaymentStatus(scholarshipid: scholarshipModel.scholarship_id!) { result, reponse in
-                    DispatchQueue.main.async { [self] in
-                        self.mc_remove()
-                        if result.success!{
-                            let paymentModel : PaymentModel = reponse as! PaymentModel
-                            let slp : Int = Int(paymentModel.value!)! - Int(paymentModel.paid_value!)!
-                            GFAlert.showAlert(titleStr: "Notice:", msgStr:
-                                                "Please send \(slp) SLP from[\(String(scholarshipModel.account_ronin_address!))]to [our platform ronin address.There is a little delay. If you have already done this，don't do it again.", currentVC: self,cancelStr:"OK", cancelHandler: { alertAction in
-                                
-                            }, otherBtns: nil) { index in
-                                
+                if scholarshipModel.staking == true{
+                    self.mc_loading(text: "Loading")
+                    DataManager.sharedInstance.fetchStakingPayScholarship(scholarshipid: scholarshipModel.scholarship_id!) { result, reponse in
+                        DispatchQueue.main.async { [self] in
+                            self.mc_remove()
+                            if result.success!{
+                                let dic : Dictionary<String,AnyObject> = reponse as! Dictionary<String,AnyObject>
+                                GFAlert.showAlert(titleStr: "Notice:", msgStr:
+                                                    "Please send \(dic["payment"]!) SLP from[\(String(scholarshipModel.myaccount_ronin_address!))]to ronin:8be5173faa7f456466b74447a74f81361c49d135.There is a little delay. If you have already done this，don't do it again.", currentVC: self,cancelStr:"OK", cancelHandler: { alertAction in
+                                    
+                                }, otherBtns: nil) { index in
+                                    
+                                }
+                            }else{
+                                if  result.msg != nil && !result.msg!.isBlank {
+                                    self.mc_success(result.msg!)
+                                }
                             }
-                        }else{
-                            if  result.msg != nil && !result.msg!.isBlank {
-                                self.mc_success(result.msg!)
+                        }
+                    }
+                }else{
+                    self.mc_loading(text: "Loading")
+                    DataManager.sharedInstance.fetchPaymentStatus(scholarshipid: scholarshipModel.scholarship_id!) { result, reponse in
+                        DispatchQueue.main.async { [self] in
+                            self.mc_remove()
+                            if result.success!{
+                                let paymentModel : PaymentModel = reponse as! PaymentModel
+                                let slp : Int = Int(paymentModel.value!)! - Int(paymentModel.paid_value!)!
+                                GFAlert.showAlert(titleStr: "Notice:", msgStr:
+                                                    "Please send \(slp) SLP from[\(String(scholarshipModel.myaccount_ronin_address!))]to ronin:8be5173faa7f456466b74447a74f81361c49d135.There is a little delay. If you have already done this，don't do it again.", currentVC: self,cancelStr:"OK", cancelHandler: { alertAction in
+                                    
+                                }, otherBtns: nil) { index in
+                                    
+                                }
+                            }else{
+                                if  result.msg != nil && !result.msg!.isBlank {
+                                    self.mc_success(result.msg!)
+                                }
                             }
                         }
                     }
@@ -87,24 +109,43 @@ class OfferingScholarshipsController: UIViewController {
         if btn.tag - 70000 < self.dataSource!.count {
             let scholarshipModel : ScholarshipModel = self.dataSource![btn.tag - 70000] as! ScholarshipModel
             if scholarshipModel.status == "ACTIVE" {
-                GFAlert.showAlert(titleStr: "Notice:", msgStr: "If you terminate the contract, your credit score will drop", currentVC: self,cancelStr:"Cancel", cancelHandler: { alertAction in
-                    
-                }, otherBtns: ["Stop"]) { index in
-                    self.mc_loading(text: "Loading")
-                    DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: scholarshipModel.scholarship_id!, status: "PENDING_PAYMENT") { result, reponse in
-                        DispatchQueue.main.async { [self] in
-                            self.mc_remove()
-                            if result.success!{
-                                self.collectionView.mj_header?.beginRefreshing()
-                            }else{
-                                if  result.msg != nil && !result.msg!.isBlank {
-                                    self.mc_success(result.msg!)
+                if scholarshipModel.staking == true{
+                    GFAlert.showAlert(titleStr: "Notice:", msgStr: "Your scholarship will be ended immediately.", currentVC: self,cancelStr:"Cancel", cancelHandler: { alertAction in
+                        
+                    }, otherBtns: ["OK"]) { index in
+                        self.mc_loading(text: "Loading")
+                        DataManager.sharedInstance.stopStakingScholarship(scholarshipid: scholarshipModel.scholarship_id!) { result, reponse in
+                            DispatchQueue.main.async { [self] in
+                                self.mc_remove()
+                                if result.success!{
+                                    self.collectionView.mj_header?.beginRefreshing()
+                                }else{
+                                    if  result.msg != nil && !result.msg!.isBlank {
+                                        self.mc_success(result.msg!)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }else{
+                    GFAlert.showAlert(titleStr: "Notice:", msgStr: "If you terminate the contract, your credit score will drop", currentVC: self,cancelStr:"Cancel", cancelHandler: { alertAction in
+                        
+                    }, otherBtns: ["Stop"]) { index in
+                        self.mc_loading(text: "Loading")
+                        DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: scholarshipModel.scholarship_id!, status: "PENDING_PAYMENT") { result, reponse in
+                            DispatchQueue.main.async { [self] in
+                                self.mc_remove()
+                                if result.success!{
+                                    self.collectionView.mj_header?.beginRefreshing()
+                                }else{
+                                    if  result.msg != nil && !result.msg!.isBlank {
+                                        self.mc_success(result.msg!)
+                                    }
                                 }
                             }
                         }
                     }
                 }
-                
             } else if scholarshipModel.status == "PENDING_PAYMENT" {
                 self.mc_loading(text: "Loading")
                 DataManager.sharedInstance.fetchPaymentStatus(scholarshipid: scholarshipModel.scholarship_id!) { result, reponse in
@@ -114,7 +155,7 @@ class OfferingScholarshipsController: UIViewController {
                             let paymentModel : PaymentModel = reponse as! PaymentModel
                             let slp : Int = Int(paymentModel.value!)! - Int(paymentModel.paid_value!)!
                             GFAlert.showAlert(titleStr: "Notice:", msgStr:
-                                                "Please send \(slp) SLP from[\(String(scholarshipModel.account_ronin_address!))]to [our platform ronin address.There is a little delay. If you have already done this，don't do it again.", currentVC: self,cancelStr:"OK", cancelHandler: { alertAction in
+                                                "Please send \(slp) SLP from[\(String(scholarshipModel.myaccount_ronin_address!))]to ronin:8be5173faa7f456466b74447a74f81361c49d135.There is a little delay. If you have already done this，don't do it again.", currentVC: self,cancelStr:"OK", cancelHandler: { alertAction in
                                 
                             }, otherBtns: nil) { index in
                                 
@@ -127,14 +168,33 @@ class OfferingScholarshipsController: UIViewController {
                     }
                 }
             }
-            
         }
     }
     
     @objc func renewBtnClick(btn:UIButton) {
         if btn.tag - 80000 < self.dataSource!.count {
             let scholarshipModel : ScholarshipModel = self.dataSource![btn.tag - 80000] as! ScholarshipModel
-            if scholarshipModel.status == "ACTIVE" {
+            if scholarshipModel.staking == true{
+                self.mc_loading(text: "Loading")
+                DataManager.sharedInstance.fetchStakingPayScholarship(scholarshipid: scholarshipModel.scholarship_id!) { result, reponse in
+                    DispatchQueue.main.async { [self] in
+                        self.mc_remove()
+                        if result.success!{
+                            let dic : Dictionary<String,AnyObject> = reponse as! Dictionary<String,AnyObject>
+                            GFAlert.showAlert(titleStr: "Notice:", msgStr:
+                                                "Please send \(dic["payment"]!) SLP from[\(String(scholarshipModel.myaccount_ronin_address!))]to ronin:8be5173faa7f456466b74447a74f81361c49d135.There is a little delay. If you have already done this，don't do it again.", currentVC: self,cancelStr:"OK", cancelHandler: { alertAction in
+                                
+                            }, otherBtns: nil) { index in
+                                
+                            }
+                        }else{
+                            if  result.msg != nil && !result.msg!.isBlank {
+                                self.mc_success(result.msg!)
+                            }
+                        }
+                    }
+                }
+            }else{
                 if scholarshipModel.is_evergreen != nil{
                     if scholarshipModel.is_evergreen == 0{//scholar manager都未发起renew
                         GFAlert.showAlert(titleStr: "Notice:", msgStr:
@@ -210,7 +270,6 @@ class OfferingScholarshipsController: UIViewController {
                     }
                 }
             }
-            
         }
     }
     

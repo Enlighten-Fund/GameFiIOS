@@ -168,11 +168,9 @@ class NoOfferScholarshipCell: UICollectionViewCell {
             }
      
         }
-        if scholarshipModel.account_ronin_address != nil {
-            self.roninAddressLabelView.rightLabel.text = scholarshipModel.account_ronin_address
-        }
-        if scholarshipModel.account_ronin_address != nil {
-            self.roninAddressLabelView.rightLabel.text = scholarshipModel.account_ronin_address
+
+        if scholarshipModel.myaccount_ronin_address != nil {
+            self.roninAddressLabelView.rightLabel.text = scholarshipModel.myaccount_ronin_address
         }
         if scholarshipModel.account_login != nil {
             self.emailLabel.text = scholarshipModel.account_login
@@ -181,7 +179,10 @@ class NoOfferScholarshipCell: UICollectionViewCell {
             self.pwdTextFild!.text = scholarshipModel.account_passcode
         }
         self.flagImgView.image = UIImage.init(named: "")
-//        self.flagImgView.image = UIImage.init(named: "verfive")
+        if scholarshipModel.staking == true {
+            self.flagImgView.image = UIImage.init(named: "auto")
+        }
+ 
         if scholarshipModel.status != nil {
             if scholarshipModel.status == "DRAFT" {
                 self.btn.isHidden = true

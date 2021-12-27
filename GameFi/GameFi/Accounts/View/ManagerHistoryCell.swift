@@ -181,8 +181,8 @@ class ManagerHistoryCell: UICollectionViewCell {
             }
         }
         
-        if scholarshipModel.account_ronin_address != nil{
-            self.roninLabelView.rightLabel.text = scholarshipModel.account_ronin_address
+        if scholarshipModel.myaccount_ronin_address != nil{
+            self.roninLabelView.rightLabel.text = scholarshipModel.myaccount_ronin_address
         }
         
         if scholarshipModel.account_login != nil {

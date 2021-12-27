@@ -14,6 +14,12 @@ class ManagerScholarshipCell: UICollectionViewCell {
         self.contentView.layer.cornerRadius = 5
         self.contentView.layer.masksToBounds = true
         self.contentView.backgroundColor = UIColor.init(hexString: "0x30354B")
+        self.flagImgView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.left.equalToSuperview()
+            make.height.equalTo(64)
+            make.width.equalTo(78)
+        }
         self.accountImgView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview().offset(10)
@@ -202,7 +208,7 @@ class ManagerScholarshipCell: UICollectionViewCell {
         }
         
         if scholarshipModel.account_ronin_address != nil{
-            self.roninLabelView.rightLabel.text = scholarshipModel.account_ronin_address
+            self.roninLabelView.rightLabel.text = scholarshipModel.myaccount_ronin_address
         }
         
         if scholarshipModel.account_login != nil {
@@ -211,68 +217,88 @@ class ManagerScholarshipCell: UICollectionViewCell {
         if scholarshipModel.account_passcode != nil {
             self.pwdTextFild!.text = scholarshipModel.account_passcode
         }
-        
+        self.flagImgView.image = UIImage.init(named: "")
         if scholarshipModel.status != nil {
-            if scholarshipModel.status == "ACTIVE" {
-                if scholarshipModel.is_evergreen != nil{
-                    self.btn.isHidden = true
-                    self.leftBtn.isHidden = false
-                    self.rightBtn.isHidden = false
-                    if scholarshipModel.is_evergreen == 0{//scholar manager都未发起renew
-                        self.rightBtn.setTitle("Renew", for: .normal)
+                if scholarshipModel.status == "ACTIVE" {
+                    if scholarshipModel.staking == true{
+                        self.flagImgView.image = UIImage.init(named: "auto")
+                        self.endDateLabelView.rightLabel.text = "Ongoing"
+                        self.btn.isHidden = true
+                        self.leftBtn.isHidden = false
+                        self.rightBtn.isHidden = false
+                        self.leftBtn.setTitle("Stop Staking", for: .normal)
+                        self.leftBtn.isEnabled = true
+                        self.leftBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
+                        self.rightBtn.setTitle("Pay", for: .normal)
                         self.rightBtn.isEnabled = true
                         self.rightBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
-                    }else if scholarshipModel.is_evergreen == 1{//scholar 发起renew
-                        self.rightBtn.setTitle("Accept Renewal", for: .normal)
-                        self.rightBtn.isEnabled = true
-                        self.rightBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
-                    }else if scholarshipModel.is_evergreen == 2{//manager 发起renew
-                        self.rightBtn.setTitle("Withdraw Renewal", for: .normal)
-                        self.rightBtn.isEnabled = true
-                        self.rightBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
-                    }else if scholarshipModel.is_evergreen == 3{//manager scholar 都同意renew
-                        self.rightBtn.setTitle("Renewed", for: .normal)
-                        self.rightBtn.isEnabled = false
-                        self.rightBtn.backgroundColor = .gray
+                    }else{
+                        if scholarshipModel.is_evergreen != nil{
+                            self.btn.isHidden = true
+                            self.leftBtn.isHidden = false
+                            self.rightBtn.isHidden = false
+                            self.leftBtn.setTitle("Stop offering", for: .normal)
+                            self.leftBtn.isEnabled = true
+                            self.leftBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
+                            if scholarshipModel.is_evergreen == 0{//scholar manager都未发起renew
+                                self.rightBtn.setTitle("Renew", for: .normal)
+                                self.rightBtn.isEnabled = true
+                                self.rightBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
+                            }else if scholarshipModel.is_evergreen == 1{//scholar 发起renew
+                                self.rightBtn.setTitle("Accept Renewal", for: .normal)
+                                self.rightBtn.isEnabled = true
+                                self.rightBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
+                            }else if scholarshipModel.is_evergreen == 2{//manager 发起renew
+                                self.rightBtn.setTitle("Withdraw Renewal", for: .normal)
+                                self.rightBtn.isEnabled = true
+                                self.rightBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
+                            }else if scholarshipModel.is_evergreen == 3{//manager scholar 都同意renew
+                                self.rightBtn.setTitle("Renewed", for: .normal)
+                                self.rightBtn.isEnabled = false
+                                self.rightBtn.backgroundColor = .gray
+                            }
+                        }
                     }
+                } else if scholarshipModel.status == "PENDING_PAYMENT" {
+                    self.btn.setTitle("Pay now (24 hours left)", for: .normal)
+                    self.btn.layer.borderColor = UIColor.clear.cgColor
+                    self.btn.layer.borderWidth = 0
+                    self.btn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
+                    self.btn.isEnabled = true
+                    self.btn.isHidden = false
+                    self.leftBtn.isHidden = true
+                    self.rightBtn.isHidden = true
+                } else if scholarshipModel.status == "MANAGER_PAID" {
+                    self.btn.setTitle("Already ended", for: .normal)
+                    self.btn.layer.borderColor = UIColor.clear.cgColor
+                    self.btn.layer.borderWidth = 0
+                    self.btn.backgroundColor = .gray
+                    self.btn.isEnabled = false
+                    self.btn.isHidden = false
+                    self.leftBtn.isHidden = true
+                    self.rightBtn.isHidden = true
+                } else if scholarshipModel.status == "END" {
+                    self.btn.setTitle("Already ended", for: .normal)
+                    self.btn.layer.borderColor = UIColor.clear.cgColor
+                    self.btn.layer.borderWidth = 0
+                    self.btn.backgroundColor = .gray
+                    self.btn.isEnabled = false
+                    self.btn.isHidden = false
+                    self.leftBtn.isHidden = true
+                    self.rightBtn.isHidden = true
                 }
-                
-            } else if scholarshipModel.status == "PENDING_PAYMENT" {
-                self.btn.setTitle("Pay now (24 hours left)", for: .normal)
-                self.btn.layer.borderColor = UIColor.clear.cgColor
-                self.btn.layer.borderWidth = 0
-                self.btn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
-                self.btn.isEnabled = true
-                self.btn.isHidden = false
-                self.leftBtn.isHidden = true
-                self.rightBtn.isHidden = true
-            } else if scholarshipModel.status == "MANAGER_PAID" {
-                self.btn.setTitle("Already ended", for: .normal)
-                self.btn.layer.borderColor = UIColor.clear.cgColor
-                self.btn.layer.borderWidth = 0
-                self.btn.backgroundColor = .gray
-                self.btn.isEnabled = false
-                self.btn.isHidden = false
-                self.leftBtn.isHidden = true
-                self.rightBtn.isHidden = true
-            } else if scholarshipModel.status == "END" {
-                self.btn.setTitle("Already ended", for: .normal)
-                self.btn.layer.borderColor = UIColor.clear.cgColor
-                self.btn.layer.borderWidth = 0
-                self.btn.backgroundColor = .gray
-                self.btn.isEnabled = false
-                self.btn.isHidden = false
-                self.leftBtn.isHidden = true
-                self.rightBtn.isHidden = true
             }
-        }
     }
     
     @objc func pwdSecureBtnClick(abtn:UIButton) {
         abtn.isSelected = !abtn.isSelected
         self.pwdTextFild?.isSecureTextEntry = !self.pwdTextFild!.isSecureTextEntry
     }
-    
+    lazy var flagImgView : UIImageView = {
+        let tempImgView = UIImageView.init()
+        self.contentView.addSubview(tempImgView)
+        return tempImgView
+    }()
     lazy var accountImgView : UIImageView = {
         let tempImgView = UIImageView.init()
         self.contentView.addSubview(tempImgView)

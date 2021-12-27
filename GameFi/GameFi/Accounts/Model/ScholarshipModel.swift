@@ -12,6 +12,11 @@ class ScholarshipModel: BaseModel {
     var scholarship_id : String?
     var scholarship_name : String?
     var account_ronin_address : String?
+    var myaccount_ronin_address : String?{
+        get{
+            return self.account_ronin_address?.replacingOccurrences(of: "0x", with: "ronin:")
+        }
+    }
     var account_login : String?
     var account_lifecycle_slp_start : String?
     var account_lifecycle_slp_latest : String?

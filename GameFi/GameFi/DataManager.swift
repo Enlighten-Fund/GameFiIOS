@@ -500,6 +500,19 @@ class DataManager: NSObject {
         }
     }
     
+    //fetch staking pay
+    func fetchStakingPayScholarship(scholarshipid:String,completeBlock: @escaping CompleteBlock) {
+        let dic = ["id" : Int(scholarshipid)!] as [String : Any]
+        self.POST(url: "scholarship/staking/pay", param: dic ) { result, reponse in
+            if result.success!{
+                let dic : Dictionary<String,AnyObject> = reponse as! Dictionary<String, AnyObject>
+                completeBlock(result,dic)
+            }else{
+                completeBlock(result,reponse)
+            }
+        }
+    }
+    
     //fetch payment status
     func fetchPaymentStatus(scholarshipid:String, completeBlock: @escaping CompleteBlock) {
         let dic = ["scholarship_id" : Int(scholarshipid)!] as [String : Any]
