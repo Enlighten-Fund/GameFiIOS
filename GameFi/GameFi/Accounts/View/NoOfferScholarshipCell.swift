@@ -40,10 +40,15 @@ class NoOfferScholarshipCell: UICollectionViewCell {
             make.height.equalTo(80)
             make.width.equalTo(100)
         }
-      
+        self.editBtn.snp.makeConstraints { make in
+            make.centerY.equalTo(self.scholarshipNameLabelView.snp.centerY)
+            make.right.equalToSuperview().offset(-15)
+            make.height.equalTo(30)
+            make.width.equalTo(30)
+        }
         self.scholarshipNameLabelView.snp.makeConstraints { make in
             make.top.equalTo(self.axieImgView3.snp.bottom).offset(10)
-            make.right.equalToSuperview().offset(-15)
+            make.right.equalTo(self.editBtn.snp.left)
             make.height.equalTo(25)
             make.left.equalToSuperview().offset(15)
         }
@@ -188,7 +193,19 @@ class NoOfferScholarshipCell: UICollectionViewCell {
                 self.btn.isHidden = true
                 self.leftBtn.isHidden = false
                 self.rightBtn.isHidden = false
+                self.editBtn.snp.remakeConstraints { make in
+                    make.centerY.equalTo(self.scholarshipNameLabelView.snp.centerY)
+                    make.right.equalToSuperview().offset(-15)
+                    make.height.equalTo(30)
+                    make.width.equalTo(0)
+                }
             } else if scholarshipModel.status == "LISTING" {
+                self.editBtn.snp.remakeConstraints { make in
+                    make.centerY.equalTo(self.scholarshipNameLabelView.snp.centerY)
+                    make.right.equalToSuperview().offset(-15)
+                    make.height.equalTo(30)
+                    make.width.equalTo(30)
+                }
                 self.btn.isHidden = false
                 self.btn.setTitle("Recall", for: .normal)
                 self.btn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
@@ -203,6 +220,12 @@ class NoOfferScholarshipCell: UICollectionViewCell {
                 self.btn.setTitle("Already ended", for: .normal)
                 self.btn.backgroundColor = .gray
                 self.btn.isEnabled = false
+                self.editBtn.snp.remakeConstraints { make in
+                    make.centerY.equalTo(self.scholarshipNameLabelView.snp.centerY)
+                    make.right.equalToSuperview().offset(-15)
+                    make.height.equalTo(30)
+                    make.width.equalTo(0)
+                }
             }else if scholarshipModel.status == "AUDIT"{
                 self.leftBtn.isHidden = true
                 self.rightBtn.isHidden = true
@@ -211,6 +234,12 @@ class NoOfferScholarshipCell: UICollectionViewCell {
                 self.btn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
                 self.btn.isEnabled = true
                 self.flagImgView.image = UIImage.init(named: "verfive")
+                self.editBtn.snp.remakeConstraints { make in
+                    make.centerY.equalTo(self.scholarshipNameLabelView.snp.centerY)
+                    make.right.equalToSuperview().offset(-15)
+                    make.height.equalTo(30)
+                    make.width.equalTo(30)
+                }
             }
         }
     }
@@ -236,7 +265,12 @@ class NoOfferScholarshipCell: UICollectionViewCell {
         self.contentView.addSubview(tempImgView)
         return tempImgView
     }()
-    
+    lazy var editBtn : UIButton = {
+        let editBtn = UIButton.init(frame: CGRect.zero)
+        editBtn.setTitle("edit", for: .normal)
+        self.contentView.addSubview(editBtn)
+        return editBtn
+    }()
     lazy var scholarshipNameLabelView : LabelAndLabelInterView = {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
         tempLabelView.leftLabel.text = "Scholarship name"

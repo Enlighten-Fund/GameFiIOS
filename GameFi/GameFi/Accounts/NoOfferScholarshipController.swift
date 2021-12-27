@@ -187,6 +187,71 @@ class NoOfferScholarshipController: UIViewController {
         }
         
     }
+    
+    @objc func editScholarBtnClick(btn:UIButton) {
+        if btn.tag - 40000 < self.dataSource!.count {
+            let scholarshipModel : ScholarshipModel = self.dataSource![btn.tag - 40000] as! ScholarshipModel
+            let alertController = UIAlertController(title: "Edit scholarship name",
+                                        message: "", preferredStyle: .alert)
+                    alertController.addTextField {
+                        (textField: UITextField!) -> Void in
+                        textField.placeholder = "Scholarship name"
+                        textField.text = scholarshipModel.scholarship_name
+                    }
+                    
+                    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                    let okAction = UIAlertAction(title: "OK", style: .default, handler: {
+                        action in
+                        //也可以用下标的形式获取textField let login = alertController.textFields![0]
+                        let login = alertController.textFields!.first!
+                        if login.text == nil || login.text.isBlank {
+                            DispatchQueue.main.async { [self] in
+                                GFAlert.showAlert(titleStr: "Notice:", msgStr:
+                                                    "Scholarship name should be filled in.", currentVC: self,cancelStr:"OK", cancelHandler: { alertAction in
+                                   
+                                }, otherBtns: nil) { index in
+
+                                }
+                            }
+                        }else{
+                            if scholarshipModel.staking == true{
+                                DispatchQueue.main.async { [self] in self.mc_loading()}
+                                DataManager.sharedInstance.editStakingScholarShip(dic: ["id":Int(scholarshipModel.scholarship_id!) as Any,"scholarship_name":login.text!]) { result, reponse in
+                                    DispatchQueue.main.async {
+                                        self.mc_remove()
+                                        if result.success!{
+                                            self.collectionView.mj_header?.beginRefreshing()
+                                        }else{
+                                            if  result.msg != nil && !result.msg!.isBlank {
+                                                self.mc_success(result.msg!)
+                                            }
+                                        }
+                                    }
+                                }
+                            }else{
+                                self.mc_loading(text: "Loading")
+                                DataManager.sharedInstance.editScholarShip(dic: ["id":Int(scholarshipModel.scholarship_id!) as Any,"scholarship_name":login.text!]) { result, reponse in
+                                    DispatchQueue.main.async { [self] in
+                                        self.mc_remove()
+                                        if result.success!{
+                                            self.collectionView.mj_header?.beginRefreshing()
+                                        }else{
+                                            if  result.msg != nil && !result.msg!.isBlank {
+                                                self.mc_success(result.msg!)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    })
+                    alertController.addAction(cancelAction)
+                    alertController.addAction(okAction)
+                    self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         //水平间隔
@@ -261,6 +326,8 @@ extension  NoOfferScholarshipController : UICollectionViewDelegate,UICollectionV
         cell.rightBtn.tag = 20000 + indexPath.row
         cell.btn.addTarget(self, action: #selector(recallScholarship), for: .touchUpInside)
         cell.btn.tag = 30000 + indexPath.row
+        cell.editBtn.addTarget(self, action: #selector(editScholarBtnClick), for: .touchUpInside)
+        cell.editBtn.tag = 40000 + indexPath.row
         return cell
     }
 

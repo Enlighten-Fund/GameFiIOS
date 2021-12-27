@@ -60,10 +60,15 @@ class ManagerScholarshipCell: UICollectionViewCell {
             make.height.equalTo(25)
             make.width.equalToSuperview()
         }
-      
+        self.editBtn.snp.makeConstraints { make in
+            make.centerY.equalTo(self.scholarshipNameLabelView.snp.centerY)
+            make.right.equalToSuperview().offset(-15)
+            make.height.equalTo(30)
+            make.width.equalTo(30)
+        }
         self.scholarshipNameLabelView.snp.makeConstraints { make in
             make.top.equalTo(self.creditLabel.snp.bottom).offset(10)
-            make.right.equalToSuperview().offset(-15)
+            make.right.equalTo(self.editBtn.snp.left)
             make.height.equalTo(25)
             make.left.equalToSuperview().offset(15)
         }
@@ -203,7 +208,7 @@ class ManagerScholarshipCell: UICollectionViewCell {
             }
             self.scholarshipNameLabelView.snp.remakeConstraints { make in
                 make.top.equalTo(self.axieImgView3.snp.bottom).offset(10)
-                make.right.equalToSuperview().offset(-15)
+                make.right.equalTo(self.editBtn.snp.left)
                 make.height.equalTo(25)
                 make.left.equalToSuperview().offset(15)
             }
@@ -226,7 +231,7 @@ class ManagerScholarshipCell: UICollectionViewCell {
             }
             self.scholarshipNameLabelView.snp.remakeConstraints { make in
                 make.top.equalTo(self.creditLabel.snp.bottom).offset(10)
-                make.right.equalToSuperview().offset(-15)
+                make.right.equalTo(self.editBtn.snp.left)
                 make.height.equalTo(25)
                 make.left.equalToSuperview().offset(15)
             }
@@ -281,6 +286,12 @@ class ManagerScholarshipCell: UICollectionViewCell {
         self.flagImgView.image = UIImage.init(named: "")
         if scholarshipModel.status != nil {
                 if scholarshipModel.status == "ACTIVE" {
+                    self.editBtn.snp.remakeConstraints { make in
+                        make.centerY.equalTo(self.scholarshipNameLabelView.snp.centerY)
+                        make.right.equalToSuperview().offset(-15)
+                        make.height.equalTo(30)
+                        make.width.equalTo(30)
+                    }
                     if scholarshipModel.staking == true{
                         self.flagImgView.image = UIImage.init(named: "auto")
                         self.endDateLabelView.rightLabel.text = "Ongoing"
@@ -322,6 +333,12 @@ class ManagerScholarshipCell: UICollectionViewCell {
                         }
                     }
                 } else if scholarshipModel.status == "PENDING_PAYMENT" {
+                    self.editBtn.snp.remakeConstraints { make in
+                        make.centerY.equalTo(self.scholarshipNameLabelView.snp.centerY)
+                        make.right.equalToSuperview().offset(-15)
+                        make.height.equalTo(30)
+                        make.width.equalTo(30)
+                    }
                     self.btn.setTitle("Pay now (24 hours left)", for: .normal)
                     self.btn.layer.borderColor = UIColor.clear.cgColor
                     self.btn.layer.borderWidth = 0
@@ -331,6 +348,12 @@ class ManagerScholarshipCell: UICollectionViewCell {
                     self.leftBtn.isHidden = true
                     self.rightBtn.isHidden = true
                 } else if scholarshipModel.status == "MANAGER_PAID" {
+                    self.editBtn.snp.remakeConstraints { make in
+                        make.centerY.equalTo(self.scholarshipNameLabelView.snp.centerY)
+                        make.right.equalToSuperview().offset(-15)
+                        make.height.equalTo(30)
+                        make.width.equalTo(0)
+                    }
                     self.btn.setTitle("Already ended", for: .normal)
                     self.btn.layer.borderColor = UIColor.clear.cgColor
                     self.btn.layer.borderWidth = 0
@@ -340,6 +363,12 @@ class ManagerScholarshipCell: UICollectionViewCell {
                     self.leftBtn.isHidden = true
                     self.rightBtn.isHidden = true
                 } else if scholarshipModel.status == "END" {
+                    self.editBtn.snp.remakeConstraints { make in
+                        make.centerY.equalTo(self.scholarshipNameLabelView.snp.centerY)
+                        make.right.equalToSuperview().offset(-15)
+                        make.height.equalTo(30)
+                        make.width.equalTo(0)
+                    }
                     self.btn.setTitle("Already ended", for: .normal)
                     self.btn.layer.borderColor = UIColor.clear.cgColor
                     self.btn.layer.borderWidth = 0
@@ -407,6 +436,12 @@ class ManagerScholarshipCell: UICollectionViewCell {
         tempLabelView.leftLabel.text = "Scholarship name"
         self.contentView.addSubview(tempLabelView)
         return tempLabelView
+    }()
+    lazy var editBtn : UIButton = {
+        let editBtn = UIButton.init(frame: CGRect.zero)
+        editBtn.setTitle("edit", for: .normal)
+        self.contentView.addSubview(editBtn)
+        return editBtn
     }()
     lazy var returnAmountLabelView : LabelAndLabelInterView = {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
