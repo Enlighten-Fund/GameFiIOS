@@ -305,7 +305,9 @@ class OfferingScholarshipsController: UIViewController {
                                     DispatchQueue.main.async {
                                         self.mc_remove()
                                         if result.success!{
-                                            self.collectionView.mj_header?.beginRefreshing()
+                                            scholarshipModel.scholarship_name = login.text
+                                            let indexpath = IndexPath.init(row: btn.tag - 60000, section: 0)
+                                            self.collectionView.reloadItems(at: [indexpath])
                                         }else{
                                             if  result.msg != nil && !result.msg!.isBlank {
                                                 self.mc_success(result.msg!)
@@ -319,7 +321,9 @@ class OfferingScholarshipsController: UIViewController {
                                     DispatchQueue.main.async { [self] in
                                         self.mc_remove()
                                         if result.success!{
-                                            self.collectionView.mj_header?.beginRefreshing()
+                                            scholarshipModel.scholarship_name = login.text
+                                            let indexpath = IndexPath.init(row: btn.tag - 60000, section: 0)
+                                            self.collectionView.reloadItems(at: [indexpath])
                                         }else{
                                             if  result.msg != nil && !result.msg!.isBlank {
                                                 self.mc_success(result.msg!)
