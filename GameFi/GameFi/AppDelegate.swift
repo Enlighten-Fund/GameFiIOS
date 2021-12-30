@@ -46,9 +46,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
        // 设置tabbar 选中文字颜色
            UITabBar.appearance().tintColor = UIColor.gray
        }
-       
+       self.window?.rootViewController = self.tabbarVC
         Bugly.start(withAppId: "95913c773a")
-        self.window?.rootViewController = self.tabbarVC
         IQKeyboardManager.shared().isEnabled = true
         IQKeyboardManager.shared().isEnableAutoToolbar = true
         AbilityUtil.sharedInstance.config()
@@ -166,14 +165,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
             Amplify.Logging.logLevel = .verbose
             try Amplify.add(plugin: AWSCognitoAuthPlugin())
             try Amplify.configure()
-            UserManager.sharedInstance.fetchAndUpdateRole {
-                
-            }
-            UserManager.sharedInstance.updateToken {
-                DataManager.sharedInstance.fetchUserDetailinfo { result, reponse in
-                    
-                }
-            }
+            
             AWSMobileClient.default().addUserStateListener(self) { (userState, info) in
                 switch (userState) {
                 case .guest:

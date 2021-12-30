@@ -664,5 +664,28 @@ class DataManager: NSObject {
             }
         }
     }
+    
+    //bind Discord
+    func bindDiscord(discordid:String, completeBlock: @escaping CompleteBlock) {
+        let dic = ["discord_id":discordid] as [String : Any]
+        self.POST(url: "discord/bind", param: dic ) { result, reponse in
+            if result.success!{
+                completeBlock(result,reponse)
+            }else{
+                completeBlock(result,reponse)
+            }
+        }
+    }
+    //get Discord info
+    func fetchDiscord(completeBlock: @escaping CompleteBlock) {
+        let dic = [:] as [String : Any]
+        self.POST(url: "discord/get", param: dic ) { result, reponse in
+            if result.success!{
+                completeBlock(result,reponse)
+            }else{
+                completeBlock(result,reponse)
+            }
+        }
+    }
 }
 

@@ -10,6 +10,7 @@
 		15092795570575A8D11E51AF /* Pods_GameFi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCCE75DA83DE142077945AEF /* Pods_GameFi.framework */; };
 		7BCBC07F76E99519033E01A6 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = CBF9F66A81AD584A3895DB4F /* amplifyconfiguration.json */; };
 		7C326CFCDF747D3682D551F3 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = F1EDDF7C6BA0C87EAB5C8C12 /* awsconfiguration.json */; };
+		9800DBED277D56440006FB1B /* MMRQRCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9800DBEC277D56440006FB1B /* MMRQRCell.swift */; };
 		980A7DC22728135B006AE4C4 /* GFNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980A7DC12728135B006AE4C4 /* GFNavController.swift */; };
 		980A7DC4272828FD006AE4C4 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980A7DC3272828FD006AE4C4 /* DataManager.swift */; };
 		980A7DCA27292034006AE4C4 /* GFResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980A7DC927292034006AE4C4 /* GFResult.swift */; };
@@ -127,6 +128,7 @@
 
 /* Begin PBXFileReference section */
 		2056B7442627D4EF41EBF823 /* Pods-GameFi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameFi.release.xcconfig"; path = "Target Support Files/Pods-GameFi/Pods-GameFi.release.xcconfig"; sourceTree = "<group>"; };
+		9800DBEC277D56440006FB1B /* MMRQRCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMRQRCell.swift; sourceTree = "<group>"; };
 		980A7DC12728135B006AE4C4 /* GFNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFNavController.swift; sourceTree = "<group>"; };
 		980A7DC3272828FD006AE4C4 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		980A7DC927292034006AE4C4 /* GFResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFResult.swift; sourceTree = "<group>"; };
@@ -500,6 +502,7 @@
 				9858177B274A8CF200D8CFCA /* GFPickerView.swift */,
 				9858177D274B283500D8CFCA /* GFDatePickerView.swift */,
 				989866722768950000BF4BE0 /* EditProfileBtnView.swift */,
+				9800DBEC277D56440006FB1B /* MMRQRCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -835,6 +838,7 @@
 				987694272738ED150075CA0F /* ScholarModel.swift in Sources */,
 				98D99423273BA9F0006AA8DC /* ManagerAccountsController.swift in Sources */,
 				985817472742793F00D8CFCA /* AxieAbilityModel.swift in Sources */,
+				9800DBED277D56440006FB1B /* MMRQRCell.swift in Sources */,
 				9811EA172726BB2700B0ACF0 /* AppDelegate.swift in Sources */,
 				98E09B5C273129140020D97D /* Usermodel.swift in Sources */,
 				984BDB99272BA23600F6144B /* RegisterHeadView.swift in Sources */,

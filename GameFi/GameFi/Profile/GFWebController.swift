@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 import SnapKit
 import JXWebViewController
+import WebKit
+import UIKit
 
 class GFWebController: JXWebViewController {
     override func viewDidLoad() {
@@ -18,6 +20,40 @@ class GFWebController: JXWebViewController {
         self.leftBtn?.isHidden = false
     }
 
+    open override func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if let url = navigationAction.request.url {
+            if !WKWebView.handlesURLScheme(url.scheme ?? "") && UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url)
+            }
+            if url.absoluteString.contains("/bindDiscord?code="){//绑定discord
+                let aurl : URL = navigationAction.request.url!
+                let params = aurl.parametersFromQueryString
+                self.mc_loading(text: "Loading")
+                DataManager.sharedInstance.bindDiscord(discordid: params!["id"]!){ result, reponse in
+                    DispatchQueue.main.async { [self] in
+                        self.mc_remove()
+                        if result.success!{
+                            self.mc_text("Success!Getting back to NinjaDAOs…")
+                            let appdelegate : AppDelegate = UIApplication.shared.delegate! as! AppDelegate
+                            appdelegate.tabbarVC?.selectedIndex = 0
+                            self.navigationController?.popToRootViewController(animated: true)
+                        }else{
+                            if  result.msg != nil && !result.msg!.isBlank {
+                                self.mc_success(result.msg!)
+                            }
+                        }
+                    }
+                }
+                
+            }else if url.absoluteString.contains("discord/redirect?error=access_denied"){
+                self.mc_text("Later.Getting back to NinjaDAOs…")
+                let appdelegate : AppDelegate = UIApplication.shared.delegate! as! AppDelegate
+                appdelegate.tabbarVC?.selectedIndex = 0
+                self.navigationController?.popToRootViewController(animated: true)
+            }
+        }
+        decisionHandler(.allow)
+    }
     
     @objc func leftBtnClick() {
         self.navigationController?.popViewController(animated: true)
