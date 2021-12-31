@@ -340,6 +340,69 @@ class OfferingScholarshipsController: UIViewController {
         }
     }
     
+    func joinDiscordRequest(scholarship_id:Int) {
+        DataManager.sharedInstance.joinDiscord(scholarship_id: scholarship_id) { result, reponse in
+            DispatchQueue.main.async { [self] in
+                self.mc_remove()
+                if result.success!{
+                    let dic:[String:Any] = reponse as! [String : Any]
+                    let discordlink : String = dic["channel_invite_link"] as! String
+                    if !discordlink.isBlank{
+                        let url = URL(string: discordlink)
+                        // 注意: 跳转之前, 可以使用 canOpenURL: 判断是否可以跳转
+                        if !UIApplication.shared.canOpenURL(url!) {
+                             // 不能跳转就不要往下执行了
+                             return
+                        }
+                        UIApplication.shared.open(url!, options: [:]) { (success) in
+                             if (success) {
+                                  print("10以后可以跳转url")
+                             }else{
+                                  print("10以后不能完成跳转")
+                             }
+                         }
+                    }
+                }else{
+                    if  result.msg != nil && !result.msg!.isBlank {
+                        self.mc_success(result.msg!)
+                    }
+                }
+            }
+        }
+    }
+    
+    @objc func joinDiscordBtnClick(btn:UIButton) {
+        if btn.tag - 50000 < self.dataSource!.count {
+            let scholarshipModel : ScholarshipModel = self.dataSource![btn.tag - 50000] as! ScholarshipModel
+            self.mc_loading(text: "Loading")
+            DataManager.sharedInstance.fetchDiscord { result, reponse in
+                DispatchQueue.main.async { [self] in
+                    if result.success!{
+                        let dic:[String:Any] = reponse as! [String : Any]
+                        let discordid : String = dic["discord_id"] as! String
+                            if !discordid.isBlank{//已经绑定
+                                self.joinDiscordRequest(scholarship_id: Int(scholarshipModel.scholarship_id!)!)
+                            }else{
+                                self.mc_remove()
+                                let webVC = GFWebController.init()
+                                webVC.isFormAccount = true
+                                webVC.agreeDiscordBlock = {
+                                    self.joinDiscordRequest(scholarship_id: Int(scholarshipModel.scholarship_id!)!)
+                                }
+                                webVC.webView.load(URLRequest(url: URL.init(string: "https://discord.com/api/oauth2/authorize?client_id=925574421094228058&redirect_uri=https%3A%2F%2F2njrgbv2l6.execute-api.ap-northeast-1.amazonaws.com%2Fprod%2Fdiscord%2Fredirect&response_type=code&scope=identify")!))
+                                self.navigationController?.pushViewController(webVC, animated: true)
+                            }
+                        }else{
+                            self.mc_remove()
+                            if  result.msg != nil && !result.msg!.isBlank {
+                                self.mc_success(result.msg!)
+                            }
+                        }
+                }
+            }
+        }
+    }
+    
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         //水平间隔
@@ -404,10 +467,12 @@ extension  OfferingScholarshipsController : UICollectionViewDelegate,UICollectio
         cell.rightBtn.tag = 80000 + indexPath.row
         cell.btn.tag = 90000 + indexPath.row
         cell.editBtn.tag = 60000 + indexPath.row
+        cell.joinDiscordBtn.tag = 50000 + indexPath.row
         cell.btn.addTarget(self, action: #selector(stopOrPayBtnClick), for: .touchUpInside)
         cell.leftBtn.addTarget(self, action: #selector(stopOrPayBtnClick2), for: .touchUpInside)
         cell.rightBtn.addTarget(self, action: #selector(renewBtnClick), for: .touchUpInside)
         cell.editBtn.addTarget(self, action: #selector(editScholarBtnClick), for: .touchUpInside)
+        cell.joinDiscordBtn.addTarget(self, action: #selector(joinDiscordBtnClick), for: .touchUpInside)
         return cell
     }
 

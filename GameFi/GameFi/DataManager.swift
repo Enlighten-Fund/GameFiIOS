@@ -353,7 +353,7 @@ class DataManager: NSObject {
         let dic = ["page_index" : pageIndex,"page_size" : 20] as [String : Any]
         self.POST(url: "scholarship/list_by_manager_historical", param: dic) { result, reponse in
             if result.success!{
-                let scholarshipListModel : ScholarshipListModel = JsonUtil.jsonToModel(reponse as! String, ScholarshipListModel.self) as! ScholarshipListModel
+                let scholarshipListModel : ScholarshipListModel = JsonUtil.dictionaryToModel(reponse as! [String : Any], ScholarshipListModel.self) as! ScholarshipListModel
                 completeBlock(result,scholarshipListModel)
             }else{
                 completeBlock(result,reponse)
@@ -680,6 +680,18 @@ class DataManager: NSObject {
     func fetchDiscord(completeBlock: @escaping CompleteBlock) {
         let dic = [:] as [String : Any]
         self.POST(url: "discord/get", param: dic ) { result, reponse in
+            if result.success!{
+                completeBlock(result,reponse)
+            }else{
+                completeBlock(result,reponse)
+            }
+        }
+    }
+    
+    //join Discord
+    func joinDiscord(scholarship_id:Int,completeBlock: @escaping CompleteBlock) {
+        let dic = ["scholarship_id":scholarship_id] as [String : Any]
+        self.POST(url: "discord/channel-join", param: dic ) { result, reponse in
             if result.success!{
                 completeBlock(result,reponse)
             }else{

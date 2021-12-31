@@ -46,9 +46,10 @@ class ScholarshipsController: UIViewController {
             make.width.equalTo(50)
             make.bottom.equalToSuperview().offset(-20)
         }
-       
+        self.mc_loading(text: "Loading")
         UserManager.sharedInstance.updateToken {
             DispatchQueue.main.async { [self] in
+                self.mc_remove()
                 self.collectionView.mj_header?.beginRefreshing()
             }
             self.checkVersion()

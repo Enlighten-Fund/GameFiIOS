@@ -153,6 +153,13 @@ class ManagerScholarshipCell: UICollectionViewCell {
             make.height.equalTo(40)
             make.left.equalToSuperview().offset(15)
         }
+        
+        self.joinDiscordBtn.snp.makeConstraints { make in
+            make.top.equalTo(self.contentView.snp.top).offset(0)
+            make.right.equalToSuperview().offset(0)
+            make.height.equalTo(40)
+            make.width.equalTo(140)
+        }
     }
 
     func getLocalDate(from UTCDate: String) -> String {
@@ -549,6 +556,18 @@ class ManagerScholarshipCell: UICollectionViewCell {
         tempBtn.setTitleColor(.white, for: .normal)
         tempBtn.setTitle("Submit", for: .normal)
         tempBtn.titleLabel?.font = UIFont(name: "Avenir Next Medium", size: 14)
+        tempBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
+        self.contentView.addSubview(tempBtn)
+        return tempBtn
+    }()
+    
+    lazy var joinDiscordBtn : UIButton = {
+        let tempBtn = UIButton.init(frame: CGRect.zero)
+        tempBtn.layer.cornerRadius = 3
+        tempBtn.layer.masksToBounds = true
+        tempBtn.setTitleColor(.white, for: .normal)
+        tempBtn.titleLabel?.font = UIFont(name: "Avenir Next Medium", size: 14)
+        tempBtn.setTitle("Join Discord", for: .normal)
         tempBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
         self.contentView.addSubview(tempBtn)
         return tempBtn

@@ -75,6 +75,14 @@ extension  ManagerHistoryController : UICollectionViewDelegate,UICollectionViewD
         return self.dataSource!.count
     }
 
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let scholarshipModel : ScholarshipModel = self.dataSource![indexPath.row] as! ScholarshipModel
+        if scholarshipModel.staking == true {
+            return CGSize.init(width: IPhone_SCREEN_WIDTH - 30, height: 350)
+        }
+        return CGSize(width: IPhone_SCREEN_WIDTH - 30, height: 390)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: managerHistoryCellIdentifier, for: indexPath) as! ManagerHistoryCell
         cell.makeConstraints()

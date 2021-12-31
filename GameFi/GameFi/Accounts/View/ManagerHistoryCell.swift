@@ -14,6 +14,33 @@ class ManagerHistoryCell: UICollectionViewCell {
         self.contentView.layer.cornerRadius = 5
         self.contentView.layer.masksToBounds = true
         self.contentView.backgroundColor = UIColor.init(hexString: "0x30354B")
+        self.flagImgView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.left.equalToSuperview()
+            make.height.equalTo(64)
+            make.width.equalTo(78)
+        }
+        
+        self.axieImgView1.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.height.equalTo(80)
+            make.width.equalTo(100)
+        }
+        
+        self.axieImgView2.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.right.equalTo(self.axieImgView1.snp.left).offset(30)
+            make.height.equalTo(80)
+            make.width.equalTo(100)
+        }
+        
+        self.axieImgView3.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.left.equalTo(self.axieImgView1.snp.right).offset(-30)
+            make.height.equalTo(80)
+            make.width.equalTo(100)
+        }
         self.accountImgView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview().offset(10)
@@ -136,16 +163,73 @@ class ManagerHistoryCell: UICollectionViewCell {
     }
     
     func update(scholarshipModel:ScholarshipModel) {
-        self.accountImgView.image = UIImage.init(named: "portrait")
-        if scholarshipModel.scholar_portrait != nil {
-            self.accountImgView.kf.setImage(with: URL.init(string: scholarshipModel.scholar_portrait!))
+        if scholarshipModel.staking == true{
+            self.flagImgView.image = UIImage.init(named: "auto")
+            self.accountImgView.isHidden = true
+            self.accountLabel.isHidden = true
+            self.creditLabel.isHidden = true
+            self.axieImgView1.isHidden = false
+            self.axieImgView2.isHidden = false
+            self.axieImgView3.isHidden = false
+            if scholarshipModel.accountAxieArry == nil || scholarshipModel.accountAxieArry!.count < 3{
+                
+            }else{
+                let axiePic1 : String = scholarshipModel.accountAxieArry![0]
+                self.axieImgView1.kf.setImage(with: URL.init(string: "https://storage.googleapis.com/assets.axieinfinity.com/axies/\(axiePic1)/axie/axie-full-transparent.png"))
+                let axiePic2 : String = scholarshipModel.accountAxieArry![1]
+                self.axieImgView2.kf.setImage(with:  URL.init(string: "https://storage.googleapis.com/assets.axieinfinity.com/axies/\(axiePic2)/axie/axie-full-transparent.png"))
+                let axiePic3 : String = scholarshipModel.accountAxieArry![2]
+                self.axieImgView3.kf.setImage(with: URL.init(string: "https://storage.googleapis.com/assets.axieinfinity.com/axies/\(axiePic3)/axie/axie-full-transparent.png"))
+            }
+            self.scholarshipNameLabelView.snp.remakeConstraints { make in
+                make.top.equalTo(self.axieImgView3.snp.bottom).offset(10)
+                make.right.equalToSuperview().offset(-15)
+                make.height.equalTo(25)
+                make.left.equalToSuperview().offset(15)
+            }
+        }else{
+            self.flagImgView.image = UIImage.init(named: "")
+            self.accountImgView.isHidden = false
+            self.accountLabel.isHidden = false
+            self.creditLabel.isHidden = false
+            self.axieImgView1.isHidden = true
+            self.axieImgView2.isHidden = true
+            self.axieImgView3.isHidden = true
+            self.accountImgView.image = UIImage.init(named: "portrait")
+            if scholarshipModel.scholar_portrait != nil {
+                self.accountImgView.kf.setImage(with: URL.init(string: scholarshipModel.scholar_portrait!))
+            }
+            if scholarshipModel.scholar_user_name != nil {
+                self.accountLabel.text = scholarshipModel.scholar_user_name
+            }
+            if scholarshipModel.scholar_credit_score != nil {
+                self.creditLabel.text = "Credit: \(scholarshipModel.scholar_credit_score!)"
+            }
+            self.scholarshipNameLabelView.snp.remakeConstraints { make in
+                make.top.equalTo(self.creditLabel.snp.bottom).offset(10)
+                make.right.equalToSuperview().offset(-15)
+                make.height.equalTo(25)
+                make.left.equalToSuperview().offset(15)
+            }
         }
-        if scholarshipModel.scholar_user_name != nil {
-            self.accountLabel.text = scholarshipModel.scholar_user_name
-        }
-        if scholarshipModel.scholar_credit_score != nil {
-            self.creditLabel.text = "Credit: \(scholarshipModel.scholar_credit_score!)"
-        }
+
+        
+//
+//        if scholarshipModel.staking == true{
+//
+//        }else{
+//            self.accountImgView.image = UIImage.init(named: "portrait")
+//            if scholarshipModel.scholar_portrait != nil {
+//                self.accountImgView.kf.setImage(with: URL.init(string: scholarshipModel.scholar_portrait!))
+//            }
+//            if scholarshipModel.scholar_user_name != nil {
+//                self.accountLabel.text = scholarshipModel.scholar_user_name
+//            }
+//            if scholarshipModel.scholar_credit_score != nil {
+//                self.creditLabel.text = "Credit: \(scholarshipModel.scholar_credit_score!)"
+//            }
+//        }
+        
         if scholarshipModel.scholarship_name != nil {
             self.scholarshipNameLabelView.rightLabel.text = scholarshipModel.scholarship_name
         }
@@ -197,7 +281,27 @@ class ManagerHistoryCell: UICollectionViewCell {
         abtn.isSelected = !abtn.isSelected
         self.pwdTextFild?.isSecureTextEntry = !self.pwdTextFild!.isSecureTextEntry
     }
+    lazy var flagImgView : UIImageView = {
+        let tempImgView = UIImageView.init()
+        self.contentView.addSubview(tempImgView)
+        return tempImgView
+    }()
     
+    lazy var axieImgView1 : UIImageView = {
+        let tempImgView = UIImageView.init()
+        self.contentView.addSubview(tempImgView)
+        return tempImgView
+    }()
+    lazy var axieImgView2 : UIImageView = {
+        let tempImgView = UIImageView.init()
+        self.contentView.addSubview(tempImgView)
+        return tempImgView
+    }()
+    lazy var axieImgView3 : UIImageView = {
+        let tempImgView = UIImageView.init()
+        self.contentView.addSubview(tempImgView)
+        return tempImgView
+    }()
     lazy var accountImgView : UIImageView = {
         let tempImgView = UIImageView.init()
         self.contentView.addSubview(tempImgView)

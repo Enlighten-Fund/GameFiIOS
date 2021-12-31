@@ -13,6 +13,8 @@ import WebKit
 import UIKit
 
 class GFWebController: JXWebViewController {
+    var isFormAccount : Bool?//从Account页面跳转过来
+    var agreeDiscordBlock : CommonEmptyBlock?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(red: 0.15, green: 0.16, blue: 0.24, alpha: 1)
@@ -34,9 +36,16 @@ class GFWebController: JXWebViewController {
                         self.mc_remove()
                         if result.success!{
                             self.mc_text("Success!Getting back to NinjaDAOs…")
-                            let appdelegate : AppDelegate = UIApplication.shared.delegate! as! AppDelegate
-                            appdelegate.tabbarVC?.selectedIndex = 0
-                            self.navigationController?.popToRootViewController(animated: true)
+                            if isFormAccount == true{
+                                self.navigationController?.popToRootViewController(animated: true)
+                                if agreeDiscordBlock != nil{
+                                    agreeDiscordBlock!()
+                                }
+                            }else{
+                                let appdelegate : AppDelegate = UIApplication.shared.delegate! as! AppDelegate
+                                appdelegate.tabbarVC?.selectedIndex = 0
+                                self.navigationController?.popToRootViewController(animated: true)
+                            }
                         }else{
                             if  result.msg != nil && !result.msg!.isBlank {
                                 self.mc_success(result.msg!)
@@ -44,12 +53,16 @@ class GFWebController: JXWebViewController {
                         }
                     }
                 }
-                
             }else if url.absoluteString.contains("discord/redirect?error=access_denied"){
                 self.mc_text("Later.Getting back to NinjaDAOs…")
-                let appdelegate : AppDelegate = UIApplication.shared.delegate! as! AppDelegate
-                appdelegate.tabbarVC?.selectedIndex = 0
-                self.navigationController?.popToRootViewController(animated: true)
+                if isFormAccount == true{
+                    self.navigationController?.popToRootViewController(animated: true)
+                }else{
+                    let appdelegate : AppDelegate = UIApplication.shared.delegate! as! AppDelegate
+                    appdelegate.tabbarVC?.selectedIndex = 0
+                    self.navigationController?.popToRootViewController(animated: true)
+                }
+               
             }
         }
         decisionHandler(.allow)

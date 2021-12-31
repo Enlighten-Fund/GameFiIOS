@@ -33,7 +33,7 @@ class DepositView: UIView{
     
     lazy var titleLabel : UILabel = {
         let temp = UILabel.init(frame: CGRect.zero)
-        temp.text = "Automatic posting"
+        temp.text = "Hands-free"
         temp.textColor = .white
         temp.font = UIFont(name: "Avenir Next Regular", size: 15)
         self.addSubview(temp)
