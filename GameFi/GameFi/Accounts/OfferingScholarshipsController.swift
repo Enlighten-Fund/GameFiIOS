@@ -371,9 +371,10 @@ class OfferingScholarshipsController: UIViewController {
         }
     }
     
-    @objc func joinDiscordBtnClick(btn:UIButton) {
-        if btn.tag - 50000 < self.dataSource!.count {
-            let scholarshipModel : ScholarshipModel = self.dataSource![btn.tag - 50000] as! ScholarshipModel
+    @objc func joinDiscordBtnClick(sender: UIGestureRecognizer) {
+        let label : UILabel = sender.view! as! UILabel
+        if label.tag - 50000 < self.dataSource!.count {
+            let scholarshipModel : ScholarshipModel = self.dataSource![label.tag - 50000] as! ScholarshipModel
             self.mc_loading(text: "Loading")
             DataManager.sharedInstance.fetchDiscord { result, reponse in
                 DispatchQueue.main.async { [self] in
@@ -382,21 +383,24 @@ class OfferingScholarshipsController: UIViewController {
                         let discordid : String = dic["discord_id"] as! String
                             if !discordid.isBlank{//已经绑定
                                 self.joinDiscordRequest(scholarship_id: Int(scholarshipModel.scholarship_id!)!)
-                            }else{
-                                self.mc_remove()
+                            }
+                        }else{
+                            self.mc_remove()
+                            if result.code == 500{//未绑定
                                 let webVC = GFWebController.init()
                                 webVC.isFormAccount = true
                                 webVC.agreeDiscordBlock = {
                                     self.joinDiscordRequest(scholarship_id: Int(scholarshipModel.scholarship_id!)!)
                                 }
                                 webVC.webView.load(URLRequest(url: URL.init(string: "https://discord.com/api/oauth2/authorize?client_id=925574421094228058&redirect_uri=https%3A%2F%2F2njrgbv2l6.execute-api.ap-northeast-1.amazonaws.com%2Fprod%2Fdiscord%2Fredirect&response_type=code&scope=identify")!))
-                                self.navigationController?.pushViewController(webVC, animated: true)
+                                let appdelegate : AppDelegate = UIApplication.shared.delegate! as! AppDelegate
+                                 appdelegate.managerAccontVC?.navigationController!.pushViewController(webVC, animated: true)
+                            }else{
+                                if  result.msg != nil && !result.msg!.isBlank {
+                                    self.mc_success(result.msg!)
+                                }
                             }
-                        }else{
-                            self.mc_remove()
-                            if  result.msg != nil && !result.msg!.isBlank {
-                                self.mc_success(result.msg!)
-                            }
+                            
                         }
                 }
             }
@@ -453,9 +457,9 @@ extension  OfferingScholarshipsController : UICollectionViewDelegate,UICollectio
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let scholarshipModel : ScholarshipModel = self.dataSource![indexPath.row] as! ScholarshipModel
         if scholarshipModel.staking == true {
-            return CGSize.init(width: IPhone_SCREEN_WIDTH - 30, height: 400)
+            return CGSize.init(width: IPhone_SCREEN_WIDTH - 30, height: 400 + 35)
         }
-        return CGSize(width: IPhone_SCREEN_WIDTH - 30, height: 440)
+        return CGSize(width: IPhone_SCREEN_WIDTH - 30, height: 440 + 35)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -467,12 +471,14 @@ extension  OfferingScholarshipsController : UICollectionViewDelegate,UICollectio
         cell.rightBtn.tag = 80000 + indexPath.row
         cell.btn.tag = 90000 + indexPath.row
         cell.editBtn.tag = 60000 + indexPath.row
-        cell.joinDiscordBtn.tag = 50000 + indexPath.row
+        cell.joinDiscordLabel.tag = 50000 + indexPath.row
         cell.btn.addTarget(self, action: #selector(stopOrPayBtnClick), for: .touchUpInside)
         cell.leftBtn.addTarget(self, action: #selector(stopOrPayBtnClick2), for: .touchUpInside)
         cell.rightBtn.addTarget(self, action: #selector(renewBtnClick), for: .touchUpInside)
         cell.editBtn.addTarget(self, action: #selector(editScholarBtnClick), for: .touchUpInside)
-        cell.joinDiscordBtn.addTarget(self, action: #selector(joinDiscordBtnClick), for: .touchUpInside)
+        cell.joinDiscordLabel.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action:#selector(joinDiscordBtnClick(sender:)))
+        cell.joinDiscordLabel.addGestureRecognizer(tap)
         return cell
     }
 

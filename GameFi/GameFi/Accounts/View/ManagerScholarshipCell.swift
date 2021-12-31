@@ -134,32 +134,41 @@ class ManagerScholarshipCell: UICollectionViewCell {
             make.width.equalTo(30)
         }
         
-        self.leftBtn.snp.makeConstraints { make in
+        self.discordImgView.snp.makeConstraints { make in
             make.top.equalTo(self.pwdTextFild!.snp.bottom).offset(10)
+            make.left.equalToSuperview().offset(15)
+            make.height.equalTo(25)
+            make.width.equalTo(25)
+        }
+        
+        self.joinDiscordLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(self.discordImgView.snp.centerY).offset(0)
+            make.left.equalTo(self.discordImgView.snp.right).offset(10)
+            make.right.equalToSuperview()
+            make.height.equalTo(25)
+        }
+        
+        self.leftBtn.snp.makeConstraints { make in
+            make.top.equalTo(self.discordImgView.snp.bottom).offset(10)
             make.width.equalTo((IPhone_SCREEN_WIDTH - 70)/2.0)
             make.height.equalTo(40)
             make.left.equalToSuperview().offset(15)
         }
         self.rightBtn.snp.makeConstraints { make in
-            make.top.equalTo(self.pwdTextFild!.snp.bottom).offset(10)
+            make.top.equalTo(self.discordImgView.snp.bottom).offset(10)
             make.width.equalTo((IPhone_SCREEN_WIDTH - 70)/2.0)
             make.height.equalTo(40)
             make.right.equalToSuperview().offset(-15)
         }
         
         self.btn.snp.makeConstraints { make in
-            make.top.equalTo(self.pwdTextFild!.snp.bottom).offset(10)
+            make.top.equalTo(self.discordImgView.snp.bottom).offset(10)
             make.right.equalToSuperview().offset(-15)
             make.height.equalTo(40)
             make.left.equalToSuperview().offset(15)
         }
         
-        self.joinDiscordBtn.snp.makeConstraints { make in
-            make.top.equalTo(self.contentView.snp.top).offset(0)
-            make.right.equalToSuperview().offset(0)
-            make.height.equalTo(40)
-            make.width.equalTo(140)
-        }
+       
     }
 
     func getLocalDate(from UTCDate: String) -> String {
@@ -291,6 +300,9 @@ class ManagerScholarshipCell: UICollectionViewCell {
         }
         self.endDateLabelView.rightLabel.textColor = .white
         self.flagImgView.image = UIImage.init(named: "")
+        if scholarshipModel.manager_user_name != nil{
+            self.joinDiscordLabel.text = "#\(scholarshipModel.manager_user_name!)-scholarship"
+        }
         if scholarshipModel.status != nil {
                 if scholarshipModel.status == "ACTIVE" {
                     self.editBtn.snp.remakeConstraints { make in
@@ -355,21 +367,6 @@ class ManagerScholarshipCell: UICollectionViewCell {
                     self.leftBtn.isHidden = true
                     self.rightBtn.isHidden = true
                 } else if scholarshipModel.status == "MANAGER_PAID" {
-                    self.editBtn.snp.remakeConstraints { make in
-                        make.centerY.equalTo(self.scholarshipNameLabelView.snp.centerY)
-                        make.right.equalToSuperview().offset(-15)
-                        make.height.equalTo(30)
-                        make.width.equalTo(0)
-                    }
-                    self.btn.setTitle("Already ended", for: .normal)
-                    self.btn.layer.borderColor = UIColor.clear.cgColor
-                    self.btn.layer.borderWidth = 0
-                    self.btn.backgroundColor = .gray
-                    self.btn.isEnabled = false
-                    self.btn.isHidden = false
-                    self.leftBtn.isHidden = true
-                    self.rightBtn.isHidden = true
-                } else if scholarshipModel.status == "END" {
                     self.editBtn.snp.remakeConstraints { make in
                         make.centerY.equalTo(self.scholarshipNameLabelView.snp.centerY)
                         make.right.equalToSuperview().offset(-15)
@@ -560,16 +557,17 @@ class ManagerScholarshipCell: UICollectionViewCell {
         self.contentView.addSubview(tempBtn)
         return tempBtn
     }()
-    
-    lazy var joinDiscordBtn : UIButton = {
-        let tempBtn = UIButton.init(frame: CGRect.zero)
-        tempBtn.layer.cornerRadius = 3
-        tempBtn.layer.masksToBounds = true
-        tempBtn.setTitleColor(.white, for: .normal)
-        tempBtn.titleLabel?.font = UIFont(name: "Avenir Next Medium", size: 14)
-        tempBtn.setTitle("Join Discord", for: .normal)
-        tempBtn.backgroundColor = UIColor(red: 0.25, green: 0.43, blue: 0.84, alpha: 1)
-        self.contentView.addSubview(tempBtn)
-        return tempBtn
+    lazy var discordImgView : UIImageView = {
+        let tempImgView = UIImageView.init()
+        tempImgView.image = UIImage.init(named: "profile_discord")
+        self.contentView.addSubview(tempImgView)
+        return tempImgView
+    }()
+    lazy var joinDiscordLabel : UILabel = {
+        let tempLabel = UILabel.init(frame: CGRect.zero)
+        tempLabel.font = UIFont(name: "Avenir Next Medium", size: 14)
+        tempLabel.textAlignment = .left
+        self.contentView.addSubview(tempLabel)
+        return tempLabel
     }()
 }

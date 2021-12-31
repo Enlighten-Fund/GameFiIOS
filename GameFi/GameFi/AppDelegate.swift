@@ -84,6 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
                 let v3 = TrackController()
                 let v4 = ProfileGuestController()
                 self.homeVC = v1
+                self.scholarAccontVC = v2
                 v1.tabBarItem = ESTabBarItem.init(title: "Tavern", image: UIImage(named: "explore"), selectedImage: UIImage(named: "explore_select"))
                 v2.tabBarItem = ESTabBarItem.init(title: "Account", image: UIImage(named: "accounts"), selectedImage: UIImage(named: "accounts_select"))
                 v3.tabBarItem = ESTabBarItem.init(title: "Tracker", image: UIImage(named: "tracker"), selectedImage: UIImage(named: "tracker_select"))
@@ -110,6 +111,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
                 let v3 = TrackController()
                 let v4 = ProfileGuestController()
                 self.homeVC = v1
+                self.managerAccontVC = v2
                 v1.tabBarItem = ESTabBarItem.init(title: "Tavern", image: UIImage(named: "explore"), selectedImage: UIImage(named: "explore_select"))
                 v2.tabBarItem = ESTabBarItem.init(title: "Account", image: UIImage(named: "accounts"), selectedImage: UIImage(named: "accounts_select"))
                 v3.tabBarItem = ESTabBarItem.init(title: "Tracker", image: UIImage(named: "tracker"), selectedImage: UIImage(named: "tracker_select"))
@@ -221,8 +223,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
         let currentRole = UserManager.sharedInstance.currentRole()
         if currentRole == 1 {
             v2 = ScholarAccountsController()
+            self.scholarAccontVC = v2 as? ScholarAccountsController
         }else{
             v2 = ManagerAccountsController()
+            self.managerAccontVC = v2 as? ManagerAccountsController
         }
         let v3 = TrackController()
         let v4 = ProfileGuestController()
