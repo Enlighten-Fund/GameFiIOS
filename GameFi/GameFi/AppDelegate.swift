@@ -13,7 +13,7 @@ import ESTabBarController_swift
 import IQKeyboardManager
 import AWSCognitoIdentityProvider
 import AWSMobileClient
-import Bugly
+//import Bugly
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate{
     var homeVC : HomeController? = nil
@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate
            UITabBar.appearance().tintColor = UIColor.gray
        }
        self.window?.rootViewController = self.tabbarVC
-        Bugly.start(withAppId: "95913c773a")
+//        Bugly.start(withAppId: "95913c773a")
         IQKeyboardManager.shared().isEnabled = true
         IQKeyboardManager.shared().isEnableAutoToolbar = true
         AbilityUtil.sharedInstance.config()

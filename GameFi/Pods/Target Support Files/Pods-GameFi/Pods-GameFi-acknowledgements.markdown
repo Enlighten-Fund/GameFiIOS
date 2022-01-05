@@ -586,11 +586,6 @@ THE SOFTWARE.
       of your accepting any such warranty or additional liability.
 
 
-## Bugly
-
-Copyright (C) 2017 Tencent Bugly, Inc. All rights reserved.
-
-
 ## ESTabBarController-swift
 
 The MIT License (MIT)

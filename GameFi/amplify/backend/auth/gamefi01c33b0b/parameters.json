@@ -2,5 +2,21 @@
   "authSelections": "userPoolOnly",
   "resourceName": "gamefi01c33b0b",
   "serviceType": "imported",
-  "region": "ap-northeast-1"
+  "region": "ap-northeast-1",
+  "aliasAttributes": [
+    "email",
+    "phone_number",
+    "preferred_username"
+  ],
+  "authProvidersUserPool": [],
+  "requiredAttributes": [
+    "email"
+  ],
+  "passwordPolicyMinLength": 6,
+  "passwordPolicyCharacters": [],
+  "mfaConfiguration": "OFF",
+  "autoVerifiedAttributes": [
+    "email"
+  ],
+  "mfaTypes": []
 }

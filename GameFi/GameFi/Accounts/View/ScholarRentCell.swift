@@ -501,6 +501,7 @@ class ScholarRentCell: UICollectionViewCell {
         let tempLabel = UILabel.init(frame: CGRect.zero)
         tempLabel.font = UIFont(name: "Avenir Next Medium", size: 14)
         tempLabel.textAlignment = .left
+        tempLabel.textColor = .white
         self.contentView.addSubview(tempLabel)
         return tempLabel
     }()
