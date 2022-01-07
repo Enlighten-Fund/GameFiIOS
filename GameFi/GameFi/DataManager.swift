@@ -637,9 +637,9 @@ class DataManager: NSObject {
         let dic = [:] as [String : Any]
         self.POST(url: "common/get_version", param: dic ) { result, reponse in
             if result.success!{
-                completeBlock(result,result.data)
+                completeBlock(result,reponse)
             }else{
-                completeBlock(result,result.data)
+                completeBlock(result,reponse)
             }
         }
     }
