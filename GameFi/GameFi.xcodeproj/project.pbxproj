@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		15092795570575A8D11E51AF /* Pods_GameFi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCCE75DA83DE142077945AEF /* Pods_GameFi.framework */; };
+		58A1882C2788049B00A635B7 /* BillController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1882B2788049B00A635B7 /* BillController.swift */; };
+		58A1882E2788064E00A635B7 /* BillHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1882D2788064E00A635B7 /* BillHeadView.swift */; };
+		58A1883027880E6B00A635B7 /* BillModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1882F27880E6B00A635B7 /* BillModel.swift */; };
+		58A188322788158500A635B7 /* BillPayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A188312788158500A635B7 /* BillPayCell.swift */; };
 		7BCBC07F76E99519033E01A6 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = CBF9F66A81AD584A3895DB4F /* amplifyconfiguration.json */; };
 		7C326CFCDF747D3682D551F3 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = F1EDDF7C6BA0C87EAB5C8C12 /* awsconfiguration.json */; };
 		9800DBED277D56440006FB1B /* MMRQRCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9800DBEC277D56440006FB1B /* MMRQRCell.swift */; };
@@ -128,6 +132,10 @@
 
 /* Begin PBXFileReference section */
 		2056B7442627D4EF41EBF823 /* Pods-GameFi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameFi.release.xcconfig"; path = "Target Support Files/Pods-GameFi/Pods-GameFi.release.xcconfig"; sourceTree = "<group>"; };
+		58A1882B2788049B00A635B7 /* BillController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillController.swift; sourceTree = "<group>"; };
+		58A1882D2788064E00A635B7 /* BillHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillHeadView.swift; sourceTree = "<group>"; };
+		58A1882F27880E6B00A635B7 /* BillModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillModel.swift; sourceTree = "<group>"; };
+		58A188312788158500A635B7 /* BillPayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillPayCell.swift; sourceTree = "<group>"; };
 		9800DBEC277D56440006FB1B /* MMRQRCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMRQRCell.swift; sourceTree = "<group>"; };
 		980A7DC12728135B006AE4C4 /* GFNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFNavController.swift; sourceTree = "<group>"; };
 		980A7DC3272828FD006AE4C4 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -461,6 +469,7 @@
 				9830EF1C274E626200352B26 /* ApplicationModel.swift */,
 				9830EF1E274E66E800352B26 /* ScholarshipModel.swift */,
 				982B476F274F3B3C004C3B52 /* PaymentModel.swift */,
+				58A1882F27880E6B00A635B7 /* BillModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -569,6 +578,7 @@
 				9858176A2746907B00D8CFCA /* ScholarAccountsController.swift */,
 				98581770274796B600D8CFCA /* EditScholarshipController.swift */,
 				98986676276C2F6B00BF4BE0 /* ScholarHistoryController.swift */,
+				58A1882B2788049B00A635B7 /* BillController.swift */,
 			);
 			path = Accounts;
 			sourceTree = "<group>";
@@ -584,6 +594,8 @@
 				9858176E27473C1F00D8CFCA /* ScholarApplyCell.swift */,
 				98986678276C376200BF4BE0 /* ManagerHistoryCell.swift */,
 				98986680276C82B200BF4BE0 /* ScholarHistoryCell.swift */,
+				58A1882D2788064E00A635B7 /* BillHeadView.swift */,
+				58A188312788158500A635B7 /* BillPayCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -746,6 +758,7 @@
 				98581722273CEBD600D8CFCA /* NoOfferScholarshipController.swift in Sources */,
 				98D99417273A8DDC006AA8DC /* NotificationCell.swift in Sources */,
 				980A7DC22728135B006AE4C4 /* GFNavController.swift in Sources */,
+				58A1882E2788064E00A635B7 /* BillHeadView.swift in Sources */,
 				98823A412729674500D9A7CD /* Define.swift in Sources */,
 				98D9941D273B6D68006AA8DC /* TrackHeadView.swift in Sources */,
 				98D99414273A8CFE006AA8DC /* NotificationController.swift in Sources */,
@@ -797,6 +810,7 @@
 				984472B4274CD91300DAE315 /* UserInfoStateController.swift in Sources */,
 				9830EF1F274E66E800352B26 /* ScholarshipModel.swift in Sources */,
 				980DB7C927356C85006ED3BE /* LabelAndLabelView.swift in Sources */,
+				58A188322788158500A635B7 /* BillPayCell.swift in Sources */,
 				9858172E273D205600D8CFCA /* PostScholarshipCell.swift in Sources */,
 				984BDBA4272C0E9300F6144B /* Extension.swift in Sources */,
 				9898667D276C644500BF4BE0 /* TYPageTitleViewDivide.swift in Sources */,
@@ -804,6 +818,7 @@
 				984BDB95272ACD0A00F6144B /* RegisterController.swift in Sources */,
 				980DB7AE2734F677006ED3BE /* LYDropListView.swift in Sources */,
 				980A7DCA27292034006AE4C4 /* GFResult.swift in Sources */,
+				58A1882C2788049B00A635B7 /* BillController.swift in Sources */,
 				98D9941A273A9A17006AA8DC /* TrackController.swift in Sources */,
 				9811EA1B2726BB2700B0ACF0 /* ViewController.swift in Sources */,
 				984BF30D2773040D0009C752 /* DepositView.swift in Sources */,
@@ -839,6 +854,7 @@
 				9800DBED277D56440006FB1B /* MMRQRCell.swift in Sources */,
 				9811EA172726BB2700B0ACF0 /* AppDelegate.swift in Sources */,
 				98E09B5C273129140020D97D /* Usermodel.swift in Sources */,
+				58A1883027880E6B00A635B7 /* BillModel.swift in Sources */,
 				984BDB99272BA23600F6144B /* RegisterHeadView.swift in Sources */,
 				984BDB9B272BC6C200F6144B /* LabelTextFildCell.swift in Sources */,
 				985817542743990100D8CFCA /* GFAlert.swift in Sources */,

@@ -699,5 +699,28 @@ class DataManager: NSObject {
             }
         }
     }
+    //bill payment
+    func fetchPaymentValue(completeBlock: @escaping CompleteBlock) {
+        let dic = [:] as [String : Any]
+        self.POST(url: "payment/get_payment_value", param: dic ) { result, reponse in
+            if result.success!{
+                completeBlock(result,reponse)
+            }else{
+                completeBlock(result,reponse)
+            }
+        }
+    }
+    //
+    func fetchPaymentDetail(pageIndex:Int,completeBlock: @escaping CompleteBlock) {
+        let dic = ["page_index" : pageIndex,"page_size" : 20] as [String : Any]
+        self.POST(url: "payment/get_payment_detail", param: dic ) { result, reponse in
+            if result.success!{
+                let billModel : BillModel = JsonUtil.dictionaryToModel(reponse as! [String : Any], BillModel.self) as! BillModel
+                completeBlock(result,billModel)
+            }else{
+                completeBlock(result,reponse)
+            }
+        }
+    }
 }
 
