@@ -179,7 +179,6 @@
 		984BDBAB272E494600F6144B /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		984BF30C2773040D0009C752 /* DepositView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositView.swift; sourceTree = "<group>"; };
 		985205DA27674CA700C3F874 /* GameFi.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GameFi.entitlements; sourceTree = "<group>"; };
-		985205DB27674D8700C3F874 /* apple-app-site-association */ = {isa = PBXFileReference; lastKnownFileType = text; path = "apple-app-site-association"; sourceTree = "<group>"; };
 		9858171D273CE4CE00D8CFCA /* LatestApplyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestApplyController.swift; sourceTree = "<group>"; };
 		9858171F273CE6AE00D8CFCA /* LatestScholarshipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestScholarshipCell.swift; sourceTree = "<group>"; };
 		98581721273CEBD600D8CFCA /* NoOfferScholarshipController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoOfferScholarshipController.swift; sourceTree = "<group>"; };
@@ -371,7 +370,6 @@
 		9811EA0A2726BB2700B0ACF0 = {
 			isa = PBXGroup;
 			children = (
-				985205DB27674D8700C3F874 /* apple-app-site-association */,
 				985817422742784B00D8CFCA /* axieability.json */,
 				98581787274CB7B100D8CFCA /* countries.json */,
 				9811EA152726BB2700B0ACF0 /* GameFi */,
@@ -680,13 +678,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-GameFi/Pods-GameFi-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-GameFi/Pods-GameFi-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -979,8 +973,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = GameFi/GameFi.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = GB62JTZ689;
 				INFOPLIST_FILE = GameFi/Info.plist;
@@ -989,10 +983,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.enlighten.CryptoNinjaLocal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = localHoc2;
+				SWIFT_ENABLE_BATCH_MODE = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "GameFi/General/GameFi-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1019,10 +1014,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.enlighten.CryptoNinjaLocal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = LocalHoc;
+				PROVISIONING_PROFILE_SPECIFIER = localHoc2;
+				SWIFT_ENABLE_BATCH_MODE = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "GameFi/General/GameFi-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

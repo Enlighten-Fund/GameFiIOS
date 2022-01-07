@@ -1,7 +1,8 @@
+
 platform :ios, '11.0'
 
 target 'GameFi' do
-use_frameworks!
+  use_frameworks!
   pod 'Amplify'
   pod 'AmplifyPlugins/AWSCognitoAuthPlugin'
   pod 'Alamofire'
@@ -13,5 +14,4 @@ use_frameworks!
   pod 'IQKeyboardManager'
   pod 'MCToast'
   pod 'JXWebViewController'
-
 end
