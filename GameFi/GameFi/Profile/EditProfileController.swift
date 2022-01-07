@@ -188,7 +188,7 @@ class EditProfileController: ViewController {
                          self.editBtnView?.btn.addTarget(self, action: #selector(updateBtnClick), for: .touchUpInside)
                          let attributeString = NSMutableAttributedString(string:"Profile (Verified)")
                          attributeString.addAttributes([NSAttributedString.Key.foregroundColor : UIColor(red: 1, green: 1, blue: 1, alpha: 1), NSAttributedString.Key.font: UIFont(name: "PingFang SC Semibold", size: 15) as Any], range: NSMakeRange(0, 8))
-                         attributeString.addAttributes([NSAttributedString.Key.foregroundColor :UIColor.init(hexString: "0x4DD16D"), NSAttributedString.Key.font: UIFont(name: "PingFang SC Semibold", size: 15) as Any], range: NSMakeRange(8, 11))
+                         attributeString.addAttributes([NSAttributedString.Key.foregroundColor :UIColor.init(hexString: "0x4DD16D"), NSAttributedString.Key.font: UIFont(name: "PingFang SC Semibold", size: 15) as Any], range: NSMakeRange(8, 10))
                          self.titleLabel?.attributedText = attributeString
                      }
                 }
