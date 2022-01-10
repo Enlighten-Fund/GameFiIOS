@@ -13,6 +13,8 @@
 		58A1883027880E6B00A635B7 /* BillModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1882F27880E6B00A635B7 /* BillModel.swift */; };
 		58A188322788158500A635B7 /* BillPayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A188312788158500A635B7 /* BillPayCell.swift */; };
 		58A188342788554500A635B7 /* QRViewContorller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A188332788554500A635B7 /* QRViewContorller.swift */; };
+		58A18836278C035D00A635B7 /* CheckVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A18835278C035D00A635B7 /* CheckVersion.swift */; };
+		58A18838278C036900A635B7 /* UIAlertController+tip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A18837278C036900A635B7 /* UIAlertController+tip.swift */; };
 		7BCBC07F76E99519033E01A6 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = CBF9F66A81AD584A3895DB4F /* amplifyconfiguration.json */; };
 		7C326CFCDF747D3682D551F3 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = F1EDDF7C6BA0C87EAB5C8C12 /* awsconfiguration.json */; };
 		9800DBED277D56440006FB1B /* MMRQRCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9800DBEC277D56440006FB1B /* MMRQRCell.swift */; };
@@ -138,6 +140,8 @@
 		58A1882F27880E6B00A635B7 /* BillModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillModel.swift; sourceTree = "<group>"; };
 		58A188312788158500A635B7 /* BillPayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillPayCell.swift; sourceTree = "<group>"; };
 		58A188332788554500A635B7 /* QRViewContorller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRViewContorller.swift; sourceTree = "<group>"; };
+		58A18835278C035D00A635B7 /* CheckVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckVersion.swift; sourceTree = "<group>"; };
+		58A18837278C036900A635B7 /* UIAlertController+tip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+tip.swift"; sourceTree = "<group>"; };
 		9800DBEC277D56440006FB1B /* MMRQRCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMRQRCell.swift; sourceTree = "<group>"; };
 		980A7DC12728135B006AE4C4 /* GFNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFNavController.swift; sourceTree = "<group>"; };
 		980A7DC3272828FD006AE4C4 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -296,6 +300,8 @@
 		980DB78A27327DF9006ED3BE /* General */ = {
 			isa = PBXGroup;
 			children = (
+				58A18835278C035D00A635B7 /* CheckVersion.swift */,
+				58A18837278C036900A635B7 /* UIAlertController+tip.swift */,
 				984472B8274CF13800DAE315 /* MJChiBaoZiHeader.h */,
 				984472B9274CF13800DAE315 /* MJChiBaoZiHeader.m */,
 				984472BC274CF31000DAE315 /* MJChiBaoZiFooter.h */,
@@ -829,10 +835,12 @@
 				98769435273941890075CA0F /* ProfileGuestHeaderView.swift in Sources */,
 				98581726273CF70900D8CFCA /* NoOfferHeaderView.swift in Sources */,
 				980DB79A2733D391006ED3BE /* UIView+FastKit.swift in Sources */,
+				58A18838278C036900A635B7 /* UIAlertController+tip.swift in Sources */,
 				9858174B274295A500D8CFCA /* TrackSumModel.swift in Sources */,
 				9898667F276C650800BF4BE0 /* TYPageViewDivide.swift in Sources */,
 				980DB7A72733F19E006ED3BE /* BaseModel.swift in Sources */,
 				985817782749349700D8CFCA /* IDPhotoCell.swift in Sources */,
+				58A18836278C035D00A635B7 /* CheckVersion.swift in Sources */,
 				984BDBA6272C1C3800F6144B /* ConfirmCodeCell.swift in Sources */,
 				987694292738F1440075CA0F /* ScholarDetailController.swift in Sources */,
 				980DB7A52733F158006ED3BE /* JsonUtil.swift in Sources */,

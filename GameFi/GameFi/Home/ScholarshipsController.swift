@@ -9,7 +9,6 @@ import UIKit
 import MJRefresh
 import SnapKit
 import Foundation
-
 import AWSMobileClient
 
 
@@ -64,37 +63,110 @@ class ScholarshipsController: UIViewController {
         
     }
     func checkVersion() {
-        DataManager.sharedInstance.fetchAppVersion { result, reponse in
-            if result.success!{
-                let localV : String = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
-                let dic : [String:AnyObject] = reponse as! [String : AnyObject]
-                let str : String = dic["version"] as! String
-                if localV != str {
-                    DispatchQueue.main.async { [self] in
-                        GFAlert.showAlert(titleStr: "App notice：", msgStr: "We have a new version", currentVC: self, cancelStr: "OK", cancelHandler: { alert in
-                            let url = URL(string: "itms-apps://itunes.apple.com/cn/app/id1598869169?mt=8")
-//                                        let url = URL(string: "https://www.pgyer.com/rrZh")
-                            // 注意: 跳转之前, 可以使用 canOpenURL: 判断是否可以跳转
-                            if !UIApplication.shared.canOpenURL(url!) {
-                                 // 不能跳转就不要往下执行了
-                                 return
-                            }
-                            UIApplication.shared.open(url!, options: [:]) { (success) in
-                                 if (success) {
-                                      print("10以后可以跳转url")
-                                 }else{
-                                      print("10以后不能完成跳转")
-                                 }
-                             }
-                        }, otherBtns: nil) { index in
-
-                        }
-                    }
-
-                }
-
-            }
-        }
+        // 显示自定义 view
+        CheckVersion.checkVersion(kAppId, nil)
+       
+//        let path = "https://itunes.apple.com/lookup?id=1598869169"
+//        self.mc_loading(text:"Loading")
+//        var headers:HTTPHeaders?
+//        headers = ["Content-Type":"application/json;charset=UTF-8"]
+//        let request = AF.request(path,method: .post,parameters: [:],encoding: JSONEncoding.default, headers: headers)
+//        request.responseJSON { (response) in
+//            switch response.result {
+//            case let .success(result):
+//                   let dic:Dictionary = try! JSONSerialization.jsonObject(with: result, options: JSONSerialization.ReadingOptions.mutableContainers) as! Dictionary<String,Any>
+//
+//                   if  dic["resultCount"] as! Int > 0{
+//
+//                       let results:Array = dic["results"] as! Array<Any>
+//                       if results.count > 0 {
+//                         let resultsDic:Dictionary = results.first as! Dictionary<String,Any>
+//                         let  version = resultsDic["version"] as! String
+//                           if version >  {
+//
+//                           }else{
+//
+//                           }
+//
+//                       }
+//
+//                   }else{
+//
+//                       SVProgressHUD.showError(withStatus: "检测版本失败".mgLocal)
+//
+//                   }
+//            case let .failure(error):
+//                debugPrint(error)
+//                
+//            }
+//        }
+//        guard let weakself = self else { return }
+//
+//                   if responseObj.error == nil {
+//
+//                       let dic:Dictionary = try! JSONSerialization.jsonObject(with: responseObj.data!, options: JSONSerialization.ReadingOptions.mutableContainers) as! Dictionary<String,Any>
+//
+//                       if  dic["resultCount"] as! Int > 0{
+//
+//                           let results:Array = dic["results"] as! Array<Any>
+//
+//                           if results.count > 0 {
+//
+//                               let resultsDic:Dictionary = results.first as! Dictionary<String,Any>
+//
+//                             let  version = resultsDic["version"] as! String
+//
+//                               if version > MGNetwork.share.appVersion {
+//
+//                               }else{
+//
+//                               }
+//
+//                           }
+//
+//                       }else{
+//
+//                           SVProgressHUD.showError(withStatus: "检测版本失败".mgLocal)
+//
+//                       }
+//
+//                   }else{
+//
+//                       SVProgressHUD.showError(withStatus: "检测版本失败".mgLocal)
+//
+//                   }
+//        
+//        DataManager.sharedInstance.fetchAppVersion { result, reponse in
+//            if result.success!{
+//                let localV : String = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+//                let dic : [String:AnyObject] = reponse as! [String : AnyObject]
+//                let str : String = dic["version"] as! String
+//                if localV != str {
+//                    DispatchQueue.main.async { [self] in
+//                        GFAlert.showAlert(titleStr: "App notice：", msgStr: "We have a new version", currentVC: self, cancelStr: "OK", cancelHandler: { alert in
+//                            let url = URL(string: "itms-apps://itunes.apple.com/cn/app/id1598869169?mt=8")
+////                                        let url = URL(string: "https://www.pgyer.com/rrZh")
+//                            // 注意: 跳转之前, 可以使用 canOpenURL: 判断是否可以跳转
+//                            if !UIApplication.shared.canOpenURL(url!) {
+//                                 // 不能跳转就不要往下执行了
+//                                 return
+//                            }
+//                            UIApplication.shared.open(url!, options: [:]) { (success) in
+//                                 if (success) {
+//                                      print("10以后可以跳转url")
+//                                 }else{
+//                                      print("10以后不能完成跳转")
+//                                 }
+//                             }
+//                        }, otherBtns: nil) { index in
+//
+//                        }
+//                    }
+//
+//                }
+//
+//            }
+//        }
         
     }
     
