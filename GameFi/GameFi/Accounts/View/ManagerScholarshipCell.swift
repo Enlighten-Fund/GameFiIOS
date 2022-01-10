@@ -301,7 +301,9 @@ class ManagerScholarshipCell: UICollectionViewCell {
         self.endDateLabelView.rightLabel.textColor = .white
         self.flagImgView.image = UIImage.init(named: "")
         if scholarshipModel.manager_user_name != nil{
-            self.joinDiscordLabel.text = "#\(scholarshipModel.manager_user_name!)-scholarship"
+            let attr: NSMutableAttributedString = NSMutableAttributedString(string: "#\(scholarshipModel.manager_user_name!)-scholarship", attributes: [NSAttributedString.Key.foregroundColor : UIColor.init(hexString: "0x3F6DD5"), NSAttributedString.Key.font : UIFont.systemFont(ofSize: 18), NSAttributedString.Key.underlineStyle : NSNumber(value: 1)])
+            self.joinDiscordLabel.attributedText = attr
+            self.joinDiscordLabel.clipsToBounds = true
         }
         if scholarshipModel.status != nil {
                 if scholarshipModel.status == "ACTIVE" {
