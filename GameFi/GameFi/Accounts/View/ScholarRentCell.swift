@@ -77,40 +77,15 @@ class ScholarRentCell: UICollectionViewCell {
             make.height.equalTo(25)
             make.left.equalToSuperview().offset(15)
         }
-        self.emailTitleLabel.snp.makeConstraints { make in
+        self.qrCodeLabelView.snp.makeConstraints { make in
             make.top.equalTo(self.endDateLabelView.snp.bottom)
             make.right.equalToSuperview().offset(-15)
             make.height.equalTo(25)
             make.left.equalToSuperview().offset(15)
         }
-        self.emailLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.emailTitleLabel.snp.bottom)
-            make.right.equalToSuperview().offset(-15)
-            make.height.equalTo(25)
-            make.left.equalToSuperview().offset(15)
-        }
-        self.secretTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.emailLabel.snp.bottom)
-            make.right.equalToSuperview().offset(-15)
-            make.height.equalTo(25)
-            make.left.equalToSuperview().offset(15)
-        }
-        self.pwdTextFild!.snp.makeConstraints { make in
-            make.top.equalTo(self.secretTitleLabel.snp.bottom)
-            make.left.equalToSuperview().offset(15)
-            make.height.equalTo(25)
-            make.right.equalTo(self.pwdSecureBtn.snp.left).offset(-10)
-        }
-
-        self.pwdSecureBtn.snp.makeConstraints { make in
-            make.centerY.equalTo(self.pwdTextFild!.snp.centerY)
-            make.right.equalToSuperview().offset(-15)
-            make.height.equalTo(20)
-            make.width.equalTo(30)
-        }
 
         self.discordImgView.snp.makeConstraints { make in
-            make.top.equalTo(self.pwdTextFild!.snp.bottom).offset(10)
+            make.top.equalTo(self.qrCodeLabelView.snp.bottom).offset(10)
             make.left.equalToSuperview().offset(15)
             make.height.equalTo(25)
             make.width.equalTo(25)
@@ -143,11 +118,7 @@ class ScholarRentCell: UICollectionViewCell {
             make.left.equalToSuperview().offset(15)
         }
     }
-    @objc func pwdSecureBtnClick(abtn:UIButton) {
-        abtn.isSelected = !abtn.isSelected
-        self.pwdTextFild?.isSecureTextEntry = !self.pwdTextFild!.isSecureTextEntry
-    }
-    
+   
     func getLocalDate(from UTCDate: String) -> String {
             
         let dateFormatter = DateFormatter.init()
@@ -233,12 +204,24 @@ class ScholarRentCell: UICollectionViewCell {
                 self.endDateLabelView.rightLabel.text = getLocalDate(from: stringFromDate(date: new))
             }
         }
-        if scholarshipModel.account_login != nil {
-            self.emailLabel.text = scholarshipModel.account_login
+        if scholarshipModel.status != nil {
+            if scholarshipModel.status == "ACTIVE"{
+                self.qrCodeLabelView.snp.remakeConstraints { make in
+                    make.top.equalTo(self.endDateLabelView.snp.bottom)
+                    make.right.equalToSuperview().offset(-15)
+                    make.height.equalTo(25)
+                    make.left.equalToSuperview().offset(15)
+                }
+            }else{
+                self.qrCodeLabelView.snp.remakeConstraints { make in
+                    make.top.equalTo(self.endDateLabelView.snp.bottom)
+                    make.right.equalToSuperview().offset(-15)
+                    make.height.equalTo(0)
+                    make.left.equalToSuperview().offset(15)
+                }
+            }
         }
-        if scholarshipModel.account_passcode != nil {
-            self.pwdTextFild!.text = scholarshipModel.account_passcode
-        }
+        
         if scholarshipModel.manager_user_name != nil{
             self.joinDiscordLabel.text = "#\(scholarshipModel.manager_user_name!)-scholarship"
         }
@@ -247,54 +230,14 @@ class ScholarRentCell: UICollectionViewCell {
                 self.btn.setTitle("Waiting payment", for: .normal)
                 self.btn.isEnabled = true
                 self.btn.backgroundColor = .clear
-                self.emailLabel.isHidden = false
-                self.emailTitleLabel.isHidden = false
-                self.pwdTextFild!.isHidden = false
-                self.secretTitleLabel.isHidden = false
-                self.leftBtn.snp.remakeConstraints { make in
-                    make.top.equalTo(self.discordImgView.snp.bottom).offset(10)
-                    make.width.equalTo((IPhone_SCREEN_WIDTH - 70)/2.0)
-                    make.height.equalTo(0)
-                    make.left.equalToSuperview().offset(15)
-                }
-                self.rightBtn.snp.remakeConstraints { make in
-                    make.top.equalTo(self.discordImgView.snp.bottom).offset(10)
-                    make.width.equalTo((IPhone_SCREEN_WIDTH - 70)/2.0)
-                    make.height.equalTo(0)
-                    make.right.equalToSuperview().offset(-15)
-                }
-                
-                self.btn.snp.remakeConstraints { make in
-                    make.top.equalTo(self.discordImgView.snp.bottom).offset(10)
-                    make.right.equalToSuperview().offset(-15)
-                    make.height.equalTo(40)
-                    make.left.equalToSuperview().offset(15)
-                }
+                self.leftBtn.isHidden = true
+                self.rightBtn.isHidden = true
+                self.btn.isHidden = false
             }else if scholarshipModel.status == "ACTIVE"{
-                self.emailLabel.isHidden = false
-                self.emailTitleLabel.isHidden = false
-                self.pwdTextFild!.isHidden = false
-                self.secretTitleLabel.isHidden = false
                 if scholarshipModel.is_evergreen != nil{
-                    self.leftBtn.snp.remakeConstraints { make in
-                        make.top.equalTo(self.discordImgView.snp.bottom).offset(10)
-                        make.width.equalTo((IPhone_SCREEN_WIDTH - 70)/2.0)
-                        make.height.equalTo(40)
-                        make.left.equalToSuperview().offset(15)
-                    }
-                    self.rightBtn.snp.remakeConstraints { make in
-                        make.top.equalTo(self.discordImgView.snp.bottom).offset(10)
-                        make.width.equalTo((IPhone_SCREEN_WIDTH - 70)/2.0)
-                        make.height.equalTo(40)
-                        make.right.equalToSuperview().offset(-15)
-                    }
-                    
-                    self.btn.snp.remakeConstraints { make in
-                        make.top.equalTo(self.discordImgView.snp.bottom).offset(10)
-                        make.right.equalToSuperview().offset(-15)
-                        make.height.equalTo(0)
-                        make.left.equalToSuperview().offset(15)
-                    }
+                    self.leftBtn.isHidden = false
+                    self.rightBtn.isHidden = false
+                    self.btn.isHidden = true
                     if scholarshipModel.is_evergreen == 0{//scholar manager都未发起renew
                         self.rightBtn.setTitle("Renew", for: .normal)
                         self.rightBtn.isEnabled = true
@@ -317,29 +260,9 @@ class ScholarRentCell: UICollectionViewCell {
                 self.btn.setTitle("Waiting payment", for: .normal)
                 self.btn.isEnabled = true
                 self.btn.backgroundColor = .clear
-                self.emailLabel.isHidden = false
-                self.emailTitleLabel.isHidden = false
-                self.pwdTextFild!.isHidden = false
-                self.secretTitleLabel.isHidden = false
-                self.leftBtn.snp.remakeConstraints { make in
-                    make.top.equalTo(self.discordImgView.snp.bottom).offset(10)
-                    make.width.equalTo((IPhone_SCREEN_WIDTH - 70)/2.0)
-                    make.height.equalTo(0)
-                    make.left.equalToSuperview().offset(15)
-                }
-                self.rightBtn.snp.remakeConstraints { make in
-                    make.top.equalTo(self.discordImgView.snp.bottom).offset(10)
-                    make.width.equalTo((IPhone_SCREEN_WIDTH - 70)/2.0)
-                    make.height.equalTo(0)
-                    make.right.equalToSuperview().offset(-15)
-                }
-                
-                self.btn.snp.remakeConstraints { make in
-                    make.top.equalTo(self.discordImgView.snp.bottom).offset(10)
-                    make.right.equalToSuperview().offset(-15)
-                    make.height.equalTo(40)
-                    make.left.equalToSuperview().offset(15)
-                }
+                self.leftBtn.isHidden = true
+                self.rightBtn.isHidden = true
+                self.btn.isHidden = false
             }
         }
     }
@@ -408,47 +331,15 @@ class ScholarRentCell: UICollectionViewCell {
         self.contentView.addSubview(tempLabelView)
         return tempLabelView
     }()
-   
-    lazy var emailTitleLabel : UILabel = {
-        let tempLabel = UILabel.init(frame: CGRect.zero)
-        tempLabel.text = "Account email"
-        tempLabel.font = UIFont(name: "Avenir Next Regular", size: 15)
-        tempLabel.textColor = UIColor(red: 0.58, green: 0.62, blue: 0.78, alpha: 1)
-        self.contentView.addSubview(tempLabel)
-        return tempLabel
-    }()
-    lazy var emailLabel : UILabel = {
-        let tempLabel = UILabel.init(frame: CGRect.zero)
-        tempLabel.font = UIFont(name: "Avenir Next Medium", size: 15)
-        tempLabel.textColor = .white
-        self.contentView.addSubview(tempLabel)
-        return tempLabel
-    }()
-    lazy var secretTitleLabel : UILabel = {
-        let tempLabel = UILabel.init(frame: CGRect.zero)
-        tempLabel.text = "Password"
-        tempLabel.font = UIFont(name: "Avenir Next Regular", size: 15)
-        tempLabel.textColor = UIColor(red: 0.58, green: 0.62, blue: 0.78, alpha: 1)
-        self.contentView.addSubview(tempLabel)
-        return tempLabel
-    }()
-    lazy var pwdTextFild : UITextField? = {
-        let tempTextField = UITextField.init(frame: CGRect.zero)
-        tempTextField.textColor = .white
-        tempTextField.font = UIFont(name: "PingFang SC Medium", size: 15)
-        tempTextField.backgroundColor = .clear
-        tempTextField.isSecureTextEntry = true
-        self.contentView.addSubview(tempTextField)
-        return tempTextField
-    }()
-    
-    lazy var pwdSecureBtn : UIButton = {
-        let tempBtn = UIButton.init(frame: CGRect.zero)
-        tempBtn.setImage(UIImage.init(named: "eye"), for: .normal)
-        tempBtn.setImage(UIImage.init(named: "eye_look"), for: .selected)
-        tempBtn.addTarget(self, action: #selector(pwdSecureBtnClick), for: .touchUpInside)
-        self.contentView.addSubview(tempBtn)
-        return tempBtn
+    lazy var qrCodeLabelView : LabelAndLabelInterView = {
+        let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
+        tempLabelView.leftLabel.text = "QR Code"
+        let str =  "View"
+        let attr: NSMutableAttributedString = NSMutableAttributedString(string: str, attributes: [NSAttributedString.Key.foregroundColor : UIColor.init(hexString: "0x3F6DD5"), NSAttributedString.Key.font : UIFont.systemFont(ofSize: 18), NSAttributedString.Key.underlineStyle : NSNumber(value: 1)])
+        tempLabelView.rightLabel.attributedText = attr
+        tempLabelView.clipsToBounds = true
+        self.contentView.addSubview(tempLabelView)
+        return tempLabelView
     }()
     
     lazy var btn : UIButton = {

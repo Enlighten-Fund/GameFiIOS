@@ -12,6 +12,7 @@
 		58A1882E2788064E00A635B7 /* BillHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1882D2788064E00A635B7 /* BillHeadView.swift */; };
 		58A1883027880E6B00A635B7 /* BillModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1882F27880E6B00A635B7 /* BillModel.swift */; };
 		58A188322788158500A635B7 /* BillPayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A188312788158500A635B7 /* BillPayCell.swift */; };
+		58A188342788554500A635B7 /* QRViewContorller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A188332788554500A635B7 /* QRViewContorller.swift */; };
 		7BCBC07F76E99519033E01A6 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = CBF9F66A81AD584A3895DB4F /* amplifyconfiguration.json */; };
 		7C326CFCDF747D3682D551F3 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = F1EDDF7C6BA0C87EAB5C8C12 /* awsconfiguration.json */; };
 		9800DBED277D56440006FB1B /* MMRQRCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9800DBEC277D56440006FB1B /* MMRQRCell.swift */; };
@@ -136,6 +137,7 @@
 		58A1882D2788064E00A635B7 /* BillHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillHeadView.swift; sourceTree = "<group>"; };
 		58A1882F27880E6B00A635B7 /* BillModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillModel.swift; sourceTree = "<group>"; };
 		58A188312788158500A635B7 /* BillPayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillPayCell.swift; sourceTree = "<group>"; };
+		58A188332788554500A635B7 /* QRViewContorller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRViewContorller.swift; sourceTree = "<group>"; };
 		9800DBEC277D56440006FB1B /* MMRQRCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMRQRCell.swift; sourceTree = "<group>"; };
 		980A7DC12728135B006AE4C4 /* GFNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFNavController.swift; sourceTree = "<group>"; };
 		980A7DC3272828FD006AE4C4 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -596,6 +598,7 @@
 				98986680276C82B200BF4BE0 /* ScholarHistoryCell.swift */,
 				58A1882D2788064E00A635B7 /* BillHeadView.swift */,
 				58A188312788158500A635B7 /* BillPayCell.swift */,
+				58A188332788554500A635B7 /* QRViewContorller.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -770,6 +773,7 @@
 				989866732768950000BF4BE0 /* EditProfileBtnView.swift in Sources */,
 				980DB7CD2738E9F6006ED3BE /* ScholarsCell.swift in Sources */,
 				98986683277042ED00BF4BE0 /* InvitateController.swift in Sources */,
+				58A188342788554500A635B7 /* QRViewContorller.swift in Sources */,
 				980DB78C27337D6F006ED3BE /* CollectionViewCell.swift in Sources */,
 				98581739273E921800D8CFCA /* UserManager.swift in Sources */,
 				9858176B2746907B00D8CFCA /* ScholarAccountsController.swift in Sources */,

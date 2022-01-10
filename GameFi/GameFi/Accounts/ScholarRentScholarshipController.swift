@@ -9,6 +9,7 @@ import UIKit
 import MJRefresh
 import SnapKit
 import Foundation
+import SwiftUI
 
 
 class ScholarRentScholarshipController: UIViewController {
@@ -266,7 +267,54 @@ class ScholarRentScholarshipController: UIViewController {
             }
         }
     }
+    @objc func showQR(sender: UIGestureRecognizer) {
+        let label : UILabel = sender.view! as! UILabel
+        if label.tag - 40000 < self.dataSource!.count {
+            let scholarshipModel : ScholarshipModel = self.dataSource![label.tag - 40000] as! ScholarshipModel
+            self.mc_loading(text: "Loading")
+            DataManager.sharedInstance.fetchScholarshipQR(scholarshipid: Int(scholarshipModel.scholarship_id!)!) { result, reponse in
+                DispatchQueue.main.async { [self] in
+                    self.mc_remove()
+                    if result.success!{
+                        let dic : [String:Any] = reponse as! [String : Any]
+                        let valid : Bool? = dic["valid"] as? Bool
+                        let imageStr : String? = dic["image"] as? String
+                        
+                        if valid == true{
+                            if imageStr != nil{
+                                let showAlert = UIAlertController(title: "Login with QR code. DO NOT share the QR code to anyone.", message: nil, preferredStyle: .alert)
+                                let imageView = UIImageView(frame: CGRect(x: 10, y: 80, width: 250, height: 250))
+                                //base64转image
+                                let data = NSData.init(base64Encoded: imageStr!, options:.ignoreUnknownCharacters)
+                                let img = UIImage.init(data: data! as Data)
+                                
+                                imageView.image = img // Your image here...
+                                showAlert.view.addSubview(imageView)
+                                let height = NSLayoutConstraint(item: showAlert.view as Any, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 380)
+                                let width = NSLayoutConstraint(item: showAlert.view as Any, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 250)
+                                showAlert.view.addConstraint(height)
+                                showAlert.view.addConstraint(width)
+                                showAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                                    // your actions here...
+                                }))
+                                self.present(showAlert, animated: true, completion: nil)
+                                
+                            }
+                        }else{
+                            GFAlert.showAlert(titleStr: "Notice:", msgStr: "QR code is invalid. Please wait for the update", currentVC: self, cancelStr: "OK", cancelHandler: { alertAction in
 
+                            }, otherBtns: nil) { index in
+                            }
+                        }
+                    }else{
+                        if  result.msg != nil && !result.msg!.isBlank {
+                            self.mc_success(result.msg!)
+                        }
+                    }
+                }
+            }
+        }
+    }
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -316,8 +364,13 @@ extension  ScholarRentScholarshipController : UICollectionViewDelegate,UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let scholarshipModel : ScholarshipModel = self.dataSource![indexPath.row] as! ScholarshipModel
-        return CGSize(width: IPhone_SCREEN_WIDTH - 30, height: 370 + 35)
+        let scholarshipModel : ScholarshipModel = self.dataSource![indexPath.row] as! ScholarshipModel
+        if scholarshipModel.status != nil {
+            if scholarshipModel.status == "ACTIVE"{
+                return CGSize(width: IPhone_SCREEN_WIDTH - 30, height: 305 + 35)
+            }
+        }
+        return CGSize(width: IPhone_SCREEN_WIDTH - 30, height: 305)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -335,6 +388,10 @@ extension  ScholarRentScholarshipController : UICollectionViewDelegate,UICollect
         cell.joinDiscordLabel.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action:#selector(joinDiscordBtnClick(sender:)))
         cell.joinDiscordLabel.addGestureRecognizer(tap)
+        cell.qrCodeLabelView.rightLabel.tag = 40000 + indexPath.row
+        cell.qrCodeLabelView.rightLabel.isUserInteractionEnabled = true
+        let tap2 = UITapGestureRecognizer(target: self, action:#selector(showQR(sender:)))
+        cell.qrCodeLabelView.rightLabel.addGestureRecognizer(tap2)
         return cell
     }
 
