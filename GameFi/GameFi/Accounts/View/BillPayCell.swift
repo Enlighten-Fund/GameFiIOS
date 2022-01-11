@@ -58,10 +58,10 @@ class BillPayCell: UICollectionViewCell {
             self.ninjaAddressLabelView.rightLabel.text = billPayModel.admin_ronin_address
         }
         if billPayModel.total_value != nil {
-            self.totalReturnLabelView.rightLabel.text = "\(billPayModel.total_value!)"
+            self.totalReturnLabelView.rightLabel.text = "\(lroundf(billPayModel.total_value!))"
         }
         if billPayModel.pay_value != nil {
-            self.owedLabelView.rightLabel.text = "\(billPayModel.pay_value!)"
+            self.owedLabelView.rightLabel.text = "\(lroundf(billPayModel.pay_value!))"
         }        
     }
     
