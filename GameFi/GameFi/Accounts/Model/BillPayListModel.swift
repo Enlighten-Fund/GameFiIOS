@@ -26,11 +26,3 @@ class BillPayListModel: BaseModel {
     required init() {}
 }
 
-class BillModel: BaseModel {
-    var admin_ronin_address : String?
-    var manager_ronin_address : String?
-    var tatal_pay_value : Float?
-    var payment_data_vo : BillPayListModel?
-    
-    required init() {}
-}

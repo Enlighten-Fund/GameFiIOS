@@ -10,7 +10,7 @@
 		15092795570575A8D11E51AF /* Pods_GameFi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCCE75DA83DE142077945AEF /* Pods_GameFi.framework */; };
 		58A1882C2788049B00A635B7 /* BillController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1882B2788049B00A635B7 /* BillController.swift */; };
 		58A1882E2788064E00A635B7 /* BillHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1882D2788064E00A635B7 /* BillHeadView.swift */; };
-		58A1883027880E6B00A635B7 /* BillModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1882F27880E6B00A635B7 /* BillModel.swift */; };
+		58A1883027880E6B00A635B7 /* BillPayListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1882F27880E6B00A635B7 /* BillPayListModel.swift */; };
 		58A188322788158500A635B7 /* BillPayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A188312788158500A635B7 /* BillPayCell.swift */; };
 		58A188342788554500A635B7 /* QRViewContorller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A188332788554500A635B7 /* QRViewContorller.swift */; };
 		58A18836278C035D00A635B7 /* CheckVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A18835278C035D00A635B7 /* CheckVersion.swift */; };
@@ -137,7 +137,7 @@
 		2056B7442627D4EF41EBF823 /* Pods-GameFi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameFi.release.xcconfig"; path = "Target Support Files/Pods-GameFi/Pods-GameFi.release.xcconfig"; sourceTree = "<group>"; };
 		58A1882B2788049B00A635B7 /* BillController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillController.swift; sourceTree = "<group>"; };
 		58A1882D2788064E00A635B7 /* BillHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillHeadView.swift; sourceTree = "<group>"; };
-		58A1882F27880E6B00A635B7 /* BillModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillModel.swift; sourceTree = "<group>"; };
+		58A1882F27880E6B00A635B7 /* BillPayListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillPayListModel.swift; sourceTree = "<group>"; };
 		58A188312788158500A635B7 /* BillPayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillPayCell.swift; sourceTree = "<group>"; };
 		58A188332788554500A635B7 /* QRViewContorller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRViewContorller.swift; sourceTree = "<group>"; };
 		58A18835278C035D00A635B7 /* CheckVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckVersion.swift; sourceTree = "<group>"; };
@@ -477,7 +477,7 @@
 				9830EF1C274E626200352B26 /* ApplicationModel.swift */,
 				9830EF1E274E66E800352B26 /* ScholarshipModel.swift */,
 				982B476F274F3B3C004C3B52 /* PaymentModel.swift */,
-				58A1882F27880E6B00A635B7 /* BillModel.swift */,
+				58A1882F27880E6B00A635B7 /* BillPayListModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -866,7 +866,7 @@
 				9800DBED277D56440006FB1B /* MMRQRCell.swift in Sources */,
 				9811EA172726BB2700B0ACF0 /* AppDelegate.swift in Sources */,
 				98E09B5C273129140020D97D /* Usermodel.swift in Sources */,
-				58A1883027880E6B00A635B7 /* BillModel.swift in Sources */,
+				58A1883027880E6B00A635B7 /* BillPayListModel.swift in Sources */,
 				984BDB99272BA23600F6144B /* RegisterHeadView.swift in Sources */,
 				984BDB9B272BC6C200F6144B /* LabelTextFildCell.swift in Sources */,
 				985817542743990100D8CFCA /* GFAlert.swift in Sources */,
@@ -1035,7 +1035,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 7;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = GB62JTZ689;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = GameFi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (

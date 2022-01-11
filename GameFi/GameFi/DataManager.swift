@@ -708,8 +708,8 @@ class DataManager: NSObject {
         let dic = ["page_index" : pageIndex,"page_size" : 20] as [String : Any]
         self.POST(url: "payment/get_payment_detail", param: dic ) { result, reponse in
             if result.success!{
-                let billModel : BillModel = JsonUtil.dictionaryToModel(reponse as! [String : Any], BillModel.self) as! BillModel
-                completeBlock(result,billModel)
+                let billPayListModel : BillPayListModel = JsonUtil.dictionaryToModel(reponse as! [String : Any], BillPayListModel.self) as! BillPayListModel
+                completeBlock(result,billPayListModel)
             }else{
                 completeBlock(result,reponse)
             }

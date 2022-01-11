@@ -132,21 +132,21 @@ extension  BillController : UICollectionViewDelegate,UICollectionViewDataSource,
                 self.collectionView.mj_footer?.endRefreshing()
                 self.collectionView.mj_header?.endRefreshing()
                 if result.success!{
-                    let billModel : BillModel = reponse as! BillModel
-                    let payListModel = billModel.payment_data_vo
+                    let billPayListModel : BillPayListModel = reponse as! BillPayListModel
                     if self.pageIndex == 1{
-                        self.dataSource = payListModel!.data
+                        self.dataSource = billPayListModel.data
                     }else{
-                        if payListModel!.data != nil {
-                            self.dataSource?.append(contentsOf: payListModel!.data!)
+                        if billPayListModel.data != nil {
+                            self.dataSource?.append(contentsOf: billPayListModel.data!)
                         }
 
                     }
-                    if payListModel!.next_page! > pageIndex {
-                        pageIndex = payListModel!.next_page!
+                    if billPayListModel.next_page! > pageIndex {
+                        pageIndex = billPayListModel.next_page!
                     }else{
                         self.collectionView.mj_footer?.endRefreshingWithNoMoreData()
                     }
+                    
                     self.collectionView.reloadData()
                 }else{
                     if  result.msg != nil && !result.msg!.isBlank {

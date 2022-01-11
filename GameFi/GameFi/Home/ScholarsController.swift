@@ -14,7 +14,8 @@ import Foundation
 class ScholarsController: UIViewController {
     var pageIndex = 1
     var dataSource : Array<Any>? = Array.init()
-    let sortArray:[String] = ["Latest", "Highest MMR"]
+//    let sortArray:[String] = ["avg_mmr", "avg_performance", "avg_return", "total_play_time"]
+    let sortArray:[String] = ["Avg MMR", "Avg Performance", "Avg Return", "Total Play Time"]
     var filter : String? = ""
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -144,10 +145,14 @@ extension  ScholarsController : UICollectionViewDelegate,UICollectionViewDataSou
     
     func requestListData() {
         var desc = ""
-        if self.filter == "Latest" {
-            desc = "scholar_since"
-        }else if self.filter == "Highest MMR"{
-            desc = "mmr"
+        if self.filter == "Avg MMR" {
+            desc = "avg_mmr"
+        }else if self.filter == "Avg Performance"{
+            desc = "avg_performance"
+        }else if self.filter == "Avg Return"{
+            desc = "avg_return"
+        }else if self.filter == "Total Play Time"{
+            desc = "total_play_time"
         }
         
         DataManager.sharedInstance.fetchScholar(filter: desc, pageIndex: pageIndex) { result, reponse in
