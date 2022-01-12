@@ -109,7 +109,7 @@ class ScholarshipsDetailController: ViewController {
     
     func changeRoleToScholar() {
         DispatchQueue.main.async {
-            GFAlert.showAlert(titleStr: "Notice:", msgStr: "Please switch your role to a scholar", currentVC: self, cancelStr: "Cancel", cancelHandler: { aletAction in
+            GFAlert.showAlert(titleStr: "Notice:", msgStr: "Before applying for a scholarship, you should be logged in as a scholar.", currentVC: self, cancelStr: "Cancel", cancelHandler: { aletAction in
                 
             }, otherBtns: ["YES"]) { idex in
                 UserManager.sharedInstance.updateRole(role: "1"){
@@ -152,7 +152,7 @@ class ScholarshipsDetailController: ViewController {
                 if result.success!{
                     NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: APPLYSUCCESS_NOFI), object: nil)
                     DispatchQueue.main.async { [self] in
-                        GFAlert.showAlert(titleStr: "Notice:", msgStr: "Apply success,please wait for the manager's consent", currentVC: self,cancelStr:"OK", cancelHandler: { action in
+                        GFAlert.showAlert(titleStr: "Notice:", msgStr: "Your application has been submitted successfully!", currentVC: self,cancelStr:"OK", cancelHandler: { action in
                             DispatchQueue.main.async { [self] in
                                 self.navigationController?.popViewController(animated: true)
                             }

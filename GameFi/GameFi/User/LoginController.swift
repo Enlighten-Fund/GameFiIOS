@@ -63,7 +63,7 @@ class LoginController: ViewController {
     
     func valifyAccount() -> Bool {
         if self.usernameTextField!.text == nil || self.usernameTextField!.text!.isBlank {
-            self.showNoticeLabel(notice: "Your email or username should be filled in")
+            self.showNoticeLabel(notice: "Please enter your username or email")
             self.updateTextField(textField: self.usernameTextField!, focus: true)
             return false
         }else{
@@ -87,7 +87,7 @@ class LoginController: ViewController {
     
     func valifyPassword() -> Bool {
         if self.passwordTextField!.text == nil || self.passwordTextField!.text!.isBlank {
-            self.showNoticeLabel(notice: "Your password should be filled in")
+            self.showNoticeLabel(notice: "Please enter your password")
             self.updateTextField(textField: self.passwordTextField!, focus: true)
             return false
         }else{
@@ -96,7 +96,7 @@ class LoginController: ViewController {
                 self.updateTextField(textField: self.passwordTextField!, focus: false)
                 return true
             }else{
-                self.showNoticeLabel(notice: "Password must be at least 8 characters and contain letters and numbers.")
+                self.showNoticeLabel(notice: "Password must contain at least 8 characters, including letters and numbers")
                 self.updateTextField(textField: self.passwordTextField!, focus: true)
                 return false
             }

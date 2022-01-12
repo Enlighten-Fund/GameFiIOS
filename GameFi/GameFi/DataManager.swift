@@ -86,7 +86,14 @@ class DataManager: NSObject {
                 case let .failure(error):
                     debugPrint(error)
                     let result = GFResult.init(error: error)
-                    completeBlock(result,error)
+                    if result.code == 10{
+                        UserManager.sharedInstance.updateToken {
+                            self.POST(url: url, param: param, completeBlock: completeBlock)
+                        }
+                    }else{
+                        completeBlock(result,error)
+                    }
+//                    completeBlock(result,error)
                 }
             }
         }

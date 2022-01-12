@@ -96,7 +96,7 @@ class ProfileController: ViewController {
     
     @objc func signBtnClick() {
         if userInfoModel!.scholar_status != nil {
-            if userInfoModel!.scholar_status == "NO" {
+            if userInfoModel!.scholar_status == "NO" || userInfoModel!.scholar_status == "DRAFT" {
                 self.navigationController?.pushViewController(EditProfileController.init(), animated: true)
             }
         }

@@ -39,7 +39,7 @@ class OfferingScholarshipsController: UIViewController {
         if btn.tag - 90000 < self.dataSource!.count {
             let scholarshipModel : ScholarshipModel = self.dataSource![btn.tag - 90000] as! ScholarshipModel
             if scholarshipModel.status == "ACTIVE" {
-                GFAlert.showAlert(titleStr: "Notice:", msgStr: "If you terminate the contract, your credit score will drop", currentVC: self,cancelStr:"Cancel", cancelHandler: { alertAction in
+                GFAlert.showAlert(titleStr: "Notice:", msgStr: "If you terminate the scholarship before the end date, [your credit score will decrease / you will have to pay an early termination fee of 50 SLP]. Are you sure you want to proceed?", currentVC: self,cancelStr:"Cancel", cancelHandler: { alertAction in
                     
                 }, otherBtns: ["Stop"]) { index in
                     self.mc_loading(text: "Loading")

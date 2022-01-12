@@ -46,6 +46,7 @@ class ScholarApplingScholarshipController: UIViewController{
                     DispatchQueue.main.async { [self] in
                         self.mc_remove()
                         if result.success!{
+                            self.mc_text("Application deleted successfully!")
                             self.collectionView.mj_header?.beginRefreshing()
                         }else{
                             if  result.msg != nil && !result.msg!.isBlank {

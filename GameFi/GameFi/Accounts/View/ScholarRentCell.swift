@@ -238,6 +238,8 @@ class ScholarRentCell: UICollectionViewCell {
             }else if scholarshipModel.status == "ACTIVE"{
                 if scholarshipModel.is_evergreen != nil{
                     self.leftBtn.isHidden = false
+                    self.leftBtn.setTitle("Terminate", for: .normal)
+                    self.leftBtn.isEnabled = true
                     self.rightBtn.isHidden = false
                     self.btn.isHidden = true
                     if scholarshipModel.is_evergreen == 0{//scholar manager都未发起renew
@@ -257,6 +259,13 @@ class ScholarRentCell: UICollectionViewCell {
                         self.rightBtn.isEnabled = false
                         self.rightBtn.backgroundColor = .gray
                     }
+                }else{
+                    self.leftBtn.isHidden = true
+                    self.rightBtn.isHidden = true
+                    self.btn.isHidden = false
+                    self.btn.setTitle("Terminate", for: .normal)
+                    self.btn.isEnabled = true
+                    self.btn.backgroundColor = .clear
                 }
             }else if scholarshipModel.status == "MANAGER_PAID"{
                 self.btn.setTitle("Waiting payment", for: .normal)

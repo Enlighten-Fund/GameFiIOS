@@ -51,14 +51,15 @@ class ScholarRentScholarshipController: UIViewController {
                     }
                 }
             }else if scholarshipModel.status == "ACTIVE"{
-                GFAlert.showAlert(titleStr: "Notice:", msgStr: "If you terminate the contract, your credit score will drop", currentVC: self,cancelStr:"Cancel", cancelHandler: { alertAction in
+                GFAlert.showAlert(titleStr: "Notice:", msgStr: "If you terminate the scholarship before the end date, your credit score will decrease. Do you still want to proceed?", currentVC: self,cancelStr:"Cancel", cancelHandler: { alertAction in
                     
-                }, otherBtns: ["Stop"]) { index in
+                }, otherBtns: ["Yes"]) { index in
                     self.mc_loading(text: "Loading")
                     DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: scholarshipModel.scholarship_id!, status: "PENDING_PAYMENT") { result, reponse in
                         DispatchQueue.main.async { [self] in
                             self.mc_remove()
                             if result.success!{
+                                self.mc_text("Scholarship terminated successfully!")
                                 self.collectionView.mj_header?.beginRefreshing()
                             }else{
                                 if  result.msg != nil && !result.msg!.isBlank {
@@ -96,14 +97,15 @@ class ScholarRentScholarshipController: UIViewController {
                     }
                 }
             }else if scholarshipModel.status == "ACTIVE"{
-                GFAlert.showAlert(titleStr: "Notice:", msgStr: "If you terminate the contract, your credit score will drop", currentVC: self,cancelStr:"Cancel", cancelHandler: { alertAction in
+                GFAlert.showAlert(titleStr: "Notice:", msgStr: "If you terminate the scholarship before the end date, your credit score will decrease. Do you still want to proceed?", currentVC: self,cancelStr:"Cancel", cancelHandler: { alertAction in
                     
-                }, otherBtns: ["Stop"]) { index in
+                }, otherBtns: ["Yes"]) { index in
                     self.mc_loading(text: "Loading")
                     DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: scholarshipModel.scholarship_id!, status: "PENDING_PAYMENT") { result, reponse in
                         DispatchQueue.main.async { [self] in
                             self.mc_remove()
                             if result.success!{
+                                self.mc_text("Scholarship terminated successfully!")
                                 self.collectionView.mj_header?.beginRefreshing()
                             }else{
                                 if  result.msg != nil && !result.msg!.isBlank {

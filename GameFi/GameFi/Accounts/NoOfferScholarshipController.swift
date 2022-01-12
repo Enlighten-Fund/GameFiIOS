@@ -108,7 +108,7 @@ class NoOfferScholarshipController: UIViewController {
             let scholarshipModel : ScholarshipModel = self.dataSource![btn.tag - 30000] as! ScholarshipModel
             if scholarshipModel.staking == true{
                 if scholarshipModel.status == "AUDIT"{
-                    GFAlert.showAlert(titleStr: "Notice:", msgStr: "If you recall the scholarship, the verification process will be terminated.", currentVC: self, cancelStr: "Cancel", cancelHandler: { alertAction in
+                    GFAlert.showAlert(titleStr: "Notice:", msgStr: "The applications you received for this scholarship will no longer be available.", currentVC: self, cancelStr: "Cancel", cancelHandler: { alertAction in
                         
                     }, otherBtns: ["OK"]) { index in
                         self.mc_loading(text: "Loading")
@@ -116,6 +116,7 @@ class NoOfferScholarshipController: UIViewController {
                             DispatchQueue.main.async { [self] in
                                 self.mc_remove()
                                 if result.success!{
+                                    self.mc_text("Scholarship recalled successfully!")
                                     self.collectionView.mj_header?.beginRefreshing()
                                 }else{
                                     if  result.msg != nil && !result.msg!.isBlank {
@@ -126,7 +127,7 @@ class NoOfferScholarshipController: UIViewController {
                         }
                     }
                 }else if scholarshipModel.status == "LISTING"{
-                    GFAlert.showAlert(titleStr: "Notice:", msgStr: "If you recall the scholarship, the application you received will expire.", currentVC: self, cancelStr: "Cancel", cancelHandler: { alertAction in
+                    GFAlert.showAlert(titleStr: "Notice:", msgStr: "The applications you received for this scholarship will no longer be available.", currentVC: self, cancelStr: "Cancel", cancelHandler: { alertAction in
                         
                     }, otherBtns: ["OK"]) { index in
                         self.mc_loading(text: "Loading")
@@ -134,6 +135,7 @@ class NoOfferScholarshipController: UIViewController {
                             DispatchQueue.main.async { [self] in
                                 self.mc_remove()
                                 if result.success!{
+                                    self.mc_text("Scholarship recalled successfully!")
                                     self.collectionView.mj_header?.beginRefreshing()
                                 }else{
                                     if  result.msg != nil && !result.msg!.isBlank {

@@ -185,7 +185,7 @@ class ScholarshipsController: UIViewController {
     
     func changeRoleToManager() {
         DispatchQueue.main.async {
-            GFAlert.showAlert(titleStr: "Notice:", msgStr: "Please switch your role to a manager", currentVC: self, cancelStr: "Cancel", cancelHandler: { aletAction in
+            GFAlert.showAlert(titleStr: "Notice:", msgStr: "Before posting a scholarship, you should be logged in as a manager.", currentVC: self, cancelStr: "Cancel", cancelHandler: { aletAction in
                 
             }, otherBtns: ["YES"]) { idex in
                 UserManager.sharedInstance.updateRole(role: "2"){

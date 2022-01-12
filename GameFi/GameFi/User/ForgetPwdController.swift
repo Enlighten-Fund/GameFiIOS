@@ -84,7 +84,7 @@ class ForgetPwdController: ViewController {
                 self.updateTextField(textField: self.emailTextField!, focus: false)
                 return true
             }else {
-                self.showNoticeLabel(notice: "Your email format is incorrect")
+                self.showNoticeLabel(notice: "Please enter a valid email address.")
                 self.updateTextField(textField: self.emailTextField!, focus: true)
                 return false
             }
@@ -98,7 +98,7 @@ class ForgetPwdController: ViewController {
             self.updateTextField(textField: self.passwordTextField!, focus: false)
             return true
         }else{
-            self.showNoticeLabel(notice: "Password must be at least 8 characters and contain letters and numbers.")
+            self.showNoticeLabel(notice: "Password must contain at least 8 characters, including letters and numbers.")
             self.updateTextField(textField: self.passwordTextField!, focus: true)
             return false
         }
