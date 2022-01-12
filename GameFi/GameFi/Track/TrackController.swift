@@ -86,6 +86,13 @@ class TrackController: ViewController {
                     let trackListModel : TrackListModel = reponse as! TrackListModel
                     if self.pageIndex == 1{
                         self.dataSource = trackListModel.data
+                        if self.dataSource!.count == 0 {
+                            let emptyView = DJEmptyView(tipInfo:"No Data", imageName: "nointernet")
+                            emptyView.tipColor = UIColor(red: 0.32, green: 0.35, blue: 0.5, alpha: 1)
+                            self.tableView!.dj_showEmptyView(emptyView)
+                        }else{
+                            self.tableView!.dj_hideEmptyView()
+                        }
                     }else{
                         if trackListModel.data != nil {
                             self.dataSource?.append(contentsOf: trackListModel.data!)

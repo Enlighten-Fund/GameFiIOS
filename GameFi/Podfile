@@ -14,4 +14,5 @@ target 'GameFi' do
   pod 'IQKeyboardManager'
   pod 'MCToast'
   pod 'JXWebViewController'
+
 end

@@ -23,7 +23,12 @@ class ScholarApplingScholarshipController: UIViewController{
             make.left.equalToSuperview().offset(15)
             make.right.equalToSuperview().offset(-15)
         }
-        
+//        let emptyView = EmptyView.init(frame: self.collectionView.bounds)
+//        emptyView.backgroundColor = .red
+//        self.collectionView.customNoDataView = emptyView
+//        self.collectionView.callBack = {(view) ->() in
+//            print("fewfwefew")
+//        }
         self.collectionView.mj_header?.beginRefreshing()
         /// 自定义通知
         NotificationCenter.default.addObserver(self, selector: #selector(applySuccess), name: NSNotification.Name(rawValue: APPLYSUCCESS_NOFI), object: nil)
@@ -177,15 +182,17 @@ extension  ScholarApplingScholarshipController : UICollectionViewDelegate,UIColl
                         if self.pageIndex == 1{
                             self.dataSource = applicationListModel.data
                             if self.dataSource!.count == 0 {
-//                                self.collectionView.ept.reloadData()
-//                                collectionView.ept.dataSource = self
-//                                collectionView.ept.delegate = self
+                                let emptyView = DJEmptyView(tipInfo:"No Data", imageName: "nointernet")
+                                emptyView.tipColor = UIColor(red: 0.32, green: 0.35, blue: 0.5, alpha: 1)
+                                self.collectionView.dj_showEmptyView(emptyView)
+                            }else{
+                                self.collectionView.dj_hideEmptyView()
                             }
                         }else{
                             if applicationListModel.data != nil {
                                 self.dataSource?.append(contentsOf: applicationListModel.data!)
                             }
-
+                            
                         }
                         if applicationListModel.next_page! > pageIndex {
                             pageIndex = applicationListModel.next_page!

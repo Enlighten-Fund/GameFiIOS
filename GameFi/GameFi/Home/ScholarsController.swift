@@ -163,6 +163,13 @@ extension  ScholarsController : UICollectionViewDelegate,UICollectionViewDataSou
                     let scholarListModel : ScholarListModel = reponse as! ScholarListModel
                     if self.pageIndex == 1{
                         self.dataSource = scholarListModel.data
+                        if self.dataSource!.count == 0 {
+                            let emptyView = DJEmptyView(tipInfo:"No Data", imageName: "nointernet")
+                            emptyView.tipColor = UIColor(red: 0.32, green: 0.35, blue: 0.5, alpha: 1)
+                            self.collectionView.dj_showEmptyView(emptyView)
+                        }else{
+                            self.collectionView.dj_hideEmptyView()
+                        }
                     }else{
                         if scholarListModel.data != nil {
                             self.dataSource?.append(contentsOf: scholarListModel.data!)

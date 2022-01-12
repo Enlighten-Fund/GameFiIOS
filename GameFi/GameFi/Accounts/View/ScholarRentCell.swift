@@ -346,7 +346,7 @@ class ScholarRentCell: UICollectionViewCell {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
         tempLabelView.leftLabel.text = "QR Code"
         let str =  "View"
-        let attr: NSMutableAttributedString = NSMutableAttributedString(string: str, attributes: [NSAttributedString.Key.foregroundColor : UIColor.init(hexString: "0x3F6DD5"), NSAttributedString.Key.font : UIFont.systemFont(ofSize: 18), NSAttributedString.Key.underlineStyle : NSNumber(value: 1)])
+        let attr: NSMutableAttributedString = NSMutableAttributedString(string: str, attributes: [NSAttributedString.Key.foregroundColor : UIColor.init(hexString: "0x3F6DD5"), NSAttributedString.Key.font : UIFont.systemFont(ofSize: 18)])
         tempLabelView.rightLabel.attributedText = attr
         tempLabelView.clipsToBounds = true
         self.contentView.addSubview(tempLabelView)

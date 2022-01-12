@@ -207,6 +207,13 @@ extension  LatestApplyController : UICollectionViewDelegate,UICollectionViewData
                     let applicationListModel : ApplicationListModel = reponse as! ApplicationListModel
                     if self.pageIndex == 1{
                         self.dataSource = applicationListModel.data
+                        if self.dataSource!.count == 0 {
+                            let emptyView = DJEmptyView(tipInfo:"No Data", imageName: "nointernet")
+                            emptyView.tipColor = UIColor(red: 0.32, green: 0.35, blue: 0.5, alpha: 1)
+                            self.collectionView.dj_showEmptyView(emptyView)
+                        }else{
+                            self.collectionView.dj_hideEmptyView()
+                        }
                     }else{
                         if applicationListModel.data != nil {
                             self.dataSource?.append(contentsOf: applicationListModel.data!)
