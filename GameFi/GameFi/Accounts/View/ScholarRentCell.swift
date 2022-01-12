@@ -238,7 +238,7 @@ class ScholarRentCell: UICollectionViewCell {
             }else if scholarshipModel.status == "ACTIVE"{
                 if scholarshipModel.is_evergreen != nil{
                     self.leftBtn.isHidden = false
-                    self.leftBtn.setTitle("Terminate", for: .normal)
+                    self.leftBtn.setTitle("Stop Grinding", for: .normal)
                     self.leftBtn.isEnabled = true
                     self.rightBtn.isHidden = false
                     self.btn.isHidden = true
@@ -263,7 +263,7 @@ class ScholarRentCell: UICollectionViewCell {
                     self.leftBtn.isHidden = true
                     self.rightBtn.isHidden = true
                     self.btn.isHidden = false
-                    self.btn.setTitle("Terminate", for: .normal)
+                    self.btn.setTitle("Stop Grinding", for: .normal)
                     self.btn.isEnabled = true
                     self.btn.backgroundColor = .clear
                 }
@@ -361,7 +361,7 @@ class ScholarRentCell: UICollectionViewCell {
         tempBtn.layer.borderColor = UIColor.white.cgColor
         tempBtn.setTitleColor(.white, for: .normal)
         tempBtn.titleLabel?.font = UIFont(name: "Avenir Next Medium", size: 14)
-        tempBtn.setTitle("Stop renting", for: .normal)
+        tempBtn.setTitle("Stop Grinding", for: .normal)
         tempBtn.backgroundColor = .clear
         self.contentView.addSubview(tempBtn)
         return tempBtn

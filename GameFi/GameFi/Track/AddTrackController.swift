@@ -65,9 +65,15 @@ class AddTrackController: ViewController {
             self.updateTextField(textField: self.accountNameTextField!, focus: true)
             return false
         }else{
-            self.hideNoticeLabel()
-            self.updateTextField(textField: self.accountNameTextField!, focus: false)
-            return true
+            if self.accountNameTextField!.validateUsername(){
+                self.hideNoticeLabel()
+                self.updateTextField(textField: self.accountNameTextField!, focus: false)
+                return true
+            }else {
+                self.showNoticeLabel(notice: "Username should be 5-16 characters in length, and can only contain letters, numbers and \"_\"")
+                self.updateTextField(textField: self.accountNameTextField!, focus: true)
+                return false
+            }
         }
     }
     
@@ -97,13 +103,21 @@ class AddTrackController: ViewController {
             self.updateTextField(textField: self.managerPercentTextField!, focus: true)
             return false
         }else{
-            let percent : Float = Float(self.managerPercentTextField!.text!)!
-            if percent < 0.00 || percent > 100.00 {
-                self.showNoticeLabel(notice: "Manager Percentage must be a number from 0 to 100")
-                self.updateTextField(textField: self.managerPercentTextField!, focus: false)
-                return false
+            if Float(self.managerPercentTextField!.text!) != nil{
+                let percent : Float = Float(self.managerPercentTextField!.text!)!
+                if percent < 0.00 || percent > 100 - (UserManager.sharedInstance.userinfoModel?.platform_fee)! {
+                    self.showNoticeLabel(notice: "Manager Percentage must be a number from 0 to \(100 - (UserManager.sharedInstance.userinfoModel?.platform_fee)!)")
+                    self.updateTextField(textField: self.managerPercentTextField!, focus: true)
+                    return false
+                }else{
+                    self.hideNoticeLabel()
+                    self.updateTextField(textField: self.managerPercentTextField!, focus: false)
+                    return true
+                }
             }else{
-                return true
+                self.showNoticeLabel(notice: "Manager Percentage must be a number from 0 to \(100 - (UserManager.sharedInstance.userinfoModel?.platform_fee)!)")
+                self.updateTextField(textField: self.managerPercentTextField!, focus: true)
+                return false
             }
         }
     }
@@ -123,6 +137,7 @@ class AddTrackController: ViewController {
             DispatchQueue.main.async { [self] in
                 self.mc_remove()
                 if result.success!{
+                    self.mc_text("Account added successfully!")
                     self.navigationController?.popViewController(animated: true)
                     if self.addTrackBlock != nil{
                         self.addTrackBlock!()

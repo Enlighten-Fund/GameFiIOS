@@ -62,55 +62,36 @@ class EditTrackController: ViewController {
     }
     
     
+    func updateTextField(textField:UITextField,focus:Bool)  {
+        if focus {
+            textField.layer.borderColor = UIColor.init(hexString: "0xB85050").cgColor
+        }else{
+            textField.layer.borderColor = UIColor(red: 0.27, green: 0.3, blue: 0.41, alpha: 1).cgColor
+        }
+    }
+    
     func valifyAccount() -> Bool{
         if self.accountNameTextField!.text == nil || self.accountNameTextField!.text!.isBlank {
             self.showNoticeLabel(notice: "Account name should be filled in")
+            self.updateTextField(textField: self.accountNameTextField!, focus: true)
             return false
         }else{
-            self.hideNoticeLabel()
-            return true
-        }
-    }
-    
-    func valifyRonin() -> Bool{
-        if self.roninTextField!.text == nil || self.roninTextField!.text!.isBlank {
-            self.showNoticeLabel(notice: "Ronin address should be filled in")
-            return false
-        }else if !self.roninTextField!.text!.starts(with: "0x") && !self.roninTextField!.text!.starts(with: "ronin:"){
-            self.showNoticeLabel(notice: "The ronin address should start with ronin: or 0x.")
-            return false
-        }else if self.roninTextField!.text!.count != 42 &&  self.roninTextField!.text!.count != 46{
-            self.showNoticeLabel(notice: "The ronin address should start with ronin: or 0x.")
-            return false
-        }else{
-            self.hideNoticeLabel()
-            return true
-        }
-    }
-    
-    func valifyPercent() -> Bool{
-        if self.managerPercentTextField!.text == nil || self.managerPercentTextField!.text!.isBlank {
-            self.showNoticeLabel(notice: "Manager percentage should be filled in")
-            return false
-        }else{
-            let percent : Float = Float(self.managerPercentTextField!.text!)!
-            if percent < 0.00 || percent > 100.00 {
-                self.showNoticeLabel(notice: "Manager percentage format is 0.00-100.00,Two significant decimals are supported")
-                return false
-            }else{
+            if self.accountNameTextField!.validateUsername(){
+                self.hideNoticeLabel()
+                self.updateTextField(textField: self.accountNameTextField!, focus: false)
                 return true
+            }else {
+                self.showNoticeLabel(notice: "Username should be 5-16 characters in length, and can only contain letters, numbers and \"_\"")
+                self.updateTextField(textField: self.accountNameTextField!, focus: true)
+                return false
             }
         }
     }
     
+
+    
     @objc func addTrack(){
         if !self.valifyAccount() {
-            return
-        }
-        if !self.valifyRonin() {
-            return
-        }
-        if !self.valifyPercent() {
             return
         }
         self.mc_loading(text: "Loading")
@@ -118,6 +99,7 @@ class EditTrackController: ViewController {
             DispatchQueue.main.async { [self] in
                 self.mc_remove()
                 if result.success!{
+                    self.mc_text("Account added successfully!")
                     self.navigationController?.popViewController(animated: true)
                     if self.editTrackBlock != nil{
                         self.editTrackBlock!()
@@ -213,13 +195,6 @@ extension  EditTrackController : UITableViewDelegate,UITableViewDataSource,UITex
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == self.accountNameTextField{
             self.valifyAccount()
-        }else if textField == self.roninTextField{
-            self.valifyRonin()
-        }else if textField == self.managerPercentTextField{
-            if self.valifyPercent(){
-                let str = String(format: "%.2f", 100 - Float(textField.text!)!)
-                self.scholarpercentageLabel!.text = "\(str)%    "
-            }
         }
         
     }

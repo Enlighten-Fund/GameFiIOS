@@ -122,7 +122,7 @@ class TrackController: ViewController {
                     let trackModel = dataSource![row]
                     self.navigationController?.pushViewController(EditTrackController.init(trackModel: trackModel as! TrackModel), animated: true)
                 }else if idx == 1{
-                    GFAlert.showAlert(titleStr: "Notice:", msgStr: "You will lost the tracking of this account", currentVC: self, cancelStr: "Cancel", cancelHandler: { cancelAction in
+                    GFAlert.showAlert(titleStr: "Notice:", msgStr: "Stop tracking data from this account?", currentVC: self, cancelStr: "Cancel", cancelHandler: { cancelAction in
                         
                     }, otherBtns: ["OK"]) { idx in
                         let row = btn.tag - 88888
@@ -132,7 +132,7 @@ class TrackController: ViewController {
                             self.mc_remove()
                             if result.success!{
                                 DispatchQueue.main.async { [self] in
-                                    self.mc_text("delete success")
+                                    self.mc_text("Account tracker deleted successfully!")
                                     self.tableView?.mj_header?.beginRefreshing {
                                         
                                     }

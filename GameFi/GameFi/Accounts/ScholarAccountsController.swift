@@ -35,7 +35,7 @@ class ScholarAccountsController: UIViewController {
     
     lazy var pageView : TYPageViewDivide? = {
         let pageView = TYPageViewDivide(frame: view.bounds,
-                                titles: ["Renting","Applying","Historical Offers"],
+                                titles: ["Grinding","Applying","Historical Offers"],
                                 childControllers: [ScholarRentScholarshipController(),ScholarApplingScholarshipController(),ScholarHistoryController()],
                                 parentController: self)
         view.addSubview(pageView)
