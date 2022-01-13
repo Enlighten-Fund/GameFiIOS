@@ -18,6 +18,7 @@
 		58F10068278EB95F0017044C /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F10067278EB95F0017044C /* EmptyView.swift */; };
 		58F1006E278EC1640017044C /* UIView+Extension(DJEmptyView).swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F1006C278EC1640017044C /* UIView+Extension(DJEmptyView).swift */; };
 		58F1006F278EC1640017044C /* DJEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F1006D278EC1640017044C /* DJEmptyView.swift */; };
+		58F10071278ED3840017044C /* RoninCopyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F10070278ED3840017044C /* RoninCopyView.swift */; };
 		7BCBC07F76E99519033E01A6 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = CBF9F66A81AD584A3895DB4F /* amplifyconfiguration.json */; };
 		7C326CFCDF747D3682D551F3 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = F1EDDF7C6BA0C87EAB5C8C12 /* awsconfiguration.json */; };
 		9800DBED277D56440006FB1B /* MMRQRCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9800DBEC277D56440006FB1B /* MMRQRCell.swift */; };
@@ -148,6 +149,7 @@
 		58F10067278EB95F0017044C /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		58F1006C278EC1640017044C /* UIView+Extension(DJEmptyView).swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension(DJEmptyView).swift"; sourceTree = "<group>"; };
 		58F1006D278EC1640017044C /* DJEmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DJEmptyView.swift; sourceTree = "<group>"; };
+		58F10070278ED3840017044C /* RoninCopyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoninCopyView.swift; sourceTree = "<group>"; };
 		9800DBEC277D56440006FB1B /* MMRQRCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMRQRCell.swift; sourceTree = "<group>"; };
 		980A7DC12728135B006AE4C4 /* GFNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFNavController.swift; sourceTree = "<group>"; };
 		980A7DC3272828FD006AE4C4 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -622,6 +624,7 @@
 				58A188312788158500A635B7 /* BillPayCell.swift */,
 				58A188332788554500A635B7 /* QRViewContorller.swift */,
 				58F10067278EB95F0017044C /* EmptyView.swift */,
+				58F10070278ED3840017044C /* RoninCopyView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -842,6 +845,7 @@
 				58A188322788158500A635B7 /* BillPayCell.swift in Sources */,
 				9858172E273D205600D8CFCA /* PostScholarshipCell.swift in Sources */,
 				984BDBA4272C0E9300F6144B /* Extension.swift in Sources */,
+				58F10071278ED3840017044C /* RoninCopyView.swift in Sources */,
 				9898667D276C644500BF4BE0 /* TYPageTitleViewDivide.swift in Sources */,
 				9858171E273CE4CE00D8CFCA /* LatestApplyController.swift in Sources */,
 				984BDB95272ACD0A00F6144B /* RegisterController.swift in Sources */,
@@ -1021,8 +1025,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = GameFi/GameFi.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = GB62JTZ689;
 				INFOPLIST_FILE = GameFi/Info.plist;
@@ -1034,7 +1038,7 @@
 				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.enlighten.CryptoNinjaLocal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = localHoc2;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ENABLE_BATCH_MODE = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "GameFi/General/GameFi-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1051,8 +1055,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = GameFi/GameFi.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 7;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = GB62JTZ689;
@@ -1065,7 +1069,7 @@
 				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.enlighten.CryptoNinjaLocal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = localHoc2;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ENABLE_BATCH_MODE = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "GameFi/General/GameFi-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

@@ -90,14 +90,14 @@ class ManagerHistoryCell: UICollectionViewCell {
             make.height.equalTo(25)
             make.left.equalToSuperview().offset(15)
         }
-        self.roninLabelView.snp.makeConstraints { make in
+        self.roninCopyView.snp.makeConstraints { make in
             make.top.equalTo(self.endDateLabelView.snp.bottom)
             make.right.equalToSuperview().offset(-15)
             make.height.equalTo(25)
             make.left.equalToSuperview().offset(15)
         }
         self.emailTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.roninLabelView.snp.bottom)
+            make.top.equalTo(self.roninCopyView.snp.bottom)
             make.right.equalToSuperview().offset(-15)
             make.height.equalTo(25)
             make.left.equalToSuperview().offset(15)
@@ -266,7 +266,7 @@ class ManagerHistoryCell: UICollectionViewCell {
         }
         
         if scholarshipModel.myaccount_ronin_address != nil{
-            self.roninLabelView.rightLabel.text = scholarshipModel.myaccount_ronin_address
+            self.roninCopyView.update(roninTitle: "Ronin address", ronin: scholarshipModel.myaccount_ronin_address)
         }
         
         if scholarshipModel.account_login != nil {
@@ -356,11 +356,10 @@ class ManagerHistoryCell: UICollectionViewCell {
         self.contentView.addSubview(tempLabelView)
         return tempLabelView
     }()
-    lazy var roninLabelView : LabelAndLabelInterView = {
-        let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
-        tempLabelView.leftLabel.text = "Ronin address"
-        self.contentView.addSubview(tempLabelView)
-        return tempLabelView
+    lazy var roninCopyView : RoninCopyView = {
+        let roninCopyView = RoninCopyView.init(frame: CGRect.zero)
+        self.contentView.addSubview(roninCopyView)
+        return roninCopyView
     }()
     lazy var emailTitleLabel : UILabel = {
         let tempLabel = UILabel.init(frame: CGRect.zero)

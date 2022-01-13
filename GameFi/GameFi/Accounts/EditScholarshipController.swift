@@ -458,6 +458,8 @@ extension  EditScholarshipController : UITableViewDelegate,UITableViewDataSource
         tempCell.textFild?.attributedPlaceholder = NSAttributedString.init(string: "  Axie account password", attributes: [.font: UIFont(name: "Avenir Next Regular", size: 15) as Any,.foregroundColor: UIColor(red: 0.29, green: 0.31, blue: 0.41, alpha: 1)])
         self.passwordTextField = tempCell.textFild
         self.passwordTextField?.text = self.scholarshipModel?.account_passcode
+        self.passwordTextField!.setupShowPasswordButton()
+        self.passwordTextField!.isSecureTextEntry = true
         cell = tempCell
     case 4:
         let tempCell : LabelTextFildCell = tableView.dequeueReusableCell(withIdentifier: labelTextFildCellIdentifier + "4", for: indexPath) as! LabelTextFildCell

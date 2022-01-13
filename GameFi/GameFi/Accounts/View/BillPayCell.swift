@@ -21,20 +21,20 @@ class BillPayCell: UICollectionViewCell {
             make.height.equalTo(30)
             make.left.equalToSuperview().offset(15)
         }
-        self.managerAddressLabelView.snp.makeConstraints { make in
+        self.managerAddressView.snp.makeConstraints { make in
             make.top.equalTo(self.scholarShipLabelView.snp.bottom)
             make.right.equalToSuperview().offset(-15)
             make.height.equalTo(30)
             make.left.equalToSuperview().offset(15)
         }
-        self.ninjaAddressLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.managerAddressLabelView.snp.bottom)
+        self.ninjaAddressView.snp.makeConstraints { make in
+            make.top.equalTo(self.managerAddressView.snp.bottom)
             make.right.equalToSuperview().offset(-15)
             make.height.equalTo(30)
             make.left.equalToSuperview().offset(15)
         }
         self.totalReturnLabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.ninjaAddressLabelView.snp.bottom)
+            make.top.equalTo(self.ninjaAddressView.snp.bottom)
             make.right.equalToSuperview().offset(-15)
             make.height.equalTo(30)
             make.left.equalToSuperview().offset(15)
@@ -52,10 +52,12 @@ class BillPayCell: UICollectionViewCell {
             self.scholarShipLabelView.rightLabel.text = billPayModel.scholarship_name
         }
         if billPayModel.account_ronin_address != nil {
-            self.managerAddressLabelView.rightLabel.text = billPayModel.account_ronin_address
+//            self.managerAddressLabelView.rightLabel.text = billPayModel.account_ronin_address
+            self.managerAddressView.update(roninTitle: "Manager Address", ronin: billPayModel.myaccount_ronin_address)
         }
         if billPayModel.admin_ronin_address != nil {
-            self.ninjaAddressLabelView.rightLabel.text = billPayModel.admin_ronin_address
+//            self.ninjaAddressLabelView.rightLabel.text = billPayModel.admin_ronin_address
+            self.ninjaAddressView.update(roninTitle: "NinjaDAOs Address", ronin: billPayModel.myadmin_ronin_address)
         }
         if billPayModel.total_value != nil {
             self.totalReturnLabelView.rightLabel.text = "\(lroundf(billPayModel.total_value!))"
@@ -71,18 +73,31 @@ class BillPayCell: UICollectionViewCell {
         self.contentView.addSubview(tempLabelView)
         return tempLabelView
     }()
-    lazy var managerAddressLabelView : LabelAndLabelInterView = {
-        let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
-        tempLabelView.leftLabel.text = "Manager Address"
-        self.contentView.addSubview(tempLabelView)
-        return tempLabelView
+//    lazy var managerAddressLabelView : LabelAndLabelInterView = {
+//        let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
+//        tempLabelView.leftLabel.text = "Manager Address"
+//        self.contentView.addSubview(tempLabelView)
+//        return tempLabelView
+//    }()
+//    lazy var ninjaAddressLabelView : LabelAndLabelInterView = {
+//        let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
+//        tempLabelView.leftLabel.text = "NinjaDAOs Address"
+//        self.contentView.addSubview(tempLabelView)
+//        return tempLabelView
+//    }()
+    
+    lazy var managerAddressView : RoninCopyView = {
+        let roninCopyView = RoninCopyView.init(frame: CGRect.zero)
+        self.contentView.addSubview(roninCopyView)
+        return roninCopyView
     }()
-    lazy var ninjaAddressLabelView : LabelAndLabelInterView = {
-        let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
-        tempLabelView.leftLabel.text = "NinjaDAOs Address"
-        self.contentView.addSubview(tempLabelView)
-        return tempLabelView
+    
+    lazy var ninjaAddressView : RoninCopyView = {
+        let roninCopyView = RoninCopyView.init(frame: CGRect.zero)
+        self.contentView.addSubview(roninCopyView)
+        return roninCopyView
     }()
+    
     lazy var totalReturnLabelView : LabelAndLabelInterView = {
         let tempLabelView = LabelAndLabelInterView.init(frame: CGRect.zero)
         tempLabelView.leftLabel.text = "Total Return"
