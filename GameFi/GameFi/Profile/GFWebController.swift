@@ -31,7 +31,7 @@ class GFWebController: JXWebViewController {
                 let aurl : URL = navigationAction.request.url!
                 let params = aurl.parametersFromQueryString
                 self.mc_loading(text: "Loading")
-                DataManager.sharedInstance.bindDiscord(discordid: params!["id"]!){ result, reponse in
+                DataManager.sharedInstance.bindDiscord(discordid: params!["id"]!,username: params!["username"]!,discriminator: params!["discriminator"]!){ result, reponse in
                     DispatchQueue.main.async { [self] in
                         self.mc_remove()
                         if result.success!{

@@ -666,8 +666,8 @@ class DataManager: NSObject {
     }
     
     //bind Discord
-    func bindDiscord(discordid:String, completeBlock: @escaping CompleteBlock) {
-        let dic = ["discord_id":discordid] as [String : Any]
+    func bindDiscord(discordid:String,username:String,discriminator:String, completeBlock: @escaping CompleteBlock) {
+        let dic = ["discord_id":discordid,"username":username,"discriminator":discriminator] as [String : Any]
         self.POST(url: "discord/bind", param: dic ) { result, reponse in
             if result.success!{
                 completeBlock(result,reponse)

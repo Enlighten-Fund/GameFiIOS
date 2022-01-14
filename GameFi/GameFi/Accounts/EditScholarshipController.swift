@@ -191,7 +191,7 @@ class EditScholarshipController: ViewController {
                 if result.success!{
                     if toStatus == "DRAFT" {
                         self.mc_remove()
-                        self.mc_success("Saved successfully")
+                        self.mc_text("Saved successfully")
                         self.navigationController?.popViewController(animated: true)
                         if editScholarBlock != nil {
                             editScholarBlock!()
@@ -200,7 +200,7 @@ class EditScholarshipController: ViewController {
                         DataManager.sharedInstance.updateScholarshipStatus(scholarshipid: self.scholarshipModel!.scholarship_id!, status: toStatus) { result, reponse in
                             self.mc_remove()
                             if result.success!{
-                                self.mc_success("Finished! Under review.")
+                                self.mc_text("Finished! Under review.")
                                 self.navigationController?.popViewController(animated: true)
                                 if editScholarBlock != nil {
                                     editScholarBlock!()

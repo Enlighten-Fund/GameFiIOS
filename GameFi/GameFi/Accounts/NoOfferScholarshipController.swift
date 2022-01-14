@@ -89,7 +89,7 @@ class NoOfferScholarshipController: UIViewController {
                     DispatchQueue.main.async { [self] in
                         self.mc_remove()
                         if result.success!{
-                            self.mc_success("Finished! Under review.")
+                            self.mc_text("Finished! Under review.")
                             self.collectionView.mj_header?.beginRefreshing()
                         }else{
                             if  result.msg != nil && !result.msg!.isBlank {
