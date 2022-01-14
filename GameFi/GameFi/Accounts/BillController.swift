@@ -18,7 +18,7 @@ class BillController: UIViewController {
         self.view.backgroundColor = UIColor(red: 0.15, green: 0.16, blue: 0.24, alpha: 1)
         self.headerView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(10)
-            make.height.equalTo(125)
+            make.height.equalTo(300)
             make.left.equalToSuperview().offset(15)
             make.right.equalToSuperview().offset(-15)
         }
@@ -37,7 +37,7 @@ class BillController: UIViewController {
 
     
     lazy var headerView: BillHeadView = {
-        let temp = BillHeadView.init(frame: CGRect.init(x: 0, y: 0, width: screenWidth, height: 125))
+        let temp = BillHeadView.init(frame: CGRect.init(x: 0, y: 0, width: screenWidth, height: 290))
         self.view.addSubview(temp)
         return temp
     }()
@@ -113,13 +113,30 @@ extension  BillController : UICollectionViewDelegate,UICollectionViewDataSource,
     }
     
     func requestPaymentValue() {
+        DataManager.sharedInstance.fetchManagerRoninValue { result, reponse in
+            DispatchQueue.main.async { [self] in
+                if result.success!{
+                    let dic : [String:String?]? = reponse as? [String : String?]
+                    if dic != nil {
+                        let managerRonin : String? = dic!["manager_ronin_address"]!
+                        self.headerView.update(managerRonin: managerRonin)
+                    }else{
+                        self.headerView.update(managerRonin: "")
+                    }
+                }else{
+                    if  result.msg != nil && !result.msg!.isBlank {
+                        self.mc_text(result.msg!)
+                    }
+                }
+            }
+        }
         DataManager.sharedInstance.fetchPaymentValue { result, reponse in
             DispatchQueue.main.async { [self] in
                 if result.success!{
                     self.headerView.update(dic: reponse as! [String : Float?])
                 }else{
                     if  result.msg != nil && !result.msg!.isBlank {
-                        self.mc_success(result.msg!)
+                        self.mc_text(result.msg!)
                     }
                 }
             }
@@ -157,7 +174,7 @@ extension  BillController : UICollectionViewDelegate,UICollectionViewDataSource,
                     self.collectionView.reloadData()
                 }else{
                     if  result.msg != nil && !result.msg!.isBlank {
-                        self.mc_success(result.msg!)
+                        self.mc_text(result.msg!)
                     }
                 }
             }

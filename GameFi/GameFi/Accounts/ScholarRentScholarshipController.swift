@@ -45,7 +45,7 @@ class ScholarRentScholarshipController: UIViewController {
                             }
                         }else{
                             if  result.msg != nil && !result.msg!.isBlank {
-                                self.mc_success(result.msg!)
+                                self.mc_text(result.msg!)
                             }
                         }
                     }
@@ -63,7 +63,7 @@ class ScholarRentScholarshipController: UIViewController {
                                 self.collectionView.mj_header?.beginRefreshing()
                             }else{
                                 if  result.msg != nil && !result.msg!.isBlank {
-                                    self.mc_success(result.msg!)
+                                    self.mc_text(result.msg!)
                                 }
                             }
                         }
@@ -91,7 +91,7 @@ class ScholarRentScholarshipController: UIViewController {
                             }
                         }else{
                             if  result.msg != nil && !result.msg!.isBlank {
-                                self.mc_success(result.msg!)
+                                self.mc_text(result.msg!)
                             }
                         }
                     }
@@ -109,7 +109,7 @@ class ScholarRentScholarshipController: UIViewController {
                                 self.collectionView.mj_header?.beginRefreshing()
                             }else{
                                 if  result.msg != nil && !result.msg!.isBlank {
-                                    self.mc_success(result.msg!)
+                                    self.mc_text(result.msg!)
                                 }
                             }
                         }
@@ -143,7 +143,7 @@ class ScholarRentScholarshipController: UIViewController {
                                         }
                                     }else{
                                         if  result.msg != nil && !result.msg!.isBlank {
-                                            self.mc_success(result.msg!)
+                                            self.mc_text(result.msg!)
                                         }
                                     }
                                     
@@ -170,7 +170,7 @@ class ScholarRentScholarshipController: UIViewController {
                                         }
                                     }else{
                                         if  result.msg != nil && !result.msg!.isBlank {
-                                            self.mc_success(result.msg!)
+                                            self.mc_text(result.msg!)
                                         }
                                     }
                                     
@@ -189,7 +189,7 @@ class ScholarRentScholarshipController: UIViewController {
                                     self.collectionView.mj_header?.beginRefreshing()
                                 }else{
                                     if  result.msg != nil && !result.msg!.isBlank {
-                                        self.mc_success(result.msg!)
+                                        self.mc_text(result.msg!)
                                     }
                                 }
                             }
@@ -227,7 +227,7 @@ class ScholarRentScholarshipController: UIViewController {
                     }
                 }else{
                     if  result.msg != nil && !result.msg!.isBlank {
-                        self.mc_success(result.msg!)
+                        self.mc_text(result.msg!)
                     }
                 }
             }
@@ -260,7 +260,7 @@ class ScholarRentScholarshipController: UIViewController {
                                  appdelegate.scholarAccontVC?.navigationController!.pushViewController(webVC, animated: true)
                             }else{
                                 if  result.msg != nil && !result.msg!.isBlank {
-                                    self.mc_success(result.msg!)
+                                    self.mc_text(result.msg!)
                                 }
                             }
                             
@@ -310,7 +310,7 @@ class ScholarRentScholarshipController: UIViewController {
                         }
                     }else{
                         if  result.msg != nil && !result.msg!.isBlank {
-                            self.mc_success(result.msg!)
+                            self.mc_text(result.msg!)
                         }
                     }
                 }

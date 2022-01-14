@@ -50,7 +50,7 @@ class OfferingScholarshipsController: UIViewController {
                                 self.collectionView.mj_header?.beginRefreshing()
                             }else{
                                 if  result.msg != nil && !result.msg!.isBlank {
-                                    self.mc_success(result.msg!)
+                                    self.mc_text(result.msg!)
                                 }
                             }
                         }
@@ -73,7 +73,7 @@ class OfferingScholarshipsController: UIViewController {
                                 }
                             }else{
                                 if  result.msg != nil && !result.msg!.isBlank {
-                                    self.mc_success(result.msg!)
+                                    self.mc_text(result.msg!)
                                 }
                             }
                         }
@@ -94,7 +94,7 @@ class OfferingScholarshipsController: UIViewController {
                                 }
                             }else{
                                 if  result.msg != nil && !result.msg!.isBlank {
-                                    self.mc_success(result.msg!)
+                                    self.mc_text(result.msg!)
                                 }
                             }
                         }
@@ -121,7 +121,7 @@ class OfferingScholarshipsController: UIViewController {
                                     self.collectionView.mj_header?.beginRefreshing()
                                 }else{
                                     if  result.msg != nil && !result.msg!.isBlank {
-                                        self.mc_success(result.msg!)
+                                        self.mc_text(result.msg!)
                                     }
                                 }
                             }
@@ -139,7 +139,7 @@ class OfferingScholarshipsController: UIViewController {
                                     self.collectionView.mj_header?.beginRefreshing()
                                 }else{
                                     if  result.msg != nil && !result.msg!.isBlank {
-                                        self.mc_success(result.msg!)
+                                        self.mc_text(result.msg!)
                                     }
                                 }
                             }
@@ -162,7 +162,7 @@ class OfferingScholarshipsController: UIViewController {
                             }
                         }else{
                             if  result.msg != nil && !result.msg!.isBlank {
-                                self.mc_success(result.msg!)
+                                self.mc_text(result.msg!)
                             }
                         }
                     }
@@ -189,7 +189,7 @@ class OfferingScholarshipsController: UIViewController {
                             }
                         }else{
                             if  result.msg != nil && !result.msg!.isBlank {
-                                self.mc_success(result.msg!)
+                                self.mc_text(result.msg!)
                             }
                         }
                     }
@@ -214,7 +214,7 @@ class OfferingScholarshipsController: UIViewController {
                                         }
                                     }else{
                                         if  result.msg != nil && !result.msg!.isBlank {
-                                            self.mc_success(result.msg!)
+                                            self.mc_text(result.msg!)
                                         }
                                     }
                                     
@@ -241,7 +241,7 @@ class OfferingScholarshipsController: UIViewController {
                                         }
                                     }else{
                                         if  result.msg != nil && !result.msg!.isBlank {
-                                            self.mc_success(result.msg!)
+                                            self.mc_text(result.msg!)
                                         }
                                     }
                                     
@@ -260,7 +260,7 @@ class OfferingScholarshipsController: UIViewController {
                                     self.collectionView.mj_header?.beginRefreshing()
                                 }else{
                                     if  result.msg != nil && !result.msg!.isBlank {
-                                        self.mc_success(result.msg!)
+                                        self.mc_text(result.msg!)
                                     }
                                 }
                             }
@@ -310,7 +310,7 @@ class OfferingScholarshipsController: UIViewController {
                                             self.collectionView.reloadItems(at: [indexpath])
                                         }else{
                                             if  result.msg != nil && !result.msg!.isBlank {
-                                                self.mc_success(result.msg!)
+                                                self.mc_text(result.msg!)
                                             }
                                         }
                                     }
@@ -326,7 +326,7 @@ class OfferingScholarshipsController: UIViewController {
                                             self.collectionView.reloadItems(at: [indexpath])
                                         }else{
                                             if  result.msg != nil && !result.msg!.isBlank {
-                                                self.mc_success(result.msg!)
+                                                self.mc_text(result.msg!)
                                             }
                                         }
                                     }
@@ -364,7 +364,7 @@ class OfferingScholarshipsController: UIViewController {
                     }
                 }else{
                     if  result.msg != nil && !result.msg!.isBlank {
-                        self.mc_success(result.msg!)
+                        self.mc_text(result.msg!)
                     }
                 }
             }
@@ -397,7 +397,7 @@ class OfferingScholarshipsController: UIViewController {
                                  appdelegate.managerAccontVC?.navigationController!.pushViewController(webVC, animated: true)
                             }else{
                                 if  result.msg != nil && !result.msg!.isBlank {
-                                    self.mc_success(result.msg!)
+                                    self.mc_text(result.msg!)
                                 }
                             }
                             
@@ -529,7 +529,7 @@ extension  OfferingScholarshipsController : UICollectionViewDelegate,UICollectio
                         self.collectionView.reloadData()
                     }else{
                         if  result.msg != nil && !result.msg!.isBlank {
-                            self.mc_success(result.msg!)
+                            self.mc_text(result.msg!)
                         }
                     }
                     

@@ -53,7 +53,7 @@ class BillPayCell: UICollectionViewCell {
         }
         if billPayModel.account_ronin_address != nil {
 //            self.managerAddressLabelView.rightLabel.text = billPayModel.account_ronin_address
-            self.managerAddressView.update(roninTitle: "Manager Address", ronin: billPayModel.myaccount_ronin_address)
+            self.managerAddressView.update(roninTitle: "Account address", ronin: billPayModel.myaccount_ronin_address)
         }
         if billPayModel.admin_ronin_address != nil {
 //            self.ninjaAddressLabelView.rightLabel.text = billPayModel.admin_ronin_address

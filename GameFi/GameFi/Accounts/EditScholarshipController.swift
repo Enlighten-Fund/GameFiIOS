@@ -150,7 +150,7 @@ class EditScholarshipController: ViewController {
                     }
                 }else{
                     if  result.msg != nil && !result.msg!.isBlank {
-                        self.mc_success(result.msg!)
+                        self.mc_text(result.msg!)
                     }
                 }
             }
@@ -207,7 +207,7 @@ class EditScholarshipController: ViewController {
                                 }
                             }else{
                                 if  result.msg != nil && !result.msg!.isBlank {
-                                    self.mc_success(result.msg!)
+                                    self.mc_text(result.msg!)
                                 }
                             }
                         }
@@ -215,7 +215,7 @@ class EditScholarshipController: ViewController {
                 }else{
                     self.mc_remove()
                     if  result.msg != nil && !result.msg!.isBlank {
-                        self.mc_success(result.msg!)
+                        self.mc_text(result.msg!)
                     }
                 }
             }

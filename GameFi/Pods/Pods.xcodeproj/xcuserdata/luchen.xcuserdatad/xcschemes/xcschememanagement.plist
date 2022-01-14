@@ -49,6 +49,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>AttributedString.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>ESTabBarController-swift.xcscheme</key>
 		<dict>
 			<key>isShown</key>

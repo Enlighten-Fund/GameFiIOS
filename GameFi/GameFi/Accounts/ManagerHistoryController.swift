@@ -138,7 +138,7 @@ extension  ManagerHistoryController : UICollectionViewDelegate,UICollectionViewD
                         self.collectionView.reloadData()
                     }else{
                         if  result.msg != nil && !result.msg!.isBlank {
-                            self.mc_success(result.msg!)
+                            self.mc_text(result.msg!)
                         }
                     }
                     

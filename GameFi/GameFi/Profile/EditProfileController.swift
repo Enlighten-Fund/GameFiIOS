@@ -124,7 +124,7 @@ class EditProfileController: ViewController {
                             self.requestData()
                         }else{
                             if  result.msg != nil && !result.msg!.isBlank {
-                                self.mc_success(result.msg!)
+                                self.mc_text(result.msg!)
                             }
                         }
                     }
@@ -146,7 +146,7 @@ class EditProfileController: ViewController {
                             self.requestData()
                         }else{
                             if  result.msg != nil && !result.msg!.isBlank {
-                                self.mc_success(result.msg!)
+                                self.mc_text(result.msg!)
                             }
                         }
                     }
@@ -608,7 +608,7 @@ class EditProfileController: ViewController {
 //                    }
                 }else{
                     if  result.msg != nil && !result.msg!.isBlank {
-                        self.mc_success(result.msg!)
+                        self.mc_text(result.msg!)
                     }
                 }
             }

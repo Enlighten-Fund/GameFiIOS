@@ -55,7 +55,7 @@ class ScholarApplingScholarshipController: UIViewController{
                             self.collectionView.mj_header?.beginRefreshing()
                         }else{
                             if  result.msg != nil && !result.msg!.isBlank {
-                                self.mc_success(result.msg!)
+                                self.mc_text(result.msg!)
                             }
                         }
                     }
@@ -202,7 +202,7 @@ extension  ScholarApplingScholarshipController : UICollectionViewDelegate,UIColl
                         self.collectionView.reloadData()
                     }else{
                         if  result.msg != nil && !result.msg!.isBlank {
-                            self.mc_success(result.msg!)
+                            self.mc_text(result.msg!)
                         }
                     }
                     
